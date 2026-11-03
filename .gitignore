@@ -1,0 +1,22 @@
+# Per-machine reports and notes may contain local paths or hardware details.
+/reports/environment.json
+/reports/environment.md
+/BASELINE.md
+/ACCEPTANCE.md
+
+# Local game builds, captures, and runtime logs are not source deliverables.
+/validation/builds*/
+/validation/shot-*.png
+/validation/*.log
+/validation/**/*.log
+
+# Python and editor-generated files.
+__pycache__/
+*.py[cod]
+*.blend1
+.venv/
+venv/
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store

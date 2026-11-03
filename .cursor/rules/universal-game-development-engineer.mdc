@@ -1,0 +1,14 @@
+---
+description: Evidence-driven guidance for game-development tasks in this repository
+alwaysApply: true
+---
+
+Follow `AGENTS.md` for shared project rules. For game-development tasks, read
+`.opencode/skills/universal-game-development-engineer/SKILL.md` and the relevant
+reference files before implementation.
+
+Inspect the actual engine version, architecture, project files and tests before
+editing. Discover MCP tools at runtime. Preserve existing work and verify asset
+licenses. Use focused tests and report configured, implemented, compiled,
+tested and verified outcomes separately. Do not invent tool availability,
+screenshots or test results.
