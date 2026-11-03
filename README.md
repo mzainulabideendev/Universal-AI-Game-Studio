@@ -5,224 +5,382 @@
 <h1 align="center">Universal AI Game Studio</h1>
 
 <p align="center">
-  A reusable, evidence-driven game-development workflow for AI coding agents,
-  game engines and asset tools.
+  An evidence-driven game-development skill, toolchain and learning path for AI
+  coding agents.
 </p>
-
-This repository packages an OpenCode game-development skill, engine and production
-guides, a local Blender MCP server, environment detection, and reusable validation
-scripts. It is a workflow/toolkit—not a finished game or a promise that an agent
-can create every requested feature without project-specific review.
-
-## What it provides
-
-- **A production workflow** for scoping, vertical slices, environment and level
-  design, gameplay systems, animation, AI, QA and delivery.
-- **Engine guidance** for Unity, Unreal Engine and Godot, with runtime discovery
-  rather than assumptions about what is installed.
-- **Blender automation** through a dependency-free MCP stdio server that launches
-  the real Blender executable.
-- **Asset research and provenance guidance**, including suitability, licensing,
-  attribution and redistribution checks.
-- **Agent-specific project instructions** for OpenCode, Codex, Claude Code,
-  GitHub Copilot, Cursor, Gemini CLI, Windsurf, Cline, Roo Code and Aider.
-- **Environment detection and smoke tests** to distinguish configured,
-  implemented, compiled, tested and verified work.
-
-## Visuals
-
-The logo is an original vector mark included in this repository. The image below
-is a real Blender render from the included MCP validation pipeline; it is a
-test-asset render, **not** a screenshot of a finished game.
 
 <p align="center">
-  <img src="validation/exports/mcp_validation.png" alt="Blender-rendered checkerboard validation asset" width="640">
+  <a href="LEARNING.md">Learning guide</a> ·
+  <a href="CONTRIBUTING.md">Contributing</a> ·
+  <a href="LICENSE">MIT license</a>
 </p>
+
+Universal AI Game Studio helps an AI coding agent work like a small game team:
+understand a game's requirements, inspect the real project and installed tools,
+design a playable slice, implement the necessary systems, research assets
+responsibly, test the result and report evidence.
+
+This repository is a **reusable workflow and toolset, not a finished game**.
+It does not replace engine-specific knowledge, human creative direction,
+playtesting or review of license terms. The agent must use the actual project,
+tools and MCP capabilities available to the current user rather than assuming
+that a documented integration is installed or running.
+
+## At a glance
+
+- **Reusable game-development skill:** production gates, world and level design,
+  gameplay architecture, animation, AI, audio/UI, testing and delivery guidance.
+- **Multi-agent project rules:** OpenCode, Codex, Claude Code, GitHub Copilot,
+  Cursor, Gemini CLI, Windsurf, Cline, Roo Code and Aider.
+- **Blender MCP server:** a dependency-free local stdio server that launches
+  Blender for real inspection, validation, import/export, rendering and Python
+  operations.
+- **Environment detector:** read-only Windows tooling discovery that writes a
+  local report, intentionally excluded from source control.
+- **Asset research practices:** candidate evaluation, license checks,
+  attribution and provenance recording.
+- **Learning and contribution guides:** [LEARNING.md](LEARNING.md) and
+  [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Visual identity
+
+The logo is an original SVG included at
+[`assets/universal-ai-game-studio-logo.svg`](assets/universal-ai-game-studio-logo.svg).
+The sample below is a real Blender render from the MCP validation pipeline. It
+is a **test asset, not a screenshot of a finished game**.
+
+<p align="center">
+  <img src="validation/exports/mcp_validation.png" alt="Blender-rendered checkerboard test asset" width="640">
+</p>
+
+## Table of contents
+
+- [Quick start](#quick-start)
+- [Requirements](#requirements)
+- [Use with AI agents](#use-with-ai-agents)
+- [Configure Blender MCP](#configure-blender-mcp)
+- [Run checks](#run-checks)
+- [Production workflow](#production-workflow)
+- [Asset research and licensing](#asset-research-and-licensing)
+- [Repository map](#repository-map)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Quick start
 
-### 1. Clone and open the project
+### 1. Clone the repository
 
 ```powershell
 git clone https://github.com/mzainulabideendev/Universal-AI-Game-Studio.git
 Set-Location .\Universal-AI-Game-Studio
 ```
 
-Open this folder as the workspace in your preferred supported AI coding agent.
-The relevant root or client-specific instruction file is included in the clone.
+### 2. Open it in your AI coding agent
 
-### 2. Check local tools
+Open the repository root as the workspace. The agent-specific project
+instructions are already included; see [Use with AI agents](#use-with-ai-agents).
+Start with a task-specific request, for example:
 
-Python 3.10 or later is required by the Blender MCP server. The game engine is
-project-dependent; install only the engine required by your game.
+> Read the game-development skill, inspect this project and tell me which engine,
+> version, tests and MCP tools are actually available. Do not edit files yet.
+
+For a game project of your own, copy `AGENTS.md`, the instruction file for your
+agent and the `.opencode/skills/` folder into that game's root. Then open the
+game project in the agent. Do not copy machine-specific reports or personal MCP
+configuration.
+
+### 3. Check Python and discover local tools
+
+Python 3.10 or later is required by the Blender MCP server.
 
 ```powershell
 python --version
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\detect-dev-environment.ps1
 ```
 
-The detector is read-only. Its generated report is written under `reports/` and
-is intentionally ignored by Git because it can contain machine paths and
-hardware details.
+The detector is read-only and currently targets Windows. It writes
+`reports/environment.json` and `reports/environment.md` locally; these files
+may include hardware and absolute paths and are excluded from Git.
 
-### 3. Run the lightweight MCP handshake test
+### 4. Verify MCP communication
 
-This verifies the server initializes and advertises tools. Blender is not needed
-for this handshake-only check.
+This handshake-only test confirms that the Blender server initializes and lists
+tools. It does **not** require Blender:
 
 ```powershell
 python .\scripts\test-mcp-server.py -- python .\tools\blender-mcp\server.py
 ```
 
-### 4. Run the Blender end-to-end test
+### 5. Optionally run the complete Blender pipeline test
 
-Install Blender separately and either add its executable to `PATH` as `blender`
-or set `BLENDER_EXE` to the local executable path:
+Install Blender separately. Either make its executable available as `blender` on
+`PATH`, or set `BLENDER_EXE` for the current shell:
 
 ```powershell
 $env:BLENDER_EXE = 'C:\Path\To\Blender\blender.exe'
 python .\scripts\test-blender-mcp.py --full
 ```
 
-The full test creates a temporary scene, inspects and validates it, exports a
-GLB and renders a PNG. It does not install software or modify a game project.
+The full test creates a temporary cube scene, inspects and validates the scene,
+exports a GLB, renders a PNG and checks that the artifacts exist. It does not
+install software or modify a game project. The pipeline has been exercised with
+Blender 5.2.2 LTS on Windows; that result does not prove a game's engine build or
+runtime behavior.
 
-The full smoke test was run successfully with Blender 5.2.2 LTS on Windows.
-This verifies the Blender MCP pipeline only; it is not evidence that a
-game-specific Unity, Unreal or Godot project builds or runs.
+## Requirements
+
+| Requirement | Needed for | Notes |
+| --- | --- | --- |
+| Python 3.10+ | Blender MCP server and Python checks | No extra Python packages are needed for the included scripts. |
+| Blender | Actual Blender operations and the full smoke test | Set `BLENDER_EXE` or make `blender` available on `PATH`. |
+| PowerShell | Environment detector | The detector targets Windows. |
+| Unity, Unreal or Godot | A project using that engine | Install only the engine/version needed by that project. |
+| AI coding agent | Interactive agent workflow | Supported project rule files are included; MCP setup is client-specific. |
+
+No engine is required to clone the repository or run the MCP handshake test.
+Engine/editor integrations require their actual engine, project and editor-side
+plugin or integration.
 
 ## Use with AI agents
 
-### Easiest setup
+Open this repository root in the agent. Use the existing rule file below; the
+core game-production workflow is in
+`.opencode/skills/universal-game-development-engineer/SKILL.md`.
 
-Clone this repository and open its root folder in your agent. Its setup files
-are already in their normal project locations. For a different game project, copy `AGENTS.md`, the instruction file for your
-client, and the `.opencode/skills/` folder into that project's root, then open
-that project in the agent.
-
-| Agent/client | Project instruction or skill file | How to use |
+| Agent/client | Project instructions | First setup |
 | --- | --- | --- |
-| OpenCode | `.opencode/skills/universal-game-development-engineer/SKILL.md` | Open the repo; ask the agent to use the **Universal Game Development Engineer** skill. |
-| OpenAI Codex | `AGENTS.md` | Open the repo; Codex reads project instructions from `AGENTS.md`. |
-| Claude Code | `CLAUDE.md` | Open the repo; Claude Code loads the project guidance from the root file. |
-| GitHub Copilot | `.github/copilot-instructions.md` | Open the repo in VS Code with Copilot; repository instructions are applied to chat. |
-| Cursor | `.cursor/rules/universal-game-development-engineer.mdc` | Open the repo in Cursor; the project rule is configured as always applicable. |
-| Gemini CLI | `GEMINI.md` | Start Gemini CLI from the repository root so it can load project context. |
-| Windsurf | `.windsurf/rules/game-development.md` | Open the repo in Windsurf and enable/use the project rule. |
-| Cline | `.clinerules/game-development.md` | Open the repo in VS Code with Cline; include the project rule. |
-| Roo Code | `.roo/rules/game-development.md` | Open the repo in VS Code with Roo Code; include the project rule. |
-| Aider | `.aider.conf.yml` | Run Aider from the repository root; the config adds project guidance as read-only context. |
+| OpenCode | `.opencode/skills/universal-game-development-engineer/SKILL.md` | Open the repo and ask the agent to use the **Universal Game Development Engineer** skill. |
+| OpenAI Codex | `AGENTS.md` | Open the repository root as the Codex workspace. |
+| Claude Code | `CLAUDE.md` | Start Claude Code from the repository root. |
+| GitHub Copilot | `.github/copilot-instructions.md` | Open the repository in VS Code with Copilot Chat enabled. |
+| Cursor | `.cursor/rules/universal-game-development-engineer.mdc` | Open the repository in Cursor and enable project rules. |
+| Gemini CLI | `GEMINI.md` | Start Gemini CLI from the repository root. |
+| Windsurf | `.windsurf/rules/game-development.md` | Open the repo in Windsurf and enable the project rule. |
+| Cline | `.clinerules/game-development.md` | Open the repo in VS Code with Cline. |
+| Roo Code | `.roo/rules/game-development.md` | Open the repo in VS Code with Roo Code. |
+| Aider | `.aider.conf.yml` | Run Aider from the repository root. |
 
-Agent versions differ. If a client does not automatically load its rule file,
-use that client's documented project-rules feature and point it to the indicated
-file. Do not copy the machine-specific generated reports or local MCP settings.
+Agent versions and project-rule behavior can change. If a client does not load
+its file automatically, use its current documented project-instructions feature
+and point it to the listed file. A project rule provides context; it does not
+install MCP servers, engines, packages or assets.
 
-### Blender MCP setup
+### Give the agent a useful task
 
-The Blender server is `tools/blender-mcp/server.py`. In the MCP settings for
-your client, add a **local stdio server** with:
+Ask it to inspect before implementing, then give a concrete outcome and target.
+For example:
 
-- **Command:** `python` (or the full path to your Python executable)
+> Inspect this Unity project and determine the current input system and render
+> pipeline. Then propose the smallest tested change to make the player dash,
+> including the files you would change. Do not modify project settings.
+
+For a production request, include the game's core loop, target platform,
+constraints, budget and what "done" means. Follow
+[LEARNING.md](LEARNING.md) to understand the workflow and the evidence expected.
+
+## Configure Blender MCP
+
+`tools/blender-mcp/server.py` is a local **stdio MCP server**. Configure it in
+the MCP settings supported by the agent you use:
+
+- **Command:** `python` (or the full path to Python)
 - **Argument:** `<repository-root>/tools/blender-mcp/server.py`
-- **Working directory:** the repository root
-- **Environment:** `BLENDER_EXE` set to your Blender executable, if Blender is
-  not available as `blender` on `PATH`
+- **Working directory:** `<repository-root>`
+- **Environment (optional):** `BLENDER_EXE` set to the absolute path of
+  `blender.exe` when Blender is not on `PATH`
 
-MCP settings are client-specific, so this repository does not ship a user-level
-configuration containing absolute paths. Restart or reload the client after
-adding the server, then verify that it advertises tools and call `blender_info`.
+For example, if the client supports the VS Code workspace MCP format, create a
+local `.vscode/mcp.json` with the following shape and replace the Blender path.
+Keep machine-specific paths local; do not commit a personal config:
 
-### Unity MCP setup
+```json
+{
+  "servers": {
+    "blender": {
+      "type": "stdio",
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/tools/blender-mcp/server.py"
+      ],
+      "env": {
+        "BLENDER_EXE": "C:\\Path\\To\\Blender\\blender.exe"
+      }
+    }
+  }
+}
+```
 
-Use the Unity CLI and editor integration supported by the installed Unity
-version. Open the intended project in the editor first, then check `unity
-status` and `unity pipeline list`. Configure the agent's MCP server to use the
-same project path; a running editor and its Unity-side integration are required
-for editor tools to appear.
+The exact MCP settings location and user-interface steps depend on the client.
+Reload its MCP configuration after editing, then discover the server's tools
+and call `blender_info`. Check `unity status` and `unity pipeline list` before
+using Unity editor tools; the editor must be running on the intended project.
+
+## Run checks
+
+### Python syntax
+
+```powershell
+python -m py_compile .\tools\blender-mcp\server.py .\scripts\test-blender-mcp.py .\scripts\test-mcp-server.py
+```
+
+### MCP handshake and advertised tools
+
+```powershell
+python .\scripts\test-mcp-server.py -- python .\tools\blender-mcp\server.py
+```
+
+The script prints the server identity and tool names. A passing handshake tests
+stdio protocol discovery only; use `--full` on the Blender test for real Blender
+operations.
+
+### Blender create/inspect/validate/export/render workflow
+
+```powershell
+$env:BLENDER_EXE = 'C:\Path\To\Blender\blender.exe'
+python .\scripts\test-blender-mcp.py --full
+```
+
+### Environment discovery (Windows)
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\detect-dev-environment.ps1
+```
+
+This is a tool-discovery report, not a game test. For a real game change, also
+run the target project's focused unit/EditMode tests, play/integration tests,
+build and runtime log checks as applicable.
+
+## Production workflow
+
+For a complete-game request, read
+`.opencode/skills/universal-game-development-engineer/references/05-production-pipeline.md`.
+Adapt the milestone gates to project scale; do not skip a critical gate merely
+to produce a longer feature list.
+
+1. **Foundation:** discover engine/version, project structure, architecture,
+   MCP/editor state, baseline tests and build.
+2. **Playable vertical slice:** implement one representative core loop with a
+   real player controller, environment, interactions, fail/win flow and minimal
+   wired UI.
+3. **Content:** develop reachable, intentional levels; add validated assets,
+   characters, animation, enemy behavior and audio required by the design.
+4. **Feature completion:** wire menus, settings, progression, saves, results and
+   level flow to real game state where the game needs them.
+5. **Polish:** review controls, readability, accessibility, balance, visuals,
+   audio, responsiveness and presentation.
+6. **QA and performance:** run focused and regression tests, profile target
+   devices, build, launch and inspect logs.
+7. **Delivery:** provide source, build instructions, asset notices, measured
+   evidence and explicit known limitations.
+
+The skill contains 14 focused references, covering engine selection, production
+gates, asset research, Unity, world design, Unreal/Godot, Blender, gameplay,
+character/AI, testing, art/audio/UI, troubleshooting, acceptance and delivery.
+See the
+[reference index](.opencode/skills/universal-game-development-engineer/SKILL.md#reference-index).
+
+### Reference guide
+
+| Guide | Use it when you need to... |
+| --- | --- |
+| [Engine selection](.opencode/skills/universal-game-development-engineer/references/00-engine-selection.md) | Choose or create a project with an appropriate installed engine. |
+| [Production pipeline](.opencode/skills/universal-game-development-engineer/references/05-production-pipeline.md) | Plan a full game through roles, milestones, gates and evidence. |
+| [Art and asset research](.opencode/skills/universal-game-development-engineer/references/05b-autonomous-art-asset-research.md) | Define art direction and research assets, licenses and provenance. |
+| [Unity](.opencode/skills/universal-game-development-engineer/references/10-unity.md) | Inspect Unity projects, editor MCP, tests, imports and builds. |
+| [World and level design](.opencode/skills/universal-game-development-engineer/references/15-world-and-level-design.md) | Plan a traversable world, route, objectives, blockout and procedural level. |
+| [Unreal and Godot](.opencode/skills/universal-game-development-engineer/references/20-unreal-godot.md) | Follow engine-specific Unreal or Godot workflows. |
+| [Blender pipeline](.opencode/skills/universal-game-development-engineer/references/30-blender-asset-pipeline.md) | Inspect, validate, export and verify Blender assets in an engine. |
+| [Gameplay systems](.opencode/skills/universal-game-development-engineer/references/40-gameplay-systems.md) | Design and implement game rules, systems and loops. |
+| [Characters and AI](.opencode/skills/universal-game-development-engineer/references/45-character-ai.md) | Integrate character animation and functional enemy behavior. |
+| [Testing and builds](.opencode/skills/universal-game-development-engineer/references/50-testing-and-builds.md) | Define test matrices and verify target builds. |
+| [Art, audio and UI](.opencode/skills/universal-game-development-engineer/references/55-art-audio-ui.md) | Establish visual direction and wire audio/UI to live gameplay. |
+| [Troubleshooting](.opencode/skills/universal-game-development-engineer/references/60-troubleshooting.md) | Diagnose common engine, import, physics and runtime failures. |
+| [Acceptance checklist](.opencode/skills/universal-game-development-engineer/references/70-acceptance-checklist.md) | Report completion with evidence and limitations. |
+| [Performance and delivery](.opencode/skills/universal-game-development-engineer/references/75-performance-qa-delivery.md) | Profile, test, package and hand off a project. |
+
+### Evidence vocabulary
+
+Use precise status language in reports:
+
+- **Configured:** a setting or integration exists.
+- **Implemented:** the requested code/content change exists.
+- **Compiled:** the relevant build/compiler completed successfully.
+- **Tested:** a named automated or manual test exercised the behavior.
+- **Verified:** the running engine/build was observed and relevant logs checked.
+- **Blocked:** a specific dependency or limitation prevented verification.
+
+A configuration is not proof of a connection; a successful compile is not proof
+that a gameplay feature works; a successful build is not proof that runtime logs
+are clean.
+
+## Asset research and licensing
+
+Before using external assets, evaluate the exact asset, source, engine
+compatibility, visual fit, technical budget and license. Record at least:
+
+- Asset name, creator and source page.
+- Exact license and required attribution.
+- Commercial use, modification and redistribution terms.
+- Dependencies and required notices.
+- Date checked, file hash when practical, and project destination.
+
+Do not silently purchase assets, bypass access controls, scrape where prohibited,
+or ship assets with unclear rights. Keep third-party terms distinct from this
+repository's license. See
+`.opencode/skills/universal-game-development-engineer/references/05b-autonomous-art-asset-research.md`
+and
+`.opencode/skills/universal-game-development-engineer/references/30-blender-asset-pipeline.md`.
 
 ## Repository map
 
 | Path | Purpose |
 | --- | --- |
-| `.opencode/skills/universal-game-development-engineer/` | Core skill and engine, production, gameplay, testing and asset references |
-| `AGENTS.md`, `CLAUDE.md`, `GEMINI.md` | Shared and CLI-specific project instructions |
-| `.github/`, `.cursor/`, `.windsurf/`, `.clinerules/`, `.roo/` | Editor/agent-specific rules |
+| `.opencode/skills/universal-game-development-engineer/SKILL.md` | Main game-development skill and task workflow |
+| `.opencode/skills/universal-game-development-engineer/references/` | Engine, production, art, gameplay, testing and delivery references |
+| `AGENTS.md`, `CLAUDE.md`, `GEMINI.md` | Shared agent rules and CLI-specific entry points |
+| `.github/`, `.cursor/`, `.windsurf/`, `.clinerules/`, `.roo/` | Editor/agent project rules |
 | `.aider.conf.yml` | Aider read-only instruction context |
 | `scripts/detect-dev-environment.ps1` | Read-only Windows environment detector |
-| `scripts/test-mcp-server.py` | Generic MCP stdio handshake/tool-list test |
-| `scripts/test-blender-mcp.py` | Blender MCP smoke test; `--full` exercises create/inspect/validate/export/render |
+| `scripts/test-mcp-server.py` | Generic MCP stdio handshake and tool-list test |
+| `scripts/test-blender-mcp.py` | Blender MCP smoke test; `--full` runs the full test pipeline |
 | `tools/blender-mcp/server.py` | Dependency-free Blender MCP stdio server |
-| `validation/assets/` | Small Blender validation source asset and texture |
-| `validation/exports/` | Exported validation meshes and actual Blender preview render |
-| `reports/README.md` | Notes on local generated reports |
+| `validation/assets/` | Small Blender test scene and checker texture |
+| `validation/exports/` | Test FBX/GLB exports and real Blender preview render |
+| `LEARNING.md` | Guided learning and practical exercises |
+| `CONTRIBUTING.md` | Contribution workflow and review checklist |
+| `LICENSE` | MIT license for repository-owned content |
 
-## Production workflow
+## Troubleshooting
 
-For a complete-game request, read
-`.opencode/skills/universal-game-development-engineer/references/05-production-pipeline.md`
-and work through its milestone gates:
-
-1. **Foundation:** verify project, engine version, architecture and baseline.
-2. **Vertical slice:** make one representative loop playable and testable.
-3. **Content:** add designed levels, characters, assets, animation and audio.
-4. **Features:** wire menus, settings, persistence and results to real state.
-5. **Polish:** review usability, accessibility, visuals, sound and balance.
-6. **QA and performance:** test, profile, fix and verify target builds.
-7. **Delivery:** document setup, dependencies, licenses, evidence and limitations.
-
-Do not treat generated concept art as a model, a copied asset as an import, or a
-successful build as proof of clean runtime behavior. Record what was actually
-configured, implemented, compiled, tested and verified.
-
-### Skill reference guide
-
-| Reference | Focus |
+| Symptom | Check |
 | --- | --- |
-| `00-engine-selection.md` | Engine selection, project creation and constraints |
-| `05-production-pipeline.md` | Studio roles, milestones, gates and evidence |
-| `05b-autonomous-art-asset-research.md` | Art direction, asset research, licenses and provenance |
-| `10-unity.md` | Unity CLI/MCP, project inspection, tests and builds |
-| `15-world-and-level-design.md` | World briefs, routes, blockouts and procedural levels |
-| `20-unreal-godot.md` | Unreal and Godot workflows |
-| `30-blender-asset-pipeline.md` | Blender MCP, export/import and validation |
-| `40-gameplay-systems.md` | Gameplay architecture and common systems |
-| `45-character-ai.md` | Character animation and enemy behavior |
-| `50-testing-and-builds.md` | Test matrices and platform builds |
-| `55-art-audio-ui.md` | Art, audio, graphics and interface guidance |
-| `60-troubleshooting.md` | Diagnostic playbooks |
-| `70-acceptance-checklist.md` | Evidence-based completion checklist |
-| `75-performance-qa-delivery.md` | Performance budgets, QA and handoff |
+| Blender tools do not appear | Reload MCP settings, verify the command and script path, then run the handshake test. |
+| Blender starts but reports it is missing | Set `BLENDER_EXE` to the actual executable or add Blender to `PATH`. |
+| `blender_info` works but asset calls fail | Check Blender's path/version and inspect the call's returned error and stderr. |
+| Unity MCP exposes no editor tools | Open the intended Unity project, check `unity status` and `unity pipeline list`, and confirm the editor integration is enabled. |
+| A model has no material or looks wrong | Inspect the source asset, validate its textures and import settings, then verify it in the target engine. |
+| A game builds but fails at runtime | Launch the build, collect its player log, inspect exceptions and test the actual core loop. |
+| The environment detector finds no engine | Check the engine's actual executable path and project version; do not treat a missing detection result as proof the project is broken. |
 
-All references are under
-`.opencode/skills/universal-game-development-engineer/references/`.
+Do not hide failures behind fallback success messages. Capture the precise error,
+make a focused diagnosis, and report any remaining limitation.
 
-## Asset licensing
+## Contributing
 
-Before using an external asset, verify the license for the exact asset and its
-dependencies. Record source, creator, license, attribution, restrictions and
-destination in the project's asset provenance manifest. Do not silently buy,
-scrape, redistribute or include assets whose terms are unclear.
+Bug reports, documentation improvements, agent setup fixes and tested workflow
+improvements are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening
+an issue or pull request.
 
-No third-party game assets are bundled as a content library here. The included
-Blender files and render are pipeline validation artifacts. **This repository
-does not yet include a `LICENSE` file; do not assume permission to reuse or
-redistribute its contents until the owner adds one.**
+## Learning
 
-## Contributing and safety
+New users and contributors can follow the hands-on path in
+[LEARNING.md](LEARNING.md), from reading agent instructions through testing the
+Blender MCP workflow and practicing a production milestone.
 
-- Inspect the existing project and preserve user work before editing.
-- Do not commit credentials, private MCP configuration, generated machine
-  reports, game builds, or unrelated project screenshots.
-- Ask before purchases, external uploads beyond the explicitly requested
-  repository, destructive changes, or system-wide installs.
-- Use the smallest relevant test and report its actual result.
+## License
 
-## Current limitations
-
-- The repository is a development workflow and toolset, not a packaged game.
-- Engine/editor MCP tools depend on the user's installed tools, project, editor
-  state and client configuration.
-- Blender MCP requires Blender; set `BLENDER_EXE` or make `blender` discoverable
-  on `PATH`.
-- The environment detector currently targets Windows.
-- There is no repository license file yet.
+Repository-owned content is licensed under the [MIT License](LICENSE), copyright
+(c) 2026 `mzainulabideendev`. Third-party material and external game assets, if
+any, remain subject to their own licenses and notices. No standalone third-party
+game asset library is intended to be bundled by this repository.
