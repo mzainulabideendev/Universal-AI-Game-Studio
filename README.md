@@ -35,6 +35,9 @@ that a documented integration is installed or running.
 - **Blender MCP server:** a dependency-free local stdio server that launches
   Blender for real inspection, validation, import/export, rendering and Python
   operations.
+- **Game Studio MCP server:** real detection, licensed asset search, Meshy
+  generation, animation inspection and Unity/Godot/Unreal staging with explicit
+  confirmation, provenance and limitations.
 - **Environment detector:** read-only Windows tooling discovery that writes a
   local report, intentionally excluded from source control.
 - **Asset research practices:** candidate evaluation, license checks,
@@ -59,6 +62,7 @@ is a **test asset, not a screenshot of a finished game**.
 - [Requirements](#requirements)
 - [Use with AI agents](#use-with-ai-agents)
 - [Configure Blender MCP](#configure-blender-mcp)
+- [Configure Game Studio MCP](#configure-game-studio-mcp)
 - [Run checks](#run-checks)
 - [Production workflow](#production-workflow)
 - [Asset research and licensing](#asset-research-and-licensing)
@@ -103,7 +107,21 @@ The detector is read-only and currently targets Windows. It writes
 `reports/environment.json` and `reports/environment.md` locally; these files
 may include hardware and absolute paths and are excluded from Git.
 
-### 4. Verify MCP communication
+### 4. Discover the Game Studio tools
+
+`tools/game-studio-mcp/server.py` is a second local stdio server that adds
+cross-engine detection, licensed asset search, Meshy tasks and engine staging.
+It has no third-party Python dependencies:
+
+```powershell
+python .\scripts\test-mcp-server.py --call studio_info -- python .\tools\game-studio-mcp\server.py
+python .\scripts\test-mcp-server.py --call detect_game_engines -- python .\tools\game-studio-mcp\server.py
+```
+
+Configuration and credentials are external to the repository; see
+[Game Studio MCP](tools/game-studio-mcp/README.md).
+
+### 5. Verify MCP communication
 
 This handshake-only test confirms that the Blender server initializes and lists
 tools. It does **not** require Blender:
@@ -112,7 +130,7 @@ tools. It does **not** require Blender:
 python .\scripts\test-mcp-server.py -- python .\tools\blender-mcp\server.py
 ```
 
-### 5. Optionally run the complete Blender pipeline test
+### 6. Optionally run the complete Blender pipeline test
 
 Install Blender separately. Either make its executable available as `blender` on
 `PATH`, or set `BLENDER_EXE` for the current shell:
@@ -216,6 +234,45 @@ Reload its MCP configuration after editing, then discover the server's tools
 and call `blender_info`. Check `unity status` and `unity pipeline list` before
 using Unity editor tools; the editor must be running on the intended project.
 
+## Configure Game Studio MCP
+
+`tools/game-studio-mcp/server.py` is a separate stdio server for discovery,
+assets, Meshy and engine staging. It uses the same MCP client configuration
+shape:
+
+```json
+{
+  "servers": {
+    "game-studio": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["${workspaceFolder}/tools/game-studio-mcp/server.py"],
+      "env": {
+        "MESHY_API_KEY": "${env:MESHY_API_KEY}",
+        "SKETCHFAB_TOKEN": "${env:SKETCHFAB_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+`MESHY_API_KEY` and `SKETCHFAB_TOKEN` are optional; omit them to use only
+keyless integrations. The server stores machine-local config outside the
+repository (`GAME_STUDIO_HOME` overrides the location) and never returns secret
+values.
+
+If Meshy is not configured, call `meshy_setup_guide`. It returns the real key
+creation steps and two supported storage options: set `MESHY_API_KEY` in the MCP
+client environment and reconnect, or call `meshy_configure_api_key` with
+`confirm=true` to validate and save the key in the private local config
+directory. The environment variable wins; `meshy_clear_api_key` removes only the
+local file. Keys can be rotated at any time by replacing either one.
+
+Start with `studio_info`, `detect_game_engines` and `inspect_game_project`.
+Credit-spending, file-writing and editor/build calls require an explicit
+`confirm=true`. See the full
+[tool and limitation reference](tools/game-studio-mcp/README.md).
+
 ## Run checks
 
 ### Python syntax
@@ -228,11 +285,21 @@ python -m py_compile .\tools\blender-mcp\server.py .\scripts\test-blender-mcp.py
 
 ```powershell
 python .\scripts\test-mcp-server.py -- python .\tools\blender-mcp\server.py
+python .\scripts\test-mcp-server.py -- python .\tools\game-studio-mcp\server.py
 ```
 
 The script prints the server identity and tool names. A passing handshake tests
 stdio protocol discovery only; use `--full` on the Blender test for real Blender
 operations.
+
+### Game Studio unit tests
+
+```powershell
+python -m unittest discover -s .\tools\game-studio-mcp\tests -v
+```
+
+These tests use temporary projects and synthetic GLB/OBJ files. They need no
+network, engine, Blender or API key.
 
 ### Blender create/inspect/validate/export/render workflow
 
@@ -345,6 +412,7 @@ and
 | `scripts/test-mcp-server.py` | Generic MCP stdio handshake and tool-list test |
 | `scripts/test-blender-mcp.py` | Blender MCP smoke test; `--full` runs the full test pipeline |
 | `tools/blender-mcp/server.py` | Dependency-free Blender MCP stdio server |
+| `tools/game-studio-mcp/` | Game Studio MCP server, tests and limitations reference |
 | `validation/assets/` | Small Blender test scene and checker texture |
 | `validation/exports/` | Test FBX/GLB exports and real Blender preview render |
 | `LEARNING.md` | Guided learning and practical exercises |
@@ -356,6 +424,8 @@ and
 | Symptom | Check |
 | --- | --- |
 | Blender tools do not appear | Reload MCP settings, verify the command and script path, then run the handshake test. |
+| Game Studio tools are not configured with Meshy | Set `MESHY_API_KEY` in the MCP server environment and reconnect. The server reports `not-configured` rather than faking a task. |
+| Staged asset never appears in the engine | Staging is not import. Open/focus the engine, run the documented refresh tool, then check `verify_staged_import` and the engine log. |
 | Blender starts but reports it is missing | Set `BLENDER_EXE` to the actual executable or add Blender to `PATH`. |
 | `blender_info` works but asset calls fail | Check Blender's path/version and inspect the call's returned error and stderr. |
 | Unity MCP exposes no editor tools | Open the intended Unity project, check `unity status` and `unity pipeline list`, and confirm the editor integration is enabled. |

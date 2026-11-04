@@ -37,7 +37,10 @@ practical. For Python changes, run syntax checks and the MCP handshake:
 
 ```powershell
 python -m py_compile .\tools\blender-mcp\server.py .\scripts\test-blender-mcp.py .\scripts\test-mcp-server.py
+python -m compileall -q .\tools\game-studio-mcp
 python .\scripts\test-mcp-server.py -- python .\tools\blender-mcp\server.py
+python .\scripts\test-mcp-server.py -- python .\tools\game-studio-mcp\server.py
+python -m unittest discover -s .\tools\game-studio-mcp\tests -v
 ```
 
 When Blender is installed, also run the real integration test:

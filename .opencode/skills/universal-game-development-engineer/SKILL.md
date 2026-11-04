@@ -609,6 +609,11 @@ Before calling an engine or art tool, enumerate what exists:
   Unreal `UnrealEditor-Cmd.exe -run=...`, Godot `--headless --script`.
 - **Editor MCP**: require the editor process plus the engine-side plugin
   (`com.unity.pipeline` for Unity). Without both, expect zero tools.
+- **Bundled Game Studio MCP**: `tools/game-studio-mcp/server.py` provides
+  detection, Blender jobs, Poly Haven/Sketchfab search, Meshy tasks, animation
+  inspection and engine staging/batch commands. Read its README and call
+  `studio_info`/`inspect_engine_capabilities` first; it reports unverified and
+  unavailable operations explicitly.
 
 Verify with one read-only call (list scenes, read project version, get status)
 before any mutating call.
@@ -640,6 +645,9 @@ validate the route with the real controller, then replace blockout art.
 - Procedural content must be seeded, constrained and connectivity-validated
   (spawn → every required objective), with collision generated, not assumed.
 - Visual meshes never imply collision; verify each interactive element by playing.
+- `blender_create_environment_blockout` (Game Studio MCP) produces a seeded
+  terrain/tree/rock/water blockout for iteration; label it as a blockout and
+  replace it with validated production art before delivery.
 - Check readability, sightlines, unreachable objectives, floating props, stuck
   spots and frame time in the heaviest area.
 
@@ -742,6 +750,7 @@ Never mark the whole system complete while a critical integration is unverified.
 | `references/60-troubleshooting.md` | Failure diagnosis playbooks |
 | `references/70-acceptance-checklist.md` | Final evidence checklist |
 | `references/75-performance-qa-delivery.md` | Performance budgets, automated playtesting, delivery package |
+| `../../../tools/game-studio-mcp/README.md` | Bundled Game Studio MCP tools, confirmations, evidence and known limitations |
 
 All 14 reference files are shipped with this skill; if a link is broken, the
 skill is incomplete.

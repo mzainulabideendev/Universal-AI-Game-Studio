@@ -13,6 +13,12 @@ references in its `references/` directory before implementation.
   `scripts/detect-dev-environment.ps1` and read its local report.
 - Discover MCP tools at runtime. Never infer that a configured server is
   connected or invent tool names.
+- Use `tools/game-studio-mcp/server.py` for cross-engine detection, licensed
+  asset search, Meshy tasks, animation inspection and asset staging. Read
+  `tools/game-studio-mcp/README.md` for tool names and known limitations.
+- Before any paid generation, download, project write, editor batch run or
+  build, obtain explicit user approval and pass `confirm=true`. Never claim a
+  staged asset is imported or a produced build is a working game.
 - Before Unity editor tools, check `unity status` and `unity pipeline list`;
   confirm the editor is open on the intended project.
 - For Blender asset work, use the discovered Blender MCP tools or the documented
