@@ -1,30 +1,120 @@
-# Universal AI Game Studio MCP server
+# Universal AI Game Studio MCP
 
-A dependency-free Python stdio MCP server that drives real tools for game
-production: system/engine detection, Blender automation, Meshy AI tasks, licensed
-asset search, animation inspection, and Unity/Unreal/Godot asset staging and CLI
-builds.
+![tests](https://img.shields.io/badge/tests-33%20passing-brightgreen)
+![python](https://img.shields.io/badge/python-3.10%2B-blue)
+![dependencies](https://img.shields.io/badge/runtime%20dependencies-none-success)
+![license](https://img.shields.io/badge/license-MIT-informational)
 
-It is intentionally strict about evidence. A staged file is not described as
-imported, a produced build is not described as a working game, and a provider or
-engine that is missing is reported instead of being simulated.
+A dependency-free Python stdio **Model Context Protocol** server for real game
+production work: system and engine detection, Blender automation, Meshy AI tasks,
+licensed asset search, animation inspection, and Unity/Unreal/Godot staging and
+CLI builds.
+
+The server is built around one rule: **report what actually happened**. A staged
+file is not called imported, a produced build is not called a working game, and a
+missing provider or engine is reported as missing rather than simulated.
+
+![Real jungle blockout rendered through the MCP server](docs/images/jungle-blockout.png)
+
+*Real output: `blender_create_environment_blockout` (`jungle`, seed 4242, 80 m)
+produced this 640×360 EEVEE render, a `.blend` and a `.glb` (6,670 triangles).
+Blockouts are iteration geometry, not production art.*
+
+---
+
+## Contents
+
+- [Why this server exists](#why-this-server-exists)
+- [Architecture](#architecture)
+- [Screenshots](#screenshots)
+- [Requirements](#requirements)
+- [Quick start](#quick-start)
+- [Configuration](#configuration)
+- [Tool reference](#tool-reference)
+- [Confirmation and overwrite model](#confirmation-and-overwrite-model)
+- [Security and portability](#security-and-portability)
+- [Validation performed](#validation-performed)
+- [Known limitations](#known-limitations)
+- [Project layout](#project-layout)
+- [Development](#development)
+
+## Why this server exists
+
+Game studios lose time to integrations that look connected but are not. This
+server makes the integration boundary explicit and auditable:
+
+- **Real processes.** Blender, Unity CLI and Godot are invoked as subprocesses;
+  engine projects are parsed from their actual project files.
+- **Real providers.** Only APIs with documented public endpoints are automated
+  (Poly Haven, Sketchfab, Meshy). Providers without one are marked `manual-only`.
+- **Provenance by default.** Downloads and staged assets keep license, source
+  URL, hashes and timestamps beside the files.
+- **Explicit risk gates.** Spending credits, writing files, editing projects or
+  starting builds requires `confirm=true`.
+- **Honest capability states.** `available`, `implemented-unverified`,
+  `not-configured`, `unavailable` and `manual-only` are distinct states.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    client["MCP client<br/>(OpenCode, VS Code, ...)"]
+    server["Game Studio MCP<br/>stdio JSON-RPC"]
+    detect["Detection<br/>hardware · toolchains · projects"]
+    blender["Blender runner<br/>headless jobs · export · render"]
+    meshy["Meshy API<br/>text-to-3D · rigging · animation"]
+    assets["Asset providers<br/>Poly Haven · Sketchfab"]
+    engines["Engine adapters<br/>Unity · Godot · Unreal"]
+    local[("External state<br/>config · audit · secrets")]
+
+    client -->|tools/call| server
+    server --> detect
+    server --> blender
+    server --> meshy
+    server --> assets
+    server --> engines
+    server --> local
+    blender --> blenderExe["blender.exe"]
+    meshy --> meshyApi["api.meshy.ai"]
+    assets --> assetApis["provider HTTPS APIs"]
+    engines --> engineClis["Unity CLI · Godot · Unreal"]
+```
+
+The server has no Python package dependencies. It is a single stdio process that
+can be launched by any MCP-capable client.
+
+## Screenshots
+
+These are real renders produced by the server in this repository's verification
+run — not mockups or concept art.
+
+| Jungle blockout | Alpine blockout |
+| --- | --- |
+| ![Jungle blockout](docs/images/jungle-blockout.png) | ![Alpine blockout](docs/images/alpine-blockout.png) |
+| `preset=jungle`, seed 4242, 80 m, 6,670 triangles | `preset=alpine`, seed 2027, 120 m, 12,194 triangles |
+
+Both images were rendered through `blender_create_environment_blockout` using
+the real Blender executable found at runtime. A render-only request (no
+`save_blend`) now stages a temporary `.blend` and removes it after rendering;
+this path is covered by a unit test.
 
 ## Requirements
 
-- Python 3.10+ (tested with 3.12.10). No third-party Python packages.
-- Optional: Blender 3.x/4.x/5.x, Unity Editor + Unity CLI, Unreal Engine, Godot 4.
-- Optional credentials:
-  - `MESHY_API_KEY` for Meshy generation, rigging, animation and balance.
-  - `SKETCHFAB_TOKEN` for authenticated Sketchfab search.
-- Poly Haven search and downloads need no key.
+| Component | Requirement |
+| --- | --- |
+| Python | 3.10+ (verified with 3.12.10) |
+| Python packages | none |
+| Blender | optional; 3.x, 4.x or 5.x (verified with 5.2.2 LTS) |
+| Unity | optional; Editor plus Unity CLI (verified CLI 1.0.0-beta.8) |
+| Unreal | optional; staged-only adapter, no editor automation |
+| Godot | optional; 4.x CLI |
+| Meshy key | optional; required only for Meshy tools |
+| Sketchfab token | optional; authenticated search only |
 
-## Run
+## Quick start
 
-```powershell
-python .\tools\game-studio-mcp\server.py
-```
-
-Configure it as a local stdio server in your MCP client. Example shape:
+1. Clone the repository.
+2. Register the server with your MCP client:
 
 ```json
 {
@@ -42,34 +132,67 @@ Configure it as a local stdio server in your MCP client. Example shape:
 }
 ```
 
-Credentials are read from the server process environment only. They are never
-written to the studio config, audit log or tool output.
+3. Start read-only:
+
+```text
+studio_info
+detect_game_engines
+inspect_game_project
+```
+
+4. Read the capability report before mutating anything:
+
+```text
+inspect_engine_capabilities
+```
+
+### Meshy key onboarding
+
+When Meshy is selected without a key, the server returns `not-configured` and
+points to `meshy_setup_guide`. No task is faked.
+
+1. Create or sign in to a Meshy account at <https://www.meshy.ai/>.
+2. Open <https://www.meshy.ai/developers/keys> and create a key, optionally with
+   a monthly credit limit.
+3. Copy it once — Meshy does not show it again.
+4. Choose one storage method:
+   - set `MESHY_API_KEY` in the MCP client environment and reconnect, or
+   - call `meshy_configure_api_key` with `confirm=true`; the key is validated
+     against the balance endpoint before it is saved.
+5. Call `meshy_balance` to confirm access.
+
+Rotation is supported at any time: create a new key, call
+`meshy_configure_api_key` again, then revoke the old key. The environment
+variable takes precedence over the local file. `meshy_clear_api_key` removes the
+local file only. No tool returns the key, and it never enters the audit log.
 
 ## Configuration
 
-Machine-local settings live outside the repository:
+Machine-local state lives outside the repository:
 
-- Windows: `%APPDATA%\UniversalAIGameStudio\config.json`
-- macOS: `~/Library/Application Support/UniversalAIGameStudio/config.json`
-- Linux: `$XDG_CONFIG_HOME/universal-game-studio/config.json`
-- Override with `GAME_STUDIO_HOME`.
-
-Paths and selected engine can be set with the `configure_studio` and
-`select_game_engine` tools. Project roots default to common folders that exist
-on the machine; they are never guessed into the repository.
-
-Environment variables:
-
-| Variable | Purpose |
+| Platform | Location |
 | --- | --- |
-| `MESHY_API_KEY` | Enables Meshy API tools. |
-| `SKETCHFAB_TOKEN` | Enables authenticated Sketchfab search. |
-| `BLENDER_EXE` | Blender executable when it is not on `PATH` or configured. |
-| `GAME_STUDIO_HOME` | Overrides the config/audit/download directory. |
-| `GAME_STUDIO_ENGINE_TIMEOUT` | Default engine command timeout in seconds (1800). |
-| `BLENDER_MCP_TIMEOUT` | Default Blender job timeout in seconds (900). |
+| Windows | `%APPDATA%\UniversalAIGameStudio\` |
+| macOS | `~/Library/Application Support/UniversalAIGameStudio/` |
+| Linux | `$XDG_CONFIG_HOME/universal-game-studio/` |
+| Override | `GAME_STUDIO_HOME` |
 
-## Tools
+`configure_studio` and `select_game_engine` manage paths and the selected engine.
+Default project roots are limited to common folders that already exist on the
+machine and are never written into the repository.
+
+| Variable | Purpose | Default |
+| --- | --- | --- |
+| `MESHY_API_KEY` | Meshy API access | unset |
+| `SKETCHFAB_TOKEN` | Authenticated Sketchfab search | unset |
+| `BLENDER_EXE` | Blender executable | auto-detected / `PATH` |
+| `GAME_STUDIO_HOME` | Config, audit, secrets, downloads | OS config directory |
+| `GAME_STUDIO_ENGINE_TIMEOUT` | Engine command timeout (seconds) | `1800` |
+| `BLENDER_MCP_TIMEOUT` | Blender job timeout (seconds) | `900` |
+
+## Tool reference
+
+52 tools, grouped by capability.
 
 ### Discovery and configuration
 
@@ -97,44 +220,25 @@ It is explicitly a blockout, not production environment art.
 `meshy_animation_library`, `meshy_create_animation`, `meshy_task_status`,
 `meshy_wait_for_task`, `meshy_download_output`, `meshy_generate_asset`.
 
-If no key is configured, `meshy_setup_guide` returns the real setup steps:
-create/sign in to a Meshy account, open
-`https://www.meshy.ai/developers/keys`, create a key (optionally with a monthly
-credit limit), copy it once, then either set `MESHY_API_KEY` in the MCP client
-environment and reconnect, or call `meshy_configure_api_key` with `confirm=true`.
-That tool validates the key against the balance endpoint before saving it to a
-private file outside the repository.
-
-Key resolution order:
-
-1. `MESHY_API_KEY` environment variable (wins when set).
-2. `%APPDATA%\UniversalAIGameStudio\secrets\meshy.json` (or the platform
-   equivalent under `GAME_STUDIO_HOME`).
-
-To rotate, create a new key and call `meshy_configure_api_key` again, or update
-the environment variable and restart the server. `meshy_clear_api_key` deletes
-the local file, but cannot remove an environment variable. No tool returns the
-key, and it is never written to the audit log.
-
 All credit-spending calls require `confirm=true` and record an audit entry.
-Rigging supports humanoid/biped models. Meshy returns GLB/FBX files; it does not
-configure a Unity Animator, Unreal Anim Blueprint or Godot AnimationPlayer.
-
-The server deliberately does **not** generate placeholder characters or claim
-that a rig will work in-engine. Use Meshy, an artist or your own Blender model,
-then inspect the rig and verify import and animation playback.
+Rigging targets humanoid/biped models. Meshy returns GLB/FBX files; it does not
+configure a Unity Animator, Unreal Animation Blueprint or Godot AnimationPlayer.
+Inspect the rig and verify import and playback before claiming a character is
+ready.
 
 ### Assets
 
 `list_asset_providers`, `search_assets`, `download_polyhaven_asset`,
 `inspect_asset_license`, `validate_asset_file`, `create_asset_manifest`.
 
-- Poly Haven: keyless search and download, CC0, MD5 verification and a
-  `provenance.json` beside the files.
-- Sketchfab: search with the license field returned by its API. Missing license
-  data is flagged as unknown.
-- Mixamo, Kenney, OpenGameArt, Unity Asset Store and Fab are reported as
-  `manual-only`; this server does not scrape them or bypass access controls.
+| Provider | Search | Download | License handling |
+| --- | --- | --- | --- |
+| Poly Haven | yes, keyless | yes | CC0, MD5 verified, provenance file |
+| Sketchfab | yes, token optional | no | per-asset license field; missing data flagged |
+| Meshy | generated assets | yes | Meshy terms |
+| Mixamo, Kenney, OpenGameArt, Unity Asset Store, Fab | no | no | `manual-only`; use the provider's own site |
+
+The server does not scrape manual-only providers or bypass access controls.
 
 ### Animation
 
@@ -156,79 +260,118 @@ retargeting; verify rest pose, scale, axes and playback in Blender or the engine
 | --- | --- | --- | --- | --- | --- | --- |
 | Unity | yes | yes | `.meta` + hash | `unity run -quit -batchmode` | `unity test` + NUnit parse | `unity build` + artifact check |
 | Godot | yes | yes | `.import` + `.godot/imported` | `godot --headless --editor --quit` | not implemented | export preset |
-| Unreal | yes | yes | not possible without editor automation | no | no | no |
+| Unreal | yes | yes | requires editor automation | no | no | no |
 
 The Unreal adapter is deliberately staged-only. It does not claim an import or a
 build succeeded.
 
-## Confirmation model
+## Confirmation and overwrite model
 
 These calls fail unless `confirm=true`:
 
 - Meshy text-to-3D, refine, rigging and animation tasks (credits).
 - Poly Haven downloads.
 - Asset staging into a game project.
-- Unity batch refresh, tests, builds, editor commands.
+- Unity batch refresh, tests, builds and editor commands.
 - Godot import and export.
 - `blender_run_python`.
 
 Exports, renders and staging refuse to replace an existing target unless
-`confirm_overwrite=true`.
+`confirm_overwrite=true`. Every confirmed write is appended to a local JSONL
+audit log.
 
-## Safety and portability
+## Security and portability
 
-- Subprocesses run without a shell; Blender receives arguments through a JSON
+- Subprocesses run without a shell. Blender receives arguments through a JSON
   file rather than string interpolation.
-- Downloads use HTTPS, an allow-list of provider hosts, size limits and private
+- Downloads use HTTPS with provider host allow-lists, size limits and private
   address rejection. Poly Haven files are MD5-checked; all downloads are
   SHA-256 hashed.
 - Staged paths must stay inside the project's `Assets/`, `Content/` or root.
   Traversal and absolute paths are rejected.
-- The audit log is append-only JSONL in the external config directory.
+- API keys are resolved at call time and never written to config, audit output
+  or tool responses.
+- The local secrets file is created under the external config directory with
+  owner-only permissions where the platform supports them.
 - No machine paths or credentials are committed to the repository.
 
 ## Validation performed
 
-The following was run on Windows with Python 3.12.10, Blender 5.2.2 LTS and Unity
-CLI 1.0.0-beta.8:
+Environment: Windows, Python 3.12.10, Blender 5.2.2 LTS, Unity 6000.6.2f1 and
+Unity CLI 1.0.0-beta.8.
 
 ```powershell
-python -m py_compile .\tools\game-studio-mcp\server.py
-python -m unittest discover -s .\tools\game-studio-mcp\tests -v   # 32 passed
+python -m compileall -q .\tools\game-studio-mcp
+python -m unittest discover -s .\tools\game-studio-mcp\tests -v   # 33 passed
 python .\scripts\test-mcp-server.py --call studio_info -- python .\tools\game-studio-mcp\server.py
 python .\scripts\test-mcp-server.py --call blender_info -- python .\tools\game-studio-mcp\server.py
 ```
 
-A real Blender blockout was created, saved, exported and rendered through the
-MCP tool (`jungle`, seed 4242, 80 m, 6,670 triangles): `.blend` 196,461 bytes,
-`.glb` 283,272 bytes, `.png` preview 278,904 bytes. The GLB has 57 meshes, 5
-materials and no rig. The render was inspected and shows terrain, trees, rocks
-and water, matching the blockout description.
+| Evidence | Result |
+| --- | --- |
+| MCP stdio handshake | 52 tools; every tool has a handler |
+| Unit tests | 33 passing, no network/engine/API key required |
+| Blender jungle blockout | `.blend` 196,461 B; `.glb` 283,272 B, 57 meshes, 5 materials; 640×360 PNG 278,904 B |
+| Blender alpine render | 12,194 triangles, 114 objects, 640×360 PNG 287,522 B |
+| Render-only path | temporary `.blend` created and removed; render persisted |
+| Poly Haven live search | `rock_moss_set_02`, `rock_moss_set_01`, `Rockingchair_01`, HDRIs |
+| Unity detection | 6000.6.2f1 editor and CLI detected; real project inspected |
+| Unity editor tools | correctly reported unavailable (no connected Pipeline editor) |
+| Meshy invalid key | real 401 response, `saved: false`, no key file written |
+| Meshy key storage | local save, environment precedence and clear tested |
 
-Live Poly Haven search returned real assets (`rock_moss_set_02`,
-`rock_moss_set_01`, `Rockingchair_01`). Unity installation/CLI detection and
-read-only project inspection succeeded.
+Reproduction notes and the full evidence table are in
+[ACCEPTANCE.md](ACCEPTANCE.md).
 
-### Not verified in this environment
+## Known limitations
 
-- **Meshy:** `MESHY_API_KEY` is absent. Only the not-configured path was tested.
-  Generation, rigging and animation task execution are unverified.
-- **Unreal:** not installed. Inspection/staging logic is tested with fixtures;
-  no editor automation exists.
-- **Godot:** not installed. Commands follow documented CLI syntax but were not
-  executed.
-- **Unity writes:** no editor was connected with the Pipeline package, and no
-  batch refresh, test run or player build was executed. Those adapter paths are
-  implemented but unverified against this Unity version.
-- **Sketchfab:** no token, so only the unauthenticated path is covered.
-- **Runtime quality:** no generated asset, staging result or build has been
-  playtested. Blockouts are placeholders.
+- **Meshy task execution is unverified.** No valid key was available. Key setup,
+  validation, storage and rejection paths are tested; live generation, rigging
+  and animation tasks are not.
+- **Unity writes are unverified.** No editor with `com.unity.pipeline` was
+  connected, and no batch refresh, test run or player build was executed in this
+  environment.
+- **Unreal is staged-only.** UE is not installed; inspection/staging logic is
+  fixture-tested, but there is no editor automation.
+- **Godot is unexecuted.** CLI syntax follows the documented interface; it was
+  not run against a Godot installation.
+- **Sketchfab authenticated search is unverified.** No token was supplied.
+- **No runtime playtesting.** No generated asset, staging result or build has
+  been played. Blockouts are placeholders and require production art, collision
+  and gameplay validation.
+- **Blockouts are not art direction.** They are seeded geometry for layout
+  iteration, not a substitute for an environment artist.
 
-## Tests
+## Project layout
 
-```powershell
-python -m unittest discover -s .\tools\game-studio-mcp\tests -v
+```text
+tools/game-studio-mcp/
+├── server.py                 # MCP registry and stdio transport
+├── game_studio/
+│   ├── config.py             # external config + audit trail
+│   ├── secrets.py            # private Meshy key resolution/storage
+│   ├── util.py               # path safety, hashing, HTTP, subprocesses
+│   ├── detect.py             # hardware, toolchains, engines, projects
+│   ├── projects.py           # Unity/Unreal/Godot project inspection
+│   ├── blender.py            # headless Blender jobs, export, render
+│   ├── meshy.py              # documented Meshy API + key onboarding
+│   ├── assets.py             # provider search, downloads, manifests
+│   ├── animations.py         # GLB/glTF rig and clip inspection
+│   └── engines.py            # staging and engine CLI adapters
+├── tests/test_game_studio.py # offline unit tests
+├── docs/images/              # real render evidence used in this README
+├── README.md
+└── ACCEPTANCE.md
 ```
 
-The suite uses temporary projects and synthetic GLB/OBJ files; it needs no
-network, engine, Blender or API key.
+## Development
+
+```powershell
+python -m compileall -q .\tools\game-studio-mcp
+python -m unittest discover -s .\tools\game-studio-mcp\tests -v
+python .\scripts\test-mcp-server.py -- python .\tools\game-studio-mcp\server.py
+```
+
+Contribution rules and verification expectations are in the repository's
+[CONTRIBUTING.md](../../CONTRIBUTING.md). Licensed under the MIT License; see
+[LICENSE](../../LICENSE).

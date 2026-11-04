@@ -31,12 +31,13 @@ Command:
 python -m unittest discover -s .\tools\game-studio-mcp\tests -v
 ```
 
-Result: **32 tests passed**.
+Result: **33 tests passed**.
 
 Coverage includes path traversal rejection, config isolation and audit, project
 discovery/inspection, OBJ and GLB validation, rig classification, retargeting,
-Meshy confirmation and not-configured guards, staging/overwrite rules, Unity and
-Unreal state logic, tool registry parity, unknown tools and clean tool errors.
+Meshy confirmation/not-configured/key storage paths, staging/overwrite rules,
+Blender render-only temporary-file handling, Unity and Unreal state logic, tool
+registry parity, unknown tools and clean tool errors.
 
 ## 3. Executed live evidence
 
@@ -81,6 +82,12 @@ and missing terrain UVs.
 The exported GLB was independently parsed by `validate_asset_file` (57 meshes, 5
 materials, no rig) and `inspect_animation_rig` (unrigged). This is expected for an
 environment blockout.
+
+A second live run exercised the render-only path with `preset=alpine`, `seed=2027`,
+`size=120`, `segments=48`, `tree_count=75`, `rock_count=35`, no `save_blend`.
+It returned `ok: true`, wrote a 640×360 PNG (287,522 bytes; 12,194 triangles,
+114 objects) and removed the temporary `.blend` afterwards. Both renders are
+committed under `docs/images/` and shown in the README.
 
 ### Engine detection and project inspection
 

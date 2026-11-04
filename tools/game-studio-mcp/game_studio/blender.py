@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import tempfile
 import time
 from pathlib import Path
@@ -710,26 +711,46 @@ def create_environment_blockout(preset: str = "jungle", seed: int = 1337,
             raise ToolError(f"output exists (pass confirm_overwrite=true): {target}")
     if not save and not glb and not png:
         raise ToolError("provide at least one of save_blend, export_glb or render_png")
+
+    # Rendering reopens a saved .blend. When the caller only asked for an image,
+    # stage a temporary file so the render still happens, then remove it.
+    temp_dir = None
+    render_source = save
+    if png and not save:
+        temp_dir = tempfile.mkdtemp(prefix="game-studio-render-")
+        render_source = os.path.join(temp_dir, "blockout.blend")
+
     out = run_blender(BUILDOUT_SCRIPT, args={
         "preset": preset, "seed": seed, "size": size, "segments": segments,
         "tree_count": tree_count, "rock_count": rock_count,
         "water_level": water_level, "include_water": include_water,
-        "save_blend": save, "export_glb": glb, "render_png": png,
+        "save_blend": render_source, "export_glb": glb, "render_png": png,
     }, timeout=1200)
     # Exporting and rendering are separate Blender invocations from the saved file,
     # so each artifact is produced by the documented exporter/renderer.
     artifacts = {}
-    if out.get("ok") and save and os.path.isfile(save):
-        artifacts["blend"] = {"path": save, "bytes": os.path.getsize(save)}
-        if glb:
-            exported = export_blend(save, glb, "glb", confirm_overwrite=confirm_overwrite)
-            artifacts["glb"] = exported.get("result") if exported.get("ok") else exported
-            out["ok"] = out.get("ok") and bool(exported.get("ok"))
-        if png:
-            rendered = render_preview(save, png, confirm_overwrite=confirm_overwrite)
-            artifacts["render"] = rendered.get("result") if rendered.get("ok") else rendered
-            out["ok"] = out.get("ok") and bool(rendered.get("ok"))
+    try:
+        if out.get("ok") and render_source and os.path.isfile(render_source):
+            if save:
+                artifacts["blend"] = {"path": save, "bytes": os.path.getsize(save)}
+            if glb:
+                exported = export_blend(render_source, glb, "glb", confirm_overwrite=confirm_overwrite)
+                artifacts["glb"] = exported.get("result") if exported.get("ok") else exported
+                out["ok"] = out.get("ok") and bool(exported.get("ok"))
+            if png:
+                rendered = render_preview(render_source, png, confirm_overwrite=confirm_overwrite)
+                artifacts["render"] = rendered.get("result") if rendered.get("ok") else rendered
+                out["ok"] = out.get("ok") and bool(rendered.get("ok"))
+    finally:
+        if temp_dir:
+            shutil.rmtree(temp_dir, ignore_errors=True)
     out["artifacts"] = artifacts
+    missing = [name for name, target in
+               (("blend", save), ("glb", glb), ("render", png))
+               if target and not os.path.isfile(target)]
+    if missing:
+        out["ok"] = False
+        out["error"] = "expected artifacts were not produced: " + ", ".join(missing)
     if out.get("ok"):
         out["generated_at"] = now_iso()
     return out

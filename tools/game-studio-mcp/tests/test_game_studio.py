@@ -19,7 +19,7 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from game_studio import animations, assets, config, detect, engines, meshy, projects, secrets  # noqa: E402
+from game_studio import animations, assets, blender, config, detect, engines, meshy, projects, secrets  # noqa: E402
 from game_studio.util import ToolError, safe_join  # noqa: E402
 
 import server  # noqa: E402
@@ -300,6 +300,34 @@ class MeshyKeyTests(StudioTestCase):
         after = next(p for p in assets.providers()["providers"] if p["id"] == "meshy")
         self.assertEqual(after["state"], "configured")
         self.assertEqual(after["setup_tool"], "meshy_setup_guide")
+
+
+class BlenderBlockoutTests(StudioTestCase):
+    def test_render_only_uses_and_removes_temporary_blend(self) -> None:
+        out_png = self.path("render.png")
+        captured = {}
+
+        def fake_run(script, *, args=None, timeout=900):
+            captured.update(args)
+            with open(args["save_blend"], "wb") as handle:
+                handle.write(b"blend")
+            return {"ok": True}
+
+        def fake_render(blend, png, *, confirm_overwrite=False):
+            self.assertTrue(os.path.isfile(blend))
+            with open(png, "wb") as handle:
+                handle.write(b"png")
+            return {"ok": True, "result": {"path": png}}
+
+        with mock.patch.object(blender, "run_blender", side_effect=fake_run), \
+             mock.patch.object(blender, "render_preview", side_effect=fake_render):
+            result = blender.create_environment_blockout(preset="alpine",
+                                                         render_png=out_png)
+        self.assertTrue(result["ok"], result)
+        self.assertIn("render", result["artifacts"])
+        self.assertNotIn("blend", result["artifacts"])
+        self.assertTrue(os.path.isfile(out_png))
+        self.assertFalse(os.path.exists(captured["save_blend"]))
 
 
 class EngineStagingTests(StudioTestCase):

@@ -37,7 +37,8 @@ that a documented integration is installed or running.
   operations.
 - **Game Studio MCP server:** real detection, licensed asset search, Meshy
   generation, animation inspection and Unity/Godot/Unreal staging with explicit
-  confirmation, provenance and limitations.
+  confirmation, provenance and limitations. See
+  [tools/game-studio-mcp/README.md](tools/game-studio-mcp/README.md).
 - **Environment detector:** read-only Windows tooling discovery that writes a
   local report, intentionally excluded from source control.
 - **Asset research practices:** candidate evaluation, license checks,
@@ -45,19 +46,37 @@ that a documented integration is installed or running.
 - **Learning and contribution guides:** [LEARNING.md](LEARNING.md) and
   [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Visual identity
+## Screenshots
+
+These are **real outputs** produced by the tools in this repository, not mockups.
+
+<table>
+  <tr>
+    <td width="50%">
+      <img src="tools/game-studio-mcp/docs/images/jungle-blockout.png" alt="Jungle terrain blockout rendered by Blender"><br>
+      <sub><code>blender_create_environment_blockout</code> · jungle · 80 m · 6,670 triangles</sub>
+    </td>
+    <td width="50%">
+      <img src="tools/game-studio-mcp/docs/images/alpine-blockout.png" alt="Alpine terrain blockout rendered by Blender"><br>
+      <sub><code>blender_create_environment_blockout</code> · alpine · 120 m · 12,194 triangles</sub>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <img src="validation/exports/mcp_validation.png" alt="Blender-rendered checkerboard validation asset" width="640"><br>
+      <sub>Blender MCP validation render — a test asset, not a finished game scene.</sub>
+    </td>
+  </tr>
+</table>
 
 The logo is an original SVG included at
 [`assets/universal-ai-game-studio-logo.svg`](assets/universal-ai-game-studio-logo.svg).
-The sample below is a real Blender render from the MCP validation pipeline. It
-is a **test asset, not a screenshot of a finished game**.
-
-<p align="center">
-  <img src="validation/exports/mcp_validation.png" alt="Blender-rendered checkerboard test asset" width="640">
-</p>
+Blockouts are seeded layout geometry for iteration; they are not production art
+or a claim of finished gameplay.
 
 ## Table of contents
 
+- [Screenshots](#screenshots)
 - [Quick start](#quick-start)
 - [Requirements](#requirements)
 - [Use with AI agents](#use-with-ai-agents)
