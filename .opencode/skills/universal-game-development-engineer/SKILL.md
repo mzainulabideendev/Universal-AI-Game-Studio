@@ -2,7 +2,7 @@
 name: Universal Game Development Engineer
 description: Build, integrate, test and ship real 2D/3D games in Unity, Unreal or Godot, including MCP discovery, Blender asset pipelines, gameplay systems, physics debugging, performance and verified builds.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   owner: local
 ---
 
@@ -570,6 +570,19 @@ opencode api get /api/info # host/version sanity check
 An MCP server that connects with `tools=0` is usually waiting for its editor or
 backend process. Diagnose the dependency; do not add a duplicate server.
 
+## Phase 0.5 — Understand the request and persist the plan
+
+Before writing gameplay code, call `analyze_game_request` with the user's
+unedited words (English, Roman Urdu, Urdu or mixed). Keep explicit requirements
+separate from implied/technical/optional suggestions, and resolve reported
+conflicts before implementation.
+
+Then call `create_game_specification`, review the questions, and get user
+approval for engine, platform, dimension, art direction and scope. Persist the
+approved plan with `init_project_manifest`; do not rely on conversation memory.
+Full procedure and the status/evidence rules:
+`references/80-intent-and-project-memory.md`.
+
 ## Phase 1 — Scope the game before touching code
 
 Write a one-page brief in the project (or the task log) covering:
@@ -750,7 +763,8 @@ Never mark the whole system complete while a critical integration is unverified.
 | `references/60-troubleshooting.md` | Failure diagnosis playbooks |
 | `references/70-acceptance-checklist.md` | Final evidence checklist |
 | `references/75-performance-qa-delivery.md` | Performance budgets, automated playtesting, delivery package |
+| `references/80-intent-and-project-memory.md` | Request intent, classified requirements, specification, manifest, evidence rules |
 | `../../../tools/game-studio-mcp/README.md` | Bundled Game Studio MCP tools, confirmations, evidence and known limitations |
 
-All 14 reference files are shipped with this skill; if a link is broken, the
+All 15 reference files are shipped with this skill; if a link is broken, the
 skill is incomplete.

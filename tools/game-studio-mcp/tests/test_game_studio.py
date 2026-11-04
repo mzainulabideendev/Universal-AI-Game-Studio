@@ -19,7 +19,7 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from game_studio import animations, assets, blender, config, detect, engines, meshy, projects, secrets  # noqa: E402
+from game_studio import animations, assets, blender, config, detect, engines, manifest, meshy, projects, secrets, specification, understanding  # noqa: E402
 from game_studio.util import ToolError, safe_join  # noqa: E402
 
 import server  # noqa: E402
@@ -425,6 +425,228 @@ class ServerProtocolTests(StudioTestCase):
         self.assertEqual(init["result"]["serverInfo"]["name"], "universal-game-studio")
         self.assertEqual(server.handle({"jsonrpc": "2.0", "id": 2, "method": "ping"}),
                          {"jsonrpc": "2.0", "id": 2, "result": {}})
+
+
+class UnderstandingTests(StudioTestCase):
+    def test_roman_urdu_request_is_understood_and_traceable(self) -> None:
+        result = understanding.analyze_request(
+            "Bhai ek realistic 3D monkey adventure game banao jungle mein. "
+            "Bandar ped par charh sake aur pani mein tair sake.")
+        self.assertEqual(result["understanding"]["dimension"], ["3d"])
+        self.assertEqual(result["understanding"]["game_genre"], ["adventure"])
+        self.assertEqual(result["understanding"]["characters"], ["monkey"])
+        self.assertIn("jungle", result["understanding"]["environment"])
+        self.assertIn("climbing", result["understanding"]["mechanics"])
+        self.assertIn("swimming", result["understanding"]["mechanics"])
+        self.assertIn("roman-urdu", result["language"]["detected"])
+        self.assertTrue(result["language"]["mixed"])
+        self.assertTrue(all(item["source_text"] for item in
+                            result["requirements"]["explicit"]))
+        self.assertTrue(result["requirements"]["implied"])
+
+    def test_exclusion_is_not_turned_into_a_requirement(self) -> None:
+        result = understanding.analyze_request(
+            "Make a 3D monkey adventure game in a jungle. No guns.")
+        self.assertFalse(any("gun" in item["statement"].lower()
+                             for item in result["requirements"]["explicit"]))
+        self.assertEqual([item["value"] for item in result["exclusions"]], ["weapons"])
+        self.assertEqual(result["conflicts"], [])
+
+    def test_multiple_engines_and_style_conflict_are_reported(self) -> None:
+        result = understanding.analyze_request(
+            "Make a 2D realistic pixel art platformer in Godot and Unreal. "
+            "Without multiplayer.")
+        types = {item["type"] for item in result["conflicts"]}
+        self.assertIn("multiple_engines", types)
+        self.assertIn("art_style_conflict", types)
+        self.assertNotIn("requested_and_excluded", types)
+
+    def test_questions_are_material_and_bounded(self) -> None:
+        result = understanding.analyze_request("Make a game")
+        self.assertLessEqual(len(result["questions"]), 5)
+        topics = {item["topic"] for item in result["unresolved"]}
+        self.assertIn("engine", topics)
+        self.assertIn("dimension", topics)
+        self.assertTrue(all(item["material"] for item in result["unresolved"]
+                            if item["topic"] in ("engine", "platform", "dimension")))
+
+
+class SpecificationTests(StudioTestCase):
+    def spec(self, **overrides):
+        request = overrides.pop("request", (
+            "Make a realistic 3D monkey adventure game in a jungle. "
+            "The monkey can climb and swim. No guns."))
+        return specification.create_specification(
+            request=request, project_name="Monkey Quest",
+            installed_engines=overrides.pop("installed_engines", ["unity"]),
+            **overrides)
+
+    def test_spec_separates_explicit_from_assumptions(self) -> None:
+        spec = self.spec(engine="unity", platform="pc")
+        explicit = [r for r in spec["requirements"] if r["classification"] == "explicit"]
+        self.assertTrue(explicit)
+        self.assertIn("assumptions", spec)
+        self.assertIn("character-source", {item["topic"] for item in spec["unresolved"]})
+        self.assertEqual(spec["status"], "awaiting-approval")
+
+    def test_dependency_graph_is_acyclic_and_ordered(self) -> None:
+        spec = self.spec(engine="unity", platform="pc")
+        graph = spec["dependency_graph"]
+        self.assertEqual(graph["cycles"], [])
+        order = graph["topological_order"]
+        self.assertEqual(len(order), len(graph["nodes"]))
+        position = {node_id: index for index, node_id in enumerate(order)}
+        for edge in graph["edges"]:
+            self.assertLess(position[edge["from"]], position[edge["to"]])
+        self.assertTrue(graph["nodes"][0]["depends_on"] == [])
+
+    def test_requested_but_missing_engine_is_reported(self) -> None:
+        spec = self.spec(request="Make a 3D racing game in Unreal.", engine="unreal",
+                         installed_engines=["unity"], platform="pc")
+        self.assertEqual(spec["engine"]["selected"], "unreal")
+        self.assertFalse(spec["engine"]["verified"])
+        self.assertIn("not detected", spec["engine"]["warning"])
+
+    def test_non_humanoid_character_gets_a_compatible_rig(self) -> None:
+        spec = self.spec(engine="unity", platform="pc")
+        monkey = spec["characters"][0]
+        self.assertIn("quadruped", monkey["rig_requirement"])
+        self.assertIn("humanoid", monkey["retargeting_warning"].lower())
+        self.assertIn("climb", monkey["animation_requirements"])
+        self.assertEqual(monkey["gameplay_role"], "player")
+
+    def test_acceptance_tests_cover_explicit_requirements(self) -> None:
+        spec = self.spec(engine="unity", platform="pc")
+        covered = {test["requirement_id"] for test in spec["acceptance_tests"]}
+        for requirement in spec["requirements"]:
+            if requirement["classification"] == "explicit":
+                self.assertIn(requirement["id"], covered)
+
+
+class ProjectMemoryTests(StudioTestCase):
+    def make_spec(self) -> dict:
+        return specification.create_specification(
+            request="Make a 3D monkey adventure game in a jungle. No guns.",
+            project_name="Memory Game", engine="unity", platform="pc", approved=True,
+            installed_engines=["unity"])
+
+    def init(self, project: str, spec: dict) -> dict:
+        return manifest.init_manifest(project, spec, confirm=True)
+
+    def test_manifest_requires_confirmation_and_is_project_local(self) -> None:
+        project = self.make_unity_project("MemoryUnity")
+        spec = self.make_spec()
+        with self.assertRaises(ToolError):
+            manifest.init_manifest(project, spec, confirm=False)
+        result = self.init(project, spec)
+        self.assertTrue(result["ok"])
+        path = os.path.join(project, ".game-studio", "manifest.json")
+        self.assertEqual(result["manifest_path"], path)
+        self.assertTrue(os.path.isfile(path))
+        with self.assertRaises(ToolError):
+            self.init(project, spec)
+
+    def test_manifest_survives_reload_with_statuses_and_decisions(self) -> None:
+        project = self.make_unity_project("MemoryReload")
+        spec = self.make_spec()
+        self.init(project, spec)
+        requirement_id = spec["requirements"][0]["id"]
+        evidence_file = os.path.join(project, "Assets", "test.log")
+        Path(evidence_file).write_text("test output\n", encoding="utf-8")
+        manifest.update_requirement_status(
+            project, requirement_id, "tested",
+            evidence=[{"kind": "test", "reference": "Assets/test.log"}], confirm=True)
+        manifest.record_decision(project, topic="engine", decision="Unity 6",
+                                 approved=True, confirm=True)
+        # Simulate a restart: read everything back from disk only.
+        progress = manifest.track_progress(project)
+        view = manifest.load_manifest_view(project)
+        self.assertEqual(progress["coverage"]["tested"], 1)
+        self.assertEqual(view["decisions"][0]["decision"], "Unity 6")
+        self.assertEqual(view["project_id"], spec["spec_id"])
+
+    def test_status_guards_reject_unsupported_claims(self) -> None:
+        project = self.make_unity_project("MemoryGuards")
+        spec = self.make_spec()
+        self.init(project, spec)
+        requirement_id = spec["requirements"][0]["id"]
+        with self.assertRaises(ToolError):
+            manifest.update_requirement_status(project, requirement_id, "verified",
+                                              confirm=True)
+        with self.assertRaises(ToolError):
+            manifest.update_requirement_status(
+                project, requirement_id, "tested",
+                evidence=[{"kind": "file", "reference": "Assets/x.log"}], confirm=True)
+        with self.assertRaises(ToolError):
+            manifest.update_requirement_status(
+                project, requirement_id, "verified",
+                evidence=[{"kind": "build", "reference": "Builds/missing.exe"}],
+                confirm=True)
+
+    def test_comparison_flags_a_tampered_verified_claim(self) -> None:
+        project = self.make_unity_project("MemoryTamper")
+        spec = self.make_spec()
+        self.init(project, spec)
+        path = os.path.join(project, ".game-studio", "manifest.json")
+        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        data["requirements"][0]["status"] = "verified"
+        data["requirements"][0]["evidence"] = []
+        Path(path).write_text(json.dumps(data), encoding="utf-8")
+        result = manifest.compare_project_against_requirements(project)
+        self.assertEqual(result["overall"], "blocked")
+        self.assertIn(data["requirements"][0]["id"], result["invalid_claims"])
+
+    def test_manifest_refuses_credential_like_values(self) -> None:
+        project = self.make_unity_project("MemorySecret")
+        spec = self.make_spec()
+        self.init(project, spec)
+        with self.assertRaises(ToolError):
+            manifest.record_decision(
+                project, topic="provider",
+                decision="MESHY_API_KEY=sk-abcdefghijklmnopqrstuvwx",
+                confirm=True)
+
+
+class UnderstandingToolsTests(StudioTestCase):
+    def call(self, name: str, arguments: dict) -> dict:
+        response = server.handle({
+            "jsonrpc": "2.0", "id": 1, "method": "tools/call",
+            "params": {"name": name, "arguments": arguments},
+        })
+        return json.loads(response["result"]["content"][0]["text"])
+
+    def test_analyze_tool_is_read_only_and_returns_classification(self) -> None:
+        payload = self.call("analyze_game_request",
+                            {"request": "Make a 3D monkey adventure game in a jungle."})
+        self.assertTrue(payload["ok"])
+        self.assertIn("explicit", payload["requirements"])
+        self.assertEqual(payload["understanding"]["characters"], ["monkey"])
+
+    def test_spec_and_manifest_tools_round_trip(self) -> None:
+        project = self.make_unity_project("ToolMemory")
+        spec = self.call("create_game_specification", {
+            "request": "Make a 3D platformer in Unity with 3 levels.",
+            "project_name": "Tool Game", "engine": "unity", "platform": "pc",
+            "installed_engines": ["unity"], "approved": True,
+        })
+        self.assertTrue(spec["ok"])
+        initialized = self.call("init_project_manifest", {
+            "project_path": project, "spec": spec, "confirm": True})
+        self.assertTrue(initialized["ok"])
+        progress = self.call("track_project_progress", {"project_path": project})
+        self.assertEqual(progress["coverage"]["total"], len(spec["requirements"]))
+        loaded = self.call("get_project_manifest", {"project_path": project})
+        self.assertEqual(loaded["project_id"], spec["spec_id"])
+
+    def test_new_tools_are_registered(self) -> None:
+        names = {tool["name"] for tool in server.TOOLS}
+        for name in ("analyze_game_request", "create_game_specification",
+                     "init_project_manifest", "get_project_manifest",
+                     "update_requirement_status", "record_project_decision",
+                     "track_project_progress",
+                     "compare_project_against_requirements"):
+            self.assertIn(name, names)
+            self.assertIn(name, server.HANDLERS)
 
 
 if __name__ == "__main__":

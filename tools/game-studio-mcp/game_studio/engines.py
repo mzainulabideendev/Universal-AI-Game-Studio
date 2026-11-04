@@ -23,7 +23,7 @@ import shutil
 import time
 import xml.etree.ElementTree as ET
 
-from . import config
+from . import config, operations
 from .detect import detect_all, detect_engine_cli, detect_godot, detect_unity
 from .projects import detect_project_engine, inspect_game_project
 from .util import (
@@ -32,11 +32,15 @@ from .util import (
     now_iso,
     read_json,
     require_path,
-    run_command,
     safe_join,
     sha256_file,
     write_json,
 )
+
+
+def _run_engine(command: list[str], timeout: int, label: str) -> dict:
+    """Run a documented engine CLI command with cancellation support."""
+    return operations.run_tracked(command, kind="engine", label=label, timeout=timeout)
 
 ENGINES = ("unity", "unreal", "godot")
 DEFAULT_TIMEOUT = int(os.environ.get("GAME_STUDIO_ENGINE_TIMEOUT", "1800"))
@@ -227,7 +231,7 @@ def _unity_pipeline_list() -> dict:
     cli = detect_engine_cli("unity")
     if not cli:
         return {"available": False, "reason": "unity CLI not found"}
-    result = run_command([cli, "pipeline", "list"], timeout=30)
+    result = _run_engine([cli, "pipeline", "list"], 30, "unity pipeline list")
     text = (result.get("stdout") or "").strip()
     available = False
     rows = []
@@ -436,7 +440,7 @@ def _unity_cli() -> str:
 
 def unity_editor_status() -> dict:
     cli = _unity_cli()
-    result = run_command([cli, "status", "--format", "json"], timeout=30)
+    result = _run_engine([cli, "status", "--format", "json"], 30, "unity editor status")
     payload = None
     text = (result.get("stdout") or "").strip()
     if text:
@@ -462,8 +466,8 @@ def unity_list_commands(project_path: str) -> dict:
     project = require_path(project_path, kind="dir", label="project_path")
     if detect_project_engine(project) != "unity":
         raise ToolError(f"not a Unity project: {project}")
-    result = run_command([cli, "command", "--project-path", project, "--format", "json"],
-                         timeout=45)
+    result = _run_engine([cli, "command", "--project-path", project, "--format", "json"],
+                         45, "unity list commands")
     payload = None
     text = (result.get("stdout") or "").strip()
     if text:
@@ -493,7 +497,7 @@ def unity_run_command(project_path: str, command: str, arguments: list[str] | No
     argv = [cli, "command", command, "--project-path", project, "--format", "json",
             "--timeout", str(max(5, min(timeout, 3600))), "--"]
     argv.extend(str(a) for a in (arguments or []))
-    result = run_command(argv, timeout=timeout + 30)
+    result = _run_engine(argv, timeout + 30, "unity editor command")
     config.audit("unity.command", tool="unity_run_command",
                  details={"project": project, "command": command,
                           "arguments": list(arguments or [])})
@@ -522,7 +526,7 @@ def unity_batch_refresh(project_path: str, *, confirm: bool = False,
     argv = [cli, "run", project, "--timeout", str(timeout), "--",
             "-quit", "-batchmode", "-nographics", "-logFile", log_path]
     started = time.time()
-    result = run_command(argv, timeout=timeout + 60)
+    result = _run_engine(argv, timeout + 60, "unity batch refresh")
     config.audit("unity.batch_refresh", tool="unity_batch_refresh",
                  details={"project": project, "ok": bool(result.get("ok")),
                           "duration_ms": result.get("duration_ms")})
@@ -556,7 +560,7 @@ def unity_run_tests(project_path: str, *, mode: str = "EditMode",
             "--report-format", "nunit", "--timeout", str(timeout)]
     if test_filter:
         argv += ["--filter", test_filter]
-    result = run_command(argv, timeout=timeout + 120)
+    result = _run_engine(argv, timeout + 120, "unity tests")
     summary = _parse_nunit(report) if os.path.isfile(report) else None
     config.audit("unity.run_tests", tool="unity_run_tests",
                  details={"project": project, "mode": mode,
@@ -622,7 +626,7 @@ def unity_build(project_path: str, *, target: str, output_path: str,
             "--log-file", log_path, "--no-tail", "--timeout", str(timeout)]
     if allow_dirty_build:
         argv.append("--allow-dirty-build")
-    result = run_command(argv, timeout=timeout + 120)
+    result = _run_engine(argv, timeout + 120, "unity build")
     artifacts = []
     if os.path.isfile(destination):
         artifacts.append({"path": destination, "bytes": os.path.getsize(destination)})
@@ -671,7 +675,7 @@ def godot_batch_import(project_path: str, *, confirm: bool = False,
     log_path = os.path.join(project, STAGING_DIR, "logs", "godot-import.log")
     os.makedirs(os.path.dirname(log_path), exist_ok=True)
     argv = [exe, "--headless", "--path", project, "--editor", "--quit"]
-    result = run_command(argv, timeout=timeout)
+    result = _run_engine(argv, timeout, "godot import")
     cache = os.path.join(project, ".godot", "imported")
     imports = glob.glob(os.path.join(project, "**", "*.import"), recursive=True)
     config.audit("godot.batch_import", tool="godot_batch_import",
@@ -705,7 +709,7 @@ def godot_build(project_path: str, *, preset: str, output_path: str,
     os.makedirs(os.path.dirname(destination), exist_ok=True)
     argv = [exe, "--headless", "--path", project, "--export-release", preset, destination]
     start = time.time()
-    result = run_command(argv, timeout=timeout)
+    result = _run_engine(argv, timeout, "godot build")
     exists = os.path.exists(destination)
     config.audit("godot.build", tool="godot_build",
                  details={"project": project, "preset": preset, "ok": bool(result.get("ok"))})

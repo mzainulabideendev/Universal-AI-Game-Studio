@@ -14,7 +14,7 @@ import tempfile
 import time
 from pathlib import Path
 
-from . import config
+from . import config, operations
 from .detect import detect_blender
 from .util import (
     ToolError,
@@ -22,7 +22,6 @@ from .util import (
     now_iso,
     read_json,
     require_path,
-    run_command,
     sha256_file,
     truncate,
 )
@@ -93,7 +92,8 @@ def run_blender(script: str, *, args: dict | None = None, blend_file: str | None
     command += ["--python", script_path, "--python-exit-code", "1"]
 
     started = time.time()
-    proc = run_command(command, timeout=timeout)
+    proc = operations.run_tracked(command, kind="blender", label="Blender background job",
+                                  timeout=timeout)
     payload: dict
     if os.path.isfile(result_path):
         try:
@@ -106,13 +106,22 @@ def run_blender(script: str, *, args: dict | None = None, blend_file: str | None
         "blender": exe,
         "exit_code": proc.get("exit_code"),
         "timed_out": proc.get("timed_out", False),
+        "cancelled": proc.get("cancelled", False),
+        "operation_id": proc.get("operation_id"),
         "duration_ms": int((time.time() - started) * 1000),
         "stdout_tail": truncate(proc.get("stdout", ""), 4000),
         "stderr_tail": truncate(proc.get("stderr", ""), 4000),
     })
-    if proc.get("timed_out"):
+    if proc.get("cancelled"):
+        payload["ok"] = False
+        payload["error"] = "Blender job cancelled; partial output may exist"
+    elif proc.get("timed_out"):
         payload["ok"] = False
         payload["error"] = f"Blender timed out after {timeout}s"
+    try:
+        shutil.rmtree(workdir, ignore_errors=True)
+    except OSError:
+        pass
     return payload
 
 

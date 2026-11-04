@@ -1,14 +1,16 @@
 # Universal AI Game Studio MCP
 
-![tests](https://img.shields.io/badge/tests-33%20passing-brightgreen)
+![tests](https://img.shields.io/badge/tests-50%20passing-brightgreen)
 ![python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![dependencies](https://img.shields.io/badge/runtime%20dependencies-none-success)
 ![license](https://img.shields.io/badge/license-MIT-informational)
 
 A dependency-free Python stdio **Model Context Protocol** server for real game
-production work: system and engine detection, Blender automation, Meshy AI tasks,
-licensed asset search, animation inspection, and Unity/Unreal/Godot staging and
-CLI builds.
+production work: request understanding (English, Roman Urdu, Urdu, mixed),
+specification and dependency planning, system and engine detection, Blender
+automation, Meshy AI tasks, licensed asset search, animation inspection,
+Unity/Unreal/Godot staging and CLI builds, and persistent project memory with
+requirement traceability.
 
 The server is built around one rule: **report what actually happened**. A staged
 file is not called imported, a produced build is not called a working game, and a
@@ -26,6 +28,7 @@ Blockouts are iteration geometry, not production art.*
 
 - [Why this server exists](#why-this-server-exists)
 - [Architecture](#architecture)
+- [Request understanding and project memory](#request-understanding-and-project-memory)
 - [Screenshots](#screenshots)
 - [Requirements](#requirements)
 - [Quick start](#quick-start)
@@ -82,6 +85,60 @@ flowchart LR
 
 The server has no Python package dependencies. It is a single stdio process that
 can be launched by any MCP-capable client.
+
+## Request understanding and project memory
+
+The intelligence layer turns free-form requests into an approved, persistent
+plan before any code is written:
+
+```text
+analyze_game_request
+  -> explicit / implied / technical / optional / unresolved requirements
+  -> exclusions, conflicts, language report and at most five material questions
+create_game_specification
+  -> engine-aware spec, character/environment/animation plans,
+     dependency graph, milestones A-G and acceptance tests
+init_project_manifest
+  -> <project>/.game-studio/manifest.json (confirmed write)
+update_requirement_status / record_project_decision
+  -> evidence-backed progress across sessions
+compare_project_against_requirements
+  -> re-check claims against the real project before reporting
+```
+
+It recognises common English, Roman Urdu and Urdu production vocabulary
+(`banao`, `bandar`, `charh`, `tair`, `jungle`, `bandar`, `گاڑی`, `جنگل`, ...).
+The parser is deterministic, not a translator: unknown dialects produce a
+clarifying question rather than a guess.
+
+Classification is explicit:
+
+| Class | Source | Example |
+| --- | --- | --- |
+| explicit | the user's words | "3D", "monkey", "drifting" |
+| implied | genre engineering | racing -> lap tracking, vehicle physics |
+| technical | engine/dimension dependency | 3D import pipeline, input actions |
+| optional | AI suggestion | weather, photo mode, ranked matchmaking |
+| unresolved | missing decision | engine, platform, online vs local |
+
+The manifest survives agent restarts and stores the specification, requirement
+statuses, evidence, decisions, pending questions, known errors and a bounded
+history. Credential-like keys and values are refused. A requirement is only
+`verified` with test, build, playtest or inspection evidence; creating a file is
+never enough.
+
+```text
+analyze_game_request  -> read-only
+create_game_specification -> read-only, awaiting approval
+init_project_manifest / update_requirement_status / record_project_decision
+                      -> writes, require confirm=true
+get_project_manifest / track_project_progress / compare_project_against_requirements
+                      -> read-only
+```
+
+Known limitation: the intent parser is a vocabulary and heuristic engine. It
+does not claim perfect natural-language understanding, and its output must be
+reviewed by the user before approval.
 
 ## Screenshots
 
@@ -189,10 +246,32 @@ machine and are never written into the repository.
 | `GAME_STUDIO_HOME` | Config, audit, secrets, downloads | OS config directory |
 | `GAME_STUDIO_ENGINE_TIMEOUT` | Engine command timeout (seconds) | `1800` |
 | `BLENDER_MCP_TIMEOUT` | Blender job timeout (seconds) | `900` |
+| `GAME_STUDIO_LLM_PROVIDER` | `openai`, `openai_compatible`, `anthropic`, `gemini`, `ollama` | `openai` |
+| `GAME_STUDIO_LLM_MODEL` | Provider model id | provider default |
+| `GAME_STUDIO_LLM_BASE_URL` | Custom compatible endpoint | provider default |
+| `GAME_STUDIO_LLM_API_KEY` | Preferred shared LLM key (never commit) | unset |
+| `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `GEMINI_API_KEY` | Provider-specific keys | unset |
+| `GAME_STUDIO_LLM_LOCAL_ONLY` | `true` refuses hosted providers | `false` |
+| `GAME_STUDIO_LLM_MAX_TOKENS` | Output token budget per request | `4096` |
+| `GAME_STUDIO_LLM_MAX_REQUESTS` | Session request budget | `20` |
+| `GAME_STUDIO_LLM_MAX_REQUESTS_PER_DAY` | Daily request budget | `200` |
+| `GAME_STUDIO_LLM_TIMEOUT` | Request timeout (seconds) | `60` |
+| `GAME_STUDIO_LLM_RETRIES` | Bounded exponential-backoff retries | `2` |
+| `GAME_STUDIO_LLM_CACHE` | Cache non-sensitive prompts locally | `false` |
+| `GAME_STUDIO_LLM_ALLOW_PROJECT_CONTENT` | Allow sending project context externally | `false` |
 
 ## Tool reference
 
-52 tools, grouped by capability.
+60 tools, grouped by capability.
+
+### Understanding, specification and project memory
+
+`analyze_game_request`, `create_game_specification`, `init_project_manifest`,
+`get_project_manifest`, `update_requirement_status`, `record_project_decision`,
+`track_project_progress`, `compare_project_against_requirements`.
+
+See [Request understanding and project memory](#request-understanding-and-project-memory)
+for the workflow and evidence rules.
 
 ### Discovery and configuration
 
@@ -275,6 +354,8 @@ These calls fail unless `confirm=true`:
 - Unity batch refresh, tests, builds and editor commands.
 - Godot import and export.
 - `blender_run_python`.
+- `init_project_manifest`, `update_requirement_status` and `record_project_decision`
+  (project-memory writes).
 
 Exports, renders and staging refuse to replace an existing target unless
 `confirm_overwrite=true`. Every confirmed write is appended to a local JSONL
@@ -302,15 +383,17 @@ Unity CLI 1.0.0-beta.8.
 
 ```powershell
 python -m compileall -q .\tools\game-studio-mcp
-python -m unittest discover -s .\tools\game-studio-mcp\tests -v   # 33 passed
+python -m unittest discover -s .\tools\game-studio-mcp\tests -v   # 50 passed
+python .\scripts\validate-intent-memory.py
 python .\scripts\test-mcp-server.py --call studio_info -- python .\tools\game-studio-mcp\server.py
 python .\scripts\test-mcp-server.py --call blender_info -- python .\tools\game-studio-mcp\server.py
 ```
 
 | Evidence | Result |
 | --- | --- |
-| MCP stdio handshake | 52 tools; every tool has a handler |
-| Unit tests | 33 passing, no network/engine/API key required |
+| MCP stdio handshake | 60 tools; every tool has a handler |
+| Unit tests | 50 passing, no network/engine/API key required |
+| Intent/memory validation | Roman Urdu request understood; 22 requirements; 33-node acyclic graph; manifest reload; evidence guards enforced |
 | Blender jungle blockout | `.blend` 196,461 B; `.glb` 283,272 B, 57 meshes, 5 materials; 640×360 PNG 278,904 B |
 | Blender alpine render | 12,194 triangles, 114 objects, 640×360 PNG 287,522 B |
 | Render-only path | temporary `.blend` created and removed; render persisted |
@@ -325,6 +408,13 @@ Reproduction notes and the full evidence table are in
 
 ## Known limitations
 
+- **Intent understanding is heuristic.** The lexicon covers common English,
+  Roman Urdu and Urdu game vocabulary. It is deterministic and traceable, but it
+  is not a general translator; unusual dialects or metaphors require a
+  clarifying question. User approval of the specification is mandatory.
+- **Requirement comparison checks evidence existence, not correctness.** A
+  `verified` status means qualifying evidence was recorded and its files exist;
+  it is not an independent re-run of the test, build or playtest.
 - **Meshy task execution is unverified.** No valid key was available. Key setup,
   validation, storage and rejection paths are tested; live generation, rigging
   and animation tasks are not.
@@ -351,6 +441,9 @@ tools/game-studio-mcp/
 │   ├── config.py             # external config + audit trail
 │   ├── secrets.py            # private Meshy key resolution/storage
 │   ├── util.py               # path safety, hashing, HTTP, subprocesses
+│   ├── understanding.py      # multilingual intent + requirement classification
+│   ├── specification.py      # spec, dependency graph, milestones, acceptance tests
+│   ├── manifest.py           # versioned project memory + evidence-backed statuses
 │   ├── detect.py             # hardware, toolchains, engines, projects
 │   ├── projects.py           # Unity/Unreal/Godot project inspection
 │   ├── blender.py            # headless Blender jobs, export, render

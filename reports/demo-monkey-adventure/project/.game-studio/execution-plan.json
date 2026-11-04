@@ -1,0 +1,336 @@
+[
+  {
+    "requirement_id": "R-001",
+    "priority": "P1",
+    "classification": "explicit",
+    "statement": "Art direction: realistic",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-002",
+    "priority": "P0",
+    "classification": "explicit",
+    "statement": "Dimension: 3d",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-003",
+    "priority": "P1",
+    "classification": "explicit",
+    "statement": "Character: monkey",
+    "mcp_tools": [
+      "search_assets",
+      "meshy_text_to_3d",
+      "meshy_rig_character",
+      "meshy_create_animation",
+      "inspect_animation_rig"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-004",
+    "priority": "P1",
+    "classification": "explicit",
+    "statement": "Character: robot",
+    "mcp_tools": [
+      "search_assets",
+      "meshy_text_to_3d",
+      "meshy_rig_character",
+      "meshy_create_animation",
+      "inspect_animation_rig"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-005",
+    "priority": "P0",
+    "classification": "explicit",
+    "statement": "Genre: adventure",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-006",
+    "priority": "P0",
+    "classification": "explicit",
+    "statement": "Platform: mobile",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-007",
+    "priority": "P0",
+    "classification": "explicit",
+    "statement": "Gameplay: jumping",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-008",
+    "priority": "P0",
+    "classification": "explicit",
+    "statement": "Gameplay: climbing",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-009",
+    "priority": "P0",
+    "classification": "explicit",
+    "statement": "Gameplay: swimming",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-010",
+    "priority": "P0",
+    "classification": "explicit",
+    "statement": "Gameplay: day night",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-011",
+    "priority": "P0",
+    "classification": "explicit",
+    "statement": "Gameplay: weather",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-012",
+    "priority": "P1",
+    "classification": "explicit",
+    "statement": "Environment: jungle",
+    "mcp_tools": [
+      "blender_create_environment_blockout",
+      "search_assets",
+      "download_polyhaven_asset"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-013",
+    "priority": "P1",
+    "classification": "implied",
+    "statement": "Player traversal",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-014",
+    "priority": "P1",
+    "classification": "implied",
+    "statement": "Interaction system",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-015",
+    "priority": "P1",
+    "classification": "implied",
+    "statement": "Collectibles and objectives",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-016",
+    "priority": "P1",
+    "classification": "implied",
+    "statement": "NPC and dialogue",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-017",
+    "priority": "P1",
+    "classification": "implied",
+    "statement": "Save and progression",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-018",
+    "priority": "P1",
+    "classification": "implied",
+    "statement": "Player controller",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-019",
+    "priority": "P1",
+    "classification": "implied",
+    "statement": "Camera",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-020",
+    "priority": "P1",
+    "classification": "implied",
+    "statement": "UI/HUD",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-021",
+    "priority": "P0",
+    "classification": "technical",
+    "statement": "3D asset import pipeline",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-022",
+    "priority": "P1",
+    "classification": "technical",
+    "statement": "Version control and reproducible project setup",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-023",
+    "priority": "P3",
+    "classification": "optional",
+    "statement": "Quest log",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-024",
+    "priority": "P3",
+    "classification": "optional",
+    "statement": "Crafting",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-025",
+    "priority": "P3",
+    "classification": "optional",
+    "statement": "Fast travel",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-026",
+    "priority": "P3",
+    "classification": "optional",
+    "statement": "Photo mode",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  },
+  {
+    "requirement_id": "R-027",
+    "priority": "P3",
+    "classification": "optional",
+    "statement": "Achievements",
+    "mcp_tools": [
+      "analyze_game_request"
+    ],
+    "requires_approval": true,
+    "executed": false,
+    "note": "Planned only. Nothing in this step imports, builds or tests a game."
+  }
+]

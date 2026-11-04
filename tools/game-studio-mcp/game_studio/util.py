@@ -236,9 +236,22 @@ def file_stats(root: str, max_files: int = 250_000) -> dict:
 _ALLOWED_SCHEMES = ("https",)
 
 
-def _validate_url(url: str, allowed_hosts: list[str] | None = None) -> urllib.parse.ParseResult:
+LOOPBACK_HOSTS = ("localhost", "127.0.0.1", "::1")
+
+
+def _is_private_ip(ip: str) -> bool:
+    return (ip.startswith(("10.", "127.", "169.254.", "192.168.", "0."))
+            or ip.startswith("172.") and 16 <= int(ip.split(".")[1]) <= 31
+            or ip in ("::1",))
+
+
+def _validate_url(url: str, allowed_hosts: list[str] | None = None,
+                  allow_local: bool = False) -> urllib.parse.ParseResult:
     parsed = urllib.parse.urlparse(url)
-    if parsed.scheme not in _ALLOWED_SCHEMES:
+    scheme_allowed = parsed.scheme == "https" or (
+        allow_local and parsed.scheme == "http" and
+        (parsed.hostname or "").lower() in LOOPBACK_HOSTS)
+    if not scheme_allowed:
         raise ToolError(f"only https URLs are allowed: {url}")
     if not parsed.hostname:
         raise ToolError(f"URL has no host: {url}")
@@ -248,6 +261,8 @@ def _validate_url(url: str, allowed_hosts: list[str] | None = None) -> urllib.pa
         raise ToolError(
             f"host {host!r} is not in the allow-list {sorted(allowed_hosts)}"
         )
+    if allow_local and host in LOOPBACK_HOSTS:
+        return parsed
     # Reject obvious SSRF targets. DNS names are still resolved below.
     try:
         resolved = socket.getaddrinfo(host, None)
@@ -255,9 +270,7 @@ def _validate_url(url: str, allowed_hosts: list[str] | None = None) -> urllib.pa
         raise ToolError(f"cannot resolve {host}: {exc}") from exc
     for info in resolved:
         ip = info[4][0]
-        if ip.startswith(("10.", "127.", "169.254.", "192.168.", "0.")) or \
-                ip.startswith("172.") and 16 <= int(ip.split(".")[1]) <= 31 or \
-                ip in ("::1",):
+        if _is_private_ip(ip):
             raise ToolError(f"refusing to contact private address {ip} for {host}")
     return parsed
 
@@ -265,9 +278,10 @@ def _validate_url(url: str, allowed_hosts: list[str] | None = None) -> urllib.pa
 def http_request(url: str, *, method: str = "GET", headers: dict | None = None,
                  body: dict | list | str | None = None, timeout: int = DEFAULT_HTTP_TIMEOUT,
                  max_bytes: int = DEFAULT_MAX_BYTES,
-                 allowed_hosts: list[str] | None = None) -> dict:
+                 allowed_hosts: list[str] | None = None,
+                 allow_local: bool = False) -> dict:
     """Perform one HTTPS request. Non-2xx responses are returned, not raised."""
-    _validate_url(url, allowed_hosts)
+    _validate_url(url, allowed_hosts, allow_local=allow_local)
     data = None
     request_headers = {"User-Agent": USER_AGENT, "Accept": "application/json"}
     if headers:

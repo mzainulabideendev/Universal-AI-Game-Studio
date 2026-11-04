@@ -18,14 +18,22 @@ from __future__ import annotations
 import json
 import os
 import sys
+import threading
 import traceback
 
 from game_studio import SERVER_NAME, SERVER_VERSION, PROTOCOL_VERSION
-from game_studio import animations, assets, blender, config, detect, engines, meshy, projects, secrets
+from game_studio import (
+    animations, assets, blender, config, detect, engines, governance, manifest, meshy,
+    operations, projects, secrets, specification, understanding, verification,
+)
+from game_studio.llm import config as llm_config
+from game_studio.llm import reasoning as llm_reasoning
+from game_studio.llm.client import LLMError
 from game_studio.util import ToolError, now_iso
 
 MAX_TEXT = 200_000
 LOG_PREFIX = "[universal-game-studio]"
+_write_lock = threading.Lock()
 
 
 def log(message: str) -> None:
@@ -214,6 +222,289 @@ def tool_read_studio_audit(args: dict) -> dict:
 
 
 # --------------------------------------------------------------------------
+# Request understanding, specification and project memory
+# --------------------------------------------------------------------------
+def _installed_engines(args: dict) -> list[str] | None:
+    explicit = _list(args, "installed_engines")
+    if explicit is not None:
+        return [str(item).lower() for item in explicit
+                if str(item).lower() in engines.ENGINES]
+    if _bool(args, "detect_environment", default=False):
+        return engines.list_available_engines().get("available", [])
+    return None
+
+
+def tool_analyze_game_request(args: dict) -> dict:
+    request = _str(args, "request", required=True, max_length=20_000)
+    result = understanding.analyze_request(
+        request or "",
+        installed_engines=_installed_engines(args),
+        known_engine=_str(args, "engine") or config.load_config().get("selected_engine"),
+        known_platform=_str(args, "platform"),
+    )
+    # Internal convenience keys are not part of the public contract.
+    result.pop("_concepts", None)
+    result.pop("_matched", None)
+    config.audit("request.analyzed", tool="analyze_game_request",
+                 details={"characters": result["understanding"]["characters"],
+                          "genre": result["understanding"]["game_genre"],
+                          "requirement_count": result["counts"]["all"]})
+    return result
+
+
+def tool_create_game_specification(args: dict) -> dict:
+    request = _str(args, "request", required=True, max_length=20_000)
+    spec = specification.create_specification(
+        request=request,
+        project_name=_str(args, "project_name"),
+        engine=_str(args, "engine"),
+        platform=_str(args, "platform"),
+        dimension=_str(args, "dimension"),
+        art_style=_str(args, "art_style"),
+        scope=_str(args, "scope"),
+        installed_engines=_installed_engines(args),
+        known_engine=config.load_config().get("selected_engine"),
+        approved=_bool(args, "approved"),
+    )
+    config.audit("specification.created", tool="create_game_specification",
+                 details={"spec_id": spec["spec_id"],
+                          "engine": spec["engine"]["selected"],
+                          "requirements": len(spec["requirements"])})
+    return spec
+
+
+def tool_init_project_manifest(args: dict) -> dict:
+    spec = args.get("spec")
+    if not isinstance(spec, dict):
+        raise ToolError("spec must be the object returned by create_game_specification")
+    confirm = _bool(args, "confirm")
+    _authorize(args, "create_files", action="write project manifest", confirm=confirm)
+    result = manifest.init_manifest(
+        _str(args, "project_path", required=True) or "",
+        spec,
+        confirm=confirm,
+        overwrite=_bool(args, "overwrite"),
+    )
+    config.audit("manifest.initialized", tool="init_project_manifest",
+                 details={"project": result.get("project_id"),
+                          "revision": result.get("revision")})
+    return result
+
+
+def tool_get_project_manifest(args: dict) -> dict:
+    return manifest.load_manifest_view(_str(args, "project_path", required=True) or "")
+
+
+def tool_update_requirement_status(args: dict) -> dict:
+    evidence = _list(args, "evidence")
+    confirm = _bool(args, "confirm")
+    _authorize(args, "edit_files", action="update requirement status", confirm=confirm)
+    result = manifest.update_requirement_status(
+        _str(args, "project_path", required=True) or "",
+        _str(args, "requirement_id", required=True) or "",
+        _str(args, "status", required=True) or "",
+        evidence=evidence,
+        note=_str(args, "note", max_length=4000),
+        confirm=confirm,
+    )
+    config.audit("requirement.status", tool="update_requirement_status",
+                 details={"project": result.get("requirement_id"),
+                          "status": result.get("current")})
+    return result
+
+
+def tool_record_project_decision(args: dict) -> dict:
+    confirm = _bool(args, "confirm")
+    _authorize(args, "edit_files", action="record project decision", confirm=confirm)
+    result = manifest.record_decision(
+        _str(args, "project_path", required=True) or "",
+        topic=_str(args, "topic", required=True) or "",
+        decision=_str(args, "decision", required=True) or "",
+        rationale=_str(args, "rationale", max_length=4000),
+        source=_str(args, "source", default="user") or "user",
+        approved=_bool(args, "approved"),
+        confirm=confirm,
+    )
+    config.audit("decision.recorded", tool="record_project_decision",
+                 details={"topic": result["decision"]["topic"]})
+    return result
+
+
+def tool_track_project_progress(args: dict) -> dict:
+    return manifest.track_progress(_str(args, "project_path", required=True) or "")
+
+
+def tool_compare_requirements(args: dict) -> dict:
+    return manifest.compare_project_against_requirements(
+        _str(args, "project_path", required=True) or "",
+        inspect_project=_bool(args, "inspect_project", default=True),
+    )
+
+
+# --------------------------------------------------------------------------
+# Execution modes, permissions and operations
+# --------------------------------------------------------------------------
+def _project_arg(args: dict) -> str | None:
+    value = _str(args, "project_path")
+    return value or None
+
+
+def _authorize(args: dict, permission: str, *, action: str,
+               confirm: bool | None = None) -> dict:
+    return governance.authorize(
+        permission,
+        project_path=_project_arg(args),
+        confirm=_bool(args, "confirm") if confirm is None else confirm,
+        action=action,
+    )
+
+
+def tool_get_execution_mode(args: dict) -> dict:
+    return governance.status(_project_arg(args))
+
+
+def tool_set_execution_mode(args: dict) -> dict:
+    return governance.set_mode(
+        _str(args, "mode", required=True) or "",
+        project_path=_project_arg(args),
+        confirm=_bool(args, "confirm"),
+    )
+
+
+def tool_set_permission(args: dict) -> dict:
+    return governance.set_permission(
+        _str(args, "permission", required=True) or "",
+        _str(args, "effect", required=True) or "",
+        project_path=_project_arg(args),
+        confirm=_bool(args, "confirm"),
+        reason=_str(args, "reason", max_length=1000),
+    )
+
+
+def tool_list_operations(args: dict) -> dict:
+    return operations.list_operations(
+        limit=_int(args, "limit", default=50, minimum=1, maximum=200) or 50,
+        include_terminal=_bool(args, "include_terminal", default=True),
+    )
+
+
+def tool_get_operation(args: dict) -> dict:
+    return operations.get_operation(_str(args, "operation_id", required=True) or "")
+
+
+def tool_cancel_operation(args: dict) -> dict:
+    return operations.request_cancel(
+        _str(args, "operation_id", required=True) or "",
+        confirm=_bool(args, "confirm"),
+        reason=_str(args, "reason", max_length=1000),
+    )
+
+
+def tool_cleanup_operation(args: dict) -> dict:
+    return operations.cleanup_operation(
+        _str(args, "operation_id", required=True) or "",
+        confirm=_bool(args, "confirm"),
+        temp_dir=_str(args, "temp_dir"),
+    )
+
+
+def tool_operation_status(args: dict) -> dict:
+    return operations.status()
+
+
+def tool_recover_operations(args: dict) -> dict:
+    return operations.recover_interrupted()
+
+
+# --------------------------------------------------------------------------
+# Evidence verification
+# --------------------------------------------------------------------------
+def tool_inspect_requirement_evidence(args: dict) -> dict:
+    return verification.inspect_requirement_evidence(
+        _str(args, "project_path", required=True) or "",
+        requirement_id=_str(args, "requirement_id"),
+    )
+
+
+def tool_run_requirement_verification(args: dict) -> dict:
+    command = _list(args, "command")
+    if command is not None and not all(isinstance(part, str) for part in command):
+        raise ToolError("command must be an array of strings")
+    return verification.run_requirement_verification(
+        _str(args, "project_path", required=True) or "",
+        _str(args, "requirement_id", required=True) or "",
+        command=[str(part) for part in command] if command is not None else None,
+        confirm=_bool(args, "confirm"),
+        timeout=_int(args, "timeout", default=900, minimum=10, maximum=7200) or 900,
+        apply_status=_bool(args, "apply_status", default=True),
+    )
+
+
+# --------------------------------------------------------------------------
+# LLM reasoning
+# --------------------------------------------------------------------------
+def tool_llm_status(args: dict) -> dict:
+    return llm_reasoning.status()
+
+
+def tool_llm_understand_request(args: dict) -> dict:
+    try:
+        return llm_reasoning.understand_request(
+            _str(args, "request", required=True, max_length=20_000) or "",
+            engine=_str(args, "engine"),
+            platform=_str(args, "platform"),
+            project_path=_project_arg(args),
+            confirm=_bool(args, "confirm"),
+        )
+    except LLMError as exc:
+        raise ToolError(str(exc)) from exc
+
+
+def tool_llm_generate_specification(args: dict) -> dict:
+    try:
+        return llm_reasoning.generate_specification(
+            _str(args, "request", required=True, max_length=20_000) or "",
+            engine=_str(args, "engine"),
+            platform=_str(args, "platform"),
+            dimension=_str(args, "dimension"),
+            art_style=_str(args, "art_style"),
+            scope=_str(args, "scope"),
+            project_name=_str(args, "project_name"),
+            project_path=_project_arg(args),
+            confirm=_bool(args, "confirm"),
+            approved=_bool(args, "approved"),
+        )
+    except LLMError as exc:
+        raise ToolError(str(exc)) from exc
+
+
+def tool_llm_review_plan(args: dict) -> dict:
+    plan = args.get("plan")
+    if not isinstance(plan, dict):
+        raise ToolError("plan must be an object")
+    try:
+        return llm_reasoning.review_plan(
+            plan,
+            project_path=_project_arg(args),
+            confirm=_bool(args, "confirm"),
+        )
+    except LLMError as exc:
+        raise ToolError(str(exc)) from exc
+
+
+def tool_llm_game_director(args: dict) -> dict:
+    try:
+        return llm_reasoning.game_director_plan(
+            _str(args, "request", required=True, max_length=20_000) or "",
+            project_path=_project_arg(args),
+            confirm=_bool(args, "confirm"),
+            include_project_content=_bool(args, "include_project_content"),
+        )
+    except LLMError as exc:
+        raise ToolError(str(exc)) from exc
+
+
+# --------------------------------------------------------------------------
 # Blender tools
 # --------------------------------------------------------------------------
 def tool_blender_info(args: dict) -> dict:
@@ -233,6 +524,7 @@ def tool_blender_validate(args: dict) -> dict:
 
 
 def tool_blender_export(args: dict) -> dict:
+    _authorize(args, "run_blender", action="export Blender asset")
     return blender.export_blend(
         _str(args, "blend_file", required=True),
         _str(args, "output", required=True),
@@ -245,6 +537,7 @@ def tool_blender_export(args: dict) -> dict:
 
 
 def tool_blender_import(args: dict) -> dict:
+    _authorize(args, "run_blender", action="import into Blender")
     return blender.import_to_blend(
         _str(args, "source", required=True),
         save_blend=_str(args, "save_blend"),
@@ -253,6 +546,7 @@ def tool_blender_import(args: dict) -> dict:
 
 
 def tool_blender_render(args: dict) -> dict:
+    _authorize(args, "run_blender", action="render Blender preview")
     return blender.render_preview(
         _str(args, "blend_file", required=True),
         _str(args, "output_png", required=True),
@@ -264,6 +558,7 @@ def tool_blender_render(args: dict) -> dict:
 
 
 def tool_blender_environment(args: dict) -> dict:
+    _authorize(args, "run_blender", action="create Blender environment blockout")
     return blender.create_environment_blockout(
         _str(args, "preset", default="jungle") or "jungle",
         seed=_int(args, "seed", default=1337) or 1337,
@@ -281,11 +576,15 @@ def tool_blender_environment(args: dict) -> dict:
 
 
 def tool_blender_run_python(args: dict) -> dict:
+    confirm = _bool(args, "confirm")
+    _authorize(args, "run_blender", action="run arbitrary Blender Python", confirm=confirm)
+    _authorize(args, "execute_process", action="run arbitrary Blender Python",
+               confirm=confirm)
     return blender.run_python(
         _str(args, "code", required=True, max_length=100_000) or "",
         blend_file=_str(args, "blend_file"),
         save=_bool(args, "save"),
-        confirm=_bool(args, "confirm"),
+        confirm=confirm,
         timeout=_int(args, "timeout", default=900, minimum=10, maximum=7200) or 900,
     )
 
@@ -313,6 +612,8 @@ def tool_meshy_clear(args: dict) -> dict:
 
 
 def tool_meshy_text_to_3d(args: dict) -> dict:
+    confirm = _bool(args, "confirm")
+    _authorize(args, "paid_generation", action="Meshy text-to-3D", confirm=confirm)
     return meshy.create_text_to_3d(
         _str(args, "prompt", default="") or "",
         mode=_str(args, "mode", default="preview") or "preview",
@@ -330,6 +631,8 @@ def tool_meshy_text_to_3d(args: dict) -> dict:
 
 
 def tool_meshy_rig(args: dict) -> dict:
+    confirm = _bool(args, "confirm")
+    _authorize(args, "paid_generation", action="Meshy rigging", confirm=confirm)
     return meshy.create_rigging(
         input_task_id=_str(args, "input_task_id"),
         model_url=_str(args, "model_url"),
@@ -354,6 +657,8 @@ def tool_meshy_create_animation(args: dict) -> dict:
     action_ids = _list(args, "action_ids")
     if action_ids is not None:
         action_ids = [int(i) for i in action_ids]
+    confirm = _bool(args, "confirm")
+    _authorize(args, "paid_generation", action="Meshy animation", confirm=confirm)
     return meshy.create_animation(
         rig_task_id=_str(args, "rig_task_id", required=True) or "",
         action_id=_int(args, "action_id"),
@@ -370,18 +675,38 @@ def tool_meshy_task_status(args: dict) -> dict:
     )
 
 
-def tool_meshy_wait(args: dict) -> dict:
-    return meshy.wait_for_task(
+def tool_meshy_cancel(args: dict) -> dict:
+    return meshy.cancel_task(
         _str(args, "task_id", required=True) or "",
         _str(args, "task_type", required=True) or "",
-        timeout_seconds=_int(args, "timeout_seconds", default=120, minimum=0,
-                             maximum=1800) or 0,
-        poll_seconds=_float(args, "poll_seconds", default=5.0, minimum=1.0,
-                            maximum=60.0) or 5.0,
+        confirm=_bool(args, "confirm"),
     )
 
 
+def tool_meshy_wait(args: dict) -> dict:
+    timeout_seconds = _int(args, "timeout_seconds", default=120, minimum=0,
+                           maximum=1800) or 0
+    record = operations.start_operation(
+        "meshy-wait", "wait for Meshy task",
+        metadata={"task_id": _str(args, "task_id")}, timeout_seconds=timeout_seconds)
+    result: dict = {"ok": False, "error": "Meshy wait did not return a result"}
+    try:
+        result = meshy.wait_for_task(
+            _str(args, "task_id", required=True) or "",
+            _str(args, "task_type", required=True) or "",
+            timeout_seconds=timeout_seconds,
+            poll_seconds=_float(args, "poll_seconds", default=5.0, minimum=1.0,
+                                maximum=60.0) or 5.0,
+            operation_id=record["id"],
+        )
+    finally:
+        operations.finish_operation(record["id"], result)
+    result["operation_id"] = record["id"]
+    return result
+
+
 def tool_meshy_download(args: dict) -> dict:
+    _authorize(args, "download_assets", action="download Meshy output")
     return meshy.download_output(
         _str(args, "task_id", required=True) or "",
         _str(args, "task_type", required=True) or "",
@@ -391,6 +716,8 @@ def tool_meshy_download(args: dict) -> dict:
 
 
 def tool_meshy_generate(args: dict) -> dict:
+    confirm = _bool(args, "confirm")
+    _authorize(args, "paid_generation", action="Meshy asset generation", confirm=confirm)
     return meshy.generate_asset(
         _str(args, "prompt", required=True) or "",
         refine=_bool(args, "refine"),
@@ -424,6 +751,9 @@ def tool_asset_search(args: dict) -> dict:
 
 
 def tool_asset_download(args: dict) -> dict:
+    confirm = _bool(args, "confirm")
+    _authorize(args, "download_assets", action="download Poly Haven asset",
+               confirm=confirm)
     return assets.download_polyhaven(
         _str(args, "asset_id", required=True) or "",
         fmt=_str(args, "format", default="glb") or "glb",
@@ -486,6 +816,7 @@ def tool_animation_sources(args: dict) -> dict:
 # Engine tools
 # --------------------------------------------------------------------------
 def tool_engine_stage(args: dict) -> dict:
+    _authorize(args, "modify_engine_project", action="stage asset into engine project")
     return engines.stage_asset(
         _str(args, "source", required=True) or "",
         _str(args, "project_path", required=True) or "",
@@ -504,6 +835,7 @@ def tool_engine_verify(args: dict) -> dict:
 
 
 def tool_engine_build(args: dict) -> dict:
+    _authorize(args, "build_game", action="build a game player")
     return engines.engine_build(
         _str(args, "engine", required=True) or "",
         _str(args, "project_path", required=True) or "",
@@ -526,6 +858,8 @@ def tool_unity_commands(args: dict) -> dict:
 
 def tool_unity_run_command(args: dict) -> dict:
     arguments = _list(args, "arguments")
+    _authorize(args, "execute_process", action="run Unity editor command")
+    _authorize(args, "modify_engine_project", action="run Unity editor command")
     return engines.unity_run_command(
         _str(args, "project_path", required=True) or "",
         _str(args, "command", required=True) or "",
@@ -536,6 +870,7 @@ def tool_unity_run_command(args: dict) -> dict:
 
 
 def tool_unity_refresh(args: dict) -> dict:
+    _authorize(args, "execute_process", action="run Unity batch refresh")
     return engines.unity_batch_refresh(
         _str(args, "project_path", required=True) or "",
         confirm=_bool(args, "confirm"),
@@ -545,6 +880,7 @@ def tool_unity_refresh(args: dict) -> dict:
 
 
 def tool_unity_tests(args: dict) -> dict:
+    _authorize(args, "execute_process", action="run Unity tests")
     return engines.unity_run_tests(
         _str(args, "project_path", required=True) or "",
         mode=_str(args, "mode", default="EditMode") or "EditMode",
@@ -557,6 +893,7 @@ def tool_unity_tests(args: dict) -> dict:
 
 
 def tool_unity_build(args: dict) -> dict:
+    _authorize(args, "build_game", action="build a Unity player")
     return engines.unity_build(
         _str(args, "project_path", required=True) or "",
         target=_str(args, "target", required=True) or "",
@@ -569,6 +906,7 @@ def tool_unity_build(args: dict) -> dict:
 
 
 def tool_godot_import(args: dict) -> dict:
+    _authorize(args, "modify_engine_project", action="run Godot headless import")
     return engines.godot_batch_import(
         _str(args, "project_path", required=True) or "",
         confirm=_bool(args, "confirm"),
@@ -578,6 +916,7 @@ def tool_godot_import(args: dict) -> dict:
 
 
 def tool_godot_build(args: dict) -> dict:
+    _authorize(args, "build_game", action="build a Godot export")
     return engines.godot_build(
         _str(args, "project_path", required=True) or "",
         preset=_str(args, "preset", required=True) or "",
@@ -679,13 +1018,17 @@ TOOLS = [
         "selected_only": {"type": "boolean", "default": False},
         "apply_transforms": {"type": "boolean", "default": True},
         "scale": {"type": "number", "default": 1.0},
+        "project_path": PROJECT_PATH,
         "confirm_overwrite": OVERWRITE,
+        "confirm": CONFIRM,
     }, ["blend_file", "output"]),
     _tool("blender_import_asset", "Import fbx/glb/gltf/obj/blend/usd into a fresh Blender scene and "
           "optionally save a .blend.", {
               "source": {"type": "string"},
               "save_blend": {"type": "string"},
+              "project_path": PROJECT_PATH,
               "confirm_overwrite": OVERWRITE,
+              "confirm": CONFIRM,
           }, ["source"]),
     _tool("blender_render_preview", "Render a PNG preview of a .blend for visual verification.", {
         "blend_file": {"type": "string"},
@@ -693,7 +1036,9 @@ TOOLS = [
         "width": {"type": "integer", "default": 640, "minimum": 16, "maximum": 4096},
         "height": {"type": "integer", "default": 360, "minimum": 16, "maximum": 4096},
         "frame": {"type": ["integer", "null"]},
+        "project_path": PROJECT_PATH,
         "confirm_overwrite": OVERWRITE,
+        "confirm": CONFIRM,
     }, ["blend_file", "output_png"]),
     _tool("blender_create_environment_blockout", "Generate a procedural terrain blockout "
           "(jungle/forest/desert/alpine) with trees, rocks, water, sun and camera. This is a "
@@ -710,7 +1055,9 @@ TOOLS = [
               "save_blend": {"type": "string"},
               "export_glb": {"type": "string"},
               "render_png": {"type": "string"},
+              "project_path": PROJECT_PATH,
               "confirm_overwrite": OVERWRITE,
+              "confirm": CONFIRM,
           }),
     _tool("blender_run_python", "Execute arbitrary Blender Python in background mode. Requires "
           "explicit confirm=true; set __mcp_result to return data.", {
@@ -780,6 +1127,14 @@ TOOLS = [
         "timeout_seconds": {"type": "integer", "default": 120, "minimum": 0, "maximum": 1800},
         "poll_seconds": {"type": "number", "default": 5, "minimum": 1, "maximum": 60},
     }, ["task_id", "task_type"]),
+    _tool("meshy_cancel_task", "Report and apply Meshy cancellation only where the documented API "
+          "supports it. This adapter has no cancel endpoint, so it explicitly reports that a "
+          "remote task was NOT cancelled rather than faking it.", {
+              "task_id": {"type": "string"},
+              "task_type": {"type": "string",
+                            "enum": ["text-to-3d", "rigging", "animation"]},
+              "confirm": CONFIRM,
+          }, ["task_id", "task_type", "confirm"]),
     _tool("meshy_download_output", "Download a finished Meshy output to a local path and hash it.", {
         "task_id": {"type": "string"},
         "task_type": {"type": "string",
@@ -938,6 +1293,200 @@ TOOLS = [
     _tool("unreal_status", "Inspect an Unreal project and state the staged-only automation limits.", {
         "project_path": PROJECT_PATH,
     }, ["project_path"]),
+    # understanding, specification and project memory
+    _tool("analyze_game_request", "Turn a free-form game request (English, Roman Urdu, Urdu or "
+          "mixed) into a traceable requirement set. Separates explicit requirements from "
+          "implied, technical, optional and unresolved items; reports conflicts, exclusions "
+          "and only the questions that materially change implementation. Read-only.", {
+              "request": {"type": "string", "maxLength": 20000,
+                          "description": "The user's words, unedited"},
+              "engine": {"type": "string", "description": "Known/selected engine to reduce "
+                                                         "unnecessary questions"},
+              "platform": {"type": "string", "description": "Known target platform"},
+              "installed_engines": {"type": "array", "items": {"type": "string"},
+                                    "description": "Optional list of verified installs"},
+              "detect_environment": {"type": "boolean", "default": False,
+                                     "description": "Run engine detection (slower) instead of "
+                                                    "supplying installed_engines"},
+          }, ["request"]),
+    _tool("create_game_specification", "Create an engine-aware project specification: overview, "
+          "character/environment/animation plans, classified requirements, dependency graph, "
+          "milestones and acceptance tests. Defaults are labelled assumptions and the result "
+          "stays awaiting approval unless approved=true. Writes nothing.", {
+              "request": {"type": "string", "maxLength": 20000},
+              "project_name": {"type": "string"},
+              "engine": {"type": "string", "enum": list(engines.ENGINES),
+                         "description": "User override after answering the engine question"},
+              "platform": {"type": "string",
+                           "enum": list(specification.PERFORMANCE_TARGETS)},
+              "dimension": {"type": "string", "enum": ["2d", "2.5d", "3d"]},
+              "art_style": {"type": "string"},
+              "scope": {"type": "string"},
+              "installed_engines": {"type": "array", "items": {"type": "string"}},
+              "detect_environment": {"type": "boolean", "default": False},
+              "approved": {"type": "boolean", "default": False},
+          }, ["request"]),
+    _tool("init_project_manifest", "Persist an approved specification and its requirement "
+          "traceability in <project>/.game-studio/manifest.json. Writes a file; requires "
+          "confirm=true. Never stores credentials.", {
+              "project_path": PROJECT_PATH,
+              "spec": {"type": "object", "description": "Output of create_game_specification"},
+              "overwrite": {"type": "boolean", "default": False},
+              "confirm": CONFIRM,
+          }, ["project_path", "spec", "confirm"]),
+    _tool("get_project_manifest", "Load the persisted project manifest after a restart: spec, "
+          "requirement statuses, decisions, questions, errors and recent history. Read-only.", {
+              "project_path": PROJECT_PATH,
+          }, ["project_path"]),
+    _tool("update_requirement_status", "Record a requirement status with evidence. implemented "
+          "needs evidence; tested needs test/playtest evidence; verified needs "
+          "test/build/playtest/inspection evidence and no missing evidence files. Requires "
+          "confirm=true.", {
+              "project_path": PROJECT_PATH,
+              "requirement_id": {"type": "string"},
+              "status": {"type": "string", "enum": list(manifest.STATUSES)},
+              "evidence": {"type": "array", "items": {
+                  "type": "object",
+                  "properties": {
+                      "kind": {"type": "string", "enum": list(manifest.EVIDENCE_KINDS)},
+                      "reference": {"type": "string"},
+                      "note": {"type": "string"},
+                  },
+                  "required": ["kind", "reference"],
+              }},
+              "note": {"type": "string"},
+              "confirm": CONFIRM,
+          }, ["project_path", "requirement_id", "status", "confirm"]),
+    _tool("record_project_decision", "Append a technical/design decision with rationale and "
+          "whether it was user-approved, and clear a matching pending question. Requires "
+          "confirm=true.", {
+              "project_path": PROJECT_PATH,
+              "topic": {"type": "string"},
+              "decision": {"type": "string"},
+              "rationale": {"type": "string"},
+              "source": {"type": "string",
+                         "enum": ["user", "ai-default", "ai-recommendation", "external"],
+                         "default": "user"},
+              "approved": {"type": "boolean", "default": False},
+              "confirm": CONFIRM,
+          }, ["project_path", "topic", "decision", "confirm"]),
+    _tool("track_project_progress", "Summarise requirement coverage, milestone gates and the "
+          "next P0/P1 actions from the persisted manifest. Read-only.", {
+              "project_path": PROJECT_PATH,
+          }, ["project_path"]),
+    _tool("compare_project_against_requirements", "Re-check the manifest against the real "
+          "project: detects the engine, checks evidence files still exist and flags requirements "
+          "claimed done without qualifying evidence. Never upgrades a status automatically.", {
+              "project_path": PROJECT_PATH,
+              "inspect_project": {"type": "boolean", "default": True},
+          }, ["project_path"]),
+    # execution modes, permissions and operations
+    _tool("get_execution_mode", "Show the effective execution mode, permission matrix, budgets "
+          "and policy path for a project (or the global fallback). Read-only.", {
+              "project_path": PROJECT_PATH,
+          }),
+    _tool("set_execution_mode", "Persist guided, balanced or autonomous mode per project. A mode "
+          "is not a permission grant: paid generation, uploads and deletion always require "
+          "per-action approval. Requires confirm=true.", {
+              "mode": {"type": "string", "enum": list(governance.MODES)},
+              "project_path": PROJECT_PATH,
+              "confirm": CONFIRM,
+          }, ["mode", "confirm"]),
+    _tool("set_permission", "Set one granular permission to allow, ask or deny. paid_generation, "
+          "upload_content and delete_files cannot be set to allow. Requires confirm=true.", {
+              "permission": {"type": "string", "enum": list(governance.PERMISSIONS)},
+              "effect": {"type": "string", "enum": list(governance.EFFECTS)},
+              "project_path": PROJECT_PATH,
+              "reason": {"type": "string", "maxLength": 1000},
+              "confirm": CONFIRM,
+          }, ["permission", "effect", "confirm"]),
+    _tool("list_operations", "List persisted long-running operations and their states. Use this "
+          "to find an operation id before cancelling.", {
+              "limit": {"type": "integer", "default": 50, "minimum": 1, "maximum": 200},
+              "include_terminal": {"type": "boolean", "default": True},
+          }),
+    _tool("get_operation", "Read one persisted operation record including cancellation state "
+          "and result.", {
+              "operation_id": {"type": "string"},
+          }, ["operation_id"]),
+    _tool("cancel_operation", "Request cancellation of a long-running operation. Local process "
+          "trees are terminated and confirmed by the OS. Remote provider work is reported "
+          "cancelled only if the provider confirms it. Requires confirm=true.", {
+              "operation_id": {"type": "string"},
+              "reason": {"type": "string", "maxLength": 1000},
+              "confirm": CONFIRM,
+          }, ["operation_id", "confirm"]),
+    _tool("cleanup_operation", "Delete a finished operation record and its studio temp directory. "
+          "Refuses active operations and paths outside the studio temp root. Requires "
+          "confirm=true.", {
+              "operation_id": {"type": "string"},
+              "temp_dir": {"type": "string"},
+              "confirm": CONFIRM,
+          }, ["operation_id", "confirm"]),
+    _tool("operation_status", "Summarise the operations registry and cancellation capabilities."),
+    _tool("recover_operations", "Mark operations that were active when the server stopped as "
+          "interrupted. Never retries them automatically."),
+    # evidence verification
+    _tool("inspect_requirement_evidence", "For each requirement show the original user wording, "
+          "implementation files, tests, acceptance test, recorded verification runs and gaps. "
+          "Read-only; never upgrades a status.", {
+              "project_path": PROJECT_PATH,
+              "requirement_id": {"type": "string"},
+          }, ["project_path"]),
+    _tool("run_requirement_verification", "Run a caller-supplied validation command (argv, no "
+          "shell) in the project, capture output/timestamps/hashes, compare with the previous "
+          "run and upgrade to tested only on exit code 0. Requires execute_process permission "
+          "and confirm=true.", {
+              "project_path": PROJECT_PATH,
+              "requirement_id": {"type": "string"},
+              "command": {"type": "array", "items": {"type": "string"},
+                          "description": "Argv array, e.g. [\"python\",\"-m\",\"unittest\"]"},
+              "timeout": {"type": "integer", "default": 900, "minimum": 10,
+                          "maximum": 7200},
+              "apply_status": {"type": "boolean", "default": True},
+              "confirm": CONFIRM,
+          }, ["project_path", "requirement_id", "confirm"]),
+    # LLM reasoning
+    _tool("llm_status", "Report LLM provider configuration, budgets, privacy controls, provider "
+          "matrix and fallback behaviour. Never returns credentials."),
+    _tool("llm_understand_request", "Use the configured LLM to understand a natural-language game "
+          "request (English, Roman Urdu, Urdu or mixed) and return schema-validated structured "
+          "requirements. Falls back to the deterministic parser and labels it. Sends text to the "
+          "provider, so it requires external_api permission and confirm=true.", {
+              "request": {"type": "string", "maxLength": 20000},
+              "engine": {"type": "string"},
+              "platform": {"type": "string"},
+              "project_path": PROJECT_PATH,
+              "confirm": CONFIRM,
+          }, ["request", "confirm"]),
+    _tool("llm_generate_specification", "Hybrid specification: LLM understanding/recommendations "
+          "plus the deterministic dependency graph, milestones and acceptance tests. Nothing is "
+          "marked implemented. Requires confirm=true for the provider request.", {
+              "request": {"type": "string", "maxLength": 20000},
+              "project_name": {"type": "string"},
+              "engine": {"type": "string", "enum": list(engines.ENGINES)},
+              "platform": {"type": "string"},
+              "dimension": {"type": "string", "enum": ["2d", "2.5d", "3d"]},
+              "art_style": {"type": "string"},
+              "scope": {"type": "string"},
+              "project_path": PROJECT_PATH,
+              "approved": {"type": "boolean", "default": False},
+              "confirm": CONFIRM,
+          }, ["request", "confirm"]),
+    _tool("llm_review_plan", "Ask the configured LLM to review a plan for feasibility, gaps and "
+          "unapproved assumptions. Returns advice only. Requires confirm=true.", {
+              "plan": {"type": "object"},
+              "project_path": PROJECT_PATH,
+              "confirm": CONFIRM,
+          }, ["plan", "confirm"]),
+    _tool("llm_game_director_plan", "AI Game Director: combine LLM understanding with real "
+          "project/manifest evidence to produce a grounded roadmap. Project content is never "
+          "sent unless explicitly requested and allowed. Requires confirm=true.", {
+              "request": {"type": "string", "maxLength": 20000},
+              "project_path": PROJECT_PATH,
+              "include_project_content": {"type": "boolean", "default": False},
+              "confirm": CONFIRM,
+          }, ["request", "confirm"]),
 ]
 
 HANDLERS = {
@@ -969,6 +1518,7 @@ HANDLERS = {
     "meshy_create_animation": tool_meshy_create_animation,
     "meshy_task_status": tool_meshy_task_status,
     "meshy_wait_for_task": tool_meshy_wait,
+    "meshy_cancel_task": tool_meshy_cancel,
     "meshy_download_output": tool_meshy_download,
     "meshy_generate_asset": tool_meshy_generate,
     "list_asset_providers": tool_asset_providers,
@@ -993,6 +1543,30 @@ HANDLERS = {
     "godot_batch_import": tool_godot_import,
     "godot_build": tool_godot_build,
     "unreal_status": tool_unreal_status,
+    "analyze_game_request": tool_analyze_game_request,
+    "create_game_specification": tool_create_game_specification,
+    "init_project_manifest": tool_init_project_manifest,
+    "get_project_manifest": tool_get_project_manifest,
+    "update_requirement_status": tool_update_requirement_status,
+    "record_project_decision": tool_record_project_decision,
+    "track_project_progress": tool_track_project_progress,
+    "compare_project_against_requirements": tool_compare_requirements,
+    "get_execution_mode": tool_get_execution_mode,
+    "set_execution_mode": tool_set_execution_mode,
+    "set_permission": tool_set_permission,
+    "list_operations": tool_list_operations,
+    "get_operation": tool_get_operation,
+    "cancel_operation": tool_cancel_operation,
+    "cleanup_operation": tool_cleanup_operation,
+    "operation_status": tool_operation_status,
+    "recover_operations": tool_recover_operations,
+    "inspect_requirement_evidence": tool_inspect_requirement_evidence,
+    "run_requirement_verification": tool_run_requirement_verification,
+    "llm_status": tool_llm_status,
+    "llm_understand_request": tool_llm_understand_request,
+    "llm_generate_specification": tool_llm_generate_specification,
+    "llm_review_plan": tool_llm_review_plan,
+    "llm_game_director_plan": tool_llm_game_director,
 }
 
 
@@ -1023,9 +1597,11 @@ def handle(req: dict) -> dict | None:
                 "capabilities": {"tools": {"listChanged": False}},
                 "serverInfo": {"name": SERVER_NAME, "version": SERVER_VERSION},
                 "instructions": (
-                    "Real game-studio tools. Read studio_info and detect_game_engines first. "
-                    "Never claim an asset is imported or a build is verified without evidence. "
-                    "Paid Meshy calls and all project writes require explicit user approval."
+                    "Real game-studio tools. Start with analyze_game_request on the user's "
+                    "unedited words, then create_game_specification; persist the approved plan "
+                    "with init_project_manifest. Read studio_info and detect_game_engines before "
+                    "engine work. Never claim an asset is imported or a build is verified without "
+                    "evidence. Paid Meshy calls and all project writes require explicit approval."
                 ),
             },
         }
@@ -1071,6 +1647,30 @@ def handle(req: dict) -> dict | None:
 
 def main() -> None:
     log(f"starting {SERVER_NAME} {SERVER_VERSION}")
+    try:
+        recovered = operations.recover_interrupted()
+        if recovered.get("count"):
+            log(f"marked {recovered['count']} interrupted operation(s) from a previous run")
+    except Exception as exc:  # never block startup on registry recovery
+        log(f"operation recovery skipped: {exc}")
+
+    def write_response(responses: object) -> None:
+        with _write_lock:
+            sys.stdout.write(json.dumps(responses, default=str) + "\n")
+            sys.stdout.flush()
+
+    def run_async(request: dict) -> None:
+        # tools/call runs on a worker thread so cancel_operation can be serviced
+        # while a long Blender/engine/LLM call is still blocking.
+        try:
+            response = handle(request)
+        except Exception as exc:  # pragma: no cover - defensive
+            log(f"async tool call crashed: {exc}")
+            response = {"jsonrpc": "2.0", "id": request.get("id"),
+                        "error": {"code": -32603, "message": "internal error"}}
+        if response is not None:
+            write_response(response)
+
     for raw in sys.stdin:
         raw = raw.strip()
         if not raw:
@@ -1081,14 +1681,22 @@ def main() -> None:
             log(f"invalid JSON: {exc}")
             continue
         if isinstance(request, list):
-            responses = [response for response in
-                         (handle(item) for item in request if isinstance(item, dict))
-                         if response is not None]
-        else:
-            responses = handle(request) if isinstance(request, dict) else None
-        if responses:
-            sys.stdout.write(json.dumps(responses, default=str) + "\n")
-            sys.stdout.flush()
+            for item in request:
+                if not isinstance(item, dict):
+                    continue
+                if item.get("method") == "tools/call":
+                    threading.Thread(target=run_async, args=(item,), daemon=True).start()
+                else:
+                    response = handle(item)
+                    if response is not None:
+                        write_response(response)
+        elif isinstance(request, dict):
+            if request.get("method") == "tools/call":
+                threading.Thread(target=run_async, args=(request,), daemon=True).start()
+            else:
+                response = handle(request)
+                if response is not None:
+                    write_response(response)
 
 
 if __name__ == "__main__":

@@ -13,6 +13,7 @@ claimed beyond what the recorded commands and artifacts show.
 
 | Area | Tools |
 | --- | --- |
+| Understanding/planning | `analyze_game_request`, `create_game_specification`, `init_project_manifest`, `get_project_manifest`, `update_requirement_status`, `record_project_decision`, `track_project_progress`, `compare_project_against_requirements` |
 | Studio/config | `studio_info`, `detect_system`, `detect_game_engines`, `list_available_engines`, `select_game_engine`, `inspect_engine_capabilities`, `inspect_game_project`, `configure_studio`, `list_studio_projects`, `read_studio_audit` |
 | Blender | `blender_info`, inspect, validate, export, import, render, procedural blockout, guarded `run_python` |
 | Meshy | key setup guide, validated local key save/clear, balance, text-to-3D preview/refine, rigging, animation library/apply, task polling, output download |
@@ -31,20 +32,52 @@ Command:
 python -m unittest discover -s .\tools\game-studio-mcp\tests -v
 ```
 
-Result: **33 tests passed**.
+Result: **50 tests passed**.
 
 Coverage includes path traversal rejection, config isolation and audit, project
 discovery/inspection, OBJ and GLB validation, rig classification, retargeting,
 Meshy confirmation/not-configured/key storage paths, staging/overwrite rules,
 Blender render-only temporary-file handling, Unity and Unreal state logic, tool
-registry parity, unknown tools and clean tool errors.
+registry parity, unknown tools and clean tool errors, plus:
+
+- Roman Urdu/mixed-language intent extraction with traceable source phrases.
+- Explicit vs implied vs technical vs optional requirement separation.
+- Negation (`no guns`, `... nahi chahiye`) not becoming a requirement.
+- Multi-engine and art-style conflict detection.
+- Monkey-specific non-humanoid rig and retargeting warning.
+- Acyclic dependency graph and topological ordering.
+- Manifest confirmation, project-local path, reload after "restart".
+- Evidence guards for `tested`/`verified` and missing evidence files.
+- Tampered-manifest invalid-claim detection.
+- Credential-like value rejection in project memory.
+
+## 2b. Executed intent/memory validation
+
+Command:
+
+```powershell
+python .\scripts\validate-intent-memory.py
+```
+
+Result: `PASS`.
+
+| Check | Evidence |
+| --- | --- |
+| Roman Urdu + English request | detected `english`, `roman-urdu` |
+| Character/mechanics | `monkey`, `climbing`, `swimming` |
+| Exclusion | `weapons` (from `Bandooq nahi chahiye`) |
+| Requirements | 7 explicit, 8 implied, 22 total |
+| Plan | 33-node acyclic graph, 7 milestones, 20 acceptance tests |
+| Persistence | manifest revision 1; decisions and `tested` status reloaded |
+| Comparison | `partial`, detected engine `unity`, 0 invalid claims |
+| Guard | `verified` rejected without qualifying evidence |
 
 ## 3. Executed live evidence
 
 ### MCP stdio
 
 - `initialize` returned `universal-game-studio` 1.0.0.
-- `tools/list` returned 52 unique tools with matching handlers.
+- `tools/list` returned 60 unique tools with matching handlers.
 - `studio_info` returned config/audit paths outside the repository and reported
   Meshy/Sketchfab as not configured without exposing values.
 - `blender_info` returned Blender 5.2.2 LTS, Python 3.13.13, exporter flags and
@@ -114,6 +147,9 @@ committed under `docs/images/` and shown in the README.
 | Godot import/export | implemented, unverified | Godot is not installed |
 | Visual/runtime quality | not assessed | No gameplay scene, playtest or player run |
 | Production character art | not implemented | The server never generates placeholder characters; use Meshy or an artist |
+| General natural-language understanding | heuristic, unproven beyond vocabulary | The parser is a deterministic lexicon; dialects, metaphors and implicit cultural references may need clarification |
+| Requirement evidence correctness | not independently re-run | Comparison checks that evidence exists and qualifies by kind; it does not replay the test, build or playtest |
+| Full multi-engine acceptance scenarios | not executed | Blender/Meshy/Unity/Unreal/Godot end-to-end asset, animation, gameplay and build scenarios require the real engines and user-approved projects |
 
 ## 5. Acceptance conclusion
 

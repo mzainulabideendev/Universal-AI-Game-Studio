@@ -9,6 +9,14 @@ references in its `references/` directory before implementation.
 
 - Inspect the project, engine version, architecture, existing assets and tests
   before changing files.
+- Start game requests with `analyze_game_request` using the user's unedited
+  words, then `create_game_specification`. Keep explicit requirements separate
+  from implied, technical, optional and unresolved items. Resolve conflicts and
+  obtain approval for engine, platform, dimension, art direction and scope before
+  writing gameplay code.
+- Persist the approved plan with `init_project_manifest`; use
+  `update_requirement_status` only with real evidence and re-check with
+  `compare_project_against_requirements` before claiming progress.
 - When engine/tool versions matter, run
   `scripts/detect-dev-environment.ps1` and read its local report.
 - Discover MCP tools at runtime. Never infer that a configured server is

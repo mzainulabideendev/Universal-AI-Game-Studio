@@ -26,10 +26,18 @@ playtesting or review of license terms. The agent must use the actual project,
 tools and MCP capabilities available to the current user rather than assuming
 that a documented integration is installed or running.
 
+The current capability audit, verified evidence, gaps and prioritized roadmap
+are in [AUDIT-V3.md](AUDIT-V3.md).
+
 ## At a glance
 
 - **Reusable game-development skill:** production gates, world and level design,
   gameplay architecture, animation, AI, audio/UI, testing and delivery guidance.
+- **Request-to-plan intelligence:** free-form English, Roman Urdu or Urdu requests
+  become classified requirements, an engine-aware specification, a dependency
+  graph and acceptance tests, with the user's wording preserved.
+- **Persistent project memory:** an approved plan and evidence-backed requirement
+  statuses survive agent restarts in `.game-studio/manifest.json`.
 - **Multi-agent project rules:** OpenCode, Codex, Claude Code, GitHub Copilot,
   Cursor, Gemini CLI, Windsurf, Cline, Roo Code and Aider.
 - **Blender MCP server:** a dependency-free local stdio server that launches

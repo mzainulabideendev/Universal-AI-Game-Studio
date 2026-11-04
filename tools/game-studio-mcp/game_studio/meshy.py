@@ -21,7 +21,7 @@ from __future__ import annotations
 import os
 import time
 
-from . import config, secrets
+from . import config, operations, secrets
 from .util import (
     ToolError,
     expand,
@@ -367,7 +367,8 @@ def _output_urls(payload: dict, task_type: str) -> dict:
 
 
 def wait_for_task(task_id: str, task_type: str, *, timeout_seconds: int = 120,
-                  poll_seconds: float = 5.0, explicit_key: str | None = None) -> dict:
+                  poll_seconds: float = 5.0, explicit_key: str | None = None,
+                  operation_id: str | None = None) -> dict:
     if timeout_seconds < 0 or timeout_seconds > 1800:
         raise ToolError("timeout_seconds must be between 0 and 1800")
     deadline = time.time() + timeout_seconds
@@ -375,6 +376,21 @@ def wait_for_task(task_id: str, task_type: str, *, timeout_seconds: int = 120,
     last = None
     while True:
         attempts += 1
+        if operation_id and operations.is_cancel_requested(operation_id):
+            return {
+                "ok": False,
+                "status": "cancelled",
+                "cancelled": True,
+                "local_polling_stopped": True,
+                "remote_cancel": {
+                    "supported": False,
+                    "confirmed": False,
+                    "note": "Meshy does not expose a documented cancel endpoint in this "
+                            "adapter, so stopping local polling is not a remote cancellation.",
+                },
+                "task_id": task_id,
+                "polls": attempts,
+            }
         last = get_task(task_id, task_type, explicit_key=explicit_key)
         if not last.get("ok"):
             return last
@@ -391,6 +407,33 @@ def wait_for_task(task_id: str, task_type: str, *, timeout_seconds: int = 120,
             last["polls"] = attempts
             return last
         time.sleep(min(poll_seconds, max(0.0, deadline - time.time())))
+
+
+def cancel_task(task_id: str, task_type: str, *, confirm: bool = False,
+                explicit_key: str | None = None) -> dict:
+    """Honest cancellation capability report.
+
+    The documented Meshy API used here has no cancellation endpoint. This
+    function never fabricates a remote cancellation. It returns ``ok: false``
+    with the required next steps.
+    """
+    if not confirm:
+        raise ToolError("cancelling a Meshy task requires explicit confirm=true")
+    return {
+        "ok": False,
+        "status": "unsupported",
+        "task_id": task_id,
+        "task_type": task_type,
+        "remote_cancel": False,
+        "error": "no documented Meshy cancellation endpoint is implemented, so a remote "
+                 "Meshy task was NOT cancelled",
+        "supported_alternative": [
+            "stop local polling with cancel_operation on the waiting operation",
+            "delete unused generated outputs after the task finishes",
+            "cancel through the Meshy web dashboard if the provider offers it",
+        ],
+        "note": "Credits already spent by a running task are not refunded by this server.",
+    }
 
 
 def download_output(task_id: str, task_type: str, output_key: str, destination: str,
