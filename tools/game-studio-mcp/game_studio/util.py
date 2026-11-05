@@ -23,6 +23,51 @@ DEFAULT_MAX_BYTES = 32 * 1024 * 1024
 USER_AGENT = "UniversalAI-GameStudio-MCP/1.0 (+https://github.com/mzainulabideendev/Universal-AI-Game-Studio)"
 
 
+class RedactedHeaders(dict):
+    """Expose redacted values to callers while preserving actual values for HTTP requests."""
+
+    REDACTED = "******"
+
+    def __init__(self, payload: dict | None = None, **kwargs):
+        super().__init__()
+        self._real = {}
+        for source in (payload or {}, kwargs):
+            for key, value in dict(source).items():
+                self._real[str(key)] = value
+                super().__setitem__(str(key), self._redacted_value(key, value))
+
+    def _redacted_value(self, key: str, value: object) -> str:
+        if key.lower() == "authorization":
+            return self.REDACTED
+        if key.lower() in {"x-api-key", "x-goog-api-key", "api-key", "token", "secret"}:
+            return self.REDACTED
+        return str(value) if value is not None else value
+
+    def real_headers(self) -> dict:
+        return dict(self._real)
+
+    def __getitem__(self, key):
+        return dict.__getitem__(self, key)
+
+    def get(self, key, default=None):
+        return dict.get(self, key, default)
+
+    def items(self):
+        return dict.items(self)
+
+    def __iter__(self):
+        return dict.__iter__(self)
+
+    def keys(self):
+        return dict.keys(self)
+
+    def values(self):
+        return dict.values(self)
+
+    def copy(self):
+        return RedactedHeaders(self._real)
+
+
 class ToolError(Exception):
     """Raised for expected, user-actionable failures."""
 
@@ -285,7 +330,10 @@ def http_request(url: str, *, method: str = "GET", headers: dict | None = None,
     data = None
     request_headers = {"User-Agent": USER_AGENT, "Accept": "application/json"}
     if headers:
-        request_headers.update(headers)
+        if hasattr(headers, "real_headers"):
+            request_headers.update(headers.real_headers())
+        else:
+            request_headers.update(headers)
     if body is not None:
         if isinstance(body, (dict, list)):
             data = json.dumps(body).encode("utf-8")

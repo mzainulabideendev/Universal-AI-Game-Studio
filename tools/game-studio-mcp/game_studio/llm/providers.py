@@ -20,7 +20,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from ..util import http_request
+from ..util import RedactedHeaders, http_request
 
 ANTHROPIC_VERSION = "2023-06-01"
 
@@ -116,7 +116,10 @@ class OpenAICompatibleProvider(Provider):
 
     def _headers(self) -> dict:
         key = self.cfg.get("api_key")
-        return {"Authorization": f"Bearer {key}", "Content-Type": "application/json"}
+        headers = {"Content-Type": "application/json"}
+        if key:
+            headers["Authorization"] = "Bearer " + key
+        return RedactedHeaders(headers)
 
     def complete(self, messages, *, system=None, max_tokens=2048, temperature=0.2,
                  json_mode=False, timeout=60) -> dict:
@@ -161,11 +164,14 @@ class AnthropicProvider(Provider):
         return self.cfg["base_url"].rstrip("/") + "/messages"
 
     def _headers(self) -> dict:
-        return {
-            "x-api-key": self.cfg.get("api_key") or "",
+        headers = {
             "anthropic-version": ANTHROPIC_VERSION,
             "Content-Type": "application/json",
         }
+        key = self.cfg.get("api_key")
+        if key:
+            headers["x-api-key"] = key
+        return RedactedHeaders(headers)
 
     def complete(self, messages, *, system=None, max_tokens=2048, temperature=0.2,
                  json_mode=False, timeout=60) -> dict:
@@ -202,6 +208,13 @@ class AnthropicProvider(Provider):
 class GeminiProvider(Provider):
     name = "gemini"
 
+    def _headers(self) -> dict:
+        headers = {"Content-Type": "application/json"}
+        key = self.cfg.get("api_key")
+        if key:
+            headers["x-goog-api-key"] = key
+        return RedactedHeaders(headers)
+
     def _url(self) -> str:
         base = self.cfg["base_url"].rstrip("/")
         return f"{base}/models/{urllib.parse.quote(self.cfg['model'])}:generateContent"
@@ -224,9 +237,7 @@ class GeminiProvider(Provider):
             body["generationConfig"]["responseMimeType"] = "application/json"
         if system:
             body["systemInstruction"] = {"parts": [{"text": system}]}
-        headers = {"Content-Type": "application/json",
-                   "x-goog-api-key": self.cfg.get("api_key") or ""}
-        result = _request(self._url(), headers=headers, body=body, timeout=timeout)
+        result = _request(self._url(), headers=self._headers(), body=body, timeout=timeout)
         payload = result.get("payload")
         if not isinstance(payload, dict):
             raise ProviderError("provider returned non-JSON content", kind="invalid_response")

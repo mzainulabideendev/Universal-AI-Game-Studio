@@ -23,6 +23,7 @@ import time
 
 from . import config, operations, secrets
 from .util import (
+    RedactedHeaders,
     ToolError,
     expand,
     http_download,
@@ -161,7 +162,8 @@ def clear_api_key() -> dict:
 
 
 def _headers(explicit_key: str | None = None) -> dict:
-    return {"Authorization": f"Bearer {api_key(explicit_key)}"}
+    key = api_key(explicit_key)
+    return RedactedHeaders({"Authorization": "Bearer " + key})
 
 
 def _request(method: str, path: str, *, body: dict | None = None,
