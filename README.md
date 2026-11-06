@@ -82,6 +82,40 @@ The logo is an original SVG included at
 Blockouts are seeded layout geometry for iteration; they are not production art
 or a claim of finished gameplay.
 
+## V5 Unity vertical slice — real build proof
+
+The image below is a **real, built Windows standalone player**, not a placeholder or
+description. It was produced by the repository's MCP-driven workflow:
+
+1. `llm_understand_request` → deterministic fallback (no live LLM provider configured;
+   Ollama is not installed and no API key is set).
+2. `create_game_specification` → `engine=unity`, `platform=pc`, `dimension=3d`,
+   `art_style=low-poly`, `scope=prototype`, `project_name="V5 Jungle Monkey"`
+   (`create_specification` is keyword-only; no positional arguments).
+3. Blender-authored real assets (`Monkey.fbx`: 3,072 tris, 14 bones, Idle/Walk/Jump;
+   `Jungle.fbx`: 15,532 tris, 6 materials; `Banana.fbx`: 828 tris) imported into Unity.
+4. Unity runtime (`MonkeyController`, `CameraFollow`, `BananaCollectible`, `GameManager`,
+   `HUDController`), scene `Assets/V5/Scenes/JungleMonkey.unity`, 10 bananas, animator,
+   UI and restart.
+5. 9/9 PlayMode tests pass (`validation/v5-playmode-results.xml`).
+6. Windows standalone build succeeded: `validation/builds/v5-windows/JungleMonkey.exe`
+   (97.4 MB, 0 errors).
+7. Built player ran and produced this screenshot plus `validation/v5-player-evidence.json`
+   (moved 17.394 m, jump peak Y 1.709, grounded at end, score 1/10, animator present).
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="validation/v5-player-screenshot.png" alt="Built Unity player showing monkey, jungle, river and HUD" width="560"><br>
+      <sub>Real built player: imported monkey, low-poly jungle, river, follow camera,
+      banana HUD and restart. Animations verified playing in PlayMode tests.</sub>
+    </td>
+  </tr>
+</table>
+
+No climb/swim/swing or weapons were implemented or claimed; they are explicitly out of
+scope for this prototype.
+
 ## Table of contents
 
 - [Screenshots](#screenshots)
