@@ -455,6 +455,19 @@ class UnderstandingTests(StudioTestCase):
         self.assertEqual([item["value"] for item in result["exclusions"]], ["weapons"])
         self.assertEqual(result["conflicts"], [])
 
+    def test_excluded_concept_is_not_reintroduced_as_optional(self) -> None:
+        result = understanding.analyze_request(
+            "Make a 3D survival horror game. No multiplayer and no weapons.")
+        self.assertIn("multiplayer", [item["value"] for item in result["exclusions"]])
+        optional = result["requirements"]["optional_enhancements"]
+        self.assertFalse(any("multiplayer" in item["statement"].lower() for item in optional))
+        self.assertFalse(any("weapon" in item["statement"].lower() for item in optional))
+
+    def test_roman_urdu_hathiyar_variant_is_excluded(self) -> None:
+        result = understanding.analyze_request(
+            "Ek 3D jungle adventure banao jisme bandar kele khaye. Hathiyar nahi chahiye.")
+        self.assertIn("weapons", [item["value"] for item in result["exclusions"]])
+
     def test_multiple_engines_and_style_conflict_are_reported(self) -> None:
         result = understanding.analyze_request(
             "Make a 2D realistic pixel art platformer in Godot and Unreal. "

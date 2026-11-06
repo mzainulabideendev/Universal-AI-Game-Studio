@@ -1,0 +1,5 @@
+﻿<Solution>
+  <Project Path="V5.PlayModeTests.csproj" />
+  <Project Path="V5.Editor.csproj" />
+  <Project Path="V5.Runtime.csproj" />
+</Solution>

@@ -1,0 +1,19 @@
+{
+  "name": "V5.Editor",
+  "rootNamespace": "V5.EditorTools",
+  "references": [
+    "V5.Runtime",
+    "UnityEngine.UI"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -1,0 +1,29 @@
+{
+  "monkey": {
+    "vertices": 1588,
+    "triangles": 3072,
+    "bones": 14,
+    "actions": [
+      "Idle",
+      "Jump",
+      "Walk"
+    ]
+  },
+  "jungle": {
+    "vertices": 8122,
+    "triangles": 15532,
+    "materials": [
+      "JungleGround",
+      "River",
+      "TreeTrunk",
+      "CanopyA",
+      "CanopyB",
+      "Rock"
+    ]
+  },
+  "banana": {
+    "vertices": 432,
+    "triangles": 828
+  },
+  "output_dir": "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\Assets\\V5\\Art"
+}

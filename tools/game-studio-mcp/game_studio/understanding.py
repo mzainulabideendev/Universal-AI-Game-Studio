@@ -112,7 +112,7 @@ LEXICON: dict[str, dict[str, list[str]]] = {
         "swimming": ["swimming", "swim", "tairna", "tair", "تیرنا", "تیر"],
         "shooting": ["shooting", "shoot", "goli chalana", "گولی چلانا"],
         "weapons": ["guns", "gun", "weapons", "weapon", "firearms", "hathyar",
-                    "bandooq", "bandook", "ہتھیار", "بندوق"],
+                    "hathiyar", "hathiyaar", "bandooq", "bandook", "ہتھیار", "بندوق"],
         "violence": ["violence", "blood", "gore", "تشدد", "خون"],
         "combat": ["combat", "melee", "sword fighting", "talwar", "تلوار", "لڑائی"],
         "enemies": ["enemies", "enemy", "dushman", "دشمن"],
@@ -757,14 +757,19 @@ def _technical_requirements(concepts: ConceptSet, counter: list[int]) -> list[di
     return requirements
 
 
-def _optional_requirements(concepts: ConceptSet, counter: list[int]) -> list[dict]:
+def _optional_requirements(concepts: ConceptSet, counter: list[int],
+                           exclusions: list[dict] | None = None) -> list[dict]:
     requirements = []
     optional: list[str] = []
     for genre in concepts.get("genre"):
         optional.extend(GENRE_TEMPLATES.get(genre, {}).get("optional", []))
     if not optional:
         optional = ["Photo mode", "Achievements", "Accessibility options"]
+    excluded_values = {str(item.get("value", "")).lower() for item in (exclusions or [])}
     for idea in optional:
+        # A suggestion must not reintroduce a concept the user explicitly excluded.
+        if any(value and value in idea.lower() for value in excluded_values):
+            continue
         requirements.append(_requirement(
             counter, "optional", idea,
             source="AI recommendation, not requested", classification="optional",
@@ -938,7 +943,7 @@ def analyze_request(text: str, *, installed_engines: list[str] | None = None,
     explicit = _explicit_requirements(concepts, original, counter)
     implied = _implied_requirements(concepts, counter)
     technical = _technical_requirements(concepts, counter)
-    optional = _optional_requirements(concepts, counter)
+    optional = _optional_requirements(concepts, counter, exclusions)
     unresolved, questions = _unresolved(concepts, installed_engines, known_engine)
     conflicts = _conflicts(concepts, exclusions, positive_snapshot)
 

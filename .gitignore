@@ -10,6 +10,17 @@
 /validation/*.log
 /validation/**/*.log
 
+# Unity generated folders and IDE files for the V5 vertical slice.
+/validation/unity-jungle-v5/Library/
+/validation/unity-jungle-v5/Temp/
+/validation/unity-jungle-v5/Logs/
+/validation/unity-jungle-v5/Obj/
+/validation/unity-jungle-v5/UserSettings/
+/validation/unity-jungle-v5/*.csproj
+/validation/unity-jungle-v5/*.sln
+/validation/unity-jungle-v5/Builds/
+/validation/unity-jungle-v5/Build/
+
 # Python and editor-generated files.
 __pycache__/
 *.py[cod]
