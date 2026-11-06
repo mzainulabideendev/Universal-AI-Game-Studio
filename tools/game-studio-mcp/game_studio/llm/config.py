@@ -55,7 +55,8 @@ DEFAULTS: dict[str, dict] = {
 }
 
 SECRET_PATTERNS = (
-    re.compile(r"(?i)(api[_-]?key|secret|password|access[_-]?token|authorization)\s*[:=]\s*\S{6,}"),
+    re.compile(r"(?i)(api[_-]?key|secret|password|access[_-]?token|authorization)"
+               r"\s*[:=]\s*(?:bearer\s+)?\S{6,}"),
     re.compile(r"\bsk-[A-Za-z0-9_\-]{12,}\b"),
     re.compile(r"\bmsy_[A-Za-z0-9_\-]{8,}\b"),
     re.compile(r"\bghp_[A-Za-z0-9]{20,}\b"),
@@ -156,6 +157,8 @@ def load_config() -> dict:
         "connect_timeout_seconds": _env_int("GAME_STUDIO_LLM_CONNECT_TIMEOUT", 10,
                                             minimum=2),
         "max_tokens": _env_int("GAME_STUDIO_LLM_MAX_TOKENS", 4096, minimum=128),
+        "max_context_chars": _env_int("GAME_STUDIO_LLM_MAX_CONTEXT_CHARS", 64_000,
+                                      minimum=4_000),
         "max_requests": _env_int("GAME_STUDIO_LLM_MAX_REQUESTS", 20, minimum=0),
         "max_requests_per_day": _env_int("GAME_STUDIO_LLM_MAX_REQUESTS_PER_DAY", 200,
                                          minimum=0),
@@ -185,6 +188,7 @@ def public_view(cfg: dict | None = None) -> dict:
         },
         "budgets": {
             "max_tokens_per_request": cfg["max_tokens"],
+            "max_context_chars": cfg["max_context_chars"],
             "max_requests_per_session": cfg["max_requests"],
             "max_requests_per_day": cfg["max_requests_per_day"],
         },
@@ -233,6 +237,7 @@ def status() -> dict:
             "GAME_STUDIO_LLM_API_KEY": "preferred shared key variable (never commit it)",
             "GAME_STUDIO_LLM_LOCAL_ONLY": "true blocks every hosted provider",
             "GAME_STUDIO_LLM_MAX_TOKENS": "per-request output budget",
+            "GAME_STUDIO_LLM_MAX_CONTEXT_CHARS": "hard prompt-size limit before a request is refused",
             "GAME_STUDIO_LLM_MAX_REQUESTS_PER_DAY": "hard request budget",
             "GAME_STUDIO_LLM_CACHE": "true enables a local cache for non-sensitive prompts",
             "GAME_STUDIO_LLM_ALLOW_PROJECT_CONTENT": "must be true before project context is sent",

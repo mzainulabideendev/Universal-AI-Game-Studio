@@ -105,6 +105,17 @@ def _list(args: dict, key: str) -> list | None:
     return value
 
 
+def _obj(args: dict, key: str, *, required: bool = False) -> dict | None:
+    value = args.get(key)
+    if value is None:
+        if required:
+            raise ToolError(f"{key} is required")
+        return None
+    if not isinstance(value, dict):
+        raise ToolError(f"{key} must be an object")
+    return value
+
+
 # --------------------------------------------------------------------------
 # studio tools
 # --------------------------------------------------------------------------
@@ -455,6 +466,7 @@ def tool_llm_understand_request(args: dict) -> dict:
             platform=_str(args, "platform"),
             project_path=_project_arg(args),
             confirm=_bool(args, "confirm"),
+            operation_id=_str(args, "operation_id"),
         )
     except LLMError as exc:
         raise ToolError(str(exc)) from exc
@@ -473,9 +485,91 @@ def tool_llm_generate_specification(args: dict) -> dict:
             project_path=_project_arg(args),
             confirm=_bool(args, "confirm"),
             approved=_bool(args, "approved"),
+            operation_id=_str(args, "operation_id"),
         )
     except LLMError as exc:
         raise ToolError(str(exc)) from exc
+
+
+def tool_llm_analyze_ambiguities(args: dict) -> dict:
+    try:
+        return llm_reasoning.analyze_ambiguities(
+            _str(args, "request", required=True, max_length=20_000) or "",
+            understanding_data=_obj(args, "understanding"),
+            project_path=_project_arg(args),
+            confirm=_bool(args, "confirm"),
+            operation_id=_str(args, "operation_id"),
+        )
+    except LLMError as exc:
+        raise ToolError(str(exc)) from exc
+
+
+def tool_llm_engine_compatibility(args: dict) -> dict:
+    try:
+        return llm_reasoning.reason_about_engine_compatibility(
+            _str(args, "request", required=True, max_length=20_000) or "",
+            engine=_str(args, "engine"),
+            platform=_str(args, "platform"),
+            understanding_data=_obj(args, "understanding"),
+            installed_engines=_list(args, "installed_engines"),
+            project_path=_project_arg(args),
+            confirm=_bool(args, "confirm"),
+            operation_id=_str(args, "operation_id"),
+        )
+    except LLMError as exc:
+        raise ToolError(str(exc)) from exc
+
+
+def tool_llm_plan_architecture(args: dict) -> dict:
+    try:
+        return llm_reasoning.plan_game_architecture(
+            _str(args, "request", required=True, max_length=20_000) or "",
+            understanding_data=_obj(args, "understanding"),
+            specification_data=_obj(args, "specification"),
+            project_path=_project_arg(args),
+            confirm=_bool(args, "confirm"),
+            operation_id=_str(args, "operation_id"),
+        )
+    except LLMError as exc:
+        raise ToolError(str(exc)) from exc
+
+
+def tool_llm_validate_plan(args: dict) -> dict:
+    try:
+        return llm_reasoning.validate_generated_plan(
+            _obj(args, "plan", required=True) or {},
+            request=_str(args, "request", max_length=20_000),
+            understanding_data=_obj(args, "understanding"),
+            project_path=_project_arg(args),
+            confirm=_bool(args, "confirm"),
+            use_llm=_bool(args, "use_llm"),
+            operation_id=_str(args, "operation_id"),
+        )
+    except LLMError as exc:
+        raise ToolError(str(exc)) from exc
+
+
+def tool_llm_build_execution_plan(args: dict) -> dict:
+    return llm_reasoning.build_execution_plan(
+        _obj(args, "specification", required=True) or {},
+        understanding_data=_obj(args, "understanding"),
+        include_paid_options=_bool(args, "include_paid_options", default=True),
+    )
+
+
+def tool_llm_trace_requirements(args: dict) -> dict:
+    return llm_reasoning.trace_requirements(
+        _obj(args, "understanding", required=True) or {},
+        specification_data=_obj(args, "specification"),
+        project_path=_project_arg(args),
+    )
+
+
+def tool_llm_test_provider(args: dict) -> dict:
+    return llm_reasoning.verify_provider(
+        confirm=_bool(args, "confirm"),
+        project_path=_project_arg(args),
+    )
 
 
 def tool_llm_review_plan(args: dict) -> dict:
@@ -487,6 +581,7 @@ def tool_llm_review_plan(args: dict) -> dict:
             plan,
             project_path=_project_arg(args),
             confirm=_bool(args, "confirm"),
+            operation_id=_str(args, "operation_id"),
         )
     except LLMError as exc:
         raise ToolError(str(exc)) from exc
@@ -499,6 +594,7 @@ def tool_llm_game_director(args: dict) -> dict:
             project_path=_project_arg(args),
             confirm=_bool(args, "confirm"),
             include_project_content=_bool(args, "include_project_content"),
+            operation_id=_str(args, "operation_id"),
         )
     except LLMError as exc:
         raise ToolError(str(exc)) from exc
@@ -946,6 +1042,9 @@ PROJECT_PATH = {"type": "string", "description": "Absolute path to the game proj
 ENGINE_ENUM = {"type": "string", "enum": list(engines.ENGINES)}
 CONFIRM = {"type": "boolean", "default": False,
            "description": "Explicit approval for a write, credit spend or editor run"}
+OPERATION_ID = {"type": "string",
+                "description": "Operation id used to check cancellation before/while "
+                               "waiting for provider retries"}
 OVERWRITE = {"type": "boolean", "default": False,
              "description": "Allow replacing an existing target file"}
 
@@ -1458,6 +1557,7 @@ TOOLS = [
               "platform": {"type": "string"},
               "project_path": PROJECT_PATH,
               "confirm": CONFIRM,
+              "operation_id": OPERATION_ID,
           }, ["request", "confirm"]),
     _tool("llm_generate_specification", "Hybrid specification: LLM understanding/recommendations "
           "plus the deterministic dependency graph, milestones and acceptance tests. Nothing is "
@@ -1472,20 +1572,85 @@ TOOLS = [
               "project_path": PROJECT_PATH,
               "approved": {"type": "boolean", "default": False},
               "confirm": CONFIRM,
+              "operation_id": OPERATION_ID,
           }, ["request", "confirm"]),
+    _tool("llm_analyze_ambiguities", "Ask only material clarification questions (maximum five) "
+          "and return ambiguities with safe defaults where possible. Falls back to the "
+          "deterministic unresolved/conflict analysis and labels it.", {
+              "request": {"type": "string", "maxLength": 20000},
+              "understanding": {"type": "object",
+                                "description": "Optional prior understanding object"},
+              "project_path": PROJECT_PATH,
+              "confirm": CONFIRM,
+              "operation_id": OPERATION_ID,
+          }, ["request", "confirm"]),
+    _tool("llm_engine_compatibility", "Reason about Unity/Unreal/Godot compatibility for the "
+          "request and platform. A recommendation is never treated as an installed or verified "
+          "engine; pass detected installations separately.", {
+              "request": {"type": "string", "maxLength": 20000},
+              "engine": {"type": "string", "enum": list(engines.ENGINES)},
+              "platform": {"type": "string"},
+              "understanding": {"type": "object"},
+              "installed_engines": {"type": "array", "items": {"type": "string"}},
+              "project_path": PROJECT_PATH,
+              "confirm": CONFIRM,
+              "operation_id": OPERATION_ID,
+          }, ["request", "confirm"]),
+    _tool("llm_plan_architecture", "Design systems, dependencies, asset/animation plans and "
+          "milestones grounded in requirement ids. Returns a proposal, never implementation "
+          "evidence.", {
+              "request": {"type": "string", "maxLength": 20000},
+              "understanding": {"type": "object"},
+              "specification": {"type": "object"},
+              "project_path": PROJECT_PATH,
+              "confirm": CONFIRM,
+              "operation_id": OPERATION_ID,
+          }, ["request", "confirm"]),
+    _tool("llm_validate_plan", "Validate a plan structurally (coverage, dependencies, "
+          "acceptance tests, traceability, execution-plan safety) and optionally add an LLM "
+          "review. The deterministic verdict cannot be upgraded by the model.", {
+              "plan": {"type": "object"},
+              "request": {"type": "string", "maxLength": 20000},
+              "understanding": {"type": "object"},
+              "project_path": PROJECT_PATH,
+              "use_llm": {"type": "boolean", "default": False},
+              "confirm": CONFIRM,
+              "operation_id": OPERATION_ID,
+          }, ["plan"]),
+    _tool("llm_build_execution_plan", "Map an approved specification onto governed MCP tool "
+          "steps. Deterministic, read-only planning: never executes anything, never emits a "
+          "shell command, and marks paid steps as requiring explicit approval.", {
+              "specification": {"type": "object"},
+              "understanding": {"type": "object"},
+              "include_paid_options": {"type": "boolean", "default": True},
+          }, ["specification"]),
+    _tool("llm_trace_requirements", "Build a requirement trace map from understanding to "
+          "specification and manifest. Copies status only when the manifest records it.", {
+              "understanding": {"type": "object"},
+              "specification": {"type": "object"},
+              "project_path": PROJECT_PATH,
+          }, ["understanding"]),
+    _tool("llm_test_provider", "Send one small real request to the configured provider to prove "
+          "reachability. Requires confirm=true; refuses hosted providers in local-only mode. "
+          "Failure is reported, never simulated.", {
+              "project_path": PROJECT_PATH,
+              "confirm": CONFIRM,
+          }, ["confirm"]),
     _tool("llm_review_plan", "Ask the configured LLM to review a plan for feasibility, gaps and "
           "unapproved assumptions. Returns advice only. Requires confirm=true.", {
               "plan": {"type": "object"},
               "project_path": PROJECT_PATH,
               "confirm": CONFIRM,
+              "operation_id": OPERATION_ID,
           }, ["plan", "confirm"]),
     _tool("llm_game_director_plan", "AI Game Director: combine LLM understanding with real "
-          "project/manifest evidence to produce a grounded roadmap. Project content is never "
-          "sent unless explicitly requested and allowed. Requires confirm=true.", {
+          "project/manifest evidence to produce a grounded, structured roadmap. Project content "
+          "is never sent unless explicitly requested and allowed. Requires confirm=true.", {
               "request": {"type": "string", "maxLength": 20000},
               "project_path": PROJECT_PATH,
               "include_project_content": {"type": "boolean", "default": False},
               "confirm": CONFIRM,
+              "operation_id": OPERATION_ID,
           }, ["request", "confirm"]),
 ]
 
@@ -1565,6 +1730,13 @@ HANDLERS = {
     "llm_status": tool_llm_status,
     "llm_understand_request": tool_llm_understand_request,
     "llm_generate_specification": tool_llm_generate_specification,
+    "llm_analyze_ambiguities": tool_llm_analyze_ambiguities,
+    "llm_engine_compatibility": tool_llm_engine_compatibility,
+    "llm_plan_architecture": tool_llm_plan_architecture,
+    "llm_validate_plan": tool_llm_validate_plan,
+    "llm_build_execution_plan": tool_llm_build_execution_plan,
+    "llm_trace_requirements": tool_llm_trace_requirements,
+    "llm_test_provider": tool_llm_test_provider,
     "llm_review_plan": tool_llm_review_plan,
     "llm_game_director_plan": tool_llm_game_director,
 }

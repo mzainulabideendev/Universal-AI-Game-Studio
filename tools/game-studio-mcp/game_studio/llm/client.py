@@ -35,6 +35,27 @@ class LLMError(Exception):
         self.details = details or {}
 
 
+def prompt_size(system: str, messages: list[dict]) -> int:
+    """Approximate prompt size in characters (provider-agnostic budget unit)."""
+    total = len(system or "")
+    for message in messages or []:
+        total += len(str(message.get("content") or ""))
+        total += 16  # role/formatting overhead
+    return total
+
+
+def _check_context(cfg: dict, system: str, messages: list[dict]) -> None:
+    size = prompt_size(system, messages)
+    if size > cfg["max_context_chars"]:
+        raise LLMError(
+            f"prompt is {size} characters, above the configured context limit of "
+            f"{cfg['max_context_chars']}; shorten the request or raise "
+            "GAME_STUDIO_LLM_MAX_CONTEXT_CHARS deliberately",
+            kind="context_overflow",
+            details={"prompt_chars": size, "limit": cfg["max_context_chars"]},
+        )
+
+
 def _today() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
@@ -204,6 +225,7 @@ class LLMClient:
             raise LLMError(reason or "provider is not available", kind="config")
 
         messages = [{"role": "user", "content": user}]
+        _check_context(cfg, system, messages)
         key = _cache_key(cfg, system, messages, task)
         if cfg["cache_enabled"] and cacheable:
             cached = _cache_get(key)
@@ -222,6 +244,7 @@ class LLMClient:
         repairs = 0
         last_errors: list[str] = []
         while repairs <= MAX_REPAIR_ATTEMPTS:
+            _check_context(cfg, system, messages)
             result = self._call(system=system, messages=messages,
                                 max_tokens=budget, temperature=temperature,
                                 operation_id=operation_id)
@@ -269,6 +292,7 @@ class LLMClient:
         allowed, reason = llm_config.provider_allowed(self.cfg)
         if not allowed:
             raise LLMError(reason or "provider is not available", kind="config")
+        _check_context(self.cfg, system, [{"role": "user", "content": user}])
         result = self._call(system=system, messages=[{"role": "user", "content": user}],
                             max_tokens=max_tokens or self.cfg["max_tokens"],
                             temperature=(self.cfg["temperature"] if temperature is None

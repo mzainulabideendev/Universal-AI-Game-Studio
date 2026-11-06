@@ -577,11 +577,22 @@ unedited words (English, Roman Urdu, Urdu or mixed). Keep explicit requirements
 separate from implied/technical/optional suggestions, and resolve reported
 conflicts before implementation.
 
+When an approved LLM provider is configured, use the reasoning tools instead of
+relying on keywords: `llm_understand_request`, `llm_analyze_ambiguities`,
+`llm_engine_compatibility`, `llm_generate_specification`,
+`llm_plan_architecture`, `llm_validate_plan`, `llm_trace_requirements` and
+`llm_build_execution_plan`. They reason and plan only. They never execute,
+download, edit files or mark requirements verified. Every real operation still
+goes through the governed MCP tools with their own confirmation gates.
+Without a provider, the deterministic path remains supported and labels itself
+`deterministic-fallback`.
+
 Then call `create_game_specification`, review the questions, and get user
 approval for engine, platform, dimension, art direction and scope. Persist the
 approved plan with `init_project_manifest`; do not rely on conversation memory.
 Full procedure and the status/evidence rules:
-`references/80-intent-and-project-memory.md`.
+`references/80-intent-and-project-memory.md`. LLM/MCP boundary:
+`references/85-llm-reasoning.md`.
 
 ## Phase 1 — Scope the game before touching code
 
@@ -764,7 +775,8 @@ Never mark the whole system complete while a critical integration is unverified.
 | `references/70-acceptance-checklist.md` | Final evidence checklist |
 | `references/75-performance-qa-delivery.md` | Performance budgets, automated playtesting, delivery package |
 | `references/80-intent-and-project-memory.md` | Request intent, classified requirements, specification, manifest, evidence rules |
+| `references/85-llm-reasoning.md` | Provider-independent LLM reasoning layer, schemas, safety and deterministic fallback |
 | `../../../tools/game-studio-mcp/README.md` | Bundled Game Studio MCP tools, confirmations, evidence and known limitations |
 
-All 15 reference files are shipped with this skill; if a link is broken, the
+All 16 reference files are shipped with this skill; if a link is broken, the
 skill is incomplete.

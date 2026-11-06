@@ -1,6 +1,6 @@
 # Universal AI Game Studio MCP
 
-![tests](https://img.shields.io/badge/tests-50%20passing-brightgreen)
+![tests](https://img.shields.io/badge/tests-150%20passing-brightgreen)
 ![python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![dependencies](https://img.shields.io/badge/runtime%20dependencies-none-success)
 ![license](https://img.shields.io/badge/license-MIT-informational)
@@ -29,6 +29,7 @@ Blockouts are iteration geometry, not production art.*
 - [Why this server exists](#why-this-server-exists)
 - [Architecture](#architecture)
 - [Request understanding and project memory](#request-understanding-and-project-memory)
+- [LLM reasoning layer](#llm-reasoning-layer)
 - [Screenshots](#screenshots)
 - [Requirements](#requirements)
 - [Quick start](#quick-start)
@@ -140,6 +141,66 @@ Known limitation: the intent parser is a vocabulary and heuristic engine. It
 does not claim perfect natural-language understanding, and its output must be
 reviewed by the user before approval.
 
+## LLM reasoning layer
+
+The deterministic parser above remains the offline default. An optional,
+provider-independent LLM layer adds reasoning on top of it without gaining any
+execution power:
+
+```text
+user text (any language the model supports)
+  -> llm_understand_request        classified requirements + language report
+  -> llm_analyze_ambiguities       max 5 material questions; assumptions labelled
+  -> llm_engine_compatibility      engine trade-offs grounded in real detection
+  -> llm_plan_architecture         systems, dependencies, asset/animation plans
+  -> llm_validate_plan             structural validation; deterministic verdict wins
+  -> llm_build_execution_plan      governed, allow-listed MCP steps (never executable)
+  -> llm_trace_requirements        understanding -> spec -> manifest trace map
+  -> llm_game_director_plan        combined plan for new or existing projects
+```
+
+Supported adapters: OpenAI, OpenAI-compatible endpoints, Anthropic, Gemini and
+Ollama. Configuration is entirely environment-driven (see
+[Configuration](#configuration)); no credential is ever printed, logged or
+returned.
+
+**Hard boundary.** The LLM reasons; MCP tools execute. Model output can never run
+a command, download an asset, spend credits, edit a project, change a
+requirement status, grant permissions or change execution mode. Execution plans
+are declarative (`executable: false`), name only tools from the server's
+allow-list, and mark paid steps as requiring explicit approval
+(`requires_confirm: true`); nothing is auto-approved.
+
+**Fallback.** With no provider, no approval, a provider failure, an unrecoverable
+schema error or an exceeded context/budget limit, the server returns the
+deterministic result and labels it:
+
+```json
+{
+  "source": "deterministic-fallback",
+  "degraded": true,
+  "fallback_reason": "..."
+}
+```
+
+Fallback output is never presented as LLM understanding.
+
+**Privacy.** Project content is not sent to a provider unless all three of
+`GAME_STUDIO_LLM_ALLOW_PROJECT_CONTENT=true`, `include_project_content=true` and
+`confirm=true` are present. Credential-shaped strings are redacted before
+prompts are built, and request budgets, per-day limits, timeouts, bounded
+retries and local-only mode bound cost and exposure.
+
+Full details:
+[architecture](docs/llm-architecture.md) ·
+[provider setup](docs/llm-provider-setup.md) ·
+[security and privacy](docs/llm-security-privacy.md) ·
+[schemas](docs/llm-schemas.md) ·
+[testing](docs/llm-testing.md) ·
+[troubleshooting](docs/llm-troubleshooting.md) ·
+[MCP integration](docs/llm-mcp-integration.md) ·
+[limitations](docs/llm-limitations.md).
+
 ## Screenshots
 
 These are real renders produced by the server in this repository's verification
@@ -167,6 +228,7 @@ this path is covered by a unit test.
 | Godot | optional; 4.x CLI |
 | Meshy key | optional; required only for Meshy tools |
 | Sketchfab token | optional; authenticated search only |
+| LLM provider | optional; OpenAI, OpenAI-compatible, Anthropic, Gemini or Ollama |
 
 ## Quick start
 
@@ -262,7 +324,7 @@ machine and are never written into the repository.
 
 ## Tool reference
 
-60 tools, grouped by capability.
+84 tools, grouped by capability.
 
 ### Understanding, specification and project memory
 
@@ -344,6 +406,30 @@ retargeting; verify rest pose, scale, axes and playback in Blender or the engine
 The Unreal adapter is deliberately staged-only. It does not claim an import or a
 build succeeded.
 
+### Governance, operations and verification
+
+`get_execution_mode`, `set_execution_mode`, `set_permission`, `list_operations`,
+`get_operation`, `cancel_operation`, `cleanup_operation`, `operation_status`,
+`recover_operations`, `inspect_requirement_evidence`,
+`run_requirement_verification`.
+
+Execution modes (`guided`, `balanced`, `autonomous`) and per-capability
+permissions (`allow` / `ask` / `deny`) bound what any tool or plan may do.
+Long-running operations are persisted with cancellation state. Requirement
+evidence is inspected and re-run through a caller-supplied argv validation
+command; only this path can change a requirement to `verified`.
+
+### LLM reasoning
+
+`llm_status`, `llm_understand_request`, `llm_generate_specification`,
+`llm_analyze_ambiguities`, `llm_engine_compatibility`, `llm_plan_architecture`,
+`llm_validate_plan`, `llm_build_execution_plan`, `llm_trace_requirements`,
+`llm_test_provider`, `llm_review_plan`, `llm_game_director_plan`.
+
+See [LLM reasoning layer](#llm-reasoning-layer). These tools reason only; they do
+not execute engine, asset or build operations. `llm_test_provider` sends one
+small real request and proves reachability, not output quality.
+
 ## Confirmation and overwrite model
 
 These calls fail unless `confirm=true`:
@@ -383,17 +469,21 @@ Unity CLI 1.0.0-beta.8.
 
 ```powershell
 python -m compileall -q .\tools\game-studio-mcp
-python -m unittest discover -s .\tools\game-studio-mcp\tests -v   # 50 passed
+python -m unittest discover -s .\tools\game-studio-mcp\tests -q   # 150 passed
 python .\scripts\validate-intent-memory.py
+python .\scripts\llm-demo.py --json                 # deterministic offline pipeline
+python .\scripts\llm-demo.py --mock-llm --json      # mocked provider pipeline
 python .\scripts\test-mcp-server.py --call studio_info -- python .\tools\game-studio-mcp\server.py
 python .\scripts\test-mcp-server.py --call blender_info -- python .\tools\game-studio-mcp\server.py
 ```
 
 | Evidence | Result |
 | --- | --- |
-| MCP stdio handshake | 60 tools; every tool has a handler |
-| Unit tests | 50 passing, no network/engine/API key required |
+| MCP stdio handshake | 84 tools; every tool has a handler |
+| Unit tests | 150 passing, mostly offline; LLM provider tests use mocked HTTP (no keys, no paid calls) |
 | Intent/memory validation | Roman Urdu request understood; 22 requirements; 33-node acyclic graph; manifest reload; evidence guards enforced |
+| LLM offline demo | full English monkey/Android request; deterministic fallback labelled; spec + trace + execution plan |
+| LLM mocked-provider demo | `source: llm`, schema-valid spec, `validation: valid`, 19 governed steps (14 available, 3 paid-blocked, 2 blocked) |
 | Blender jungle blockout | `.blend` 196,461 B; `.glb` 283,272 B, 57 meshes, 5 materials; 640×360 PNG 278,904 B |
 | Blender alpine render | 12,194 triangles, 114 objects, 640×360 PNG 287,522 B |
 | Render-only path | temporary `.blend` created and removed; render persisted |
@@ -402,6 +492,7 @@ python .\scripts\test-mcp-server.py --call blender_info -- python .\tools\game-s
 | Unity editor tools | correctly reported unavailable (no connected Pipeline editor) |
 | Meshy invalid key | real 401 response, `saved: false`, no key file written |
 | Meshy key storage | local save, environment precedence and clear tested |
+| LLM live provider | **not verified** — no credential or local model was used; adapters are wire-format tested only |
 
 Reproduction notes and the full evidence table are in
 [ACCEPTANCE.md](ACCEPTANCE.md).
@@ -411,7 +502,19 @@ Reproduction notes and the full evidence table are in
 - **Intent understanding is heuristic.** The lexicon covers common English,
   Roman Urdu and Urdu game vocabulary. It is deterministic and traceable, but it
   is not a general translator; unusual dialects or metaphors require a
-  clarifying question. User approval of the specification is mandatory.
+  clarifying question. User approval of the specification is mandatory. The
+  optional LLM layer can improve coverage, but its output is equally advisory.
+- **No LLM provider was live-verified.** All five adapters are implemented and
+  covered by mocked-HTTP wire-format tests. No credential or local model was
+  available, so live reachability, rate-limit behaviour and real output quality
+  are unconfirmed. Use `llm_test_provider` to prove reachability in your own
+  environment.
+- **LLM plans are proposals.** Architecture, engine recommendations, risks and
+  execution steps are not evidence of implementation. Execution plans are
+  abstract (tool names, no concrete arguments) and always `executable: false`.
+- **LLM cost and context are approximate.** Budgets count requests, not currency,
+  and the context guard uses a local character approximation rather than a
+  model-specific tokenizer.
 - **Requirement comparison checks evidence existence, not correctness.** A
   `verified` status means qualifying evidence was recorded and its files exist;
   it is not an independent re-run of the test, build or playtest.
@@ -444,6 +547,18 @@ tools/game-studio-mcp/
 │   ├── understanding.py      # multilingual intent + requirement classification
 │   ├── specification.py      # spec, dependency graph, milestones, acceptance tests
 │   ├── manifest.py           # versioned project memory + evidence-backed statuses
+│   ├── governance.py         # execution modes, permissions, confirm gates
+│   ├── verification.py       # evidence-backed requirement status changes
+│   ├── operations.py         # persisted long-running operations + cancellation
+│   ├── llm/                  # provider-independent reasoning layer
+│   │   ├── config.py         # provider, budget, privacy and redaction settings
+│   │   ├── providers.py      # OpenAI/compatible, Anthropic, Gemini, Ollama
+│   │   ├── client.py         # retries, budgets, context limit, schema repair
+│   │   ├── schemas.py        # versioned JSON schemas + validator
+│   │   ├── reasoning.py      # understanding, ambiguity, engine, architecture
+│   │   ├── planning.py       # governed execution plans (never executable)
+│   │   ├── traceability.py   # requirement -> spec -> manifest trace map
+│   │   └── director.py       # AI Game Director
 │   ├── detect.py             # hardware, toolchains, engines, projects
 │   ├── projects.py           # Unity/Unreal/Godot project inspection
 │   ├── blender.py            # headless Blender jobs, export, render
@@ -451,8 +566,10 @@ tools/game-studio-mcp/
 │   ├── assets.py             # provider search, downloads, manifests
 │   ├── animations.py         # GLB/glTF rig and clip inspection
 │   └── engines.py            # staging and engine CLI adapters
-├── tests/test_game_studio.py # offline unit tests
+├── tests/test_game_studio.py # offline unit tests (core, governance, engines)
+├── tests/test_llm_v4.py      # LLM layer tests (mocked providers, schemas, safety)
 ├── docs/images/              # real render evidence used in this README
+├── docs/llm-*.md             # LLM architecture, providers, security, schemas, tests
 ├── README.md
 └── ACCEPTANCE.md
 ```
@@ -462,6 +579,7 @@ tools/game-studio-mcp/
 ```powershell
 python -m compileall -q .\tools\game-studio-mcp
 python -m unittest discover -s .\tools\game-studio-mcp\tests -v
+python .\scripts\llm-demo.py --mock-llm --json
 python .\scripts\test-mcp-server.py -- python .\tools\game-studio-mcp\server.py
 ```
 

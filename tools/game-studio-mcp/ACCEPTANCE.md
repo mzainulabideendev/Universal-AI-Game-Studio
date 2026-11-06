@@ -1,6 +1,6 @@
 # Game Studio MCP acceptance report
 
-Date: 2026-11-04
+Date: 2026-11-06
 Platform: Windows 11, Python 3.12.10
 Blender: 5.2.2 LTS
 Unity Editor: 6000.6.2f1
@@ -20,6 +20,8 @@ claimed beyond what the recorded commands and artifacts show.
 | Assets | provider matrix, Poly Haven search/download with MD5 + provenance, Sketchfab search, license inspection, file validation, manifest |
 | Animation | GLB/glTF rig classification, clip inspection, retarget map, compatibility check, source limitations |
 | Engines | Unity stage/verify/refresh/test/build/editor commands, Godot stage/verify/import/build, Unreal inspect/stage-only |
+| Governance | execution modes, granular permissions, confirm gates, persisted operations with cancellation, evidence inspection and caller-supplied requirement verification |
+| LLM reasoning | `llm_status`, understand, hybrid specification, ambiguity analysis, engine compatibility, architecture, plan validation, governed execution plan, requirement trace, provider test, plan review, Game Director |
 
 All modules are dependency-free Python. No simulated tool returns a success
 payload for work that did not happen.
@@ -32,7 +34,7 @@ Command:
 python -m unittest discover -s .\tools\game-studio-mcp\tests -v
 ```
 
-Result: **50 tests passed**.
+Result: **150 tests passed**.
 
 Coverage includes path traversal rejection, config isolation and audit, project
 discovery/inspection, OBJ and GLB validation, rig classification, retargeting,
@@ -50,6 +52,29 @@ registry parity, unknown tools and clean tool errors, plus:
 - Evidence guards for `tested`/`verified` and missing evidence files.
 - Tampered-manifest invalid-claim detection.
 - Credential-like value rejection in project memory.
+
+LLM layer tests (`tests/test_llm_v4.py`) use mocked HTTP providers and make no
+paid calls:
+
+- Provider wire formats for OpenAI, OpenAI-compatible, Anthropic, Gemini and
+  Ollama; authorization headers and base-URL overrides.
+- Secret redaction in configured headers and prompts; credential-shaped values
+  never returned.
+- Budget limits, request/day caps, timeout, bounded retry/backoff and
+  cancellation-before-send.
+- Schema validation and bounded repair; invalid model output is rejected rather
+  than accepted.
+- Deterministic fallback on missing provider, failed provider and unrecoverable
+  schema errors, always labelled `deterministic-fallback` / `degraded: true`.
+- Provider-independent intent, ambiguity (max five questions), engine reasoning,
+  architecture and validation with mocked models.
+- Deterministic execution plans: `executable: false`, allow-listed tools only,
+  paid steps requiring explicit approval and blockable by policy; LLM review
+  cannot upgrade a `blocked` verdict.
+- Requirement traceability across understanding, specification and manifest,
+  including exclusions.
+- Project-content gate requires environment flag + request flag + confirmation.
+- Multilingual request scenarios (English, Roman Urdu, Urdu, mixed).
 
 ## 2b. Executed intent/memory validation
 
@@ -72,12 +97,41 @@ Result: `PASS`.
 | Comparison | `partial`, detected engine `unity`, 0 invalid claims |
 | Guard | `verified` rejected without qualifying evidence |
 
+## 2c. LLM reasoning demo (offline and mocked)
+
+Commands:
+
+```powershell
+python .\scripts\llm-demo.py --json
+python .\scripts\llm-demo.py --mock-llm --json
+```
+
+Both pipelines use the same English monkey/Android request ("Create a realistic
+3D monkey adventure game for Android ... No weapons.") and produce understanding,
+a specification, traceability, validation and a governed execution plan. Neither
+runs Blender, an engine, an asset download, gameplay or a build.
+
+| Check | Offline (`--json`) | Mocked provider (`--mock-llm`) |
+| --- | --- | --- |
+| `provider_mode` | `deterministic-fallback` | `mocked` |
+| Understanding `source` | `deterministic-fallback` | `llm` |
+| Requirements | 28 total (12 explicit, 8 implied, 2 technical, 5 optional, 1 excluded) | fixture response, 6 requirements (5 explicit, 1 excluded) |
+| Plan validation | `valid` | `valid` |
+| Execution plan | `executable: false` | `executable: false` |
+| Execution steps | 20 total: 17 available, 3 paid (require approval), 0 blocked | same |
+| `implementation_claimed` | `false` | `false` |
+
+The mocked run proves schema validation, adapter plumbing and the
+reasoning-to-plan pipeline. It does **not** prove model quality. The offline run
+proves the deterministic fallback remains usable with no provider, key or
+network.
+
 ## 3. Executed live evidence
 
 ### MCP stdio
 
 - `initialize` returned `universal-game-studio` 1.0.0.
-- `tools/list` returned 60 unique tools with matching handlers.
+- `tools/list` returned 84 unique tools with matching handlers.
 - `studio_info` returned config/audit paths outside the repository and reported
   Meshy/Sketchfab as not configured without exposing values.
 - `blender_info` returned Blender 5.2.2 LTS, Python 3.13.13, exporter flags and
@@ -150,6 +204,9 @@ committed under `docs/images/` and shown in the README.
 | General natural-language understanding | heuristic, unproven beyond vocabulary | The parser is a deterministic lexicon; dialects, metaphors and implicit cultural references may need clarification |
 | Requirement evidence correctness | not independently re-run | Comparison checks that evidence exists and qualifies by kind; it does not replay the test, build or playtest |
 | Full multi-engine acceptance scenarios | not executed | Blender/Meshy/Unity/Unreal/Godot end-to-end asset, animation, gameplay and build scenarios require the real engines and user-approved projects |
+| Live LLM providers | unverified | No hosted credential or local Ollama model was used; all five adapters are wire-format tested with mocked HTTP only |
+| LLM output quality | unproven | Mocked fixtures validate plumbing and schemas, not reasoning quality across models or languages |
+| LLM cost accounting | approximate | Budgets count requests; currency pricing and model-specific tokenizer limits are not implemented |
 
 ## 5. Acceptance conclusion
 
@@ -158,3 +215,8 @@ paths listed in section 3. It is **not** a complete game studio by itself:
 paid Meshy execution, Godot/Unreal automation, Unity batch builds and runtime
 quality remain unverified or unavailable in this environment. Those gaps are
 reported by the tools themselves and must stay visible in any delivery report.
+
+The LLM reasoning layer is **implemented, schema-validated and tested offline
+and with mocked providers**. It has **not** been live-verified against any
+provider, and its plans are advisory. It never executes work, never changes
+requirement status and never overrides a deterministic safety verdict.

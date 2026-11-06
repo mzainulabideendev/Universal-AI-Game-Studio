@@ -14,6 +14,21 @@ references in its `references/` directory before implementation.
   from implied, technical, optional and unresolved items. Resolve conflicts and
   obtain approval for engine, platform, dimension, art direction and scope before
   writing gameplay code.
+- When a configured LLM provider is available and the user approves the external
+  request, prefer the reasoning tools: `llm_understand_request`,
+  `llm_analyze_ambiguities`, `llm_engine_compatibility`,
+  `llm_generate_specification`, `llm_plan_architecture`, `llm_validate_plan`,
+  `llm_game_director_plan`, `llm_trace_requirements` and
+  `llm_build_execution_plan`. Without a provider, the deterministic tools remain
+  the supported path and say so in their response.
+- LLM = reasoning only. MCP tools = the only execution path. Never treat a
+  generated plan, architecture, trace map or execution plan as evidence that a
+  feature, asset, import, test or build exists. Only `verification.py` may change
+  requirement status, and only with recorded evidence.
+- Obtain explicit approval before any provider request that may cost money, and
+  before sending project content externally (`GAME_STUDIO_LLM_ALLOW_PROJECT_CONTENT`
+  plus `include_project_content` plus `confirm=true`). Never enable local-only
+  bypasses or widen permissions on the model's behalf.
 - Persist the approved plan with `init_project_manifest`; use
   `update_requirement_status` only with real evidence and re-check with
   `compare_project_against_requirements` before claiming progress.

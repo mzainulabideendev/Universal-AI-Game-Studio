@@ -7,7 +7,7 @@ governed MCP tools. See ``game_studio/llm/client.py`` for the boundary.
 
 from .config import load_config, status, redact
 from .client import LLMClient, LLMError
-from . import director, reasoning, schemas
+from . import director, planning, reasoning, schemas, traceability
 
 __all__ = ["load_config", "status", "redact", "LLMClient", "LLMError",
-           "reasoning", "schemas", "director"]
+           "reasoning", "schemas", "director", "planning", "traceability"]

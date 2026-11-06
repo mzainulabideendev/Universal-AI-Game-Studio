@@ -259,7 +259,10 @@ class MeshyKeyTests(StudioTestCase):
         self.assertEqual(result["state"], "connected")
         request.assert_called_once()
         headers = request.call_args.kwargs["headers"]
-        self.assertEqual(headers["Authorization"], "Bearer msy_local_key_1234567890")
+        self.assertEqual(headers.real_headers()["Authorization"],
+                         "Bearer msy_local_key_1234567890")
+        # The object handed to callers redacts credentials on inspection.
+        self.assertEqual(headers["Authorization"], "******")
 
     def test_configure_validates_then_saves_without_returning_key(self) -> None:
         with mock.patch.object(meshy, "http_request",
