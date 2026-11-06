@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-11-06T17:43:33Z",
+  "request": "Create a 3D low-poly jungle monkey adventure prototype for Windows PC. The monkey can run, jump and collect bananas. Include a follow camera, a score HUD and a restart. No climbing, no swinging, no swimming, no weapons and no Android support.",
+  "exclusions": [
+    "climbing",
+    "swinging",
+    "swimming",
+    "weapons",
+    "Android support"
+  ],
+  "steps": [
+    {
+      "step": "analyze_request",
+      "ok": true,
+      "counts": {
+        "explicit": 9,
+        "implied": 8,
+        "technical": 2,
+        "optional": 5,
+        "unresolved": 3,
+        "all": 24
+      },
+      "exclusions": [
+        {
+          "category": "mechanic",
+          "value": "climbing",
+          "matched_text": "climbing",
+          "reason": "negated in the original request"
+        },
+        {
+          "category": "mechanic",
+          "value": "swimming",
+          "matched_text": "swimming",
+          "reason": "negated in the original request"
+        },
+        {
+          "category": "mechanic",
+          "value": "weapons",
+          "matched_text": "weapons",
+          "reason": "negated in the original request"
+        },
+        {
+          "category": "platform",
+          "value": "mobile",
+          "matched_text": "Android",
+          "reason": "negated in the original request"
+        }
+      ]
+    },
+    {
+      "step": "create_specification",
+      "ok": true,
+      "spec_id": "4af7ee0b97fd",
+      "requirements": 24,
+      "status": "approved"
+    },
+    {
+      "step": "validate_specification",
+      "ok": true,
+      "verdict": "valid",
+      "issues": []
+    },
+    {
+      "step": "trace_requirements",
+      "ok": true,
+      "mapped": 0,
+      "unmapped": null
+    },
+    {
+      "step": "dependency_graph",
+      "ok": true,
+      "nodes": 34,
+      "edges": 37
+    },
+    {
+      "step": "init_project_manifest",
+      "ok": true,
+      "requirements": 24,
+      "revision": 1
+    },
+    {
+      "step": "record_decision",
+      "topic": "Engine",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Target platform",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Dimension",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Art direction",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Scope",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Explicit exclusions",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Prototype scope exclusions",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Execution policy",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Verification policy",
+      "ok": true
+    },
+    {
+      "step": "build_execution_plan",
+      "ok": true,
+      "executable": false,
+      "steps": 20,
+      "paid_requires_approval": 3
+    }
+  ],
+  "mcp": {
+    "server": {
+      "name": "universal-game-studio",
+      "version": "1.0.0"
+    },
+    "protocol_version": "2024-11-05",
+    "tool_count": 84,
+    "unique_tool_names": true,
+    "schemas_valid": true
+  },
+  "spec_id": "4af7ee0b97fd",
+  "manifest_path": "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\.game-studio\\manifest.json",
+  "ok": false,
+  "error": "MCPError: run_requirement_verification failed: {'ok': False, 'status': 'failed', 'requirement_id': 'R-001', 'evidence_path': 'D:\\\\MCP\\\\MCP\\\\validation\\\\unity-jungle-v5\\\\.game-studio\\\\evidence\\\\R-001-20261106T174834Z-op-5099bc6e4ed8465e.json', 'evidence_reference': '.game-studio/evidence/R-001-20261106T174834Z-op-5099bc6e4ed8465e.json', 'run': {'command': ['C:\\\\Users\\\\zu442\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe', 'D:\\\\MCP\\\\MCP\\\\scripts\\\\v5-verify-slice.py', '--check', 'dimension_3d'], 'run_at': '2026-11-06T17:48:34Z', 'exit_code': 1, 'cancelled': False, 'timed_out': True, 'duration_ms': 300293, 'ok': False, 'operation_id': 'op-5099bc6e4ed8465e', 'stdout_sha256': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 'stderr_sha256': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'}, 'stdout_tail': '', 'stderr_tail': '', 'comparison': {'previous_run': None, 'changed': None, 'note': 'first recorded verification run for this requirement'}, 'status_update': None, 'caveats': ['Exit code 0 shows this command passed; it is not proof of visual quality, fun or platform performance.', 'A cancelled or timed-out run is never accepted as evidence.', 'The command ran without a shell; shell syntax is not interpreted.']}",
+  "finished_at": "2026-11-06T17:48:34Z"
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "requirement_id": "R-001",
+  "statement": "Dimension: 3d",
+  "source_text": "3D",
+  "acceptance_test": "The game renders and plays in the requested perspective.",
+  "command": [
+    "cmd",
+    "/c",
+    "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe D:\\MCP\\MCP\\scripts\\v5-verify-slice.py --check dimension_3d < NUL"
+  ],
+  "cwd": "D:\\MCP\\MCP\\validation\\unity-jungle-v5",
+  "run_at": "2026-11-06T17:54:53Z",
+  "exit_code": 0,
+  "cancelled": false,
+  "timed_out": false,
+  "duration_ms": 238,
+  "ok": true,
+  "operation_id": "op-fcd9755ed9c846e8",
+  "stdout": "[PASS] dimension_3d: 3/3 component checks passed\nSummary: PASS=1, FAIL=0, BLOCKED=0, NOT VERIFIED=0\n",
+  "stderr": "",
+  "stdout_sha256": "7e379b180320d91deb1fe459c4e73d7a219f6773a33571910acbb2df77e7644a",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "governance_decision": {
+    "ok": true,
+    "permission": "execute_process",
+    "effect": "ask",
+    "mode": "guided",
+    "mandatory_approval": false,
+    "confirmed": true,
+    "scope": "project"
+  },
+  "previous_evidence": {
+    "tests": 0,
+    "files": 0,
+    "missing": []
+  },
+  "comparison": {
+    "previous_run": {
+      "run_at": "2026-11-06T17:54:47Z",
+      "exit_code": 1,
+      "ok": false
+    },
+    "changed": {
+      "command": true,
+      "exit_code": true,
+      "stdout": true,
+      "stderr": true
+    },
+    "changed_any": true,
+    "note": "Output changes are expected when timings or hashes are printed; compare the exit code and the asserted behaviour, not raw text alone."
+  }
+}

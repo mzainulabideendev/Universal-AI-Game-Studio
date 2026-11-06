@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="9" result="Passed" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-06 04:30:28Z" end-time="2026-11-06 04:30:32Z" duration="4.1241215">
+  <test-suite type="TestSuite" id="1015" name="V5 Jungle Monkey" fullname="V5 Jungle Monkey" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-06 04:30:28Z" end-time="2026-11-06 04:30:32Z" duration="4.124122" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1012" name="V5.PlayModeTests.dll" fullname="D:/MCP/MCP/validation/unity-jungle-v5/Library/ScriptAssemblies/V5.PlayModeTests.dll" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-06 04:30:28Z" end-time="2026-11-06 04:30:32Z" duration="4.110741" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="5296" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1013" name="V5" fullname="V5" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-06 04:30:28Z" end-time="2026-11-06 04:30:32Z" duration="4.109144" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1014" name="Tests" fullname="V5.Tests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-06 04:30:28Z" end-time="2026-11-06 04:30:32Z" duration="4.107511" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1002" name="V5PlayModeTests" fullname="V5.Tests.V5PlayModeTests" classname="V5.Tests.V5PlayModeTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-06 04:30:28Z" end-time="2026-11-06 04:30:32Z" duration="4.104076" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1010" name="AnimatorReactsToMovement" fullname="V5.Tests.V5PlayModeTests.AnimatorReactsToMovement" methodname="AnimatorReactsToMovement" classname="V5.Tests.V5PlayModeTests" runstate="Runnable" seed="1355912758" result="Passed" start-time="2026-11-06 04:30:28Z" end-time="2026-11-06 04:30:29Z" duration="0.962054" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1008" name="CollectibleIncrementsScoreAndDisappears" fullname="V5.Tests.V5PlayModeTests.CollectibleIncrementsScoreAndDisappears" methodname="CollectibleIncrementsScoreAndDisappears" classname="V5.Tests.V5PlayModeTests" runstate="Runnable" seed="1222634511" result="Passed" start-time="2026-11-06 04:30:29Z" end-time="2026-11-06 04:30:29Z" duration="0.293699" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1011" name="HudDisplaysBananaProgress" fullname="V5.Tests.V5PlayModeTests.HudDisplaysBananaProgress" methodname="HudDisplaysBananaProgress" classname="V5.Tests.V5PlayModeTests" runstate="Runnable" seed="405337691" result="Passed" start-time="2026-11-06 04:30:29Z" end-time="2026-11-06 04:30:29Z" duration="0.031812" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1007" name="JumpRaisesPlayerAboveGround" fullname="V5.Tests.V5PlayModeTests.JumpRaisesPlayerAboveGround" methodname="JumpRaisesPlayerAboveGround" classname="V5.Tests.V5PlayModeTests" runstate="Runnable" seed="225009559" result="Passed" start-time="2026-11-06 04:30:29Z" end-time="2026-11-06 04:30:30Z" duration="0.880321" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="MovementChangesPlayerPosition" fullname="V5.Tests.V5PlayModeTests.MovementChangesPlayerPosition" methodname="MovementChangesPlayerPosition" classname="V5.Tests.V5PlayModeTests" runstate="Runnable" seed="937199213" result="Passed" start-time="2026-11-06 04:30:30Z" end-time="2026-11-06 04:30:31Z" duration="0.842541" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1004" name="NoMissingScriptsOrMaterials" fullname="V5.Tests.V5PlayModeTests.NoMissingScriptsOrMaterials" methodname="NoMissingScriptsOrMaterials" classname="V5.Tests.V5PlayModeTests" runstate="Runnable" seed="151772063" result="Passed" start-time="2026-11-06 04:30:31Z" end-time="2026-11-06 04:30:31Z" duration="0.039825" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1005" name="PlayerIsGroundedByPhysics" fullname="V5.Tests.V5PlayModeTests.PlayerIsGroundedByPhysics" methodname="PlayerIsGroundedByPhysics" classname="V5.Tests.V5PlayModeTests" runstate="Runnable" seed="488243238" result="Passed" start-time="2026-11-06 04:30:31Z" end-time="2026-11-06 04:30:32Z" duration="0.644665" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1009" name="RestartResetsScorePlayerAndBananas" fullname="V5.Tests.V5PlayModeTests.RestartResetsScorePlayerAndBananas" methodname="RestartResetsScorePlayerAndBananas" classname="V5.Tests.V5PlayModeTests" runstate="Runnable" seed="1653032454" result="Passed" start-time="2026-11-06 04:30:32Z" end-time="2026-11-06 04:30:32Z" duration="0.325636" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1003" name="SceneContainsPlayerEnvironmentAndHud" fullname="V5.Tests.V5PlayModeTests.SceneContainsPlayerEnvironmentAndHud" methodname="SceneContainsPlayerEnvironmentAndHud" classname="V5.Tests.V5PlayModeTests" runstate="Runnable" seed="1707660254" result="Passed" start-time="2026-11-06 04:30:32Z" end-time="2026-11-06 04:30:32Z" duration="0.056181" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: D:\MCP\MCP\validation\v5-playmode-results.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

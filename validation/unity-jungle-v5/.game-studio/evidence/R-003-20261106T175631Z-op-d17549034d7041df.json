@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "requirement_id": "R-003",
+  "statement": "Environment: jungle",
+  "source_text": "jungle",
+  "acceptance_test": "The requested environment exists and is traversable.",
+  "command": [
+    "cmd",
+    "/c",
+    "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe D:\\MCP\\MCP\\scripts\\v5-verify-slice.py --check jungle_environment < NUL"
+  ],
+  "cwd": "D:\\MCP\\MCP\\validation\\unity-jungle-v5",
+  "run_at": "2026-11-06T17:56:31Z",
+  "exit_code": 0,
+  "cancelled": false,
+  "timed_out": false,
+  "duration_ms": 238,
+  "ok": true,
+  "operation_id": "op-d17549034d7041df",
+  "stdout": "[PASS] jungle_environment: 3/3 component checks passed\nSummary: PASS=1, FAIL=0, BLOCKED=0, NOT VERIFIED=0\n",
+  "stderr": "",
+  "stdout_sha256": "10c9fd8ec02eeef9f59f4b0b8ab78ec8b59d840cc06b77b9e6341030627621bc",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "governance_decision": {
+    "ok": true,
+    "permission": "execute_process",
+    "effect": "ask",
+    "mode": "guided",
+    "mandatory_approval": false,
+    "confirmed": true,
+    "scope": "project"
+  },
+  "previous_evidence": {
+    "tests": 0,
+    "files": 0,
+    "missing": []
+  },
+  "comparison": {
+    "previous_run": null,
+    "changed": null,
+    "note": "first recorded verification run for this requirement"
+  }
+}

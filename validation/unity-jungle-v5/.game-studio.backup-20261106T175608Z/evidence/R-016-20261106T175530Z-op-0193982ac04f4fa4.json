@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "requirement_id": "R-016",
+  "statement": "Camera",
+  "source_text": "implied by genre/mechanics",
+  "acceptance_test": "Camera works in a playable build: Third-person or genre-appropriate camera with collision handling.",
+  "command": [
+    "cmd",
+    "/c",
+    "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe D:\\MCP\\MCP\\scripts\\v5-verify-slice.py --check camera_system < NUL"
+  ],
+  "cwd": "D:\\MCP\\MCP\\validation\\unity-jungle-v5",
+  "run_at": "2026-11-06T17:55:30Z",
+  "exit_code": 0,
+  "cancelled": false,
+  "timed_out": false,
+  "duration_ms": 236,
+  "ok": true,
+  "operation_id": "op-0193982ac04f4fa4",
+  "stdout": "[PASS] camera_system: 2/2 component checks passed\nSummary: PASS=1, FAIL=0, BLOCKED=0, NOT VERIFIED=0\n",
+  "stderr": "",
+  "stdout_sha256": "889d3985946f86bc205159497cdb6a976e1804ec429e806141fe2f2e77bb782d",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "governance_decision": {
+    "ok": true,
+    "permission": "execute_process",
+    "effect": "ask",
+    "mode": "guided",
+    "mandatory_approval": false,
+    "confirmed": true,
+    "scope": "project"
+  },
+  "previous_evidence": {
+    "tests": 0,
+    "files": 0,
+    "missing": []
+  },
+  "comparison": {
+    "previous_run": null,
+    "changed": null,
+    "note": "first recorded verification run for this requirement"
+  }
+}

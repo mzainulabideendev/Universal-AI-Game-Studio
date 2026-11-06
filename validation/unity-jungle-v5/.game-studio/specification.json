@@ -1,0 +1,2053 @@
+{
+  "ok": true,
+  "spec_id": "4af7ee0b97fd",
+  "project_name": "V5 Jungle Monkey",
+  "generated_at": "2026-11-06T17:56:29Z",
+  "status": "approved",
+  "approved": true,
+  "request": "Create a 3D low-poly jungle monkey adventure prototype for Windows PC. The monkey can run, jump and collect bananas. Include a follow camera, a score HUD and a restart. No climbing, no swinging, no swimming, no weapons and no Android support.",
+  "analysis": {
+    "ok": true,
+    "original_request": "Create a 3D low-poly jungle monkey adventure prototype for Windows PC. The monkey can run, jump and collect bananas. Include a follow camera, a score HUD and a restart. No climbing, no swinging, no swimming, no weapons and no Android support.",
+    "language": {
+      "detected": [
+        "english",
+        "roman-urdu"
+      ],
+      "mixed": true,
+      "roman_urdu_terms": [
+        "jungle"
+      ],
+      "urdu_terms": [],
+      "urdu_character_count": 0
+    },
+    "summary": "Build a low poly 3D adventure game featuring a monkey set in a jungle environment.",
+    "understanding": {
+      "objective": "Build a low poly 3D adventure game featuring a monkey set in a jungle environment.",
+      "game_genre": [
+        "adventure"
+      ],
+      "dimension": [
+        "3d"
+      ],
+      "engine_requested": [],
+      "target_platform": [
+        "pc"
+      ],
+      "characters": [
+        "monkey"
+      ],
+      "environment": [
+        "jungle"
+      ],
+      "visual_style": [
+        "low-poly"
+      ],
+      "mechanics": [
+        "jumping",
+        "collectibles",
+        "score"
+      ]
+    },
+    "matched_terms": [
+      {
+        "category": "dimension",
+        "value": "3d",
+        "matched_text": "3D",
+        "start": 9,
+        "end": 11
+      },
+      {
+        "category": "style",
+        "value": "low-poly",
+        "matched_text": "low-poly",
+        "start": 12,
+        "end": 20
+      },
+      {
+        "category": "environment",
+        "value": "jungle",
+        "matched_text": "jungle",
+        "start": 21,
+        "end": 27
+      },
+      {
+        "category": "character",
+        "value": "monkey",
+        "matched_text": "monkey",
+        "start": 28,
+        "end": 34
+      },
+      {
+        "category": "genre",
+        "value": "adventure",
+        "matched_text": "adventure",
+        "start": 35,
+        "end": 44
+      },
+      {
+        "category": "platform",
+        "value": "pc",
+        "matched_text": "Windows",
+        "start": 59,
+        "end": 66
+      },
+      {
+        "category": "platform",
+        "value": "pc",
+        "matched_text": "PC",
+        "start": 67,
+        "end": 69
+      },
+      {
+        "category": "character",
+        "value": "monkey",
+        "matched_text": "monkey",
+        "start": 75,
+        "end": 81
+      },
+      {
+        "category": "mechanic",
+        "value": "jumping",
+        "matched_text": "jump",
+        "start": 91,
+        "end": 95
+      },
+      {
+        "category": "mechanic",
+        "value": "collectibles",
+        "matched_text": "bananas",
+        "start": 108,
+        "end": 115
+      },
+      {
+        "category": "mechanic",
+        "value": "score",
+        "matched_text": "score",
+        "start": 144,
+        "end": 149
+      },
+      {
+        "category": "mechanic",
+        "value": "climbing",
+        "matched_text": "climbing",
+        "start": 172,
+        "end": 180
+      },
+      {
+        "category": "mechanic",
+        "value": "swimming",
+        "matched_text": "swimming",
+        "start": 198,
+        "end": 206
+      },
+      {
+        "category": "mechanic",
+        "value": "weapons",
+        "matched_text": "weapons",
+        "start": 211,
+        "end": 218
+      },
+      {
+        "category": "platform",
+        "value": "mobile",
+        "matched_text": "Android",
+        "start": 226,
+        "end": 233
+      }
+    ],
+    "constraints": [],
+    "exclusions": [
+      {
+        "category": "mechanic",
+        "value": "climbing",
+        "matched_text": "climbing",
+        "reason": "negated in the original request"
+      },
+      {
+        "category": "mechanic",
+        "value": "swimming",
+        "matched_text": "swimming",
+        "reason": "negated in the original request"
+      },
+      {
+        "category": "mechanic",
+        "value": "weapons",
+        "matched_text": "weapons",
+        "reason": "negated in the original request"
+      },
+      {
+        "category": "platform",
+        "value": "mobile",
+        "matched_text": "Android",
+        "reason": "negated in the original request"
+      }
+    ],
+    "conflicts": [],
+    "requirements": {
+      "explicit": [
+        {
+          "id": "R-001",
+          "category": "dimension",
+          "statement": "Dimension: 3d",
+          "source_text": "3D",
+          "classification": "explicit",
+          "priority": "P0",
+          "confidence": "high",
+          "acceptance_test": "The game renders and plays in the requested perspective.",
+          "implementation_tasks": [],
+          "status": "pending"
+        },
+        {
+          "id": "R-002",
+          "category": "style",
+          "statement": "Art direction: low poly",
+          "source_text": "low-poly",
+          "classification": "explicit",
+          "priority": "P1",
+          "confidence": "high",
+          "acceptance_test": "Delivered assets follow the requested style.",
+          "implementation_tasks": [],
+          "status": "pending"
+        },
+        {
+          "id": "R-003",
+          "category": "environment",
+          "statement": "Environment: jungle",
+          "source_text": "jungle",
+          "classification": "explicit",
+          "priority": "P1",
+          "confidence": "high",
+          "acceptance_test": "The requested environment exists and is traversable.",
+          "implementation_tasks": [],
+          "status": "pending"
+        },
+        {
+          "id": "R-004",
+          "category": "character",
+          "statement": "Character: monkey",
+          "source_text": "monkey",
+          "classification": "explicit",
+          "priority": "P1",
+          "confidence": "high",
+          "acceptance_test": "The requested character exists and is controllable.",
+          "implementation_tasks": [],
+          "status": "pending"
+        },
+        {
+          "id": "R-005",
+          "category": "genre",
+          "statement": "Genre: adventure",
+          "source_text": "adventure",
+          "classification": "explicit",
+          "priority": "P0",
+          "confidence": "high",
+          "acceptance_test": "The core loop matches the requested genre.",
+          "implementation_tasks": [],
+          "status": "pending"
+        },
+        {
+          "id": "R-006",
+          "category": "platform",
+          "statement": "Platform: pc",
+          "source_text": "Windows",
+          "classification": "explicit",
+          "priority": "P0",
+          "confidence": "high",
+          "acceptance_test": "The game runs on the requested target platform.",
+          "implementation_tasks": [],
+          "status": "pending"
+        },
+        {
+          "id": "R-007",
+          "category": "mechanic",
+          "statement": "Gameplay: jumping",
+          "source_text": "jump",
+          "classification": "explicit",
+          "priority": "P0",
+          "confidence": "high",
+          "acceptance_test": "The requested mechanic is implemented and playable.",
+          "implementation_tasks": [],
+          "status": "pending"
+        },
+        {
+          "id": "R-008",
+          "category": "mechanic",
+          "statement": "Gameplay: collectibles",
+          "source_text": "bananas",
+          "classification": "explicit",
+          "priority": "P0",
+          "confidence": "high",
+          "acceptance_test": "The requested mechanic is implemented and playable.",
+          "implementation_tasks": [],
+          "status": "pending"
+        },
+        {
+          "id": "R-009",
+          "category": "mechanic",
+          "statement": "Gameplay: score",
+          "source_text": "score",
+          "classification": "explicit",
+          "priority": "P0",
+          "confidence": "high",
+          "acceptance_test": "The requested mechanic is implemented and playable.",
+          "implementation_tasks": [],
+          "status": "pending"
+        }
+      ],
+      "implied": [
+        {
+          "id": "R-010",
+          "category": "system",
+          "statement": "Player traversal",
+          "source_text": "implied by genre/mechanics",
+          "classification": "implied",
+          "priority": "P1",
+          "confidence": "medium",
+          "acceptance_test": "Player traversal works in a playable build: Walk, run, jump and interact with a grounded character controller.",
+          "implementation_tasks": [
+            "Walk, run, jump and interact with a grounded character controller."
+          ],
+          "status": "pending"
+        },
+        {
+          "id": "R-011",
+          "category": "system",
+          "statement": "Interaction system",
+          "source_text": "implied by genre/mechanics",
+          "classification": "implied",
+          "priority": "P1",
+          "confidence": "medium",
+          "acceptance_test": "Interaction system works in a playable build: Context prompts and interactable objects that change gameplay state.",
+          "implementation_tasks": [
+            "Context prompts and interactable objects that change gameplay state."
+          ],
+          "status": "pending"
+        },
+        {
+          "id": "R-012",
+          "category": "system",
+          "statement": "Collectibles and objectives",
+          "source_text": "implied by genre/mechanics",
+          "classification": "implied",
+          "priority": "P1",
+          "confidence": "medium",
+          "acceptance_test": "Collectibles and objectives works in a playable build: Tracked pickups and objective state that persist.",
+          "implementation_tasks": [
+            "Tracked pickups and objective state that persist."
+          ],
+          "status": "pending"
+        },
+        {
+          "id": "R-013",
+          "category": "system",
+          "statement": "NPC and dialogue",
+          "source_text": "implied by genre/mechanics",
+          "classification": "implied",
+          "priority": "P1",
+          "confidence": "medium",
+          "acceptance_test": "NPC and dialogue works in a playable build: At least one NPC with a repeatable interaction and dialogue.",
+          "implementation_tasks": [
+            "At least one NPC with a repeatable interaction and dialogue."
+          ],
+          "status": "pending"
+        },
+        {
+          "id": "R-014",
+          "category": "system",
+          "statement": "Save and progression",
+          "source_text": "implied by genre/mechanics",
+          "classification": "implied",
+          "priority": "P1",
+          "confidence": "medium",
+          "acceptance_test": "Save and progression works in a playable build: Persist position, collectibles and objectives across sessions.",
+          "implementation_tasks": [
+            "Persist position, collectibles and objectives across sessions."
+          ],
+          "status": "pending"
+        },
+        {
+          "id": "R-015",
+          "category": "system",
+          "statement": "Player controller",
+          "source_text": "implied by genre/mechanics",
+          "classification": "implied",
+          "priority": "P1",
+          "confidence": "medium",
+          "acceptance_test": "Player controller works in a playable build: Engine-native character/vehicle controller with tuned movement.",
+          "implementation_tasks": [
+            "Engine-native character/vehicle controller with tuned movement."
+          ],
+          "status": "pending"
+        },
+        {
+          "id": "R-016",
+          "category": "system",
+          "statement": "Camera",
+          "source_text": "implied by genre/mechanics",
+          "classification": "implied",
+          "priority": "P1",
+          "confidence": "medium",
+          "acceptance_test": "Camera works in a playable build: Third-person or genre-appropriate camera with collision handling.",
+          "implementation_tasks": [
+            "Third-person or genre-appropriate camera with collision handling."
+          ],
+          "status": "pending"
+        },
+        {
+          "id": "R-017",
+          "category": "system",
+          "statement": "UI/HUD",
+          "source_text": "implied by genre/mechanics",
+          "classification": "implied",
+          "priority": "P1",
+          "confidence": "medium",
+          "acceptance_test": "UI/HUD works in a playable build: Core gameplay state visible to the player.",
+          "implementation_tasks": [
+            "Core gameplay state visible to the player."
+          ],
+          "status": "pending"
+        }
+      ],
+      "technical_dependencies": [
+        {
+          "id": "R-018",
+          "category": "technical",
+          "statement": "3D asset import pipeline",
+          "source_text": "implied by 3D/2.5D dimension",
+          "classification": "technical",
+          "priority": "P0",
+          "confidence": "high",
+          "acceptance_test": "A test model imports with correct scale, materials and colliders.",
+          "implementation_tasks": [],
+          "status": "pending"
+        },
+        {
+          "id": "R-019",
+          "category": "technical",
+          "statement": "Version control and reproducible project setup",
+          "source_text": "studio baseline",
+          "classification": "technical",
+          "priority": "P1",
+          "confidence": "high",
+          "acceptance_test": "A clean clone/checkout opens and builds using documented steps.",
+          "implementation_tasks": [],
+          "status": "pending"
+        }
+      ],
+      "optional_enhancements": [
+        {
+          "id": "R-020",
+          "category": "optional",
+          "statement": "Quest log",
+          "source_text": "AI recommendation, not requested",
+          "classification": "optional",
+          "priority": "P3",
+          "confidence": "low",
+          "acceptance_test": "If built, Quest log works without breaking the core loop.",
+          "implementation_tasks": [],
+          "status": "pending"
+        },
+        {
+          "id": "R-021",
+          "category": "optional",
+          "statement": "Crafting",
+          "source_text": "AI recommendation, not requested",
+          "classification": "optional",
+          "priority": "P3",
+          "confidence": "low",
+          "acceptance_test": "If built, Crafting works without breaking the core loop.",
+          "implementation_tasks": [],
+          "status": "pending"
+        },
+        {
+          "id": "R-022",
+          "category": "optional",
+          "statement": "Fast travel",
+          "source_text": "AI recommendation, not requested",
+          "classification": "optional",
+          "priority": "P3",
+          "confidence": "low",
+          "acceptance_test": "If built, Fast travel works without breaking the core loop.",
+          "implementation_tasks": [],
+          "status": "pending"
+        },
+        {
+          "id": "R-023",
+          "category": "optional",
+          "statement": "Photo mode",
+          "source_text": "AI recommendation, not requested",
+          "classification": "optional",
+          "priority": "P3",
+          "confidence": "low",
+          "acceptance_test": "If built, Photo mode works without breaking the core loop.",
+          "implementation_tasks": [],
+          "status": "pending"
+        },
+        {
+          "id": "R-024",
+          "category": "optional",
+          "statement": "Achievements",
+          "source_text": "AI recommendation, not requested",
+          "classification": "optional",
+          "priority": "P3",
+          "confidence": "low",
+          "acceptance_test": "If built, Achievements works without breaking the core loop.",
+          "implementation_tasks": [],
+          "status": "pending"
+        }
+      ]
+    },
+    "unresolved": [
+      {
+        "topic": "engine",
+        "material": true,
+        "reason": "The engine determines project structure, scripting, asset import and build pipeline.",
+        "recommended": "unity",
+        "default_used": null,
+        "installed_options": []
+      },
+      {
+        "topic": "character-source",
+        "material": false,
+        "reason": "Character creation method affects time, cost and licensing.",
+        "recommended": "Blender-authored or licensed base mesh; Meshy optional",
+        "default_used": "Blender/licensed"
+      },
+      {
+        "topic": "scope",
+        "material": false,
+        "reason": "Prevents promising a full content plan before the core loop works.",
+        "recommended": "one vertical slice",
+        "default_used": "one vertical slice"
+      }
+    ],
+    "questions": [
+      {
+        "question": "Which engine should this be built in?",
+        "why": "It changes every downstream implementation step.",
+        "options": [
+          "Unity",
+          "Unreal Engine",
+          "Godot"
+        ],
+        "recommended": "unity"
+      }
+    ],
+    "recommendations": [
+      "Choose the engine from detected installations before planning asset work.",
+      "Use a species-appropriate rig; do not assume humanoid retargeting will work."
+    ],
+    "assumptions_available": {
+      "engine": "Unity for 3D, Godot for a small 2D prototype when no engine is requested",
+      "platform": "PC (Windows) for development, with a later mobile/web port decision",
+      "scope": "one vertical slice first, not the full content plan",
+      "art": "stylised-realistic placeholder art that can be replaced without rework",
+      "character": "Blender-authored or licensed asset; Meshy optional and credit-gated",
+      "environment": "Blender blockout plus engine terrain, replaced by production art later"
+    },
+    "counts": {
+      "explicit": 9,
+      "implied": 8,
+      "technical": 2,
+      "optional": 5,
+      "unresolved": 3,
+      "all": 24
+    },
+    "confidence": "medium",
+    "notes": [
+      "Explicit requirements come from the user's words. Implied, technical and optional items are engineering recommendations, not user demands.",
+      "A matched term is evidence of intent, not proof of a complete specification."
+    ]
+  },
+  "overview": {
+    "summary": "Build a low poly 3D adventure game featuring a monkey set in a jungle environment.",
+    "genre": [
+      "adventure"
+    ],
+    "dimension": "3d",
+    "target_platform": "pc",
+    "visual_style": [
+      "low-poly"
+    ],
+    "scope": "prototype"
+  },
+  "engine": {
+    "selected": "unity",
+    "source": "user-override",
+    "requested": [],
+    "installed": [],
+    "verified": false,
+    "warning": "No engine installations were supplied, so the selected engine could not be verified."
+  },
+  "characters": [
+    {
+      "character": "monkey",
+      "species_type": "monkey",
+      "visual_style": [
+        "low-poly"
+      ],
+      "camera_perspective": "third-person",
+      "gameplay_role": "player",
+      "movement": "ground + jump",
+      "rig_requirement": "quadruped-capable / non-humanoid rig",
+      "animation_requirements": [
+        "climb",
+        "idle",
+        "jump",
+        "jump loop",
+        "jump start",
+        "land",
+        "pickup",
+        "run",
+        "walk",
+        "walk/run"
+      ],
+      "polygon_budget": "40k-120k triangles",
+      "texture_budget": "up to 4K for hero assets",
+      "retargeting_warning": "Do not retarget humanoid locomotion clips blindly onto a monkey; verify spine chain, limb proportions and rest pose.",
+      "source_options": [
+        "Blender-authored",
+        "licensed asset",
+        "Meshy (credit-gated)"
+      ]
+    }
+  ],
+  "environments": [
+    {
+      "biome": "jungle",
+      "scale": "one playable slice first; size decided after the traversal test",
+      "traversal": [
+        "walk",
+        "run"
+      ],
+      "collision_requirements": [
+        "solid ground and boundary collision",
+        "no pass-through on tree trunks, rocks and buildings",
+        "slopes walkable up to the configured limit"
+      ],
+      "interactive_objects": [
+        "collectibles"
+      ],
+      "lighting_style": "stylised, readable key light",
+      "weather": "only if explicitly requested; it is not part of the core loop",
+      "asset_density": "start sparse, measure frame time, then add set dressing",
+      "performance_budget": {
+        "fps": "60 fps at 1080p on the reference machine",
+        "budget": "Keep draw calls below ~2,000 and total scene triangles below ~2M."
+      }
+    }
+  ],
+  "animations": {
+    "required_clips": [
+      "idle",
+      "jump loop",
+      "jump start",
+      "land",
+      "pickup",
+      "walk/run"
+    ],
+    "skeleton_types": [
+      "quadruped-capable / non-humanoid rig"
+    ],
+    "retargeting_order": [
+      "source rig -> bone map -> rest-pose check -> scale check -> test clip -> engine import -> playback test"
+    ],
+    "incompatibilities": [
+      "Humanoid locomotion clips are not automatically compatible with quadruped characters; check bone names, chain lengths and rest pose before retargeting."
+    ],
+    "acceptance": "Every clip plays on the target character in the engine, with the correct root motion and loop behaviour."
+  },
+  "gameplay_systems": [
+    {
+      "name": "Genre: adventure",
+      "detail": "The core loop matches the requested genre.",
+      "requirement_id": "R-005",
+      "priority": "P0",
+      "role": "Game Director"
+    },
+    {
+      "name": "Gameplay: jumping",
+      "detail": "The requested mechanic is implemented and playable.",
+      "requirement_id": "R-007",
+      "priority": "P0",
+      "role": "Gameplay Programmer"
+    },
+    {
+      "name": "Gameplay: collectibles",
+      "detail": "The requested mechanic is implemented and playable.",
+      "requirement_id": "R-008",
+      "priority": "P0",
+      "role": "Gameplay Programmer"
+    },
+    {
+      "name": "Gameplay: score",
+      "detail": "The requested mechanic is implemented and playable.",
+      "requirement_id": "R-009",
+      "priority": "P0",
+      "role": "Gameplay Programmer"
+    },
+    {
+      "name": "Player traversal",
+      "detail": "Player traversal works in a playable build: Walk, run, jump and interact with a grounded character controller.",
+      "requirement_id": "R-010",
+      "priority": "P1",
+      "role": "Gameplay Programmer"
+    },
+    {
+      "name": "Interaction system",
+      "detail": "Interaction system works in a playable build: Context prompts and interactable objects that change gameplay state.",
+      "requirement_id": "R-011",
+      "priority": "P1",
+      "role": "Gameplay Programmer"
+    },
+    {
+      "name": "Collectibles and objectives",
+      "detail": "Collectibles and objectives works in a playable build: Tracked pickups and objective state that persist.",
+      "requirement_id": "R-012",
+      "priority": "P1",
+      "role": "Gameplay Programmer"
+    },
+    {
+      "name": "NPC and dialogue",
+      "detail": "NPC and dialogue works in a playable build: At least one NPC with a repeatable interaction and dialogue.",
+      "requirement_id": "R-013",
+      "priority": "P1",
+      "role": "Gameplay Programmer"
+    },
+    {
+      "name": "Save and progression",
+      "detail": "Save and progression works in a playable build: Persist position, collectibles and objectives across sessions.",
+      "requirement_id": "R-014",
+      "priority": "P1",
+      "role": "Gameplay Programmer"
+    },
+    {
+      "name": "Player controller",
+      "detail": "Player controller works in a playable build: Engine-native character/vehicle controller with tuned movement.",
+      "requirement_id": "R-015",
+      "priority": "P1",
+      "role": "Gameplay Programmer"
+    },
+    {
+      "name": "Camera",
+      "detail": "Camera works in a playable build: Third-person or genre-appropriate camera with collision handling.",
+      "requirement_id": "R-016",
+      "priority": "P1",
+      "role": "Gameplay Programmer"
+    },
+    {
+      "name": "UI/HUD",
+      "detail": "UI/HUD works in a playable build: Core gameplay state visible to the player.",
+      "requirement_id": "R-017",
+      "priority": "P1",
+      "role": "Gameplay Programmer"
+    },
+    {
+      "name": "3D asset import pipeline",
+      "detail": "A test model imports with correct scale, materials and colliders.",
+      "requirement_id": "R-018",
+      "priority": "P0",
+      "role": "Technical Director"
+    },
+    {
+      "name": "Version control and reproducible project setup",
+      "detail": "A clean clone/checkout opens and builds using documented steps.",
+      "requirement_id": "R-019",
+      "priority": "P1",
+      "role": "Technical Director"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "R-001",
+      "category": "dimension",
+      "statement": "Dimension: 3d",
+      "source_text": "3D",
+      "classification": "explicit",
+      "priority": "P0",
+      "confidence": "high",
+      "acceptance_test": "The game renders and plays in the requested perspective.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-002",
+      "category": "style",
+      "statement": "Art direction: low poly",
+      "source_text": "low-poly",
+      "classification": "explicit",
+      "priority": "P1",
+      "confidence": "high",
+      "acceptance_test": "Delivered assets follow the requested style.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-003",
+      "category": "environment",
+      "statement": "Environment: jungle",
+      "source_text": "jungle",
+      "classification": "explicit",
+      "priority": "P1",
+      "confidence": "high",
+      "acceptance_test": "The requested environment exists and is traversable.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-004",
+      "category": "character",
+      "statement": "Character: monkey",
+      "source_text": "monkey",
+      "classification": "explicit",
+      "priority": "P1",
+      "confidence": "high",
+      "acceptance_test": "The requested character exists and is controllable.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-005",
+      "category": "genre",
+      "statement": "Genre: adventure",
+      "source_text": "adventure",
+      "classification": "explicit",
+      "priority": "P0",
+      "confidence": "high",
+      "acceptance_test": "The core loop matches the requested genre.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-006",
+      "category": "platform",
+      "statement": "Platform: pc",
+      "source_text": "Windows",
+      "classification": "explicit",
+      "priority": "P0",
+      "confidence": "high",
+      "acceptance_test": "The game runs on the requested target platform.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-007",
+      "category": "mechanic",
+      "statement": "Gameplay: jumping",
+      "source_text": "jump",
+      "classification": "explicit",
+      "priority": "P0",
+      "confidence": "high",
+      "acceptance_test": "The requested mechanic is implemented and playable.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-008",
+      "category": "mechanic",
+      "statement": "Gameplay: collectibles",
+      "source_text": "bananas",
+      "classification": "explicit",
+      "priority": "P0",
+      "confidence": "high",
+      "acceptance_test": "The requested mechanic is implemented and playable.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-009",
+      "category": "mechanic",
+      "statement": "Gameplay: score",
+      "source_text": "score",
+      "classification": "explicit",
+      "priority": "P0",
+      "confidence": "high",
+      "acceptance_test": "The requested mechanic is implemented and playable.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-010",
+      "category": "system",
+      "statement": "Player traversal",
+      "source_text": "implied by genre/mechanics",
+      "classification": "implied",
+      "priority": "P1",
+      "confidence": "medium",
+      "acceptance_test": "Player traversal works in a playable build: Walk, run, jump and interact with a grounded character controller.",
+      "implementation_tasks": [
+        "Walk, run, jump and interact with a grounded character controller."
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "R-011",
+      "category": "system",
+      "statement": "Interaction system",
+      "source_text": "implied by genre/mechanics",
+      "classification": "implied",
+      "priority": "P1",
+      "confidence": "medium",
+      "acceptance_test": "Interaction system works in a playable build: Context prompts and interactable objects that change gameplay state.",
+      "implementation_tasks": [
+        "Context prompts and interactable objects that change gameplay state."
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "R-012",
+      "category": "system",
+      "statement": "Collectibles and objectives",
+      "source_text": "implied by genre/mechanics",
+      "classification": "implied",
+      "priority": "P1",
+      "confidence": "medium",
+      "acceptance_test": "Collectibles and objectives works in a playable build: Tracked pickups and objective state that persist.",
+      "implementation_tasks": [
+        "Tracked pickups and objective state that persist."
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "R-013",
+      "category": "system",
+      "statement": "NPC and dialogue",
+      "source_text": "implied by genre/mechanics",
+      "classification": "implied",
+      "priority": "P1",
+      "confidence": "medium",
+      "acceptance_test": "NPC and dialogue works in a playable build: At least one NPC with a repeatable interaction and dialogue.",
+      "implementation_tasks": [
+        "At least one NPC with a repeatable interaction and dialogue."
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "R-014",
+      "category": "system",
+      "statement": "Save and progression",
+      "source_text": "implied by genre/mechanics",
+      "classification": "implied",
+      "priority": "P1",
+      "confidence": "medium",
+      "acceptance_test": "Save and progression works in a playable build: Persist position, collectibles and objectives across sessions.",
+      "implementation_tasks": [
+        "Persist position, collectibles and objectives across sessions."
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "R-015",
+      "category": "system",
+      "statement": "Player controller",
+      "source_text": "implied by genre/mechanics",
+      "classification": "implied",
+      "priority": "P1",
+      "confidence": "medium",
+      "acceptance_test": "Player controller works in a playable build: Engine-native character/vehicle controller with tuned movement.",
+      "implementation_tasks": [
+        "Engine-native character/vehicle controller with tuned movement."
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "R-016",
+      "category": "system",
+      "statement": "Camera",
+      "source_text": "implied by genre/mechanics",
+      "classification": "implied",
+      "priority": "P1",
+      "confidence": "medium",
+      "acceptance_test": "Camera works in a playable build: Third-person or genre-appropriate camera with collision handling.",
+      "implementation_tasks": [
+        "Third-person or genre-appropriate camera with collision handling."
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "R-017",
+      "category": "system",
+      "statement": "UI/HUD",
+      "source_text": "implied by genre/mechanics",
+      "classification": "implied",
+      "priority": "P1",
+      "confidence": "medium",
+      "acceptance_test": "UI/HUD works in a playable build: Core gameplay state visible to the player.",
+      "implementation_tasks": [
+        "Core gameplay state visible to the player."
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "R-018",
+      "category": "technical",
+      "statement": "3D asset import pipeline",
+      "source_text": "implied by 3D/2.5D dimension",
+      "classification": "technical",
+      "priority": "P0",
+      "confidence": "high",
+      "acceptance_test": "A test model imports with correct scale, materials and colliders.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-019",
+      "category": "technical",
+      "statement": "Version control and reproducible project setup",
+      "source_text": "studio baseline",
+      "classification": "technical",
+      "priority": "P1",
+      "confidence": "high",
+      "acceptance_test": "A clean clone/checkout opens and builds using documented steps.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-020",
+      "category": "optional",
+      "statement": "Quest log",
+      "source_text": "AI recommendation, not requested",
+      "classification": "optional",
+      "priority": "P3",
+      "confidence": "low",
+      "acceptance_test": "If built, Quest log works without breaking the core loop.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-021",
+      "category": "optional",
+      "statement": "Crafting",
+      "source_text": "AI recommendation, not requested",
+      "classification": "optional",
+      "priority": "P3",
+      "confidence": "low",
+      "acceptance_test": "If built, Crafting works without breaking the core loop.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-022",
+      "category": "optional",
+      "statement": "Fast travel",
+      "source_text": "AI recommendation, not requested",
+      "classification": "optional",
+      "priority": "P3",
+      "confidence": "low",
+      "acceptance_test": "If built, Fast travel works without breaking the core loop.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-023",
+      "category": "optional",
+      "statement": "Photo mode",
+      "source_text": "AI recommendation, not requested",
+      "classification": "optional",
+      "priority": "P3",
+      "confidence": "low",
+      "acceptance_test": "If built, Photo mode works without breaking the core loop.",
+      "implementation_tasks": [],
+      "status": "pending"
+    },
+    {
+      "id": "R-024",
+      "category": "optional",
+      "statement": "Achievements",
+      "source_text": "AI recommendation, not requested",
+      "classification": "optional",
+      "priority": "P3",
+      "confidence": "low",
+      "acceptance_test": "If built, Achievements works without breaking the core loop.",
+      "implementation_tasks": [],
+      "status": "pending"
+    }
+  ],
+  "dependency_graph": {
+    "nodes": [
+      {
+        "id": "T-01",
+        "key": "setup",
+        "label": "Create/verify project and version control",
+        "depends_on": [],
+        "role": "Technical Director",
+        "milestone": "A",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-02",
+        "key": "engine",
+        "label": "Configure unity project settings",
+        "depends_on": [
+          "T-01"
+        ],
+        "role": "Technical Director",
+        "milestone": "A",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-03",
+        "key": "input",
+        "label": "Input actions and remapping",
+        "depends_on": [
+          "T-02"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "A",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-04",
+        "key": "controller",
+        "label": "Player/vehicle controller",
+        "depends_on": [
+          "T-03"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "B",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-05",
+        "key": "camera",
+        "label": "Camera system",
+        "depends_on": [
+          "T-04"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "B",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-06",
+        "key": "physics",
+        "label": "Physics, collision layers and boundaries",
+        "depends_on": [
+          "T-04"
+        ],
+        "role": "Technical Director",
+        "milestone": "B",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-07",
+        "key": "char_source",
+        "label": "Character model or licensed asset",
+        "depends_on": [
+          "T-02"
+        ],
+        "role": "Character Technical Artist",
+        "milestone": "C",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-08",
+        "key": "char_rig",
+        "label": "Skeleton/rig validation and scale",
+        "depends_on": [
+          "T-07"
+        ],
+        "role": "Character Technical Artist",
+        "milestone": "C",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-09",
+        "key": "animations",
+        "label": "Animation clips and retargeting",
+        "depends_on": [
+          "T-08",
+          "T-05"
+        ],
+        "role": "Animation Engineer",
+        "milestone": "C",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-10",
+        "key": "animator",
+        "label": "Animation state machine connected to gameplay",
+        "depends_on": [
+          "T-09",
+          "T-04"
+        ],
+        "role": "Animation Engineer",
+        "milestone": "C",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-11",
+        "key": "env_blockout",
+        "label": "Environment blockout and scale test",
+        "depends_on": [
+          "T-02"
+        ],
+        "role": "Level Designer",
+        "milestone": "C",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-12",
+        "key": "env_art",
+        "label": "Materials, props and lighting",
+        "depends_on": [
+          "T-11"
+        ],
+        "role": "Environment Artist",
+        "milestone": "C",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-13",
+        "key": "env_collision",
+        "label": "Environment collision and navigation",
+        "depends_on": [
+          "T-12",
+          "T-06"
+        ],
+        "role": "Level Designer",
+        "milestone": "C",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-14",
+        "key": "system-1",
+        "label": "Genre: adventure",
+        "depends_on": [
+          "T-02"
+        ],
+        "role": "Game Director",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-005"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-15",
+        "key": "system-2",
+        "label": "Gameplay: jumping",
+        "depends_on": [
+          "T-10"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-007"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-16",
+        "key": "system-3",
+        "label": "Gameplay: collectibles",
+        "depends_on": [
+          "T-10"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-008"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-17",
+        "key": "system-4",
+        "label": "Gameplay: score",
+        "depends_on": [
+          "T-10"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-009"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-18",
+        "key": "system-5",
+        "label": "Player traversal",
+        "depends_on": [
+          "T-10"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-010"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-19",
+        "key": "system-6",
+        "label": "Interaction system",
+        "depends_on": [
+          "T-10"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-011"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-20",
+        "key": "system-7",
+        "label": "Collectibles and objectives",
+        "depends_on": [
+          "T-10"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-012"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-21",
+        "key": "system-8",
+        "label": "NPC and dialogue",
+        "depends_on": [
+          "T-10"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-013"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-22",
+        "key": "system-9",
+        "label": "Save and progression",
+        "depends_on": [
+          "T-10"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-014"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-23",
+        "key": "system-10",
+        "label": "Player controller",
+        "depends_on": [
+          "T-10"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-015"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-24",
+        "key": "system-11",
+        "label": "Camera",
+        "depends_on": [
+          "T-10"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-016"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-25",
+        "key": "system-12",
+        "label": "UI/HUD",
+        "depends_on": [
+          "T-10"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-017"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-26",
+        "key": "system-13",
+        "label": "3D asset import pipeline",
+        "depends_on": [
+          "T-02"
+        ],
+        "role": "Technical Director",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-018"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-27",
+        "key": "system-14",
+        "label": "Version control and reproducible project setup",
+        "depends_on": [
+          "T-02"
+        ],
+        "role": "Technical Director",
+        "milestone": "D",
+        "requirement_ids": [
+          "R-019"
+        ],
+        "status": "pending"
+      },
+      {
+        "id": "T-28",
+        "key": "ui",
+        "label": "HUD, menus and settings",
+        "depends_on": [
+          "T-14"
+        ],
+        "role": "UI/UX Designer",
+        "milestone": "D",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-29",
+        "key": "audio",
+        "label": "Music and gameplay audio",
+        "depends_on": [
+          "T-02"
+        ],
+        "role": "Audio Designer",
+        "milestone": "D",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-30",
+        "key": "save",
+        "label": "Save/load and persistence",
+        "depends_on": [
+          "T-02"
+        ],
+        "role": "Gameplay Programmer",
+        "milestone": "D",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-31",
+        "key": "tests",
+        "label": "Automated tests and playtest checklist",
+        "depends_on": [
+          "T-04",
+          "T-28"
+        ],
+        "role": "QA Engineer",
+        "milestone": "F",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-32",
+        "key": "optimise",
+        "label": "Performance profiling and optimisation",
+        "depends_on": [
+          "T-31"
+        ],
+        "role": "Graphics Engineer",
+        "milestone": "F",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-33",
+        "key": "build",
+        "label": "Target-platform build",
+        "depends_on": [
+          "T-32"
+        ],
+        "role": "Build Engineer",
+        "milestone": "F",
+        "requirement_ids": [],
+        "status": "pending"
+      },
+      {
+        "id": "T-34",
+        "key": "verify",
+        "label": "Runtime verification and acceptance evidence",
+        "depends_on": [
+          "T-33"
+        ],
+        "role": "QA Engineer",
+        "milestone": "G",
+        "requirement_ids": [],
+        "status": "pending"
+      }
+    ],
+    "edges": [
+      {
+        "from": "T-01",
+        "to": "T-02"
+      },
+      {
+        "from": "T-02",
+        "to": "T-03"
+      },
+      {
+        "from": "T-03",
+        "to": "T-04"
+      },
+      {
+        "from": "T-04",
+        "to": "T-05"
+      },
+      {
+        "from": "T-04",
+        "to": "T-06"
+      },
+      {
+        "from": "T-02",
+        "to": "T-07"
+      },
+      {
+        "from": "T-07",
+        "to": "T-08"
+      },
+      {
+        "from": "T-08",
+        "to": "T-09"
+      },
+      {
+        "from": "T-05",
+        "to": "T-09"
+      },
+      {
+        "from": "T-09",
+        "to": "T-10"
+      },
+      {
+        "from": "T-04",
+        "to": "T-10"
+      },
+      {
+        "from": "T-02",
+        "to": "T-11"
+      },
+      {
+        "from": "T-11",
+        "to": "T-12"
+      },
+      {
+        "from": "T-12",
+        "to": "T-13"
+      },
+      {
+        "from": "T-06",
+        "to": "T-13"
+      },
+      {
+        "from": "T-02",
+        "to": "T-14"
+      },
+      {
+        "from": "T-10",
+        "to": "T-15"
+      },
+      {
+        "from": "T-10",
+        "to": "T-16"
+      },
+      {
+        "from": "T-10",
+        "to": "T-17"
+      },
+      {
+        "from": "T-10",
+        "to": "T-18"
+      },
+      {
+        "from": "T-10",
+        "to": "T-19"
+      },
+      {
+        "from": "T-10",
+        "to": "T-20"
+      },
+      {
+        "from": "T-10",
+        "to": "T-21"
+      },
+      {
+        "from": "T-10",
+        "to": "T-22"
+      },
+      {
+        "from": "T-10",
+        "to": "T-23"
+      },
+      {
+        "from": "T-10",
+        "to": "T-24"
+      },
+      {
+        "from": "T-10",
+        "to": "T-25"
+      },
+      {
+        "from": "T-02",
+        "to": "T-26"
+      },
+      {
+        "from": "T-02",
+        "to": "T-27"
+      },
+      {
+        "from": "T-14",
+        "to": "T-28"
+      },
+      {
+        "from": "T-02",
+        "to": "T-29"
+      },
+      {
+        "from": "T-02",
+        "to": "T-30"
+      },
+      {
+        "from": "T-04",
+        "to": "T-31"
+      },
+      {
+        "from": "T-28",
+        "to": "T-31"
+      },
+      {
+        "from": "T-31",
+        "to": "T-32"
+      },
+      {
+        "from": "T-32",
+        "to": "T-33"
+      },
+      {
+        "from": "T-33",
+        "to": "T-34"
+      }
+    ],
+    "topological_order": [
+      "T-01",
+      "T-02",
+      "T-03",
+      "T-04",
+      "T-05",
+      "T-06",
+      "T-07",
+      "T-08",
+      "T-09",
+      "T-10",
+      "T-11",
+      "T-12",
+      "T-13",
+      "T-14",
+      "T-15",
+      "T-16",
+      "T-17",
+      "T-18",
+      "T-19",
+      "T-20",
+      "T-21",
+      "T-22",
+      "T-23",
+      "T-24",
+      "T-25",
+      "T-26",
+      "T-27",
+      "T-28",
+      "T-29",
+      "T-30",
+      "T-31",
+      "T-32",
+      "T-33",
+      "T-34"
+    ],
+    "cycles": []
+  },
+  "milestones": [
+    {
+      "id": "A",
+      "name": "Foundation",
+      "gate": "Project opens, compiles and runs an empty/test scene.",
+      "task_ids": [
+        "T-01",
+        "T-02",
+        "T-03"
+      ],
+      "status": "not-started"
+    },
+    {
+      "id": "B",
+      "name": "Vertical slice",
+      "gate": "Player, camera, one environment and the core loop are playable.",
+      "task_ids": [
+        "T-04",
+        "T-05",
+        "T-06"
+      ],
+      "status": "not-started"
+    },
+    {
+      "id": "C",
+      "name": "Content",
+      "gate": "Required characters, environments, animations and levels exist.",
+      "task_ids": [
+        "T-07",
+        "T-08",
+        "T-09",
+        "T-10",
+        "T-11",
+        "T-12",
+        "T-13"
+      ],
+      "status": "not-started"
+    },
+    {
+      "id": "D",
+      "name": "Features",
+      "gate": "Requested mechanics, UI, save and settings are wired.",
+      "task_ids": [
+        "T-14",
+        "T-15",
+        "T-16",
+        "T-17",
+        "T-18",
+        "T-19",
+        "T-20",
+        "T-21",
+        "T-22",
+        "T-23",
+        "T-24",
+        "T-25",
+        "T-26",
+        "T-27",
+        "T-28",
+        "T-29",
+        "T-30"
+      ],
+      "status": "not-started"
+    },
+    {
+      "id": "E",
+      "name": "Polish",
+      "gate": "Visual consistency, audio, balance and accessibility pass.",
+      "task_ids": [],
+      "status": "not-started"
+    },
+    {
+      "id": "F",
+      "name": "Optimise/QA",
+      "gate": "Measured performance, regression tests and platform builds.",
+      "task_ids": [
+        "T-31",
+        "T-32",
+        "T-33"
+      ],
+      "status": "not-started"
+    },
+    {
+      "id": "G",
+      "name": "Delivery",
+      "gate": "Source, build, licences and known issues documented.",
+      "task_ids": [
+        "T-34"
+      ],
+      "status": "not-started"
+    }
+  ],
+  "acceptance_tests": [
+    {
+      "id": "AT-001",
+      "requirement_id": "R-001",
+      "statement": "The game renders and plays in the requested perspective.",
+      "source_requirement": "Dimension: 3d",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-002",
+      "requirement_id": "R-002",
+      "statement": "Delivered assets follow the requested style.",
+      "source_requirement": "Art direction: low poly",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-003",
+      "requirement_id": "R-003",
+      "statement": "The requested environment exists and is traversable.",
+      "source_requirement": "Environment: jungle",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-004",
+      "requirement_id": "R-004",
+      "statement": "The requested character exists and is controllable.",
+      "source_requirement": "Character: monkey",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-005",
+      "requirement_id": "R-005",
+      "statement": "The core loop matches the requested genre.",
+      "source_requirement": "Genre: adventure",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-006",
+      "requirement_id": "R-006",
+      "statement": "The game runs on the requested target platform.",
+      "source_requirement": "Platform: pc",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-007",
+      "requirement_id": "R-007",
+      "statement": "The requested mechanic is implemented and playable.",
+      "source_requirement": "Gameplay: jumping",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-008",
+      "requirement_id": "R-008",
+      "statement": "The requested mechanic is implemented and playable.",
+      "source_requirement": "Gameplay: collectibles",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-009",
+      "requirement_id": "R-009",
+      "statement": "The requested mechanic is implemented and playable.",
+      "source_requirement": "Gameplay: score",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-010",
+      "requirement_id": "R-010",
+      "statement": "Player traversal works in a playable build: Walk, run, jump and interact with a grounded character controller.",
+      "source_requirement": "Player traversal",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-011",
+      "requirement_id": "R-011",
+      "statement": "Interaction system works in a playable build: Context prompts and interactable objects that change gameplay state.",
+      "source_requirement": "Interaction system",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-012",
+      "requirement_id": "R-012",
+      "statement": "Collectibles and objectives works in a playable build: Tracked pickups and objective state that persist.",
+      "source_requirement": "Collectibles and objectives",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-013",
+      "requirement_id": "R-013",
+      "statement": "NPC and dialogue works in a playable build: At least one NPC with a repeatable interaction and dialogue.",
+      "source_requirement": "NPC and dialogue",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-014",
+      "requirement_id": "R-014",
+      "statement": "Save and progression works in a playable build: Persist position, collectibles and objectives across sessions.",
+      "source_requirement": "Save and progression",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-015",
+      "requirement_id": "R-015",
+      "statement": "Player controller works in a playable build: Engine-native character/vehicle controller with tuned movement.",
+      "source_requirement": "Player controller",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-016",
+      "requirement_id": "R-016",
+      "statement": "Camera works in a playable build: Third-person or genre-appropriate camera with collision handling.",
+      "source_requirement": "Camera",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-017",
+      "requirement_id": "R-017",
+      "statement": "UI/HUD works in a playable build: Core gameplay state visible to the player.",
+      "source_requirement": "UI/HUD",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-018",
+      "requirement_id": "R-018",
+      "statement": "A test model imports with correct scale, materials and colliders.",
+      "source_requirement": "3D asset import pipeline",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-019",
+      "requirement_id": "R-019",
+      "statement": "A clean clone/checkout opens and builds using documented steps.",
+      "source_requirement": "Version control and reproducible project setup",
+      "method": "engine playtest + evidence capture",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-020",
+      "requirement_id": null,
+      "statement": "Do not retarget humanoid locomotion clips blindly onto a monkey; verify spine chain, limb proportions and rest pose.",
+      "source_requirement": "animation compatibility",
+      "method": "inspect bone map, rest pose and playback",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-021",
+      "requirement_id": null,
+      "statement": "Player cannot pass through solid environment collision (jungle).",
+      "source_requirement": "environment collision",
+      "method": "move directly into a tree/rock/building and confirm blocking",
+      "status": "not-run",
+      "evidence": []
+    },
+    {
+      "id": "AT-022",
+      "requirement_id": null,
+      "statement": "The built game launches, accepts input and reaches the core loop.",
+      "source_requirement": "playable build",
+      "method": "launch the produced build and play for five minutes",
+      "status": "not-run",
+      "evidence": []
+    }
+  ],
+  "performance_targets": {
+    "fps": "60 fps at 1080p on the reference machine",
+    "budget": "Keep draw calls below ~2,000 and total scene triangles below ~2M."
+  },
+  "assumptions": {
+    "engine": "Unity for 3D, Godot for a small 2D prototype when no engine is requested",
+    "platform": "PC (Windows) for development, with a later mobile/web port decision",
+    "scope": "one vertical slice first, not the full content plan",
+    "art": "stylised-realistic placeholder art that can be replaced without rework",
+    "character": "Blender-authored or licensed asset; Meshy optional and credit-gated",
+    "environment": "Blender blockout plus engine terrain, replaced by production art later"
+  },
+  "unresolved": [
+    {
+      "topic": "engine",
+      "material": true,
+      "reason": "The engine determines project structure, scripting, asset import and build pipeline.",
+      "recommended": "unity",
+      "default_used": null,
+      "installed_options": []
+    },
+    {
+      "topic": "character-source",
+      "material": false,
+      "reason": "Character creation method affects time, cost and licensing.",
+      "recommended": "Blender-authored or licensed base mesh; Meshy optional",
+      "default_used": "Blender/licensed"
+    },
+    {
+      "topic": "scope",
+      "material": false,
+      "reason": "Prevents promising a full content plan before the core loop works.",
+      "recommended": "one vertical slice",
+      "default_used": "one vertical slice"
+    }
+  ],
+  "questions": [
+    {
+      "question": "Which engine should this be built in?",
+      "why": "It changes every downstream implementation step.",
+      "options": [
+        "Unity",
+        "Unreal Engine",
+        "Godot"
+      ],
+      "recommended": "unity"
+    }
+  ],
+  "conflicts": [],
+  "limitations": [
+    "No engine installations were supplied, so the selected engine could not be verified.",
+    "This specification is a plan, not a playable game. Each gate needs its own implementation and evidence.",
+    "Content scope is one vertical slice until the core loop is verified."
+  ],
+  "deliverables": [
+    "Project source under version control",
+    "Playable build for the chosen platform",
+    "Asset provenance and licence record",
+    "Automated tests plus a playtest checklist",
+    "Build/run instructions and known issues"
+  ],
+  "next_actions": [
+    "No engine installations were supplied, so the selected engine could not be verified.",
+    "Inspect the existing project (inspect_game_project) before creating or overwriting files.",
+    "Initialise the project manifest to persist this plan across sessions."
+  ]
+}

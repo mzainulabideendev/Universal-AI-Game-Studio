@@ -1,0 +1,68 @@
+{
+  "ok": true,
+  "traceability": {
+    "schema_version": "1.0",
+    "original_request_preserved": false,
+    "requirements": [],
+    "counts": {
+      "total": 0,
+      "explicit": 0,
+      "implied": 0,
+      "technical": 0,
+      "optional": 0,
+      "unresolved": 0,
+      "conflict": 0,
+      "excluded": 0
+    },
+    "specification": {
+      "evaluated": true,
+      "mapped": 0,
+      "unmapped_requirements": [],
+      "spec_only_requirements": [
+        "R-001",
+        "R-002",
+        "R-003",
+        "R-004",
+        "R-005",
+        "R-006",
+        "R-007",
+        "R-008",
+        "R-009",
+        "R-010",
+        "R-011",
+        "R-012",
+        "R-013",
+        "R-014",
+        "R-015",
+        "R-016",
+        "R-017",
+        "R-018",
+        "R-019",
+        "R-020",
+        "R-021",
+        "R-022",
+        "R-023",
+        "R-024"
+      ]
+    },
+    "manifest": {
+      "evaluated": false,
+      "matched": 0,
+      "statuses": {
+        "pending": 0,
+        "implemented": 0,
+        "tested": 0,
+        "verified": 0,
+        "blocked": 0,
+        "failed": 0
+      }
+    },
+    "rules": [
+      "source_text is copied from the user's wording and never rewritten",
+      "optional recommendations are never treated as approved requirements",
+      "status is only non-null when a manifest actually records it",
+      "a plan does not prove implementation"
+    ]
+  },
+  "note": "Status is copied from the manifest only when it exists; planning never sets it."
+}

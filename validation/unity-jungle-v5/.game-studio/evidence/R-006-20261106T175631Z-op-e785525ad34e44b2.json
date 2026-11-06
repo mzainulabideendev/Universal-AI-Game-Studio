@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "requirement_id": "R-006",
+  "statement": "Platform: pc",
+  "source_text": "Windows",
+  "acceptance_test": "The game runs on the requested target platform.",
+  "command": [
+    "cmd",
+    "/c",
+    "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe D:\\MCP\\MCP\\scripts\\v5-verify-slice.py --check pc_platform < NUL"
+  ],
+  "cwd": "D:\\MCP\\MCP\\validation\\unity-jungle-v5",
+  "run_at": "2026-11-06T17:56:31Z",
+  "exit_code": 0,
+  "cancelled": false,
+  "timed_out": false,
+  "duration_ms": 238,
+  "ok": true,
+  "operation_id": "op-e785525ad34e44b2",
+  "stdout": "[PASS] pc_platform: 3/3 component checks passed\nSummary: PASS=1, FAIL=0, BLOCKED=0, NOT VERIFIED=0\n",
+  "stderr": "",
+  "stdout_sha256": "0e90b476e2ba21f4d452faac2d3e6b9c5934fd3fa94d164ec7def9714eabdca6",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "governance_decision": {
+    "ok": true,
+    "permission": "execute_process",
+    "effect": "ask",
+    "mode": "guided",
+    "mandatory_approval": false,
+    "confirmed": true,
+    "scope": "project"
+  },
+  "previous_evidence": {
+    "tests": 0,
+    "files": 0,
+    "missing": []
+  },
+  "comparison": {
+    "previous_run": null,
+    "changed": null,
+    "note": "first recorded verification run for this requirement"
+  }
+}

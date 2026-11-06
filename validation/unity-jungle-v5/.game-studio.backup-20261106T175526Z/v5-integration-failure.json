@@ -1,0 +1,1160 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-11-06T17:55:06Z",
+  "request": "Create a 3D low-poly jungle monkey adventure prototype for Windows PC. The monkey can run, jump and collect bananas. Include a follow camera, a score HUD and a restart. No climbing, no swinging, no swimming, no weapons and no Android support.",
+  "exclusions": [
+    "climbing",
+    "swinging",
+    "swimming",
+    "weapons",
+    "Android support"
+  ],
+  "steps": [
+    {
+      "step": "analyze_request",
+      "ok": true,
+      "counts": {
+        "explicit": 9,
+        "implied": 8,
+        "technical": 2,
+        "optional": 5,
+        "unresolved": 3,
+        "all": 24
+      },
+      "exclusions": [
+        {
+          "category": "mechanic",
+          "value": "climbing",
+          "matched_text": "climbing",
+          "reason": "negated in the original request"
+        },
+        {
+          "category": "mechanic",
+          "value": "swimming",
+          "matched_text": "swimming",
+          "reason": "negated in the original request"
+        },
+        {
+          "category": "mechanic",
+          "value": "weapons",
+          "matched_text": "weapons",
+          "reason": "negated in the original request"
+        },
+        {
+          "category": "platform",
+          "value": "mobile",
+          "matched_text": "Android",
+          "reason": "negated in the original request"
+        }
+      ]
+    },
+    {
+      "step": "create_specification",
+      "ok": true,
+      "spec_id": "4af7ee0b97fd",
+      "requirements": 24,
+      "status": "approved"
+    },
+    {
+      "step": "validate_specification",
+      "ok": true,
+      "verdict": "valid",
+      "issues": []
+    },
+    {
+      "step": "trace_requirements",
+      "ok": true,
+      "mapped": 0,
+      "unmapped": null
+    },
+    {
+      "step": "dependency_graph",
+      "ok": true,
+      "nodes": 34,
+      "edges": 37
+    },
+    {
+      "step": "init_project_manifest",
+      "ok": true,
+      "requirements": 24,
+      "revision": 1
+    },
+    {
+      "step": "record_decision",
+      "topic": "Engine",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Target platform",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Dimension",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Art direction",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Scope",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Explicit exclusions",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Prototype scope exclusions",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Execution policy",
+      "ok": true
+    },
+    {
+      "step": "record_decision",
+      "topic": "Verification policy",
+      "ok": true
+    },
+    {
+      "step": "build_execution_plan",
+      "ok": true,
+      "executable": false,
+      "steps": 20,
+      "paid_requires_approval": 3
+    }
+  ],
+  "mcp": {
+    "server": {
+      "name": "universal-game-studio",
+      "version": "1.0.0"
+    },
+    "protocol_version": "2024-11-05",
+    "tool_count": 84,
+    "unique_tool_names": true,
+    "schemas_valid": true
+  },
+  "spec_id": "4af7ee0b97fd",
+  "manifest_path": "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\.game-studio\\manifest.json",
+  "verification": {
+    "runs": [
+      {
+        "requirement_id": "R-001",
+        "check": "dimension_3d",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-001-20261106T175507Z-op-d99e035351a245a1.json"
+      },
+      {
+        "requirement_id": "R-002",
+        "check": "low_poly_style",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-002-20261106T175507Z-op-f1968ee17c1a4eac.json"
+      },
+      {
+        "requirement_id": "R-003",
+        "check": "jungle_environment",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-003-20261106T175507Z-op-dec8be49296440fc.json"
+      },
+      {
+        "requirement_id": "R-004",
+        "check": "monkey_character",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-004-20261106T175508Z-op-eb68e33853ed403d.json"
+      },
+      {
+        "requirement_id": "R-006",
+        "check": "pc_platform",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-006-20261106T175508Z-op-ca1a867051af4551.json"
+      },
+      {
+        "requirement_id": "R-007",
+        "check": "jumping",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-007-20261106T175508Z-op-4b69a7f836194de1.json"
+      },
+      {
+        "requirement_id": "R-008",
+        "check": "collectibles",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-008-20261106T175508Z-op-5145a0e149564b9d.json"
+      },
+      {
+        "requirement_id": "R-009",
+        "check": "score",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-009-20261106T175509Z-op-2690744f3eae4d66.json"
+      },
+      {
+        "requirement_id": "R-010",
+        "check": "player_traversal",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-010-20261106T175509Z-op-377acc5e0a254481.json"
+      },
+      {
+        "requirement_id": "R-011",
+        "check": "interaction",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-011-20261106T175509Z-op-665395381df04228.json"
+      },
+      {
+        "requirement_id": "R-012",
+        "check": "objectives",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-012-20261106T175509Z-op-2ed884c11f7f4728.json"
+      },
+      {
+        "requirement_id": "R-015",
+        "check": "player_controller",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-015-20261106T175510Z-op-5b096157fb594628.json"
+      },
+      {
+        "requirement_id": "R-016",
+        "check": "camera_system",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-016-20261106T175510Z-op-3d422ffa047b4e36.json"
+      },
+      {
+        "requirement_id": "R-017",
+        "check": "ui_hud",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-017-20261106T175510Z-op-29927c52a93149f3.json"
+      },
+      {
+        "requirement_id": "R-018",
+        "check": "asset_import",
+        "ok": true,
+        "exit_code": 0,
+        "evidence": ".game-studio/evidence/R-018-20261106T175511Z-op-186961fe68e64adf.json"
+      }
+    ],
+    "statuses": [
+      {
+        "id": "R-001",
+        "statement": "Dimension: 3d",
+        "status": "tested",
+        "evidence_count": 6,
+        "missing": []
+      },
+      {
+        "id": "R-002",
+        "statement": "Art direction: low poly",
+        "status": "implemented",
+        "evidence_count": 6,
+        "missing": []
+      },
+      {
+        "id": "R-003",
+        "statement": "Environment: jungle",
+        "status": "tested",
+        "evidence_count": 5,
+        "missing": []
+      },
+      {
+        "id": "R-004",
+        "statement": "Character: monkey",
+        "status": "tested",
+        "evidence_count": 5,
+        "missing": []
+      },
+      {
+        "id": "R-005",
+        "statement": "Genre: adventure",
+        "status": "pending",
+        "evidence_count": 0,
+        "missing": []
+      },
+      {
+        "id": "R-006",
+        "statement": "Platform: pc",
+        "status": "tested",
+        "evidence_count": 4,
+        "missing": []
+      },
+      {
+        "id": "R-007",
+        "statement": "Gameplay: jumping",
+        "status": "tested",
+        "evidence_count": 4,
+        "missing": []
+      },
+      {
+        "id": "R-008",
+        "statement": "Gameplay: collectibles",
+        "status": "tested",
+        "evidence_count": 5,
+        "missing": []
+      },
+      {
+        "id": "R-009",
+        "statement": "Gameplay: score",
+        "status": "tested",
+        "evidence_count": 5,
+        "missing": []
+      },
+      {
+        "id": "R-010",
+        "statement": "Player traversal",
+        "status": "tested",
+        "evidence_count": 4,
+        "missing": []
+      },
+      {
+        "id": "R-011",
+        "statement": "Interaction system",
+        "status": "tested",
+        "evidence_count": 3,
+        "missing": []
+      },
+      {
+        "id": "R-012",
+        "statement": "Collectibles and objectives",
+        "status": "tested",
+        "evidence_count": 4,
+        "missing": []
+      },
+      {
+        "id": "R-013",
+        "statement": "NPC and dialogue",
+        "status": "rejected",
+        "evidence_count": 0,
+        "missing": []
+      },
+      {
+        "id": "R-014",
+        "statement": "Save and progression",
+        "status": "rejected",
+        "evidence_count": 0,
+        "missing": []
+      },
+      {
+        "id": "R-015",
+        "statement": "Player controller",
+        "status": "tested",
+        "evidence_count": 3,
+        "missing": []
+      },
+      {
+        "id": "R-016",
+        "statement": "Camera",
+        "status": "implemented",
+        "evidence_count": 4,
+        "missing": []
+      },
+      {
+        "id": "R-017",
+        "statement": "UI/HUD",
+        "status": "tested",
+        "evidence_count": 4,
+        "missing": []
+      },
+      {
+        "id": "R-018",
+        "statement": "3D asset import pipeline",
+        "status": "tested",
+        "evidence_count": 6,
+        "missing": []
+      },
+      {
+        "id": "R-019",
+        "statement": "Version control and reproducible project setup",
+        "status": "implemented",
+        "evidence_count": 3,
+        "missing": []
+      },
+      {
+        "id": "R-020",
+        "statement": "Quest log",
+        "status": "rejected",
+        "evidence_count": 0,
+        "missing": []
+      },
+      {
+        "id": "R-021",
+        "statement": "Crafting",
+        "status": "rejected",
+        "evidence_count": 0,
+        "missing": []
+      },
+      {
+        "id": "R-022",
+        "statement": "Fast travel",
+        "status": "rejected",
+        "evidence_count": 0,
+        "missing": []
+      },
+      {
+        "id": "R-023",
+        "statement": "Photo mode",
+        "status": "rejected",
+        "evidence_count": 0,
+        "missing": []
+      },
+      {
+        "id": "R-024",
+        "statement": "Achievements",
+        "status": "rejected",
+        "evidence_count": 0,
+        "missing": []
+      }
+    ],
+    "comparison_overall": "partial",
+    "comparison_coverage": {
+      "total": 24,
+      "pending": 1,
+      "in_progress": 0,
+      "implemented": 3,
+      "tested": 13,
+      "verified": 0,
+      "blocked": 0,
+      "rejected": 7,
+      "verified_ratio": 0.0,
+      "verified_or_tested": 13,
+      "open": 4
+    },
+    "detected_engine": "unity",
+    "invalid_claims": [],
+    "requirements_with_issues": [],
+    "progress": {
+      "total": 24,
+      "pending": 1,
+      "in_progress": 0,
+      "implemented": 3,
+      "tested": 13,
+      "verified": 0,
+      "blocked": 0,
+      "rejected": 7,
+      "verified_ratio": 0.0,
+      "verified_or_tested": 13,
+      "open": 4
+    }
+  },
+  "integration": {
+    "generated_at": "2026-11-06T17:55:11Z",
+    "manifest_path": "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\.game-studio\\manifest.json",
+    "artifacts": [
+      "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\.game-studio\\analysis.json",
+      "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\.game-studio\\specification.json",
+      "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\.game-studio\\traceability.json",
+      "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\.game-studio\\dependency-graph.json",
+      "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\.game-studio\\execution-plan.json"
+    ],
+    "evidence_files": [
+      "unity-player-build.log",
+      "unity-player-build.provenance.json",
+      "v5-player-evidence.json",
+      "v5-player-screenshot.png",
+      "v5-player.log",
+      "v5-playmode-results.xml"
+    ],
+    "build_artifact": {
+      "generated_at": "2026-11-06T17:55:06Z",
+      "generated_by": "scripts/v5-mcp-integration.py",
+      "exe": "D:\\MCP\\MCP\\validation\\builds\\v5-windows\\JungleMonkey.exe",
+      "exe_size_bytes": 667136,
+      "exe_sha256": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+      "unity_player_size_bytes": 38693808,
+      "data_directory": "D:\\MCP\\MCP\\validation\\builds\\v5-windows\\JungleMonkey_Data",
+      "data_bytes": 40721172,
+      "build_provenance_copy": ".game-studio/evidence/source/unity-player-build.provenance.json",
+      "build_provenance_sha256": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+      "player_evidence_copy": ".game-studio/evidence/source/v5-player-evidence.json",
+      "player_evidence_sha256": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+      "screenshot_copy": ".game-studio/evidence/source/v5-player-screenshot.png",
+      "screenshot_sha256": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+      "note": "Hashes/sizes were computed from the real files at integration time. This record is not proof that the player was re-launched by this driver."
+    },
+    "tool_calls": [
+      {
+        "tool": "analyze_game_request",
+        "ok": true,
+        "arguments": [
+          "request"
+        ]
+      },
+      {
+        "tool": "create_game_specification",
+        "ok": true,
+        "arguments": [
+          "approved",
+          "art_style",
+          "dimension",
+          "engine",
+          "platform",
+          "project_name",
+          "request",
+          "scope"
+        ]
+      },
+      {
+        "tool": "llm_validate_plan",
+        "ok": true,
+        "arguments": [
+          "plan",
+          "request",
+          "understanding",
+          "use_llm"
+        ]
+      },
+      {
+        "tool": "llm_trace_requirements",
+        "ok": true,
+        "arguments": [
+          "specification",
+          "understanding"
+        ]
+      },
+      {
+        "tool": "init_project_manifest",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "overwrite",
+          "project_path",
+          "spec"
+        ]
+      },
+      {
+        "tool": "record_project_decision",
+        "ok": true,
+        "arguments": [
+          "approved",
+          "confirm",
+          "decision",
+          "project_path",
+          "rationale",
+          "source",
+          "topic"
+        ]
+      },
+      {
+        "tool": "record_project_decision",
+        "ok": true,
+        "arguments": [
+          "approved",
+          "confirm",
+          "decision",
+          "project_path",
+          "rationale",
+          "source",
+          "topic"
+        ]
+      },
+      {
+        "tool": "record_project_decision",
+        "ok": true,
+        "arguments": [
+          "approved",
+          "confirm",
+          "decision",
+          "project_path",
+          "rationale",
+          "source",
+          "topic"
+        ]
+      },
+      {
+        "tool": "record_project_decision",
+        "ok": true,
+        "arguments": [
+          "approved",
+          "confirm",
+          "decision",
+          "project_path",
+          "rationale",
+          "source",
+          "topic"
+        ]
+      },
+      {
+        "tool": "record_project_decision",
+        "ok": true,
+        "arguments": [
+          "approved",
+          "confirm",
+          "decision",
+          "project_path",
+          "rationale",
+          "source",
+          "topic"
+        ]
+      },
+      {
+        "tool": "record_project_decision",
+        "ok": true,
+        "arguments": [
+          "approved",
+          "confirm",
+          "decision",
+          "project_path",
+          "rationale",
+          "source",
+          "topic"
+        ]
+      },
+      {
+        "tool": "record_project_decision",
+        "ok": true,
+        "arguments": [
+          "approved",
+          "confirm",
+          "decision",
+          "project_path",
+          "rationale",
+          "source",
+          "topic"
+        ]
+      },
+      {
+        "tool": "record_project_decision",
+        "ok": true,
+        "arguments": [
+          "approved",
+          "confirm",
+          "decision",
+          "project_path",
+          "rationale",
+          "source",
+          "topic"
+        ]
+      },
+      {
+        "tool": "record_project_decision",
+        "ok": true,
+        "arguments": [
+          "approved",
+          "confirm",
+          "decision",
+          "project_path",
+          "rationale",
+          "source",
+          "topic"
+        ]
+      },
+      {
+        "tool": "llm_build_execution_plan",
+        "ok": true,
+        "arguments": [
+          "include_paid_options",
+          "specification",
+          "understanding"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "run_requirement_verification",
+        "ok": true,
+        "arguments": [
+          "apply_status",
+          "command",
+          "confirm",
+          "project_path",
+          "requirement_id",
+          "timeout"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "update_requirement_status",
+        "ok": true,
+        "arguments": [
+          "confirm",
+          "evidence",
+          "note",
+          "project_path",
+          "requirement_id",
+          "status"
+        ]
+      },
+      {
+        "tool": "compare_project_against_requirements",
+        "ok": true,
+        "arguments": [
+          "inspect_project",
+          "project_path"
+        ]
+      },
+      {
+        "tool": "track_project_progress",
+        "ok": true,
+        "arguments": [
+          "project_path"
+        ]
+      }
+    ],
+    "notes": [
+      "All manifest writes went through registered MCP handlers.",
+      "No requirement was marked verified; no human playtest exists.",
+      "executable=false was preserved from llm_build_execution_plan."
+    ]
+  },
+  "ok": false,
+  "error": "KeyError: 'analysis'",
+  "finished_at": "2026-11-06T17:55:11Z"
+}

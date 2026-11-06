@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-11-06T17:55:27Z",
+  "generated_by": "scripts/v5-mcp-integration.py",
+  "exe": "D:\\MCP\\MCP\\validation\\builds\\v5-windows\\JungleMonkey.exe",
+  "exe_size_bytes": 667136,
+  "exe_sha256": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+  "unity_player_size_bytes": 38693808,
+  "data_directory": "D:\\MCP\\MCP\\validation\\builds\\v5-windows\\JungleMonkey_Data",
+  "data_bytes": 40721172,
+  "build_provenance_copy": ".game-studio/evidence/source/unity-player-build.provenance.json",
+  "build_provenance_sha256": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+  "player_evidence_copy": ".game-studio/evidence/source/v5-player-evidence.json",
+  "player_evidence_sha256": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+  "screenshot_copy": ".game-studio/evidence/source/v5-player-screenshot.png",
+  "screenshot_sha256": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+  "note": "Hashes/sizes were computed from the real files at integration time. This record is not proof that the player was re-launched by this driver."
+}

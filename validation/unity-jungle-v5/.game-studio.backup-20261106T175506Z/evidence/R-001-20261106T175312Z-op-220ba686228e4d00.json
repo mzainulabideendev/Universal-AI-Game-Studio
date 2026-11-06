@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "requirement_id": "R-001",
+  "statement": "Dimension: 3d",
+  "source_text": "3D",
+  "acceptance_test": "The game renders and plays in the requested perspective.",
+  "command": [
+    "cmd",
+    "/c",
+    "dir"
+  ],
+  "cwd": "D:\\MCP\\MCP\\validation\\unity-jungle-v5",
+  "run_at": "2026-11-06T17:53:12Z",
+  "exit_code": 0,
+  "cancelled": false,
+  "timed_out": false,
+  "duration_ms": 135,
+  "ok": true,
+  "operation_id": "op-220ba686228e4d00",
+  "stdout": " Volume in drive D is New Volume\n Volume Serial Number is A654-D5B2\n\n Directory of D:\\MCP\\MCP\\validation\\unity-jungle-v5\n\n11/06/2026  10:43 PM    <DIR>          .\n11/06/2026  09:31 AM    <DIR>          ..\n11/06/2026  10:48 PM    <DIR>          .game-studio\n11/06/2026  09:01 AM                96 .vsconfig\n11/06/2026  09:31 AM    <DIR>          Assets\n11/06/2026  09:31 AM    <DIR>          Library\n11/06/2026  09:31 AM    <DIR>          Logs\n11/06/2026  09:24 AM    <DIR>          Packages\n11/06/2026  09:31 AM    <DIR>          ProjectSettings\n11/06/2026  09:25 AM               153 unity-jungle-v5.slnx\n11/06/2026  09:25 AM    <DIR>          UserSettings\n11/06/2026  09:29 AM               507 v5-blender-assets.json\n11/06/2026  09:25 AM            84,285 V5.Editor.csproj\n11/06/2026  09:25 AM            81,173 V5.PlayModeTests.csproj\n11/06/2026  09:25 AM            82,050 V5.Runtime.csproj\n               6 File(s)        248,264 bytes\n               9 Dir(s)  188,970,971,136 bytes free\n",
+  "stderr": "",
+  "stdout_sha256": "382f07f1903dbed3f2b04bdca7b9848d40a1c4b400e1021942ed03348110888e",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "governance_decision": {
+    "ok": true,
+    "permission": "execute_process",
+    "effect": "ask",
+    "mode": "guided",
+    "mandatory_approval": false,
+    "confirmed": true,
+    "scope": "project"
+  },
+  "previous_evidence": {
+    "tests": 0,
+    "files": 0,
+    "missing": []
+  },
+  "comparison": {
+    "previous_run": {
+      "run_at": "2026-11-06T17:53:12Z",
+      "exit_code": 1,
+      "ok": false
+    },
+    "changed": {
+      "command": true,
+      "exit_code": true,
+      "stdout": true,
+      "stderr": false
+    },
+    "changed_any": true,
+    "note": "Output changes are expected when timings or hashes are printed; compare the exit code and the asserted behaviour, not raw text alone."
+  }
+}

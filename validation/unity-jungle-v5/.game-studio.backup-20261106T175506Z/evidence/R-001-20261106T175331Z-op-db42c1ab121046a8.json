@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "requirement_id": "R-001",
+  "statement": "Dimension: 3d",
+  "source_text": "3D",
+  "acceptance_test": "The game renders and plays in the requested perspective.",
+  "command": [
+    "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "-c",
+    "pass"
+  ],
+  "cwd": "D:\\MCP\\MCP\\validation\\unity-jungle-v5",
+  "run_at": "2026-11-06T17:53:31Z",
+  "exit_code": 1,
+  "cancelled": false,
+  "timed_out": true,
+  "duration_ms": 10239,
+  "ok": false,
+  "operation_id": "op-db42c1ab121046a8",
+  "stdout": "",
+  "stderr": "",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "governance_decision": {
+    "ok": true,
+    "permission": "execute_process",
+    "effect": "ask",
+    "mode": "guided",
+    "mandatory_approval": false,
+    "confirmed": true,
+    "scope": "project"
+  },
+  "previous_evidence": {
+    "tests": 0,
+    "files": 0,
+    "missing": []
+  },
+  "comparison": {
+    "previous_run": {
+      "run_at": "2026-11-06T17:53:12Z",
+      "exit_code": 1,
+      "ok": false
+    },
+    "changed": {
+      "command": true,
+      "exit_code": false,
+      "stdout": false,
+      "stderr": false
+    },
+    "changed_any": true,
+    "note": "Output changes are expected when timings or hashes are printed; compare the exit code and the asserted behaviour, not raw text alone."
+  }
+}

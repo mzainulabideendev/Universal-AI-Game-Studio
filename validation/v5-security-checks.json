@@ -1,0 +1,125 @@
+{
+  "generated_at": "2026-11-06T18:01:17Z",
+  "generated_by": "scripts/v5-security-checks.py",
+  "network_calls": 0,
+  "checks": [
+    {
+      "name": "mcp_registry_84_handlers_and_schemas",
+      "status": "PASS",
+      "detail": {
+        "tool_count": 84,
+        "handler_count": 84,
+        "required_tools_present": 11
+      }
+    },
+    {
+      "name": "mcp_stdio_handshake_and_tools_list",
+      "status": "PASS",
+      "detail": {
+        "server": "universal-game-studio",
+        "version": "1.0.0",
+        "protocol": "2024-11-05",
+        "tools_listed": 84
+      }
+    },
+    {
+      "name": "manifest_secret_rejection_and_location",
+      "status": "PASS",
+      "detail": {
+        "value_rejected": "ToolError",
+        "field_rejected": "ToolError",
+        "manifest_inside_project": true
+      }
+    },
+    {
+      "name": "credential_redaction",
+      "status": "PASS",
+      "detail": {
+        "redacted_excerpt": "provider failed with [REDACTED] and [REDACTED]"
+      }
+    },
+    {
+      "name": "path_traversal_and_evidence_containment",
+      "status": "PASS",
+      "detail": {
+        "blocked_paths": [
+          "..\\..\\Windows\\System32\\drivers\\etc\\hosts",
+          "C:\\Windows\\win.ini",
+          "/etc/passwd"
+        ],
+        "evidence_references_inside_project": true
+      }
+    },
+    {
+      "name": "prompt_injection_flags",
+      "status": "PASS",
+      "detail": {
+        "flagged_markers": [
+          "ignore previous instructions"
+        ],
+        "clean_request_markers": []
+      }
+    },
+    {
+      "name": "provider_unavailable_falls_back_labelled",
+      "status": "PASS",
+      "detail": {
+        "provider_status": "degraded",
+        "provider_configured": false,
+        "source": "deterministic-fallback",
+        "provider": null,
+        "note": "The LLM was not used. This deterministic parse is keyword-based and may miss nuance, but it is safe and offline."
+      }
+    },
+    {
+      "name": "llm_eval_harness_22_cases",
+      "status": "PASS",
+      "detail": {
+        "cases": 22,
+        "source": "deterministic-fallback",
+        "live": false,
+        "mean_overall": 0.944,
+        "failures": [],
+        "capability_gaps": 3
+      }
+    },
+    {
+      "name": "requirement_verification_honesty",
+      "status": "PASS",
+      "detail": {
+        "statuses": {
+          "tested": 13,
+          "implemented": 3,
+          "pending": 1,
+          "rejected": 7
+        },
+        "verification_runs": 15,
+        "comparison_overall": "partial",
+        "execution_plan_executable": false
+      }
+    },
+    {
+      "name": "unity_evidence_integrity",
+      "status": "PASS",
+      "detail": {
+        "evidence_hashes": {
+          "v5-playmode-results.xml": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+          "v5-player-evidence.json": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+          "v5-player-screenshot.png": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+          "unity-player-build.provenance.json": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+          "v5-player.log": "e845ccaa3303ff5f8066cb0bd0ec0f4efd2c087a07a9f49812720764f2081c28"
+        },
+        "exe_size_bytes": 667136,
+        "playmode_passed": 9,
+        "player_grounded": true,
+        "player_score": 1,
+        "build_target": "StandaloneWindows64"
+      }
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "passed": 10,
+    "failed": 0
+  }
+}

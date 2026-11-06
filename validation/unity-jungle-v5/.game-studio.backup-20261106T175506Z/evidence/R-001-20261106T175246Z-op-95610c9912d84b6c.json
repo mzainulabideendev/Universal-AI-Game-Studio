@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "requirement_id": "R-001",
+  "statement": "Dimension: 3d",
+  "source_text": "3D",
+  "acceptance_test": "The game renders and plays in the requested perspective.",
+  "command": [
+    "cmd",
+    "/c",
+    "set"
+  ],
+  "cwd": "D:\\MCP\\MCP\\validation\\unity-jungle-v5",
+  "run_at": "2026-11-06T17:52:46Z",
+  "exit_code": 1,
+  "cancelled": false,
+  "timed_out": true,
+  "duration_ms": 10193,
+  "ok": false,
+  "operation_id": "op-95610c9912d84b6c",
+  "stdout": "AGENT=1\nAI_AGENT=opencode\nALLUSERSPROFILE=C:\\ProgramData\nANDROID_HOME=D:\\Android\\Sdk\nANDROID_NDK_HOME=D:\\Android\\Sdk\\ndk\\28.2.13676358\nANDROID_NDK_ROOT=D:\\Android\\Sdk\\ndk\\28.2.13676358\nANDROID_SDK_ROOT=D:\\Android\\Sdk\nAPPDATA=C:\\Users\\zu442\\AppData\\Roaming\nBUNDLED_DEBUGPY_PATH=c:\\Users\\zu442\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\libs\\debugpy\nCHROME_CRASHPAD_PIPE_NAME=\\\\.\\pipe\\crashpad_20644_BTAJLRPQLPQVDUKI\nCLAUDE_CODE_SSE_PORT=53496\nCOLORTERM=truecolor\nCOMMONPROGRAMFILES=C:\\Program Files\\Common Files\nCOMMONPROGRAMFILES(X86)=C:\\Program Files (x86)\\Common Files\nCOMMONPROGRAMW6432=C:\\Program Files\\Common Files\nCOMPUTERNAME=ZAIN\nCOMSPEC=C:\\WINDOWS\\system32\\cmd.exe\nCOPILOT_DEBUG_NONCE=71f1dc2acfb13004f497471bfb01898e\nDEPOT_TOOLS_WIN_TOOLCHAIN=0\nDRIVERDATA=C:\\Windows\\System32\\Drivers\\DriverData\nEFC_16476_1592913036=1\nEFC_16476_4126798990=1\nGIT_ASKPASS=c:\\Users\\zu442\\AppData\\Roaming\\Code\\User\\globalStorage\\vscode.git\\askpass\\70789581cae28aa7\\askpass.sh\nHOMEDRIVE=C:\nHOMEPATH=\\Users\\zu442\nJAVA_HOME=D:\\jdk17\\jdk-17.0.20.1+1\nLANG=en_US.UTF-8\nLOCALAPPDATA=C:\\Users\\zu442\\AppData\\Local\nLOGONSERVER=\\\\ZAIN\nNO_PROXY=127.0.0.1,localhost,::1\nNUMBER_OF_PROCESSORS=6\nONEDRIVE=C:\\Users\\zu442\\OneDrive\nONEDRIVECONSUMER=C:\\Users\\zu442\\OneDrive\nOPENCODE=1\nOPENCODE_SESSION_ID=ses_e4e14d12fffeLsgz1zFD1UlVJI\nOPENCODE_TERMINAL=1\nOS=Windows_NT\nPATH=C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\nodejs\\;D:\\Github window data\\Git\\cmd;C:\\Program Files\\dotnet\\;C:\\Program Files\\Microsoft SQL Server\\170\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Program Files\\Gpg4win\\..\\GnuPG\\bin;C:\\Program Files\\GitHub CLI\\;D:\\depot_tools;C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312;C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\Scripts;C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Launcher\\;C:\\Users\\zu442\\.local\\bin;D:\\jdk17\\jdk-17.0.20.1+1\\bin;D:\\Android\\Sdk\\platform-tools;D:\\Android\\Sdk\\cmdline-tools\\latest\\bin;D:\\flutter\\bin;C:\\Users\\zu442\\AppData\\Local\\Microsoft\\WindowsApps;D:\\vs code data\\Microsoft VS Code\\bin;C:\\Users\\zu442\\AppData\\Roaming\\npm;C:\\Users\\zu442\\.dotnet\\tools;C:\\Users\\zu442\\AppData\\Local\\Unity\\bin;D:\\vs code data\\Microsoft VS Code\\bin\\copilot-shim;c:\\Users\\zu442\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts;c:\\Users\\zu442\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand;D:\\vs code data\\Microsoft VS Code\\bin\\copilot-shim\nPATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL\nPROCESSOR_ARCHITECTURE=AMD64\nPROCESSOR_IDENTIFIER=AMD64 Family 23 Model 96 Stepping 1, AuthenticAMD\nPROCESSOR_LEVEL=23\nPROCESSOR_REVISION=6001\nPROGRAMDATA=C:\\ProgramData\nPROGRAMFILES=C:\\Program Files\nPROGRAMFILES(X86)=C:\\Program Files (x86)\nPROGRAMW6432=C:\\Program Files\nPROMPT=$P$G\nPSMODULEPATH=C:\\Users\\zu442\\OneDrive\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\nPUBLIC=C:\\Users\\Public\nPYDEVD_DISABLE_FILE_VALIDATION=1\nPYTHONSTARTUP=c:\\Users\\zu442\\AppData\\Roaming\\Code\\User\\workspaceStorage\\d13e1e82fdccafb379ca7c810b349a73\\ms-python.python\\pythonrc.py\nSESSIONNAME=Console\nSYSTEMDRIVE=C:\nSYSTEMROOT=C:\\WINDOWS\nTEMP=C:\\Users\\zu442\\AppData\\Local\\Temp\nTERM=xterm-256color\nTERM_PROGRAM=vscode\nTERM_PROGRAM_VERSION=1.145.1\nTMP=C:\\Users\\zu442\\AppData\\Local\\Temp\nUSERDOMAIN=ZAIN\nUSERDOMAIN_ROAMINGPROFILE=ZAIN\nUSERNAME=zu442\nUSERPROFILE=C:\\Users\\zu442\nVSCODE_DEBUGPY_ADAPTER_ENDPOINTS=c:\\Users\\zu442\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\.noConfigDebugAdapterEndpoints\\endpoint-73750fcc96394059.txt\nVSCODE_GIT_ASKPASS_EXTRA_ARGS=\nVSCODE_GIT_ASKPASS_MAIN=c:\\Users\\zu442\\AppData\\Roaming\\Code\\User\\globalStorage\\vscode.git\\askpass\\70789581cae28aa7\\askpass-main.js\n",
+  "stderr": "",
+  "stdout_sha256": "d182e5448825357adc624e34bbc77dfcff500b53a79c9e15b9172a21099d625b",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "governance_decision": {
+    "ok": true,
+    "permission": "execute_process",
+    "effect": "ask",
+    "mode": "guided",
+    "mandatory_approval": false,
+    "confirmed": true,
+    "scope": "project"
+  },
+  "previous_evidence": {
+    "tests": 0,
+    "files": 0,
+    "missing": []
+  },
+  "comparison": {
+    "previous_run": {
+      "run_at": "2026-11-06T17:52:27Z",
+      "exit_code": 1,
+      "ok": false
+    },
+    "changed": {
+      "command": true,
+      "exit_code": false,
+      "stdout": true,
+      "stderr": false
+    },
+    "changed_any": true,
+    "note": "Output changes are expected when timings or hashes are printed; compare the exit code and the asserted behaviour, not raw text alone."
+  }
+}

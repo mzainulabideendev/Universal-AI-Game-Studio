@@ -1,0 +1,629 @@
+{
+  "nodes": [
+    {
+      "id": "T-01",
+      "key": "setup",
+      "label": "Create/verify project and version control",
+      "depends_on": [],
+      "role": "Technical Director",
+      "milestone": "A",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-02",
+      "key": "engine",
+      "label": "Configure unity project settings",
+      "depends_on": [
+        "T-01"
+      ],
+      "role": "Technical Director",
+      "milestone": "A",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-03",
+      "key": "input",
+      "label": "Input actions and remapping",
+      "depends_on": [
+        "T-02"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "A",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-04",
+      "key": "controller",
+      "label": "Player/vehicle controller",
+      "depends_on": [
+        "T-03"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "B",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-05",
+      "key": "camera",
+      "label": "Camera system",
+      "depends_on": [
+        "T-04"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "B",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-06",
+      "key": "physics",
+      "label": "Physics, collision layers and boundaries",
+      "depends_on": [
+        "T-04"
+      ],
+      "role": "Technical Director",
+      "milestone": "B",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-07",
+      "key": "char_source",
+      "label": "Character model or licensed asset",
+      "depends_on": [
+        "T-02"
+      ],
+      "role": "Character Technical Artist",
+      "milestone": "C",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-08",
+      "key": "char_rig",
+      "label": "Skeleton/rig validation and scale",
+      "depends_on": [
+        "T-07"
+      ],
+      "role": "Character Technical Artist",
+      "milestone": "C",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-09",
+      "key": "animations",
+      "label": "Animation clips and retargeting",
+      "depends_on": [
+        "T-08",
+        "T-05"
+      ],
+      "role": "Animation Engineer",
+      "milestone": "C",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-10",
+      "key": "animator",
+      "label": "Animation state machine connected to gameplay",
+      "depends_on": [
+        "T-09",
+        "T-04"
+      ],
+      "role": "Animation Engineer",
+      "milestone": "C",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-11",
+      "key": "env_blockout",
+      "label": "Environment blockout and scale test",
+      "depends_on": [
+        "T-02"
+      ],
+      "role": "Level Designer",
+      "milestone": "C",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-12",
+      "key": "env_art",
+      "label": "Materials, props and lighting",
+      "depends_on": [
+        "T-11"
+      ],
+      "role": "Environment Artist",
+      "milestone": "C",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-13",
+      "key": "env_collision",
+      "label": "Environment collision and navigation",
+      "depends_on": [
+        "T-12",
+        "T-06"
+      ],
+      "role": "Level Designer",
+      "milestone": "C",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-14",
+      "key": "system-1",
+      "label": "Genre: adventure",
+      "depends_on": [
+        "T-02"
+      ],
+      "role": "Game Director",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-005"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-15",
+      "key": "system-2",
+      "label": "Gameplay: jumping",
+      "depends_on": [
+        "T-10"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-007"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-16",
+      "key": "system-3",
+      "label": "Gameplay: collectibles",
+      "depends_on": [
+        "T-10"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-008"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-17",
+      "key": "system-4",
+      "label": "Gameplay: score",
+      "depends_on": [
+        "T-10"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-009"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-18",
+      "key": "system-5",
+      "label": "Player traversal",
+      "depends_on": [
+        "T-10"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-010"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-19",
+      "key": "system-6",
+      "label": "Interaction system",
+      "depends_on": [
+        "T-10"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-011"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-20",
+      "key": "system-7",
+      "label": "Collectibles and objectives",
+      "depends_on": [
+        "T-10"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-012"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-21",
+      "key": "system-8",
+      "label": "NPC and dialogue",
+      "depends_on": [
+        "T-10"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-013"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-22",
+      "key": "system-9",
+      "label": "Save and progression",
+      "depends_on": [
+        "T-10"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-014"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-23",
+      "key": "system-10",
+      "label": "Player controller",
+      "depends_on": [
+        "T-10"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-015"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-24",
+      "key": "system-11",
+      "label": "Camera",
+      "depends_on": [
+        "T-10"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-016"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-25",
+      "key": "system-12",
+      "label": "UI/HUD",
+      "depends_on": [
+        "T-10"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-017"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-26",
+      "key": "system-13",
+      "label": "3D asset import pipeline",
+      "depends_on": [
+        "T-02"
+      ],
+      "role": "Technical Director",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-018"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-27",
+      "key": "system-14",
+      "label": "Version control and reproducible project setup",
+      "depends_on": [
+        "T-02"
+      ],
+      "role": "Technical Director",
+      "milestone": "D",
+      "requirement_ids": [
+        "R-019"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "T-28",
+      "key": "ui",
+      "label": "HUD, menus and settings",
+      "depends_on": [
+        "T-14"
+      ],
+      "role": "UI/UX Designer",
+      "milestone": "D",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-29",
+      "key": "audio",
+      "label": "Music and gameplay audio",
+      "depends_on": [
+        "T-02"
+      ],
+      "role": "Audio Designer",
+      "milestone": "D",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-30",
+      "key": "save",
+      "label": "Save/load and persistence",
+      "depends_on": [
+        "T-02"
+      ],
+      "role": "Gameplay Programmer",
+      "milestone": "D",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-31",
+      "key": "tests",
+      "label": "Automated tests and playtest checklist",
+      "depends_on": [
+        "T-04",
+        "T-28"
+      ],
+      "role": "QA Engineer",
+      "milestone": "F",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-32",
+      "key": "optimise",
+      "label": "Performance profiling and optimisation",
+      "depends_on": [
+        "T-31"
+      ],
+      "role": "Graphics Engineer",
+      "milestone": "F",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-33",
+      "key": "build",
+      "label": "Target-platform build",
+      "depends_on": [
+        "T-32"
+      ],
+      "role": "Build Engineer",
+      "milestone": "F",
+      "requirement_ids": [],
+      "status": "pending"
+    },
+    {
+      "id": "T-34",
+      "key": "verify",
+      "label": "Runtime verification and acceptance evidence",
+      "depends_on": [
+        "T-33"
+      ],
+      "role": "QA Engineer",
+      "milestone": "G",
+      "requirement_ids": [],
+      "status": "pending"
+    }
+  ],
+  "edges": [
+    {
+      "from": "T-01",
+      "to": "T-02"
+    },
+    {
+      "from": "T-02",
+      "to": "T-03"
+    },
+    {
+      "from": "T-03",
+      "to": "T-04"
+    },
+    {
+      "from": "T-04",
+      "to": "T-05"
+    },
+    {
+      "from": "T-04",
+      "to": "T-06"
+    },
+    {
+      "from": "T-02",
+      "to": "T-07"
+    },
+    {
+      "from": "T-07",
+      "to": "T-08"
+    },
+    {
+      "from": "T-08",
+      "to": "T-09"
+    },
+    {
+      "from": "T-05",
+      "to": "T-09"
+    },
+    {
+      "from": "T-09",
+      "to": "T-10"
+    },
+    {
+      "from": "T-04",
+      "to": "T-10"
+    },
+    {
+      "from": "T-02",
+      "to": "T-11"
+    },
+    {
+      "from": "T-11",
+      "to": "T-12"
+    },
+    {
+      "from": "T-12",
+      "to": "T-13"
+    },
+    {
+      "from": "T-06",
+      "to": "T-13"
+    },
+    {
+      "from": "T-02",
+      "to": "T-14"
+    },
+    {
+      "from": "T-10",
+      "to": "T-15"
+    },
+    {
+      "from": "T-10",
+      "to": "T-16"
+    },
+    {
+      "from": "T-10",
+      "to": "T-17"
+    },
+    {
+      "from": "T-10",
+      "to": "T-18"
+    },
+    {
+      "from": "T-10",
+      "to": "T-19"
+    },
+    {
+      "from": "T-10",
+      "to": "T-20"
+    },
+    {
+      "from": "T-10",
+      "to": "T-21"
+    },
+    {
+      "from": "T-10",
+      "to": "T-22"
+    },
+    {
+      "from": "T-10",
+      "to": "T-23"
+    },
+    {
+      "from": "T-10",
+      "to": "T-24"
+    },
+    {
+      "from": "T-10",
+      "to": "T-25"
+    },
+    {
+      "from": "T-02",
+      "to": "T-26"
+    },
+    {
+      "from": "T-02",
+      "to": "T-27"
+    },
+    {
+      "from": "T-14",
+      "to": "T-28"
+    },
+    {
+      "from": "T-02",
+      "to": "T-29"
+    },
+    {
+      "from": "T-02",
+      "to": "T-30"
+    },
+    {
+      "from": "T-04",
+      "to": "T-31"
+    },
+    {
+      "from": "T-28",
+      "to": "T-31"
+    },
+    {
+      "from": "T-31",
+      "to": "T-32"
+    },
+    {
+      "from": "T-32",
+      "to": "T-33"
+    },
+    {
+      "from": "T-33",
+      "to": "T-34"
+    }
+  ],
+  "topological_order": [
+    "T-01",
+    "T-02",
+    "T-03",
+    "T-04",
+    "T-05",
+    "T-06",
+    "T-07",
+    "T-08",
+    "T-09",
+    "T-10",
+    "T-11",
+    "T-12",
+    "T-13",
+    "T-14",
+    "T-15",
+    "T-16",
+    "T-17",
+    "T-18",
+    "T-19",
+    "T-20",
+    "T-21",
+    "T-22",
+    "T-23",
+    "T-24",
+    "T-25",
+    "T-26",
+    "T-27",
+    "T-28",
+    "T-29",
+    "T-30",
+    "T-31",
+    "T-32",
+    "T-33",
+    "T-34"
+  ],
+  "cycles": []
+}

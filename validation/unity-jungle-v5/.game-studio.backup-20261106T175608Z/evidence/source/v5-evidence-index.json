@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-11-06T17:55:27Z",
+  "files": {
+    "v5-playmode-results.xml": {
+      "source": "D:\\MCP\\MCP\\validation\\v5-playmode-results.xml",
+      "copy": ".game-studio\\evidence\\source\\v5-playmode-results.xml",
+      "size": 8252,
+      "sha256": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+      "matches_source": true
+    },
+    "v5-player-evidence.json": {
+      "source": "D:\\MCP\\MCP\\validation\\v5-player-evidence.json",
+      "copy": ".game-studio\\evidence\\source\\v5-player-evidence.json",
+      "size": 302,
+      "sha256": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+      "matches_source": true
+    },
+    "v5-player-screenshot.png": {
+      "source": "D:\\MCP\\MCP\\validation\\v5-player-screenshot.png",
+      "copy": ".game-studio\\evidence\\source\\v5-player-screenshot.png",
+      "size": 300694,
+      "sha256": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+      "matches_source": true
+    },
+    "unity-player-build.provenance.json": {
+      "source": "D:\\MCP\\MCP\\validation\\unity-player-build.provenance.json",
+      "copy": ".game-studio\\evidence\\source\\unity-player-build.provenance.json",
+      "size": 2661,
+      "sha256": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+      "matches_source": true
+    },
+    "v5-player.log": {
+      "source": "D:\\MCP\\MCP\\validation\\v5-player.log",
+      "copy": ".game-studio\\evidence\\source\\v5-player.log",
+      "size": 2317,
+      "sha256": "e845ccaa3303ff5f8066cb0bd0ec0f4efd2c087a07a9f49812720764f2081c28",
+      "matches_source": true
+    },
+    "unity-player-build.log": {
+      "source": "D:\\MCP\\MCP\\validation\\unity-player-build.log",
+      "copy": ".game-studio\\evidence\\source\\unity-player-build.log",
+      "size": 244384,
+      "sha256": "53fa5cbcbd910186140587a0623ebf444c35622f8a8be8d3aca6aaef0fa3f54c",
+      "matches_source": true
+    }
+  },
+  "note": "Copies are in-project references for the manifest; source files were hashed before and after copying."
+}
