@@ -10,9 +10,10 @@ from __future__ import annotations
 
 import os
 import re
+import urllib.parse
 
 from .. import config as studio_config
-from ..util import safe_join
+from ..util import ToolError, now_iso, safe_join, write_json
 
 PROVIDERS = ("openai", "openai_compatible", "anthropic", "gemini", "ollama")
 
@@ -126,7 +127,37 @@ def _key_for(provider: str) -> tuple[str | None, str | None]:
         value = os.environ.get(key_env)
         if value:
             return value, key_env
+    # Private local secrets must never be able to break configuration loading.
+    try:
+        from .. import secrets as local_secrets
+        value = local_secrets.load_local_llm_key(provider)
+    except Exception:
+        value = None
+    if value:
+        return value, "local-file"
     return None, None
+
+
+def _runtime_limits() -> dict:
+    """Limits shared by every provider so routing reports the real budgets."""
+    return {
+        "timeout_seconds": _env_int("GAME_STUDIO_LLM_TIMEOUT", 60, minimum=5),
+        "connect_timeout_seconds": _env_int("GAME_STUDIO_LLM_CONNECT_TIMEOUT", 10,
+                                            minimum=2),
+        "max_tokens": _env_int("GAME_STUDIO_LLM_MAX_TOKENS", 4096, minimum=128),
+        "max_context_chars": _env_int("GAME_STUDIO_LLM_MAX_CONTEXT_CHARS", 64_000,
+                                      minimum=4_000),
+        "max_requests": _env_int("GAME_STUDIO_LLM_MAX_REQUESTS", 20, minimum=0),
+        "max_requests_per_day": _env_int("GAME_STUDIO_LLM_MAX_REQUESTS_PER_DAY", 200,
+                                        minimum=0),
+        "retries": _env_int("GAME_STUDIO_LLM_RETRIES", 2, minimum=0),
+        "backoff_seconds": _env_float("GAME_STUDIO_LLM_BACKOFF", 1.5, minimum=0.0),
+        "temperature": _env_float("GAME_STUDIO_LLM_TEMPERATURE", 0.2, minimum=0.0),
+        "cache_enabled": _env_bool("GAME_STUDIO_LLM_CACHE", False),
+        "allow_project_content": _env_bool("GAME_STUDIO_LLM_ALLOW_PROJECT_CONTENT", False),
+        "prompt_version": "1.0",
+    }
+
 
 
 def load_config() -> dict:
@@ -168,6 +199,118 @@ def load_config() -> dict:
         "cache_enabled": _env_bool("GAME_STUDIO_LLM_CACHE", False),
         "allow_project_content": _env_bool("GAME_STUDIO_LLM_ALLOW_PROJECT_CONTENT", False),
         "prompt_version": "1.0",
+    }
+
+
+def provider_config(provider: str) -> dict:
+    """Return a full config for one provider without changing the active choice.
+
+    Environment variables apply to the active provider only, so asking about a
+    different provider never reuses another provider's endpoint or model.
+    """
+    name = validate_provider_name(provider)
+    active = load_config()
+    if name == active["provider"]:
+        return active
+    default = DEFAULTS[name]
+    stored = _stored()
+    base_url = default["base_url"]
+    model = default["model"]
+    if stored.get("provider") == name:
+        base_url = stored.get("base_url") or base_url
+        model = stored.get("model") or model
+    key, source = _key_for(name)
+    cfg = dict(active)
+    cfg.update({
+        "provider": name,
+        "model": model,
+        "base_url": str(base_url).rstrip("/"),
+        "api_key": key,
+        "key_source": source,
+        "key_env": default.get("key_env"),
+        "key_required": bool(default.get("key_required")),
+        "local_provider": bool(default.get("local")),
+    })
+    return cfg
+
+
+def validate_provider_name(provider: str) -> str:
+    name = (provider or "").strip().lower()
+    if name not in PROVIDERS:
+        raise ToolError(f"unknown provider {provider!r}; expected one of {list(PROVIDERS)}")
+    return name
+
+
+def validate_model_name(model: str) -> str:
+    if not isinstance(model, str) or not model.strip():
+        raise ToolError("model must be a non-empty string")
+    cleaned = model.strip()
+    if len(cleaned) > 200:
+        raise ToolError("model must be at most 200 characters")
+    if any(ord(ch) < 32 or ord(ch) == 127 for ch in cleaned):
+        raise ToolError("model must not contain control characters or newlines")
+    return cleaned
+
+
+def validate_base_url(base_url: str, provider: str) -> str:
+    """HTTPS only, except loopback HTTP for the local Ollama adapter."""
+    name = validate_provider_name(provider)
+    if not isinstance(base_url, str) or not base_url.strip():
+        raise ToolError("base_url must be a non-empty string")
+    cleaned = base_url.strip().rstrip("/")
+    parsed = urllib.parse.urlparse(cleaned)
+    host = (parsed.hostname or "").lower()
+    loopback = host in ("127.0.0.1", "localhost", "::1")
+    if parsed.username or parsed.password:
+        raise ToolError("base_url must not contain credentials")
+    if parsed.scheme != "https":
+        if not (parsed.scheme == "http" and loopback and DEFAULTS[name].get("local")):
+            raise ToolError("base_url must use https; http is only allowed for the "
+                            "local Ollama loopback endpoint")
+    if not host:
+        raise ToolError("base_url must include a host")
+    if parsed.query or parsed.fragment:
+        raise ToolError("base_url must not contain a query string or fragment")
+    return cleaned
+
+
+def save_provider_selection(provider: str, *, model: str | None = None,
+                            base_url: str | None = None,
+                            confirm: bool = False) -> dict:
+    """Persist provider/provider-model/endpoint. Never stores a credential."""
+    if not confirm:
+        raise ToolError("Changing provider settings writes machine-local config; "
+                        "pass confirm=true")
+    name = validate_provider_name(provider)
+    default = DEFAULTS[name]
+    chosen_model = validate_model_name(model) if model else default["model"]
+    chosen_url = validate_base_url(base_url, name) if base_url else default["base_url"]
+    path = os.path.join(studio_config.config_dir(), "llm.json")
+    stored = _stored()
+    stored.update({
+        "schema_version": 1,
+        "provider": name,
+        "model": chosen_model,
+        "base_url": chosen_url,
+        "updated_at": now_iso(),
+        "note": "Machine-local LLM provider selection. Credentials belong in the "
+                "private secrets file or environment variables, never here.",
+    })
+    os.makedirs(studio_config.config_dir(), exist_ok=True)
+    write_json(path, stored)
+    studio_config.audit("llm.configure_provider", tool="llm_configure_provider",
+                        details={"provider": name, "model": chosen_model,
+                                 "base_url": chosen_url})
+    cfg = load_config()
+    return {
+        "ok": True,
+        "state": "configured",
+        "path": path,
+        "saved": {"provider": name, "model": chosen_model, "base_url": chosen_url},
+        "credential_saved": False,
+        "active": public_view(cfg),
+        "note": ("Selection saved. A credential is still required for hosted providers "
+                 "and reachability is not claimed until a real test request succeeds."),
     }
 
 

@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 2 - agent orchestration",
+  "generated_at": "2026-11-07T06:40:44Z",
+  "repository": {
+    "root": "D:\\MCP\\MCP",
+    "branch": "main",
+    "head": "b628527015b3ad8e0ec817afbc1d3badcd3a9551",
+    "head_short": "b628527",
+    "head_subject": "Add v5 security checks JSON file with comprehensive validation results"
+  },
+  "mcp": {
+    "tools": 90,
+    "handlers": 90,
+    "unique_tool_names": 90,
+    "missing_handlers": [],
+    "extra_handlers": [],
+    "all_schemas_valid": true,
+    "phase1_baseline_tools": 89,
+    "new_tools": [
+      "orchestrate_game_plan"
+    ]
+  },
+  "agents": {
+    "count": 8,
+    "expected": [
+      "character",
+      "environment",
+      "game_designer",
+      "game_director",
+      "gameplay",
+      "qa",
+      "technical_architect",
+      "uiux"
+    ],
+    "registered": [
+      "character",
+      "environment",
+      "game_designer",
+      "game_director",
+      "gameplay",
+      "qa",
+      "technical_architect",
+      "uiux"
+    ],
+    "complete": true,
+    "versions": {
+      "game_director": "1.0.0",
+      "game_designer": "1.0.0",
+      "technical_architect": "1.0.0",
+      "character": "1.0.0",
+      "environment": "1.0.0",
+      "gameplay": "1.0.0",
+      "uiux": "1.0.0",
+      "qa": "1.0.0"
+    },
+    "registry_report_ok": true,
+    "all_agents_have_schemas": true
+  },
+  "workflow": {
+    "tasks": 8,
+    "parallel_groups": [
+      [
+        "design"
+      ],
+      [
+        "architecture"
+      ],
+      [
+        "character",
+        "environment",
+        "gameplay"
+      ],
+      [
+        "uiux"
+      ],
+      [
+        "qa"
+      ],
+      [
+        "consolidation"
+      ]
+    ],
+    "graph_errors": [],
+    "report": "reports/v6-agent-workflow.json"
+  },
+  "registry_report": "reports/v6-agent-registry.json",
+  "tests": {
+    "command": "python -m unittest discover -s tools/game-studio-mcp/tests -q",
+    "returncode": 0,
+    "tests": 267,
+    "duration_seconds": 24.86,
+    "result": "OK",
+    "stderr_tail": [
+      "----------------------------------------------------------------------",
+      "Ran 267 tests in 24.860s",
+      "",
+      "OK"
+    ]
+  },
+  "demo": {
+    "returncode": 0,
+    "stdout": [
+      "status=completed ok=True engine=unity",
+      "  design         game_designer        completed",
+      "  architecture   technical_architect  completed",
+      "  character      character            completed",
+      "  environment    environment          completed",
+      "  gameplay       gameplay             completed",
+      "  uiux           uiux                 completed",
+      "  qa             qa                   completed",
+      "  consolidation  game_director        completed",
+      "conflicts=['C-character-pipeline']",
+      "provider=deterministic live_verified=False",
+      "executable=False game_generated=False",
+      "report=D:\\MCP\\MCP\\reports\\v6-phase2-demo.json"
+    ],
+    "status": "completed",
+    "ok": true,
+    "executable": false,
+    "engine": "unity",
+    "mode": "deterministic-zero-network",
+    "network_calls": 0,
+    "live_provider_verified": false,
+    "game_generated": false,
+    "assets_generated": false,
+    "agent_steps": 8,
+    "conflicts": [
+      "C-character-pipeline"
+    ],
+    "provider_summary": {
+      "mode": "deterministic",
+      "live_verified": false,
+      "note": "No provider was contacted in deterministic mode. Mocked executors are never live verification."
+    },
+    "duration_ms": 98,
+    "report": "reports/v6-phase2-demo.json"
+  },
+  "preservation": {
+    "v4_checkpoint_commit": "4bf92a84c42e8516e6f54718ce675481e44f3139",
+    "v4_files": {
+      "tools/game-studio-mcp/tests/test_llm_v4.py": {
+        "expected": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "actual": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "unchanged": true
+      },
+      "tools/game-studio-mcp/tests/test_p0_v4.py": {
+        "expected": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "actual": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "unchanged": true
+      }
+    },
+    "v4_preserved": true,
+    "v5_artifacts": {
+      "validation/unity-jungle-v5/.game-studio/manifest.json": {
+        "exists": true,
+        "expected": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "actual": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "unchanged": true
+      },
+      "validation/unity-jungle-v5/.game-studio/specification.json": {
+        "exists": true,
+        "expected": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "actual": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "unchanged": true
+      },
+      "validation/unity-jungle-v5/.game-studio/execution-plan.json": {
+        "exists": true,
+        "expected": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "actual": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "unchanged": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml": {
+        "exists": true,
+        "expected": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "actual": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "unchanged": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json": {
+        "exists": true,
+        "expected": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "actual": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "unchanged": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png": {
+        "exists": true,
+        "expected": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "actual": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "unchanged": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json": {
+        "exists": true,
+        "expected": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "actual": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "unchanged": true
+      },
+      "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity": {
+        "exists": true,
+        "expected": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "actual": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "unchanged": true
+      },
+      "validation/builds/v5-windows/JungleMonkey.exe": {
+        "exists": true,
+        "expected": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "actual": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "unchanged": true
+      },
+      "V5-IMPLEMENTATION-REPORT.md": {
+        "exists": true,
+        "expected": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "actual": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "unchanged": true
+      },
+      "V5-LLM-EVALUATION.md": {
+        "exists": true,
+        "expected": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "actual": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "unchanged": true
+      },
+      "V5-UNITY-VERTICAL-SLICE.md": {
+        "exists": true,
+        "expected": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "actual": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "unchanged": true
+      },
+      "V5-VERIFICATION-MATRIX.md": {
+        "exists": true,
+        "expected": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "actual": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "unchanged": true
+      }
+    },
+    "v5_preserved": true,
+    "v5_requirements": 24,
+    "v5_status_counts": {
+      "tested": 13,
+      "implemented": 3,
+      "pending": 1,
+      "rejected": 7
+    }
+  },
+  "security": {
+    "reports_scanned": [
+      "reports/v6-agent-registry.json",
+      "reports/v6-agent-workflow.json",
+      "reports/v6-phase2-demo.json"
+    ],
+    "credential_values_read": false,
+    "findings": [],
+    "clean": true
+  },
+  "governance": {
+    "executable": false,
+    "game_generated": false,
+    "assets_generated": false,
+    "live_provider_verified": false,
+    "writes_performed": false,
+    "requirements_status_changed": false
+  },
+  "acceptance_criteria": {
+    "eight_typed_agents": true,
+    "coordinator_demo_completed": true,
+    "demo_all_eight_steps": true,
+    "outputs_non_executable": true,
+    "no_live_verification_claim": true,
+    "no_assets_generated": true,
+    "zero_network_demo": true,
+    "tests_pass": true,
+    "tool_handler_parity": true,
+    "v4_preserved": true,
+    "v5_preserved": true,
+    "security_clean": true,
+    "workflow_graph_valid": true
+  },
+  "ok": true,
+  "limitations": [
+    "Phase 2 validates orchestration and planning only.",
+    "No character mesh, PBR texture, rig, animation, environment, scene, build or playable game exists because of this audit.",
+    "Live provider verification was not performed; the demonstration is deterministic and zero-network.",
+    "Mocked provider tests are not live provider verification."
+  ]
+}

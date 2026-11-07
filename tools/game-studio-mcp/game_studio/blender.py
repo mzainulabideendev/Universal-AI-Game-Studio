@@ -185,9 +185,22 @@ images = [{
     'size': list(img.size),
 } for img in bpy.data.images]
 
+def count_fcurves(act):
+    # Blender 5 layered actions have no direct ``fcurves`` collection.
+    try:
+        return len(act.fcurves)
+    except AttributeError:
+        pass
+    total = 0
+    for layer in act.layers:
+        for strip in layer.strips:
+            for bag in getattr(strip, 'channelbags', []):
+                total += len(bag.fcurves)
+    return total
+
 actions = [{
     'name': act.name, 'frame_range': [round(v, 2) for v in act.frame_range],
-    'fcurves': len(act.fcurves),
+    'fcurves': count_fcurves(act),
 } for act in bpy.data.actions]
 
 materials = []

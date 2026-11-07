@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "requirement_id": "R-017",
+  "statement": "UI/HUD",
+  "source_text": "implied by genre/mechanics",
+  "acceptance_test": "UI/HUD works in a playable build: Core gameplay state visible to the player.",
+  "command": [
+    "cmd",
+    "/c",
+    "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe D:\\MCP\\MCP\\scripts\\v5-verify-slice.py --check ui_hud < NUL"
+  ],
+  "cwd": "D:\\MCP\\MCP\\validation\\unity-jungle-v5",
+  "run_at": "2026-11-07T05:36:23Z",
+  "exit_code": 0,
+  "cancelled": false,
+  "timed_out": false,
+  "duration_ms": 366,
+  "ok": true,
+  "operation_id": "op-d14c2f1859e347f6",
+  "stdout": "[PASS] ui_hud: 2/2 component checks passed\nSummary: PASS=1, FAIL=0, BLOCKED=0, NOT VERIFIED=0\n",
+  "stderr": "",
+  "stdout_sha256": "06e22f3bcc7290338773a28179685594acc8d6d061eb1501e06739632f121ebb",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "governance_decision": {
+    "ok": true,
+    "permission": "execute_process",
+    "effect": "ask",
+    "mode": "guided",
+    "mandatory_approval": false,
+    "confirmed": true,
+    "scope": "project"
+  },
+  "previous_evidence": {
+    "tests": 0,
+    "files": 0,
+    "missing": []
+  },
+  "comparison": {
+    "previous_run": null,
+    "changed": null,
+    "note": "first recorded verification run for this requirement"
+  }
+}

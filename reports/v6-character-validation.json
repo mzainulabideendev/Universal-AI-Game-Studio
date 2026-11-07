@@ -1,0 +1,460 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 3 - character validation",
+  "generated_at": "2026-11-07T07:10:19Z",
+  "overall_status": "passed",
+  "checks": {
+    "specification_valid": {
+      "status": "passed",
+      "errors": []
+    },
+    "agent_asset_specification": {
+      "status": "passed",
+      "agent_assets_generated": false,
+      "agent_plan_only": "planned"
+    },
+    "geometry": {
+      "status": "passed",
+      "triangles": 15688,
+      "vertices": 7974,
+      "non_manifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "uv_mapping": {
+      "status": "passed",
+      "uv_layers": [
+        "UVMap"
+      ],
+      "coverage": 0.1501,
+      "method": "smart_project"
+    },
+    "materials": {
+      "status": "passed",
+      "material_count": 7,
+      "channels": {
+        "M_Monkey_EyeWhite": {
+          "base_color": "constant",
+          "roughness": "constant",
+          "normal": "absent",
+          "metallic": "constant",
+          "ao": "absent",
+          "emission": "absent",
+          "opacity": "constant"
+        },
+        "M_Monkey_Fur": {
+          "base_color": "texture",
+          "roughness": "texture",
+          "normal": "texture",
+          "metallic": "constant",
+          "ao": "absent",
+          "emission": "absent",
+          "opacity": "constant"
+        },
+        "M_Monkey_InnerEar": {
+          "base_color": "constant",
+          "roughness": "constant",
+          "normal": "absent",
+          "metallic": "constant",
+          "ao": "absent",
+          "emission": "absent",
+          "opacity": "constant"
+        },
+        "M_Monkey_Iris": {
+          "base_color": "constant",
+          "roughness": "constant",
+          "normal": "absent",
+          "metallic": "constant",
+          "ao": "absent",
+          "emission": "absent",
+          "opacity": "constant"
+        },
+        "M_Monkey_Nose": {
+          "base_color": "constant",
+          "roughness": "constant",
+          "normal": "absent",
+          "metallic": "constant",
+          "ao": "absent",
+          "emission": "absent",
+          "opacity": "constant"
+        },
+        "M_Monkey_Pupil": {
+          "base_color": "constant",
+          "roughness": "constant",
+          "normal": "absent",
+          "metallic": "constant",
+          "ao": "absent",
+          "emission": "absent",
+          "opacity": "constant"
+        },
+        "M_Monkey_Skin": {
+          "base_color": "constant",
+          "roughness": "constant",
+          "normal": "absent",
+          "metallic": "constant",
+          "ao": "absent",
+          "emission": "absent",
+          "opacity": "constant"
+        }
+      },
+      "issues": []
+    },
+    "textures": {
+      "status": "passed",
+      "resolution": 512,
+      "files": [
+        {
+          "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_basecolor.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 162812,
+          "sha256": "0442abcacbfdbdc953dfd51dfee8210feec314f04e9c04a5e361b5a1746c990c",
+          "colorspace": "sRGB",
+          "exists": true
+        },
+        {
+          "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_normal.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 235413,
+          "sha256": "36c73708e39577d696fab0708967d6e009c732e0efbd298ca82f116b47b6e8ce",
+          "colorspace": "Non-Color",
+          "exists": true
+        },
+        {
+          "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_roughness.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 148342,
+          "sha256": "49c7eae414da821cea2cc0f15bb1cfdd8a0eeff48c71ca198e9857e5091295d3",
+          "colorspace": "Non-Color",
+          "exists": true
+        }
+      ],
+      "absent_channels": {
+        "ao": "no physically measured ambient occlusion was computed",
+        "emission": "not required by the character description",
+        "opacity": "character is fully opaque"
+      }
+    },
+    "rigging": {
+      "status": "passed",
+      "bones": 23,
+      "weight_mode": "automatic",
+      "weighted_ratio": 1.0,
+      "vertex_groups": 23,
+      "armature_modifier": true
+    },
+    "animations": {
+      "status": "passed",
+      "requested": [
+        "idle",
+        "walk",
+        "run",
+        "jump"
+      ],
+      "actions": [
+        {
+          "name": "Idle",
+          "frame_range": [
+            1.0,
+            60.0
+          ],
+          "fcurves": 6
+        },
+        {
+          "name": "Jump",
+          "frame_range": [
+            1.0,
+            30.0
+          ],
+          "fcurves": 12
+        },
+        {
+          "name": "Run",
+          "frame_range": [
+            1.0,
+            19.0
+          ],
+          "fcurves": 12
+        },
+        {
+          "name": "Walk",
+          "frame_range": [
+            1.0,
+            25.0
+          ],
+          "fcurves": 9
+        }
+      ],
+      "exported": [
+        "Idle",
+        "Jump",
+        "Run",
+        "Walk"
+      ]
+    },
+    "export": {
+      "status": "passed",
+      "formats": [
+        "blend",
+        "glb",
+        "fbx"
+      ],
+      "artifacts": {
+        "blend": {
+          "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.blend",
+          "exists": true,
+          "bytes": 1010677,
+          "sha256": "9e4543b87719477fba24824afced5f8779d4eb7dd394449505995dbdc76ae8f9",
+          "size_matches_report": true,
+          "hash_matches_report": true
+        },
+        "glb": {
+          "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+          "exists": true,
+          "bytes": 1310604,
+          "sha256": "eb828d981ae7fe6230c9c16532869c4a59def4dea657d589dfbb60cf5f641361",
+          "size_matches_report": true,
+          "hash_matches_report": true
+        },
+        "fbx": {
+          "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.fbx",
+          "exists": true,
+          "bytes": 1512924,
+          "sha256": "9f7658bbece56b190113d7d0249cbf3e07a2e3806902409256ff6cca6630437a",
+          "size_matches_report": true,
+          "hash_matches_report": true
+        },
+        "preview": {
+          "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\preview.png",
+          "exists": true,
+          "bytes": 465712,
+          "sha256": "fc2860785da29b091cd881b978a7299bd9e66e21e9e11f44f76cd45e51783497",
+          "size_matches_report": true,
+          "hash_matches_report": true
+        }
+      }
+    },
+    "glb_validation": {
+      "status": "passed",
+      "details": {
+        "ok": true,
+        "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+        "errors": [],
+        "warnings": [],
+        "bytes": 1310604,
+        "sha256": "eb828d981ae7fe6230c9c16532869c4a59def4dea657d589dfbb60cf5f641361",
+        "version": 2,
+        "declared_length": 1310604,
+        "meshes": 1,
+        "primitives": 7,
+        "triangles": 15688,
+        "materials": 7,
+        "textures": 3,
+        "images": 3,
+        "embedded_images": 3,
+        "external_images": [],
+        "animations": 4,
+        "animation_names": [
+          "Idle",
+          "Jump",
+          "Run",
+          "Walk"
+        ],
+        "skins": 1,
+        "joints": 23,
+        "nodes": 25,
+        "bounds_min": [
+          -0.44999998807907104,
+          0.009999990463256836,
+          -0.640625
+        ],
+        "bounds_max": [
+          0.44999998807907104,
+          1.7000000476837158,
+          0.3499999940395355
+        ],
+        "generator": "Khronos glTF Blender I/O v5.2.40"
+      }
+    },
+    "reimport": {
+      "status": "passed",
+      "checks": {
+        "imported_meshes": true,
+        "imported_materials": true,
+        "imported_uvs": true,
+        "imported_armature": true,
+        "animated_actions": true,
+        "skinned_mesh": true,
+        "no_missing_textures": true
+      },
+      "metrics": {
+        "meshes": 1,
+        "triangles": 15688,
+        "materials": 7,
+        "bones": 23,
+        "actions": [
+          "Idle",
+          "Jump",
+          "Run",
+          "Walk"
+        ],
+        "animated_actions": [
+          "Idle",
+          "Jump",
+          "Run",
+          "Walk"
+        ],
+        "missing_images": []
+      }
+    },
+    "preview": {
+      "status": "passed",
+      "engine": "BLENDER_EEVEE",
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\preview.png"
+    },
+    "engine_compatibility": {
+      "status": "export-prepared-unverified",
+      "details": {
+        "unity": {
+          "export_prepared": true,
+          "integration_verified": false,
+          "materials": true,
+          "rig": true,
+          "animations": true,
+          "note": "Files are export-prepared and structurally validated. Engine import was not executed in Phase 3.",
+          "formats": [
+            "fbx",
+            "glb"
+          ],
+          "status": "export-prepared-unverified",
+          "notes": [
+            "FBX is the primary Unity path; GLB also imports with Unity glTF support.",
+            "No Unity editor import was run."
+          ]
+        },
+        "godot": {
+          "export_prepared": true,
+          "integration_verified": false,
+          "materials": true,
+          "rig": true,
+          "animations": true,
+          "note": "Files are export-prepared and structurally validated. Engine import was not executed in Phase 3.",
+          "formats": [
+            "glb"
+          ],
+          "status": "export-prepared-unverified",
+          "notes": [
+            "glTF/GLB is Godot's native interchange path.",
+            "No Godot import was run in Phase 3."
+          ]
+        },
+        "unreal": {
+          "export_prepared": true,
+          "integration_verified": false,
+          "materials": true,
+          "rig": true,
+          "animations": true,
+          "note": "Files are export-prepared and structurally validated. Engine import was not executed in Phase 3.",
+          "formats": [
+            "fbx"
+          ],
+          "status": "export-prepared-unverified",
+          "notes": [
+            "FBX is the usual Unreal path; materials may require manual reassignment.",
+            "No Unreal import was run."
+          ]
+        },
+        "target": "unity"
+      }
+    }
+  },
+  "summary": {
+    "required_stage_count": 13,
+    "passed_stage_count": 13,
+    "failed_stages": []
+  },
+  "honest_channel_report": {
+    "generated_images": [
+      "base_color",
+      "roughness",
+      "normal"
+    ],
+    "constant_values": [
+      "metallic"
+    ],
+    "absent": [
+      "ambient_occlusion",
+      "emission",
+      "opacity"
+    ],
+    "note": "Base color, roughness and normal maps are procedural images generated locally. AO, emission and opacity were not generated and are reported as absent."
+  },
+  "engine_compatibility": {
+    "unity": {
+      "export_prepared": true,
+      "integration_verified": false,
+      "materials": true,
+      "rig": true,
+      "animations": true,
+      "note": "Files are export-prepared and structurally validated. Engine import was not executed in Phase 3.",
+      "formats": [
+        "fbx",
+        "glb"
+      ],
+      "status": "export-prepared-unverified",
+      "notes": [
+        "FBX is the primary Unity path; GLB also imports with Unity glTF support.",
+        "No Unity editor import was run."
+      ]
+    },
+    "godot": {
+      "export_prepared": true,
+      "integration_verified": false,
+      "materials": true,
+      "rig": true,
+      "animations": true,
+      "note": "Files are export-prepared and structurally validated. Engine import was not executed in Phase 3.",
+      "formats": [
+        "glb"
+      ],
+      "status": "export-prepared-unverified",
+      "notes": [
+        "glTF/GLB is Godot's native interchange path.",
+        "No Godot import was run in Phase 3."
+      ]
+    },
+    "unreal": {
+      "export_prepared": true,
+      "integration_verified": false,
+      "materials": true,
+      "rig": true,
+      "animations": true,
+      "note": "Files are export-prepared and structurally validated. Engine import was not executed in Phase 3.",
+      "formats": [
+        "fbx"
+      ],
+      "status": "export-prepared-unverified",
+      "notes": [
+        "FBX is the usual Unreal path; materials may require manual reassignment.",
+        "No Unreal import was run."
+      ]
+    },
+    "target": "unity"
+  },
+  "classification": {
+    "procedurally_generated_geometry": true,
+    "imported_existing_geometry": false,
+    "ai_generated_assets": false,
+    "external_acquired_assets": false,
+    "placeholder_asset": false,
+    "production_ready": false,
+    "quality_classification": "stylized-procedural-game-ready-prototype"
+  }
+}

@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 0 - baseline and preservation",
+  "generated_at": "2026-11-07T05:50:04Z",
+  "repository": {
+    "root": "D:\\MCP\\MCP",
+    "branch": "main",
+    "head": "b628527015b3ad8e0ec817afbc1d3badcd3a9551",
+    "head_short": "b628527",
+    "head_subject": "Add v5 security checks JSON file with comprehensive validation results",
+    "tags": [],
+    "working_tree_clean": false,
+    "changed_tracked": [
+      "M reports/llm-eval-summary.md",
+      " M validation/llm-eval-results.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-001-20261106T175630Z-op-69e2b5d354fa4e7d.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-002-20261106T175630Z-op-74d42b1dc7074673.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-003-20261106T175631Z-op-d17549034d7041df.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-004-20261106T175631Z-op-a8bb5d2cfaa846ce.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-006-20261106T175631Z-op-e785525ad34e44b2.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-007-20261106T175631Z-op-3041c6dbf28c4e06.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-008-20261106T175632Z-op-29ff1f0459d44410.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-009-20261106T175632Z-op-91c5e42cb1a347dc.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-010-20261106T175632Z-op-c5c90fa2f4664414.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-011-20261106T175632Z-op-4c957baa9fcb4169.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-012-20261106T175633Z-op-d107e66c44c6429c.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-015-20261106T175633Z-op-ee935fb0575145f6.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-016-20261106T175633Z-op-eff855bb795a4592.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-017-20261106T175634Z-op-cfd7fb25ad944d42.json",
+      " D validation/unity-jungle-v5/.game-studio/evidence/R-018-20261106T175634Z-op-5df06d2fb0de449a.json",
+      " M validation/unity-jungle-v5/.game-studio/evidence/build-artifact.json",
+      " M validation/unity-jungle-v5/.game-studio/evidence/source/v5-evidence-index.json",
+      " M validation/unity-jungle-v5/.game-studio/execution-plan.json",
+      " M validation/unity-jungle-v5/.game-studio/manifest.json",
+      " M validation/unity-jungle-v5/.game-studio/specification.json",
+      " M validation/unity-jungle-v5/.game-studio/v5-integration-report.json",
+      " M validation/v5-security-checks.json"
+    ],
+    "untracked_count": 22
+  },
+  "mcp": {
+    "server_name": "universal-game-studio",
+    "server_version": "1.0.0",
+    "protocol_version": "2024-11-05",
+    "tools": 84,
+    "handlers": 84,
+    "unique_tool_names": 84,
+    "missing_handlers": [],
+    "extra_handlers": [],
+    "all_schemas_valid": true,
+    "tool_groups": {
+      "analyze": 1,
+      "blender": 8,
+      "cancel": 1,
+      "check": 1,
+      "cleanup": 1,
+      "compare": 1,
+      "configure": 1,
+      "create": 3,
+      "detect": 2,
+      "download": 1,
+      "engine": 1,
+      "get": 3,
+      "godot": 2,
+      "init": 1,
+      "inspect": 5,
+      "list": 5,
+      "llm": 12,
+      "meshy": 13,
+      "operation": 1,
+      "read": 1,
+      "record": 1,
+      "recover": 1,
+      "run": 1,
+      "search": 1,
+      "select": 1,
+      "set": 2,
+      "stage": 1,
+      "studio": 1,
+      "track": 1,
+      "unity": 6,
+      "unreal": 1,
+      "update": 1,
+      "validate": 1,
+      "verify": 1
+    },
+    "tool_names": [
+      "studio_info",
+      "detect_system",
+      "detect_game_engines",
+      "list_available_engines",
+      "select_game_engine",
+      "inspect_engine_capabilities",
+      "inspect_game_project",
+      "configure_studio",
+      "list_studio_projects",
+      "read_studio_audit",
+      "blender_info",
+      "blender_inspect_blend",
+      "blender_validate_asset",
+      "blender_export_asset",
+      "blender_import_asset",
+      "blender_render_preview",
+      "blender_create_environment_blockout",
+      "blender_run_python",
+      "meshy_setup_guide",
+      "meshy_configure_api_key",
+      "meshy_clear_api_key",
+      "meshy_balance",
+      "meshy_text_to_3d",
+      "meshy_rig_character",
+      "meshy_animation_library",
+      "meshy_create_animation",
+      "meshy_task_status",
+      "meshy_wait_for_task",
+      "meshy_cancel_task",
+      "meshy_download_output",
+      "meshy_generate_asset",
+      "list_asset_providers",
+      "search_assets",
+      "download_polyhaven_asset",
+      "inspect_asset_license",
+      "validate_asset_file",
+      "create_asset_manifest",
+      "inspect_animation_rig",
+      "create_animation_retarget_map",
+      "check_animation_compatibility",
+      "list_animation_sources",
+      "stage_asset_for_engine",
+      "verify_staged_import",
+      "engine_build",
+      "unity_editor_status",
+      "unity_list_commands",
+      "unity_run_command",
+      "unity_batch_refresh",
+      "unity_run_tests",
+      "unity_build",
+      "godot_batch_import",
+      "godot_build",
+      "unreal_status",
+      "analyze_game_request",
+      "create_game_specification",
+      "init_project_manifest",
+      "get_project_manifest",
+      "update_requirement_status",
+      "record_project_decision",
+      "track_project_progress",
+      "compare_project_against_requirements",
+      "get_execution_mode",
+      "set_execution_mode",
+      "set_permission",
+      "list_operations",
+      "get_operation",
+      "cancel_operation",
+      "cleanup_operation",
+      "operation_status",
+      "recover_operations",
+      "inspect_requirement_evidence",
+      "run_requirement_verification",
+      "llm_status",
+      "llm_understand_request",
+      "llm_generate_specification",
+      "llm_analyze_ambiguities",
+      "llm_engine_compatibility",
+      "llm_plan_architecture",
+      "llm_validate_plan",
+      "llm_build_execution_plan",
+      "llm_trace_requirements",
+      "llm_test_provider",
+      "llm_review_plan",
+      "llm_game_director_plan"
+    ]
+  },
+  "providers": {
+    "registry": [
+      "anthropic",
+      "gemini",
+      "ollama",
+      "openai",
+      "openai_compatible"
+    ],
+    "configured": false,
+    "fallback": "game_studio.understanding deterministic parser",
+    "note": "Credential values are never read; status only."
+  },
+  "engines": {
+    "detected": [
+      "unity"
+    ],
+    "unavailable": [
+      "godot",
+      "unreal"
+    ],
+    "unity": {
+      "version": "6000.6.2f1",
+      "adapter": "inspection, staging, import verification, batch refresh, tests, build; editor commands need an open editor with the pipeline package"
+    },
+    "godot": {
+      "state": "not-found",
+      "adapter": "inspection, staging, import-cache verification; build/import not executable because executable absent"
+    },
+    "unreal": {
+      "state": "not-found",
+      "adapter": "inspection and staging only; import/build/test not wired"
+    }
+  },
+  "blender": {
+    "ok": true,
+    "version_string": "5.2.2 LTS",
+    "exporter_fbx": true,
+    "exporter_gltf": true,
+    "exit_code": 0
+  },
+  "environment_report": {
+    "path": "D:\\MCP\\MCP\\reports\\environment.json",
+    "generated_at": "2026-11-06T03:48:21.6757792Z",
+    "summary": {
+      "total": 15,
+      "verified": 12,
+      "broken": 0,
+      "missing": 3
+    },
+    "findings": [
+      {
+        "name": "Unity Hub",
+        "state": "not-found",
+        "version": ""
+      },
+      {
+        "name": "Unity Editor 6000.6.2f1",
+        "state": "verified",
+        "version": "6000.6.2f1"
+      },
+      {
+        "name": "Unity CLI",
+        "state": "verified",
+        "version": "1.0.0-beta.8"
+      },
+      {
+        "name": "Unreal Engine",
+        "state": "not-found",
+        "version": ""
+      },
+      {
+        "name": "Godot",
+        "state": "not-found",
+        "version": ""
+      },
+      {
+        "name": "Blender",
+        "state": "verified",
+        "version": "Blender 5.2.2 LTS"
+      },
+      {
+        "name": "Visual Studio Community 2026",
+        "state": "verified",
+        "version": "18.10.12217.157"
+      },
+      {
+        "name": ".NET SDK",
+        "state": "verified",
+        "version": "10.0.401 [C:\\Program Files\\dotnet\\sdk]"
+      },
+      {
+        "name": "MSBuild",
+        "state": "verified",
+        "version": "18.10.1.42706"
+      },
+      {
+        "name": "Git",
+        "state": "verified",
+        "version": "git version 2.55.0.windows.5"
+      },
+      {
+        "name": "Git LFS",
+        "state": "verified",
+        "version": "git-lfs/3.7.1 (GitHub; windows amd64; go 1.25.1; git b84b3384)"
+      },
+      {
+        "name": "Python",
+        "state": "verified",
+        "version": "Python 3.12.10"
+      },
+      {
+        "name": "Java",
+        "state": "verified",
+        "version": "openjdk version \"17.0.20.1\" 2026-08-18"
+      },
+      {
+        "name": "Android SDK",
+        "state": "verified",
+        "version": "android-29, android-33, android-34, android-35, android-36"
+      },
+      {
+        "name": "Node.js",
+        "state": "verified",
+        "version": "v24.20.0"
+      }
+    ]
+  },
+  "tests": {
+    "command": "python -m unittest discover -s tools/game-studio-mcp/tests -q",
+    "returncode": 0,
+    "tests": 152,
+    "duration_seconds": 14.265,
+    "result": "OK",
+    "stderr_tail": [
+      "Ran 152 tests in 14.265s",
+      "",
+      "OK"
+    ]
+  },
+  "v4_checkpoint": {
+    "commit": "4bf92a84c42e8516e6f54718ce675481e44f3139",
+    "commit_exists": true,
+    "files": {
+      "tools/game-studio-mcp/tests/test_llm_v4.py": {
+        "exists": true,
+        "sha256": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2"
+      },
+      "tools/game-studio-mcp/tests/test_p0_v4.py": {
+        "exists": true,
+        "sha256": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d"
+      }
+    },
+    "preserved": true
+  },
+  "v5_checkpoint": {
+    "project": "validation/unity-jungle-v5",
+    "manifest_revision": 35,
+    "requirements": 24,
+    "status_counts": {
+      "tested": 13,
+      "implemented": 3,
+      "pending": 1,
+      "rejected": 7
+    },
+    "decisions": 9,
+    "execution_plan_executable": false,
+    "artifacts": {
+      "validation/unity-jungle-v5/.game-studio/manifest.json": {
+        "exists": true,
+        "bytes": 192107,
+        "sha256": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed"
+      },
+      "validation/unity-jungle-v5/.game-studio/specification.json": {
+        "exists": true,
+        "bytes": 61730,
+        "sha256": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663"
+      },
+      "validation/unity-jungle-v5/.game-studio/execution-plan.json": {
+        "exists": true,
+        "bytes": 13112,
+        "sha256": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408"
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml": {
+        "exists": true,
+        "bytes": 8252,
+        "sha256": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb"
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json": {
+        "exists": true,
+        "bytes": 302,
+        "sha256": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7"
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png": {
+        "exists": true,
+        "bytes": 300694,
+        "sha256": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9"
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json": {
+        "exists": true,
+        "bytes": 2661,
+        "sha256": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7"
+      },
+      "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity": {
+        "exists": true,
+        "bytes": 62862,
+        "sha256": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6"
+      },
+      "validation/builds/v5-windows/JungleMonkey.exe": {
+        "exists": true,
+        "bytes": 667136,
+        "sha256": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e"
+      },
+      "V5-IMPLEMENTATION-REPORT.md": {
+        "exists": true,
+        "bytes": 11275,
+        "sha256": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7"
+      },
+      "V5-LLM-EVALUATION.md": {
+        "exists": true,
+        "bytes": 5753,
+        "sha256": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377"
+      },
+      "V5-UNITY-VERTICAL-SLICE.md": {
+        "exists": true,
+        "bytes": 8747,
+        "sha256": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4"
+      },
+      "V5-VERIFICATION-MATRIX.md": {
+        "exists": true,
+        "bytes": 9865,
+        "sha256": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548"
+      }
+    },
+    "preserved": true
+  },
+  "immutable_boundaries": [
+    "validation/unity-jungle-v5/",
+    "validation/builds/",
+    "tools/game-studio-mcp/tests/test_llm_v4.py",
+    "tools/game-studio-mcp/tests/test_p0_v4.py",
+    "V5-*.md",
+    "all existing tests and evidence"
+  ],
+  "capability_gaps_for_later_phases": [
+    "No specialized agent modules (Game Design, Technical Architect, Character, Environment, Gameplay, Asset Pipeline, UI/UX, QA, Coordinator) with typed I/O and governed scheduling.",
+    "No provider model listing, capability discovery or settings workflow tool; llm_test_provider exists for a real test request.",
+    "No PBR texture generation/baking/validation pipeline (albedo, normal, roughness, metallic, AO, emission, opacity).",
+    "Environment generation is limited to four procedural Blender blockout presets; no terrain materials, weather, day/night, navigation or streaming.",
+    "Gameplay templates are not yet packaged as reusable cross-engine generators.",
+    "Godot and Unreal adapters are not capability-complete; neither editor is installed, so no live validation is possible.",
+    "No V6 benchmark suite yet.",
+    "No V6 final reports yet (these are Phase 9 deliverables)."
+  ]
+}

@@ -1,0 +1,652 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 1 - AI provider architecture",
+  "generated_at": "2026-11-07T06:04:09Z",
+  "mode": "configuration-only",
+  "network_calls": 0,
+  "live_verified": null,
+  "credential_values_included": false,
+  "states": {
+    "supported": "The adapter implements and tests this capability.",
+    "unsupported": "The adapter does not implement this capability.",
+    "unknown": "No documented source established the state; do not assume it."
+  },
+  "capability_keys": [
+    "text_generation",
+    "structured_output",
+    "json_mode",
+    "tool_calling",
+    "vision",
+    "streaming",
+    "embeddings",
+    "context_window",
+    "model_listing",
+    "health_check"
+  ],
+  "task_categories": {
+    "game_design_reasoning": {
+      "description": "Understand a game request, extract requirements and design a game loop.",
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ]
+    },
+    "technical_architecture": {
+      "description": "Choose engines, dependencies, performance and platform architecture.",
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ]
+    },
+    "code_generation": {
+      "description": "Draft gameplay code or engine scripts from an approved plan.",
+      "required_capabilities": [
+        "text_generation"
+      ]
+    },
+    "character_environment_planning": {
+      "description": "Plan characters, environments, materials, rigs and animation sets.",
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ]
+    },
+    "asset_analysis": {
+      "description": "Reason about existing asset inventories and validation evidence.",
+      "required_capabilities": [
+        "text_generation"
+      ]
+    },
+    "qa_verification": {
+      "description": "Review test evidence and produce a verification assessment.",
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ]
+    }
+  },
+  "providers": [
+    {
+      "provider": "openai",
+      "kind": "hosted",
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "supported",
+        "json_mode": "supported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "unknown",
+        "model_listing": "supported",
+        "health_check": "supported"
+      },
+      "capabilities_with_state": {
+        "text_generation": {
+          "state": "supported",
+          "capability": "text_generation",
+          "label": "Text generation (chat/completion)"
+        },
+        "structured_output": {
+          "state": "supported",
+          "capability": "structured_output",
+          "label": "Structured JSON output requested by the adapter"
+        },
+        "json_mode": {
+          "state": "supported",
+          "capability": "json_mode",
+          "label": "Provider JSON mode parameter"
+        },
+        "tool_calling": {
+          "state": "unsupported",
+          "capability": "tool_calling",
+          "label": "Function/tool calling"
+        },
+        "vision": {
+          "state": "unsupported",
+          "capability": "vision",
+          "label": "Image input"
+        },
+        "streaming": {
+          "state": "unsupported",
+          "capability": "streaming",
+          "label": "Streaming responses"
+        },
+        "embeddings": {
+          "state": "unsupported",
+          "capability": "embeddings",
+          "label": "Embeddings"
+        },
+        "context_window": {
+          "state": "unknown",
+          "capability": "context_window",
+          "label": "Context window size"
+        },
+        "model_listing": {
+          "state": "supported",
+          "capability": "model_listing",
+          "label": "Model discovery endpoint implemented"
+        },
+        "health_check": {
+          "state": "supported",
+          "capability": "health_check",
+          "label": "Reachability/health check implemented"
+        }
+      },
+      "limitations": [
+        "The adapter does not send tool/function definitions.",
+        "The adapter sends text-only message content; image input is not implemented.",
+        "Responses are non-streaming.",
+        "Context window is not exposed by the documented model-list payload."
+      ],
+      "note": "Provider-level states describe the adapter implementation in this repository. Model-level support is discovered separately and is unknown when the provider does not expose it."
+    },
+    {
+      "provider": "openai_compatible",
+      "kind": "hosted",
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "supported",
+        "json_mode": "supported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "unknown",
+        "model_listing": "supported",
+        "health_check": "supported"
+      },
+      "capabilities_with_state": {
+        "text_generation": {
+          "state": "supported",
+          "capability": "text_generation",
+          "label": "Text generation (chat/completion)"
+        },
+        "structured_output": {
+          "state": "supported",
+          "capability": "structured_output",
+          "label": "Structured JSON output requested by the adapter"
+        },
+        "json_mode": {
+          "state": "supported",
+          "capability": "json_mode",
+          "label": "Provider JSON mode parameter"
+        },
+        "tool_calling": {
+          "state": "unsupported",
+          "capability": "tool_calling",
+          "label": "Function/tool calling"
+        },
+        "vision": {
+          "state": "unsupported",
+          "capability": "vision",
+          "label": "Image input"
+        },
+        "streaming": {
+          "state": "unsupported",
+          "capability": "streaming",
+          "label": "Streaming responses"
+        },
+        "embeddings": {
+          "state": "unsupported",
+          "capability": "embeddings",
+          "label": "Embeddings"
+        },
+        "context_window": {
+          "state": "unknown",
+          "capability": "context_window",
+          "label": "Context window size"
+        },
+        "model_listing": {
+          "state": "supported",
+          "capability": "model_listing",
+          "label": "Model discovery endpoint implemented"
+        },
+        "health_check": {
+          "state": "supported",
+          "capability": "health_check",
+          "label": "Reachability/health check implemented"
+        }
+      },
+      "limitations": [
+        "Capabilities depend on the third-party endpoint, so only adapter-level behaviour is claimed.",
+        "The adapter does not send tool/function definitions, images or streams."
+      ],
+      "note": "Provider-level states describe the adapter implementation in this repository. Model-level support is discovered separately and is unknown when the provider does not expose it."
+    },
+    {
+      "provider": "anthropic",
+      "kind": "hosted",
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "unsupported",
+        "json_mode": "unsupported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "unknown",
+        "model_listing": "supported",
+        "health_check": "supported"
+      },
+      "capabilities_with_state": {
+        "text_generation": {
+          "state": "supported",
+          "capability": "text_generation",
+          "label": "Text generation (chat/completion)"
+        },
+        "structured_output": {
+          "state": "unsupported",
+          "capability": "structured_output",
+          "label": "Structured JSON output requested by the adapter"
+        },
+        "json_mode": {
+          "state": "unsupported",
+          "capability": "json_mode",
+          "label": "Provider JSON mode parameter"
+        },
+        "tool_calling": {
+          "state": "unsupported",
+          "capability": "tool_calling",
+          "label": "Function/tool calling"
+        },
+        "vision": {
+          "state": "unsupported",
+          "capability": "vision",
+          "label": "Image input"
+        },
+        "streaming": {
+          "state": "unsupported",
+          "capability": "streaming",
+          "label": "Streaming responses"
+        },
+        "embeddings": {
+          "state": "unsupported",
+          "capability": "embeddings",
+          "label": "Embeddings"
+        },
+        "context_window": {
+          "state": "unknown",
+          "capability": "context_window",
+          "label": "Context window size"
+        },
+        "model_listing": {
+          "state": "supported",
+          "capability": "model_listing",
+          "label": "Model discovery endpoint implemented"
+        },
+        "health_check": {
+          "state": "supported",
+          "capability": "health_check",
+          "label": "Reachability/health check implemented"
+        }
+      },
+      "limitations": [
+        "No JSON-mode parameter is sent by the adapter; structured output is not requested through a documented provider control.",
+        "No tool, image or streaming support in the adapter.",
+        "Context window is not exposed by the documented model-list payload."
+      ],
+      "note": "Provider-level states describe the adapter implementation in this repository. Model-level support is discovered separately and is unknown when the provider does not expose it."
+    },
+    {
+      "provider": "gemini",
+      "kind": "hosted",
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "supported",
+        "json_mode": "supported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "supported",
+        "model_listing": "supported",
+        "health_check": "supported"
+      },
+      "capabilities_with_state": {
+        "text_generation": {
+          "state": "supported",
+          "capability": "text_generation",
+          "label": "Text generation (chat/completion)"
+        },
+        "structured_output": {
+          "state": "supported",
+          "capability": "structured_output",
+          "label": "Structured JSON output requested by the adapter"
+        },
+        "json_mode": {
+          "state": "supported",
+          "capability": "json_mode",
+          "label": "Provider JSON mode parameter"
+        },
+        "tool_calling": {
+          "state": "unsupported",
+          "capability": "tool_calling",
+          "label": "Function/tool calling"
+        },
+        "vision": {
+          "state": "unsupported",
+          "capability": "vision",
+          "label": "Image input"
+        },
+        "streaming": {
+          "state": "unsupported",
+          "capability": "streaming",
+          "label": "Streaming responses"
+        },
+        "embeddings": {
+          "state": "unsupported",
+          "capability": "embeddings",
+          "label": "Embeddings"
+        },
+        "context_window": {
+          "state": "supported",
+          "capability": "context_window",
+          "label": "Context window size"
+        },
+        "model_listing": {
+          "state": "supported",
+          "capability": "model_listing",
+          "label": "Model discovery endpoint implemented"
+        },
+        "health_check": {
+          "state": "supported",
+          "capability": "health_check",
+          "label": "Reachability/health check implemented"
+        }
+      },
+      "limitations": [
+        "The adapter does not send tools, inline image parts or streams.",
+        "Model context window is only known after discovery returns token limits."
+      ],
+      "note": "Provider-level states describe the adapter implementation in this repository. Model-level support is discovered separately and is unknown when the provider does not expose it."
+    },
+    {
+      "provider": "ollama",
+      "kind": "local",
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "supported",
+        "json_mode": "supported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "unknown",
+        "model_listing": "supported",
+        "health_check": "supported"
+      },
+      "capabilities_with_state": {
+        "text_generation": {
+          "state": "supported",
+          "capability": "text_generation",
+          "label": "Text generation (chat/completion)"
+        },
+        "structured_output": {
+          "state": "supported",
+          "capability": "structured_output",
+          "label": "Structured JSON output requested by the adapter"
+        },
+        "json_mode": {
+          "state": "supported",
+          "capability": "json_mode",
+          "label": "Provider JSON mode parameter"
+        },
+        "tool_calling": {
+          "state": "unsupported",
+          "capability": "tool_calling",
+          "label": "Function/tool calling"
+        },
+        "vision": {
+          "state": "unsupported",
+          "capability": "vision",
+          "label": "Image input"
+        },
+        "streaming": {
+          "state": "unsupported",
+          "capability": "streaming",
+          "label": "Streaming responses"
+        },
+        "embeddings": {
+          "state": "unsupported",
+          "capability": "embeddings",
+          "label": "Embeddings"
+        },
+        "context_window": {
+          "state": "unknown",
+          "capability": "context_window",
+          "label": "Context window size"
+        },
+        "model_listing": {
+          "state": "supported",
+          "capability": "model_listing",
+          "label": "Model discovery endpoint implemented"
+        },
+        "health_check": {
+          "state": "supported",
+          "capability": "health_check",
+          "label": "Reachability/health check implemented"
+        }
+      },
+      "limitations": [
+        "Ollama is optional and is never installed or started by this project.",
+        "A reachable service must be verified before use.",
+        "Individual local models may not support JSON mode; the adapter requests it but model-level support stays unknown unless discovery reports it.",
+        "The adapter does not send tools, images or streams."
+      ],
+      "note": "Provider-level states describe the adapter implementation in this repository. Model-level support is discovered separately and is unknown when the provider does not expose it."
+    }
+  ],
+  "provider_status": [
+    {
+      "provider": "openai",
+      "kind": "hosted",
+      "model": "gpt-4o-mini",
+      "base_url": "https://api.openai.com/v1",
+      "credential_required": true,
+      "credential_configured": false,
+      "credential_source": null,
+      "local_only_blocks": false,
+      "available": false,
+      "unavailable_reason": "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+      "reachable": null,
+      "live_verified": null,
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "supported",
+        "json_mode": "supported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "unknown",
+        "model_listing": "supported",
+        "health_check": "supported"
+      },
+      "limits": {
+        "timeout_seconds": 60,
+        "connect_timeout_seconds": 10,
+        "max_tokens": 4096,
+        "max_context_chars": 64000,
+        "max_requests": 20,
+        "max_requests_per_day": 200,
+        "retries": 2
+      },
+      "note": "Configuration is not evidence of reachability. Reachability requires llm_list_models or llm_test_provider with confirm=true."
+    },
+    {
+      "provider": "openai_compatible",
+      "kind": "hosted",
+      "model": "gpt-4o-mini",
+      "base_url": "https://api.openai.com/v1",
+      "credential_required": true,
+      "credential_configured": false,
+      "credential_source": null,
+      "local_only_blocks": false,
+      "available": false,
+      "unavailable_reason": "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY",
+      "reachable": null,
+      "live_verified": null,
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "supported",
+        "json_mode": "supported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "unknown",
+        "model_listing": "supported",
+        "health_check": "supported"
+      },
+      "limits": {
+        "timeout_seconds": 60,
+        "connect_timeout_seconds": 10,
+        "max_tokens": 4096,
+        "max_context_chars": 64000,
+        "max_requests": 20,
+        "max_requests_per_day": 200,
+        "retries": 2
+      },
+      "note": "Configuration is not evidence of reachability. Reachability requires llm_list_models or llm_test_provider with confirm=true."
+    },
+    {
+      "provider": "anthropic",
+      "kind": "hosted",
+      "model": "claude-3-5-sonnet-latest",
+      "base_url": "https://api.anthropic.com/v1",
+      "credential_required": true,
+      "credential_configured": false,
+      "credential_source": null,
+      "local_only_blocks": false,
+      "available": false,
+      "unavailable_reason": "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+      "reachable": null,
+      "live_verified": null,
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "unsupported",
+        "json_mode": "unsupported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "unknown",
+        "model_listing": "supported",
+        "health_check": "supported"
+      },
+      "limits": {
+        "timeout_seconds": 60,
+        "connect_timeout_seconds": 10,
+        "max_tokens": 4096,
+        "max_context_chars": 64000,
+        "max_requests": 20,
+        "max_requests_per_day": 200,
+        "retries": 2
+      },
+      "note": "Configuration is not evidence of reachability. Reachability requires llm_list_models or llm_test_provider with confirm=true."
+    },
+    {
+      "provider": "gemini",
+      "kind": "hosted",
+      "model": "gemini-1.5-flash",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta",
+      "credential_required": true,
+      "credential_configured": false,
+      "credential_source": null,
+      "local_only_blocks": false,
+      "available": false,
+      "unavailable_reason": "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+      "reachable": null,
+      "live_verified": null,
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "supported",
+        "json_mode": "supported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "supported",
+        "model_listing": "supported",
+        "health_check": "supported"
+      },
+      "limits": {
+        "timeout_seconds": 60,
+        "connect_timeout_seconds": 10,
+        "max_tokens": 4096,
+        "max_context_chars": 64000,
+        "max_requests": 20,
+        "max_requests_per_day": 200,
+        "retries": 2
+      },
+      "note": "Configuration is not evidence of reachability. Reachability requires llm_list_models or llm_test_provider with confirm=true."
+    },
+    {
+      "provider": "ollama",
+      "kind": "local",
+      "model": "llama3.1",
+      "base_url": "http://127.0.0.1:11434",
+      "credential_required": false,
+      "credential_configured": false,
+      "credential_source": null,
+      "local_only_blocks": false,
+      "available": true,
+      "unavailable_reason": null,
+      "reachable": null,
+      "live_verified": null,
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "supported",
+        "json_mode": "supported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "unknown",
+        "model_listing": "supported",
+        "health_check": "supported"
+      },
+      "limits": {
+        "timeout_seconds": 60,
+        "connect_timeout_seconds": 10,
+        "max_tokens": 4096,
+        "max_context_chars": 64000,
+        "max_requests": 20,
+        "max_requests_per_day": 200,
+        "retries": 2
+      },
+      "note": "Configuration is not evidence of reachability. Reachability requires llm_list_models or llm_test_provider with confirm=true."
+    }
+  ],
+  "model_level": {
+    "default": "unknown",
+    "rule": "A model name is never used as evidence. Only documented discovery fields can set a model capability to supported or unsupported."
+  },
+  "discovery": {
+    "endpoints": {
+      "openai": "GET {base_url}/models",
+      "openai_compatible": "GET {base_url}/models",
+      "anthropic": "GET {base_url}/models?limit=100",
+      "gemini": "GET {base_url}/models?pageSize=200",
+      "ollama": "GET {base_url}/api/tags (loopback HTTP allowed)"
+    },
+    "requires": "llm_list_models with confirm=true (one read-only request)",
+    "capability_metadata": "Gemini documents supportedGenerationMethods and inputTokenLimit. OpenAI-compatible and Anthropic list ids only. Ollama tags do not declare capabilities, so they stay unknown."
+  },
+  "ollama": {
+    "runtime_on_path": false,
+    "executable": null,
+    "installed": false,
+    "started": false,
+    "note": "Detection only. This project never installs Ollama, downloads a model or starts a background service."
+  },
+  "limitations": [
+    "No live provider request was made while producing this report.",
+    "Provider-level states describe adapter implementation, not vendor features.",
+    "Tool calling, vision, streaming and embeddings are unsupported by every adapter in this repository.",
+    "Anthropic structured output is unsupported because no documented JSON mode is sent by the adapter.",
+    "Context window is unknown unless discovery exposes token limits.",
+    "Mocked tests prove code paths only, never live provider behaviour."
+  ]
+}

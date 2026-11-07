@@ -1,0 +1,1465 @@
+{
+  "ok": true,
+  "schema_version": 1,
+  "phase": "V6 Phase 2 - agent orchestration",
+  "agent_count": 8,
+  "agents": [
+    {
+      "id": "game_director",
+      "name": "Game Director",
+      "version": "1.0.0",
+      "responsibility": "Coordinate the workflow, resolve dependencies and consolidate the plan.",
+      "task_category": "game_design_reasoning",
+      "dependencies": [
+        "qa"
+      ],
+      "required_context": [
+        "brief",
+        "design",
+        "architecture",
+        "character",
+        "environment",
+        "gameplay",
+        "uiux",
+        "qa"
+      ],
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "request",
+          "context_sources"
+        ],
+        "properties": {
+          "request": {
+            "type": "string"
+          },
+          "context_sources": {
+            "type": "object"
+          },
+          "brief": {
+            "type": "object"
+          },
+          "design": {
+            "type": "object"
+          },
+          "architecture": {
+            "type": "object"
+          },
+          "character": {
+            "type": "object"
+          },
+          "environment": {
+            "type": "object"
+          },
+          "gameplay": {
+            "type": "object"
+          },
+          "uiux": {
+            "type": "object"
+          },
+          "qa": {
+            "type": "object"
+          },
+          "approved_decisions": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "summary",
+          "project",
+          "milestones",
+          "workstreams",
+          "dependency_graph",
+          "parallel_groups",
+          "conflicts",
+          "open_questions",
+          "approval_required",
+          "executable",
+          "implementation_status",
+          "assumptions",
+          "risks",
+          "requirements_addressed"
+        ],
+        "properties": {
+          "summary": {
+            "type": "string"
+          },
+          "project": {
+            "type": "object"
+          },
+          "milestones": {
+            "type": "array"
+          },
+          "workstreams": {
+            "type": "array"
+          },
+          "dependency_graph": {
+            "type": "object"
+          },
+          "parallel_groups": {
+            "type": "array"
+          },
+          "conflicts": {
+            "type": "array"
+          },
+          "open_questions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "approval_required": {
+            "type": "array"
+          },
+          "executable": {
+            "type": "boolean",
+            "enum": [
+              false
+            ]
+          },
+          "implementation_status": {
+            "type": "string"
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "requirements_addressed": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "max_retries": 0,
+      "produces": "consolidation",
+      "states": [
+        "pending",
+        "ready",
+        "running",
+        "completed",
+        "failed",
+        "blocked",
+        "skipped",
+        "cancelled"
+      ]
+    },
+    {
+      "id": "game_designer",
+      "name": "Game Designer",
+      "version": "1.0.0",
+      "responsibility": "Design the gameplay loop, objectives, progression and acceptance tests.",
+      "task_category": "game_design_reasoning",
+      "dependencies": [],
+      "required_context": [
+        "brief"
+      ],
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "request",
+          "context_sources"
+        ],
+        "properties": {
+          "request": {
+            "type": "string"
+          },
+          "context_sources": {
+            "type": "object"
+          },
+          "brief": {
+            "type": "object"
+          },
+          "design": {
+            "type": "object"
+          },
+          "architecture": {
+            "type": "object"
+          },
+          "character": {
+            "type": "object"
+          },
+          "environment": {
+            "type": "object"
+          },
+          "gameplay": {
+            "type": "object"
+          },
+          "uiux": {
+            "type": "object"
+          },
+          "qa": {
+            "type": "object"
+          },
+          "approved_decisions": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "summary",
+          "genre",
+          "dimension",
+          "platform",
+          "core_loop",
+          "mechanics",
+          "objectives",
+          "progression",
+          "exclusions",
+          "missing_requirements",
+          "acceptance_tests",
+          "requirements_addressed",
+          "assumptions",
+          "risks"
+        ],
+        "properties": {
+          "summary": {
+            "type": "string"
+          },
+          "genre": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dimension": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "platform": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "core_loop": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "mechanics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "objectives": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "progression": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "exclusions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "missing_requirements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "acceptance_tests": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "requirements_addressed": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "max_retries": 0,
+      "produces": "design",
+      "states": [
+        "pending",
+        "ready",
+        "running",
+        "completed",
+        "failed",
+        "blocked",
+        "skipped",
+        "cancelled"
+      ]
+    },
+    {
+      "id": "technical_architect",
+      "name": "Technical Architect",
+      "version": "1.0.0",
+      "responsibility": "Choose a verified engine and define scenes, systems and budgets.",
+      "task_category": "technical_architecture",
+      "dependencies": [
+        "design"
+      ],
+      "required_context": [
+        "brief",
+        "design"
+      ],
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "request",
+          "context_sources"
+        ],
+        "properties": {
+          "request": {
+            "type": "string"
+          },
+          "context_sources": {
+            "type": "object"
+          },
+          "brief": {
+            "type": "object"
+          },
+          "design": {
+            "type": "object"
+          },
+          "architecture": {
+            "type": "object"
+          },
+          "character": {
+            "type": "object"
+          },
+          "environment": {
+            "type": "object"
+          },
+          "gameplay": {
+            "type": "object"
+          },
+          "uiux": {
+            "type": "object"
+          },
+          "qa": {
+            "type": "object"
+          },
+          "approved_decisions": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "summary",
+          "engine",
+          "architecture",
+          "performance",
+          "risks",
+          "requirements_addressed",
+          "assumptions"
+        ],
+        "properties": {
+          "summary": {
+            "type": "string"
+          },
+          "engine": {
+            "type": "object",
+            "required": [
+              "name",
+              "rationale",
+              "installed",
+              "supported_systems",
+              "unsupported_features"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "rationale": {
+                "type": "string"
+              },
+              "installed": {
+                "type": "boolean"
+              },
+              "supported_systems": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "unsupported_features": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "architecture": {
+            "type": "object",
+            "required": [
+              "scenes",
+              "systems",
+              "dependencies"
+            ],
+            "properties": {
+              "scenes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "systems": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "dependencies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "performance": {
+            "type": "object",
+            "required": [
+              "quality_target",
+              "budget"
+            ],
+            "properties": {
+              "quality_target": {
+                "type": "string"
+              },
+              "budget": {
+                "type": "object"
+              }
+            }
+          },
+          "risks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "requirements_addressed": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "max_retries": 0,
+      "produces": "architecture",
+      "states": [
+        "pending",
+        "ready",
+        "running",
+        "completed",
+        "failed",
+        "blocked",
+        "skipped",
+        "cancelled"
+      ]
+    },
+    {
+      "id": "character",
+      "name": "Character Agent",
+      "version": "1.0.0",
+      "responsibility": "Plan character geometry, UVs, PBR textures, rig and animations.",
+      "task_category": "character_environment_planning",
+      "dependencies": [
+        "design",
+        "architecture"
+      ],
+      "required_context": [
+        "brief",
+        "design",
+        "architecture"
+      ],
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "request",
+          "context_sources"
+        ],
+        "properties": {
+          "request": {
+            "type": "string"
+          },
+          "context_sources": {
+            "type": "object"
+          },
+          "brief": {
+            "type": "object"
+          },
+          "design": {
+            "type": "object"
+          },
+          "architecture": {
+            "type": "object"
+          },
+          "character": {
+            "type": "object"
+          },
+          "environment": {
+            "type": "object"
+          },
+          "gameplay": {
+            "type": "object"
+          },
+          "uiux": {
+            "type": "object"
+          },
+          "qa": {
+            "type": "object"
+          },
+          "approved_decisions": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "summary",
+          "characters",
+          "assets_generated",
+          "textures_generated",
+          "capability_gaps",
+          "assumptions",
+          "risks"
+        ],
+        "properties": {
+          "summary": {
+            "type": "string"
+          },
+          "characters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "type",
+                "geometry",
+                "materials",
+                "textures",
+                "rig",
+                "lod",
+                "status"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "geometry": {
+                  "type": "object"
+                },
+                "materials": {
+                  "type": "array"
+                },
+                "textures": {
+                  "type": "object"
+                },
+                "rig": {
+                  "type": "object"
+                },
+                "lod": {
+                  "type": "object"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "assets_generated": {
+            "type": "boolean"
+          },
+          "textures_generated": {
+            "type": "boolean"
+          },
+          "capability_gaps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "max_retries": 0,
+      "produces": "character",
+      "states": [
+        "pending",
+        "ready",
+        "running",
+        "completed",
+        "failed",
+        "blocked",
+        "skipped",
+        "cancelled"
+      ]
+    },
+    {
+      "id": "environment",
+      "name": "Environment Agent",
+      "version": "1.0.0",
+      "responsibility": "Plan terrain, vegetation, structures, water, lighting and atmosphere.",
+      "task_category": "character_environment_planning",
+      "dependencies": [
+        "design",
+        "architecture"
+      ],
+      "required_context": [
+        "brief",
+        "design",
+        "architecture"
+      ],
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "request",
+          "context_sources"
+        ],
+        "properties": {
+          "request": {
+            "type": "string"
+          },
+          "context_sources": {
+            "type": "object"
+          },
+          "brief": {
+            "type": "object"
+          },
+          "design": {
+            "type": "object"
+          },
+          "architecture": {
+            "type": "object"
+          },
+          "character": {
+            "type": "object"
+          },
+          "environment": {
+            "type": "object"
+          },
+          "gameplay": {
+            "type": "object"
+          },
+          "uiux": {
+            "type": "object"
+          },
+          "qa": {
+            "type": "object"
+          },
+          "approved_decisions": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "summary",
+          "environment",
+          "terrain",
+          "vegetation",
+          "structures",
+          "water",
+          "lighting",
+          "weather",
+          "atmosphere",
+          "materials",
+          "estimates",
+          "performance_risks",
+          "dependencies",
+          "generated",
+          "assumptions",
+          "risks"
+        ],
+        "properties": {
+          "summary": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "string"
+          },
+          "terrain": {
+            "type": "object"
+          },
+          "vegetation": {
+            "type": "array"
+          },
+          "structures": {
+            "type": "array"
+          },
+          "water": {
+            "type": "object"
+          },
+          "lighting": {
+            "type": "object"
+          },
+          "weather": {
+            "type": "object"
+          },
+          "atmosphere": {
+            "type": "object"
+          },
+          "materials": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "estimates": {
+            "type": "object"
+          },
+          "performance_risks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "generated": {
+            "type": "boolean"
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "max_retries": 0,
+      "produces": "environment",
+      "states": [
+        "pending",
+        "ready",
+        "running",
+        "completed",
+        "failed",
+        "blocked",
+        "skipped",
+        "cancelled"
+      ]
+    },
+    {
+      "id": "gameplay",
+      "name": "Gameplay Agent",
+      "version": "1.0.0",
+      "responsibility": "Plan controls, movement, physics, camera, scoring and tests.",
+      "task_category": "technical_architecture",
+      "dependencies": [
+        "design",
+        "architecture"
+      ],
+      "required_context": [
+        "brief",
+        "design",
+        "architecture"
+      ],
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "request",
+          "context_sources"
+        ],
+        "properties": {
+          "request": {
+            "type": "string"
+          },
+          "context_sources": {
+            "type": "object"
+          },
+          "brief": {
+            "type": "object"
+          },
+          "design": {
+            "type": "object"
+          },
+          "architecture": {
+            "type": "object"
+          },
+          "character": {
+            "type": "object"
+          },
+          "environment": {
+            "type": "object"
+          },
+          "gameplay": {
+            "type": "object"
+          },
+          "uiux": {
+            "type": "object"
+          },
+          "qa": {
+            "type": "object"
+          },
+          "approved_decisions": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "summary",
+          "controls",
+          "movement",
+          "physics",
+          "interactions",
+          "camera",
+          "scoring",
+          "progression",
+          "systems",
+          "acceptance_tests",
+          "exclusions",
+          "assumptions",
+          "risks"
+        ],
+        "properties": {
+          "summary": {
+            "type": "string"
+          },
+          "controls": {
+            "type": "array"
+          },
+          "movement": {
+            "type": "object"
+          },
+          "physics": {
+            "type": "object"
+          },
+          "interactions": {
+            "type": "array"
+          },
+          "camera": {
+            "type": "object"
+          },
+          "scoring": {
+            "type": "object"
+          },
+          "progression": {
+            "type": "object"
+          },
+          "systems": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "name",
+                "reusable",
+                "acceptance_tests"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "reusable": {
+                  "type": "boolean"
+                },
+                "acceptance_tests": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "acceptance_tests": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "exclusions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "max_retries": 0,
+      "produces": "gameplay",
+      "states": [
+        "pending",
+        "ready",
+        "running",
+        "completed",
+        "failed",
+        "blocked",
+        "skipped",
+        "cancelled"
+      ]
+    },
+    {
+      "id": "uiux",
+      "name": "UI/UX Agent",
+      "version": "1.0.0",
+      "responsibility": "Plan menus, HUD, settings, pause, accessibility and navigation.",
+      "task_category": "game_design_reasoning",
+      "dependencies": [
+        "design",
+        "gameplay"
+      ],
+      "required_context": [
+        "brief",
+        "design",
+        "gameplay"
+      ],
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "request",
+          "context_sources"
+        ],
+        "properties": {
+          "request": {
+            "type": "string"
+          },
+          "context_sources": {
+            "type": "object"
+          },
+          "brief": {
+            "type": "object"
+          },
+          "design": {
+            "type": "object"
+          },
+          "architecture": {
+            "type": "object"
+          },
+          "character": {
+            "type": "object"
+          },
+          "environment": {
+            "type": "object"
+          },
+          "gameplay": {
+            "type": "object"
+          },
+          "uiux": {
+            "type": "object"
+          },
+          "qa": {
+            "type": "object"
+          },
+          "approved_decisions": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "summary",
+          "screens",
+          "hud",
+          "settings",
+          "accessibility",
+          "navigation",
+          "dependencies",
+          "assumptions",
+          "risks"
+        ],
+        "properties": {
+          "summary": {
+            "type": "string"
+          },
+          "screens": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "purpose",
+                "widgets",
+                "navigation"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "purpose": {
+                  "type": "string"
+                },
+                "widgets": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "navigation": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "hud": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "settings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accessibility": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "navigation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "max_retries": 0,
+      "produces": "uiux",
+      "states": [
+        "pending",
+        "ready",
+        "running",
+        "completed",
+        "failed",
+        "blocked",
+        "skipped",
+        "cancelled"
+      ]
+    },
+    {
+      "id": "qa",
+      "name": "QA Agent",
+      "version": "1.0.0",
+      "responsibility": "Review coverage, dependencies and conflicts; define test evidence.",
+      "task_category": "qa_verification",
+      "dependencies": [
+        "design",
+        "architecture",
+        "character",
+        "environment",
+        "gameplay",
+        "uiux"
+      ],
+      "required_context": [
+        "brief",
+        "design",
+        "architecture",
+        "character",
+        "environment",
+        "gameplay",
+        "uiux"
+      ],
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "request",
+          "context_sources"
+        ],
+        "properties": {
+          "request": {
+            "type": "string"
+          },
+          "context_sources": {
+            "type": "object"
+          },
+          "brief": {
+            "type": "object"
+          },
+          "design": {
+            "type": "object"
+          },
+          "architecture": {
+            "type": "object"
+          },
+          "character": {
+            "type": "object"
+          },
+          "environment": {
+            "type": "object"
+          },
+          "gameplay": {
+            "type": "object"
+          },
+          "uiux": {
+            "type": "object"
+          },
+          "qa": {
+            "type": "object"
+          },
+          "approved_decisions": {
+            "type": "array"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "summary",
+          "checks",
+          "coverage",
+          "test_plan",
+          "evidence_requirements",
+          "conflicts",
+          "verification_status",
+          "assumptions",
+          "risks"
+        ],
+        "properties": {
+          "summary": {
+            "type": "string"
+          },
+          "checks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "category",
+                "status",
+                "evidence",
+                "remediation"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "evidence": {
+                  "type": "string"
+                },
+                "remediation": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "coverage": {
+            "type": "object",
+            "required": [
+              "requirements_total",
+              "addressed",
+              "missing"
+            ],
+            "properties": {
+              "requirements_total": {
+                "type": "integer"
+              },
+              "addressed": {
+                "type": "integer"
+              },
+              "missing": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "test_plan": {
+            "type": "array"
+          },
+          "evidence_requirements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "conflicts": {
+            "type": "array"
+          },
+          "verification_status": {
+            "type": "string",
+            "enum": [
+              "not-verified"
+            ]
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "max_retries": 0,
+      "produces": "qa",
+      "states": [
+        "pending",
+        "ready",
+        "running",
+        "completed",
+        "failed",
+        "blocked",
+        "skipped",
+        "cancelled"
+      ]
+    }
+  ],
+  "workflow": {
+    "dependency_graph": {
+      "design": {
+        "agent": "game_designer",
+        "depends_on": [],
+        "section": "design",
+        "description": "Define the game loop, objectives, progression and acceptance tests."
+      },
+      "architecture": {
+        "agent": "technical_architect",
+        "depends_on": [
+          "design"
+        ],
+        "section": "architecture",
+        "description": "Select a verified engine and define scenes, systems and budgets."
+      },
+      "character": {
+        "agent": "character",
+        "depends_on": [
+          "design",
+          "architecture"
+        ],
+        "section": "character",
+        "description": "Plan character geometry, UVs, PBR textures, rig and animations."
+      },
+      "environment": {
+        "agent": "environment",
+        "depends_on": [
+          "design",
+          "architecture"
+        ],
+        "section": "environment",
+        "description": "Plan terrain, vegetation, structures, water, lighting and atmosphere."
+      },
+      "gameplay": {
+        "agent": "gameplay",
+        "depends_on": [
+          "design",
+          "architecture"
+        ],
+        "section": "gameplay",
+        "description": "Plan controls, movement, physics, camera, scoring and tests."
+      },
+      "uiux": {
+        "agent": "uiux",
+        "depends_on": [
+          "design",
+          "gameplay"
+        ],
+        "section": "uiux",
+        "description": "Plan menus, HUD, settings, pause, accessibility and navigation."
+      },
+      "qa": {
+        "agent": "qa",
+        "depends_on": [
+          "design",
+          "architecture",
+          "character",
+          "environment",
+          "gameplay",
+          "uiux"
+        ],
+        "section": "qa",
+        "description": "Review coverage, dependencies, conflicts and evidence needs."
+      },
+      "consolidation": {
+        "agent": "game_director",
+        "depends_on": [
+          "qa"
+        ],
+        "section": "consolidation",
+        "description": "Consolidate a non-executable project plan with open decisions."
+      }
+    },
+    "parallel_groups": [
+      [
+        "design"
+      ],
+      [
+        "architecture"
+      ],
+      [
+        "character",
+        "environment",
+        "gameplay"
+      ],
+      [
+        "uiux"
+      ],
+      [
+        "qa"
+      ],
+      [
+        "consolidation"
+      ]
+    ],
+    "graph_errors": []
+  },
+  "states": [
+    "pending",
+    "ready",
+    "running",
+    "completed",
+    "failed",
+    "blocked",
+    "skipped",
+    "cancelled"
+  ],
+  "note": "All agents are planning modules. A completed agent run is not implementation, texture, animation or build verification."
+}

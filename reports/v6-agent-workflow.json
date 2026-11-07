@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 2 - agent workflow",
+  "generated_at": "2026-11-07T06:40:18Z",
+  "executable": false,
+  "note": "Planning workflow only. Execution produces plans, never engine writes, assets or builds.",
+  "task_count": 8,
+  "tasks": [
+    {
+      "id": "design",
+      "agent": "game_designer",
+      "section": "design",
+      "dependencies": [],
+      "description": "Define the game loop, objectives, progression and acceptance tests."
+    },
+    {
+      "id": "architecture",
+      "agent": "technical_architect",
+      "section": "architecture",
+      "dependencies": [
+        "design"
+      ],
+      "description": "Select a verified engine and define scenes, systems and budgets."
+    },
+    {
+      "id": "character",
+      "agent": "character",
+      "section": "character",
+      "dependencies": [
+        "design",
+        "architecture"
+      ],
+      "description": "Plan character geometry, UVs, PBR textures, rig and animations."
+    },
+    {
+      "id": "environment",
+      "agent": "environment",
+      "section": "environment",
+      "dependencies": [
+        "design",
+        "architecture"
+      ],
+      "description": "Plan terrain, vegetation, structures, water, lighting and atmosphere."
+    },
+    {
+      "id": "gameplay",
+      "agent": "gameplay",
+      "section": "gameplay",
+      "dependencies": [
+        "design",
+        "architecture"
+      ],
+      "description": "Plan controls, movement, physics, camera, scoring and tests."
+    },
+    {
+      "id": "uiux",
+      "agent": "uiux",
+      "section": "uiux",
+      "dependencies": [
+        "design",
+        "gameplay"
+      ],
+      "description": "Plan menus, HUD, settings, pause, accessibility and navigation."
+    },
+    {
+      "id": "qa",
+      "agent": "qa",
+      "section": "qa",
+      "dependencies": [
+        "design",
+        "architecture",
+        "character",
+        "environment",
+        "gameplay",
+        "uiux"
+      ],
+      "description": "Review coverage, dependencies, conflicts and evidence needs."
+    },
+    {
+      "id": "consolidation",
+      "agent": "game_director",
+      "section": "consolidation",
+      "dependencies": [
+        "qa"
+      ],
+      "description": "Consolidate a non-executable project plan with open decisions."
+    }
+  ],
+  "dependency_graph": {
+    "design": {
+      "agent": "game_designer",
+      "depends_on": [],
+      "section": "design",
+      "description": "Define the game loop, objectives, progression and acceptance tests."
+    },
+    "architecture": {
+      "agent": "technical_architect",
+      "depends_on": [
+        "design"
+      ],
+      "section": "architecture",
+      "description": "Select a verified engine and define scenes, systems and budgets."
+    },
+    "character": {
+      "agent": "character",
+      "depends_on": [
+        "design",
+        "architecture"
+      ],
+      "section": "character",
+      "description": "Plan character geometry, UVs, PBR textures, rig and animations."
+    },
+    "environment": {
+      "agent": "environment",
+      "depends_on": [
+        "design",
+        "architecture"
+      ],
+      "section": "environment",
+      "description": "Plan terrain, vegetation, structures, water, lighting and atmosphere."
+    },
+    "gameplay": {
+      "agent": "gameplay",
+      "depends_on": [
+        "design",
+        "architecture"
+      ],
+      "section": "gameplay",
+      "description": "Plan controls, movement, physics, camera, scoring and tests."
+    },
+    "uiux": {
+      "agent": "uiux",
+      "depends_on": [
+        "design",
+        "gameplay"
+      ],
+      "section": "uiux",
+      "description": "Plan menus, HUD, settings, pause, accessibility and navigation."
+    },
+    "qa": {
+      "agent": "qa",
+      "depends_on": [
+        "design",
+        "architecture",
+        "character",
+        "environment",
+        "gameplay",
+        "uiux"
+      ],
+      "section": "qa",
+      "description": "Review coverage, dependencies, conflicts and evidence needs."
+    },
+    "consolidation": {
+      "agent": "game_director",
+      "depends_on": [
+        "qa"
+      ],
+      "section": "consolidation",
+      "description": "Consolidate a non-executable project plan with open decisions."
+    }
+  },
+  "parallel_groups": [
+    [
+      "design"
+    ],
+    [
+      "architecture"
+    ],
+    [
+      "character",
+      "environment",
+      "gameplay"
+    ],
+    [
+      "uiux"
+    ],
+    [
+      "qa"
+    ],
+    [
+      "consolidation"
+    ]
+  ],
+  "graph_errors": [],
+  "concurrency": {
+    "default": 2,
+    "maximum": 4,
+    "configurable_per_run": true,
+    "note": "Explicit cap; the coordinator never opens uncontrolled parallel provider requests."
+  }
+}

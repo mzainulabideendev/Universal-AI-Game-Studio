@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T18:01:17Z",
+  "generated_at": "2026-11-07T05:37:19Z",
   "generated_by": "scripts/v5-security-checks.py",
   "network_calls": 0,
   "checks": [
@@ -78,7 +78,7 @@
         "cases": 22,
         "source": "deterministic-fallback",
         "live": false,
-        "mean_overall": 0.944,
+        "mean_overall": 0.957,
         "failures": [],
         "capability_gaps": 3
       }

@@ -21,6 +21,7 @@ import urllib.parse
 import urllib.request
 
 from ..util import RedactedHeaders, http_request
+from .capabilities import model_capabilities, unknown_model_capabilities
 
 ANTHROPIC_VERSION = "2023-06-01"
 
@@ -80,6 +81,36 @@ def _request(url: str, *, headers: dict, body: dict, timeout: int,
     raise _classify_status(result.get("status"), result.get("payload"))
 
 
+def _request_get(url: str, *, headers: dict, timeout: int,
+                 allow_local: bool = False) -> dict:
+    result = http_request(url, method="GET", headers=headers, timeout=timeout,
+                          allow_local=allow_local)
+    if result.get("ok"):
+        return result
+    if result.get("status") is None:
+        message = str(result.get("error") or "network request failed")
+        kind = "timeout" if "timed out" in message.lower() else "unavailable"
+        raise ProviderError(message, kind=kind, retryable=True)
+    raise _classify_status(result.get("status"), result.get("payload"))
+
+
+def _model_entry(model_id: str, *, provider: str, name: str | None = None,
+                 created: object = None, owned_by: str | None = None,
+                 capabilities: dict | None = None,
+                 raw_meta: dict | None = None) -> dict:
+    return {
+        "id": model_id,
+        "name": name or model_id,
+        "provider": provider,
+        "created": created,
+        "owned_by": owned_by,
+        "capabilities": capabilities or unknown_model_capabilities(),
+        "source": "live-discovery",
+        "raw_meta": raw_meta or {},
+    }
+
+
+
 def _usage_openai(payload: dict) -> dict:
     usage = payload.get("usage") or {}
     return {
@@ -104,6 +135,37 @@ class Provider:
     def _headers(self) -> dict:
         return {}
 
+    def list_models(self, *, timeout: int = 15) -> dict:
+        """Return documented models. Adapters that cannot list raise ProviderError."""
+        raise ProviderError(
+            f"model listing is not implemented for provider {self.name!r}",
+            kind="unsupported")
+
+    def health(self, *, timeout: int = 10) -> dict:
+        """Probe reachability with the documented model-list endpoint."""
+        try:
+            listing = self.list_models(timeout=timeout)
+        except ProviderError as exc:
+            return {
+                "ok": False,
+                "provider": self.name,
+                "reachable": False,
+                "state": exc.kind,
+                "retryable": bool(exc.retryable),
+                "error": str(exc),
+                "live_verified": False,
+            }
+        return {
+            "ok": True,
+            "provider": self.name,
+            "reachable": True,
+            "state": "reachable",
+            "model_count": listing.get("count", 0),
+            "source": listing.get("source"),
+            "live_verified": True,
+            "note": "Reachability was verified by a real model-list request.",
+        }
+
 
 class OpenAICompatibleProvider(Provider):
     name = "openai_compatible"
@@ -113,6 +175,37 @@ class OpenAICompatibleProvider(Provider):
         if base.endswith("/chat/completions"):
             return base
         return base + "/chat/completions"
+
+    def _models_url(self) -> str:
+        base = self.cfg["base_url"].rstrip("/")
+        if base.endswith("/chat/completions"):
+            base = base[: -len("/chat/completions")]
+        return base + "/models"
+
+    def list_models(self, *, timeout: int = 15) -> dict:
+        result = _request_get(self._models_url(), headers=self._headers(), timeout=timeout)
+        payload = result.get("payload")
+        if not isinstance(payload, dict):
+            raise ProviderError("provider returned non-JSON model list",
+                                kind="invalid_response")
+        items = payload.get("data")
+        if not isinstance(items, list):
+            raise ProviderError("model list response has no data array",
+                                kind="invalid_response")
+        models = []
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            model_id = item.get("id")
+            if not isinstance(model_id, str) or not model_id.strip():
+                continue
+            models.append(_model_entry(
+                model_id.strip(), provider=self.name,
+                created=item.get("created"), owned_by=item.get("owned_by"),
+                raw_meta={"object": item.get("object")}))
+        return {"ok": True, "provider": self.name, "source": "live-discovery",
+                "endpoint": self._models_url(), "models": models, "count": len(models),
+                "capability_metadata_exposed": False}
 
     def _headers(self) -> dict:
         key = self.cfg.get("api_key")
@@ -173,6 +266,34 @@ class AnthropicProvider(Provider):
             headers["x-api-key"] = key
         return RedactedHeaders(headers)
 
+    def _models_url(self) -> str:
+        return self.cfg["base_url"].rstrip("/") + "/models?limit=100"
+
+    def list_models(self, *, timeout: int = 15) -> dict:
+        result = _request_get(self._models_url(), headers=self._headers(), timeout=timeout)
+        payload = result.get("payload")
+        if not isinstance(payload, dict):
+            raise ProviderError("provider returned non-JSON model list",
+                                kind="invalid_response")
+        items = payload.get("data")
+        if not isinstance(items, list):
+            raise ProviderError("model list response has no data array",
+                                kind="invalid_response")
+        models = []
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            model_id = item.get("id")
+            if not isinstance(model_id, str) or not model_id.strip():
+                continue
+            models.append(_model_entry(
+                model_id.strip(), provider=self.name,
+                name=item.get("display_name"), created=item.get("created_at"),
+                raw_meta={"type": item.get("type")}))
+        return {"ok": True, "provider": self.name, "source": "live-discovery",
+                "endpoint": self._models_url(), "models": models, "count": len(models),
+                "capability_metadata_exposed": False}
+
     def complete(self, messages, *, system=None, max_tokens=2048, temperature=0.2,
                  json_mode=False, timeout=60) -> dict:
         body: dict = {
@@ -218,6 +339,49 @@ class GeminiProvider(Provider):
     def _url(self) -> str:
         base = self.cfg["base_url"].rstrip("/")
         return f"{base}/models/{urllib.parse.quote(self.cfg['model'])}:generateContent"
+
+    def _models_url(self) -> str:
+        return self.cfg["base_url"].rstrip("/") + "/models?pageSize=200"
+
+    def list_models(self, *, timeout: int = 15) -> dict:
+        result = _request_get(self._models_url(), headers=self._headers(), timeout=timeout)
+        payload = result.get("payload")
+        if not isinstance(payload, dict):
+            raise ProviderError("provider returned non-JSON model list",
+                                kind="invalid_response")
+        items = payload.get("models")
+        if not isinstance(items, list):
+            raise ProviderError("model list response has no models array",
+                                kind="invalid_response")
+        models = []
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            raw_name = item.get("name")
+            if not isinstance(raw_name, str) or not raw_name.strip():
+                continue
+            model_id = raw_name.strip()
+            if model_id.startswith("models/"):
+                model_id = model_id[len("models/"):]
+            methods = item.get("supportedGenerationMethods")
+            methods = [str(m) for m in methods] if isinstance(methods, list) else []
+            text_state = "supported" if "generateContent" in methods else None
+            window = None
+            if isinstance(item.get("inputTokenLimit"), int):
+                window = {"state": "supported", "value": item["inputTokenLimit"]}
+            models.append(_model_entry(
+                model_id, provider=self.name,
+                name=item.get("displayName"),
+                capabilities=model_capabilities(text_generation=text_state,
+                                                context_window=window),
+                raw_meta={
+                    "supported_generation_methods": methods[:20],
+                    "output_token_limit": item.get("outputTokenLimit"),
+                }))
+        return {"ok": True, "provider": self.name, "source": "live-discovery",
+                "endpoint": self._models_url(), "models": models, "count": len(models),
+                "capability_metadata_exposed": True,
+                "capability_source": "supportedGenerationMethods and inputTokenLimit"}
 
     def complete(self, messages, *, system=None, max_tokens=2048, temperature=0.2,
                  json_mode=False, timeout=60) -> dict:
@@ -266,6 +430,43 @@ class OllamaProvider(Provider):
 
     def _url(self) -> str:
         return self.cfg["base_url"].rstrip("/") + "/api/chat"
+
+    def _models_url(self) -> str:
+        return self.cfg["base_url"].rstrip("/") + "/api/tags"
+
+    def list_models(self, *, timeout: int = 15) -> dict:
+        result = _request_get(self._models_url(), headers={"Content-Type": "application/json"},
+                              timeout=timeout, allow_local=True)
+        payload = result.get("payload")
+        if not isinstance(payload, dict):
+            raise ProviderError("Ollama returned non-JSON model list",
+                                kind="invalid_response")
+        items = payload.get("models")
+        if not isinstance(items, list):
+            raise ProviderError("Ollama tags response has no models array",
+                                kind="invalid_response")
+        models = []
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            model_id = item.get("model") or item.get("name")
+            if not isinstance(model_id, str) or not model_id.strip():
+                continue
+            details = item.get("details") if isinstance(item.get("details"), dict) else {}
+            models.append(_model_entry(
+                model_id.strip(), provider=self.name,
+                name=item.get("name") or model_id,
+                created=item.get("modified_at"),
+                raw_meta={"size": item.get("size"),
+                          "family": details.get("family"),
+                          "parameter_size": details.get("parameter_size"),
+                          "quantization_level": details.get("quantization_level"),
+                          "capabilities_exposed": False}))
+        return {"ok": True, "provider": self.name, "source": "live-discovery",
+                "endpoint": self._models_url(), "models": models, "count": len(models),
+                "capability_metadata_exposed": False,
+                "note": ("Ollama tags do not declare tool/JSON/image support. Model-level "
+                         "capabilities remain unknown; do not assume they exist.")}
 
     def complete(self, messages, *, system=None, max_tokens=2048, temperature=0.2,
                  json_mode=False, timeout=60) -> dict:

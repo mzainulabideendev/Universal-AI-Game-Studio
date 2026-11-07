@@ -1,0 +1,351 @@
+{
+  "asset_id": "char-junglemonkey-medium",
+  "name": "JungleMonkey",
+  "asset_type": "character",
+  "character_type": "primate",
+  "source": "generated-locally",
+  "generation_method": "procedural-blender",
+  "creator": "Universal AI Game Studio",
+  "license": "Original project asset (no third-party content)",
+  "license_id": "project-original-1.0",
+  "attribution_required": false,
+  "external_assets": [],
+  "downloads": [],
+  "download_status": "not-downloaded",
+  "ai_generated": false,
+  "procedural": true,
+  "blender_executed": true,
+  "dependencies": {
+    "blender": "D:\\blender data\\blender.exe",
+    "blender_exit_code": 0,
+    "textures": [
+      "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_basecolor.png",
+      "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_normal.png",
+      "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_roughness.png"
+    ]
+  },
+  "validation": {
+    "build_status": "built",
+    "failed_stages": [],
+    "glb": true,
+    "reimport": true,
+    "geometry": "passed",
+    "materials": "passed",
+    "rig": "passed",
+    "animations": "passed",
+    "uv": "passed"
+  },
+  "engine_compatibility": {
+    "unity": {
+      "export_prepared": true,
+      "integration_verified": false,
+      "materials": true,
+      "rig": true,
+      "animations": true,
+      "note": "Files are export-prepared and structurally validated. Engine import was not executed in Phase 3.",
+      "formats": [
+        "fbx",
+        "glb"
+      ],
+      "status": "export-prepared-unverified",
+      "notes": [
+        "FBX is the primary Unity path; GLB also imports with Unity glTF support.",
+        "No Unity editor import was run."
+      ]
+    },
+    "godot": {
+      "export_prepared": true,
+      "integration_verified": false,
+      "materials": true,
+      "rig": true,
+      "animations": true,
+      "note": "Files are export-prepared and structurally validated. Engine import was not executed in Phase 3.",
+      "formats": [
+        "glb"
+      ],
+      "status": "export-prepared-unverified",
+      "notes": [
+        "glTF/GLB is Godot's native interchange path.",
+        "No Godot import was run in Phase 3."
+      ]
+    },
+    "unreal": {
+      "export_prepared": true,
+      "integration_verified": false,
+      "materials": true,
+      "rig": true,
+      "animations": true,
+      "note": "Files are export-prepared and structurally validated. Engine import was not executed in Phase 3.",
+      "formats": [
+        "fbx"
+      ],
+      "status": "export-prepared-unverified",
+      "notes": [
+        "FBX is the usual Unreal path; materials may require manual reassignment.",
+        "No Unreal import was run."
+      ]
+    },
+    "target": "unity"
+  },
+  "artifacts": [
+    {
+      "role": "blend",
+      "format": "blend",
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.blend",
+      "exists": true,
+      "bytes": 1010677,
+      "sha256": "9e4543b87719477fba24824afced5f8779d4eb7dd394449505995dbdc76ae8f9"
+    },
+    {
+      "role": "glb",
+      "format": "glb",
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+      "exists": true,
+      "bytes": 1310604,
+      "sha256": "eb828d981ae7fe6230c9c16532869c4a59def4dea657d589dfbb60cf5f641361"
+    },
+    {
+      "role": "fbx",
+      "format": "fbx",
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.fbx",
+      "exists": true,
+      "bytes": 1512924,
+      "sha256": "9f7658bbece56b190113d7d0249cbf3e07a2e3806902409256ff6cca6630437a"
+    },
+    {
+      "role": "preview",
+      "format": "png",
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\preview.png",
+      "exists": true,
+      "bytes": 465712,
+      "sha256": "fc2860785da29b091cd881b978a7299bd9e66e21e9e11f44f76cd45e51783497"
+    }
+  ],
+  "textures": [
+    {
+      "role": "texture",
+      "format": "png",
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_basecolor.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 162812,
+      "sha256": "0442abcacbfdbdc953dfd51dfee8210feec314f04e9c04a5e361b5a1746c990c",
+      "colorspace": "sRGB"
+    },
+    {
+      "role": "texture",
+      "format": "png",
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_normal.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 235413,
+      "sha256": "36c73708e39577d696fab0708967d6e009c732e0efbd298ca82f116b47b6e8ce",
+      "colorspace": "Non-Color"
+    },
+    {
+      "role": "texture",
+      "format": "png",
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_roughness.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 148342,
+      "sha256": "49c7eae414da821cea2cc0f15bb1cfdd8a0eeff48c71ca198e9857e5091295d3",
+      "colorspace": "Non-Color"
+    }
+  ],
+  "created_at": "2026-11-07T07:10:17Z",
+  "schema_version": 1,
+  "phase": "V6 Phase 3 - asset provenance",
+  "generated_at": "2026-11-07T07:10:19Z",
+  "request": "Create a stylized 3D jungle monkey character for a professional third-person adventure game. It should have expressive eyes, detailed facial features, brown fur coloration, realistic proportions for a stylized game character, a complete body, hands, feet, and a game-ready material setup. Prepare the character for idle, walk, run, and jump animations.",
+  "classification": {
+    "procedurally_generated_geometry": true,
+    "imported_existing_geometry": false,
+    "ai_generated_assets": false,
+    "external_acquired_assets": false,
+    "placeholder_asset": false,
+    "production_ready": false,
+    "quality_classification": "stylized-procedural-game-ready-prototype"
+  },
+  "procedurally_generated": true,
+  "imported_existing_geometry": false,
+  "external_assets_acquired": false,
+  "placeholder_only": false,
+  "provider_capabilities": {
+    "schema_version": 1,
+    "providers": {
+      "openai": {
+        "text_reasoning": "supported",
+        "image_generation": "unsupported",
+        "texture_generation": "unsupported",
+        "image_to_texture": "unsupported",
+        "material_generation": "unsupported",
+        "mesh_generation": "unsupported",
+        "image_analysis": "unknown",
+        "basis": "Phase 1 text adapter only; no image/texture/material endpoint is implemented in this repository."
+      },
+      "openai_compatible": {
+        "text_reasoning": "supported",
+        "image_generation": "unsupported",
+        "texture_generation": "unsupported",
+        "image_to_texture": "unsupported",
+        "material_generation": "unsupported",
+        "mesh_generation": "unsupported",
+        "image_analysis": "unknown",
+        "basis": "Phase 1 text adapter only; no image/texture/material endpoint is implemented in this repository."
+      },
+      "anthropic": {
+        "text_reasoning": "supported",
+        "image_generation": "unsupported",
+        "texture_generation": "unsupported",
+        "image_to_texture": "unsupported",
+        "material_generation": "unsupported",
+        "mesh_generation": "unsupported",
+        "image_analysis": "unknown",
+        "basis": "Phase 1 text adapter only; no image/texture/material endpoint is implemented in this repository."
+      },
+      "gemini": {
+        "text_reasoning": "supported",
+        "image_generation": "unsupported",
+        "texture_generation": "unsupported",
+        "image_to_texture": "unsupported",
+        "material_generation": "unsupported",
+        "mesh_generation": "unsupported",
+        "image_analysis": "unknown",
+        "basis": "Phase 1 text adapter only; no image/texture/material endpoint is implemented in this repository."
+      },
+      "ollama": {
+        "text_reasoning": "supported",
+        "image_generation": "unsupported",
+        "texture_generation": "unsupported",
+        "image_to_texture": "unsupported",
+        "material_generation": "unsupported",
+        "mesh_generation": "unsupported",
+        "image_analysis": "unknown",
+        "basis": "Phase 1 text adapter only; no image/texture/material endpoint is implemented in this repository."
+      },
+      "meshy": {
+        "text_reasoning": "unsupported",
+        "image_generation": "unsupported",
+        "texture_generation": "unknown",
+        "image_to_texture": "unknown",
+        "material_generation": "unsupported",
+        "mesh_generation": "supported",
+        "image_analysis": "unknown",
+        "basis": "Dedicated Meshy text-to-3D adapter exists. Calls spend credits, require a configured key and explicit approval, and are not used in Phase 3.",
+        "paid": true,
+        "authorized": false
+      }
+    },
+    "capability_states": [
+      "supported",
+      "unsupported",
+      "unknown"
+    ],
+    "local_tools": {
+      "mesh_generation": "procedural-blender",
+      "texture_generation": "procedural-blender-images",
+      "material_generation": "blender-pbr-node-graph",
+      "image_analysis": "not-implemented"
+    },
+    "authorized_external_generators": [],
+    "note": "No LLM provider is treated as an image or 3D generator. Phase 3 uses local Blender execution and reports missing capabilities.",
+    "authorized_missing": [
+      "image_generation",
+      "texture_generation",
+      "material_generation",
+      "mesh_generation"
+    ],
+    "llm_capability_keys": [
+      "text_generation",
+      "structured_output",
+      "json_mode",
+      "tool_calling",
+      "vision",
+      "streaming",
+      "embeddings",
+      "context_window",
+      "model_listing",
+      "health_check"
+    ]
+  },
+  "artifact_checks": {
+    "blend": {
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.blend",
+      "exists": true,
+      "bytes": 1010677,
+      "sha256": "9e4543b87719477fba24824afced5f8779d4eb7dd394449505995dbdc76ae8f9",
+      "size_matches_report": true,
+      "hash_matches_report": true
+    },
+    "glb": {
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+      "exists": true,
+      "bytes": 1310604,
+      "sha256": "eb828d981ae7fe6230c9c16532869c4a59def4dea657d589dfbb60cf5f641361",
+      "size_matches_report": true,
+      "hash_matches_report": true
+    },
+    "fbx": {
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.fbx",
+      "exists": true,
+      "bytes": 1512924,
+      "sha256": "9f7658bbece56b190113d7d0249cbf3e07a2e3806902409256ff6cca6630437a",
+      "size_matches_report": true,
+      "hash_matches_report": true
+    },
+    "preview": {
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\preview.png",
+      "exists": true,
+      "bytes": 465712,
+      "sha256": "fc2860785da29b091cd881b978a7299bd9e66e21e9e11f44f76cd45e51783497",
+      "size_matches_report": true,
+      "hash_matches_report": true
+    }
+  },
+  "texture_checks": [
+    {
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_basecolor.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 162812,
+      "sha256": "0442abcacbfdbdc953dfd51dfee8210feec314f04e9c04a5e361b5a1746c990c",
+      "colorspace": "sRGB",
+      "exists": true
+    },
+    {
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_normal.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 235413,
+      "sha256": "36c73708e39577d696fab0708967d6e009c732e0efbd298ca82f116b47b6e8ce",
+      "colorspace": "Non-Color",
+      "exists": true
+    },
+    {
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_roughness.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 148342,
+      "sha256": "49c7eae414da821cea2cc0f15bb1cfdd8a0eeff48c71ca198e9857e5091295d3",
+      "colorspace": "Non-Color",
+      "exists": true
+    }
+  ],
+  "report_hashes": {
+    "reports/v6-character-pipeline.json": "619203e3a7ed2513a4adfee65caaa410160869c02bc2e08b3f58d38bd872759b",
+    "reports/v6-character-validation.json": "97c81ef5b74003ceb00102aa18d976ca376939454a153e0138e86d2f4c9e3a4c"
+  }
+}

@@ -23,12 +23,18 @@ import traceback
 
 from game_studio import SERVER_NAME, SERVER_VERSION, PROTOCOL_VERSION
 from game_studio import (
-    animations, assets, blender, config, detect, engines, governance, manifest, meshy,
-    operations, projects, secrets, specification, understanding, verification,
+    animations, assets, blender, character_pipeline, character_spec, config, detect,
+    engines, governance, manifest, meshy, operations, projects, secrets,
+    specification, understanding, verification,
 )
 from game_studio.llm import config as llm_config
+from game_studio.llm import capabilities as llm_capabilities
+from game_studio.llm import catalog as llm_catalog
 from game_studio.llm import reasoning as llm_reasoning
+from game_studio.llm import routing as llm_routing
 from game_studio.llm.client import LLMError
+from game_studio.agents import Orchestrator as AgentOrchestrator
+from game_studio.agents.helpers import QUALITY_PROFILES
 from game_studio.util import ToolError, now_iso
 
 MAX_TEXT = 200_000
@@ -600,6 +606,126 @@ def tool_llm_game_director(args: dict) -> dict:
         raise ToolError(str(exc)) from exc
 
 
+def tool_llm_provider_capabilities(args: dict) -> dict:
+    return llm_capabilities.capability_report()
+
+
+def tool_llm_list_models(args: dict) -> dict:
+    provider = _str(args, "provider") or llm_config.load_config()["provider"]
+    return llm_catalog.discover_models(
+        provider,
+        confirm=_bool(args, "confirm"),
+        project_path=_project_arg(args),
+    )
+
+
+def tool_llm_route(args: dict) -> dict:
+    try:
+        return llm_routing.route(
+            _str(args, "task", required=True) or "",
+            required_capabilities=_list(args, "required_capabilities") or None,
+            context_chars=_int(args, "context_chars", minimum=0),
+            provider=_str(args, "provider"),
+            model=_str(args, "model"),
+            allow_paid=_bool(args, "allow_paid"),
+            require_known=_bool(args, "require_known"),
+            discovered=_obj(args, "discovered"),
+            max_tokens=_int(args, "max_tokens", minimum=1),
+        )
+    except ToolError:
+        raise
+    except Exception as exc:
+        raise ToolError(f"routing failed: {llm_config.redact(str(exc))}") from exc
+
+
+def tool_llm_configure_provider(args: dict) -> dict:
+    return llm_config.save_provider_selection(
+        _str(args, "provider", required=True) or "",
+        model=_str(args, "model"),
+        base_url=_str(args, "base_url"),
+        confirm=_bool(args, "confirm"),
+    )
+
+
+def tool_llm_configure_credential(args: dict) -> dict:
+    provider = _str(args, "provider", required=True) or ""
+    action = (_str(args, "action") or "set").strip().lower()
+    if action not in ("set", "clear"):
+        raise ToolError("action must be 'set' or 'clear'")
+    if not _bool(args, "confirm"):
+        raise ToolError("Configuring a credential writes a private local secret; "
+                        "pass confirm=true")
+    if action == "clear":
+        removed = secrets.clear_llm_key(provider)
+        config.audit("llm.clear_credential", tool="llm_configure_credential",
+                     details={"provider": provider, "removed": removed})
+        return {
+            "ok": True,
+            "provider": provider,
+            "action": "clear",
+            "removed": removed,
+            "credential_configured": bool(
+                llm_config.provider_config(provider).get("api_key")),
+            "note": ("An environment variable can still provide this credential; "
+                     "only the private local file entry was removed."),
+        }
+    api_key = args.get("api_key")
+    if not isinstance(api_key, str) or not api_key.strip():
+        raise ToolError("api_key is required when action='set'")
+    saved = secrets.save_llm_key(provider, api_key)
+    config.audit("llm.configure_credential", tool="llm_configure_credential",
+                 details={"provider": saved["provider"], "source": saved["source"]})
+    cfg = llm_config.provider_config(provider)
+    return {
+        "ok": True,
+        "provider": saved["provider"],
+        "action": "set",
+        "source": saved["source"],
+        "saved": True,
+        "credential_configured": True,
+        "api_key": "[REDACTED]",
+        "note": ("The key is stored in the private machine-local secrets file and is "
+                 "never returned. Reachability is not claimed until a real test request "
+                 "succeeds."),
+        "active_provider": cfg["provider"],
+    }
+
+
+def tool_orchestrate_game_plan(args: dict) -> dict:
+    request = _str(args, "request", required=True, max_length=20_000) or ""
+    installed = _list(args, "installed_engines")
+    if installed is None:
+        try:
+            detected = engines.list_available_engines()
+            installed = detected.get("available") or []
+        except Exception:
+            installed = []
+    quality = _str(args, "quality_target") or "prototype"
+    if quality not in QUALITY_PROFILES:
+        raise ToolError(f"quality_target must be one of {list(QUALITY_PROFILES)}")
+    approved = _list(args, "approved_decisions") or []
+    if any(not isinstance(item, dict) for item in approved):
+        raise ToolError("approved_decisions must be an array of objects")
+    try:
+        orchestrator = AgentOrchestrator(
+            request,
+            engine=_str(args, "engine"),
+            platform=_str(args, "platform"),
+            quality_target=quality,
+            concurrency=_int(args, "concurrency", default=2, minimum=1,
+                             maximum=4) or 2,
+            max_retries=_int(args, "max_retries", default=1, minimum=0,
+                             maximum=3) or 0,
+            installed_engines=[str(x) for x in installed],
+            approved_decisions=approved,
+            use_provider=False,
+        )
+        return orchestrator.run()
+    except ValueError as exc:
+        raise ToolError(str(exc)) from exc
+
+
+
 # --------------------------------------------------------------------------
 # Blender tools
 # --------------------------------------------------------------------------
@@ -683,6 +809,45 @@ def tool_blender_run_python(args: dict) -> dict:
         confirm=confirm,
         timeout=_int(args, "timeout", default=900, minimum=10, maximum=7200) or 900,
     )
+
+
+# --------------------------------------------------------------------------
+# Character asset pipeline
+# --------------------------------------------------------------------------
+def tool_character_generate(args: dict) -> dict:
+    confirm = _bool(args, "confirm")
+    if not confirm:
+        raise ToolError("character generation runs Blender and writes files; pass confirm=true")
+    _authorize(args, "run_blender", action="generate a Blender character asset",
+               confirm=confirm)
+    description = _str(args, "description", required=True, max_length=8000) or ""
+    quality_tier = (_str(args, "quality_tier", default="medium") or "medium").lower()
+    if quality_tier not in character_spec.QUALITY_TIERS:
+        raise ToolError(
+            f"quality_tier must be one of {list(character_spec.QUALITY_TIERS)}")
+    animations = _list(args, "animations")
+    name = _str(args, "name", default="JungleMonkey") or "JungleMonkey"
+    target_engine = _str(args, "target_engine", default="unity") or "unity"
+    output_dir = _str(args, "output_dir", required=True) or ""
+    try:
+        spec = character_spec.build_character_spec(
+            description, name=name, quality_tier=quality_tier,
+            animations=[str(item) for item in animations] if animations else None,
+            target_engine=target_engine,
+        )
+    except ValueError as exc:
+        raise ToolError(str(exc)) from exc
+    return character_pipeline.run_pipeline(
+        spec, output_dir,
+        timeout=_int(args, "timeout", default=1200, minimum=60, maximum=7200) or 1200,
+        blender_exe=_str(args, "blender_exe"),
+        preview_size=_int(args, "preview_size", default=720, minimum=128,
+                          maximum=2048) or 720,
+    )
+
+
+def tool_character_capabilities(args: dict) -> dict:
+    return character_spec.provider_capability_report()
 
 
 # --------------------------------------------------------------------------
@@ -1166,6 +1331,31 @@ TOOLS = [
               "confirm": CONFIRM,
               "timeout": {"type": "integer", "default": 900, "minimum": 10, "maximum": 7200},
           }, ["code"]),
+    # character asset pipeline
+    _tool("character_generate_asset", "Generate a real procedural character in Blender: "
+          "geometry, UVs, PBR materials/textures, armature, skin weights, keyframed actions, "
+          ".blend/.glb/.fbx export, GLB re-import validation and a rendered preview. This is a "
+          "stylized procedural prototype, not AI-generated or production character art. "
+          "Requires confirm=true.", {
+              "description": {"type": "string", "maxLength": 8000,
+                              "description": "Natural-language character request."},
+              "name": {"type": "string", "maxLength": 80, "default": "JungleMonkey"},
+              "quality_tier": {"type": "string", "enum": ["low", "medium", "high"],
+                               "default": "medium"},
+              "animations": {"type": "array", "items": {"type": "string"}},
+              "target_engine": {"type": "string", "enum": ["unity", "godot", "unreal"],
+                                "default": "unity"},
+              "output_dir": {"type": "string"},
+              "preview_size": {"type": "integer", "default": 720, "minimum": 128,
+                               "maximum": 2048},
+              "timeout": {"type": "integer", "default": 1200, "minimum": 60, "maximum": 7200},
+              "blender_exe": {"type": "string"},
+              "project_path": PROJECT_PATH,
+              "confirm": CONFIRM,
+          }, ["description", "output_dir", "confirm"]),
+    _tool("character_capabilities", "Report which asset capabilities (text, image, texture, "
+          "material, mesh, image-to-texture, image analysis) each provider supports, explicitly "
+          "separating configured text adapters from unauthorized image/3D generators."),
     # meshy
     _tool("meshy_setup_guide", "Explain how to create a Meshy API key, where to store it, how "
           "to rotate it, and whether one is currently configured. Never returns the key."),
@@ -1652,6 +1842,82 @@ TOOLS = [
               "confirm": CONFIRM,
               "operation_id": OPERATION_ID,
           }, ["request", "confirm"]),
+    _tool("llm_provider_capabilities", "Report adapter-level capability states for every "
+          "provider (supported/unsupported/unknown), task categories, limitations and the "
+          "rule that model names are never treated as capability evidence. No network calls."),
+    _tool("llm_list_models", "List models from one provider using its documented discovery "
+          "endpoint. Performs one real read-only request, so it requires confirm=true. "
+          "Capabilities stay unknown unless the provider exposes documented metadata. "
+          "Ollama is never installed or started.", {
+              "provider": {"type": "string",
+                           "enum": list(llm_config.PROVIDERS)},
+              "project_path": PROJECT_PATH,
+              "confirm": CONFIRM,
+          }, ["confirm"]),
+    _tool("llm_route", "Select a provider/model for a task category and required "
+          "capabilities. Refuses known-unsupported capabilities, labels unknown ones, "
+          "honours budgets and never silently switches to a paid provider. No network calls.", {
+              "task": {"type": "string",
+                       "enum": list(llm_capabilities.TASK_CATEGORIES)},
+              "required_capabilities": {"type": "array",
+                                        "items": {"type": "string",
+                                                  "enum": list(
+                                                      llm_capabilities.CAPABILITY_KEYS)}},
+              "context_chars": {"type": "integer", "minimum": 0},
+              "max_tokens": {"type": "integer", "minimum": 1},
+              "provider": {"type": "string", "enum": list(llm_config.PROVIDERS)},
+              "model": {"type": "string"},
+              "allow_paid": {"type": "boolean", "default": False,
+                             "description": "Explicit approval to consider hosted providers"},
+              "require_known": {"type": "boolean", "default": False,
+                                "description": "Reject unknown capabilities instead of "
+                                               "labelling them unverified"},
+              "discovered": {"type": "object",
+                             "description": "Optional provider -> model entries from "
+                                            "llm_list_models for model checks"},
+          }, ["task"]),
+    _tool("llm_configure_provider", "Persist the machine-local provider selection, model and "
+          "endpoint. Never stores a credential. Requires confirm=true.", {
+              "provider": {"type": "string", "enum": list(llm_config.PROVIDERS)},
+              "model": {"type": "string"},
+              "base_url": {"type": "string"},
+              "confirm": CONFIRM,
+          }, ["provider", "confirm"]),
+    _tool("llm_configure_credential", "Store or clear a provider credential in the private "
+          "machine-local secrets file. The value is never returned, logged or written to "
+          "project files. Requires confirm=true. Does not perform a paid request.", {
+              "provider": {"type": "string", "enum": list(llm_config.PROVIDERS)},
+              "api_key": {"type": "string",
+                          "description": "Credential value; redacted from every response"},
+              "action": {"type": "string", "enum": ["set", "clear"], "default": "set"},
+              "confirm": CONFIRM,
+          }, ["provider", "confirm"]),
+    _tool("orchestrate_game_plan", "Run the V6 Phase 2 typed multi-agent orchestration "
+          "deterministically: Game Director, Game Designer, Technical Architect, "
+          "Character, Environment, Gameplay, UI/UX and QA plan a project with a "
+          "dependency graph, conflict detection and evidence. Produces a "
+          "non-executable plan only; no provider, engine, Blender or asset write "
+          "occurs and nothing is generated.", {
+              "request": {"type": "string", "minLength": 1, "maxLength": 20000,
+                          "description": "Original game request, unedited"},
+              "engine": {"type": "string",
+                         "description": "Optional engine hint; only honoured if detected"},
+              "platform": {"type": "string"},
+              "quality_target": {"type": "string",
+                                 "enum": list(QUALITY_PROFILES),
+                                 "default": "prototype"},
+              "concurrency": {"type": "integer", "minimum": 1, "maximum": 4,
+                              "default": 2,
+                              "description": "Maximum concurrently running agents"},
+              "max_retries": {"type": "integer", "minimum": 0, "maximum": 3,
+                              "default": 1},
+              "installed_engines": {"type": "array", "items": {"type": "string"},
+                                    "description": "Defaults to locally detected "
+                                                   "engines"},
+              "approved_decisions": {"type": "array", "items": {"type": "object"},
+                                     "description": "Approved project decisions the "
+                                                    "director must not override"},
+          }, ["request"]),
 ]
 
 HANDLERS = {
@@ -1673,6 +1939,8 @@ HANDLERS = {
     "blender_render_preview": tool_blender_render,
     "blender_create_environment_blockout": tool_blender_environment,
     "blender_run_python": tool_blender_run_python,
+    "character_generate_asset": tool_character_generate,
+    "character_capabilities": tool_character_capabilities,
     "meshy_balance": tool_meshy_balance,
     "meshy_setup_guide": tool_meshy_setup,
     "meshy_configure_api_key": tool_meshy_configure,
@@ -1739,6 +2007,12 @@ HANDLERS = {
     "llm_test_provider": tool_llm_test_provider,
     "llm_review_plan": tool_llm_review_plan,
     "llm_game_director_plan": tool_llm_game_director,
+    "llm_provider_capabilities": tool_llm_provider_capabilities,
+    "llm_list_models": tool_llm_list_models,
+    "llm_route": tool_llm_route,
+    "llm_configure_provider": tool_llm_configure_provider,
+    "llm_configure_credential": tool_llm_configure_credential,
+    "orchestrate_game_plan": tool_orchestrate_game_plan,
 }
 
 

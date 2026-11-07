@@ -1,0 +1,1016 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 1 - AI provider architecture",
+  "generated_at": "2026-11-07T06:04:09Z",
+  "mode": "configuration-only",
+  "network_calls": 0,
+  "live_verified": null,
+  "policy": {
+    "unsupported_capability": "rejected",
+    "unknown_capability": "allowed with unverified warning (rejected when require_known=true)",
+    "paid_switch": "never automatic",
+    "fallback": "deterministic parser in game_studio.understanding",
+    "paid_opt_in": "allow_paid=true is explicit approval to consider hosted providers"
+  },
+  "matrices": {
+    "default_no_paid": {
+      "ok": true,
+      "mode": "configuration-only",
+      "network_calls": 0,
+      "allow_paid": false,
+      "require_known": false,
+      "rows": [
+        {
+          "task": "game_design_reasoning",
+          "description": "Understand a game request, extract requirements and design a game loop.",
+          "required_capabilities": [
+            "text_generation",
+            "structured_output"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai_compatible' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'anthropic' is potentially paid and allow_paid is false; it is never selected automatically",
+                "required capability 'structured_output' is unsupported"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'gemini' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "technical_architecture",
+          "description": "Choose engines, dependencies, performance and platform architecture.",
+          "required_capabilities": [
+            "text_generation",
+            "structured_output"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai_compatible' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'anthropic' is potentially paid and allow_paid is false; it is never selected automatically",
+                "required capability 'structured_output' is unsupported"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'gemini' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "code_generation",
+          "description": "Draft gameplay code or engine scripts from an approved plan.",
+          "required_capabilities": [
+            "text_generation"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai_compatible' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'anthropic' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'gemini' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "character_environment_planning",
+          "description": "Plan characters, environments, materials, rigs and animation sets.",
+          "required_capabilities": [
+            "text_generation",
+            "structured_output"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai_compatible' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'anthropic' is potentially paid and allow_paid is false; it is never selected automatically",
+                "required capability 'structured_output' is unsupported"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'gemini' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "asset_analysis",
+          "description": "Reason about existing asset inventories and validation evidence.",
+          "required_capabilities": [
+            "text_generation"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai_compatible' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'anthropic' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'gemini' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "qa_verification",
+          "description": "Review test evidence and produce a verification assessment.",
+          "required_capabilities": [
+            "text_generation",
+            "structured_output"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai_compatible' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'anthropic' is potentially paid and allow_paid is false; it is never selected automatically",
+                "required capability 'structured_output' is unsupported"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'gemini' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "No provider was contacted."
+    },
+    "require_known_capabilities": {
+      "ok": true,
+      "mode": "configuration-only",
+      "network_calls": 0,
+      "allow_paid": false,
+      "require_known": true,
+      "rows": [
+        {
+          "task": "game_design_reasoning",
+          "description": "Understand a game request, extract requirements and design a game loop.",
+          "required_capabilities": [
+            "text_generation",
+            "structured_output"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai_compatible' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'anthropic' is potentially paid and allow_paid is false; it is never selected automatically",
+                "required capability 'structured_output' is unsupported"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'gemini' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "technical_architecture",
+          "description": "Choose engines, dependencies, performance and platform architecture.",
+          "required_capabilities": [
+            "text_generation",
+            "structured_output"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai_compatible' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'anthropic' is potentially paid and allow_paid is false; it is never selected automatically",
+                "required capability 'structured_output' is unsupported"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'gemini' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "code_generation",
+          "description": "Draft gameplay code or engine scripts from an approved plan.",
+          "required_capabilities": [
+            "text_generation"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai_compatible' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'anthropic' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'gemini' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "character_environment_planning",
+          "description": "Plan characters, environments, materials, rigs and animation sets.",
+          "required_capabilities": [
+            "text_generation",
+            "structured_output"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai_compatible' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'anthropic' is potentially paid and allow_paid is false; it is never selected automatically",
+                "required capability 'structured_output' is unsupported"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'gemini' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "asset_analysis",
+          "description": "Reason about existing asset inventories and validation evidence.",
+          "required_capabilities": [
+            "text_generation"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai_compatible' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'anthropic' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'gemini' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "qa_verification",
+          "description": "Review test evidence and produce a verification assessment.",
+          "required_capabilities": [
+            "text_generation",
+            "structured_output"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'openai_compatible' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'anthropic' is potentially paid and allow_paid is false; it is never selected automatically",
+                "required capability 'structured_output' is unsupported"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "hosted provider 'gemini' is potentially paid and allow_paid is false; it is never selected automatically"
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "No provider was contacted."
+    },
+    "explicit_paid_approval": {
+      "ok": true,
+      "mode": "configuration-only",
+      "network_calls": 0,
+      "allow_paid": true,
+      "require_known": false,
+      "rows": [
+        {
+          "task": "game_design_reasoning",
+          "description": "Understand a game request, extract requirements and design a game loop.",
+          "required_capabilities": [
+            "text_generation",
+            "structured_output"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "required capability 'structured_output' is unsupported"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "technical_architecture",
+          "description": "Choose engines, dependencies, performance and platform architecture.",
+          "required_capabilities": [
+            "text_generation",
+            "structured_output"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "required capability 'structured_output' is unsupported"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "code_generation",
+          "description": "Draft gameplay code or engine scripts from an approved plan.",
+          "required_capabilities": [
+            "text_generation"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "character_environment_planning",
+          "description": "Plan characters, environments, materials, rigs and animation sets.",
+          "required_capabilities": [
+            "text_generation",
+            "structured_output"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "required capability 'structured_output' is unsupported"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "asset_analysis",
+          "description": "Reason about existing asset inventories and validation evidence.",
+          "required_capabilities": [
+            "text_generation"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            }
+          ]
+        },
+        {
+          "task": "qa_verification",
+          "description": "Review test evidence and produce a verification assessment.",
+          "required_capabilities": [
+            "text_generation",
+            "structured_output"
+          ],
+          "selected": null,
+          "mode": "deterministic",
+          "candidates": [
+            {
+              "provider": "ollama",
+              "available": false,
+              "blockers": [
+                "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+              ]
+            },
+            {
+              "provider": "openai",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "openai_compatible",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'openai_compatible'; set GAME_STUDIO_LLM_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            },
+            {
+              "provider": "anthropic",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'anthropic'; set ANTHROPIC_API_KEY or GAME_STUDIO_LLM_API_KEY",
+                "required capability 'structured_output' is unsupported"
+              ]
+            },
+            {
+              "provider": "gemini",
+              "available": false,
+              "blockers": [
+                "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+              ]
+            }
+          ]
+        }
+      ],
+      "note": "No provider was contacted."
+    }
+  },
+  "task_decisions": [
+    {
+      "task": "game_design_reasoning",
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "default": null,
+      "default_mode": "deterministic",
+      "with_paid_approval_mode": "deterministic"
+    },
+    {
+      "task": "technical_architecture",
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "default": null,
+      "default_mode": "deterministic",
+      "with_paid_approval_mode": "deterministic"
+    },
+    {
+      "task": "code_generation",
+      "required_capabilities": [
+        "text_generation"
+      ],
+      "default": null,
+      "default_mode": "deterministic",
+      "with_paid_approval_mode": "deterministic"
+    },
+    {
+      "task": "character_environment_planning",
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "default": null,
+      "default_mode": "deterministic",
+      "with_paid_approval_mode": "deterministic"
+    },
+    {
+      "task": "asset_analysis",
+      "required_capabilities": [
+        "text_generation"
+      ],
+      "default": null,
+      "default_mode": "deterministic",
+      "with_paid_approval_mode": "deterministic"
+    },
+    {
+      "task": "qa_verification",
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "default": null,
+      "default_mode": "deterministic",
+      "with_paid_approval_mode": "deterministic"
+    }
+  ],
+  "constraints": {
+    "max_tokens_per_request": 4096,
+    "max_context_chars": 64000,
+    "max_requests_per_session": 20,
+    "max_requests_per_day": 200,
+    "retries": 2,
+    "timeout_seconds": 60
+  },
+  "note": "Routing is a configuration decision. It does not verify reachability or output quality."
+}

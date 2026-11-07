@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 2 - multi-agent orchestration demonstration",
+  "generated_at": "2026-11-07T06:40:44Z",
+  "request": "Create a professional 3D jungle adventure game for Windows PC. The player controls a monkey that can run, jump, and collect bananas. Include a detailed jungle environment, character assets, follow camera, score HUD, and restart functionality.",
+  "mode": "deterministic-zero-network",
+  "network_calls": 0,
+  "live_provider_verified": false,
+  "outputs_are_plans_only": true,
+  "game_generated": false,
+  "assets_generated": false,
+  "textures_animated_or_built": false,
+  "executable": false,
+  "status": "completed",
+  "ok": true,
+  "engine": "unity",
+  "agent_count": 8,
+  "stages": [
+    {
+      "step": "design",
+      "agent": "game_designer",
+      "agent_version": "1.0.0",
+      "status": "completed",
+      "dependencies": [],
+      "provider_mode": "deterministic",
+      "duration_ms": 0,
+      "evidence": [
+        "agent://game_designer/design"
+      ],
+      "summary": "3D adventure design for pc."
+    },
+    {
+      "step": "architecture",
+      "agent": "technical_architect",
+      "agent_version": "1.0.0",
+      "status": "completed",
+      "dependencies": [
+        "design"
+      ],
+      "provider_mode": "deterministic",
+      "duration_ms": 0,
+      "evidence": [
+        "agent://technical_architect/architecture"
+      ],
+      "summary": "Recommend unity with 10 systems at prototype quality."
+    },
+    {
+      "step": "character",
+      "agent": "character",
+      "agent_version": "1.0.0",
+      "status": "completed",
+      "dependencies": [
+        "design",
+        "architecture"
+      ],
+      "provider_mode": "deterministic",
+      "duration_ms": 0,
+      "evidence": [
+        "agent://character/character"
+      ],
+      "summary": "Planned 1 character asset set(s) with PBR maps, rig and animation requirements. Nothing was generated."
+    },
+    {
+      "step": "environment",
+      "agent": "environment",
+      "agent_version": "1.0.0",
+      "status": "completed",
+      "dependencies": [
+        "design",
+        "architecture"
+      ],
+      "provider_mode": "deterministic",
+      "duration_ms": 0,
+      "evidence": [
+        "agent://environment/environment"
+      ],
+      "summary": "Planned a jungle environment at prototype quality within the 150 draw-call budget."
+    },
+    {
+      "step": "gameplay",
+      "agent": "gameplay",
+      "agent_version": "1.0.0",
+      "status": "completed",
+      "dependencies": [
+        "design",
+        "architecture"
+      ],
+      "provider_mode": "deterministic",
+      "duration_ms": 0,
+      "evidence": [
+        "agent://gameplay/gameplay"
+      ],
+      "summary": "Planned 4 reusable gameplay systems with acceptance tests."
+    },
+    {
+      "step": "uiux",
+      "agent": "uiux",
+      "agent_version": "1.0.0",
+      "status": "completed",
+      "dependencies": [
+        "design",
+        "gameplay"
+      ],
+      "provider_mode": "deterministic",
+      "duration_ms": 0,
+      "evidence": [
+        "agent://uiux/uiux"
+      ],
+      "summary": "Planned 5 screens with HUD, settings and accessibility."
+    },
+    {
+      "step": "qa",
+      "agent": "qa",
+      "agent_version": "1.0.0",
+      "status": "completed",
+      "dependencies": [
+        "design",
+        "architecture",
+        "character",
+        "environment",
+        "gameplay",
+        "uiux"
+      ],
+      "provider_mode": "deterministic",
+      "duration_ms": 0,
+      "evidence": [
+        "agent://qa/qa"
+      ],
+      "summary": "QA review found 1 open conflict(s); verification status is not-verified."
+    },
+    {
+      "step": "consolidation",
+      "agent": "game_director",
+      "agent_version": "1.0.0",
+      "status": "completed",
+      "dependencies": [
+        "qa"
+      ],
+      "provider_mode": "deterministic",
+      "duration_ms": 0,
+      "evidence": [
+        "agent://game_director/consolidation"
+      ],
+      "summary": "Consolidated a non-executable plan for Build a 3D adventure game featuring a monkey set in a jungle environment. on unity; 1 open conflict(s)."
+    }
+  ],
+  "diagnostics": {
+    "duration_ms": 98,
+    "agent_runs": 8,
+    "retries": 0,
+    "concurrency_limit": 2,
+    "provider_modes": {
+      "deterministic": 8
+    },
+    "live_verified": false,
+    "network_calls": 0,
+    "state_counts": {
+      "completed": 8
+    }
+  },
+  "routing": {
+    "design": {
+      "task": "design",
+      "mode": "deterministic",
+      "selected": null,
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "explanation": [
+        "no provider/model satisfies the request",
+        "hosted providers were not considered because allow_paid is false; set allow_paid=true only with explicit approval",
+        "the deterministic parser remains available and makes no network calls"
+      ],
+      "network_calls": 0
+    },
+    "architecture": {
+      "task": "architecture",
+      "mode": "deterministic",
+      "selected": null,
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "explanation": [
+        "no provider/model satisfies the request",
+        "hosted providers were not considered because allow_paid is false; set allow_paid=true only with explicit approval",
+        "the deterministic parser remains available and makes no network calls"
+      ],
+      "network_calls": 0
+    },
+    "environment": {
+      "task": "environment",
+      "mode": "deterministic",
+      "selected": null,
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "explanation": [
+        "no provider/model satisfies the request",
+        "hosted providers were not considered because allow_paid is false; set allow_paid=true only with explicit approval",
+        "the deterministic parser remains available and makes no network calls"
+      ],
+      "network_calls": 0
+    },
+    "character": {
+      "task": "character",
+      "mode": "deterministic",
+      "selected": null,
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "explanation": [
+        "no provider/model satisfies the request",
+        "hosted providers were not considered because allow_paid is false; set allow_paid=true only with explicit approval",
+        "the deterministic parser remains available and makes no network calls"
+      ],
+      "network_calls": 0
+    },
+    "gameplay": {
+      "task": "gameplay",
+      "mode": "deterministic",
+      "selected": null,
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "explanation": [
+        "no provider/model satisfies the request",
+        "hosted providers were not considered because allow_paid is false; set allow_paid=true only with explicit approval",
+        "the deterministic parser remains available and makes no network calls"
+      ],
+      "network_calls": 0
+    },
+    "uiux": {
+      "task": "uiux",
+      "mode": "deterministic",
+      "selected": null,
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "explanation": [
+        "no provider/model satisfies the request",
+        "hosted providers were not considered because allow_paid is false; set allow_paid=true only with explicit approval",
+        "the deterministic parser remains available and makes no network calls"
+      ],
+      "network_calls": 0
+    },
+    "qa": {
+      "task": "qa",
+      "mode": "deterministic",
+      "selected": null,
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "explanation": [
+        "no provider/model satisfies the request",
+        "hosted providers were not considered because allow_paid is false; set allow_paid=true only with explicit approval",
+        "the deterministic parser remains available and makes no network calls"
+      ],
+      "network_calls": 0
+    },
+    "consolidation": {
+      "task": "consolidation",
+      "mode": "deterministic",
+      "selected": null,
+      "required_capabilities": [
+        "text_generation",
+        "structured_output"
+      ],
+      "explanation": [
+        "no provider/model satisfies the request",
+        "hosted providers were not considered because allow_paid is false; set allow_paid=true only with explicit approval",
+        "the deterministic parser remains available and makes no network calls"
+      ],
+      "network_calls": 0
+    }
+  },
+  "conflicts": [
+    {
+      "id": "C-character-pipeline",
+      "category": "asset-pipeline",
+      "severity": "medium",
+      "message": "Character mesh/PBR/rig pipeline is not implemented in Phase 2.",
+      "blocking": false,
+      "requires_approval": true,
+      "source_agents": [
+        "character"
+      ],
+      "status": "open"
+    }
+  ],
+  "approval_required": [
+    "Approve the plan before implementation.",
+    "Approve any paid provider use separately.",
+    "Approve asset generation and engine writes separately.",
+    "Resolve all blocking conflicts."
+  ],
+  "governance": {
+    "executable": false,
+    "writes_performed": false,
+    "engine_invoked": false,
+    "assets_generated": false,
+    "requirement_status_changed": false
+  },
+  "provider_summary": {
+    "mode": "deterministic",
+    "live_verified": false,
+    "note": "No provider was contacted in deterministic mode. Mocked executors are never live verification."
+  },
+  "consolidated_summary": "Consolidated a non-executable plan for Build a 3D adventure game featuring a monkey set in a jungle environment. on unity; 1 open conflict(s).",
+  "limitations": [
+    "Phase 2 produces plans only; no game, asset, texture or animation exists.",
+    "A completed agent run is not implementation or build verification.",
+    "Provider attribution is deterministic unless an authorized live executor was supplied."
+  ]
+}

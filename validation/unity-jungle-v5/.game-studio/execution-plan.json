@@ -1,7 +1,7 @@
 {
   "ok": true,
   "schema_version": "1.0",
-  "generated_at": "2026-11-06T17:56:30Z",
+  "generated_at": "2026-11-07T05:36:18Z",
   "executable": false,
   "note": "This is a plan, not an execution. Every step must still pass the governance permission check and its own confirm gate. Paid steps are blocked until the user explicitly approves spending.",
   "engine": "unity",

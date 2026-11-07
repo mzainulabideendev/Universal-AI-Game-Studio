@@ -4,13 +4,13 @@
   "project_id": "4af7ee0b97fd",
   "project_name": "V5 Jungle Monkey",
   "project_path": "D:\\MCP\\MCP\\validation\\unity-jungle-v5",
-  "created_at": "2026-11-06T17:56:29Z",
-  "updated_at": "2026-11-06T17:56:34Z",
+  "created_at": "2026-11-07T05:36:18Z",
+  "updated_at": "2026-11-07T05:36:23Z",
   "spec": {
     "ok": true,
     "spec_id": "4af7ee0b97fd",
     "project_name": "V5 Jungle Monkey",
-    "generated_at": "2026-11-06T17:56:29Z",
+    "generated_at": "2026-11-07T05:36:18Z",
     "status": "approved",
     "approved": true,
     "request": "Create a 3D low-poly jungle monkey adventure prototype for Windows PC. The monkey can run, jump and collect bananas. Include a follow camera, a score HUD and a restart. No climbing, no swinging, no swimming, no weapons and no Android support.",
@@ -2075,59 +2075,59 @@
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-playmode-results.xml",
           "note": "PlayMode XML passed: SceneContainsPlayerEnvironmentAndHud",
-          "recorded_at": "2026-11-06T17:56:30Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-001-20261106T175630Z-op-69e2b5d354fa4e7d.json",
+          "reference": ".game-studio/evidence/R-001-20261107T053619Z-op-b9dc1a55fa124972.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check dimension_3d",
-          "recorded_at": "2026-11-06T17:56:30Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scenes/JungleMonkey.unity",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:30Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "build",
           "reference": ".game-studio/evidence/build-artifact.json",
           "note": "Real exe size and SHA-256 recorded at integration time.",
-          "recorded_at": "2026-11-06T17:56:30Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-player-evidence.json",
           "note": "Machine runtime evidence; not a human playtest.",
-          "recorded_at": "2026-11-06T17:56:30Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "build",
           "reference": ".game-studio/evidence/source/unity-player-build.provenance.json",
           "note": "Unity build provenance: StandaloneWindows64, exit 0.",
-          "recorded_at": "2026-11-06T17:56:30Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:30Z",
+          "at": "2026-11-07T05:36:19Z",
           "note": "3D scene, build and machine runtime evidence exist; no human playtest."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:30Z",
+          "at": "2026-11-07T05:36:19Z",
           "status": "tested",
           "previous": "pending",
           "note": "3D scene, build and machine runtime evidence exist; no human playtest.",
@@ -2152,61 +2152,61 @@
       "evidence": [
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-002-20261106T175630Z-op-74d42b1dc7074673.json",
+          "reference": ".game-studio/evidence/R-002-20261107T053619Z-op-8841901a86c34355.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check low_poly_style",
-          "recorded_at": "2026-11-06T17:56:30Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "v5-blender-assets.json",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:30Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Art/Monkey.fbx",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:30Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Art/Jungle.fbx",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:30Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Art/Banana.fbx",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:30Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "inspection",
           "reference": "v5-blender-assets.json",
           "note": "Blender-generated triangle/bone/action statistics.",
-          "recorded_at": "2026-11-06T17:56:30Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": null
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:30Z",
+          "at": "2026-11-07T05:36:19Z",
           "note": "Blender stats and imported low-poly assets exist; visual quality is not independently assessed."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:30Z",
+          "at": "2026-11-07T05:36:19Z",
           "status": "implemented",
           "previous": "pending",
           "note": "Blender stats and imported low-poly assets exist; visual quality is not independently assessed.",
@@ -2233,52 +2233,52 @@
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-playmode-results.xml",
           "note": "PlayMode XML passed: SceneContainsPlayerEnvironmentAndHud",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-003-20261106T175631Z-op-d17549034d7041df.json",
+          "reference": ".game-studio/evidence/R-003-20261107T053619Z-op-794cbeb753cc49a5.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check jungle_environment",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scenes/JungleMonkey.unity",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Art/Jungle.fbx",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "inspection",
           "reference": "v5-blender-assets.json",
           "note": "Blender-generated triangle/bone/action statistics.",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": null
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:31Z",
+          "at": "2026-11-07T05:36:19Z",
           "note": "PlayMode scene test found JungleEnvironment; imported jungle FBX exists."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:31Z",
+          "at": "2026-11-07T05:36:19Z",
           "status": "tested",
           "previous": "pending",
           "note": "PlayMode scene test found JungleEnvironment; imported jungle FBX exists.",
@@ -2305,52 +2305,52 @@
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-playmode-results.xml",
           "note": "PlayMode XML passed: SceneContainsPlayerEnvironmentAndHud, AnimatorReactsToMovement",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-004-20261106T175631Z-op-a8bb5d2cfaa846ce.json",
+          "reference": ".game-studio/evidence/R-004-20261107T053619Z-op-a9b51ce529a943b9.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check monkey_character",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Art/Monkey.fbx",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scripts/MonkeyController.cs",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": true
         },
         {
           "kind": "inspection",
           "reference": "v5-blender-assets.json",
           "note": "Blender-generated triangle/bone/action statistics.",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:19Z",
           "exists": null
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:31Z",
+          "at": "2026-11-07T05:36:19Z",
           "note": "PlayMode tests found the animated monkey; imported FBX has 14 bones and Idle/Walk/Jump actions."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:31Z",
+          "at": "2026-11-07T05:36:19Z",
           "status": "tested",
           "previous": "pending",
           "note": "PlayMode tests found the animated monkey; imported FBX has 14 bones and Idle/Walk/Jump actions.",
@@ -2375,18 +2375,18 @@
       "evidence": [],
       "notes": [
         {
-          "at": "2026-11-06T17:56:31Z",
+          "at": "2026-11-07T05:36:19Z",
           "note": "Adventure genre quality needs human playtesting; no automated proxy."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:31Z",
+          "at": "2026-11-07T05:36:19Z",
           "status": "pending",
           "previous": "pending",
           "note": "Adventure genre quality needs human playtesting; no automated proxy.",
@@ -2407,47 +2407,47 @@
       "evidence": [
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-006-20261106T175631Z-op-e785525ad34e44b2.json",
+          "reference": ".game-studio/evidence/R-006-20261107T053620Z-op-0447472b49784de0.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check pc_platform",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "build",
           "reference": ".game-studio/evidence/build-artifact.json",
           "note": "Real exe size and SHA-256 recorded at integration time.",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-player-evidence.json",
           "note": "Machine runtime evidence; not a human playtest.",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "build",
           "reference": ".game-studio/evidence/source/unity-player-build.provenance.json",
           "note": "Unity build provenance: StandaloneWindows64, exit 0.",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:31Z",
+          "at": "2026-11-07T05:36:20Z",
           "note": "StandaloneWindows64 build and machine runtime evidence exist; the player was not independently re-launched by this driver."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:31Z",
+          "at": "2026-11-07T05:36:20Z",
           "status": "tested",
           "previous": "pending",
           "note": "StandaloneWindows64 build and machine runtime evidence exist; the player was not independently re-launched by this driver.",
@@ -2473,45 +2473,45 @@
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-playmode-results.xml",
           "note": "PlayMode XML passed: JumpRaisesPlayerAboveGround",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-007-20261106T175631Z-op-3041c6dbf28c4e06.json",
+          "reference": ".game-studio/evidence/R-007-20261107T053620Z-op-6a576b4af3474a4c.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check jumping",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scripts/MonkeyController.cs",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-player-evidence.json",
           "note": "Machine runtime evidence; not a human playtest.",
-          "recorded_at": "2026-11-06T17:56:31Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:31Z",
+          "at": "2026-11-07T05:36:20Z",
           "note": "PlayMode JumpRaisesPlayerAboveGround passed; player evidence peakY=1.709."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:31Z",
+          "at": "2026-11-07T05:36:20Z",
           "status": "tested",
           "previous": "pending",
           "note": "PlayMode JumpRaisesPlayerAboveGround passed; player evidence peakY=1.709.",
@@ -2537,52 +2537,52 @@
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-playmode-results.xml",
           "note": "PlayMode XML passed: CollectibleIncrementsScoreAndDisappears",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-008-20261106T175632Z-op-29ff1f0459d44410.json",
+          "reference": ".game-studio/evidence/R-008-20261107T053620Z-op-df2d808eee354ea0.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check collectibles",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scripts/BananaCollectible.cs",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Prefabs/Banana.prefab",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scenes/JungleMonkey.unity",
           "note": "Scene inspected for objects and components.",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:32Z",
+          "at": "2026-11-07T05:36:20Z",
           "note": "PlayMode collectible test incremented score and disabled the banana."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:32Z",
+          "at": "2026-11-07T05:36:20Z",
           "status": "tested",
           "previous": "pending",
           "note": "PlayMode collectible test incremented score and disabled the banana.",
@@ -2608,52 +2608,52 @@
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-playmode-results.xml",
           "note": "PlayMode XML passed: CollectibleIncrementsScoreAndDisappears, HudDisplaysBananaProgress",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-009-20261106T175632Z-op-91c5e42cb1a347dc.json",
+          "reference": ".game-studio/evidence/R-009-20261107T053620Z-op-e9aae1f520cb455b.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check score",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scripts/GameManager.cs",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scripts/HUDController.cs",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scenes/JungleMonkey.unity",
           "note": "Scene inspected for objects and components.",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:20Z",
           "exists": true
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:32Z",
+          "at": "2026-11-07T05:36:20Z",
           "note": "PlayMode tests cover score increment and the banana HUD string."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:32Z",
+          "at": "2026-11-07T05:36:20Z",
           "status": "tested",
           "previous": "pending",
           "note": "PlayMode tests cover score increment and the banana HUD string.",
@@ -2681,45 +2681,45 @@
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-playmode-results.xml",
           "note": "PlayMode XML passed: MovementChangesPlayerPosition",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:21Z",
           "exists": true
         },
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-010-20261106T175632Z-op-c5c90fa2f4664414.json",
+          "reference": ".game-studio/evidence/R-010-20261107T053621Z-op-e88df7f7b62847ab.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check player_traversal",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:21Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scripts/MonkeyController.cs",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:21Z",
           "exists": true
         },
         {
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-player-evidence.json",
           "note": "Machine runtime evidence; not a human playtest.",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:21Z",
           "exists": true
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:32Z",
+          "at": "2026-11-07T05:36:21Z",
           "note": "PlayMode movement test moved more than 1 m; player evidence moved 17.394 m."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:32Z",
+          "at": "2026-11-07T05:36:21Z",
           "status": "tested",
           "previous": "pending",
           "note": "PlayMode movement test moved more than 1 m; player evidence moved 17.394 m.",
@@ -2747,38 +2747,38 @@
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-playmode-results.xml",
           "note": "PlayMode XML passed: CollectibleIncrementsScoreAndDisappears",
-          "recorded_at": "2026-11-06T17:56:32Z",
+          "recorded_at": "2026-11-07T05:36:21Z",
           "exists": true
         },
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-011-20261106T175632Z-op-4c957baa9fcb4169.json",
+          "reference": ".game-studio/evidence/R-011-20261107T053621Z-op-2ee779b2f03d4c4f.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check interaction",
-          "recorded_at": "2026-11-06T17:56:33Z",
+          "recorded_at": "2026-11-07T05:36:21Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scripts/BananaCollectible.cs",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:33Z",
+          "recorded_at": "2026-11-07T05:36:21Z",
           "exists": true
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:33Z",
+          "at": "2026-11-07T05:36:21Z",
           "note": "Trigger interaction is covered by the PlayMode collectible test."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:33Z",
+          "at": "2026-11-07T05:36:21Z",
           "status": "tested",
           "previous": "pending",
           "note": "Trigger interaction is covered by the PlayMode collectible test.",
@@ -2806,45 +2806,45 @@
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-playmode-results.xml",
           "note": "PlayMode XML passed: CollectibleIncrementsScoreAndDisappears",
-          "recorded_at": "2026-11-06T17:56:33Z",
+          "recorded_at": "2026-11-07T05:36:22Z",
           "exists": true
         },
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-012-20261106T175633Z-op-d107e66c44c6429c.json",
+          "reference": ".game-studio/evidence/R-012-20261107T053621Z-op-ca404b9e0cc14a2a.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check objectives",
-          "recorded_at": "2026-11-06T17:56:33Z",
+          "recorded_at": "2026-11-07T05:36:22Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scripts/BananaCollectible.cs",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:33Z",
+          "recorded_at": "2026-11-07T05:36:22Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scenes/JungleMonkey.unity",
           "note": "Scene inspected for objects and components.",
-          "recorded_at": "2026-11-06T17:56:33Z",
+          "recorded_at": "2026-11-07T05:36:22Z",
           "exists": true
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:33Z",
+          "at": "2026-11-07T05:36:22Z",
           "note": "PlayMode test covers the prototype collection objective."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:33Z",
+          "at": "2026-11-07T05:36:22Z",
           "status": "tested",
           "previous": "pending",
           "note": "PlayMode test covers the prototype collection objective.",
@@ -2870,18 +2870,18 @@
       "evidence": [],
       "notes": [
         {
-          "at": "2026-11-06T17:56:33Z",
+          "at": "2026-11-07T05:36:22Z",
           "note": "Implied by the genre analysis but excluded from the approved prototype scope; no NPC or dialogue was implemented."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:33Z",
+          "at": "2026-11-07T05:36:22Z",
           "status": "rejected",
           "previous": "pending",
           "note": "Implied by the genre analysis but excluded from the approved prototype scope; no NPC or dialogue was implemented.",
@@ -2904,18 +2904,18 @@
       "evidence": [],
       "notes": [
         {
-          "at": "2026-11-06T17:56:33Z",
+          "at": "2026-11-07T05:36:22Z",
           "note": "Excluded from the approved prototype scope; no save system was implemented."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:33Z",
+          "at": "2026-11-07T05:36:22Z",
           "status": "rejected",
           "previous": "pending",
           "note": "Excluded from the approved prototype scope; no save system was implemented.",
@@ -2940,38 +2940,38 @@
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-playmode-results.xml",
           "note": "PlayMode XML passed: MovementChangesPlayerPosition, JumpRaisesPlayerAboveGround",
-          "recorded_at": "2026-11-06T17:56:33Z",
+          "recorded_at": "2026-11-07T05:36:22Z",
           "exists": true
         },
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-015-20261106T175633Z-op-ee935fb0575145f6.json",
+          "reference": ".game-studio/evidence/R-015-20261107T053622Z-op-7c437a5a04504212.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check player_controller",
-          "recorded_at": "2026-11-06T17:56:33Z",
+          "recorded_at": "2026-11-07T05:36:22Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scripts/MonkeyController.cs",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:33Z",
+          "recorded_at": "2026-11-07T05:36:22Z",
           "exists": true
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:33Z",
+          "at": "2026-11-07T05:36:22Z",
           "note": "PlayMode movement and jump tests exercise the CharacterController."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:33Z",
+          "at": "2026-11-07T05:36:22Z",
           "status": "tested",
           "previous": "pending",
           "note": "PlayMode movement and jump tests exercise the CharacterController.",
@@ -2999,45 +2999,45 @@
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-playmode-results.xml",
           "note": "PlayMode XML passed: SceneContainsPlayerEnvironmentAndHud",
-          "recorded_at": "2026-11-06T17:56:33Z",
+          "recorded_at": "2026-11-07T05:36:22Z",
           "exists": true
         },
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-016-20261106T175633Z-op-eff855bb795a4592.json",
+          "reference": ".game-studio/evidence/R-016-20261107T053622Z-op-b198aa0b809c452a.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check camera_system",
-          "recorded_at": "2026-11-06T17:56:33Z",
+          "recorded_at": "2026-11-07T05:36:22Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scripts/CameraFollow.cs",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:33Z",
+          "recorded_at": "2026-11-07T05:36:22Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scenes/JungleMonkey.unity",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:33Z",
+          "recorded_at": "2026-11-07T05:36:22Z",
           "exists": true
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:33Z",
+          "at": "2026-11-07T05:36:22Z",
           "note": "Camera exists and follow code is present; follow behaviour is not directly asserted beyond the rendered runtime screenshot."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:33Z",
+          "at": "2026-11-07T05:36:22Z",
           "status": "implemented",
           "previous": "pending",
           "note": "Camera exists and follow code is present; follow behaviour is not directly asserted beyond the rendered runtime screenshot.",
@@ -3065,45 +3065,45 @@
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-playmode-results.xml",
           "note": "PlayMode XML passed: HudDisplaysBananaProgress",
-          "recorded_at": "2026-11-06T17:56:34Z",
+          "recorded_at": "2026-11-07T05:36:23Z",
           "exists": true
         },
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-017-20261106T175634Z-op-cfd7fb25ad944d42.json",
+          "reference": ".game-studio/evidence/R-017-20261107T053623Z-op-d14c2f1859e347f6.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check ui_hud",
-          "recorded_at": "2026-11-06T17:56:34Z",
+          "recorded_at": "2026-11-07T05:36:23Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scripts/HUDController.cs",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:34Z",
+          "recorded_at": "2026-11-07T05:36:23Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Scenes/JungleMonkey.unity",
           "note": "Scene inspected for objects and components.",
-          "recorded_at": "2026-11-06T17:56:34Z",
+          "recorded_at": "2026-11-07T05:36:23Z",
           "exists": true
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "note": "PlayMode HUD test found the score text containing 'Bananas' and '/'."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "status": "tested",
           "previous": "pending",
           "note": "PlayMode HUD test found the score text containing 'Bananas' and '/'.",
@@ -3129,59 +3129,59 @@
           "kind": "test",
           "reference": ".game-studio/evidence/source/v5-playmode-results.xml",
           "note": "PlayMode XML passed: NoMissingScriptsOrMaterials",
-          "recorded_at": "2026-11-06T17:56:34Z",
+          "recorded_at": "2026-11-07T05:36:23Z",
           "exists": true
         },
         {
           "kind": "test",
-          "reference": ".game-studio/evidence/R-018-20261106T175634Z-op-5df06d2fb0de449a.json",
+          "reference": ".game-studio/evidence/R-018-20261107T053623Z-op-0c22c309c86d4e1a.json",
           "note": "Independent evidence harness run: scripts/v5-verify-slice.py --check asset_import",
-          "recorded_at": "2026-11-06T17:56:34Z",
+          "recorded_at": "2026-11-07T05:36:23Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Art/Monkey.fbx",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:34Z",
+          "recorded_at": "2026-11-07T05:36:23Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Art/Jungle.fbx",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:34Z",
+          "recorded_at": "2026-11-07T05:36:23Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Assets/V5/Art/Banana.fbx",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:34Z",
+          "recorded_at": "2026-11-07T05:36:23Z",
           "exists": true
         },
         {
           "kind": "inspection",
           "reference": "v5-blender-assets.json",
           "note": "Blender-generated triangle/bone/action statistics.",
-          "recorded_at": "2026-11-06T17:56:34Z",
+          "recorded_at": "2026-11-07T05:36:23Z",
           "exists": null
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "note": "PlayMode NoMissingScriptsOrMaterials passed; FBX GUIDs are referenced by the scene/prefab."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "status": "tested",
           "previous": "pending",
           "note": "PlayMode NoMissingScriptsOrMaterials passed; FBX GUIDs are referenced by the scene/prefab.",
@@ -3208,38 +3208,38 @@
           "kind": "file",
           "reference": "ProjectSettings/ProjectVersion.txt",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:34Z",
+          "recorded_at": "2026-11-07T05:36:23Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "Packages/manifest.json",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:34Z",
+          "recorded_at": "2026-11-07T05:36:23Z",
           "exists": true
         },
         {
           "kind": "file",
           "reference": "unity-jungle-v5.slnx",
           "note": "Implementation artefact inspected by the V5 verifier.",
-          "recorded_at": "2026-11-06T17:56:34Z",
+          "recorded_at": "2026-11-07T05:36:23Z",
           "exists": true
         }
       ],
       "notes": [
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "note": "Versioned project settings, package lock and solution exist; reproducibility was not independently rebuilt in this driver."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "status": "implemented",
           "previous": "pending",
           "note": "Versioned project settings, package lock and solution exist; reproducibility was not independently rebuilt in this driver.",
@@ -3262,18 +3262,18 @@
       "evidence": [],
       "notes": [
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "note": "Optional AI suggestion, not requested and not approved for this prototype."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "status": "rejected",
           "previous": "pending",
           "note": "Optional AI suggestion, not requested and not approved for this prototype.",
@@ -3294,18 +3294,18 @@
       "evidence": [],
       "notes": [
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "note": "Optional AI suggestion, not requested and not approved for this prototype."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "status": "rejected",
           "previous": "pending",
           "note": "Optional AI suggestion, not requested and not approved for this prototype.",
@@ -3326,18 +3326,18 @@
       "evidence": [],
       "notes": [
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "note": "Optional AI suggestion, not requested and not approved for this prototype."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "status": "rejected",
           "previous": "pending",
           "note": "Optional AI suggestion, not requested and not approved for this prototype.",
@@ -3358,18 +3358,18 @@
       "evidence": [],
       "notes": [
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "note": "Optional AI suggestion, not requested and not approved for this prototype."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "status": "rejected",
           "previous": "pending",
           "note": "Optional AI suggestion, not requested and not approved for this prototype.",
@@ -3390,18 +3390,18 @@
       "evidence": [],
       "notes": [
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "note": "Optional AI suggestion, not requested and not approved for this prototype."
         }
       ],
       "history": [
         {
-          "at": "2026-11-06T17:56:29Z",
+          "at": "2026-11-07T05:36:18Z",
           "status": "pending",
           "note": "created from specification"
         },
         {
-          "at": "2026-11-06T17:56:34Z",
+          "at": "2026-11-07T05:36:23Z",
           "status": "rejected",
           "previous": "pending",
           "note": "Optional AI suggestion, not requested and not approved for this prototype.",
@@ -3418,7 +3418,7 @@
       "rationale": "Already installed; the existing V5 project and build are Unity.",
       "source": "user",
       "approved": true,
-      "at": "2026-11-06T17:56:29Z"
+      "at": "2026-11-07T05:36:18Z"
     },
     {
       "id": "D-002",
@@ -3427,7 +3427,7 @@
       "rationale": "The user approved a Windows prototype; Android is excluded.",
       "source": "user",
       "approved": true,
-      "at": "2026-11-06T17:56:30Z"
+      "at": "2026-11-07T05:36:18Z"
     },
     {
       "id": "D-003",
@@ -3436,7 +3436,7 @@
       "rationale": "Explicit request.",
       "source": "user",
       "approved": true,
-      "at": "2026-11-06T17:56:30Z"
+      "at": "2026-11-07T05:36:18Z"
     },
     {
       "id": "D-004",
@@ -3445,7 +3445,7 @@
       "rationale": "Explicit request.",
       "source": "user",
       "approved": true,
-      "at": "2026-11-06T17:56:30Z"
+      "at": "2026-11-07T05:36:18Z"
     },
     {
       "id": "D-005",
@@ -3454,7 +3454,7 @@
       "rationale": "Keeps the slice reviewable and evidence-based.",
       "source": "user",
       "approved": true,
-      "at": "2026-11-06T17:56:30Z"
+      "at": "2026-11-07T05:36:18Z"
     },
     {
       "id": "D-006",
@@ -3463,7 +3463,7 @@
       "rationale": "Recorded from the original request and README scope statement.",
       "source": "user",
       "approved": true,
-      "at": "2026-11-06T17:56:30Z"
+      "at": "2026-11-07T05:36:18Z"
     },
     {
       "id": "D-007",
@@ -3472,7 +3472,7 @@
       "rationale": "These were implied by the genre analysis, not requested for the slice.",
       "source": "user",
       "approved": true,
-      "at": "2026-11-06T17:56:30Z"
+      "at": "2026-11-07T05:36:18Z"
     },
     {
       "id": "D-008",
@@ -3481,7 +3481,7 @@
       "rationale": "The user did not authorize paid calls or external content.",
       "source": "user",
       "approved": true,
-      "at": "2026-11-06T17:56:30Z"
+      "at": "2026-11-07T05:36:18Z"
     },
     {
       "id": "D-009",
@@ -3490,7 +3490,7 @@
       "rationale": "No human playtest record exists.",
       "source": "user",
       "approved": true,
-      "at": "2026-11-06T17:56:30Z"
+      "at": "2026-11-07T05:36:18Z"
     }
   ],
   "known_errors": [],
@@ -3589,7 +3589,7 @@
   "replaced": false,
   "history": [
     {
-      "at": "2026-11-06T17:56:29Z",
+      "at": "2026-11-07T05:36:18Z",
       "event": "manifest.created",
       "detail": {
         "spec_id": "4af7ee0b97fd",
@@ -3598,7 +3598,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:30Z",
+      "at": "2026-11-07T05:36:18Z",
       "event": "decision.recorded",
       "detail": {
         "id": "D-001",
@@ -3608,7 +3608,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:30Z",
+      "at": "2026-11-07T05:36:18Z",
       "event": "decision.recorded",
       "detail": {
         "id": "D-002",
@@ -3618,7 +3618,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:30Z",
+      "at": "2026-11-07T05:36:18Z",
       "event": "decision.recorded",
       "detail": {
         "id": "D-003",
@@ -3628,7 +3628,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:30Z",
+      "at": "2026-11-07T05:36:18Z",
       "event": "decision.recorded",
       "detail": {
         "id": "D-004",
@@ -3638,7 +3638,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:30Z",
+      "at": "2026-11-07T05:36:18Z",
       "event": "decision.recorded",
       "detail": {
         "id": "D-005",
@@ -3648,7 +3648,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:30Z",
+      "at": "2026-11-07T05:36:18Z",
       "event": "decision.recorded",
       "detail": {
         "id": "D-006",
@@ -3658,7 +3658,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:30Z",
+      "at": "2026-11-07T05:36:18Z",
       "event": "decision.recorded",
       "detail": {
         "id": "D-007",
@@ -3668,7 +3668,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:30Z",
+      "at": "2026-11-07T05:36:18Z",
       "event": "decision.recorded",
       "detail": {
         "id": "D-008",
@@ -3678,7 +3678,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:30Z",
+      "at": "2026-11-07T05:36:18Z",
       "event": "decision.recorded",
       "detail": {
         "id": "D-009",
@@ -3688,7 +3688,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:30Z",
+      "at": "2026-11-07T05:36:19Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-001",
@@ -3698,7 +3698,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:30Z",
+      "at": "2026-11-07T05:36:19Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-002",
@@ -3708,7 +3708,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:31Z",
+      "at": "2026-11-07T05:36:19Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-003",
@@ -3718,7 +3718,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:31Z",
+      "at": "2026-11-07T05:36:19Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-004",
@@ -3728,7 +3728,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:31Z",
+      "at": "2026-11-07T05:36:19Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-005",
@@ -3738,7 +3738,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:31Z",
+      "at": "2026-11-07T05:36:20Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-006",
@@ -3748,7 +3748,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:31Z",
+      "at": "2026-11-07T05:36:20Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-007",
@@ -3758,7 +3758,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:32Z",
+      "at": "2026-11-07T05:36:20Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-008",
@@ -3768,7 +3768,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:32Z",
+      "at": "2026-11-07T05:36:20Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-009",
@@ -3778,7 +3778,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:32Z",
+      "at": "2026-11-07T05:36:21Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-010",
@@ -3788,7 +3788,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:33Z",
+      "at": "2026-11-07T05:36:21Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-011",
@@ -3798,7 +3798,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:33Z",
+      "at": "2026-11-07T05:36:22Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-012",
@@ -3808,7 +3808,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:33Z",
+      "at": "2026-11-07T05:36:22Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-013",
@@ -3818,7 +3818,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:33Z",
+      "at": "2026-11-07T05:36:22Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-014",
@@ -3828,7 +3828,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:33Z",
+      "at": "2026-11-07T05:36:22Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-015",
@@ -3838,7 +3838,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:33Z",
+      "at": "2026-11-07T05:36:22Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-016",
@@ -3848,7 +3848,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:34Z",
+      "at": "2026-11-07T05:36:23Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-017",
@@ -3858,7 +3858,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:34Z",
+      "at": "2026-11-07T05:36:23Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-018",
@@ -3868,7 +3868,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:34Z",
+      "at": "2026-11-07T05:36:23Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-019",
@@ -3878,7 +3878,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:34Z",
+      "at": "2026-11-07T05:36:23Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-020",
@@ -3888,7 +3888,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:34Z",
+      "at": "2026-11-07T05:36:23Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-021",
@@ -3898,7 +3898,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:34Z",
+      "at": "2026-11-07T05:36:23Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-022",
@@ -3908,7 +3908,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:34Z",
+      "at": "2026-11-07T05:36:23Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-023",
@@ -3918,7 +3918,7 @@
       }
     },
     {
-      "at": "2026-11-06T17:56:34Z",
+      "at": "2026-11-07T05:36:23Z",
       "event": "requirement.status",
       "detail": {
         "id": "R-024",
@@ -4553,7 +4553,7 @@
   "execution_plan": {
     "ok": true,
     "schema_version": "1.0",
-    "generated_at": "2026-11-06T17:56:30Z",
+    "generated_at": "2026-11-07T05:36:18Z",
     "executable": false,
     "note": "This is a plan, not an execution. Every step must still pass the governance permission check and its own confirm gate. Paid steps are blocked until the user explicitly approves spending.",
     "engine": "unity",
@@ -5654,7 +5654,7 @@
     }
   ],
   "integration": {
-    "generated_at": "2026-11-06T17:56:34Z",
+    "generated_at": "2026-11-07T05:36:23Z",
     "manifest_path": "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\.game-studio\\manifest.json",
     "artifacts": [
       "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\.game-studio\\analysis.json",
@@ -5672,7 +5672,7 @@
       "v5-playmode-results.xml"
     ],
     "build_artifact": {
-      "generated_at": "2026-11-06T17:56:30Z",
+      "generated_at": "2026-11-07T05:36:18Z",
       "generated_by": "scripts/v5-mcp-integration.py",
       "exe": "D:\\MCP\\MCP\\validation\\builds\\v5-windows\\JungleMonkey.exe",
       "exe_size_bytes": 667136,
@@ -6361,105 +6361,105 @@
         "check": "dimension_3d",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-001-20261106T175630Z-op-69e2b5d354fa4e7d.json"
+        "evidence": ".game-studio/evidence/R-001-20261107T053619Z-op-b9dc1a55fa124972.json"
       },
       {
         "requirement_id": "R-002",
         "check": "low_poly_style",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-002-20261106T175630Z-op-74d42b1dc7074673.json"
+        "evidence": ".game-studio/evidence/R-002-20261107T053619Z-op-8841901a86c34355.json"
       },
       {
         "requirement_id": "R-003",
         "check": "jungle_environment",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-003-20261106T175631Z-op-d17549034d7041df.json"
+        "evidence": ".game-studio/evidence/R-003-20261107T053619Z-op-794cbeb753cc49a5.json"
       },
       {
         "requirement_id": "R-004",
         "check": "monkey_character",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-004-20261106T175631Z-op-a8bb5d2cfaa846ce.json"
+        "evidence": ".game-studio/evidence/R-004-20261107T053619Z-op-a9b51ce529a943b9.json"
       },
       {
         "requirement_id": "R-006",
         "check": "pc_platform",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-006-20261106T175631Z-op-e785525ad34e44b2.json"
+        "evidence": ".game-studio/evidence/R-006-20261107T053620Z-op-0447472b49784de0.json"
       },
       {
         "requirement_id": "R-007",
         "check": "jumping",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-007-20261106T175631Z-op-3041c6dbf28c4e06.json"
+        "evidence": ".game-studio/evidence/R-007-20261107T053620Z-op-6a576b4af3474a4c.json"
       },
       {
         "requirement_id": "R-008",
         "check": "collectibles",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-008-20261106T175632Z-op-29ff1f0459d44410.json"
+        "evidence": ".game-studio/evidence/R-008-20261107T053620Z-op-df2d808eee354ea0.json"
       },
       {
         "requirement_id": "R-009",
         "check": "score",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-009-20261106T175632Z-op-91c5e42cb1a347dc.json"
+        "evidence": ".game-studio/evidence/R-009-20261107T053620Z-op-e9aae1f520cb455b.json"
       },
       {
         "requirement_id": "R-010",
         "check": "player_traversal",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-010-20261106T175632Z-op-c5c90fa2f4664414.json"
+        "evidence": ".game-studio/evidence/R-010-20261107T053621Z-op-e88df7f7b62847ab.json"
       },
       {
         "requirement_id": "R-011",
         "check": "interaction",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-011-20261106T175632Z-op-4c957baa9fcb4169.json"
+        "evidence": ".game-studio/evidence/R-011-20261107T053621Z-op-2ee779b2f03d4c4f.json"
       },
       {
         "requirement_id": "R-012",
         "check": "objectives",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-012-20261106T175633Z-op-d107e66c44c6429c.json"
+        "evidence": ".game-studio/evidence/R-012-20261107T053621Z-op-ca404b9e0cc14a2a.json"
       },
       {
         "requirement_id": "R-015",
         "check": "player_controller",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-015-20261106T175633Z-op-ee935fb0575145f6.json"
+        "evidence": ".game-studio/evidence/R-015-20261107T053622Z-op-7c437a5a04504212.json"
       },
       {
         "requirement_id": "R-016",
         "check": "camera_system",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-016-20261106T175633Z-op-eff855bb795a4592.json"
+        "evidence": ".game-studio/evidence/R-016-20261107T053622Z-op-b198aa0b809c452a.json"
       },
       {
         "requirement_id": "R-017",
         "check": "ui_hud",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-017-20261106T175634Z-op-cfd7fb25ad944d42.json"
+        "evidence": ".game-studio/evidence/R-017-20261107T053623Z-op-d14c2f1859e347f6.json"
       },
       {
         "requirement_id": "R-018",
         "check": "asset_import",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-018-20261106T175634Z-op-5df06d2fb0de449a.json"
+        "evidence": ".game-studio/evidence/R-018-20261107T053623Z-op-0c22c309c86d4e1a.json"
       }
     ],
     "statuses": [

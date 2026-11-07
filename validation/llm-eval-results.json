@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at": "2026-11-06T03:58:25+00:00",
+    "generated_at": "2026-11-07T05:36:54+00:00",
     "mode": "pipeline",
     "source": "deterministic-fallback",
     "live": false,
@@ -9,8 +9,8 @@
     "dataset": "validation\\llm-eval-requests.json",
     "case_count": 22,
     "capability_gap_count": 3,
-    "mean_overall": 0.944,
-    "median_overall": 0.944,
+    "mean_overall": 0.957,
+    "median_overall": 0.972,
     "min_overall": 0.75,
     "max_overall": 1.0,
     "component_means": {
@@ -18,7 +18,7 @@
       "genre_precision": 1.0,
       "dimension": 0.944,
       "keyword_recall": 0.939,
-      "exclusion_recall": 0.909,
+      "exclusion_recall": 1.0,
       "technical": 1.0,
       "engine": 1.0,
       "clarification": 0.706,
@@ -674,7 +674,9 @@
           "swimming",
           "collectibles"
         ],
-        "exclusions": [],
+        "exclusions": [
+          "weapons"
+        ],
         "engines": [],
         "requirements": 21,
         "technical_requirements": 2,
@@ -686,7 +688,7 @@
         "genre_precision": 1.0,
         "dimension": 1.0,
         "keyword_recall": 1.0,
-        "exclusion_recall": 0.0,
+        "exclusion_recall": 1.0,
         "technical": 1.0,
         "engine": null,
         "clarification": null,
@@ -694,7 +696,7 @@
         "conflict": null,
         "non_hallucination": 1.0
       },
-      "overall": 0.875,
+      "overall": 1.0,
       "capability_gap": false,
       "gap_note": null,
       "exclusion_leaks": [],
@@ -733,7 +735,9 @@
         "keywords": [
           "drifting"
         ],
-        "exclusions": [],
+        "exclusions": [
+          "weapons"
+        ],
         "engines": [],
         "requirements": 20,
         "technical_requirements": 1,
@@ -745,7 +749,7 @@
         "genre_precision": 1.0,
         "dimension": null,
         "keyword_recall": 1.0,
-        "exclusion_recall": 0.0,
+        "exclusion_recall": 1.0,
         "technical": 1.0,
         "engine": null,
         "clarification": null,
@@ -753,7 +757,7 @@
         "conflict": null,
         "non_hallucination": 1.0
       },
-      "overall": 0.857,
+      "overall": 1.0,
       "capability_gap": false,
       "gap_note": null,
       "exclusion_leaks": [],

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "requirement_id": "R-011",
+  "statement": "Interaction system",
+  "source_text": "implied by genre/mechanics",
+  "acceptance_test": "Interaction system works in a playable build: Context prompts and interactable objects that change gameplay state.",
+  "command": [
+    "cmd",
+    "/c",
+    "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe D:\\MCP\\MCP\\scripts\\v5-verify-slice.py --check interaction < NUL"
+  ],
+  "cwd": "D:\\MCP\\MCP\\validation\\unity-jungle-v5",
+  "run_at": "2026-11-07T05:36:21Z",
+  "exit_code": 0,
+  "cancelled": false,
+  "timed_out": false,
+  "duration_ms": 236,
+  "ok": true,
+  "operation_id": "op-2ee779b2f03d4c4f",
+  "stdout": "[PASS] interaction: 2/2 component checks passed\nSummary: PASS=1, FAIL=0, BLOCKED=0, NOT VERIFIED=0\n",
+  "stderr": "",
+  "stdout_sha256": "b39ed7714e52bc245c913467f27683005cd6f5f6ddc95b788b9fea415717be38",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "governance_decision": {
+    "ok": true,
+    "permission": "execute_process",
+    "effect": "ask",
+    "mode": "guided",
+    "mandatory_approval": false,
+    "confirmed": true,
+    "scope": "project"
+  },
+  "previous_evidence": {
+    "tests": 0,
+    "files": 0,
+    "missing": []
+  },
+  "comparison": {
+    "previous_run": null,
+    "changed": null,
+    "note": "first recorded verification run for this requirement"
+  }
+}

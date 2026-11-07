@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "started_at": "2026-11-06T17:56:29Z",
+  "started_at": "2026-11-07T05:36:18Z",
   "request": "Create a 3D low-poly jungle monkey adventure prototype for Windows PC. The monkey can run, jump and collect bananas. Include a follow camera, a score HUD and a restart. No climbing, no swinging, no swimming, no weapons and no Android support.",
   "exclusions": [
     {
@@ -788,7 +788,7 @@
   "execution_plan": {
     "ok": true,
     "schema_version": "1.0",
-    "generated_at": "2026-11-06T17:56:30Z",
+    "generated_at": "2026-11-07T05:36:18Z",
     "executable": false,
     "note": "This is a plan, not an execution. Every step must still pass the governance permission check and its own confirm gate. Paid steps are blocked until the user explicitly approves spending.",
     "engine": "unity",
@@ -1869,105 +1869,105 @@
         "check": "dimension_3d",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-001-20261106T175630Z-op-69e2b5d354fa4e7d.json"
+        "evidence": ".game-studio/evidence/R-001-20261107T053619Z-op-b9dc1a55fa124972.json"
       },
       {
         "requirement_id": "R-002",
         "check": "low_poly_style",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-002-20261106T175630Z-op-74d42b1dc7074673.json"
+        "evidence": ".game-studio/evidence/R-002-20261107T053619Z-op-8841901a86c34355.json"
       },
       {
         "requirement_id": "R-003",
         "check": "jungle_environment",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-003-20261106T175631Z-op-d17549034d7041df.json"
+        "evidence": ".game-studio/evidence/R-003-20261107T053619Z-op-794cbeb753cc49a5.json"
       },
       {
         "requirement_id": "R-004",
         "check": "monkey_character",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-004-20261106T175631Z-op-a8bb5d2cfaa846ce.json"
+        "evidence": ".game-studio/evidence/R-004-20261107T053619Z-op-a9b51ce529a943b9.json"
       },
       {
         "requirement_id": "R-006",
         "check": "pc_platform",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-006-20261106T175631Z-op-e785525ad34e44b2.json"
+        "evidence": ".game-studio/evidence/R-006-20261107T053620Z-op-0447472b49784de0.json"
       },
       {
         "requirement_id": "R-007",
         "check": "jumping",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-007-20261106T175631Z-op-3041c6dbf28c4e06.json"
+        "evidence": ".game-studio/evidence/R-007-20261107T053620Z-op-6a576b4af3474a4c.json"
       },
       {
         "requirement_id": "R-008",
         "check": "collectibles",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-008-20261106T175632Z-op-29ff1f0459d44410.json"
+        "evidence": ".game-studio/evidence/R-008-20261107T053620Z-op-df2d808eee354ea0.json"
       },
       {
         "requirement_id": "R-009",
         "check": "score",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-009-20261106T175632Z-op-91c5e42cb1a347dc.json"
+        "evidence": ".game-studio/evidence/R-009-20261107T053620Z-op-e9aae1f520cb455b.json"
       },
       {
         "requirement_id": "R-010",
         "check": "player_traversal",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-010-20261106T175632Z-op-c5c90fa2f4664414.json"
+        "evidence": ".game-studio/evidence/R-010-20261107T053621Z-op-e88df7f7b62847ab.json"
       },
       {
         "requirement_id": "R-011",
         "check": "interaction",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-011-20261106T175632Z-op-4c957baa9fcb4169.json"
+        "evidence": ".game-studio/evidence/R-011-20261107T053621Z-op-2ee779b2f03d4c4f.json"
       },
       {
         "requirement_id": "R-012",
         "check": "objectives",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-012-20261106T175633Z-op-d107e66c44c6429c.json"
+        "evidence": ".game-studio/evidence/R-012-20261107T053621Z-op-ca404b9e0cc14a2a.json"
       },
       {
         "requirement_id": "R-015",
         "check": "player_controller",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-015-20261106T175633Z-op-ee935fb0575145f6.json"
+        "evidence": ".game-studio/evidence/R-015-20261107T053622Z-op-7c437a5a04504212.json"
       },
       {
         "requirement_id": "R-016",
         "check": "camera_system",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-016-20261106T175633Z-op-eff855bb795a4592.json"
+        "evidence": ".game-studio/evidence/R-016-20261107T053622Z-op-b198aa0b809c452a.json"
       },
       {
         "requirement_id": "R-017",
         "check": "ui_hud",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-017-20261106T175634Z-op-cfd7fb25ad944d42.json"
+        "evidence": ".game-studio/evidence/R-017-20261107T053623Z-op-d14c2f1859e347f6.json"
       },
       {
         "requirement_id": "R-018",
         "check": "asset_import",
         "ok": true,
         "exit_code": 0,
-        "evidence": ".game-studio/evidence/R-018-20261106T175634Z-op-5df06d2fb0de449a.json"
+        "evidence": ".game-studio/evidence/R-018-20261107T053623Z-op-0c22c309c86d4e1a.json"
       }
     ],
     "statuses": [
@@ -2172,7 +2172,7 @@
     }
   },
   "integration": {
-    "generated_at": "2026-11-06T17:56:34Z",
+    "generated_at": "2026-11-07T05:36:23Z",
     "manifest_path": "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\.game-studio\\manifest.json",
     "artifacts": [
       "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\.game-studio\\analysis.json",
@@ -2190,7 +2190,7 @@
       "v5-playmode-results.xml"
     ],
     "build_artifact": {
-      "generated_at": "2026-11-06T17:56:30Z",
+      "generated_at": "2026-11-07T05:36:18Z",
       "generated_by": "scripts/v5-mcp-integration.py",
       "exe": "D:\\MCP\\MCP\\validation\\builds\\v5-windows\\JungleMonkey.exe",
       "exe_size_bytes": 667136,
@@ -2879,6 +2879,6 @@
     "rejected": 7
   },
   "final_revision": 35,
-  "finished_at": "2026-11-06T17:56:34Z",
+  "finished_at": "2026-11-07T05:36:23Z",
   "ok": true
 }
