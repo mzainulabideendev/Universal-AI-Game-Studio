@@ -316,18 +316,31 @@ def _run_recorded(record: dict, command: list[str], *, cwd: str | None,
     cancelled = False
     timed_out = False
     try:
+        # Drain stdout/stderr while the process runs. Waiting for exit before
+        # reading deadlocks when a child (e.g. the Blender FBX exporter) emits
+        # more output than the OS pipe buffer can hold.
         while True:
             if is_cancel_requested(operation_id):
                 cancelled = True
                 _terminate_tree(proc)
                 break
-            if proc.poll() is not None:
-                break
             if time.time() - started > timeout:
                 timed_out = True
                 _terminate_tree(proc)
                 break
-            time.sleep(0.1)
+            try:
+                proc.communicate(timeout=0.2)
+                # The process may have exited because request_cancel killed it
+                # between our last flag check and communicate() returning.
+                if is_cancel_requested(operation_id):
+                    cancelled = True
+                break
+            except subprocess.TimeoutExpired:
+                continue
+        # Covers any remaining race where the cancel flag was persisted just
+        # after the process exited on its own.
+        if not cancelled and is_cancel_requested(operation_id):
+            cancelled = True
         try:
             stdout, stderr = proc.communicate(timeout=30)
         except subprocess.TimeoutExpired:

@@ -24,8 +24,8 @@ import traceback
 from game_studio import SERVER_NAME, SERVER_VERSION, PROTOCOL_VERSION
 from game_studio import (
     animations, assets, blender, character_pipeline, character_spec, config, detect,
-    engines, governance, manifest, meshy, operations, projects, secrets,
-    specification, understanding, verification,
+    engines, environment_pipeline, environment_spec, governance, manifest, meshy,
+    operations, projects, secrets, specification, understanding, verification,
 )
 from game_studio.llm import config as llm_config
 from game_studio.llm import capabilities as llm_capabilities
@@ -851,6 +851,50 @@ def tool_character_capabilities(args: dict) -> dict:
 
 
 # --------------------------------------------------------------------------
+# Environment generation pipeline
+# --------------------------------------------------------------------------
+def tool_environment_generate(args: dict) -> dict:
+    confirm = _bool(args, "confirm")
+    if not confirm:
+        raise ToolError(
+            "environment generation runs Blender and writes files; pass confirm=true")
+    _authorize(args, "run_blender", action="generate a Blender environment",
+               confirm=confirm)
+    description = _str(args, "description", required=True, max_length=8000) or ""
+    quality_tier = (_str(args, "quality_tier", default="medium") or "medium").lower()
+    profile = _str(args, "profile")
+    if profile and profile.lower() not in environment_spec.ENVIRONMENT_PROFILES:
+        raise ToolError(
+            f"profile must be one of {list(environment_spec.ENVIRONMENT_PROFILES)}")
+    name = _str(args, "name", default="JungleLevel") or "JungleLevel"
+    target_engine = _str(args, "target_engine", default="unity") or "unity"
+    output_dir = _str(args, "output_dir", required=True) or ""
+    try:
+        spec = environment_spec.build_environment_spec(
+            description, name=name, quality_tier=quality_tier,
+            profile=profile.lower() if profile else None,
+            lighting=_str(args, "lighting"),
+            target_engine=target_engine,
+            character_path=_str(args, "character_path"),
+            seed=_int(args, "seed", default=20261108) or 20261108,
+        )
+    except ValueError as exc:
+        raise ToolError(str(exc)) from exc
+    return environment_pipeline.run_pipeline(
+        spec, output_dir,
+        timeout=_int(args, "timeout", default=1200, minimum=60, maximum=7200) or 1200,
+        blender_exe=_str(args, "blender_exe"),
+        preview_size=_int(args, "preview_size", default=640, minimum=128,
+                          maximum=2048),
+        character_root=_str(args, "project_path"),
+    )
+
+
+def tool_environment_profiles(args: dict) -> dict:
+    return environment_spec.profile_report()
+
+
+# --------------------------------------------------------------------------
 # Meshy tools
 # --------------------------------------------------------------------------
 def tool_meshy_balance(args: dict) -> dict:
@@ -1356,6 +1400,34 @@ TOOLS = [
     _tool("character_capabilities", "Report which asset capabilities (text, image, texture, "
           "material, mesh, image-to-texture, image analysis) each provider supports, explicitly "
           "separating configured text adapters from unauthorized image/3D generators."),
+    # environment generation pipeline
+    _tool("environment_generate_asset", "Generate a real procedural tropical jungle environment "
+          "in Blender: terrain, vegetation, rocks, props, river with banks, PBR ground textures, "
+          "lighting/atmosphere, collision and spawn metadata, Phase 3 character integration, "
+          ".blend/.glb/.gltf/.fbx export, GLB re-import validation and preview renders. This is a "
+          "stylized procedural prototype, not hand-authored or AI-generated production art. "
+          "Requires confirm=true.", {
+              "description": {"type": "string", "maxLength": 8000,
+                              "description": "Natural-language environment request."},
+              "name": {"type": "string", "maxLength": 80, "default": "JungleLevel"},
+              "quality_tier": {"type": "string", "enum": ["low", "medium", "high"],
+                               "default": "medium"},
+              "profile": {"type": "string", "enum": list(environment_spec.ENVIRONMENT_PROFILES)},
+              "lighting": {"type": "string", "enum": list(environment_spec.LIGHTING_PRESETS)},
+              "target_engine": {"type": "string", "enum": ["unity", "godot", "unreal"],
+                                "default": "unity"},
+              "character_path": {"type": "string"},
+              "seed": {"type": "integer", "default": 20261108},
+              "output_dir": {"type": "string"},
+              "preview_size": {"type": "integer", "default": 640, "minimum": 128,
+                               "maximum": 2048},
+              "timeout": {"type": "integer", "default": 1200, "minimum": 60, "maximum": 7200},
+              "blender_exe": {"type": "string"},
+              "project_path": PROJECT_PATH,
+              "confirm": CONFIRM,
+          }, ["description", "output_dir", "confirm"]),
+    _tool("environment_profiles", "Report the reusable environment profiles (with honest "
+          "implementation levels), quality tiers, lighting presets and tier settings."),
     # meshy
     _tool("meshy_setup_guide", "Explain how to create a Meshy API key, where to store it, how "
           "to rotate it, and whether one is currently configured. Never returns the key."),
@@ -1941,6 +2013,8 @@ HANDLERS = {
     "blender_run_python": tool_blender_run_python,
     "character_generate_asset": tool_character_generate,
     "character_capabilities": tool_character_capabilities,
+    "environment_generate_asset": tool_environment_generate,
+    "environment_profiles": tool_environment_profiles,
     "meshy_balance": tool_meshy_balance,
     "meshy_setup_guide": tool_meshy_setup,
     "meshy_configure_api_key": tool_meshy_configure,

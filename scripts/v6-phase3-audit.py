@@ -198,6 +198,7 @@ def fresh_blender_build() -> dict:
             "textures": build.get("textures") or [],
             "animations": [a.get("name") for a in build.get("animations") or []],
             "glb": build.get("glb_validation"),
+            "gltf": build.get("gltf_validation"),
             "reimport_ok": (report.get("reimport") or {}).get("ok"),
             "preview_dimensions": character_pipeline.png_dimensions(preview_path)
             if preview_path else None,
@@ -328,9 +329,12 @@ def main() -> int:
         and (fresh["weighted_ratio"] or 0) >= 0.99,
         "animations_created": fresh["stage_status"].get("animations-created") == "passed",
         "real_exports_succeeded": fresh["stage_status"].get("glb-exported") == "passed"
+        and fresh["stage_status"].get("gltf-exported") == "passed"
         and fresh["stage_status"].get("fbx-exported") == "passed",
         "export_validated_and_reimported": fresh["stage_status"].get(
-            "glb-validated") == "passed" and bool(fresh["reimport_ok"]),
+            "glb-validated") == "passed"
+        and fresh["stage_status"].get("gltf-validated") == "passed"
+        and bool(fresh["reimport_ok"]),
         "preview_rendered": fresh["stage_status"].get("preview-rendered") == "passed"
         and bool(fresh["preview_dimensions"]),
         "phase2_agent_integration": agent["asset_specification_present"]
@@ -406,6 +410,7 @@ def main() -> int:
         "fresh_status": fresh["status"],
         "triangles": fresh["triangles"],
         "glb_ok": fresh["glb"].get("ok") if fresh["glb"] else None,
+        "gltf_ok": fresh["gltf"].get("ok") if fresh["gltf"] else None,
         "mcp": f"{mcp['tools']}/{mcp['handlers']}",
         "v4_preserved": preserved["v4_preserved"],
         "v5_preserved": preserved["v5_preserved"],

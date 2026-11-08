@@ -1,0 +1,587 @@
+{
+  "asset_id": "env-junglelevel-tropical_jungle-medium",
+  "name": "JungleLevel",
+  "asset_type": "environment",
+  "profile": "tropical_jungle",
+  "quality_tier": "medium",
+  "source": "generated-locally",
+  "generation_method": "procedural-blender",
+  "creator": "Universal AI Game Studio",
+  "license": "Original project asset (no third-party content)",
+  "license_id": "project-original-1.0",
+  "attribution_required": false,
+  "external_assets": [],
+  "downloads": [],
+  "download_status": "not-downloaded",
+  "ai_generated": false,
+  "procedural": true,
+  "blender_executed": true,
+  "dependencies": {
+    "blender": "D:\\blender data\\blender.exe",
+    "blender_exit_code": 0,
+    "textures": [
+      "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\textures\\ground_basecolor.png",
+      "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\textures\\ground_roughness.png",
+      "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\textures\\ground_normal.png"
+    ],
+    "character_asset": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+    "gltf_external_buffers": [
+      "JungleLevel.bin"
+    ],
+    "gltf_external_images": [
+      "T_Monkey_Fur_Normal.png",
+      "T_Monkey_Fur_BaseColor.png",
+      "T_Monkey_Fur_Roughness.png",
+      "T_Env_Ground_Normal.png",
+      "T_Env_Ground_BaseColor.png",
+      "T_Env_Ground_Roughness.png"
+    ]
+  },
+  "validation": {
+    "build_status": "built",
+    "failed_stages": [],
+    "terrain": "passed",
+    "vegetation": "passed",
+    "props": "passed",
+    "water": "passed",
+    "materials": "passed",
+    "lighting": "passed",
+    "layout": "passed",
+    "collision": "passed",
+    "character": "passed",
+    "glb": true,
+    "gltf": true,
+    "reimport": true
+  },
+  "engine_compatibility": {
+    "unity": {
+      "export_prepared": true,
+      "integration_verified": false,
+      "materials": true,
+      "rig": false,
+      "animations": false,
+      "note": "Exports are structurally validated. No engine import was executed in Phase 4.",
+      "formats": [
+        "fbx",
+        "glb",
+        "gltf"
+      ],
+      "status": "export-prepared-unverified",
+      "notes": [
+        "FBX is the primary Unity path; GLB/glTF import with Unity glTF support.",
+        "No Unity editor import was run."
+      ]
+    },
+    "godot": {
+      "export_prepared": true,
+      "integration_verified": false,
+      "materials": true,
+      "rig": false,
+      "animations": false,
+      "note": "Exports are structurally validated. No engine import was executed in Phase 4.",
+      "formats": [
+        "glb",
+        "gltf"
+      ],
+      "status": "export-prepared-unverified",
+      "notes": [
+        "glTF/GLB is Godot's native path; not imported here."
+      ]
+    },
+    "unreal": {
+      "export_prepared": true,
+      "integration_verified": false,
+      "materials": true,
+      "rig": false,
+      "animations": false,
+      "note": "Exports are structurally validated. No engine import was executed in Phase 4.",
+      "formats": [
+        "fbx",
+        "gltf"
+      ],
+      "status": "export-prepared-unverified",
+      "notes": [
+        "FBX is the usual path; glTF needs the import plugin."
+      ]
+    },
+    "target": "unity"
+  },
+  "content": {
+    "terrain": {
+      "vertices": 4356,
+      "triangles": 8450,
+      "non_manifold_edges": 260,
+      "degenerate_faces": 0,
+      "height_min_m": -0.2624,
+      "height_max_m": 6.8304,
+      "height_range_m": 7.0928,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "uv_coverage": 1.0,
+      "materials": [
+        "M_Env_Ground"
+      ],
+      "dimensions": [
+        120.0,
+        120.0,
+        7.093
+      ]
+    },
+    "vegetation_counts": {
+      "tree": 22,
+      "bush": 30,
+      "fern": 55,
+      "grass": 140,
+      "plant": 22,
+      "roots": 7
+    },
+    "vegetation_instances": 287,
+    "unique_vegetation_meshes": 19,
+    "prop_counts": {
+      "rock": 20,
+      "large_rock": 6,
+      "fallen_log": 4
+    },
+    "debris": 10,
+    "ruin_objects": 6,
+    "river": {
+      "present": true,
+      "width_m": 9.0,
+      "triangles": 192,
+      "physics": "visual-only"
+    },
+    "character": {
+      "imported": true,
+      "height_m": 1.6,
+      "ground_contact_error_m": 0.0
+    }
+  },
+  "artifacts": [
+    {
+      "role": "blend",
+      "format": "blend",
+      "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\JungleLevel.blend",
+      "exists": true,
+      "bytes": 2127827,
+      "sha256": "269a854d97c2d18668ec2ec0d3b842ba7d408aba767e0ca16db5ab20d4d9a2ea"
+    },
+    {
+      "role": "glb",
+      "format": "glb",
+      "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\JungleLevel.glb",
+      "exists": true,
+      "bytes": 2158528,
+      "sha256": "667181dd057ae54be1268ab7ecad31cac68b5ec9f88afc2026fc486dd58951c6"
+    },
+    {
+      "role": "gltf",
+      "format": "gltf",
+      "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\JungleLevel.gltf",
+      "exists": true,
+      "bytes": 218021,
+      "sha256": "f92b18e40a204af13c9594d785231a57f66cfb2f35790d0247b9a54218d9cb76"
+    },
+    {
+      "role": "fbx",
+      "format": "fbx",
+      "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\JungleLevel.fbx",
+      "exists": true,
+      "bytes": 2250540,
+      "sha256": "fc39f575da637724a609d82ea548f93b27c4876cfa1520fa0c5d3dfd8f9a81f9"
+    },
+    {
+      "role": "preview_overview",
+      "format": "png",
+      "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\preview_overview.png",
+      "exists": true,
+      "bytes": 325679,
+      "sha256": "fa39252a8b0dce3cb1903e213dcc45a8d20a06dc58e3bdd154122c920c65d99b"
+    },
+    {
+      "role": "preview_spawn",
+      "format": "png",
+      "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\preview_spawn.png",
+      "exists": true,
+      "bytes": 269580,
+      "sha256": "b2a0cd49c160056a085ae0dd7ac53e424ed0c8a1611022639a7902ecd57d06b0"
+    },
+    {
+      "role": "layout",
+      "format": "json",
+      "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\environment_layout.json",
+      "exists": true,
+      "bytes": 35017,
+      "sha256": "10a358afeb4de69c7dde4b8587e381a94936960f2a2e47a9475c582307062662"
+    }
+  ],
+  "textures": [
+    {
+      "role": "texture",
+      "format": "png",
+      "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\textures\\ground_basecolor.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 177081,
+      "sha256": "841259b10b7db78e299843f9c2e4af7976b191ae2499b831b442249c7f8ee955",
+      "colorspace": "sRGB"
+    },
+    {
+      "role": "texture",
+      "format": "png",
+      "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\textures\\ground_roughness.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 151551,
+      "sha256": "82fa6d48ed6812f947477ebe8d6eac2741592adb2623306b7d7c7fdd8fd88523",
+      "colorspace": "Non-Color"
+    },
+    {
+      "role": "texture",
+      "format": "png",
+      "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\textures\\ground_normal.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 286025,
+      "sha256": "dc5f946318186c4991fc133204f6a5eef39d5be5c30c53c22e947d8c7778c6f0",
+      "colorspace": "Non-Color"
+    }
+  ],
+  "created_at": "2026-11-08T13:22:27Z",
+  "schema_version": 1,
+  "artifact_hashes": {
+    "blend": {
+      "path": "validation/v6-environment-pipeline/JungleLevel.blend",
+      "bytes": 2127827,
+      "sha256": "269a854d97c2d18668ec2ec0d3b842ba7d408aba767e0ca16db5ab20d4d9a2ea"
+    },
+    "glb": {
+      "path": "validation/v6-environment-pipeline/JungleLevel.glb",
+      "bytes": 2158528,
+      "sha256": "667181dd057ae54be1268ab7ecad31cac68b5ec9f88afc2026fc486dd58951c6"
+    },
+    "gltf": {
+      "path": "validation/v6-environment-pipeline/JungleLevel.gltf",
+      "bytes": 218021,
+      "sha256": "f92b18e40a204af13c9594d785231a57f66cfb2f35790d0247b9a54218d9cb76"
+    },
+    "fbx": {
+      "path": "validation/v6-environment-pipeline/JungleLevel.fbx",
+      "bytes": 2250540,
+      "sha256": "fc39f575da637724a609d82ea548f93b27c4876cfa1520fa0c5d3dfd8f9a81f9"
+    },
+    "preview_overview": {
+      "path": "validation/v6-environment-pipeline/preview_overview.png",
+      "bytes": 325679,
+      "sha256": "fa39252a8b0dce3cb1903e213dcc45a8d20a06dc58e3bdd154122c920c65d99b"
+    },
+    "preview_spawn": {
+      "path": "validation/v6-environment-pipeline/preview_spawn.png",
+      "bytes": 269580,
+      "sha256": "b2a0cd49c160056a085ae0dd7ac53e424ed0c8a1611022639a7902ecd57d06b0"
+    },
+    "layout": {
+      "path": "validation/v6-environment-pipeline/environment_layout.json",
+      "bytes": 35017,
+      "sha256": "10a358afeb4de69c7dde4b8587e381a94936960f2a2e47a9475c582307062662"
+    }
+  },
+  "texture_hashes": [
+    {
+      "path": "validation/v6-environment-pipeline/textures/ground_basecolor.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 177081,
+      "sha256": "841259b10b7db78e299843f9c2e4af7976b191ae2499b831b442249c7f8ee955",
+      "colorspace": "sRGB"
+    },
+    {
+      "path": "validation/v6-environment-pipeline/textures/ground_roughness.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 151551,
+      "sha256": "82fa6d48ed6812f947477ebe8d6eac2741592adb2623306b7d7c7fdd8fd88523",
+      "colorspace": "Non-Color"
+    },
+    {
+      "path": "validation/v6-environment-pipeline/textures/ground_normal.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 286025,
+      "sha256": "dc5f946318186c4991fc133204f6a5eef39d5be5c30c53c22e947d8c7778c6f0",
+      "colorspace": "Non-Color"
+    }
+  ],
+  "character_source": {
+    "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+    "sha256_before": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
+    "sha256_after": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
+    "unchanged": true
+  },
+  "tier_outputs": {
+    "low": {
+      "quality_tier": "low",
+      "status": "completed",
+      "ok": true,
+      "failed_stages": [],
+      "terrain_vertices": 1156,
+      "terrain_triangles": 2178,
+      "terrain_height_range_m": 6.882,
+      "vegetation_instances": 118,
+      "unique_vegetation_meshes": 19,
+      "vegetation_counts": {
+        "tree": 10,
+        "bush": 14,
+        "fern": 24,
+        "grass": 60,
+        "plant": 10,
+        "roots": 4
+      },
+      "prop_counts": {
+        "rock": 10,
+        "large_rock": 3,
+        "fallen_log": 2
+      },
+      "river_triangles": 192,
+      "objects": 169,
+      "meshes": 154,
+      "instances": 118,
+      "materials": 19,
+      "textures": 3,
+      "total_triangles": 31246,
+      "texture_resolution": 256,
+      "estimated_memory_mb": 90,
+      "memory_label": "estimated, not measured",
+      "timings": {
+        "blender_build_ms": 7414,
+        "export_processes": {
+          "glb": 2285,
+          "gltf": 2944,
+          "fbx": 2407
+        },
+        "total_pipeline_seconds": 22.821
+      },
+      "artifacts": {
+        "blend": {
+          "path": "validation/v6-environment-pipeline/low/JungleLevel.blend",
+          "bytes": 1598389,
+          "sha256": "e412be4c65644df265a388b29a6ebbd83c165530bf960165ea2d52ed68940b62"
+        },
+        "glb": {
+          "path": "validation/v6-environment-pipeline/low/JungleLevel.glb",
+          "bytes": 1558560,
+          "sha256": "b75b7bf688abcd3eff9e83ea75335893e80f3faf66eecd083fb7be3d77a13376"
+        },
+        "gltf": {
+          "path": "validation/v6-environment-pipeline/low/JungleLevel.gltf",
+          "bytes": 134415,
+          "sha256": "c2053755d6681674a141136d53aa7f48ed8fd62a3d1430838374baa6d1887f07"
+        },
+        "fbx": {
+          "path": "validation/v6-environment-pipeline/low/JungleLevel.fbx",
+          "bytes": 1593804,
+          "sha256": "3ee7dd3f56da1a58951d18770a66723fd55e4a1703545e00370aff360fb1a172"
+        },
+        "preview_overview": {
+          "path": "validation/v6-environment-pipeline/low/preview_overview.png",
+          "bytes": 318957,
+          "sha256": "9b4d6fc3e0f0f5226d59cec13dbcfa47c6fd91e05efd9580be412ae74e3e120a"
+        },
+        "preview_spawn": {
+          "path": "validation/v6-environment-pipeline/low/preview_spawn.png",
+          "bytes": 266110,
+          "sha256": "73d841349a45fbebe50e2acfc0c3eb17d3945a7779a3d93bf5845b50495aea27"
+        },
+        "layout": {
+          "path": "validation/v6-environment-pipeline/low/environment_layout.json",
+          "bytes": 23614,
+          "sha256": "1ed5360e2b296db2dc8167c81a77ba7deac2c11acd198ebfa3581f64c3d2acc7"
+        }
+      },
+      "output_dir": "validation/v6-environment-pipeline/low"
+    },
+    "medium": {
+      "quality_tier": "medium",
+      "status": "completed",
+      "ok": true,
+      "failed_stages": [],
+      "terrain_vertices": 4356,
+      "terrain_triangles": 8450,
+      "terrain_height_range_m": 7.0928,
+      "vegetation_instances": 287,
+      "unique_vegetation_meshes": 19,
+      "vegetation_counts": {
+        "tree": 22,
+        "bush": 30,
+        "fern": 55,
+        "grass": 140,
+        "plant": 22,
+        "roots": 7
+      },
+      "prop_counts": {
+        "rock": 20,
+        "large_rock": 6,
+        "fallen_log": 4
+      },
+      "river_triangles": 192,
+      "objects": 343,
+      "meshes": 328,
+      "instances": 287,
+      "materials": 19,
+      "textures": 3,
+      "total_triangles": 53674,
+      "texture_resolution": 512,
+      "estimated_memory_mb": 180,
+      "memory_label": "estimated, not measured",
+      "timings": {
+        "blender_build_ms": 19776,
+        "export_processes": {
+          "glb": 2714,
+          "gltf": 2453,
+          "fbx": 1869
+        },
+        "total_pipeline_seconds": 35.846
+      },
+      "artifacts": {
+        "blend": {
+          "path": "validation/v6-environment-pipeline/JungleLevel.blend",
+          "bytes": 2127827,
+          "sha256": "269a854d97c2d18668ec2ec0d3b842ba7d408aba767e0ca16db5ab20d4d9a2ea"
+        },
+        "glb": {
+          "path": "validation/v6-environment-pipeline/JungleLevel.glb",
+          "bytes": 2158528,
+          "sha256": "667181dd057ae54be1268ab7ecad31cac68b5ec9f88afc2026fc486dd58951c6"
+        },
+        "gltf": {
+          "path": "validation/v6-environment-pipeline/JungleLevel.gltf",
+          "bytes": 218021,
+          "sha256": "f92b18e40a204af13c9594d785231a57f66cfb2f35790d0247b9a54218d9cb76"
+        },
+        "fbx": {
+          "path": "validation/v6-environment-pipeline/JungleLevel.fbx",
+          "bytes": 2250540,
+          "sha256": "fc39f575da637724a609d82ea548f93b27c4876cfa1520fa0c5d3dfd8f9a81f9"
+        },
+        "preview_overview": {
+          "path": "validation/v6-environment-pipeline/preview_overview.png",
+          "bytes": 325679,
+          "sha256": "fa39252a8b0dce3cb1903e213dcc45a8d20a06dc58e3bdd154122c920c65d99b"
+        },
+        "preview_spawn": {
+          "path": "validation/v6-environment-pipeline/preview_spawn.png",
+          "bytes": 269580,
+          "sha256": "b2a0cd49c160056a085ae0dd7ac53e424ed0c8a1611022639a7902ecd57d06b0"
+        },
+        "layout": {
+          "path": "validation/v6-environment-pipeline/environment_layout.json",
+          "bytes": 35017,
+          "sha256": "10a358afeb4de69c7dde4b8587e381a94936960f2a2e47a9475c582307062662"
+        }
+      },
+      "output_dir": "validation/v6-environment-pipeline"
+    },
+    "high": {
+      "quality_tier": "high",
+      "status": "completed",
+      "ok": true,
+      "failed_stages": [],
+      "terrain_vertices": 9604,
+      "terrain_triangles": 18818,
+      "terrain_height_range_m": 7.1488,
+      "vegetation_instances": 494,
+      "unique_vegetation_meshes": 19,
+      "vegetation_counts": {
+        "tree": 38,
+        "bush": 50,
+        "fern": 90,
+        "grass": 240,
+        "plant": 36,
+        "roots": 12
+      },
+      "prop_counts": {
+        "rock": 32,
+        "large_rock": 9,
+        "fallen_log": 6
+      },
+      "river_triangles": 192,
+      "objects": 562,
+      "meshes": 547,
+      "instances": 494,
+      "materials": 19,
+      "textures": 3,
+      "total_triangles": 83930,
+      "texture_resolution": 1024,
+      "estimated_memory_mb": 320,
+      "memory_label": "estimated, not measured",
+      "timings": {
+        "blender_build_ms": 65364,
+        "export_processes": {
+          "glb": 2590,
+          "gltf": 2522,
+          "fbx": 2051
+        },
+        "total_pipeline_seconds": 82.818
+      },
+      "artifacts": {
+        "blend": {
+          "path": "validation/v6-environment-pipeline/high/JungleLevel.blend",
+          "bytes": 3353817,
+          "sha256": "d74cc4e092b46d5a075ca47fa77d7368dc84ebaff523b7c7dd30546ba65f185c"
+        },
+        "glb": {
+          "path": "validation/v6-environment-pipeline/high/JungleLevel.glb",
+          "bytes": 3512564,
+          "sha256": "fa979178c6760fc7afa643f81843436e9a14581f49e75fcae3cf1470e94ae1ac"
+        },
+        "gltf": {
+          "path": "validation/v6-environment-pipeline/high/JungleLevel.gltf",
+          "bytes": 327115,
+          "sha256": "33fed7815fe02dfbc0fe8d514efba52678168617b9f6036bda370a4a6712e85e"
+        },
+        "fbx": {
+          "path": "validation/v6-environment-pipeline/high/JungleLevel.fbx",
+          "bytes": 3671740,
+          "sha256": "562176d5b1a747031a381a258c9eb8034cc1c947ef191f6f771f212898e464ac"
+        },
+        "preview_overview": {
+          "path": "validation/v6-environment-pipeline/high/preview_overview.png",
+          "bytes": 334580,
+          "sha256": "6ef2377433e7648164e1d86e545287c54ca8bfd8181a9745880ed791d7654ece"
+        },
+        "preview_spawn": {
+          "path": "validation/v6-environment-pipeline/high/preview_spawn.png",
+          "bytes": 280166,
+          "sha256": "f32364b0344ca61c89b1bd85f036b59ccceeb9431bbbf5184c0242d9d269d05e"
+        },
+        "layout": {
+          "path": "validation/v6-environment-pipeline/high/environment_layout.json",
+          "bytes": 50089,
+          "sha256": "0d1a244799e1a5abab7d56a020f9c381ddfa248ca9d319c2aebdf13182c80cfe"
+        }
+      },
+      "output_dir": "validation/v6-environment-pipeline/high"
+    }
+  },
+  "declarations": {
+    "procedural": true,
+    "ai_generated": false,
+    "external_assets_downloaded": false,
+    "paid_generation_used": false,
+    "third_party_licenses": [],
+    "production_ready": false,
+    "engine_integration_verified": false
+  }
+}

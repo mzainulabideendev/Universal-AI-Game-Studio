@@ -1,0 +1,1208 @@
+{
+  "schema_version": 1,
+  "level": "JungleLevel",
+  "profile": "tropical_jungle",
+  "quality_tier": "low",
+  "units": "meters",
+  "up_axis": "Z",
+  "forward_axis": "-Z",
+  "terrain": {
+    "size_x_m": 120.0,
+    "size_y_m": 120.0,
+    "height_min_m": -0.2452,
+    "height_max_m": 6.6367
+  },
+  "spawn": {
+    "name": "SPAWN_PLAYER",
+    "x": 0.0,
+    "y": -48.0,
+    "z": 3.7685,
+    "facing": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "clearance_m": 4.882
+  },
+  "route": {
+    "width_m": 5.0,
+    "waypoints": [
+      {
+        "name": "ROUTE_WAYPOINT_00",
+        "x": 1.978,
+        "y": -48.0,
+        "z": 3.7517
+      },
+      {
+        "name": "ROUTE_WAYPOINT_01",
+        "x": 2.917,
+        "y": -37.75,
+        "z": 4.6568
+      },
+      {
+        "name": "ROUTE_WAYPOINT_02",
+        "x": 2.787,
+        "y": -27.5,
+        "z": 4.042
+      },
+      {
+        "name": "ROUTE_WAYPOINT_03",
+        "x": 1.636,
+        "y": -17.25,
+        "z": 5.1274
+      },
+      {
+        "name": "ROUTE_WAYPOINT_04",
+        "x": -0.115,
+        "y": -7.0,
+        "z": 5.4204
+      },
+      {
+        "name": "ROUTE_WAYPOINT_05",
+        "x": -1.824,
+        "y": 3.25,
+        "z": 5.5586
+      },
+      {
+        "name": "ROUTE_WAYPOINT_06",
+        "x": -2.864,
+        "y": 13.5,
+        "z": 4.223
+      },
+      {
+        "name": "ROUTE_WAYPOINT_07",
+        "x": -2.855,
+        "y": 23.75,
+        "z": 3.2213
+      },
+      {
+        "name": "ROUTE_WAYPOINT_08",
+        "x": -1.799,
+        "y": 34.0,
+        "z": 2.192
+      }
+    ],
+    "max_slope_deg": 17.349,
+    "conflicts": []
+  },
+  "landmark": {
+    "name": "LANDMARK_DESTINATION",
+    "x": 0.0,
+    "y": 46.0,
+    "z": 1.6693,
+    "type": "jungle_ruins"
+  },
+  "collision": {
+    "terrain_collider": "Terrain",
+    "walkable_slope_deg": 32.0,
+    "obstacles": [
+      {
+        "name": "tree_000",
+        "category": "tree",
+        "role": "static_obstacle",
+        "x": 52.608,
+        "y": -5.338,
+        "z": 3.72,
+        "radius": 0.667
+      },
+      {
+        "name": "tree_001",
+        "category": "tree",
+        "role": "static_obstacle",
+        "x": 18.361,
+        "y": -8.076,
+        "z": 4.938,
+        "radius": 0.64
+      },
+      {
+        "name": "tree_002",
+        "category": "tree",
+        "role": "static_obstacle",
+        "x": 42.752,
+        "y": -25.549,
+        "z": 4.556,
+        "radius": 0.639
+      },
+      {
+        "name": "tree_003",
+        "category": "tree",
+        "role": "static_obstacle",
+        "x": 49.384,
+        "y": -34.168,
+        "z": 3.053,
+        "radius": 0.564
+      },
+      {
+        "name": "tree_000.001",
+        "category": "tree",
+        "role": "static_obstacle",
+        "x": -29.906,
+        "y": -21.794,
+        "z": 4.673,
+        "radius": 0.438
+      },
+      {
+        "name": "tree_001.001",
+        "category": "tree",
+        "role": "static_obstacle",
+        "x": -42.212,
+        "y": -13.663,
+        "z": 4.086,
+        "radius": 0.54
+      },
+      {
+        "name": "tree_002.001",
+        "category": "tree",
+        "role": "static_obstacle",
+        "x": -13.542,
+        "y": 20.64,
+        "z": 2.944,
+        "radius": 0.68
+      },
+      {
+        "name": "tree_000.002",
+        "category": "tree",
+        "role": "static_obstacle",
+        "x": 5.871,
+        "y": 5.264,
+        "z": 4.753,
+        "radius": 0.673
+      },
+      {
+        "name": "tree_001.002",
+        "category": "tree",
+        "role": "static_obstacle",
+        "x": 18.178,
+        "y": 31.218,
+        "z": 4.498,
+        "radius": 0.503
+      },
+      {
+        "name": "tree_002.002",
+        "category": "tree",
+        "role": "static_obstacle",
+        "x": 43.762,
+        "y": -8.074,
+        "z": 4.802,
+        "radius": 0.462
+      },
+      {
+        "name": "bush_000",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": 50.05,
+        "y": -11.424,
+        "z": 3.924,
+        "radius": 0.524
+      },
+      {
+        "name": "bush_001",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": 15.051,
+        "y": -49.444,
+        "z": 3.432,
+        "radius": 0.378
+      },
+      {
+        "name": "bush_002",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": 5.393,
+        "y": 32.709,
+        "z": 3.448,
+        "radius": 0.512
+      },
+      {
+        "name": "bush_003",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": -0.789,
+        "y": 51.001,
+        "z": 1.951,
+        "radius": 0.441
+      },
+      {
+        "name": "bush_004",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": 52.663,
+        "y": 19.094,
+        "z": 3.435,
+        "radius": 0.472
+      },
+      {
+        "name": "bush_005",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": -18.887,
+        "y": -3.89,
+        "z": 4.598,
+        "radius": 0.605
+      },
+      {
+        "name": "bush_006",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": 22.855,
+        "y": 26.458,
+        "z": 6.366,
+        "radius": 0.41
+      },
+      {
+        "name": "bush_000.001",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": -42.836,
+        "y": 30.958,
+        "z": 2.505,
+        "radius": 0.384
+      },
+      {
+        "name": "bush_001.001",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": -53.544,
+        "y": 25.868,
+        "z": 4.267,
+        "radius": 0.427
+      },
+      {
+        "name": "bush_002.001",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": 45.722,
+        "y": 36.793,
+        "z": 3.242,
+        "radius": 0.511
+      },
+      {
+        "name": "bush_003.001",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": 8.972,
+        "y": 4.956,
+        "z": 4.23,
+        "radius": 0.419
+      },
+      {
+        "name": "bush_004.001",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": -33.514,
+        "y": -24.898,
+        "z": 4.591,
+        "radius": 0.583
+      },
+      {
+        "name": "bush_005.001",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": -22.362,
+        "y": -31.873,
+        "z": 4.773,
+        "radius": 0.491
+      },
+      {
+        "name": "bush_006.001",
+        "category": "bush",
+        "role": "static_obstacle",
+        "x": -29.317,
+        "y": -7.674,
+        "z": 4.355,
+        "radius": 0.365
+      },
+      {
+        "name": "plant_000",
+        "category": "plant",
+        "role": "static_obstacle",
+        "x": 9.029,
+        "y": 48.859,
+        "z": 3.147,
+        "radius": 0.214
+      },
+      {
+        "name": "plant_001",
+        "category": "plant",
+        "role": "static_obstacle",
+        "x": -34.228,
+        "y": -38.099,
+        "z": 5.034,
+        "radius": 0.232
+      },
+      {
+        "name": "plant_002",
+        "category": "plant",
+        "role": "static_obstacle",
+        "x": 44.654,
+        "y": 53.368,
+        "z": 2.96,
+        "radius": 0.275
+      },
+      {
+        "name": "plant_003",
+        "category": "plant",
+        "role": "static_obstacle",
+        "x": -20.379,
+        "y": 40.595,
+        "z": 2.321,
+        "radius": 0.217
+      },
+      {
+        "name": "plant_004",
+        "category": "plant",
+        "role": "static_obstacle",
+        "x": -42.251,
+        "y": -34.065,
+        "z": 4.788,
+        "radius": 0.299
+      },
+      {
+        "name": "plant_000.001",
+        "category": "plant",
+        "role": "static_obstacle",
+        "x": 5.858,
+        "y": -15.134,
+        "z": 5.326,
+        "radius": 0.25
+      },
+      {
+        "name": "plant_001.001",
+        "category": "plant",
+        "role": "static_obstacle",
+        "x": -23.178,
+        "y": -1.589,
+        "z": 4.81,
+        "radius": 0.241
+      },
+      {
+        "name": "plant_002.001",
+        "category": "plant",
+        "role": "static_obstacle",
+        "x": 52.432,
+        "y": -33.106,
+        "z": 2.544,
+        "radius": 0.227
+      },
+      {
+        "name": "plant_003.001",
+        "category": "plant",
+        "role": "static_obstacle",
+        "x": -15.428,
+        "y": 22.109,
+        "z": 2.979,
+        "radius": 0.3
+      },
+      {
+        "name": "plant_004.001",
+        "category": "plant",
+        "role": "static_obstacle",
+        "x": -16.121,
+        "y": -37.574,
+        "z": 4.224,
+        "radius": 0.209
+      },
+      {
+        "name": "rock_000",
+        "category": "rock",
+        "role": "static_obstacle",
+        "x": -35.157,
+        "y": 0.963,
+        "z": 4.6,
+        "radius": 0.624
+      },
+      {
+        "name": "rock_001",
+        "category": "rock",
+        "role": "static_obstacle",
+        "x": -14.096,
+        "y": 28.646,
+        "z": 2.781,
+        "radius": 0.585
+      },
+      {
+        "name": "rock_002",
+        "category": "rock",
+        "role": "static_obstacle",
+        "x": -31.487,
+        "y": 18.562,
+        "z": 3.167,
+        "radius": 0.522
+      },
+      {
+        "name": "rock_003",
+        "category": "rock",
+        "role": "static_obstacle",
+        "x": 44.846,
+        "y": -50.184,
+        "z": 3.931,
+        "radius": 0.691
+      },
+      {
+        "name": "rock_004",
+        "category": "rock",
+        "role": "static_obstacle",
+        "x": -52.727,
+        "y": -2.252,
+        "z": 3.643,
+        "radius": 0.622
+      },
+      {
+        "name": "rock_000.001",
+        "category": "rock",
+        "role": "static_obstacle",
+        "x": 39.35,
+        "y": -33.517,
+        "z": 4.174,
+        "radius": 0.356
+      },
+      {
+        "name": "rock_001.001",
+        "category": "rock",
+        "role": "static_obstacle",
+        "x": 13.736,
+        "y": 28.035,
+        "z": 4.845,
+        "radius": 0.424
+      },
+      {
+        "name": "rock_002.001",
+        "category": "rock",
+        "role": "static_obstacle",
+        "x": -50.909,
+        "y": 50.548,
+        "z": 0.87,
+        "radius": 0.673
+      },
+      {
+        "name": "rock_003.001",
+        "category": "rock",
+        "role": "static_obstacle",
+        "x": 24.116,
+        "y": 41.743,
+        "z": 4.561,
+        "radius": 0.62
+      },
+      {
+        "name": "rock_004.001",
+        "category": "rock",
+        "role": "static_obstacle",
+        "x": -49.997,
+        "y": -46.63,
+        "z": 3.43,
+        "radius": 0.697
+      },
+      {
+        "name": "large_rock_000",
+        "category": "large_rock",
+        "role": "static_obstacle",
+        "x": 52.262,
+        "y": 29.317,
+        "z": 3.269,
+        "radius": 2.015
+      },
+      {
+        "name": "large_rock_001",
+        "category": "large_rock",
+        "role": "static_obstacle",
+        "x": -13.869,
+        "y": -22.099,
+        "z": 4.409,
+        "radius": 1.788
+      },
+      {
+        "name": "large_rock_000.001",
+        "category": "large_rock",
+        "role": "static_obstacle",
+        "x": 25.36,
+        "y": 48.895,
+        "z": 2.452,
+        "radius": 1.27
+      },
+      {
+        "name": "fallen_log_000",
+        "category": "fallen_log",
+        "role": "static_obstacle",
+        "x": 20.539,
+        "y": -1.923,
+        "z": 4.21,
+        "radius": 1.292
+      },
+      {
+        "name": "fallen_log_000.001",
+        "category": "fallen_log",
+        "role": "static_obstacle",
+        "x": 52.353,
+        "y": -19.346,
+        "z": 3.043,
+        "radius": 1.388
+      },
+      {
+        "name": "RuinPlatform_0",
+        "category": "ruins",
+        "role": "static_obstacle",
+        "x": 0.0,
+        "y": 46.0,
+        "z": 1.919,
+        "radius": 2.8
+      },
+      {
+        "name": "RuinPillar_0_0",
+        "category": "ruins",
+        "role": "static_obstacle",
+        "x": 2.4,
+        "y": 46.0,
+        "z": 3.007,
+        "radius": 1.2
+      },
+      {
+        "name": "RuinPillar_0_1",
+        "category": "ruins",
+        "role": "static_obstacle",
+        "x": 0.0,
+        "y": 48.4,
+        "z": 3.041,
+        "radius": 1.2
+      },
+      {
+        "name": "RuinPillar_0_2",
+        "category": "ruins",
+        "role": "static_obstacle",
+        "x": -2.4,
+        "y": 46.0,
+        "z": 3.026,
+        "radius": 1.2
+      },
+      {
+        "name": "RuinPillar_0_3",
+        "category": "ruins",
+        "role": "static_obstacle",
+        "x": -0.0,
+        "y": 43.6,
+        "z": 2.797,
+        "radius": 1.2
+      },
+      {
+        "name": "RuinLintel_0",
+        "category": "ruins",
+        "role": "static_obstacle",
+        "x": 0.0,
+        "y": 46.0,
+        "z": 4.469,
+        "radius": 2.8
+      }
+    ],
+    "river_boundary": {
+      "name": "River_Water",
+      "width_m": 9.0,
+      "flow_direction": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    "navmesh": "metadata only; no runtime navigation system implemented"
+  },
+  "river": {
+    "present": true,
+    "width_m": 9.0,
+    "vertices": 147,
+    "faces": 96,
+    "triangles": 192,
+    "flow_direction": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "banks": 2,
+    "water_surface": true,
+    "bed_geometry": true,
+    "left_boundary": [
+      {
+        "x": 24.207,
+        "y": -57.6,
+        "z": 1.989
+      },
+      {
+        "x": 23.638,
+        "y": -55.2,
+        "z": 2.202
+      },
+      {
+        "x": 23.096,
+        "y": -52.8,
+        "z": 2.098
+      },
+      {
+        "x": 22.588,
+        "y": -50.4,
+        "z": 1.717
+      },
+      {
+        "x": 22.123,
+        "y": -48.0,
+        "z": 1.665
+      },
+      {
+        "x": 21.706,
+        "y": -45.6,
+        "z": 1.769
+      },
+      {
+        "x": 21.343,
+        "y": -43.2,
+        "z": 1.284
+      },
+      {
+        "x": 21.04,
+        "y": -40.8,
+        "z": 0.7
+      },
+      {
+        "x": 20.802,
+        "y": -38.4,
+        "z": 0.311
+      },
+      {
+        "x": 20.631,
+        "y": -36.0,
+        "z": 0.436
+      },
+      {
+        "x": 20.53,
+        "y": -33.6,
+        "z": 0.949
+      },
+      {
+        "x": 20.5,
+        "y": -31.2,
+        "z": 1.325
+      },
+      {
+        "x": 20.543,
+        "y": -28.8,
+        "z": 1.883
+      },
+      {
+        "x": 20.656,
+        "y": -26.4,
+        "z": 2.394
+      },
+      {
+        "x": 20.84,
+        "y": -24.0,
+        "z": 2.551
+      },
+      {
+        "x": 21.09,
+        "y": -21.6,
+        "z": 2.38
+      },
+      {
+        "x": 21.404,
+        "y": -19.2,
+        "z": 2.168
+      },
+      {
+        "x": 21.777,
+        "y": -16.8,
+        "z": 2.177
+      },
+      {
+        "x": 22.203,
+        "y": -14.4,
+        "z": 2.312
+      },
+      {
+        "x": 22.677,
+        "y": -12.0,
+        "z": 2.467
+      },
+      {
+        "x": 23.191,
+        "y": -9.6,
+        "z": 2.461
+      },
+      {
+        "x": 23.739,
+        "y": -7.2,
+        "z": 2.213
+      },
+      {
+        "x": 24.311,
+        "y": -4.8,
+        "z": 1.936
+      },
+      {
+        "x": 24.901,
+        "y": -2.4,
+        "z": 1.64
+      },
+      {
+        "x": 25.5,
+        "y": 0.0,
+        "z": 1.494
+      },
+      {
+        "x": 26.099,
+        "y": 2.4,
+        "z": 1.769
+      },
+      {
+        "x": 26.689,
+        "y": 4.8,
+        "z": 2.091
+      },
+      {
+        "x": 27.261,
+        "y": 7.2,
+        "z": 2.663
+      },
+      {
+        "x": 27.809,
+        "y": 9.6,
+        "z": 3.013
+      },
+      {
+        "x": 28.323,
+        "y": 12.0,
+        "z": 2.879
+      },
+      {
+        "x": 28.797,
+        "y": 14.4,
+        "z": 3.015
+      },
+      {
+        "x": 29.223,
+        "y": 16.8,
+        "z": 3.089
+      },
+      {
+        "x": 29.596,
+        "y": 19.2,
+        "z": 3.139
+      },
+      {
+        "x": 29.91,
+        "y": 21.6,
+        "z": 3.326
+      },
+      {
+        "x": 30.16,
+        "y": 24.0,
+        "z": 3.471
+      },
+      {
+        "x": 30.344,
+        "y": 26.4,
+        "z": 3.252
+      },
+      {
+        "x": 30.457,
+        "y": 28.8,
+        "z": 2.841
+      },
+      {
+        "x": 30.5,
+        "y": 31.2,
+        "z": 2.254
+      },
+      {
+        "x": 30.47,
+        "y": 33.6,
+        "z": 1.717
+      },
+      {
+        "x": 30.369,
+        "y": 36.0,
+        "z": 1.429
+      },
+      {
+        "x": 30.198,
+        "y": 38.4,
+        "z": 1.16
+      },
+      {
+        "x": 29.96,
+        "y": 40.8,
+        "z": 0.785
+      },
+      {
+        "x": 29.657,
+        "y": 43.2,
+        "z": 0.642
+      },
+      {
+        "x": 29.294,
+        "y": 45.6,
+        "z": 0.537
+      },
+      {
+        "x": 28.877,
+        "y": 48.0,
+        "z": 0.364
+      },
+      {
+        "x": 28.412,
+        "y": 50.4,
+        "z": 0.494
+      },
+      {
+        "x": 27.904,
+        "y": 52.8,
+        "z": 0.766
+      },
+      {
+        "x": 27.362,
+        "y": 55.2,
+        "z": 0.495
+      },
+      {
+        "x": 26.793,
+        "y": 57.6,
+        "z": 0.491
+      }
+    ],
+    "right_boundary": [
+      {
+        "x": 33.207,
+        "y": -57.6,
+        "z": 1.989
+      },
+      {
+        "x": 32.638,
+        "y": -55.2,
+        "z": 2.202
+      },
+      {
+        "x": 32.096,
+        "y": -52.8,
+        "z": 2.098
+      },
+      {
+        "x": 31.588,
+        "y": -50.4,
+        "z": 1.717
+      },
+      {
+        "x": 31.123,
+        "y": -48.0,
+        "z": 1.665
+      },
+      {
+        "x": 30.706,
+        "y": -45.6,
+        "z": 1.769
+      },
+      {
+        "x": 30.343,
+        "y": -43.2,
+        "z": 1.284
+      },
+      {
+        "x": 30.04,
+        "y": -40.8,
+        "z": 0.7
+      },
+      {
+        "x": 29.802,
+        "y": -38.4,
+        "z": 0.311
+      },
+      {
+        "x": 29.631,
+        "y": -36.0,
+        "z": 0.436
+      },
+      {
+        "x": 29.53,
+        "y": -33.6,
+        "z": 0.949
+      },
+      {
+        "x": 29.5,
+        "y": -31.2,
+        "z": 1.325
+      },
+      {
+        "x": 29.543,
+        "y": -28.8,
+        "z": 1.883
+      },
+      {
+        "x": 29.656,
+        "y": -26.4,
+        "z": 2.394
+      },
+      {
+        "x": 29.84,
+        "y": -24.0,
+        "z": 2.551
+      },
+      {
+        "x": 30.09,
+        "y": -21.6,
+        "z": 2.38
+      },
+      {
+        "x": 30.404,
+        "y": -19.2,
+        "z": 2.168
+      },
+      {
+        "x": 30.777,
+        "y": -16.8,
+        "z": 2.177
+      },
+      {
+        "x": 31.203,
+        "y": -14.4,
+        "z": 2.312
+      },
+      {
+        "x": 31.677,
+        "y": -12.0,
+        "z": 2.467
+      },
+      {
+        "x": 32.191,
+        "y": -9.6,
+        "z": 2.461
+      },
+      {
+        "x": 32.739,
+        "y": -7.2,
+        "z": 2.213
+      },
+      {
+        "x": 33.311,
+        "y": -4.8,
+        "z": 1.936
+      },
+      {
+        "x": 33.901,
+        "y": -2.4,
+        "z": 1.64
+      },
+      {
+        "x": 34.5,
+        "y": 0.0,
+        "z": 1.494
+      },
+      {
+        "x": 35.099,
+        "y": 2.4,
+        "z": 1.769
+      },
+      {
+        "x": 35.689,
+        "y": 4.8,
+        "z": 2.091
+      },
+      {
+        "x": 36.261,
+        "y": 7.2,
+        "z": 2.663
+      },
+      {
+        "x": 36.809,
+        "y": 9.6,
+        "z": 3.013
+      },
+      {
+        "x": 37.323,
+        "y": 12.0,
+        "z": 2.879
+      },
+      {
+        "x": 37.797,
+        "y": 14.4,
+        "z": 3.015
+      },
+      {
+        "x": 38.223,
+        "y": 16.8,
+        "z": 3.089
+      },
+      {
+        "x": 38.596,
+        "y": 19.2,
+        "z": 3.139
+      },
+      {
+        "x": 38.91,
+        "y": 21.6,
+        "z": 3.326
+      },
+      {
+        "x": 39.16,
+        "y": 24.0,
+        "z": 3.471
+      },
+      {
+        "x": 39.344,
+        "y": 26.4,
+        "z": 3.252
+      },
+      {
+        "x": 39.457,
+        "y": 28.8,
+        "z": 2.841
+      },
+      {
+        "x": 39.5,
+        "y": 31.2,
+        "z": 2.254
+      },
+      {
+        "x": 39.47,
+        "y": 33.6,
+        "z": 1.717
+      },
+      {
+        "x": 39.369,
+        "y": 36.0,
+        "z": 1.429
+      },
+      {
+        "x": 39.198,
+        "y": 38.4,
+        "z": 1.16
+      },
+      {
+        "x": 38.96,
+        "y": 40.8,
+        "z": 0.785
+      },
+      {
+        "x": 38.657,
+        "y": 43.2,
+        "z": 0.642
+      },
+      {
+        "x": 38.294,
+        "y": 45.6,
+        "z": 0.537
+      },
+      {
+        "x": 37.877,
+        "y": 48.0,
+        "z": 0.364
+      },
+      {
+        "x": 37.412,
+        "y": 50.4,
+        "z": 0.494
+      },
+      {
+        "x": 36.904,
+        "y": 52.8,
+        "z": 0.766
+      },
+      {
+        "x": 36.362,
+        "y": 55.2,
+        "z": 0.495
+      },
+      {
+        "x": 35.793,
+        "y": 57.6,
+        "z": 0.491
+      }
+    ],
+    "centerline": [
+      {
+        "x": 28.707,
+        "y": -57.6
+      },
+      {
+        "x": 26.623,
+        "y": -48.0
+      },
+      {
+        "x": 25.302,
+        "y": -38.4
+      },
+      {
+        "x": 25.043,
+        "y": -28.8
+      },
+      {
+        "x": 25.904,
+        "y": -19.2
+      },
+      {
+        "x": 27.691,
+        "y": -9.6
+      },
+      {
+        "x": 30.0,
+        "y": 0.0
+      },
+      {
+        "x": 32.309,
+        "y": 9.6
+      },
+      {
+        "x": 34.096,
+        "y": 19.2
+      },
+      {
+        "x": 34.957,
+        "y": 28.8
+      },
+      {
+        "x": 34.698,
+        "y": 38.4
+      },
+      {
+        "x": 33.377,
+        "y": 48.0
+      },
+      {
+        "x": 31.293,
+        "y": 57.6
+      }
+    ]
+  },
+  "character": {
+    "imported": true,
+    "asset_path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+    "imported_objects": 3,
+    "meshes": 2,
+    "dimensions": [
+      1.127,
+      1.185,
+      1.6
+    ],
+    "height_m": 1.6,
+    "source_height_m": 2.7,
+    "scale_factor": 0.5926,
+    "target_height_m": 1.6,
+    "ground_contact_error_m": 0.0,
+    "min_z": 3.7485,
+    "max_z": 5.3485,
+    "spawn_z": 3.7485,
+    "intersects_terrain": false,
+    "ground_max_under_bounds": 3.8261,
+    "actions": [
+      "Idle",
+      "Jump",
+      "Run",
+      "Walk"
+    ],
+    "source_sha256": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b"
+  },
+  "performance": {
+    "terrain_vertices": 1156,
+    "terrain_triangles": 2178,
+    "object_count": 169,
+    "instance_count": 118,
+    "unique_meshes": 19,
+    "material_count": 19,
+    "texture_count": 3,
+    "estimated_memory_mb": 90,
+    "memory_label": "estimated, not measured"
+  }
+}

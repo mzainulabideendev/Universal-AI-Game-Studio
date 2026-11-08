@@ -60,7 +60,7 @@ QUALITY_TIERS = {
     },
 }
 
-EXPORT_FORMATS = ("blend", "glb", "fbx")
+EXPORT_FORMATS = ("blend", "glb", "gltf", "fbx")
 
 ANIMATION_LIBRARY = {
     "idle": {"frames": 60, "loop": True},

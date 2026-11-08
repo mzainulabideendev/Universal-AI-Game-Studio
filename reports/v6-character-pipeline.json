@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "phase": "V6 Phase 3 - character asset pipeline",
-  "generated_at": "2026-11-07T07:10:19Z",
+  "generated_at": "2026-11-08T13:11:20Z",
   "request": "Create a stylized 3D jungle monkey character for a professional third-person adventure game. It should have expressive eyes, detailed facial features, brown fur coloration, realistic proportions for a stylized game character, a complete body, hands, feet, and a game-ready material setup. Prepare the character for idle, walk, run, and jump animations.",
   "agent": {
     "name": "CharacterAgent",
@@ -366,6 +366,7 @@
       "formats": [
         "blend",
         "glb",
+        "gltf",
         "fbx"
       ],
       "units": "meters",
@@ -465,7 +466,7 @@
     "blender_executable": "D:\\blender data\\blender.exe",
     "blender_version": "5.2.2 LTS",
     "blender_exit_code": 0,
-    "blender_duration_ms": 15200,
+    "blender_duration_ms": 18340,
     "pipeline_status": "completed",
     "failed_stages": [],
     "stage_status": {
@@ -478,13 +479,15 @@
       "blender-build": "passed",
       "blend-saved": "passed",
       "glb-exported": "passed",
+      "gltf-exported": "passed",
       "fbx-exported": "passed",
       "preview-rendered": "passed",
       "glb-validated": "passed",
+      "gltf-validated": "passed",
       "blend-loaded": "pending",
       "glb-reimported": "passed"
     },
-    "wall_clock_seconds": 19.2
+    "wall_clock_seconds": 36.8
   },
   "geometry": {
     "vertices": 7974,
@@ -497,7 +500,7 @@
     "uv_layers": [
       "UVMap"
     ],
-    "uv_coverage": 0.1501
+    "uv_coverage": 0.1504
   },
   "rig": {
     "armature": "Armature_JungleMonkey",
@@ -600,7 +603,7 @@
         "metallic": "constant",
         "ao": "absent",
         "emission": "absent",
-        "opacity": "constant"
+        "opacity": "absent"
       },
       "declared_channels": {
         "base_color": "absent",
@@ -662,7 +665,7 @@
         "metallic": "constant",
         "ao": "absent",
         "emission": "absent",
-        "opacity": "constant"
+        "opacity": "absent"
       },
       "declared_channels": {
         "base_color": "generated",
@@ -688,7 +691,7 @@
         "metallic": "constant",
         "ao": "absent",
         "emission": "absent",
-        "opacity": "constant"
+        "opacity": "absent"
       },
       "declared_channels": {
         "base_color": "absent",
@@ -714,7 +717,7 @@
         "metallic": "constant",
         "ao": "absent",
         "emission": "absent",
-        "opacity": "constant"
+        "opacity": "absent"
       },
       "declared_channels": {
         "base_color": "absent",
@@ -740,7 +743,7 @@
         "metallic": "constant",
         "ao": "absent",
         "emission": "absent",
-        "opacity": "constant"
+        "opacity": "absent"
       },
       "declared_channels": {
         "base_color": "absent",
@@ -766,7 +769,7 @@
         "metallic": "constant",
         "ao": "absent",
         "emission": "absent",
-        "opacity": "constant"
+        "opacity": "absent"
       },
       "declared_channels": {
         "base_color": "absent",
@@ -792,7 +795,7 @@
         "metallic": "constant",
         "ao": "absent",
         "emission": "absent",
-        "opacity": "constant"
+        "opacity": "absent"
       },
       "declared_channels": {
         "base_color": "absent",
@@ -809,8 +812,8 @@
     "blend": {
       "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.blend",
       "exists": true,
-      "bytes": 1010677,
-      "sha256": "9e4543b87719477fba24824afced5f8779d4eb7dd394449505995dbdc76ae8f9",
+      "bytes": 1013753,
+      "sha256": "eca11b8536d2ef9ad500bede8a187dd6fdf63bba9e819e8f8091d3515d6b532c",
       "size_matches_report": true,
       "hash_matches_report": true
     },
@@ -818,23 +821,31 @@
       "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
       "exists": true,
       "bytes": 1310604,
-      "sha256": "eb828d981ae7fe6230c9c16532869c4a59def4dea657d589dfbb60cf5f641361",
+      "sha256": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
+      "size_matches_report": true,
+      "hash_matches_report": true
+    },
+    "gltf": {
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.gltf",
+      "exists": true,
+      "bytes": 90026,
+      "sha256": "1c201ef9bcc30c9c59243b51fa1a2f4a047e2ed97be1e634dbbca91730e7ec63",
       "size_matches_report": true,
       "hash_matches_report": true
     },
     "fbx": {
       "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.fbx",
       "exists": true,
-      "bytes": 1512924,
-      "sha256": "9f7658bbece56b190113d7d0249cbf3e07a2e3806902409256ff6cca6630437a",
+      "bytes": 1513628,
+      "sha256": "634e2e64276c80194881c13c25d8cb70c6083f36431b38a65126303fa60b9cf6",
       "size_matches_report": true,
       "hash_matches_report": true
     },
     "preview": {
       "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\preview.png",
       "exists": true,
-      "bytes": 465712,
-      "sha256": "fc2860785da29b091cd881b978a7299bd9e66e21e9e11f44f76cd45e51783497",
+      "bytes": 464480,
+      "sha256": "5dab449d49124a224fbed85bea54646da2b0fd88de6754a51118e8d46decdc9e",
       "size_matches_report": true,
       "hash_matches_report": true
     }
@@ -845,7 +856,7 @@
     "errors": [],
     "warnings": [],
     "bytes": 1310604,
-    "sha256": "eb828d981ae7fe6230c9c16532869c4a59def4dea657d589dfbb60cf5f641361",
+    "sha256": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
     "version": 2,
     "declared_length": 1310604,
     "meshes": 1,
@@ -856,6 +867,54 @@
     "images": 3,
     "embedded_images": 3,
     "external_images": [],
+    "buffers": 1,
+    "external_buffers": [],
+    "animations": 4,
+    "animation_names": [
+      "Idle",
+      "Jump",
+      "Run",
+      "Walk"
+    ],
+    "skins": 1,
+    "joints": 23,
+    "nodes": 25,
+    "bounds_min": [
+      -0.44999998807907104,
+      0.009999990463256836,
+      -0.640625
+    ],
+    "bounds_max": [
+      0.44999998807907104,
+      1.7000000476837158,
+      0.3499999940395355
+    ],
+    "generator": "Khronos glTF Blender I/O v5.2.40"
+  },
+  "gltf_validation": {
+    "ok": true,
+    "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.gltf",
+    "errors": [],
+    "warnings": [],
+    "bytes": 90026,
+    "sha256": "1c201ef9bcc30c9c59243b51fa1a2f4a047e2ed97be1e634dbbca91730e7ec63",
+    "version": "2.0",
+    "meshes": 1,
+    "primitives": 7,
+    "triangles": 15688,
+    "materials": 7,
+    "textures": 3,
+    "images": 3,
+    "embedded_images": 0,
+    "external_images": [
+      "T_Monkey_Fur_Normal.png",
+      "T_Monkey_Fur_BaseColor.png",
+      "T_Monkey_Fur_Roughness.png"
+    ],
+    "buffers": 1,
+    "external_buffers": [
+      "JungleMonkey.bin"
+    ],
     "animations": 4,
     "animation_names": [
       "Idle",
@@ -884,7 +943,7 @@
     "reimport_blend": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\reimport_validation.blend",
     "blender_executable": "D:\\blender data\\blender.exe",
     "blender_exit_code": 0,
-    "duration_ms": 1840,
+    "duration_ms": 1873,
     "import": {
       "ok": true,
       "result": {
@@ -986,9 +1045,9 @@
       "exit_code": 0,
       "timed_out": false,
       "cancelled": false,
-      "operation_id": "op-1d16a1eca2654955",
-      "duration_ms": 1840,
-      "stdout_tail": "12:10:17 | INFO: Data are loaded, start creating Blender stuff\n12:10:17 | INFO: Blender create Mesh node JungleMonkeyMesh\n12:10:17 | INFO: glTF import finished in 0.14s\nInfo: Saved as \"reimport_validation.blend\"\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)\n\nBlender quit\n",
+      "operation_id": "op-7c41eb4998314ff3",
+      "duration_ms": 1873,
+      "stdout_tail": "18:11:03 | INFO: Data are loaded, start creating Blender stuff\n18:11:03 | INFO: Blender create Mesh node JungleMonkeyMesh\n18:11:03 | INFO: glTF import finished in 0.14s\nInfo: Saved as \"reimport_validation.blend\"\nBlender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)\n\nBlender quit\n",
       "stderr_tail": ""
     },
     "inspection": {

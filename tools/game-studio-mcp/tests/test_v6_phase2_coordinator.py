@@ -543,8 +543,10 @@ class McpIntegrationTests(BaseCase):
         names = [tool["name"] for tool in server.TOOLS]
         self.assertEqual(len(names), len(set(names)))
         self.assertEqual(set(names), set(server.HANDLERS))
-        self.assertEqual(len(names), 92)
+        self.assertEqual(len(names), 94)
         self.assertIn("orchestrate_game_plan", names)
+        self.assertIn("environment_generate_asset", names)
+        self.assertIn("environment_profiles", names)
 
     def test_orchestrate_tool_schema_is_strict(self) -> None:
         tool = next(t for t in server.TOOLS if t["name"] == "orchestrate_game_plan")

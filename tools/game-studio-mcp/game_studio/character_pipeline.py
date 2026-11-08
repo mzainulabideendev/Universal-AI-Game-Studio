@@ -2,7 +2,7 @@
 
 Real Blender execution for a procedural stylized monkey: geometry, materials,
 procedural PBR images, UV unwrap, armature, skin weights, keyframed actions,
-.blend save, GLB/FBX export, re-import validation and a rendered preview.
+.blend save, GLB/glTF/FBX export, re-import validation and a rendered preview.
 
 Every stage records evidence. A stage that fails is reported as failed; the
 pipeline never upgrades a failed Blender operation to success.
@@ -27,8 +27,9 @@ DEFAULT_BLENDER_CANDIDATES = (
 REQUIRED_STAGES = (
     "spec-validated", "blender-build", "geometry-validated",
     "materials-validated", "uv-validated", "rig-validated",
-    "animations-created", "blend-saved", "glb-exported", "fbx-exported",
-    "glb-validated", "glb-reimported", "preview-rendered",
+    "animations-created", "blend-saved", "glb-exported", "gltf-exported",
+    "fbx-exported", "glb-validated", "gltf-validated", "glb-reimported",
+    "preview-rendered",
 )
 
 
@@ -596,13 +597,39 @@ bm.free()
 triangles = len(me.loop_triangles)
 
 # ---------------------------------------------------------------- material audit
+def linked_node(node, key):
+    if node is None:
+        return None
+    socket = node.inputs.get(key)
+    if socket is None or not socket.is_linked:
+        return None
+    return socket.links[0].from_node
+
+def image_upstream(node, key):
+    # True only when the socket is fed (possibly via Normal Map) by an image.
+    source = linked_node(node, key)
+    if source is None:
+        return False
+    if source.type == 'TEX_IMAGE':
+        return True
+    if key == 'Normal' and source.type == 'NORMAL_MAP':
+        color_source = linked_node(source, 'Color')
+        return bool(color_source and color_source.type == 'TEX_IMAGE')
+    return False
+
+def emission_is_on(bsdf):
+    strength_socket = bsdf.inputs.get('Emission Strength')
+    strength = float(strength_socket.default_value) if strength_socket else 0.0
+    color_socket = bsdf.inputs.get('Emission Color') or bsdf.inputs.get('Emission')
+    color = tuple(color_socket.default_value)[:3] if color_socket else (0.0, 0.0, 0.0)
+    return strength > 0.0 and max(color) > 0.0
+
 material_report = []
 for mat in bpy.data.materials:
     if not mat.use_nodes:
         continue
     nodes = list(mat.node_tree.nodes)
     bsdf = mat.node_tree.nodes.get('Principled BSDF')
-    links = {link.to_socket.name: link.from_node for link in mat.node_tree.links}
     images = []
     for node in nodes:
         if node.type == 'TEX_IMAGE' and node.image:
@@ -617,14 +644,22 @@ for mat in bpy.data.materials:
             })
     channels = {}
     if bsdf:
+        alpha_socket = bsdf.inputs.get('Alpha')
+        alpha = float(alpha_socket.default_value) if alpha_socket else 1.0
+        # ``mat.blend_method`` is not a reliable opacity indicator in Blender 4.2+
+        # (it can report DITHERED for an opaque material), so read the real
+        # shader inputs instead of guessing from the render method.
         channels = {
-            'base_color': ('texture' if any(link.to_socket.name == 'Base Color' and link.from_node.type == 'TEX_IMAGE' for link in mat.node_tree.links) else 'constant'),
-            'roughness': ('texture' if any(link.to_socket.name == 'Roughness' and link.from_node.type == 'TEX_IMAGE' for link in mat.node_tree.links) else 'constant'),
-            'normal': ('texture' if any(link.to_socket.name == 'Normal' for link in mat.node_tree.links) else 'absent'),
-            'metallic': ('texture' if any(link.to_socket.name == 'Metallic' and link.from_node.type == 'TEX_IMAGE' for link in mat.node_tree.links) else 'constant'),
+            'base_color': 'texture' if image_upstream(bsdf, 'Base Color') else 'constant',
+            'roughness': 'texture' if image_upstream(bsdf, 'Roughness') else 'constant',
+            'normal': 'texture' if image_upstream(bsdf, 'Normal') else 'absent',
+            'metallic': 'texture' if image_upstream(bsdf, 'Metallic') else 'constant',
             'ao': 'absent',
-            'emission': 'constant' if bsdf.inputs.get('Emission Strength') and float(bsdf.inputs['Emission Strength'].default_value) > 0 else 'absent',
-            'opacity': 'constant' if mat.blend_method != 'OPAQUE' else 'absent',
+            'emission': ('texture' if image_upstream(bsdf, 'Emission Color')
+                         or image_upstream(bsdf, 'Emission')
+                         else ('constant' if emission_is_on(bsdf) else 'absent')),
+            'opacity': ('texture' if image_upstream(bsdf, 'Alpha')
+                        else ('constant' if alpha < 0.999 else 'absent')),
         }
     material_report.append({
         'name': mat.name, 'node_types': sorted({n.type for n in nodes}),
@@ -650,6 +685,14 @@ def export_glb():
                   export_cameras=False, export_lights=False)
     bpy.ops.export_scene.gltf(**kwargs)
 
+def export_gltf():
+    kwargs = dict(filepath=os.path.join(out_dir, name + '.gltf'),
+                  export_format='GLTF_SEPARATE', use_selection=False,
+                  export_apply=True, export_yup=True, export_animations=True,
+                  export_animation_mode='ACTIONS', export_skins=True,
+                  export_cameras=False, export_lights=False)
+    bpy.ops.export_scene.gltf(**kwargs)
+
 def export_fbx():
     bpy.ops.export_scene.fbx(
         filepath=os.path.join(out_dir, name + '.fbx'), use_selection=False,
@@ -658,7 +701,8 @@ def export_fbx():
         path_mode='COPY', embed_textures=True)
 
 export_errors = []
-for label, fn in (('glb', export_glb), ('fbx', export_fbx)):
+for label, fn in (('glb', export_glb), ('gltf', export_gltf),
+                  ('fbx', export_fbx)):
     try:
         fn()
     except Exception as exc:
@@ -700,6 +744,7 @@ __mcp_result = {
     'name': name, 'tier': tier, 'blend': blend_path,
     'blend_bytes': os.path.getsize(blend_path) if os.path.isfile(blend_path) else 0,
     'glb': os.path.join(out_dir, name + '.glb'),
+    'gltf': os.path.join(out_dir, name + '.gltf'),
     'fbx': os.path.join(out_dir, name + '.fbx'),
     'preview': render_path if render_engine else None,
     'render_engine': render_engine, 'render_error': render_error,
@@ -854,42 +899,8 @@ def png_dimensions(path: str) -> tuple[int, int] | None:
     return int(width), int(height)
 
 
-def validate_glb(path: str) -> dict:
-    """Parse a real GLB container without external libraries."""
-    result = {"ok": False, "path": path, "errors": [], "warnings": []}
-    if not os.path.isfile(path):
-        result["errors"].append("file does not exist")
-        return result
-    size = os.path.getsize(path)
-    result.update({"bytes": size, "sha256": sha256_file(path)})
-    if size <= 0:
-        result["errors"].append("file is empty")
-        return result
-    with open(path, "rb") as handle:
-        data = handle.read()
-    if data[:4] != b"glTF":
-        result["errors"].append("not a GLB container")
-        return result
-    version, total = struct.unpack("<II", data[4:12])
-    result["version"] = version
-    result["declared_length"] = total
-    if total != len(data):
-        result["warnings"].append("declared length differs from file size")
-    offset = 12
-    gltf = None
-    while offset + 8 <= len(data):
-        chunk_length, chunk_type = struct.unpack("<II", data[offset:offset + 8])
-        chunk = data[offset + 8:offset + 8 + chunk_length]
-        if chunk_type == 0x4E4F534A:
-            try:
-                gltf = json.loads(chunk.decode("utf-8").rstrip("\x00 "))
-            except (UnicodeDecodeError, json.JSONDecodeError) as exc:
-                result["errors"].append(f"invalid JSON chunk: {exc}")
-        offset += 8 + chunk_length
-    if gltf is None:
-        result["errors"].append("no JSON chunk")
-        return result
-
+def _gltf_document_report(path: str, gltf: dict, result: dict) -> dict:
+    """Validate a decoded glTF 2.0 document (used by .glb and .gltf)."""
     images = gltf.get("images") or []
     textures = gltf.get("textures") or []
     materials = gltf.get("materials") or []
@@ -910,6 +921,22 @@ def validate_glb(path: str) -> dict:
                       and not os.path.isfile(os.path.join(os.path.dirname(path), uri))]
     if missing_images:
         result["errors"].append(f"missing external images: {missing_images}")
+
+    buffers = gltf.get("buffers") or []
+    missing_buffers = []
+    for buffer in buffers:
+        uri = buffer.get("uri")
+        if not uri or uri.startswith("data:"):
+            continue
+        buffer_path = os.path.join(os.path.dirname(path), uri)
+        if not os.path.isfile(buffer_path):
+            missing_buffers.append(uri)
+        elif buffer.get("byteLength") is not None and os.path.getsize(
+                buffer_path) != int(buffer["byteLength"]):
+            result["warnings"].append(
+                f"buffer byteLength differs from file size: {uri}")
+    if missing_buffers:
+        result["errors"].append(f"missing external buffers: {missing_buffers}")
 
     triangle_count = 0
     primitive_count = 0
@@ -945,6 +972,9 @@ def validate_glb(path: str) -> dict:
         "images": len(images),
         "embedded_images": embedded,
         "external_images": external,
+        "buffers": len(buffers),
+        "external_buffers": [b.get("uri") for b in buffers
+                             if b.get("uri") and not b["uri"].startswith("data:")],
         "animations": len(animations),
         "animation_names": [a.get("name") for a in animations],
         "skins": len(skins),
@@ -964,6 +994,70 @@ def validate_glb(path: str) -> dict:
         result["warnings"].append("no skins/rig in export")
     result["ok"] = not result["errors"]
     return result
+
+
+def validate_gltf(path: str) -> dict:
+    """Validate a separated .gltf JSON file plus its external buffers/images."""
+    result = {"ok": False, "path": path, "errors": [], "warnings": []}
+    if not os.path.isfile(path):
+        result["errors"].append("file does not exist")
+        return result
+    size = os.path.getsize(path)
+    result.update({"bytes": size, "sha256": sha256_file(path)})
+    if size <= 0:
+        result["errors"].append("file is empty")
+        return result
+    try:
+        gltf = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        result["errors"].append(f"invalid glTF JSON: {exc}")
+        return result
+    if not isinstance(gltf, dict):
+        result["errors"].append("glTF root must be an object")
+        return result
+    version = (gltf.get("asset") or {}).get("version")
+    result["version"] = version
+    if not str(version or "").startswith("2"):
+        result["errors"].append(f"unsupported glTF version: {version!r}")
+    return _gltf_document_report(path, gltf, result)
+
+
+def validate_glb(path: str) -> dict:
+    """Parse a real GLB container without external libraries."""
+    result = {"ok": False, "path": path, "errors": [], "warnings": []}
+    if not os.path.isfile(path):
+        result["errors"].append("file does not exist")
+        return result
+    size = os.path.getsize(path)
+    result.update({"bytes": size, "sha256": sha256_file(path)})
+    if size <= 0:
+        result["errors"].append("file is empty")
+        return result
+    with open(path, "rb") as handle:
+        data = handle.read()
+    if data[:4] != b"glTF":
+        result["errors"].append("not a GLB container")
+        return result
+    version, total = struct.unpack("<II", data[4:12])
+    result["version"] = version
+    result["declared_length"] = total
+    if total != len(data):
+        result["warnings"].append("declared length differs from file size")
+    offset = 12
+    gltf = None
+    while offset + 8 <= len(data):
+        chunk_length, chunk_type = struct.unpack("<II", data[offset:offset + 8])
+        chunk = data[offset + 8:offset + 8 + chunk_length]
+        if chunk_type == 0x4E4F534A:
+            try:
+                gltf = json.loads(chunk.decode("utf-8").rstrip("\x00 "))
+            except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+                result["errors"].append(f"invalid JSON chunk: {exc}")
+        offset += 8 + chunk_length
+    if gltf is None:
+        result["errors"].append("no JSON chunk")
+        return result
+    return _gltf_document_report(path, gltf, result)
 
 
 def _resolve_texture_path(output_dir: str, raw: str) -> str:
@@ -1046,16 +1140,19 @@ def build_character(spec: dict, output_dir: str, *, timeout: int = 1200,
 
     blend_path = payload.get("blend") or os.path.join(out, spec["name"] + ".blend")
     glb_path = payload.get("glb") or os.path.join(out, spec["name"] + ".glb")
+    gltf_path = payload.get("gltf") or os.path.join(out, spec["name"] + ".gltf")
     fbx_path = payload.get("fbx") or os.path.join(out, spec["name"] + ".fbx")
     preview_path = payload.get("preview") or os.path.join(out, "preview.png")
     report["artifacts"] = {
         "blend": _artifact_entry(blend_path),
         "glb": _artifact_entry(glb_path),
+        "gltf": _artifact_entry(gltf_path),
         "fbx": _artifact_entry(fbx_path),
         "preview": _artifact_entry(preview_path),
     }
     for name, path in (("blend", blend_path), ("glb", glb_path),
-                       ("fbx", fbx_path), ("preview", preview_path)):
+                       ("gltf", gltf_path), ("fbx", fbx_path),
+                       ("preview", preview_path)):
         if not os.path.isfile(path) or os.path.getsize(path) <= 0:
             report["errors"].append(f"{name} artifact missing or empty: {path}")
 
@@ -1209,6 +1306,10 @@ def build_character(spec: dict, output_dir: str, *, timeout: int = 1200,
         "status": "passed" if report["artifacts"]["glb"]["exists"] else "failed",
         "artifact": report["artifacts"]["glb"],
     }
+    report["stages"]["gltf-exported"] = {
+        "status": "passed" if report["artifacts"]["gltf"]["exists"] else "failed",
+        "artifact": report["artifacts"]["gltf"],
+    }
     report["stages"]["fbx-exported"] = {
         "status": "passed" if report["artifacts"]["fbx"]["exists"] else "failed",
         "artifact": report["artifacts"]["fbx"],
@@ -1233,6 +1334,22 @@ def build_character(spec: dict, output_dir: str, *, timeout: int = 1200,
         "animations": glb_validation.get("animations"),
         "skins": glb_validation.get("skins"),
         "joints": glb_validation.get("joints"),
+    }
+
+    # Separated .gltf JSON validation (external .bin + image references)
+    gltf_validation = validate_gltf(gltf_path)
+    report["gltf_validation"] = gltf_validation
+    report["stages"]["gltf-validated"] = {
+        "status": "passed" if gltf_validation["ok"] else "failed",
+        "errors": gltf_validation["errors"],
+        "warnings": gltf_validation["warnings"],
+        "triangles": gltf_validation.get("triangles"),
+        "materials": gltf_validation.get("materials"),
+        "buffers": gltf_validation.get("buffers"),
+        "external_buffers": gltf_validation.get("external_buffers"),
+        "animations": gltf_validation.get("animations"),
+        "skins": gltf_validation.get("skins"),
+        "joints": gltf_validation.get("joints"),
     }
 
     report["quality"] = payload.get("quality") or {
@@ -1362,24 +1479,24 @@ def engine_compatibility(glb_validation: dict, *, target_engine: str) -> dict:
     return {
         "unity": {
             **common,
-            "formats": ["fbx", "glb"],
+            "formats": ["fbx", "glb", "gltf"],
             "status": "export-prepared-unverified",
-            "notes": ["FBX is the primary Unity path; GLB also imports with Unity "
+            "notes": ["FBX is the primary Unity path; GLB/glTF also import with Unity "
                       "glTF support.", "No Unity editor import was run."],
         },
         "godot": {
             **common,
-            "formats": ["glb"],
+            "formats": ["glb", "gltf"],
             "status": "export-prepared-unverified",
             "notes": ["glTF/GLB is Godot's native interchange path.",
                       "No Godot import was run in Phase 3."],
         },
         "unreal": {
             **common,
-            "formats": ["fbx"],
+            "formats": ["fbx", "gltf"],
             "status": "export-prepared-unverified",
-            "notes": ["FBX is the usual Unreal path; materials may require "
-                      "manual reassignment.", "No Unreal import was run."],
+            "notes": ["FBX is the usual Unreal path; glTF import requires the "
+                      "glTF Exporter/Importer plugin.", "No Unreal import was run."],
         },
         "target": target_engine,
     }
@@ -1422,11 +1539,16 @@ def asset_manifest(spec: dict, build: dict, *, reimport: dict | None = None,
             "blender": build.get("blender_executable"),
             "blender_exit_code": build.get("blender_exit_code"),
             "textures": [texture["path"] for texture in textures],
+            "gltf_external_buffers": (build.get("gltf_validation") or {}).get(
+                "external_buffers") or [],
+            "gltf_external_images": (build.get("gltf_validation") or {}).get(
+                "external_images") or [],
         },
         "validation": {
             "build_status": build.get("status"),
             "failed_stages": build.get("failed_stages", []),
             "glb": (build.get("glb_validation") or {}).get("ok"),
+            "gltf": (build.get("gltf_validation") or {}).get("ok"),
             "reimport": (reimport or {}).get("ok"),
             "geometry": build.get("stages", {}).get(
                 "geometry-validated", {}).get("status"),

@@ -22,12 +22,21 @@
       "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_basecolor.png",
       "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_normal.png",
       "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\textures\\monkey_fur_roughness.png"
+    ],
+    "gltf_external_buffers": [
+      "JungleMonkey.bin"
+    ],
+    "gltf_external_images": [
+      "T_Monkey_Fur_Normal.png",
+      "T_Monkey_Fur_BaseColor.png",
+      "T_Monkey_Fur_Roughness.png"
     ]
   },
   "validation": {
     "build_status": "built",
     "failed_stages": [],
     "glb": true,
+    "gltf": true,
     "reimport": true,
     "geometry": "passed",
     "materials": "passed",
@@ -45,11 +54,12 @@
       "note": "Files are export-prepared and structurally validated. Engine import was not executed in Phase 3.",
       "formats": [
         "fbx",
-        "glb"
+        "glb",
+        "gltf"
       ],
       "status": "export-prepared-unverified",
       "notes": [
-        "FBX is the primary Unity path; GLB also imports with Unity glTF support.",
+        "FBX is the primary Unity path; GLB/glTF also import with Unity glTF support.",
         "No Unity editor import was run."
       ]
     },
@@ -61,7 +71,8 @@
       "animations": true,
       "note": "Files are export-prepared and structurally validated. Engine import was not executed in Phase 3.",
       "formats": [
-        "glb"
+        "glb",
+        "gltf"
       ],
       "status": "export-prepared-unverified",
       "notes": [
@@ -77,11 +88,12 @@
       "animations": true,
       "note": "Files are export-prepared and structurally validated. Engine import was not executed in Phase 3.",
       "formats": [
-        "fbx"
+        "fbx",
+        "gltf"
       ],
       "status": "export-prepared-unverified",
       "notes": [
-        "FBX is the usual Unreal path; materials may require manual reassignment.",
+        "FBX is the usual Unreal path; glTF import requires the glTF Exporter/Importer plugin.",
         "No Unreal import was run."
       ]
     },
@@ -93,8 +105,8 @@
       "format": "blend",
       "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.blend",
       "exists": true,
-      "bytes": 1010677,
-      "sha256": "9e4543b87719477fba24824afced5f8779d4eb7dd394449505995dbdc76ae8f9"
+      "bytes": 1013753,
+      "sha256": "eca11b8536d2ef9ad500bede8a187dd6fdf63bba9e819e8f8091d3515d6b532c"
     },
     {
       "role": "glb",
@@ -102,23 +114,31 @@
       "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
       "exists": true,
       "bytes": 1310604,
-      "sha256": "eb828d981ae7fe6230c9c16532869c4a59def4dea657d589dfbb60cf5f641361"
+      "sha256": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b"
+    },
+    {
+      "role": "gltf",
+      "format": "gltf",
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.gltf",
+      "exists": true,
+      "bytes": 90026,
+      "sha256": "1c201ef9bcc30c9c59243b51fa1a2f4a047e2ed97be1e634dbbca91730e7ec63"
     },
     {
       "role": "fbx",
       "format": "fbx",
       "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.fbx",
       "exists": true,
-      "bytes": 1512924,
-      "sha256": "9f7658bbece56b190113d7d0249cbf3e07a2e3806902409256ff6cca6630437a"
+      "bytes": 1513628,
+      "sha256": "634e2e64276c80194881c13c25d8cb70c6083f36431b38a65126303fa60b9cf6"
     },
     {
       "role": "preview",
       "format": "png",
       "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\preview.png",
       "exists": true,
-      "bytes": 465712,
-      "sha256": "fc2860785da29b091cd881b978a7299bd9e66e21e9e11f44f76cd45e51783497"
+      "bytes": 464480,
+      "sha256": "5dab449d49124a224fbed85bea54646da2b0fd88de6754a51118e8d46decdc9e"
     }
   ],
   "textures": [
@@ -159,10 +179,10 @@
       "colorspace": "Non-Color"
     }
   ],
-  "created_at": "2026-11-07T07:10:17Z",
+  "created_at": "2026-11-08T13:11:04Z",
   "schema_version": 1,
   "phase": "V6 Phase 3 - asset provenance",
-  "generated_at": "2026-11-07T07:10:19Z",
+  "generated_at": "2026-11-08T13:11:20Z",
   "request": "Create a stylized 3D jungle monkey character for a professional third-person adventure game. It should have expressive eyes, detailed facial features, brown fur coloration, realistic proportions for a stylized game character, a complete body, hands, feet, and a game-ready material setup. Prepare the character for idle, walk, run, and jump animations.",
   "classification": {
     "procedurally_generated_geometry": true,
@@ -279,8 +299,8 @@
     "blend": {
       "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.blend",
       "exists": true,
-      "bytes": 1010677,
-      "sha256": "9e4543b87719477fba24824afced5f8779d4eb7dd394449505995dbdc76ae8f9",
+      "bytes": 1013753,
+      "sha256": "eca11b8536d2ef9ad500bede8a187dd6fdf63bba9e819e8f8091d3515d6b532c",
       "size_matches_report": true,
       "hash_matches_report": true
     },
@@ -288,23 +308,31 @@
       "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
       "exists": true,
       "bytes": 1310604,
-      "sha256": "eb828d981ae7fe6230c9c16532869c4a59def4dea657d589dfbb60cf5f641361",
+      "sha256": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
+      "size_matches_report": true,
+      "hash_matches_report": true
+    },
+    "gltf": {
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.gltf",
+      "exists": true,
+      "bytes": 90026,
+      "sha256": "1c201ef9bcc30c9c59243b51fa1a2f4a047e2ed97be1e634dbbca91730e7ec63",
       "size_matches_report": true,
       "hash_matches_report": true
     },
     "fbx": {
       "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.fbx",
       "exists": true,
-      "bytes": 1512924,
-      "sha256": "9f7658bbece56b190113d7d0249cbf3e07a2e3806902409256ff6cca6630437a",
+      "bytes": 1513628,
+      "sha256": "634e2e64276c80194881c13c25d8cb70c6083f36431b38a65126303fa60b9cf6",
       "size_matches_report": true,
       "hash_matches_report": true
     },
     "preview": {
       "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\preview.png",
       "exists": true,
-      "bytes": 465712,
-      "sha256": "fc2860785da29b091cd881b978a7299bd9e66e21e9e11f44f76cd45e51783497",
+      "bytes": 464480,
+      "sha256": "5dab449d49124a224fbed85bea54646da2b0fd88de6754a51118e8d46decdc9e",
       "size_matches_report": true,
       "hash_matches_report": true
     }
@@ -345,7 +373,7 @@
     }
   ],
   "report_hashes": {
-    "reports/v6-character-pipeline.json": "619203e3a7ed2513a4adfee65caaa410160869c02bc2e08b3f58d38bd872759b",
-    "reports/v6-character-validation.json": "97c81ef5b74003ceb00102aa18d976ca376939454a153e0138e86d2f4c9e3a4c"
+    "reports/v6-character-pipeline.json": "1078dd8b354e492433217ee127eb70750eecf16cc592c30bcc3087eb0543a675",
+    "reports/v6-character-validation.json": "0e34ddd65569f1772bf3b507d8dbeee1cdbfd6bb77d83b048b1575a08e619baf"
   }
 }

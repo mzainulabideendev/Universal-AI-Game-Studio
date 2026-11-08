@@ -1,0 +1,488 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 4 - environment generation audit",
+  "generated_at": "2026-11-08T13:33:27Z",
+  "verdict": "PASS",
+  "all_criteria_passed": true,
+  "criteria": {
+    "1_terrain_generation": true,
+    "2_terrain_non_flat": true,
+    "3_vegetation_generation": true,
+    "4_rocks_and_props": true,
+    "5_water_feature": true,
+    "6_materials_validated": true,
+    "7_lighting_atmosphere": true,
+    "8_playable_layout": true,
+    "9_collision_and_spawn": true,
+    "10_character_integration": true,
+    "11_real_export": true,
+    "12_export_validation": true,
+    "13_previews": true,
+    "14_phase2_agent_integration": true,
+    "15_previous_tests_preserved": true,
+    "16_new_tests_pass": true,
+    "17_v4_v5_preserved": true,
+    "18_mcp_parity": true,
+    "19_audit_evidence": true,
+    "20_quality_tier_differences_measured": true
+  },
+  "deliverables": {
+    "V6-PHASE-4-ENVIRONMENT-GENERATION.md": true,
+    "reports/v6-environment-generation.json": true,
+    "reports/v6-environment-validation.json": true,
+    "reports/v6-environment-provenance.json": true,
+    "reports/v6-phase4-audit.json": true,
+    "scripts/v6-phase4-demo.py": true,
+    "scripts/v6-phase4-audit.py": true,
+    "tools/game-studio-mcp/game_studio/environment_spec.py": true,
+    "tools/game-studio-mcp/game_studio/environment_pipeline.py": true,
+    "tools/game-studio-mcp/tests/test_v6_phase4_environment_spec.py": true,
+    "tools/game-studio-mcp/tests/test_v6_phase4_pipeline.py": true
+  },
+  "repository": {
+    "head": "f239250c02ac9bb8d74d7956a9be1d979d6497ee",
+    "branch": "main",
+    "status_short": [
+      "M reports/v6-asset-provenance.json",
+      " M reports/v6-character-pipeline.json",
+      " M reports/v6-character-validation.json",
+      " M scripts/v6-phase3-audit.py",
+      " M scripts/v6-phase3-demo.py",
+      " M tools/game-studio-mcp/game_studio/character_pipeline.py",
+      " M tools/game-studio-mcp/game_studio/character_spec.py",
+      " M tools/game-studio-mcp/game_studio/operations.py",
+      " M tools/game-studio-mcp/server.py",
+      " M tools/game-studio-mcp/tests/test_v6_phase2_coordinator.py",
+      " M tools/game-studio-mcp/tests/test_v6_phase3_pipeline.py",
+      " M validation/v6-character-pipeline/JungleMonkey.blend",
+      " M validation/v6-character-pipeline/JungleMonkey.fbx",
+      " M validation/v6-character-pipeline/JungleMonkey.glb",
+      " M validation/v6-character-pipeline/preview.png",
+      " M validation/v6-character-pipeline/reimport_validation.blend",
+      "?? V6-PHASE-3-CHARACTER-ASSET-PIPELINE.md",
+      "?? V6-PHASE-4-ENVIRONMENT-GENERATION.md",
+      "?? reports/v6-environment-generation.json",
+      "?? reports/v6-environment-provenance.json",
+      "?? reports/v6-environment-validation.json",
+      "?? reports/v6-phase3-audit.json",
+      "?? reports/v6-phase4-audit.json",
+      "?? scripts/v6-phase4-audit.py",
+      "?? scripts/v6-phase4-demo.py",
+      "?? tools/game-studio-mcp/game_studio/environment_pipeline.py",
+      "?? tools/game-studio-mcp/game_studio/environment_spec.py",
+      "?? tools/game-studio-mcp/tests/test_v6_phase4_environment_spec.py",
+      "?? tools/game-studio-mcp/tests/test_v6_phase4_pipeline.py",
+      "?? validation/v6-character-pipeline/JungleMonkey.bin",
+      "?? validation/v6-character-pipeline/JungleMonkey.gltf",
+      "?? validation/v6-character-pipeline/T_Monkey_Fur_BaseColor.png",
+      "?? validation/v6-character-pipeline/T_Monkey_Fur_Normal.png",
+      "?? validation/v6-character-pipeline/T_Monkey_Fur_Roughness.png",
+      "?? validation/v6-environment-pipeline/"
+    ],
+    "commit_made": false
+  },
+  "tests": {
+    "result": "OK",
+    "tests": 365,
+    "exit_code": 0,
+    "duration_seconds": 77.2,
+    "tail": [
+      "Ran 365 tests in 76.503s",
+      "",
+      "OK"
+    ],
+    "output_tail": null
+  },
+  "preservation": {
+    "v4_commit": "4bf92a84c42e8516e6f54718ce675481e44f3139",
+    "v4_ok": true,
+    "v4_files": 2,
+    "v5_ok": true,
+    "v5_artifacts": 13,
+    "details": {
+      "v4": {
+        "tools/game-studio-mcp/tests/test_llm_v4.py": {
+          "expected": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+          "actual": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+          "matches": true
+        },
+        "tools/game-studio-mcp/tests/test_p0_v4.py": {
+          "expected": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+          "actual": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+          "matches": true
+        }
+      },
+      "v5": {
+        "validation/unity-jungle-v5/.game-studio/manifest.json": {
+          "exists": true,
+          "expected": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+          "actual": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/.game-studio/specification.json": {
+          "exists": true,
+          "expected": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+          "actual": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/.game-studio/execution-plan.json": {
+          "exists": true,
+          "expected": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+          "actual": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml": {
+          "exists": true,
+          "expected": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+          "actual": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json": {
+          "exists": true,
+          "expected": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+          "actual": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png": {
+          "exists": true,
+          "expected": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+          "actual": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json": {
+          "exists": true,
+          "expected": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+          "actual": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity": {
+          "exists": true,
+          "expected": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+          "actual": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+          "matches": true
+        },
+        "validation/builds/v5-windows/JungleMonkey.exe": {
+          "exists": true,
+          "expected": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+          "actual": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+          "matches": true
+        },
+        "V5-IMPLEMENTATION-REPORT.md": {
+          "exists": true,
+          "expected": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+          "actual": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+          "matches": true
+        },
+        "V5-LLM-EVALUATION.md": {
+          "exists": true,
+          "expected": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+          "actual": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+          "matches": true
+        },
+        "V5-UNITY-VERTICAL-SLICE.md": {
+          "exists": true,
+          "expected": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+          "actual": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+          "matches": true
+        },
+        "V5-VERIFICATION-MATRIX.md": {
+          "exists": true,
+          "expected": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+          "actual": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+          "matches": true
+        }
+      }
+    }
+  },
+  "mcp": {
+    "tools": 94,
+    "handlers": 94,
+    "unique": true,
+    "parity": true,
+    "environment_tools": [
+      "environment_generate_asset",
+      "environment_profiles"
+    ]
+  },
+  "artifacts": {
+    "ok": true,
+    "artifacts": {
+      "low:blend": {
+        "path": "validation/v6-environment-pipeline/low/JungleLevel.blend",
+        "exists": true,
+        "expected": "e412be4c65644df265a388b29a6ebbd83c165530bf960165ea2d52ed68940b62",
+        "actual": "e412be4c65644df265a388b29a6ebbd83c165530bf960165ea2d52ed68940b62",
+        "matches": true
+      },
+      "low:glb": {
+        "path": "validation/v6-environment-pipeline/low/JungleLevel.glb",
+        "exists": true,
+        "expected": "b75b7bf688abcd3eff9e83ea75335893e80f3faf66eecd083fb7be3d77a13376",
+        "actual": "b75b7bf688abcd3eff9e83ea75335893e80f3faf66eecd083fb7be3d77a13376",
+        "matches": true
+      },
+      "low:gltf": {
+        "path": "validation/v6-environment-pipeline/low/JungleLevel.gltf",
+        "exists": true,
+        "expected": "c2053755d6681674a141136d53aa7f48ed8fd62a3d1430838374baa6d1887f07",
+        "actual": "c2053755d6681674a141136d53aa7f48ed8fd62a3d1430838374baa6d1887f07",
+        "matches": true
+      },
+      "low:fbx": {
+        "path": "validation/v6-environment-pipeline/low/JungleLevel.fbx",
+        "exists": true,
+        "expected": "3ee7dd3f56da1a58951d18770a66723fd55e4a1703545e00370aff360fb1a172",
+        "actual": "3ee7dd3f56da1a58951d18770a66723fd55e4a1703545e00370aff360fb1a172",
+        "matches": true
+      },
+      "low:preview_overview": {
+        "path": "validation/v6-environment-pipeline/low/preview_overview.png",
+        "exists": true,
+        "expected": "9b4d6fc3e0f0f5226d59cec13dbcfa47c6fd91e05efd9580be412ae74e3e120a",
+        "actual": "9b4d6fc3e0f0f5226d59cec13dbcfa47c6fd91e05efd9580be412ae74e3e120a",
+        "matches": true
+      },
+      "low:preview_spawn": {
+        "path": "validation/v6-environment-pipeline/low/preview_spawn.png",
+        "exists": true,
+        "expected": "73d841349a45fbebe50e2acfc0c3eb17d3945a7779a3d93bf5845b50495aea27",
+        "actual": "73d841349a45fbebe50e2acfc0c3eb17d3945a7779a3d93bf5845b50495aea27",
+        "matches": true
+      },
+      "low:layout": {
+        "path": "validation/v6-environment-pipeline/low/environment_layout.json",
+        "exists": true,
+        "expected": "1ed5360e2b296db2dc8167c81a77ba7deac2c11acd198ebfa3581f64c3d2acc7",
+        "actual": "1ed5360e2b296db2dc8167c81a77ba7deac2c11acd198ebfa3581f64c3d2acc7",
+        "matches": true
+      },
+      "medium:blend": {
+        "path": "validation/v6-environment-pipeline/JungleLevel.blend",
+        "exists": true,
+        "expected": "269a854d97c2d18668ec2ec0d3b842ba7d408aba767e0ca16db5ab20d4d9a2ea",
+        "actual": "269a854d97c2d18668ec2ec0d3b842ba7d408aba767e0ca16db5ab20d4d9a2ea",
+        "matches": true
+      },
+      "medium:glb": {
+        "path": "validation/v6-environment-pipeline/JungleLevel.glb",
+        "exists": true,
+        "expected": "667181dd057ae54be1268ab7ecad31cac68b5ec9f88afc2026fc486dd58951c6",
+        "actual": "667181dd057ae54be1268ab7ecad31cac68b5ec9f88afc2026fc486dd58951c6",
+        "matches": true
+      },
+      "medium:gltf": {
+        "path": "validation/v6-environment-pipeline/JungleLevel.gltf",
+        "exists": true,
+        "expected": "f92b18e40a204af13c9594d785231a57f66cfb2f35790d0247b9a54218d9cb76",
+        "actual": "f92b18e40a204af13c9594d785231a57f66cfb2f35790d0247b9a54218d9cb76",
+        "matches": true
+      },
+      "medium:fbx": {
+        "path": "validation/v6-environment-pipeline/JungleLevel.fbx",
+        "exists": true,
+        "expected": "fc39f575da637724a609d82ea548f93b27c4876cfa1520fa0c5d3dfd8f9a81f9",
+        "actual": "fc39f575da637724a609d82ea548f93b27c4876cfa1520fa0c5d3dfd8f9a81f9",
+        "matches": true
+      },
+      "medium:preview_overview": {
+        "path": "validation/v6-environment-pipeline/preview_overview.png",
+        "exists": true,
+        "expected": "fa39252a8b0dce3cb1903e213dcc45a8d20a06dc58e3bdd154122c920c65d99b",
+        "actual": "fa39252a8b0dce3cb1903e213dcc45a8d20a06dc58e3bdd154122c920c65d99b",
+        "matches": true
+      },
+      "medium:preview_spawn": {
+        "path": "validation/v6-environment-pipeline/preview_spawn.png",
+        "exists": true,
+        "expected": "b2a0cd49c160056a085ae0dd7ac53e424ed0c8a1611022639a7902ecd57d06b0",
+        "actual": "b2a0cd49c160056a085ae0dd7ac53e424ed0c8a1611022639a7902ecd57d06b0",
+        "matches": true
+      },
+      "medium:layout": {
+        "path": "validation/v6-environment-pipeline/environment_layout.json",
+        "exists": true,
+        "expected": "10a358afeb4de69c7dde4b8587e381a94936960f2a2e47a9475c582307062662",
+        "actual": "10a358afeb4de69c7dde4b8587e381a94936960f2a2e47a9475c582307062662",
+        "matches": true
+      },
+      "high:blend": {
+        "path": "validation/v6-environment-pipeline/high/JungleLevel.blend",
+        "exists": true,
+        "expected": "d74cc4e092b46d5a075ca47fa77d7368dc84ebaff523b7c7dd30546ba65f185c",
+        "actual": "d74cc4e092b46d5a075ca47fa77d7368dc84ebaff523b7c7dd30546ba65f185c",
+        "matches": true
+      },
+      "high:glb": {
+        "path": "validation/v6-environment-pipeline/high/JungleLevel.glb",
+        "exists": true,
+        "expected": "fa979178c6760fc7afa643f81843436e9a14581f49e75fcae3cf1470e94ae1ac",
+        "actual": "fa979178c6760fc7afa643f81843436e9a14581f49e75fcae3cf1470e94ae1ac",
+        "matches": true
+      },
+      "high:gltf": {
+        "path": "validation/v6-environment-pipeline/high/JungleLevel.gltf",
+        "exists": true,
+        "expected": "33fed7815fe02dfbc0fe8d514efba52678168617b9f6036bda370a4a6712e85e",
+        "actual": "33fed7815fe02dfbc0fe8d514efba52678168617b9f6036bda370a4a6712e85e",
+        "matches": true
+      },
+      "high:fbx": {
+        "path": "validation/v6-environment-pipeline/high/JungleLevel.fbx",
+        "exists": true,
+        "expected": "562176d5b1a747031a381a258c9eb8034cc1c947ef191f6f771f212898e464ac",
+        "actual": "562176d5b1a747031a381a258c9eb8034cc1c947ef191f6f771f212898e464ac",
+        "matches": true
+      },
+      "high:preview_overview": {
+        "path": "validation/v6-environment-pipeline/high/preview_overview.png",
+        "exists": true,
+        "expected": "6ef2377433e7648164e1d86e545287c54ca8bfd8181a9745880ed791d7654ece",
+        "actual": "6ef2377433e7648164e1d86e545287c54ca8bfd8181a9745880ed791d7654ece",
+        "matches": true
+      },
+      "high:preview_spawn": {
+        "path": "validation/v6-environment-pipeline/high/preview_spawn.png",
+        "exists": true,
+        "expected": "f32364b0344ca61c89b1bd85f036b59ccceeb9431bbbf5184c0242d9d269d05e",
+        "actual": "f32364b0344ca61c89b1bd85f036b59ccceeb9431bbbf5184c0242d9d269d05e",
+        "matches": true
+      },
+      "high:layout": {
+        "path": "validation/v6-environment-pipeline/high/environment_layout.json",
+        "exists": true,
+        "expected": "0d1a244799e1a5abab7d56a020f9c381ddfa248ca9d319c2aebdf13182c80cfe",
+        "actual": "0d1a244799e1a5abab7d56a020f9c381ddfa248ca9d319c2aebdf13182c80cfe",
+        "matches": true
+      }
+    }
+  },
+  "previews": {
+    "overview_exists": true,
+    "spawn_exists": true,
+    "overview_dimensions": [
+      512,
+      512
+    ],
+    "spawn_dimensions": [
+      512,
+      512
+    ]
+  },
+  "provenance_honest": true,
+  "pipeline": {
+    "status": "completed",
+    "failed_stages": [],
+    "terrain": {
+      "vertices": 4356,
+      "triangles": 8450,
+      "non_manifold_edges": 260,
+      "degenerate_faces": 0,
+      "height_min_m": -0.2624,
+      "height_max_m": 6.8304,
+      "height_range_m": 7.0928,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "uv_coverage": 1.0,
+      "materials": [
+        "M_Env_Ground"
+      ],
+      "dimensions": [
+        120.0,
+        120.0,
+        7.093
+      ]
+    },
+    "vegetation_instances": 287,
+    "vegetation_counts": {
+      "tree": 22,
+      "bush": 30,
+      "fern": 55,
+      "grass": 140,
+      "plant": 22,
+      "roots": 7
+    },
+    "prop_counts": {
+      "rock": 20,
+      "large_rock": 6,
+      "fallen_log": 4
+    },
+    "water": {
+      "present": true,
+      "triangles": 192,
+      "width_m": 9.0
+    },
+    "character": {
+      "imported": true,
+      "height_m": 1.6,
+      "source_height_m": 2.7,
+      "scale_factor": 0.5926,
+      "ground_contact_error_m": 0.0,
+      "intersects_terrain": false
+    },
+    "textures": 3,
+    "images": 0
+  },
+  "quality_tiers": {
+    "low": {
+      "status": "completed",
+      "terrain_vertices": 1156,
+      "terrain_triangles": 2178,
+      "vegetation_instances": 118,
+      "texture_resolution": 256,
+      "estimated_memory_mb": 90,
+      "timings": {
+        "blender_build_ms": 7414,
+        "export_processes": {
+          "glb": 2285,
+          "gltf": 2944,
+          "fbx": 2407
+        },
+        "total_pipeline_seconds": 22.821
+      }
+    },
+    "medium": {
+      "status": "completed",
+      "terrain_vertices": 4356,
+      "terrain_triangles": 8450,
+      "vegetation_instances": 287,
+      "texture_resolution": 512,
+      "estimated_memory_mb": 180,
+      "timings": {
+        "blender_build_ms": 19776,
+        "export_processes": {
+          "glb": 2714,
+          "gltf": 2453,
+          "fbx": 1869
+        },
+        "total_pipeline_seconds": 35.846
+      }
+    },
+    "high": {
+      "status": "completed",
+      "terrain_vertices": 9604,
+      "terrain_triangles": 18818,
+      "vegetation_instances": 494,
+      "texture_resolution": 1024,
+      "estimated_memory_mb": 320,
+      "timings": {
+        "blender_build_ms": 65364,
+        "export_processes": {
+          "glb": 2590,
+          "gltf": 2522,
+          "fbx": 2051
+        },
+        "total_pipeline_seconds": 82.818
+      }
+    }
+  },
+  "limitations": [
+    "The environment is a stylized procedural prototype, not hand-authored production art.",
+    "Water is visual-only with boundary metadata; no swimming or water physics are implemented.",
+    "Navigation is metadata only; no runtime navmesh is implemented.",
+    "Engine integration is export-prepared and structurally validated; no Unity/Godot/Unreal import was executed.",
+    "Lighting/atmosphere is world haze plus fog metadata; volumetric fog is not rendered in the EEVEE previews.",
+    "No AI provider was contacted and no external asset was downloaded."
+  ],
+  "duration_seconds": 77.4
+}

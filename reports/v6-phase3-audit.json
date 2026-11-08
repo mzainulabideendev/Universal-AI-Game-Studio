@@ -1,0 +1,637 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 3 - character asset pipeline audit",
+  "generated_at": "2026-11-08T13:19:46Z",
+  "verdict": "PASS",
+  "repository": {
+    "root": "C:\\Users\\zu442\\AppData\\Local\\Temp\\opencode\\phase3-audit-worktree",
+    "branch": "HEAD",
+    "head": "f239250c02ac9bb8d74d7956a9be1d979d6497ee",
+    "head_short": "f239250",
+    "dirty_tracked": [
+      "M reports/v6-asset-provenance.json",
+      " M reports/v6-character-pipeline.json",
+      " M reports/v6-character-validation.json",
+      " M scripts/v6-phase3-audit.py",
+      " M scripts/v6-phase3-demo.py",
+      " M tools/game-studio-mcp/game_studio/character_pipeline.py",
+      " M tools/game-studio-mcp/game_studio/character_spec.py",
+      " M tools/game-studio-mcp/game_studio/operations.py",
+      " M tools/game-studio-mcp/tests/test_v6_phase3_pipeline.py",
+      " M validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml",
+      " M validation/unity-jungle-v5/.game-studio/execution-plan.json",
+      " M validation/unity-jungle-v5/.game-studio/specification.json",
+      " M validation/v6-character-pipeline/JungleMonkey.blend",
+      " M validation/v6-character-pipeline/JungleMonkey.fbx",
+      " M validation/v6-character-pipeline/JungleMonkey.glb",
+      " M validation/v6-character-pipeline/preview.png",
+      " M validation/v6-character-pipeline/reimport_validation.blend",
+      "?? V6-PHASE-3-CHARACTER-ASSET-PIPELINE.md",
+      "?? reports/v6-phase3-audit.json",
+      "?? validation/v6-character-pipeline/JungleMonkey.bin",
+      "?? validation/v6-character-pipeline/JungleMonkey.gltf",
+      "?? validation/v6-character-pipeline/T_Monkey_Fur_BaseColor.png",
+      "?? validation/v6-character-pipeline/T_Monkey_Fur_Normal.png",
+      "?? validation/v6-character-pipeline/T_Monkey_Fur_Roughness.png"
+    ],
+    "primary_root": "D:\\MCP\\MCP",
+    "audit_workspace": "C:\\Users\\zu442\\AppData\\Local\\Temp\\opencode\\phase3-audit-worktree",
+    "note": "A parallel OpenCode session was writing Phase 4 environment files and re-registering Phase 4 MCP tools in the primary working tree during this pass. To keep Phase 3 evidence uncontaminated, this audit ran in an isolated git worktree pinned to the same HEAD (f239250) with only the Phase 3 changes applied. The primary tree was not committed, reset, or cleaned by this audit."
+  },
+  "blender": {
+    "executable": "D:\\blender data\\blender.exe",
+    "version": "5.2.2 LTS",
+    "info_ok": true
+  },
+  "tests": {
+    "result": "OK",
+    "tests": 320,
+    "exit_code": 0,
+    "duration_seconds": 44.3,
+    "tail": [
+      "Ran 320 tests in 43.605s",
+      "",
+      "OK"
+    ]
+  },
+  "fresh_real_build": {
+    "status": "completed",
+    "ok": true,
+    "failed_stages": [],
+    "duration_seconds": 13.2,
+    "blender_executed": true,
+    "blender_exit_code": 0,
+    "triangles": 7632,
+    "vertices": 3938,
+    "materials": 7,
+    "bones": 23,
+    "weighted_ratio": 1.0,
+    "uv_coverage": 0.3169,
+    "pbr_channels": {
+      "M_Monkey_EyeWhite": {
+        "base_color": "constant",
+        "roughness": "constant",
+        "normal": "absent",
+        "metallic": "constant",
+        "ao": "absent",
+        "emission": "absent",
+        "opacity": "absent"
+      },
+      "M_Monkey_Fur": {
+        "base_color": "texture",
+        "roughness": "texture",
+        "normal": "texture",
+        "metallic": "constant",
+        "ao": "absent",
+        "emission": "absent",
+        "opacity": "absent"
+      },
+      "M_Monkey_InnerEar": {
+        "base_color": "constant",
+        "roughness": "constant",
+        "normal": "absent",
+        "metallic": "constant",
+        "ao": "absent",
+        "emission": "absent",
+        "opacity": "absent"
+      },
+      "M_Monkey_Iris": {
+        "base_color": "constant",
+        "roughness": "constant",
+        "normal": "absent",
+        "metallic": "constant",
+        "ao": "absent",
+        "emission": "absent",
+        "opacity": "absent"
+      },
+      "M_Monkey_Nose": {
+        "base_color": "constant",
+        "roughness": "constant",
+        "normal": "absent",
+        "metallic": "constant",
+        "ao": "absent",
+        "emission": "absent",
+        "opacity": "absent"
+      },
+      "M_Monkey_Pupil": {
+        "base_color": "constant",
+        "roughness": "constant",
+        "normal": "absent",
+        "metallic": "constant",
+        "ao": "absent",
+        "emission": "absent",
+        "opacity": "absent"
+      },
+      "M_Monkey_Skin": {
+        "base_color": "constant",
+        "roughness": "constant",
+        "normal": "absent",
+        "metallic": "constant",
+        "ao": "absent",
+        "emission": "absent",
+        "opacity": "absent"
+      }
+    },
+    "textures": [
+      {
+        "path": "C:\\Users\\zu442\\AppData\\Local\\Temp\\v6-phase3-audit-qfp_8x81\\textures\\monkey_fur_basecolor.png",
+        "dimensions": [
+          256,
+          256
+        ],
+        "bytes": 53428,
+        "sha256": "7a7c85944456b401deeec8873168aedbaa36c81bb7b229caef744ba65a075e1d",
+        "colorspace": "sRGB"
+      },
+      {
+        "path": "C:\\Users\\zu442\\AppData\\Local\\Temp\\v6-phase3-audit-qfp_8x81\\textures\\monkey_fur_normal.png",
+        "dimensions": [
+          256,
+          256
+        ],
+        "bytes": 99715,
+        "sha256": "d4f9ea8f8bdb141acedd7300be483dc67072f63a977bebed14d7c3cef826b12f",
+        "colorspace": "Non-Color"
+      },
+      {
+        "path": "C:\\Users\\zu442\\AppData\\Local\\Temp\\v6-phase3-audit-qfp_8x81\\textures\\monkey_fur_roughness.png",
+        "dimensions": [
+          256,
+          256
+        ],
+        "bytes": 50323,
+        "sha256": "045ea6d3e0e64451b92a5ca398760d271050a94c2625759a5325619cced8d9ae",
+        "colorspace": "Non-Color"
+      }
+    ],
+    "animations": [
+      "Idle",
+      "Jump",
+      "Run",
+      "Walk"
+    ],
+    "glb": {
+      "ok": true,
+      "path": "C:\\Users\\zu442\\AppData\\Local\\Temp\\v6-phase3-audit-qfp_8x81\\JungleMonkey.glb",
+      "errors": [],
+      "warnings": [],
+      "bytes": 661440,
+      "sha256": "f0a3a2a62a19c808a3fe3658edbddcdf829364a10f7212ca789ea5b15c10ebbb",
+      "version": 2,
+      "declared_length": 661440,
+      "meshes": 1,
+      "primitives": 7,
+      "triangles": 7632,
+      "materials": 7,
+      "textures": 3,
+      "images": 3,
+      "embedded_images": 3,
+      "external_images": [],
+      "buffers": 1,
+      "external_buffers": [],
+      "animations": 4,
+      "animation_names": [
+        "Idle",
+        "Jump",
+        "Run",
+        "Walk"
+      ],
+      "skins": 1,
+      "joints": 23,
+      "nodes": 25,
+      "bounds_min": [
+        -0.44999998807907104,
+        0.009999990463256836,
+        -0.640625
+      ],
+      "bounds_max": [
+        0.44999998807907104,
+        1.7000000476837158,
+        0.3499999940395355
+      ],
+      "generator": "Khronos glTF Blender I/O v5.2.40"
+    },
+    "gltf": {
+      "ok": true,
+      "path": "C:\\Users\\zu442\\AppData\\Local\\Temp\\v6-phase3-audit-qfp_8x81\\JungleMonkey.gltf",
+      "errors": [],
+      "warnings": [],
+      "bytes": 90022,
+      "sha256": "5aa57a12a33e9c17c0cbd31f3d5ad5f44f1149dc93da4eaa10d6edd1ad019c9e",
+      "version": "2.0",
+      "meshes": 1,
+      "primitives": 7,
+      "triangles": 7632,
+      "materials": 7,
+      "textures": 3,
+      "images": 3,
+      "embedded_images": 0,
+      "external_images": [
+        "T_Monkey_Fur_Normal.png",
+        "T_Monkey_Fur_BaseColor.png",
+        "T_Monkey_Fur_Roughness.png"
+      ],
+      "buffers": 1,
+      "external_buffers": [
+        "JungleMonkey.bin"
+      ],
+      "animations": 4,
+      "animation_names": [
+        "Idle",
+        "Jump",
+        "Run",
+        "Walk"
+      ],
+      "skins": 1,
+      "joints": 23,
+      "nodes": 25,
+      "bounds_min": [
+        -0.44999998807907104,
+        0.009999990463256836,
+        -0.640625
+      ],
+      "bounds_max": [
+        0.44999998807907104,
+        1.7000000476837158,
+        0.3499999940395355
+      ],
+      "generator": "Khronos glTF Blender I/O v5.2.40"
+    },
+    "reimport_ok": true,
+    "preview_dimensions": [
+      256,
+      256
+    ],
+    "stage_status": {
+      "geometry-validated": "passed",
+      "materials-validated": "passed",
+      "uv-validated": "passed",
+      "rig-validated": "passed",
+      "animations-created": "passed",
+      "spec-validated": "passed",
+      "blender-build": "passed",
+      "blend-saved": "passed",
+      "glb-exported": "passed",
+      "gltf-exported": "passed",
+      "fbx-exported": "passed",
+      "preview-rendered": "passed",
+      "glb-validated": "passed",
+      "gltf-validated": "passed",
+      "blend-loaded": "pending",
+      "glb-reimported": "passed"
+    },
+    "classification": {
+      "procedurally_generated_geometry": true,
+      "imported_existing_geometry": false,
+      "ai_generated_assets": false,
+      "external_acquired_assets": false,
+      "placeholder_asset": false,
+      "production_ready": false,
+      "quality_classification": "stylized-procedural-game-ready-prototype"
+    }
+  },
+  "committed_evidence": {
+    "ok": true,
+    "pipeline_status": "completed",
+    "validation_status": "passed",
+    "failed_stages": [],
+    "artifacts": [
+      {
+        "role": "blend",
+        "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.blend",
+        "exists": true,
+        "bytes": 1013753,
+        "sha256": "eca11b8536d2ef9ad500bede8a187dd6fdf63bba9e819e8f8091d3515d6b532c",
+        "reported_sha256": "eca11b8536d2ef9ad500bede8a187dd6fdf63bba9e819e8f8091d3515d6b532c",
+        "matches": true
+      },
+      {
+        "role": "glb",
+        "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+        "exists": true,
+        "bytes": 1310604,
+        "sha256": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
+        "reported_sha256": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
+        "matches": true
+      },
+      {
+        "role": "gltf",
+        "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.gltf",
+        "exists": true,
+        "bytes": 90026,
+        "sha256": "1c201ef9bcc30c9c59243b51fa1a2f4a047e2ed97be1e634dbbca91730e7ec63",
+        "reported_sha256": "1c201ef9bcc30c9c59243b51fa1a2f4a047e2ed97be1e634dbbca91730e7ec63",
+        "matches": true
+      },
+      {
+        "role": "fbx",
+        "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.fbx",
+        "exists": true,
+        "bytes": 1513628,
+        "sha256": "634e2e64276c80194881c13c25d8cb70c6083f36431b38a65126303fa60b9cf6",
+        "reported_sha256": "634e2e64276c80194881c13c25d8cb70c6083f36431b38a65126303fa60b9cf6",
+        "matches": true
+      },
+      {
+        "role": "preview",
+        "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\preview.png",
+        "exists": true,
+        "bytes": 464480,
+        "sha256": "5dab449d49124a224fbed85bea54646da2b0fd88de6754a51118e8d46decdc9e",
+        "reported_sha256": "5dab449d49124a224fbed85bea54646da2b0fd88de6754a51118e8d46decdc9e",
+        "matches": true
+      }
+    ],
+    "glb": {
+      "ok": true,
+      "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1310604,
+      "sha256": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
+      "version": 2,
+      "declared_length": 1310604,
+      "meshes": 1,
+      "primitives": 7,
+      "triangles": 15688,
+      "materials": 7,
+      "textures": 3,
+      "images": 3,
+      "embedded_images": 3,
+      "external_images": [],
+      "buffers": 1,
+      "external_buffers": [],
+      "animations": 4,
+      "animation_names": [
+        "Idle",
+        "Jump",
+        "Run",
+        "Walk"
+      ],
+      "skins": 1,
+      "joints": 23,
+      "nodes": 25,
+      "bounds_min": [
+        -0.44999998807907104,
+        0.009999990463256836,
+        -0.640625
+      ],
+      "bounds_max": [
+        0.44999998807907104,
+        1.7000000476837158,
+        0.3499999940395355
+      ],
+      "generator": "Khronos glTF Blender I/O v5.2.40"
+    },
+    "license": "Original project asset (no third-party content)",
+    "license_id": "project-original-1.0",
+    "ai_generated": false,
+    "external_assets_acquired": false,
+    "report_hashes": {
+      "reports/v6-character-pipeline.json": "1078dd8b354e492433217ee127eb70750eecf16cc592c30bcc3087eb0543a675",
+      "reports/v6-character-validation.json": "0e34ddd65569f1772bf3b507d8dbeee1cdbfd6bb77d83b048b1575a08e619baf"
+    },
+    "hashes_match": true
+  },
+  "deliverables": {
+    "V6-PHASE-3-CHARACTER-ASSET-PIPELINE.md": {
+      "exists": true,
+      "bytes": 16678,
+      "sha256": "81e7fa4de00af6de06946cbad47b39b944ac88bc01e6dc9c350aa1c14499abd4"
+    },
+    "reports/v6-character-pipeline.json": {
+      "exists": true,
+      "bytes": 36817,
+      "sha256": "1078dd8b354e492433217ee127eb70750eecf16cc592c30bcc3087eb0543a675"
+    },
+    "reports/v6-character-validation.json": {
+      "exists": true,
+      "bytes": 15207,
+      "sha256": "0e34ddd65569f1772bf3b507d8dbeee1cdbfd6bb77d83b048b1575a08e619baf"
+    },
+    "reports/v6-asset-provenance.json": {
+      "exists": true,
+      "bytes": 13366,
+      "sha256": "373445ff5a5673ef0b9bc327312a5d8e9925f7e510211570ebef4473844f9ecc"
+    },
+    "reports/v6-phase3-audit.json": {
+      "exists": true,
+      "bytes": 22150,
+      "sha256": "51314db69e306eb15b57b822ddf0443225810e659a031d7c7571fb67a783db99"
+    },
+    "scripts/v6-phase3-demo.py": {
+      "exists": true,
+      "bytes": 16184,
+      "sha256": "73618b7d37813c6cb68ebfe88f30c6641f61a347b20a3ee98feeefcfd9f15569"
+    },
+    "scripts/v6-phase3-audit.py": {
+      "exists": true,
+      "bytes": 18938,
+      "sha256": "a1d1a80859d8ba7f8361945f1ed4135ea7357e457b52e529e3ab7335c3d2fd9f"
+    },
+    "tools/game-studio-mcp/game_studio/character_spec.py": {
+      "exists": true,
+      "bytes": 21253,
+      "sha256": "17a298f59e2307b179a917bcf164dffc62007f7da34808b54b805731bc219995"
+    },
+    "tools/game-studio-mcp/game_studio/character_pipeline.py": {
+      "exists": true,
+      "bytes": 69894,
+      "sha256": "b6d47181468dba9e107d90218a1a113c78b27b8f7f341df8eecd53e8eb0babca"
+    },
+    "tools/game-studio-mcp/tests/test_v6_phase3_character_spec.py": {
+      "exists": true,
+      "bytes": 9592,
+      "sha256": "ac2a9888a6eedf6ed9e08a523e200abb7f6bc5ef689fdfa2e20ef17e1c85bda6"
+    },
+    "tools/game-studio-mcp/tests/test_v6_phase3_pipeline.py": {
+      "exists": true,
+      "bytes": 30415,
+      "sha256": "99f4e6d59b71f60865dee217ddb7cc1ce228ca5674e9bcc4dca5f70dd1b0be56"
+    }
+  },
+  "preservation": {
+    "v4_commit": "4bf92a84c42e8516e6f54718ce675481e44f3139",
+    "v4_preserved": true,
+    "v4_files": {
+      "tools/game-studio-mcp/tests/test_llm_v4.py": {
+        "expected": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "actual": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "matches": true
+      },
+      "tools/game-studio-mcp/tests/test_p0_v4.py": {
+        "expected": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "actual": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "matches": true
+      }
+    },
+    "v5_preserved": true,
+    "v5_artifacts": {
+      "validation/unity-jungle-v5/.game-studio/manifest.json": {
+        "exists": true,
+        "expected": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "actual": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/specification.json": {
+        "exists": true,
+        "expected": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "actual": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/execution-plan.json": {
+        "exists": true,
+        "expected": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "actual": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml": {
+        "exists": true,
+        "expected": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "actual": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json": {
+        "exists": true,
+        "expected": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "actual": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png": {
+        "exists": true,
+        "expected": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "actual": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json": {
+        "exists": true,
+        "expected": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "actual": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity": {
+        "exists": true,
+        "expected": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "actual": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "matches": true
+      },
+      "validation/builds/v5-windows/JungleMonkey.exe": {
+        "exists": true,
+        "expected": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "actual": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "matches": true
+      },
+      "V5-IMPLEMENTATION-REPORT.md": {
+        "exists": true,
+        "expected": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "actual": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "matches": true
+      },
+      "V5-LLM-EVALUATION.md": {
+        "exists": true,
+        "expected": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "actual": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "matches": true
+      },
+      "V5-UNITY-VERTICAL-SLICE.md": {
+        "exists": true,
+        "expected": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "actual": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "matches": true
+      },
+      "V5-VERIFICATION-MATRIX.md": {
+        "exists": true,
+        "expected": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "actual": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "matches": true
+      }
+    }
+  },
+  "mcp": {
+    "tools": 92,
+    "handlers": 92,
+    "unique_tool_names": 92,
+    "missing_handlers": [],
+    "extra_handlers": [],
+    "all_schemas_object": true,
+    "character_tools": [
+      "character_generate_asset",
+      "character_capabilities"
+    ]
+  },
+  "capabilities": {
+    "authorized_external_generators": [],
+    "authorized_missing": [
+      "image_generation",
+      "texture_generation",
+      "material_generation",
+      "mesh_generation"
+    ],
+    "image_generation_supported": [],
+    "mesh_generation_supported": [
+      "meshy"
+    ],
+    "meshy_authorized": false,
+    "states_used": [
+      "supported",
+      "unknown",
+      "unsupported"
+    ]
+  },
+  "phase2_integration": {
+    "asset_specification_present": true,
+    "spec_valid": true,
+    "quality_tier": "medium",
+    "agent_assets_generated": false,
+    "agent_textures_generated": false,
+    "status": "planned-not-generated"
+  },
+  "security": {
+    "clean": true,
+    "hits": []
+  },
+  "criteria": {
+    "real_character_generation": true,
+    "blender_executed": true,
+    "geometry_validated": true,
+    "uv_validated": true,
+    "materials_and_textures_validated": true,
+    "pbr_channels_honest": true,
+    "rigging_validated": true,
+    "animations_created": true,
+    "real_exports_succeeded": true,
+    "export_validated_and_reimported": true,
+    "preview_rendered": true,
+    "phase2_agent_integration": true,
+    "reports_reproducible": true,
+    "mcp_tool_handler_parity": true,
+    "v4_preserved": true,
+    "v5_preserved": true,
+    "tests_pass": true,
+    "no_fabricated_ai_assets": true,
+    "security_clean": true,
+    "deliverables_present": true
+  },
+  "not_executed": [
+    "Unity/Godot/Unreal engine import (only export-prepared structure was validated)",
+    "AI image/texture/3D generation (no authorized provider configured)",
+    "Asset downloads (not authorized)",
+    "Commits, pushes and tags (not authorized)"
+  ],
+  "limitations": [
+    "The character is a procedural stylized prototype, not production art.",
+    "Textures are locally generated procedural images; AO/emission/opacity maps are absent and reported as such.",
+    "Animations are short procedural keyframe clips.",
+    "Engine integration is export-prepared and structurally validated only."
+  ],
+  "concurrent_session": {
+    "present": true,
+    "scope": "V6 Phase 4 environment generation (not part of this task)",
+    "effects_on_primary_tree": [
+      "Phase 4 modules/tests are present and tool registry reports 94/94 (Phase 4 adds 2).",
+      "Phase 3-scoped tests (267 legacy + 53 new = 320) pass in isolation.",
+      "Phase 4 work is preserved under validation/deferred-phase4/ as a snapshot."
+    ]
+  },
+  "deliverables_note": "Deliverable hashes were re-read from the primary tree after the Phase 3 document was repaired from corrupted Unicode. Phase 3 code and reports are identical to the isolated audit workspace; only the document text changed."
+}

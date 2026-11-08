@@ -217,13 +217,18 @@ def main() -> int:
         "export": {
             "status": "passed" if all(
                 stage_status.get(name) == "passed"
-                for name in ("blend-saved", "glb-exported", "fbx-exported")) else "failed",
-            "formats": ["blend", "glb", "fbx"],
+                for name in ("blend-saved", "glb-exported", "gltf-exported",
+                             "fbx-exported")) else "failed",
+            "formats": ["blend", "glb", "gltf", "fbx"],
             "artifacts": artifact_checks,
         },
         "glb_validation": {
             "status": stage_status.get("glb-validated"),
             "details": build.get("glb_validation"),
+        },
+        "gltf_validation": {
+            "status": stage_status.get("gltf-validated"),
+            "details": build.get("gltf_validation"),
         },
         "reimport": {
             "status": stage_status.get("glb-reimported"),
@@ -284,6 +289,7 @@ def main() -> int:
         "materials": build.get("materials"),
         "artifact_checks": artifact_checks,
         "glb_validation": build.get("glb_validation"),
+        "gltf_validation": build.get("gltf_validation"),
         "reimport": pipeline.get("reimport"),
         "classification": pipeline.get("generation_classification"),
         "capabilities": character_spec.provider_capability_report(),
@@ -356,6 +362,8 @@ def main() -> int:
         "animations": [a.get("name") for a in build.get("animations") or []],
         "glb": (build.get("artifacts", {}).get("glb") or {}).get("path"),
         "glb_sha256": (build.get("artifacts", {}).get("glb") or {}).get("sha256"),
+        "gltf": (build.get("artifacts", {}).get("gltf") or {}).get("path"),
+        "gltf_sha256": (build.get("artifacts", {}).get("gltf") or {}).get("sha256"),
         "preview": (build.get("artifacts", {}).get("preview") or {}).get("path"),
         "failed_stages": pipeline.get("failed_stages"),
         "output_dir": str(output_dir),

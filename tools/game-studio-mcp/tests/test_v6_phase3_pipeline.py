@@ -79,14 +79,16 @@ def sample_gltf() -> dict:
 def artifacts(root: Path) -> dict:
     blend = root / "JungleMonkey.blend"
     glb = root / "JungleMonkey.glb"
+    gltf = root / "JungleMonkey.gltf"
     fbx = root / "JungleMonkey.fbx"
     preview = root / "preview.png"
     blend.write_bytes(b"BLENDER-test")
     glb.write_bytes(make_glb(sample_gltf()))
+    gltf.write_text(json.dumps(sample_gltf()), encoding="utf-8")
     fbx.write_bytes(b"FBX-test")
     make_png(preview, 8, 8)
-    return {"blend": str(blend), "glb": str(glb), "fbx": str(fbx),
-            "preview": str(preview)}
+    return {"blend": str(blend), "glb": str(glb), "gltf": str(gltf),
+            "fbx": str(fbx), "preview": str(preview)}
 
 
 def fake_payload(root: Path, spec: dict, *, colorspace: str = "sRGB",
@@ -100,7 +102,8 @@ def fake_payload(root: Path, spec: dict, *, colorspace: str = "sRGB",
                       "fcurves": 3})
     return {
         "name": spec["name"], "tier": spec["quality_tier"],
-        "blend": paths["blend"], "glb": paths["glb"], "fbx": paths["fbx"],
+        "blend": paths["blend"], "glb": paths["glb"], "gltf": paths["gltf"],
+        "fbx": paths["fbx"],
         "preview": paths["preview"], "render_engine": "BLENDER_EEVEE_NEXT",
         "render_error": None, "export_errors": [],
         "geometry": {
@@ -219,6 +222,49 @@ class GlbParserTests(unittest.TestCase):
             self.assertIsNone(character_pipeline.png_dimensions(str(text)))
 
 
+class GltfParserTests(unittest.TestCase):
+    def test_separated_gltf_with_external_buffer_and_image_is_valid(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            document = sample_gltf()
+            document["buffers"] = [{"uri": "JungleMonkey.bin", "byteLength": 4}]
+            document["images"] = [{"uri": "textures/base.png"}]
+            make_png(root / "textures" / "base.png", 8, 8)
+            (root / "JungleMonkey.bin").write_bytes(b"\x00" * 4)
+            path = root / "JungleMonkey.gltf"
+            path.write_text(json.dumps(document), encoding="utf-8")
+            result = character_pipeline.validate_gltf(str(path))
+        self.assertTrue(result["ok"], result["errors"])
+        self.assertEqual(result["buffers"], 1)
+        self.assertEqual(result["external_buffers"], ["JungleMonkey.bin"])
+        self.assertEqual(result["triangles"], 3)
+        self.assertEqual(result["skins"], 1)
+
+    def test_separated_gltf_reports_missing_buffer_and_image(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            document = sample_gltf()
+            document["buffers"] = [{"uri": "missing.bin", "byteLength": 4}]
+            document["images"] = [{"uri": "textures/missing.png"}]
+            path = root / "x.gltf"
+            path.write_text(json.dumps(document), encoding="utf-8")
+            result = character_pipeline.validate_gltf(str(path))
+        self.assertFalse(result["ok"])
+        self.assertTrue(any("missing external buffers" in error
+                            for error in result["errors"]))
+        self.assertTrue(any("missing external images" in error
+                            for error in result["errors"]))
+
+    def test_invalid_gltf_json_is_reported(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "bad.gltf"
+            path.write_text("{not json", encoding="utf-8")
+            result = character_pipeline.validate_gltf(str(path))
+        self.assertFalse(result["ok"])
+        self.assertTrue(any("invalid glTF JSON" in error
+                            for error in result["errors"]))
+
+
 class BuildStageTests(unittest.TestCase):
     def _build(self, *, colorspace="sRGB", image_exists=True, run_ok=True,
                payload_mutator=None):
@@ -243,8 +289,9 @@ class BuildStageTests(unittest.TestCase):
         self.assertFalse(report["failed_stages"])
         for stage in ("geometry-validated", "materials-validated",
                       "uv-validated", "rig-validated", "animations-created",
-                      "blend-saved", "glb-exported", "fbx-exported",
-                      "glb-validated", "preview-rendered"):
+                      "blend-saved", "glb-exported", "gltf-exported",
+                      "fbx-exported", "glb-validated", "gltf-validated",
+                      "preview-rendered"):
             self.assertEqual(report["stages"][stage]["status"], "passed", stage)
         self.assertTrue(report["glb_validation"]["ok"])
         self.assertFalse(report["ai_generated"])

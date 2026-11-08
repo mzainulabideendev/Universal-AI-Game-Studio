@@ -1,0 +1,7212 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 4 - environment validation",
+  "generated_at": "2026-11-08T13:24:06Z",
+  "primary_tier": "medium",
+  "tiers": {
+    "low": {
+      "status": "completed",
+      "ok": true,
+      "failed_stages": [],
+      "stage_status": {
+        "terrain-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "vegetation-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "props-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "water-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "materials-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "lighting-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "layout-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "collision-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "character-integrated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "spec-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "blender-build": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "blend-saved": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "glb-exported": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "gltf-exported": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "fbx-exported": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "previews-rendered": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "glb-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "gltf-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "glb-reimported": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        }
+      },
+      "terrain": {
+        "vertices": 1156,
+        "triangles": 2178,
+        "non_manifold_edges": 132,
+        "degenerate_faces": 0,
+        "height_min_m": -0.2452,
+        "height_max_m": 6.6367,
+        "height_range_m": 6.882,
+        "uv_layers": [
+          "UVMap"
+        ],
+        "uv_coverage": 1.0,
+        "materials": [
+          "M_Env_Ground"
+        ],
+        "dimensions": [
+          120.0,
+          120.0,
+          6.882
+        ]
+      },
+      "vegetation": {
+        "requested": {
+          "trees": 10,
+          "bushes": 14,
+          "ferns": 24,
+          "grass": 60,
+          "plants": 10
+        },
+        "counts": {
+          "tree": 10,
+          "bush": 14,
+          "fern": 24,
+          "grass": 60,
+          "plant": 10,
+          "roots": 4
+        },
+        "instance_count": 118,
+        "unique_meshes": 19,
+        "spacing_violations": [],
+        "route_conflicts": []
+      },
+      "props": {
+        "counts": {
+          "rock": 10,
+          "large_rock": 3,
+          "fallen_log": 2
+        },
+        "debris": 5,
+        "ruin_objects": 6,
+        "records": [
+          {
+            "name": "Debris_000",
+            "category": "debris",
+            "x": -10.766,
+            "y": -50.059
+          },
+          {
+            "name": "Debris_001",
+            "category": "debris",
+            "x": -41.788,
+            "y": 8.609
+          },
+          {
+            "name": "Debris_002",
+            "category": "debris",
+            "x": 29.176,
+            "y": 8.332
+          },
+          {
+            "name": "Debris_003",
+            "category": "debris",
+            "x": -5.087,
+            "y": 39.371
+          },
+          {
+            "name": "Debris_004",
+            "category": "debris",
+            "x": 25.077,
+            "y": -51.593
+          }
+        ]
+      },
+      "water": {
+        "present": true,
+        "width_m": 9.0,
+        "vertices": 147,
+        "faces": 96,
+        "triangles": 192,
+        "flow_direction": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "banks": 2,
+        "water_surface": true,
+        "bed_geometry": true,
+        "left_boundary": [
+          {
+            "x": 24.207,
+            "y": -57.6,
+            "z": 1.989
+          },
+          {
+            "x": 23.638,
+            "y": -55.2,
+            "z": 2.202
+          },
+          {
+            "x": 23.096,
+            "y": -52.8,
+            "z": 2.098
+          },
+          {
+            "x": 22.588,
+            "y": -50.4,
+            "z": 1.717
+          },
+          {
+            "x": 22.123,
+            "y": -48.0,
+            "z": 1.665
+          },
+          {
+            "x": 21.706,
+            "y": -45.6,
+            "z": 1.769
+          },
+          {
+            "x": 21.343,
+            "y": -43.2,
+            "z": 1.284
+          },
+          {
+            "x": 21.04,
+            "y": -40.8,
+            "z": 0.7
+          },
+          {
+            "x": 20.802,
+            "y": -38.4,
+            "z": 0.311
+          },
+          {
+            "x": 20.631,
+            "y": -36.0,
+            "z": 0.436
+          },
+          {
+            "x": 20.53,
+            "y": -33.6,
+            "z": 0.949
+          },
+          {
+            "x": 20.5,
+            "y": -31.2,
+            "z": 1.325
+          },
+          {
+            "x": 20.543,
+            "y": -28.8,
+            "z": 1.883
+          },
+          {
+            "x": 20.656,
+            "y": -26.4,
+            "z": 2.394
+          },
+          {
+            "x": 20.84,
+            "y": -24.0,
+            "z": 2.551
+          },
+          {
+            "x": 21.09,
+            "y": -21.6,
+            "z": 2.38
+          },
+          {
+            "x": 21.404,
+            "y": -19.2,
+            "z": 2.168
+          },
+          {
+            "x": 21.777,
+            "y": -16.8,
+            "z": 2.177
+          },
+          {
+            "x": 22.203,
+            "y": -14.4,
+            "z": 2.312
+          },
+          {
+            "x": 22.677,
+            "y": -12.0,
+            "z": 2.467
+          },
+          {
+            "x": 23.191,
+            "y": -9.6,
+            "z": 2.461
+          },
+          {
+            "x": 23.739,
+            "y": -7.2,
+            "z": 2.213
+          },
+          {
+            "x": 24.311,
+            "y": -4.8,
+            "z": 1.936
+          },
+          {
+            "x": 24.901,
+            "y": -2.4,
+            "z": 1.64
+          },
+          {
+            "x": 25.5,
+            "y": 0.0,
+            "z": 1.494
+          },
+          {
+            "x": 26.099,
+            "y": 2.4,
+            "z": 1.769
+          },
+          {
+            "x": 26.689,
+            "y": 4.8,
+            "z": 2.091
+          },
+          {
+            "x": 27.261,
+            "y": 7.2,
+            "z": 2.663
+          },
+          {
+            "x": 27.809,
+            "y": 9.6,
+            "z": 3.013
+          },
+          {
+            "x": 28.323,
+            "y": 12.0,
+            "z": 2.879
+          },
+          {
+            "x": 28.797,
+            "y": 14.4,
+            "z": 3.015
+          },
+          {
+            "x": 29.223,
+            "y": 16.8,
+            "z": 3.089
+          },
+          {
+            "x": 29.596,
+            "y": 19.2,
+            "z": 3.139
+          },
+          {
+            "x": 29.91,
+            "y": 21.6,
+            "z": 3.326
+          },
+          {
+            "x": 30.16,
+            "y": 24.0,
+            "z": 3.471
+          },
+          {
+            "x": 30.344,
+            "y": 26.4,
+            "z": 3.252
+          },
+          {
+            "x": 30.457,
+            "y": 28.8,
+            "z": 2.841
+          },
+          {
+            "x": 30.5,
+            "y": 31.2,
+            "z": 2.254
+          },
+          {
+            "x": 30.47,
+            "y": 33.6,
+            "z": 1.717
+          },
+          {
+            "x": 30.369,
+            "y": 36.0,
+            "z": 1.429
+          },
+          {
+            "x": 30.198,
+            "y": 38.4,
+            "z": 1.16
+          },
+          {
+            "x": 29.96,
+            "y": 40.8,
+            "z": 0.785
+          },
+          {
+            "x": 29.657,
+            "y": 43.2,
+            "z": 0.642
+          },
+          {
+            "x": 29.294,
+            "y": 45.6,
+            "z": 0.537
+          },
+          {
+            "x": 28.877,
+            "y": 48.0,
+            "z": 0.364
+          },
+          {
+            "x": 28.412,
+            "y": 50.4,
+            "z": 0.494
+          },
+          {
+            "x": 27.904,
+            "y": 52.8,
+            "z": 0.766
+          },
+          {
+            "x": 27.362,
+            "y": 55.2,
+            "z": 0.495
+          },
+          {
+            "x": 26.793,
+            "y": 57.6,
+            "z": 0.491
+          }
+        ],
+        "right_boundary": [
+          {
+            "x": 33.207,
+            "y": -57.6,
+            "z": 1.989
+          },
+          {
+            "x": 32.638,
+            "y": -55.2,
+            "z": 2.202
+          },
+          {
+            "x": 32.096,
+            "y": -52.8,
+            "z": 2.098
+          },
+          {
+            "x": 31.588,
+            "y": -50.4,
+            "z": 1.717
+          },
+          {
+            "x": 31.123,
+            "y": -48.0,
+            "z": 1.665
+          },
+          {
+            "x": 30.706,
+            "y": -45.6,
+            "z": 1.769
+          },
+          {
+            "x": 30.343,
+            "y": -43.2,
+            "z": 1.284
+          },
+          {
+            "x": 30.04,
+            "y": -40.8,
+            "z": 0.7
+          },
+          {
+            "x": 29.802,
+            "y": -38.4,
+            "z": 0.311
+          },
+          {
+            "x": 29.631,
+            "y": -36.0,
+            "z": 0.436
+          },
+          {
+            "x": 29.53,
+            "y": -33.6,
+            "z": 0.949
+          },
+          {
+            "x": 29.5,
+            "y": -31.2,
+            "z": 1.325
+          },
+          {
+            "x": 29.543,
+            "y": -28.8,
+            "z": 1.883
+          },
+          {
+            "x": 29.656,
+            "y": -26.4,
+            "z": 2.394
+          },
+          {
+            "x": 29.84,
+            "y": -24.0,
+            "z": 2.551
+          },
+          {
+            "x": 30.09,
+            "y": -21.6,
+            "z": 2.38
+          },
+          {
+            "x": 30.404,
+            "y": -19.2,
+            "z": 2.168
+          },
+          {
+            "x": 30.777,
+            "y": -16.8,
+            "z": 2.177
+          },
+          {
+            "x": 31.203,
+            "y": -14.4,
+            "z": 2.312
+          },
+          {
+            "x": 31.677,
+            "y": -12.0,
+            "z": 2.467
+          },
+          {
+            "x": 32.191,
+            "y": -9.6,
+            "z": 2.461
+          },
+          {
+            "x": 32.739,
+            "y": -7.2,
+            "z": 2.213
+          },
+          {
+            "x": 33.311,
+            "y": -4.8,
+            "z": 1.936
+          },
+          {
+            "x": 33.901,
+            "y": -2.4,
+            "z": 1.64
+          },
+          {
+            "x": 34.5,
+            "y": 0.0,
+            "z": 1.494
+          },
+          {
+            "x": 35.099,
+            "y": 2.4,
+            "z": 1.769
+          },
+          {
+            "x": 35.689,
+            "y": 4.8,
+            "z": 2.091
+          },
+          {
+            "x": 36.261,
+            "y": 7.2,
+            "z": 2.663
+          },
+          {
+            "x": 36.809,
+            "y": 9.6,
+            "z": 3.013
+          },
+          {
+            "x": 37.323,
+            "y": 12.0,
+            "z": 2.879
+          },
+          {
+            "x": 37.797,
+            "y": 14.4,
+            "z": 3.015
+          },
+          {
+            "x": 38.223,
+            "y": 16.8,
+            "z": 3.089
+          },
+          {
+            "x": 38.596,
+            "y": 19.2,
+            "z": 3.139
+          },
+          {
+            "x": 38.91,
+            "y": 21.6,
+            "z": 3.326
+          },
+          {
+            "x": 39.16,
+            "y": 24.0,
+            "z": 3.471
+          },
+          {
+            "x": 39.344,
+            "y": 26.4,
+            "z": 3.252
+          },
+          {
+            "x": 39.457,
+            "y": 28.8,
+            "z": 2.841
+          },
+          {
+            "x": 39.5,
+            "y": 31.2,
+            "z": 2.254
+          },
+          {
+            "x": 39.47,
+            "y": 33.6,
+            "z": 1.717
+          },
+          {
+            "x": 39.369,
+            "y": 36.0,
+            "z": 1.429
+          },
+          {
+            "x": 39.198,
+            "y": 38.4,
+            "z": 1.16
+          },
+          {
+            "x": 38.96,
+            "y": 40.8,
+            "z": 0.785
+          },
+          {
+            "x": 38.657,
+            "y": 43.2,
+            "z": 0.642
+          },
+          {
+            "x": 38.294,
+            "y": 45.6,
+            "z": 0.537
+          },
+          {
+            "x": 37.877,
+            "y": 48.0,
+            "z": 0.364
+          },
+          {
+            "x": 37.412,
+            "y": 50.4,
+            "z": 0.494
+          },
+          {
+            "x": 36.904,
+            "y": 52.8,
+            "z": 0.766
+          },
+          {
+            "x": 36.362,
+            "y": 55.2,
+            "z": 0.495
+          },
+          {
+            "x": 35.793,
+            "y": 57.6,
+            "z": 0.491
+          }
+        ],
+        "centerline": [
+          {
+            "x": 28.707,
+            "y": -57.6
+          },
+          {
+            "x": 26.623,
+            "y": -48.0
+          },
+          {
+            "x": 25.302,
+            "y": -38.4
+          },
+          {
+            "x": 25.043,
+            "y": -28.8
+          },
+          {
+            "x": 25.904,
+            "y": -19.2
+          },
+          {
+            "x": 27.691,
+            "y": -9.6
+          },
+          {
+            "x": 30.0,
+            "y": 0.0
+          },
+          {
+            "x": 32.309,
+            "y": 9.6
+          },
+          {
+            "x": 34.096,
+            "y": 19.2
+          },
+          {
+            "x": 34.957,
+            "y": 28.8
+          },
+          {
+            "x": 34.698,
+            "y": 38.4
+          },
+          {
+            "x": 33.377,
+            "y": 48.0
+          },
+          {
+            "x": 31.293,
+            "y": 57.6
+          }
+        ]
+      },
+      "materials": {
+        "count": 19,
+        "channels": {
+          "M_Env_Bark": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Grass": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Ground": {
+            "base_color": "texture",
+            "roughness": "texture",
+            "normal": "texture",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Leaf": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Leaf_Light": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Rock": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Rock_Mossy": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Root": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Stone": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Water": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "constant",
+            "transmission": "constant"
+          },
+          "M_Env_WetGround": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Wood": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_EyeWhite": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Fur": {
+            "base_color": "texture",
+            "roughness": "constant",
+            "normal": "texture",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_InnerEar": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Iris": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Nose": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Pupil": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Skin": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          }
+        },
+        "textures": [
+          {
+            "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\low\\textures\\ground_basecolor.png",
+            "dimensions": [
+              256,
+              256
+            ],
+            "bytes": 57379,
+            "sha256": "fbfee59e5d5a0fd94dd8b1e5dde02f5d1d581567090e38b3ea7477abb224b3fc",
+            "colorspace": "sRGB"
+          },
+          {
+            "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\low\\textures\\ground_roughness.png",
+            "dimensions": [
+              256,
+              256
+            ],
+            "bytes": 51529,
+            "sha256": "3288652b428cae43d6a3549c652a0d05bb3997ff4010014868477695c9e7d34f",
+            "colorspace": "Non-Color"
+          },
+          {
+            "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\low\\textures\\ground_normal.png",
+            "dimensions": [
+              256,
+              256
+            ],
+            "bytes": 116176,
+            "sha256": "c486e172bf37f9b0fb15f0fad0c8218afd26f6862ef62742e01cace40ed02795",
+            "colorspace": "Non-Color"
+          }
+        ]
+      },
+      "lighting": {
+        "sun": {
+          "name": "Sun_Key",
+          "energy": 4.0,
+          "elevation_deg": 38.0,
+          "azimuth_deg": 52.0,
+          "shadows": true
+        },
+        "world": {
+          "sky_color": [
+            0.42,
+            0.62,
+            0.82
+          ],
+          "ambient_strength": 0.55,
+          "fog_density": 0.018,
+          "fog_color": [
+            0.55,
+            0.68,
+            0.66
+          ],
+          "volumetric_fog_rendered": false
+        },
+        "exposure": 0.0,
+        "view_transform": "AgX"
+      },
+      "layout": {
+        "spawn": {
+          "name": "SPAWN_PLAYER",
+          "x": 0.0,
+          "y": -48.0,
+          "z": 3.7685,
+          "facing": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "clearance_m": 4.882
+        },
+        "route": {
+          "width_m": 5.0,
+          "waypoints": [
+            {
+              "name": "ROUTE_WAYPOINT_00",
+              "x": 1.978,
+              "y": -48.0,
+              "z": 3.7517
+            },
+            {
+              "name": "ROUTE_WAYPOINT_01",
+              "x": 2.917,
+              "y": -37.75,
+              "z": 4.6568
+            },
+            {
+              "name": "ROUTE_WAYPOINT_02",
+              "x": 2.787,
+              "y": -27.5,
+              "z": 4.042
+            },
+            {
+              "name": "ROUTE_WAYPOINT_03",
+              "x": 1.636,
+              "y": -17.25,
+              "z": 5.1274
+            },
+            {
+              "name": "ROUTE_WAYPOINT_04",
+              "x": -0.115,
+              "y": -7.0,
+              "z": 5.4204
+            },
+            {
+              "name": "ROUTE_WAYPOINT_05",
+              "x": -1.824,
+              "y": 3.25,
+              "z": 5.5586
+            },
+            {
+              "name": "ROUTE_WAYPOINT_06",
+              "x": -2.864,
+              "y": 13.5,
+              "z": 4.223
+            },
+            {
+              "name": "ROUTE_WAYPOINT_07",
+              "x": -2.855,
+              "y": 23.75,
+              "z": 3.2213
+            },
+            {
+              "name": "ROUTE_WAYPOINT_08",
+              "x": -1.799,
+              "y": 34.0,
+              "z": 2.192
+            }
+          ],
+          "max_slope_deg": 17.349,
+          "conflicts": []
+        },
+        "landmark": {
+          "name": "LANDMARK_DESTINATION",
+          "x": 0.0,
+          "y": 46.0,
+          "z": 1.6693,
+          "type": "jungle_ruins"
+        },
+        "layout_path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\low\\environment_layout.json",
+        "spawn_clearance_m": 4.882,
+        "route_conflicts": [],
+        "route_max_slope_deg": 17.349,
+        "waypoint_count": 9
+      },
+      "collision": {
+        "terrain_collider": "Terrain",
+        "walkable_slope_deg": 32.0,
+        "obstacles": [
+          {
+            "name": "tree_000",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 52.608,
+            "y": -5.338,
+            "z": 3.72,
+            "radius": 0.667
+          },
+          {
+            "name": "tree_001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 18.361,
+            "y": -8.076,
+            "z": 4.938,
+            "radius": 0.64
+          },
+          {
+            "name": "tree_002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 42.752,
+            "y": -25.549,
+            "z": 4.556,
+            "radius": 0.639
+          },
+          {
+            "name": "tree_003",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 49.384,
+            "y": -34.168,
+            "z": 3.053,
+            "radius": 0.564
+          },
+          {
+            "name": "tree_000.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -29.906,
+            "y": -21.794,
+            "z": 4.673,
+            "radius": 0.438
+          },
+          {
+            "name": "tree_001.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -42.212,
+            "y": -13.663,
+            "z": 4.086,
+            "radius": 0.54
+          },
+          {
+            "name": "tree_002.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -13.542,
+            "y": 20.64,
+            "z": 2.944,
+            "radius": 0.68
+          },
+          {
+            "name": "tree_000.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 5.871,
+            "y": 5.264,
+            "z": 4.753,
+            "radius": 0.673
+          },
+          {
+            "name": "tree_001.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 18.178,
+            "y": 31.218,
+            "z": 4.498,
+            "radius": 0.503
+          },
+          {
+            "name": "tree_002.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 43.762,
+            "y": -8.074,
+            "z": 4.802,
+            "radius": 0.462
+          },
+          {
+            "name": "bush_000",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 50.05,
+            "y": -11.424,
+            "z": 3.924,
+            "radius": 0.524
+          },
+          {
+            "name": "bush_001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 15.051,
+            "y": -49.444,
+            "z": 3.432,
+            "radius": 0.378
+          },
+          {
+            "name": "bush_002",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 5.393,
+            "y": 32.709,
+            "z": 3.448,
+            "radius": 0.512
+          },
+          {
+            "name": "bush_003",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -0.789,
+            "y": 51.001,
+            "z": 1.951,
+            "radius": 0.441
+          },
+          {
+            "name": "bush_004",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 52.663,
+            "y": 19.094,
+            "z": 3.435,
+            "radius": 0.472
+          },
+          {
+            "name": "bush_005",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -18.887,
+            "y": -3.89,
+            "z": 4.598,
+            "radius": 0.605
+          },
+          {
+            "name": "bush_006",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 22.855,
+            "y": 26.458,
+            "z": 6.366,
+            "radius": 0.41
+          },
+          {
+            "name": "bush_000.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -42.836,
+            "y": 30.958,
+            "z": 2.505,
+            "radius": 0.384
+          },
+          {
+            "name": "bush_001.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -53.544,
+            "y": 25.868,
+            "z": 4.267,
+            "radius": 0.427
+          },
+          {
+            "name": "bush_002.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 45.722,
+            "y": 36.793,
+            "z": 3.242,
+            "radius": 0.511
+          },
+          {
+            "name": "bush_003.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 8.972,
+            "y": 4.956,
+            "z": 4.23,
+            "radius": 0.419
+          },
+          {
+            "name": "bush_004.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -33.514,
+            "y": -24.898,
+            "z": 4.591,
+            "radius": 0.583
+          },
+          {
+            "name": "bush_005.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -22.362,
+            "y": -31.873,
+            "z": 4.773,
+            "radius": 0.491
+          },
+          {
+            "name": "bush_006.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -29.317,
+            "y": -7.674,
+            "z": 4.355,
+            "radius": 0.365
+          },
+          {
+            "name": "plant_000",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 9.029,
+            "y": 48.859,
+            "z": 3.147,
+            "radius": 0.214
+          },
+          {
+            "name": "plant_001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -34.228,
+            "y": -38.099,
+            "z": 5.034,
+            "radius": 0.232
+          },
+          {
+            "name": "plant_002",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 44.654,
+            "y": 53.368,
+            "z": 2.96,
+            "radius": 0.275
+          },
+          {
+            "name": "plant_003",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -20.379,
+            "y": 40.595,
+            "z": 2.321,
+            "radius": 0.217
+          },
+          {
+            "name": "plant_004",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -42.251,
+            "y": -34.065,
+            "z": 4.788,
+            "radius": 0.299
+          },
+          {
+            "name": "plant_000.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 5.858,
+            "y": -15.134,
+            "z": 5.326,
+            "radius": 0.25
+          },
+          {
+            "name": "plant_001.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -23.178,
+            "y": -1.589,
+            "z": 4.81,
+            "radius": 0.241
+          },
+          {
+            "name": "plant_002.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 52.432,
+            "y": -33.106,
+            "z": 2.544,
+            "radius": 0.227
+          },
+          {
+            "name": "plant_003.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -15.428,
+            "y": 22.109,
+            "z": 2.979,
+            "radius": 0.3
+          },
+          {
+            "name": "plant_004.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -16.121,
+            "y": -37.574,
+            "z": 4.224,
+            "radius": 0.209
+          },
+          {
+            "name": "rock_000",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -35.157,
+            "y": 0.963,
+            "z": 4.6,
+            "radius": 0.624
+          },
+          {
+            "name": "rock_001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -14.096,
+            "y": 28.646,
+            "z": 2.781,
+            "radius": 0.585
+          },
+          {
+            "name": "rock_002",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -31.487,
+            "y": 18.562,
+            "z": 3.167,
+            "radius": 0.522
+          },
+          {
+            "name": "rock_003",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 44.846,
+            "y": -50.184,
+            "z": 3.931,
+            "radius": 0.691
+          },
+          {
+            "name": "rock_004",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -52.727,
+            "y": -2.252,
+            "z": 3.643,
+            "radius": 0.622
+          },
+          {
+            "name": "rock_000.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 39.35,
+            "y": -33.517,
+            "z": 4.174,
+            "radius": 0.356
+          },
+          {
+            "name": "rock_001.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 13.736,
+            "y": 28.035,
+            "z": 4.845,
+            "radius": 0.424
+          },
+          {
+            "name": "rock_002.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -50.909,
+            "y": 50.548,
+            "z": 0.87,
+            "radius": 0.673
+          },
+          {
+            "name": "rock_003.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 24.116,
+            "y": 41.743,
+            "z": 4.561,
+            "radius": 0.62
+          },
+          {
+            "name": "rock_004.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -49.997,
+            "y": -46.63,
+            "z": 3.43,
+            "radius": 0.697
+          },
+          {
+            "name": "large_rock_000",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": 52.262,
+            "y": 29.317,
+            "z": 3.269,
+            "radius": 2.015
+          },
+          {
+            "name": "large_rock_001",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": -13.869,
+            "y": -22.099,
+            "z": 4.409,
+            "radius": 1.788
+          },
+          {
+            "name": "large_rock_000.001",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": 25.36,
+            "y": 48.895,
+            "z": 2.452,
+            "radius": 1.27
+          },
+          {
+            "name": "fallen_log_000",
+            "category": "fallen_log",
+            "role": "static_obstacle",
+            "x": 20.539,
+            "y": -1.923,
+            "z": 4.21,
+            "radius": 1.292
+          },
+          {
+            "name": "fallen_log_000.001",
+            "category": "fallen_log",
+            "role": "static_obstacle",
+            "x": 52.353,
+            "y": -19.346,
+            "z": 3.043,
+            "radius": 1.388
+          },
+          {
+            "name": "RuinPlatform_0",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 0.0,
+            "y": 46.0,
+            "z": 1.919,
+            "radius": 2.8
+          },
+          {
+            "name": "RuinPillar_0_0",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 2.4,
+            "y": 46.0,
+            "z": 3.007,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinPillar_0_1",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 0.0,
+            "y": 48.4,
+            "z": 3.041,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinPillar_0_2",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": -2.4,
+            "y": 46.0,
+            "z": 3.026,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinPillar_0_3",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": -0.0,
+            "y": 43.6,
+            "z": 2.797,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinLintel_0",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 0.0,
+            "y": 46.0,
+            "z": 4.469,
+            "radius": 2.8
+          }
+        ],
+        "river_boundary": {
+          "name": "River_Water",
+          "width_m": 9.0,
+          "flow_direction": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        "navmesh": "metadata only; no runtime navigation system implemented"
+      },
+      "character": {
+        "imported": true,
+        "asset_path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+        "imported_objects": 3,
+        "meshes": 2,
+        "dimensions": [
+          1.127,
+          1.185,
+          1.6
+        ],
+        "height_m": 1.6,
+        "source_height_m": 2.7,
+        "scale_factor": 0.5926,
+        "target_height_m": 1.6,
+        "ground_contact_error_m": 0.0,
+        "min_z": 3.7485,
+        "max_z": 5.3485,
+        "spawn_z": 3.7485,
+        "intersects_terrain": false,
+        "ground_max_under_bounds": 3.8261,
+        "actions": [
+          "Idle",
+          "Jump",
+          "Run",
+          "Walk"
+        ],
+        "source_sha256": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b"
+      },
+      "glb_validation": {
+        "ok": true,
+        "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\low\\JungleLevel.glb",
+        "errors": [],
+        "warnings": [
+          "no animations in export",
+          "no skins/rig in export"
+        ],
+        "bytes": 1558560,
+        "sha256": "b75b7bf688abcd3eff9e83ea75335893e80f3faf66eecd083fb7be3d77a13376",
+        "version": 2,
+        "declared_length": 1558560,
+        "meshes": 35,
+        "primitives": 47,
+        "triangles": 20022,
+        "materials": 19,
+        "textures": 6,
+        "images": 6,
+        "embedded_images": 6,
+        "external_images": [],
+        "buffers": 1,
+        "external_buffers": [],
+        "animations": 0,
+        "animation_names": [],
+        "skins": 0,
+        "joints": 0,
+        "nodes": 191,
+        "bounds_min": [
+          -60,
+          -2.572999954223633,
+          -60
+        ],
+        "bounds_max": [
+          60,
+          7.39900016784668,
+          60
+        ],
+        "generator": "Khronos glTF Blender I/O v5.2.40"
+      },
+      "gltf_validation": {
+        "ok": true,
+        "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\low\\JungleLevel.gltf",
+        "errors": [],
+        "warnings": [
+          "no animations in export",
+          "no skins/rig in export"
+        ],
+        "bytes": 134415,
+        "sha256": "c2053755d6681674a141136d53aa7f48ed8fd62a3d1430838374baa6d1887f07",
+        "version": "2.0",
+        "meshes": 35,
+        "primitives": 47,
+        "triangles": 20022,
+        "materials": 19,
+        "textures": 6,
+        "images": 6,
+        "embedded_images": 0,
+        "external_images": [
+          "T_Monkey_Fur_Normal.png",
+          "T_Monkey_Fur_BaseColor.png",
+          "T_Monkey_Fur_Roughness.png",
+          "T_Env_Ground_Normal.png",
+          "T_Env_Ground_BaseColor.png",
+          "T_Env_Ground_Roughness.png"
+        ],
+        "buffers": 1,
+        "external_buffers": [
+          "JungleLevel.bin"
+        ],
+        "animations": 0,
+        "animation_names": [],
+        "skins": 0,
+        "joints": 0,
+        "nodes": 191,
+        "bounds_min": [
+          -60,
+          -2.572999954223633,
+          -60
+        ],
+        "bounds_max": [
+          60,
+          7.39900016784668,
+          60
+        ],
+        "generator": "Khronos glTF Blender I/O v5.2.40"
+      },
+      "reimport": {
+        "ok": true,
+        "glb": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\low\\JungleLevel.glb",
+        "reimport_blend": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\low\\reimport_validation.blend",
+        "blender_exit_code": 0,
+        "duration_ms": 2313,
+        "inspection": {
+          "object_count": 191,
+          "mesh_count": 153,
+          "triangle_count": 31166,
+          "light_count": 1,
+          "camera_count": 2,
+          "armature_count": 0,
+          "material_count": 19,
+          "materials": [
+            "M_Env_Bark",
+            "M_Env_Grass",
+            "M_Env_Ground",
+            "M_Env_Leaf",
+            "M_Env_Leaf_Light",
+            "M_Env_Rock",
+            "M_Env_Rock_Mossy",
+            "M_Env_Root",
+            "M_Env_Stone",
+            "M_Env_Water",
+            "M_Env_WetGround",
+            "M_Env_Wood",
+            "M_Monkey_EyeWhite",
+            "M_Monkey_Fur",
+            "M_Monkey_InnerEar",
+            "M_Monkey_Iris",
+            "M_Monkey_Nose",
+            "M_Monkey_Pupil",
+            "M_Monkey_Skin"
+          ],
+          "actions": [],
+          "spawn_marker": true,
+          "waypoint_markers": [
+            "ROUTE_WAYPOINT_00",
+            "ROUTE_WAYPOINT_01",
+            "ROUTE_WAYPOINT_02",
+            "ROUTE_WAYPOINT_03",
+            "ROUTE_WAYPOINT_04",
+            "ROUTE_WAYPOINT_05",
+            "ROUTE_WAYPOINT_06",
+            "ROUTE_WAYPOINT_07",
+            "ROUTE_WAYPOINT_08"
+          ],
+          "landmark_marker": true,
+          "river_objects": [
+            "River_Water",
+            "RiverBank_L",
+            "RiverBank_R"
+          ],
+          "missing_images": [],
+          "saved": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\low\\reimport_validation.blend"
+        },
+        "checks": {
+          "imported_meshes": true,
+          "imported_materials": true,
+          "imported_lights": true,
+          "imported_cameras": true,
+          "spawn_marker": true,
+          "route_markers": true,
+          "landmark_marker": true,
+          "river_objects": true,
+          "no_missing_textures": true
+        }
+      },
+      "character_source": {
+        "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+        "sha256_before": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
+        "sha256_after": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
+        "unchanged": true
+      },
+      "export_processes": {
+        "glb": {
+          "ok": true,
+          "exit_code": 0,
+          "duration_ms": 2285,
+          "error": null
+        },
+        "gltf": {
+          "ok": true,
+          "exit_code": 0,
+          "duration_ms": 2944,
+          "error": null
+        },
+        "fbx": {
+          "ok": true,
+          "exit_code": 0,
+          "duration_ms": 2407,
+          "error": null
+        }
+      },
+      "render_process": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 5382,
+        "error": null,
+        "render_error": null
+      }
+    },
+    "medium": {
+      "status": "completed",
+      "ok": true,
+      "failed_stages": [],
+      "stage_status": {
+        "terrain-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "vegetation-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "props-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "water-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "materials-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "lighting-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "layout-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "collision-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "character-integrated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "spec-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "blender-build": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "blend-saved": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "glb-exported": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "gltf-exported": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "fbx-exported": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "previews-rendered": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "glb-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "gltf-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "glb-reimported": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        }
+      },
+      "terrain": {
+        "vertices": 4356,
+        "triangles": 8450,
+        "non_manifold_edges": 260,
+        "degenerate_faces": 0,
+        "height_min_m": -0.2624,
+        "height_max_m": 6.8304,
+        "height_range_m": 7.0928,
+        "uv_layers": [
+          "UVMap"
+        ],
+        "uv_coverage": 1.0,
+        "materials": [
+          "M_Env_Ground"
+        ],
+        "dimensions": [
+          120.0,
+          120.0,
+          7.093
+        ]
+      },
+      "vegetation": {
+        "requested": {
+          "trees": 22,
+          "bushes": 30,
+          "ferns": 55,
+          "grass": 140,
+          "plants": 22
+        },
+        "counts": {
+          "tree": 22,
+          "bush": 30,
+          "fern": 55,
+          "grass": 140,
+          "plant": 22,
+          "roots": 7
+        },
+        "instance_count": 287,
+        "unique_meshes": 19,
+        "spacing_violations": [],
+        "route_conflicts": []
+      },
+      "props": {
+        "counts": {
+          "rock": 20,
+          "large_rock": 6,
+          "fallen_log": 4
+        },
+        "debris": 10,
+        "ruin_objects": 6,
+        "records": [
+          {
+            "name": "Debris_000",
+            "category": "debris",
+            "x": 13.781,
+            "y": -40.981
+          },
+          {
+            "name": "Debris_001",
+            "category": "debris",
+            "x": 3.592,
+            "y": -1.665
+          },
+          {
+            "name": "Debris_002",
+            "category": "debris",
+            "x": -11.704,
+            "y": 47.336
+          },
+          {
+            "name": "Debris_003",
+            "category": "debris",
+            "x": 28.105,
+            "y": -24.276
+          },
+          {
+            "name": "Debris_004",
+            "category": "debris",
+            "x": 27.393,
+            "y": 2.106
+          },
+          {
+            "name": "Debris_005",
+            "category": "debris",
+            "x": -19.264,
+            "y": -51.133
+          },
+          {
+            "name": "Debris_006",
+            "category": "debris",
+            "x": 41.705,
+            "y": -8.504
+          },
+          {
+            "name": "Debris_007",
+            "category": "debris",
+            "x": -0.6,
+            "y": -27.109
+          },
+          {
+            "name": "Debris_008",
+            "category": "debris",
+            "x": -8.627,
+            "y": -50.703
+          },
+          {
+            "name": "Debris_009",
+            "category": "debris",
+            "x": -24.926,
+            "y": -42.172
+          }
+        ]
+      },
+      "water": {
+        "present": true,
+        "width_m": 9.0,
+        "vertices": 147,
+        "faces": 96,
+        "triangles": 192,
+        "flow_direction": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "banks": 2,
+        "water_surface": true,
+        "bed_geometry": true,
+        "left_boundary": [
+          {
+            "x": 24.207,
+            "y": -57.6,
+            "z": 1.989
+          },
+          {
+            "x": 23.638,
+            "y": -55.2,
+            "z": 2.202
+          },
+          {
+            "x": 23.096,
+            "y": -52.8,
+            "z": 2.098
+          },
+          {
+            "x": 22.588,
+            "y": -50.4,
+            "z": 1.717
+          },
+          {
+            "x": 22.123,
+            "y": -48.0,
+            "z": 1.665
+          },
+          {
+            "x": 21.706,
+            "y": -45.6,
+            "z": 1.769
+          },
+          {
+            "x": 21.343,
+            "y": -43.2,
+            "z": 1.284
+          },
+          {
+            "x": 21.04,
+            "y": -40.8,
+            "z": 0.7
+          },
+          {
+            "x": 20.802,
+            "y": -38.4,
+            "z": 0.311
+          },
+          {
+            "x": 20.631,
+            "y": -36.0,
+            "z": 0.436
+          },
+          {
+            "x": 20.53,
+            "y": -33.6,
+            "z": 0.949
+          },
+          {
+            "x": 20.5,
+            "y": -31.2,
+            "z": 1.325
+          },
+          {
+            "x": 20.543,
+            "y": -28.8,
+            "z": 1.883
+          },
+          {
+            "x": 20.656,
+            "y": -26.4,
+            "z": 2.394
+          },
+          {
+            "x": 20.84,
+            "y": -24.0,
+            "z": 2.551
+          },
+          {
+            "x": 21.09,
+            "y": -21.6,
+            "z": 2.38
+          },
+          {
+            "x": 21.404,
+            "y": -19.2,
+            "z": 2.168
+          },
+          {
+            "x": 21.777,
+            "y": -16.8,
+            "z": 2.177
+          },
+          {
+            "x": 22.203,
+            "y": -14.4,
+            "z": 2.312
+          },
+          {
+            "x": 22.677,
+            "y": -12.0,
+            "z": 2.467
+          },
+          {
+            "x": 23.191,
+            "y": -9.6,
+            "z": 2.461
+          },
+          {
+            "x": 23.739,
+            "y": -7.2,
+            "z": 2.213
+          },
+          {
+            "x": 24.311,
+            "y": -4.8,
+            "z": 1.936
+          },
+          {
+            "x": 24.901,
+            "y": -2.4,
+            "z": 1.64
+          },
+          {
+            "x": 25.5,
+            "y": 0.0,
+            "z": 1.494
+          },
+          {
+            "x": 26.099,
+            "y": 2.4,
+            "z": 1.769
+          },
+          {
+            "x": 26.689,
+            "y": 4.8,
+            "z": 2.091
+          },
+          {
+            "x": 27.261,
+            "y": 7.2,
+            "z": 2.663
+          },
+          {
+            "x": 27.809,
+            "y": 9.6,
+            "z": 3.013
+          },
+          {
+            "x": 28.323,
+            "y": 12.0,
+            "z": 2.879
+          },
+          {
+            "x": 28.797,
+            "y": 14.4,
+            "z": 3.015
+          },
+          {
+            "x": 29.223,
+            "y": 16.8,
+            "z": 3.089
+          },
+          {
+            "x": 29.596,
+            "y": 19.2,
+            "z": 3.139
+          },
+          {
+            "x": 29.91,
+            "y": 21.6,
+            "z": 3.326
+          },
+          {
+            "x": 30.16,
+            "y": 24.0,
+            "z": 3.471
+          },
+          {
+            "x": 30.344,
+            "y": 26.4,
+            "z": 3.252
+          },
+          {
+            "x": 30.457,
+            "y": 28.8,
+            "z": 2.841
+          },
+          {
+            "x": 30.5,
+            "y": 31.2,
+            "z": 2.254
+          },
+          {
+            "x": 30.47,
+            "y": 33.6,
+            "z": 1.717
+          },
+          {
+            "x": 30.369,
+            "y": 36.0,
+            "z": 1.429
+          },
+          {
+            "x": 30.198,
+            "y": 38.4,
+            "z": 1.16
+          },
+          {
+            "x": 29.96,
+            "y": 40.8,
+            "z": 0.785
+          },
+          {
+            "x": 29.657,
+            "y": 43.2,
+            "z": 0.642
+          },
+          {
+            "x": 29.294,
+            "y": 45.6,
+            "z": 0.537
+          },
+          {
+            "x": 28.877,
+            "y": 48.0,
+            "z": 0.364
+          },
+          {
+            "x": 28.412,
+            "y": 50.4,
+            "z": 0.494
+          },
+          {
+            "x": 27.904,
+            "y": 52.8,
+            "z": 0.766
+          },
+          {
+            "x": 27.362,
+            "y": 55.2,
+            "z": 0.495
+          },
+          {
+            "x": 26.793,
+            "y": 57.6,
+            "z": 0.491
+          }
+        ],
+        "right_boundary": [
+          {
+            "x": 33.207,
+            "y": -57.6,
+            "z": 1.989
+          },
+          {
+            "x": 32.638,
+            "y": -55.2,
+            "z": 2.202
+          },
+          {
+            "x": 32.096,
+            "y": -52.8,
+            "z": 2.098
+          },
+          {
+            "x": 31.588,
+            "y": -50.4,
+            "z": 1.717
+          },
+          {
+            "x": 31.123,
+            "y": -48.0,
+            "z": 1.665
+          },
+          {
+            "x": 30.706,
+            "y": -45.6,
+            "z": 1.769
+          },
+          {
+            "x": 30.343,
+            "y": -43.2,
+            "z": 1.284
+          },
+          {
+            "x": 30.04,
+            "y": -40.8,
+            "z": 0.7
+          },
+          {
+            "x": 29.802,
+            "y": -38.4,
+            "z": 0.311
+          },
+          {
+            "x": 29.631,
+            "y": -36.0,
+            "z": 0.436
+          },
+          {
+            "x": 29.53,
+            "y": -33.6,
+            "z": 0.949
+          },
+          {
+            "x": 29.5,
+            "y": -31.2,
+            "z": 1.325
+          },
+          {
+            "x": 29.543,
+            "y": -28.8,
+            "z": 1.883
+          },
+          {
+            "x": 29.656,
+            "y": -26.4,
+            "z": 2.394
+          },
+          {
+            "x": 29.84,
+            "y": -24.0,
+            "z": 2.551
+          },
+          {
+            "x": 30.09,
+            "y": -21.6,
+            "z": 2.38
+          },
+          {
+            "x": 30.404,
+            "y": -19.2,
+            "z": 2.168
+          },
+          {
+            "x": 30.777,
+            "y": -16.8,
+            "z": 2.177
+          },
+          {
+            "x": 31.203,
+            "y": -14.4,
+            "z": 2.312
+          },
+          {
+            "x": 31.677,
+            "y": -12.0,
+            "z": 2.467
+          },
+          {
+            "x": 32.191,
+            "y": -9.6,
+            "z": 2.461
+          },
+          {
+            "x": 32.739,
+            "y": -7.2,
+            "z": 2.213
+          },
+          {
+            "x": 33.311,
+            "y": -4.8,
+            "z": 1.936
+          },
+          {
+            "x": 33.901,
+            "y": -2.4,
+            "z": 1.64
+          },
+          {
+            "x": 34.5,
+            "y": 0.0,
+            "z": 1.494
+          },
+          {
+            "x": 35.099,
+            "y": 2.4,
+            "z": 1.769
+          },
+          {
+            "x": 35.689,
+            "y": 4.8,
+            "z": 2.091
+          },
+          {
+            "x": 36.261,
+            "y": 7.2,
+            "z": 2.663
+          },
+          {
+            "x": 36.809,
+            "y": 9.6,
+            "z": 3.013
+          },
+          {
+            "x": 37.323,
+            "y": 12.0,
+            "z": 2.879
+          },
+          {
+            "x": 37.797,
+            "y": 14.4,
+            "z": 3.015
+          },
+          {
+            "x": 38.223,
+            "y": 16.8,
+            "z": 3.089
+          },
+          {
+            "x": 38.596,
+            "y": 19.2,
+            "z": 3.139
+          },
+          {
+            "x": 38.91,
+            "y": 21.6,
+            "z": 3.326
+          },
+          {
+            "x": 39.16,
+            "y": 24.0,
+            "z": 3.471
+          },
+          {
+            "x": 39.344,
+            "y": 26.4,
+            "z": 3.252
+          },
+          {
+            "x": 39.457,
+            "y": 28.8,
+            "z": 2.841
+          },
+          {
+            "x": 39.5,
+            "y": 31.2,
+            "z": 2.254
+          },
+          {
+            "x": 39.47,
+            "y": 33.6,
+            "z": 1.717
+          },
+          {
+            "x": 39.369,
+            "y": 36.0,
+            "z": 1.429
+          },
+          {
+            "x": 39.198,
+            "y": 38.4,
+            "z": 1.16
+          },
+          {
+            "x": 38.96,
+            "y": 40.8,
+            "z": 0.785
+          },
+          {
+            "x": 38.657,
+            "y": 43.2,
+            "z": 0.642
+          },
+          {
+            "x": 38.294,
+            "y": 45.6,
+            "z": 0.537
+          },
+          {
+            "x": 37.877,
+            "y": 48.0,
+            "z": 0.364
+          },
+          {
+            "x": 37.412,
+            "y": 50.4,
+            "z": 0.494
+          },
+          {
+            "x": 36.904,
+            "y": 52.8,
+            "z": 0.766
+          },
+          {
+            "x": 36.362,
+            "y": 55.2,
+            "z": 0.495
+          },
+          {
+            "x": 35.793,
+            "y": 57.6,
+            "z": 0.491
+          }
+        ],
+        "centerline": [
+          {
+            "x": 28.707,
+            "y": -57.6
+          },
+          {
+            "x": 26.623,
+            "y": -48.0
+          },
+          {
+            "x": 25.302,
+            "y": -38.4
+          },
+          {
+            "x": 25.043,
+            "y": -28.8
+          },
+          {
+            "x": 25.904,
+            "y": -19.2
+          },
+          {
+            "x": 27.691,
+            "y": -9.6
+          },
+          {
+            "x": 30.0,
+            "y": 0.0
+          },
+          {
+            "x": 32.309,
+            "y": 9.6
+          },
+          {
+            "x": 34.096,
+            "y": 19.2
+          },
+          {
+            "x": 34.957,
+            "y": 28.8
+          },
+          {
+            "x": 34.698,
+            "y": 38.4
+          },
+          {
+            "x": 33.377,
+            "y": 48.0
+          },
+          {
+            "x": 31.293,
+            "y": 57.6
+          }
+        ]
+      },
+      "materials": {
+        "count": 19,
+        "channels": {
+          "M_Env_Bark": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Grass": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Ground": {
+            "base_color": "texture",
+            "roughness": "texture",
+            "normal": "texture",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Leaf": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Leaf_Light": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Rock": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Rock_Mossy": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Root": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Stone": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Water": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "constant",
+            "transmission": "constant"
+          },
+          "M_Env_WetGround": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Wood": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_EyeWhite": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Fur": {
+            "base_color": "texture",
+            "roughness": "constant",
+            "normal": "texture",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_InnerEar": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Iris": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Nose": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Pupil": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Skin": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          }
+        },
+        "textures": [
+          {
+            "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\textures\\ground_basecolor.png",
+            "dimensions": [
+              512,
+              512
+            ],
+            "bytes": 177081,
+            "sha256": "841259b10b7db78e299843f9c2e4af7976b191ae2499b831b442249c7f8ee955",
+            "colorspace": "sRGB"
+          },
+          {
+            "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\textures\\ground_roughness.png",
+            "dimensions": [
+              512,
+              512
+            ],
+            "bytes": 151551,
+            "sha256": "82fa6d48ed6812f947477ebe8d6eac2741592adb2623306b7d7c7fdd8fd88523",
+            "colorspace": "Non-Color"
+          },
+          {
+            "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\textures\\ground_normal.png",
+            "dimensions": [
+              512,
+              512
+            ],
+            "bytes": 286025,
+            "sha256": "dc5f946318186c4991fc133204f6a5eef39d5be5c30c53c22e947d8c7778c6f0",
+            "colorspace": "Non-Color"
+          }
+        ]
+      },
+      "lighting": {
+        "sun": {
+          "name": "Sun_Key",
+          "energy": 4.0,
+          "elevation_deg": 38.0,
+          "azimuth_deg": 52.0,
+          "shadows": true
+        },
+        "world": {
+          "sky_color": [
+            0.42,
+            0.62,
+            0.82
+          ],
+          "ambient_strength": 0.55,
+          "fog_density": 0.018,
+          "fog_color": [
+            0.55,
+            0.68,
+            0.66
+          ],
+          "volumetric_fog_rendered": false
+        },
+        "exposure": 0.0,
+        "view_transform": "AgX"
+      },
+      "layout": {
+        "spawn": {
+          "name": "SPAWN_PLAYER",
+          "x": 0.0,
+          "y": -48.0,
+          "z": 3.7685,
+          "facing": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "clearance_m": 6.394
+        },
+        "route": {
+          "width_m": 5.0,
+          "waypoints": [
+            {
+              "name": "ROUTE_WAYPOINT_00",
+              "x": 1.978,
+              "y": -48.0,
+              "z": 3.7517
+            },
+            {
+              "name": "ROUTE_WAYPOINT_01",
+              "x": 2.917,
+              "y": -37.75,
+              "z": 4.6568
+            },
+            {
+              "name": "ROUTE_WAYPOINT_02",
+              "x": 2.787,
+              "y": -27.5,
+              "z": 4.042
+            },
+            {
+              "name": "ROUTE_WAYPOINT_03",
+              "x": 1.636,
+              "y": -17.25,
+              "z": 5.1274
+            },
+            {
+              "name": "ROUTE_WAYPOINT_04",
+              "x": -0.115,
+              "y": -7.0,
+              "z": 5.4204
+            },
+            {
+              "name": "ROUTE_WAYPOINT_05",
+              "x": -1.824,
+              "y": 3.25,
+              "z": 5.5586
+            },
+            {
+              "name": "ROUTE_WAYPOINT_06",
+              "x": -2.864,
+              "y": 13.5,
+              "z": 4.223
+            },
+            {
+              "name": "ROUTE_WAYPOINT_07",
+              "x": -2.855,
+              "y": 23.75,
+              "z": 3.2213
+            },
+            {
+              "name": "ROUTE_WAYPOINT_08",
+              "x": -1.799,
+              "y": 34.0,
+              "z": 2.192
+            }
+          ],
+          "max_slope_deg": 17.349,
+          "conflicts": []
+        },
+        "landmark": {
+          "name": "LANDMARK_DESTINATION",
+          "x": 0.0,
+          "y": 46.0,
+          "z": 1.6693,
+          "type": "jungle_ruins"
+        },
+        "layout_path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\environment_layout.json",
+        "spawn_clearance_m": 6.394,
+        "route_conflicts": [],
+        "route_max_slope_deg": 17.349,
+        "waypoint_count": 9
+      },
+      "collision": {
+        "terrain_collider": "Terrain",
+        "walkable_slope_deg": 32.0,
+        "obstacles": [
+          {
+            "name": "tree_000",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 52.608,
+            "y": -5.338,
+            "z": 3.72,
+            "radius": 0.587
+          },
+          {
+            "name": "tree_001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 18.361,
+            "y": -8.076,
+            "z": 4.938,
+            "radius": 0.564
+          },
+          {
+            "name": "tree_002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 42.752,
+            "y": -25.549,
+            "z": 4.556,
+            "radius": 0.605
+          },
+          {
+            "name": "tree_003",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 49.384,
+            "y": -34.168,
+            "z": 3.053,
+            "radius": 0.738
+          },
+          {
+            "name": "tree_004",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -12.283,
+            "y": 1.627,
+            "z": 4.593,
+            "radius": 0.685
+          },
+          {
+            "name": "tree_005",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 50.05,
+            "y": -11.424,
+            "z": 3.924,
+            "radius": 0.566
+          },
+          {
+            "name": "tree_006",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -53.544,
+            "y": 25.868,
+            "z": 4.267,
+            "radius": 0.475
+          },
+          {
+            "name": "tree_007",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -0.789,
+            "y": 51.001,
+            "z": 1.951,
+            "radius": 0.52
+          },
+          {
+            "name": "tree_000.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -29.906,
+            "y": -21.794,
+            "z": 4.673,
+            "radius": 0.509
+          },
+          {
+            "name": "tree_001.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -42.212,
+            "y": -13.663,
+            "z": 4.086,
+            "radius": 0.674
+          },
+          {
+            "name": "tree_002.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -13.542,
+            "y": 20.64,
+            "z": 2.944,
+            "radius": 0.647
+          },
+          {
+            "name": "tree_003.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 20.366,
+            "y": -0.033,
+            "z": 4.274,
+            "radius": 0.488
+          },
+          {
+            "name": "tree_004.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -24.345,
+            "y": 44.179,
+            "z": 1.737,
+            "radius": 0.631
+          },
+          {
+            "name": "tree_005.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -42.836,
+            "y": 30.958,
+            "z": 2.505,
+            "radius": 0.437
+          },
+          {
+            "name": "tree_006.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 5.393,
+            "y": 32.709,
+            "z": 3.448,
+            "radius": 0.615
+          },
+          {
+            "name": "tree_000.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 5.871,
+            "y": 5.264,
+            "z": 4.753,
+            "radius": 0.52
+          },
+          {
+            "name": "tree_001.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 18.178,
+            "y": 31.218,
+            "z": 4.498,
+            "radius": 0.562
+          },
+          {
+            "name": "tree_002.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 43.762,
+            "y": -8.074,
+            "z": 4.802,
+            "radius": 0.739
+          },
+          {
+            "name": "tree_003.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -45.612,
+            "y": 6.397,
+            "z": 3.632,
+            "radius": 0.479
+          },
+          {
+            "name": "tree_004.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -37.736,
+            "y": -52.981,
+            "z": 2.879,
+            "radius": 0.445
+          },
+          {
+            "name": "tree_005.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 15.051,
+            "y": -49.444,
+            "z": 3.432,
+            "radius": 0.502
+          },
+          {
+            "name": "tree_006.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 45.722,
+            "y": 36.793,
+            "z": 3.242,
+            "radius": 0.613
+          },
+          {
+            "name": "bush_000",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -28.352,
+            "y": -19.668,
+            "z": 4.684,
+            "radius": 0.56
+          },
+          {
+            "name": "bush_001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -51.961,
+            "y": -22.881,
+            "z": 3.389,
+            "radius": 0.389
+          },
+          {
+            "name": "bush_002",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -26.149,
+            "y": -2.983,
+            "z": 5.022,
+            "radius": 0.566
+          },
+          {
+            "name": "bush_003",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -16.167,
+            "y": 11.33,
+            "z": 4.305,
+            "radius": 0.366
+          },
+          {
+            "name": "bush_004",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -48.87,
+            "y": 22.32,
+            "z": 3.243,
+            "radius": 0.582
+          },
+          {
+            "name": "bush_005",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 16.15,
+            "y": -15.839,
+            "z": 4.596,
+            "radius": 0.433
+          },
+          {
+            "name": "bush_006",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -15.355,
+            "y": -31.139,
+            "z": 4.335,
+            "radius": 0.364
+          },
+          {
+            "name": "bush_007",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 50.856,
+            "y": -14.293,
+            "z": 3.606,
+            "radius": 0.46
+          },
+          {
+            "name": "bush_008",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 9.146,
+            "y": -43.701,
+            "z": 2.947,
+            "radius": 0.559
+          },
+          {
+            "name": "bush_009",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 53.127,
+            "y": 19.117,
+            "z": 3.331,
+            "radius": 0.391
+          },
+          {
+            "name": "bush_010",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -45.517,
+            "y": 25.272,
+            "z": 2.788,
+            "radius": 0.493
+          },
+          {
+            "name": "bush_011",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 51.287,
+            "y": -41.34,
+            "z": 3.247,
+            "radius": 0.467
+          },
+          {
+            "name": "bush_012",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -12.165,
+            "y": 42.914,
+            "z": 2.395,
+            "radius": 0.522
+          },
+          {
+            "name": "bush_013",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 50.801,
+            "y": -35.489,
+            "z": 2.754,
+            "radius": 0.551
+          },
+          {
+            "name": "bush_014",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -37.994,
+            "y": 27.128,
+            "z": 2.753,
+            "radius": 0.476
+          },
+          {
+            "name": "bush_000.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 43.383,
+            "y": 18.25,
+            "z": 4.043,
+            "radius": 0.606
+          },
+          {
+            "name": "bush_001.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 48.555,
+            "y": 51.89,
+            "z": 2.963,
+            "radius": 0.506
+          },
+          {
+            "name": "bush_002.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -43.633,
+            "y": 2.488,
+            "z": 4.059,
+            "radius": 0.406
+          },
+          {
+            "name": "bush_003.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -21.816,
+            "y": 11.904,
+            "z": 3.081,
+            "radius": 0.43
+          },
+          {
+            "name": "bush_004.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 9.216,
+            "y": 19.481,
+            "z": 4.532,
+            "radius": 0.489
+          },
+          {
+            "name": "bush_005.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 46.509,
+            "y": -7.278,
+            "z": 4.751,
+            "radius": 0.475
+          },
+          {
+            "name": "bush_006.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -12.236,
+            "y": 28.543,
+            "z": 2.597,
+            "radius": 0.374
+          },
+          {
+            "name": "bush_007.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -40.41,
+            "y": -48.682,
+            "z": 3.312,
+            "radius": 0.479
+          },
+          {
+            "name": "bush_008.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -42.568,
+            "y": -27.639,
+            "z": 4.756,
+            "radius": 0.449
+          },
+          {
+            "name": "bush_009.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -2.82,
+            "y": -40.605,
+            "z": 3.768,
+            "radius": 0.427
+          },
+          {
+            "name": "bush_010.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -13.196,
+            "y": 46.58,
+            "z": 2.444,
+            "radius": 0.391
+          },
+          {
+            "name": "bush_011.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 17.208,
+            "y": 38.184,
+            "z": 4.458,
+            "radius": 0.45
+          },
+          {
+            "name": "bush_012.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -47.634,
+            "y": -9.127,
+            "z": 4.328,
+            "radius": 0.395
+          },
+          {
+            "name": "bush_013.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -37.396,
+            "y": -47.24,
+            "z": 3.504,
+            "radius": 0.364
+          },
+          {
+            "name": "bush_014.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 14.314,
+            "y": -9.579,
+            "z": 4.831,
+            "radius": 0.59
+          },
+          {
+            "name": "plant_000",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -39.028,
+            "y": -45.957,
+            "z": 3.775,
+            "radius": 0.287
+          },
+          {
+            "name": "plant_001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -13.645,
+            "y": -7.859,
+            "z": 5.422,
+            "radius": 0.301
+          },
+          {
+            "name": "plant_002",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -10.486,
+            "y": -19.15,
+            "z": 4.508,
+            "radius": 0.221
+          },
+          {
+            "name": "plant_003",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 13.003,
+            "y": 28.313,
+            "z": 4.793,
+            "radius": 0.26
+          },
+          {
+            "name": "plant_004",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 52.199,
+            "y": -5.762,
+            "z": 3.735,
+            "radius": 0.304
+          },
+          {
+            "name": "plant_005",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 49.627,
+            "y": -47.598,
+            "z": 3.089,
+            "radius": 0.292
+          },
+          {
+            "name": "plant_006",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 11.398,
+            "y": 8.652,
+            "z": 4.432,
+            "radius": 0.241
+          },
+          {
+            "name": "plant_007",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 51.166,
+            "y": 35.052,
+            "z": 3.514,
+            "radius": 0.264
+          },
+          {
+            "name": "plant_008",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 39.356,
+            "y": -1.31,
+            "z": 4.747,
+            "radius": 0.288
+          },
+          {
+            "name": "plant_009",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 1.376,
+            "y": 50.861,
+            "z": 2.053,
+            "radius": 0.323
+          },
+          {
+            "name": "plant_010",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 6.389,
+            "y": 30.797,
+            "z": 3.879,
+            "radius": 0.304
+          },
+          {
+            "name": "plant_000.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 40.576,
+            "y": -46.867,
+            "z": 3.897,
+            "radius": 0.256
+          },
+          {
+            "name": "plant_001.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -34.286,
+            "y": 51.618,
+            "z": 1.099,
+            "radius": 0.293
+          },
+          {
+            "name": "plant_002.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -45.098,
+            "y": 30.797,
+            "z": 2.926,
+            "radius": 0.209
+          },
+          {
+            "name": "plant_003.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -23.625,
+            "y": -39.344,
+            "z": 4.281,
+            "radius": 0.248
+          },
+          {
+            "name": "plant_004.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 19.063,
+            "y": 47.527,
+            "z": 3.826,
+            "radius": 0.313
+          },
+          {
+            "name": "plant_005.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -4.547,
+            "y": -42.585,
+            "z": 3.631,
+            "radius": 0.232
+          },
+          {
+            "name": "plant_006.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -44.849,
+            "y": -34.924,
+            "z": 4.833,
+            "radius": 0.215
+          },
+          {
+            "name": "plant_007.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -30.002,
+            "y": -39.863,
+            "z": 4.427,
+            "radius": 0.279
+          },
+          {
+            "name": "plant_008.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -11.549,
+            "y": 14.526,
+            "z": 3.983,
+            "radius": 0.223
+          },
+          {
+            "name": "plant_009.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -32.438,
+            "y": -53.817,
+            "z": 2.927,
+            "radius": 0.274
+          },
+          {
+            "name": "plant_010.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -49.852,
+            "y": 5.762,
+            "z": 3.31,
+            "radius": 0.285
+          },
+          {
+            "name": "rock_000",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 18.165,
+            "y": 39.766,
+            "z": 4.643,
+            "radius": 0.593
+          },
+          {
+            "name": "rock_001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 25.797,
+            "y": 17.121,
+            "z": 5.41,
+            "radius": 0.652
+          },
+          {
+            "name": "rock_002",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 12.104,
+            "y": 17.947,
+            "z": 4.916,
+            "radius": 0.446
+          },
+          {
+            "name": "rock_003",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 51.582,
+            "y": 11.142,
+            "z": 3.593,
+            "radius": 0.444
+          },
+          {
+            "name": "rock_004",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 11.052,
+            "y": -42.985,
+            "z": 3.21,
+            "radius": 0.487
+          },
+          {
+            "name": "rock_005",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -14.871,
+            "y": -16.397,
+            "z": 4.254,
+            "radius": 0.572
+          },
+          {
+            "name": "rock_006",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 26.947,
+            "y": 29.429,
+            "z": 5.7,
+            "radius": 0.561
+          },
+          {
+            "name": "rock_007",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 7.599,
+            "y": -20.46,
+            "z": 5.537,
+            "radius": 0.596
+          },
+          {
+            "name": "rock_008",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -14.312,
+            "y": -23.778,
+            "z": 4.371,
+            "radius": 0.436
+          },
+          {
+            "name": "rock_009",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 4.053,
+            "y": 3.485,
+            "z": 5.361,
+            "radius": 0.692
+          },
+          {
+            "name": "rock_000.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -32.742,
+            "y": -37.534,
+            "z": 5.087,
+            "radius": 0.672
+          },
+          {
+            "name": "rock_001.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 10.193,
+            "y": -48.346,
+            "z": 3.023,
+            "radius": 0.613
+          },
+          {
+            "name": "rock_002.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -29.638,
+            "y": 5.94,
+            "z": 4.115,
+            "radius": 0.506
+          },
+          {
+            "name": "rock_003.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 45.829,
+            "y": -34.051,
+            "z": 3.523,
+            "radius": 0.511
+          },
+          {
+            "name": "rock_004.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 51.827,
+            "y": 49.634,
+            "z": 3.133,
+            "radius": 0.433
+          },
+          {
+            "name": "rock_005.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 46.583,
+            "y": 17.378,
+            "z": 4.164,
+            "radius": 0.708
+          },
+          {
+            "name": "rock_006.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 16.731,
+            "y": 4.489,
+            "z": 5.394,
+            "radius": 0.389
+          },
+          {
+            "name": "rock_007.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -46.896,
+            "y": -25.854,
+            "z": 4.052,
+            "radius": 0.36
+          },
+          {
+            "name": "rock_008.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 48.332,
+            "y": -20.762,
+            "z": 3.653,
+            "radius": 0.416
+          },
+          {
+            "name": "rock_009.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 50.291,
+            "y": -46.321,
+            "z": 3.013,
+            "radius": 0.373
+          },
+          {
+            "name": "large_rock_000",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": -22.093,
+            "y": 31.905,
+            "z": 2.884,
+            "radius": 1.755
+          },
+          {
+            "name": "large_rock_001",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": -38.42,
+            "y": 47.872,
+            "z": 1.42,
+            "radius": 1.34
+          },
+          {
+            "name": "large_rock_002",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": -50.911,
+            "y": -45.795,
+            "z": 3.401,
+            "radius": 1.223
+          },
+          {
+            "name": "large_rock_000.001",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": -21.107,
+            "y": 19.273,
+            "z": 3.227,
+            "radius": 1.756
+          },
+          {
+            "name": "large_rock_001.001",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": -51.731,
+            "y": -22.343,
+            "z": 3.375,
+            "radius": 1.408
+          },
+          {
+            "name": "large_rock_002.001",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": 32.96,
+            "y": -25.938,
+            "z": 3.943,
+            "radius": 1.445
+          },
+          {
+            "name": "fallen_log_000",
+            "category": "fallen_log",
+            "role": "static_obstacle",
+            "x": -37.961,
+            "y": -29.753,
+            "z": 5.032,
+            "radius": 1.199
+          },
+          {
+            "name": "fallen_log_001",
+            "category": "fallen_log",
+            "role": "static_obstacle",
+            "x": 51.224,
+            "y": -24.255,
+            "z": 2.893,
+            "radius": 1.109
+          },
+          {
+            "name": "fallen_log_000.001",
+            "category": "fallen_log",
+            "role": "static_obstacle",
+            "x": 7.771,
+            "y": -50.002,
+            "z": 3.503,
+            "radius": 1.631
+          },
+          {
+            "name": "fallen_log_001.001",
+            "category": "fallen_log",
+            "role": "static_obstacle",
+            "x": -27.611,
+            "y": 46.233,
+            "z": 1.66,
+            "radius": 1.716
+          },
+          {
+            "name": "RuinPlatform_0",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 0.0,
+            "y": 46.0,
+            "z": 1.919,
+            "radius": 2.8
+          },
+          {
+            "name": "RuinPillar_0_0",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 2.4,
+            "y": 46.0,
+            "z": 3.007,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinPillar_0_1",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 0.0,
+            "y": 48.4,
+            "z": 3.041,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinPillar_0_2",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": -2.4,
+            "y": 46.0,
+            "z": 3.026,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinPillar_0_3",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": -0.0,
+            "y": 43.6,
+            "z": 2.797,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinLintel_0",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 0.0,
+            "y": 46.0,
+            "z": 4.469,
+            "radius": 2.8
+          }
+        ],
+        "river_boundary": {
+          "name": "River_Water",
+          "width_m": 9.0,
+          "flow_direction": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        "navmesh": "metadata only; no runtime navigation system implemented"
+      },
+      "character": {
+        "imported": true,
+        "asset_path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+        "imported_objects": 3,
+        "meshes": 2,
+        "dimensions": [
+          1.127,
+          1.185,
+          1.6
+        ],
+        "height_m": 1.6,
+        "source_height_m": 2.7,
+        "scale_factor": 0.5926,
+        "target_height_m": 1.6,
+        "ground_contact_error_m": 0.0,
+        "min_z": 3.7485,
+        "max_z": 5.3485,
+        "spawn_z": 3.7485,
+        "intersects_terrain": false,
+        "ground_max_under_bounds": 3.8261,
+        "actions": [
+          "Idle",
+          "Jump",
+          "Run",
+          "Walk"
+        ],
+        "source_sha256": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b"
+      },
+      "glb_validation": {
+        "ok": true,
+        "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\JungleLevel.glb",
+        "errors": [],
+        "warnings": [
+          "no animations in export",
+          "no skins/rig in export"
+        ],
+        "bytes": 2158528,
+        "sha256": "667181dd057ae54be1268ab7ecad31cac68b5ec9f88afc2026fc486dd58951c6",
+        "version": 2,
+        "declared_length": 2158528,
+        "meshes": 40,
+        "primitives": 52,
+        "triangles": 26394,
+        "materials": 19,
+        "textures": 6,
+        "images": 6,
+        "embedded_images": 6,
+        "external_images": [],
+        "buffers": 1,
+        "external_buffers": [],
+        "animations": 0,
+        "animation_names": [],
+        "skins": 0,
+        "joints": 0,
+        "nodes": 365,
+        "bounds_min": [
+          -60,
+          -2.572999954223633,
+          -60
+        ],
+        "bounds_max": [
+          60,
+          7.39900016784668,
+          60
+        ],
+        "generator": "Khronos glTF Blender I/O v5.2.40"
+      },
+      "gltf_validation": {
+        "ok": true,
+        "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\JungleLevel.gltf",
+        "errors": [],
+        "warnings": [
+          "no animations in export",
+          "no skins/rig in export"
+        ],
+        "bytes": 218021,
+        "sha256": "f92b18e40a204af13c9594d785231a57f66cfb2f35790d0247b9a54218d9cb76",
+        "version": "2.0",
+        "meshes": 40,
+        "primitives": 52,
+        "triangles": 26394,
+        "materials": 19,
+        "textures": 6,
+        "images": 6,
+        "embedded_images": 0,
+        "external_images": [
+          "T_Monkey_Fur_Normal.png",
+          "T_Monkey_Fur_BaseColor.png",
+          "T_Monkey_Fur_Roughness.png",
+          "T_Env_Ground_Normal.png",
+          "T_Env_Ground_BaseColor.png",
+          "T_Env_Ground_Roughness.png"
+        ],
+        "buffers": 1,
+        "external_buffers": [
+          "JungleLevel.bin"
+        ],
+        "animations": 0,
+        "animation_names": [],
+        "skins": 0,
+        "joints": 0,
+        "nodes": 365,
+        "bounds_min": [
+          -60,
+          -2.572999954223633,
+          -60
+        ],
+        "bounds_max": [
+          60,
+          7.39900016784668,
+          60
+        ],
+        "generator": "Khronos glTF Blender I/O v5.2.40"
+      },
+      "reimport": {
+        "ok": true,
+        "glb": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\JungleLevel.glb",
+        "reimport_blend": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\reimport_validation.blend",
+        "blender_exit_code": 0,
+        "duration_ms": 2259,
+        "inspection": {
+          "object_count": 365,
+          "mesh_count": 327,
+          "triangle_count": 53594,
+          "light_count": 1,
+          "camera_count": 2,
+          "armature_count": 0,
+          "material_count": 19,
+          "materials": [
+            "M_Env_Bark",
+            "M_Env_Grass",
+            "M_Env_Ground",
+            "M_Env_Leaf",
+            "M_Env_Leaf_Light",
+            "M_Env_Rock",
+            "M_Env_Rock_Mossy",
+            "M_Env_Root",
+            "M_Env_Stone",
+            "M_Env_Water",
+            "M_Env_WetGround",
+            "M_Env_Wood",
+            "M_Monkey_EyeWhite",
+            "M_Monkey_Fur",
+            "M_Monkey_InnerEar",
+            "M_Monkey_Iris",
+            "M_Monkey_Nose",
+            "M_Monkey_Pupil",
+            "M_Monkey_Skin"
+          ],
+          "actions": [],
+          "spawn_marker": true,
+          "waypoint_markers": [
+            "ROUTE_WAYPOINT_00",
+            "ROUTE_WAYPOINT_01",
+            "ROUTE_WAYPOINT_02",
+            "ROUTE_WAYPOINT_03",
+            "ROUTE_WAYPOINT_04",
+            "ROUTE_WAYPOINT_05",
+            "ROUTE_WAYPOINT_06",
+            "ROUTE_WAYPOINT_07",
+            "ROUTE_WAYPOINT_08"
+          ],
+          "landmark_marker": true,
+          "river_objects": [
+            "River_Water",
+            "RiverBank_L",
+            "RiverBank_R"
+          ],
+          "missing_images": [],
+          "saved": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\reimport_validation.blend"
+        },
+        "checks": {
+          "imported_meshes": true,
+          "imported_materials": true,
+          "imported_lights": true,
+          "imported_cameras": true,
+          "spawn_marker": true,
+          "route_markers": true,
+          "landmark_marker": true,
+          "river_objects": true,
+          "no_missing_textures": true
+        }
+      },
+      "character_source": {
+        "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+        "sha256_before": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
+        "sha256_after": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
+        "unchanged": true
+      },
+      "export_processes": {
+        "glb": {
+          "ok": true,
+          "exit_code": 0,
+          "duration_ms": 2714,
+          "error": null
+        },
+        "gltf": {
+          "ok": true,
+          "exit_code": 0,
+          "duration_ms": 2453,
+          "error": null
+        },
+        "fbx": {
+          "ok": true,
+          "exit_code": 0,
+          "duration_ms": 1869,
+          "error": null
+        }
+      },
+      "render_process": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 6696,
+        "error": null,
+        "render_error": null
+      }
+    },
+    "high": {
+      "status": "completed",
+      "ok": true,
+      "failed_stages": [],
+      "stage_status": {
+        "terrain-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "vegetation-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "props-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "water-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "materials-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "lighting-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "layout-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "collision-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "character-integrated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "spec-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "blender-build": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "blend-saved": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "glb-exported": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "gltf-exported": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "fbx-exported": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "previews-rendered": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "glb-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "gltf-validated": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        },
+        "glb-reimported": {
+          "status": "passed",
+          "issues": [],
+          "error": null
+        }
+      },
+      "terrain": {
+        "vertices": 9604,
+        "triangles": 18818,
+        "non_manifold_edges": 388,
+        "degenerate_faces": 0,
+        "height_min_m": -0.2861,
+        "height_max_m": 6.8627,
+        "height_range_m": 7.1488,
+        "uv_layers": [
+          "UVMap"
+        ],
+        "uv_coverage": 1.0,
+        "materials": [
+          "M_Env_Ground"
+        ],
+        "dimensions": [
+          120.0,
+          120.0,
+          7.149
+        ]
+      },
+      "vegetation": {
+        "requested": {
+          "trees": 38,
+          "bushes": 50,
+          "ferns": 90,
+          "grass": 240,
+          "plants": 36
+        },
+        "counts": {
+          "tree": 38,
+          "bush": 50,
+          "fern": 90,
+          "grass": 240,
+          "plant": 36,
+          "roots": 12
+        },
+        "instance_count": 494,
+        "unique_meshes": 19,
+        "spacing_violations": [],
+        "route_conflicts": []
+      },
+      "props": {
+        "counts": {
+          "rock": 32,
+          "large_rock": 9,
+          "fallen_log": 6
+        },
+        "debris": 16,
+        "ruin_objects": 12,
+        "records": [
+          {
+            "name": "Debris_000",
+            "category": "debris",
+            "x": -9.917,
+            "y": -18.622
+          },
+          {
+            "name": "Debris_001",
+            "category": "debris",
+            "x": -49.711,
+            "y": 11.041
+          },
+          {
+            "name": "Debris_002",
+            "category": "debris",
+            "x": -34.111,
+            "y": -50.731
+          },
+          {
+            "name": "Debris_003",
+            "category": "debris",
+            "x": 17.972,
+            "y": -36.052
+          },
+          {
+            "name": "Debris_004",
+            "category": "debris",
+            "x": -23.144,
+            "y": 1.416
+          },
+          {
+            "name": "Debris_005",
+            "category": "debris",
+            "x": -52.74,
+            "y": -27.121
+          },
+          {
+            "name": "Debris_006",
+            "category": "debris",
+            "x": -22.119,
+            "y": 46.017
+          },
+          {
+            "name": "Debris_007",
+            "category": "debris",
+            "x": 39.198,
+            "y": 29.374
+          },
+          {
+            "name": "Debris_008",
+            "category": "debris",
+            "x": -53.541,
+            "y": 17.306
+          },
+          {
+            "name": "Debris_009",
+            "category": "debris",
+            "x": -16.651,
+            "y": 29.622
+          },
+          {
+            "name": "Debris_010",
+            "category": "debris",
+            "x": 20.595,
+            "y": -17.611
+          },
+          {
+            "name": "Debris_011",
+            "category": "debris",
+            "x": 26.718,
+            "y": -5.152
+          },
+          {
+            "name": "Debris_012",
+            "category": "debris",
+            "x": 20.222,
+            "y": 5.953
+          },
+          {
+            "name": "Debris_013",
+            "category": "debris",
+            "x": -21.731,
+            "y": -19.513
+          },
+          {
+            "name": "Debris_014",
+            "category": "debris",
+            "x": 35.584,
+            "y": -2.854
+          },
+          {
+            "name": "Debris_015",
+            "category": "debris",
+            "x": -46.357,
+            "y": 3.854
+          }
+        ]
+      },
+      "water": {
+        "present": true,
+        "width_m": 9.0,
+        "vertices": 147,
+        "faces": 96,
+        "triangles": 192,
+        "flow_direction": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "banks": 2,
+        "water_surface": true,
+        "bed_geometry": true,
+        "left_boundary": [
+          {
+            "x": 24.207,
+            "y": -57.6,
+            "z": 1.989
+          },
+          {
+            "x": 23.638,
+            "y": -55.2,
+            "z": 2.202
+          },
+          {
+            "x": 23.096,
+            "y": -52.8,
+            "z": 2.098
+          },
+          {
+            "x": 22.588,
+            "y": -50.4,
+            "z": 1.717
+          },
+          {
+            "x": 22.123,
+            "y": -48.0,
+            "z": 1.665
+          },
+          {
+            "x": 21.706,
+            "y": -45.6,
+            "z": 1.769
+          },
+          {
+            "x": 21.343,
+            "y": -43.2,
+            "z": 1.284
+          },
+          {
+            "x": 21.04,
+            "y": -40.8,
+            "z": 0.7
+          },
+          {
+            "x": 20.802,
+            "y": -38.4,
+            "z": 0.311
+          },
+          {
+            "x": 20.631,
+            "y": -36.0,
+            "z": 0.436
+          },
+          {
+            "x": 20.53,
+            "y": -33.6,
+            "z": 0.949
+          },
+          {
+            "x": 20.5,
+            "y": -31.2,
+            "z": 1.325
+          },
+          {
+            "x": 20.543,
+            "y": -28.8,
+            "z": 1.883
+          },
+          {
+            "x": 20.656,
+            "y": -26.4,
+            "z": 2.394
+          },
+          {
+            "x": 20.84,
+            "y": -24.0,
+            "z": 2.551
+          },
+          {
+            "x": 21.09,
+            "y": -21.6,
+            "z": 2.38
+          },
+          {
+            "x": 21.404,
+            "y": -19.2,
+            "z": 2.168
+          },
+          {
+            "x": 21.777,
+            "y": -16.8,
+            "z": 2.177
+          },
+          {
+            "x": 22.203,
+            "y": -14.4,
+            "z": 2.312
+          },
+          {
+            "x": 22.677,
+            "y": -12.0,
+            "z": 2.467
+          },
+          {
+            "x": 23.191,
+            "y": -9.6,
+            "z": 2.461
+          },
+          {
+            "x": 23.739,
+            "y": -7.2,
+            "z": 2.213
+          },
+          {
+            "x": 24.311,
+            "y": -4.8,
+            "z": 1.936
+          },
+          {
+            "x": 24.901,
+            "y": -2.4,
+            "z": 1.64
+          },
+          {
+            "x": 25.5,
+            "y": 0.0,
+            "z": 1.494
+          },
+          {
+            "x": 26.099,
+            "y": 2.4,
+            "z": 1.769
+          },
+          {
+            "x": 26.689,
+            "y": 4.8,
+            "z": 2.091
+          },
+          {
+            "x": 27.261,
+            "y": 7.2,
+            "z": 2.663
+          },
+          {
+            "x": 27.809,
+            "y": 9.6,
+            "z": 3.013
+          },
+          {
+            "x": 28.323,
+            "y": 12.0,
+            "z": 2.879
+          },
+          {
+            "x": 28.797,
+            "y": 14.4,
+            "z": 3.015
+          },
+          {
+            "x": 29.223,
+            "y": 16.8,
+            "z": 3.089
+          },
+          {
+            "x": 29.596,
+            "y": 19.2,
+            "z": 3.139
+          },
+          {
+            "x": 29.91,
+            "y": 21.6,
+            "z": 3.326
+          },
+          {
+            "x": 30.16,
+            "y": 24.0,
+            "z": 3.471
+          },
+          {
+            "x": 30.344,
+            "y": 26.4,
+            "z": 3.252
+          },
+          {
+            "x": 30.457,
+            "y": 28.8,
+            "z": 2.841
+          },
+          {
+            "x": 30.5,
+            "y": 31.2,
+            "z": 2.254
+          },
+          {
+            "x": 30.47,
+            "y": 33.6,
+            "z": 1.717
+          },
+          {
+            "x": 30.369,
+            "y": 36.0,
+            "z": 1.429
+          },
+          {
+            "x": 30.198,
+            "y": 38.4,
+            "z": 1.16
+          },
+          {
+            "x": 29.96,
+            "y": 40.8,
+            "z": 0.785
+          },
+          {
+            "x": 29.657,
+            "y": 43.2,
+            "z": 0.642
+          },
+          {
+            "x": 29.294,
+            "y": 45.6,
+            "z": 0.537
+          },
+          {
+            "x": 28.877,
+            "y": 48.0,
+            "z": 0.364
+          },
+          {
+            "x": 28.412,
+            "y": 50.4,
+            "z": 0.494
+          },
+          {
+            "x": 27.904,
+            "y": 52.8,
+            "z": 0.766
+          },
+          {
+            "x": 27.362,
+            "y": 55.2,
+            "z": 0.495
+          },
+          {
+            "x": 26.793,
+            "y": 57.6,
+            "z": 0.491
+          }
+        ],
+        "right_boundary": [
+          {
+            "x": 33.207,
+            "y": -57.6,
+            "z": 1.989
+          },
+          {
+            "x": 32.638,
+            "y": -55.2,
+            "z": 2.202
+          },
+          {
+            "x": 32.096,
+            "y": -52.8,
+            "z": 2.098
+          },
+          {
+            "x": 31.588,
+            "y": -50.4,
+            "z": 1.717
+          },
+          {
+            "x": 31.123,
+            "y": -48.0,
+            "z": 1.665
+          },
+          {
+            "x": 30.706,
+            "y": -45.6,
+            "z": 1.769
+          },
+          {
+            "x": 30.343,
+            "y": -43.2,
+            "z": 1.284
+          },
+          {
+            "x": 30.04,
+            "y": -40.8,
+            "z": 0.7
+          },
+          {
+            "x": 29.802,
+            "y": -38.4,
+            "z": 0.311
+          },
+          {
+            "x": 29.631,
+            "y": -36.0,
+            "z": 0.436
+          },
+          {
+            "x": 29.53,
+            "y": -33.6,
+            "z": 0.949
+          },
+          {
+            "x": 29.5,
+            "y": -31.2,
+            "z": 1.325
+          },
+          {
+            "x": 29.543,
+            "y": -28.8,
+            "z": 1.883
+          },
+          {
+            "x": 29.656,
+            "y": -26.4,
+            "z": 2.394
+          },
+          {
+            "x": 29.84,
+            "y": -24.0,
+            "z": 2.551
+          },
+          {
+            "x": 30.09,
+            "y": -21.6,
+            "z": 2.38
+          },
+          {
+            "x": 30.404,
+            "y": -19.2,
+            "z": 2.168
+          },
+          {
+            "x": 30.777,
+            "y": -16.8,
+            "z": 2.177
+          },
+          {
+            "x": 31.203,
+            "y": -14.4,
+            "z": 2.312
+          },
+          {
+            "x": 31.677,
+            "y": -12.0,
+            "z": 2.467
+          },
+          {
+            "x": 32.191,
+            "y": -9.6,
+            "z": 2.461
+          },
+          {
+            "x": 32.739,
+            "y": -7.2,
+            "z": 2.213
+          },
+          {
+            "x": 33.311,
+            "y": -4.8,
+            "z": 1.936
+          },
+          {
+            "x": 33.901,
+            "y": -2.4,
+            "z": 1.64
+          },
+          {
+            "x": 34.5,
+            "y": 0.0,
+            "z": 1.494
+          },
+          {
+            "x": 35.099,
+            "y": 2.4,
+            "z": 1.769
+          },
+          {
+            "x": 35.689,
+            "y": 4.8,
+            "z": 2.091
+          },
+          {
+            "x": 36.261,
+            "y": 7.2,
+            "z": 2.663
+          },
+          {
+            "x": 36.809,
+            "y": 9.6,
+            "z": 3.013
+          },
+          {
+            "x": 37.323,
+            "y": 12.0,
+            "z": 2.879
+          },
+          {
+            "x": 37.797,
+            "y": 14.4,
+            "z": 3.015
+          },
+          {
+            "x": 38.223,
+            "y": 16.8,
+            "z": 3.089
+          },
+          {
+            "x": 38.596,
+            "y": 19.2,
+            "z": 3.139
+          },
+          {
+            "x": 38.91,
+            "y": 21.6,
+            "z": 3.326
+          },
+          {
+            "x": 39.16,
+            "y": 24.0,
+            "z": 3.471
+          },
+          {
+            "x": 39.344,
+            "y": 26.4,
+            "z": 3.252
+          },
+          {
+            "x": 39.457,
+            "y": 28.8,
+            "z": 2.841
+          },
+          {
+            "x": 39.5,
+            "y": 31.2,
+            "z": 2.254
+          },
+          {
+            "x": 39.47,
+            "y": 33.6,
+            "z": 1.717
+          },
+          {
+            "x": 39.369,
+            "y": 36.0,
+            "z": 1.429
+          },
+          {
+            "x": 39.198,
+            "y": 38.4,
+            "z": 1.16
+          },
+          {
+            "x": 38.96,
+            "y": 40.8,
+            "z": 0.785
+          },
+          {
+            "x": 38.657,
+            "y": 43.2,
+            "z": 0.642
+          },
+          {
+            "x": 38.294,
+            "y": 45.6,
+            "z": 0.537
+          },
+          {
+            "x": 37.877,
+            "y": 48.0,
+            "z": 0.364
+          },
+          {
+            "x": 37.412,
+            "y": 50.4,
+            "z": 0.494
+          },
+          {
+            "x": 36.904,
+            "y": 52.8,
+            "z": 0.766
+          },
+          {
+            "x": 36.362,
+            "y": 55.2,
+            "z": 0.495
+          },
+          {
+            "x": 35.793,
+            "y": 57.6,
+            "z": 0.491
+          }
+        ],
+        "centerline": [
+          {
+            "x": 28.707,
+            "y": -57.6
+          },
+          {
+            "x": 26.623,
+            "y": -48.0
+          },
+          {
+            "x": 25.302,
+            "y": -38.4
+          },
+          {
+            "x": 25.043,
+            "y": -28.8
+          },
+          {
+            "x": 25.904,
+            "y": -19.2
+          },
+          {
+            "x": 27.691,
+            "y": -9.6
+          },
+          {
+            "x": 30.0,
+            "y": 0.0
+          },
+          {
+            "x": 32.309,
+            "y": 9.6
+          },
+          {
+            "x": 34.096,
+            "y": 19.2
+          },
+          {
+            "x": 34.957,
+            "y": 28.8
+          },
+          {
+            "x": 34.698,
+            "y": 38.4
+          },
+          {
+            "x": 33.377,
+            "y": 48.0
+          },
+          {
+            "x": 31.293,
+            "y": 57.6
+          }
+        ]
+      },
+      "materials": {
+        "count": 19,
+        "channels": {
+          "M_Env_Bark": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Grass": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Ground": {
+            "base_color": "texture",
+            "roughness": "texture",
+            "normal": "texture",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Leaf": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Leaf_Light": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Rock": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Rock_Mossy": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Root": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Stone": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Water": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "constant",
+            "transmission": "constant"
+          },
+          "M_Env_WetGround": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Env_Wood": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_EyeWhite": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Fur": {
+            "base_color": "texture",
+            "roughness": "constant",
+            "normal": "texture",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_InnerEar": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Iris": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Nose": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Pupil": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          },
+          "M_Monkey_Skin": {
+            "base_color": "constant",
+            "roughness": "constant",
+            "normal": "absent",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent",
+            "transmission": "absent"
+          }
+        },
+        "textures": [
+          {
+            "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\high\\textures\\ground_basecolor.png",
+            "dimensions": [
+              1024,
+              1024
+            ],
+            "bytes": 526553,
+            "sha256": "d8cf8190bf506968099f309d0a08551e810e2afff3b16042690a796b53e4896b",
+            "colorspace": "sRGB"
+          },
+          {
+            "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\high\\textures\\ground_roughness.png",
+            "dimensions": [
+              1024,
+              1024
+            ],
+            "bytes": 447456,
+            "sha256": "fef8086f577b14c158f141533aad64086a37385b688c42f95ad7464e4ed41b85",
+            "colorspace": "Non-Color"
+          },
+          {
+            "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\high\\textures\\ground_normal.png",
+            "dimensions": [
+              1024,
+              1024
+            ],
+            "bytes": 668451,
+            "sha256": "b67113f875dc6871d6bc85569d9512a9cd3a11d90c50811c61543959f4e5f95f",
+            "colorspace": "Non-Color"
+          }
+        ]
+      },
+      "lighting": {
+        "sun": {
+          "name": "Sun_Key",
+          "energy": 4.0,
+          "elevation_deg": 38.0,
+          "azimuth_deg": 52.0,
+          "shadows": true
+        },
+        "world": {
+          "sky_color": [
+            0.42,
+            0.62,
+            0.82
+          ],
+          "ambient_strength": 0.55,
+          "fog_density": 0.018,
+          "fog_color": [
+            0.55,
+            0.68,
+            0.66
+          ],
+          "volumetric_fog_rendered": false
+        },
+        "exposure": 0.0,
+        "view_transform": "AgX"
+      },
+      "layout": {
+        "spawn": {
+          "name": "SPAWN_PLAYER",
+          "x": 0.0,
+          "y": -48.0,
+          "z": 3.7685,
+          "facing": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "clearance_m": 4.796
+        },
+        "route": {
+          "width_m": 5.0,
+          "waypoints": [
+            {
+              "name": "ROUTE_WAYPOINT_00",
+              "x": 1.978,
+              "y": -48.0,
+              "z": 3.7517
+            },
+            {
+              "name": "ROUTE_WAYPOINT_01",
+              "x": 2.917,
+              "y": -37.75,
+              "z": 4.6568
+            },
+            {
+              "name": "ROUTE_WAYPOINT_02",
+              "x": 2.787,
+              "y": -27.5,
+              "z": 4.042
+            },
+            {
+              "name": "ROUTE_WAYPOINT_03",
+              "x": 1.636,
+              "y": -17.25,
+              "z": 5.1274
+            },
+            {
+              "name": "ROUTE_WAYPOINT_04",
+              "x": -0.115,
+              "y": -7.0,
+              "z": 5.4204
+            },
+            {
+              "name": "ROUTE_WAYPOINT_05",
+              "x": -1.824,
+              "y": 3.25,
+              "z": 5.5586
+            },
+            {
+              "name": "ROUTE_WAYPOINT_06",
+              "x": -2.864,
+              "y": 13.5,
+              "z": 4.223
+            },
+            {
+              "name": "ROUTE_WAYPOINT_07",
+              "x": -2.855,
+              "y": 23.75,
+              "z": 3.2213
+            },
+            {
+              "name": "ROUTE_WAYPOINT_08",
+              "x": -1.799,
+              "y": 34.0,
+              "z": 2.192
+            }
+          ],
+          "max_slope_deg": 17.349,
+          "conflicts": []
+        },
+        "landmark": {
+          "name": "LANDMARK_DESTINATION",
+          "x": 0.0,
+          "y": 46.0,
+          "z": 1.6693,
+          "type": "jungle_ruins"
+        },
+        "layout_path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\high\\environment_layout.json",
+        "spawn_clearance_m": 4.796,
+        "route_conflicts": [],
+        "route_max_slope_deg": 17.349,
+        "waypoint_count": 9
+      },
+      "collision": {
+        "terrain_collider": "Terrain",
+        "walkable_slope_deg": 32.0,
+        "obstacles": [
+          {
+            "name": "tree_000",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 52.608,
+            "y": -5.338,
+            "z": 3.72,
+            "radius": 0.498
+          },
+          {
+            "name": "tree_001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 18.361,
+            "y": -8.076,
+            "z": 4.938,
+            "radius": 0.444
+          },
+          {
+            "name": "tree_002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 42.752,
+            "y": -25.549,
+            "z": 4.556,
+            "radius": 0.528
+          },
+          {
+            "name": "tree_003",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 49.384,
+            "y": -34.168,
+            "z": 3.053,
+            "radius": 0.559
+          },
+          {
+            "name": "tree_004",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -12.283,
+            "y": 1.627,
+            "z": 4.593,
+            "radius": 0.699
+          },
+          {
+            "name": "tree_005",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 50.05,
+            "y": -11.424,
+            "z": 3.924,
+            "radius": 0.638
+          },
+          {
+            "name": "tree_006",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -53.544,
+            "y": 25.868,
+            "z": 4.267,
+            "radius": 0.562
+          },
+          {
+            "name": "tree_007",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -0.789,
+            "y": 51.001,
+            "z": 1.951,
+            "radius": 0.511
+          },
+          {
+            "name": "tree_008",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -22.362,
+            "y": -31.873,
+            "z": 4.773,
+            "radius": 0.645
+          },
+          {
+            "name": "tree_009",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 17.36,
+            "y": 23.092,
+            "z": 5.44,
+            "radius": 0.428
+          },
+          {
+            "name": "tree_010",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 53.0,
+            "y": -28.527,
+            "z": 2.434,
+            "radius": 0.606
+          },
+          {
+            "name": "tree_011",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -24.616,
+            "y": -46.753,
+            "z": 3.806,
+            "radius": 0.627
+          },
+          {
+            "name": "tree_012",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -51.961,
+            "y": -22.881,
+            "z": 3.389,
+            "radius": 0.72
+          },
+          {
+            "name": "tree_000.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -29.906,
+            "y": -21.794,
+            "z": 4.673,
+            "radius": 0.628
+          },
+          {
+            "name": "tree_001.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -42.212,
+            "y": -13.663,
+            "z": 4.086,
+            "radius": 0.531
+          },
+          {
+            "name": "tree_002.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -13.542,
+            "y": 20.64,
+            "z": 2.944,
+            "radius": 0.564
+          },
+          {
+            "name": "tree_003.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 20.366,
+            "y": -0.033,
+            "z": 4.274,
+            "radius": 0.54
+          },
+          {
+            "name": "tree_004.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -24.345,
+            "y": 44.179,
+            "z": 1.737,
+            "radius": 0.733
+          },
+          {
+            "name": "tree_005.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -42.836,
+            "y": 30.958,
+            "z": 2.505,
+            "radius": 0.454
+          },
+          {
+            "name": "tree_006.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 5.393,
+            "y": 32.709,
+            "z": 3.448,
+            "radius": 0.605
+          },
+          {
+            "name": "tree_007.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 52.663,
+            "y": 19.094,
+            "z": 3.435,
+            "radius": 0.447
+          },
+          {
+            "name": "tree_008.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 22.855,
+            "y": 26.458,
+            "z": 6.366,
+            "radius": 0.74
+          },
+          {
+            "name": "tree_009.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -46.042,
+            "y": -51.539,
+            "z": 2.854,
+            "radius": 0.569
+          },
+          {
+            "name": "tree_010.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -32.244,
+            "y": 16.952,
+            "z": 3.313,
+            "radius": 0.438
+          },
+          {
+            "name": "tree_011.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 11.676,
+            "y": 52.381,
+            "z": 3.77,
+            "radius": 0.586
+          },
+          {
+            "name": "tree_012.001",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 48.555,
+            "y": 51.89,
+            "z": 2.963,
+            "radius": 0.537
+          },
+          {
+            "name": "tree_000.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 5.871,
+            "y": 5.264,
+            "z": 4.753,
+            "radius": 0.734
+          },
+          {
+            "name": "tree_001.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 18.178,
+            "y": 31.218,
+            "z": 4.498,
+            "radius": 0.63
+          },
+          {
+            "name": "tree_002.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 43.762,
+            "y": -8.074,
+            "z": 4.802,
+            "radius": 0.54
+          },
+          {
+            "name": "tree_003.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -45.612,
+            "y": 6.397,
+            "z": 3.632,
+            "radius": 0.432
+          },
+          {
+            "name": "tree_004.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -37.736,
+            "y": -52.981,
+            "z": 2.879,
+            "radius": 0.659
+          },
+          {
+            "name": "tree_005.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 15.051,
+            "y": -49.444,
+            "z": 3.432,
+            "radius": 0.586
+          },
+          {
+            "name": "tree_006.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 45.722,
+            "y": 36.793,
+            "z": 3.242,
+            "radius": 0.733
+          },
+          {
+            "name": "tree_007.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -18.887,
+            "y": -3.89,
+            "z": 4.598,
+            "radius": 0.463
+          },
+          {
+            "name": "tree_008.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -29.317,
+            "y": -7.674,
+            "z": 4.355,
+            "radius": 0.461
+          },
+          {
+            "name": "tree_009.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 12.138,
+            "y": -28.257,
+            "z": 3.651,
+            "radius": 0.621
+          },
+          {
+            "name": "tree_010.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": -43.33,
+            "y": 24.503,
+            "z": 2.717,
+            "radius": 0.679
+          },
+          {
+            "name": "tree_011.002",
+            "category": "tree",
+            "role": "static_obstacle",
+            "x": 43.383,
+            "y": 18.25,
+            "z": 4.043,
+            "radius": 0.451
+          },
+          {
+            "name": "bush_000",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -51.552,
+            "y": -12.451,
+            "z": 4.158,
+            "radius": 0.491
+          },
+          {
+            "name": "bush_001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -22.056,
+            "y": 45.516,
+            "z": 1.621,
+            "radius": 0.509
+          },
+          {
+            "name": "bush_002",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -10.57,
+            "y": -28.645,
+            "z": 3.83,
+            "radius": 0.492
+          },
+          {
+            "name": "bush_003",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -40.683,
+            "y": 23.113,
+            "z": 2.966,
+            "radius": 0.423
+          },
+          {
+            "name": "bush_004",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -7.263,
+            "y": -17.128,
+            "z": 4.559,
+            "radius": 0.539
+          },
+          {
+            "name": "bush_005",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 53.277,
+            "y": 31.598,
+            "z": 3.398,
+            "radius": 0.54
+          },
+          {
+            "name": "bush_006",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -33.999,
+            "y": 36.702,
+            "z": 2.808,
+            "radius": 0.542
+          },
+          {
+            "name": "bush_007",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -2.222,
+            "y": -30.046,
+            "z": 4.157,
+            "radius": 0.408
+          },
+          {
+            "name": "bush_008",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -24.829,
+            "y": 31.028,
+            "z": 2.748,
+            "radius": 0.453
+          },
+          {
+            "name": "bush_009",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -14.738,
+            "y": 22.495,
+            "z": 2.807,
+            "radius": 0.598
+          },
+          {
+            "name": "bush_010",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -52.07,
+            "y": 15.227,
+            "z": 3.229,
+            "radius": 0.429
+          },
+          {
+            "name": "bush_011",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 34.192,
+            "y": -17.843,
+            "z": 3.359,
+            "radius": 0.499
+          },
+          {
+            "name": "bush_012",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -27.696,
+            "y": -37.704,
+            "z": 4.78,
+            "radius": 0.401
+          },
+          {
+            "name": "bush_013",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -28.649,
+            "y": -42.479,
+            "z": 4.279,
+            "radius": 0.519
+          },
+          {
+            "name": "bush_014",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -52.97,
+            "y": 23.755,
+            "z": 4.33,
+            "radius": 0.472
+          },
+          {
+            "name": "bush_015",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 12.691,
+            "y": 18.33,
+            "z": 5.068,
+            "radius": 0.585
+          },
+          {
+            "name": "bush_016",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 19.314,
+            "y": 31.328,
+            "z": 4.778,
+            "radius": 0.533
+          },
+          {
+            "name": "bush_017",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -25.056,
+            "y": 47.73,
+            "z": 1.751,
+            "radius": 0.475
+          },
+          {
+            "name": "bush_018",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 10.283,
+            "y": -8.771,
+            "z": 4.902,
+            "radius": 0.446
+          },
+          {
+            "name": "bush_019",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -16.466,
+            "y": -29.602,
+            "z": 4.246,
+            "radius": 0.468
+          },
+          {
+            "name": "bush_020",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 32.764,
+            "y": -35.129,
+            "z": 3.249,
+            "radius": 0.504
+          },
+          {
+            "name": "bush_021",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 2.355,
+            "y": 25.819,
+            "z": 4.226,
+            "radius": 0.364
+          },
+          {
+            "name": "bush_022",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -25.311,
+            "y": -14.467,
+            "z": 4.322,
+            "radius": 0.522
+          },
+          {
+            "name": "bush_023",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -22.636,
+            "y": 3.457,
+            "z": 3.921,
+            "radius": 0.471
+          },
+          {
+            "name": "bush_024",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -35.438,
+            "y": 44.423,
+            "z": 1.862,
+            "radius": 0.368
+          },
+          {
+            "name": "bush_000.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 42.831,
+            "y": 4.483,
+            "z": 5.1,
+            "radius": 0.386
+          },
+          {
+            "name": "bush_001.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -52.136,
+            "y": 3.401,
+            "z": 2.904,
+            "radius": 0.548
+          },
+          {
+            "name": "bush_002.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 32.752,
+            "y": -42.174,
+            "z": 2.33,
+            "radius": 0.606
+          },
+          {
+            "name": "bush_003.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 3.845,
+            "y": 30.299,
+            "z": 3.54,
+            "radius": 0.377
+          },
+          {
+            "name": "bush_004.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 16.579,
+            "y": 0.854,
+            "z": 4.922,
+            "radius": 0.428
+          },
+          {
+            "name": "bush_005.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 9.713,
+            "y": -2.199,
+            "z": 4.647,
+            "radius": 0.468
+          },
+          {
+            "name": "bush_006.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -47.774,
+            "y": -47.96,
+            "z": 3.446,
+            "radius": 0.568
+          },
+          {
+            "name": "bush_007.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -15.026,
+            "y": 29.707,
+            "z": 2.716,
+            "radius": 0.452
+          },
+          {
+            "name": "bush_008.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -40.364,
+            "y": 6.032,
+            "z": 3.921,
+            "radius": 0.606
+          },
+          {
+            "name": "bush_009.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -38.728,
+            "y": 36.671,
+            "z": 2.091,
+            "radius": 0.367
+          },
+          {
+            "name": "bush_010.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 46.208,
+            "y": -22.951,
+            "z": 4.109,
+            "radius": 0.504
+          },
+          {
+            "name": "bush_011.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -40.401,
+            "y": -33.989,
+            "z": 4.856,
+            "radius": 0.452
+          },
+          {
+            "name": "bush_012.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 18.006,
+            "y": 23.824,
+            "z": 5.383,
+            "radius": 0.448
+          },
+          {
+            "name": "bush_013.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 14.354,
+            "y": 53.579,
+            "z": 3.399,
+            "radius": 0.43
+          },
+          {
+            "name": "bush_014.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -43.514,
+            "y": -30.235,
+            "z": 4.683,
+            "radius": 0.373
+          },
+          {
+            "name": "bush_015.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -35.454,
+            "y": -38.445,
+            "z": 4.927,
+            "radius": 0.453
+          },
+          {
+            "name": "bush_016.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -9.61,
+            "y": -46.768,
+            "z": 3.483,
+            "radius": 0.431
+          },
+          {
+            "name": "bush_017.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -43.901,
+            "y": 49.867,
+            "z": 1.384,
+            "radius": 0.436
+          },
+          {
+            "name": "bush_018.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 50.863,
+            "y": 39.549,
+            "z": 3.403,
+            "radius": 0.551
+          },
+          {
+            "name": "bush_019.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 13.621,
+            "y": 4.903,
+            "z": 4.92,
+            "radius": 0.416
+          },
+          {
+            "name": "bush_020.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -46.32,
+            "y": 25.925,
+            "z": 2.825,
+            "radius": 0.557
+          },
+          {
+            "name": "bush_021.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 20.094,
+            "y": 50.278,
+            "z": 3.251,
+            "radius": 0.498
+          },
+          {
+            "name": "bush_022.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": 52.192,
+            "y": 23.4,
+            "z": 3.599,
+            "radius": 0.483
+          },
+          {
+            "name": "bush_023.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -21.659,
+            "y": -21.124,
+            "z": 4.477,
+            "radius": 0.424
+          },
+          {
+            "name": "bush_024.001",
+            "category": "bush",
+            "role": "static_obstacle",
+            "x": -32.025,
+            "y": -31.622,
+            "z": 4.594,
+            "radius": 0.524
+          },
+          {
+            "name": "plant_000",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -22.696,
+            "y": 46.815,
+            "z": 1.784,
+            "radius": 0.222
+          },
+          {
+            "name": "plant_001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -39.781,
+            "y": -0.97,
+            "z": 4.657,
+            "radius": 0.224
+          },
+          {
+            "name": "plant_002",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 13.007,
+            "y": 29.585,
+            "z": 4.542,
+            "radius": 0.277
+          },
+          {
+            "name": "plant_003",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 17.72,
+            "y": -12.772,
+            "z": 4.811,
+            "radius": 0.207
+          },
+          {
+            "name": "plant_004",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 12.764,
+            "y": 48.62,
+            "z": 3.202,
+            "radius": 0.222
+          },
+          {
+            "name": "plant_005",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 20.135,
+            "y": 21.164,
+            "z": 6.333,
+            "radius": 0.219
+          },
+          {
+            "name": "plant_006",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -29.856,
+            "y": 33.115,
+            "z": 3.26,
+            "radius": 0.274
+          },
+          {
+            "name": "plant_007",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 43.679,
+            "y": -12.517,
+            "z": 4.563,
+            "radius": 0.209
+          },
+          {
+            "name": "plant_008",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 15.18,
+            "y": -47.136,
+            "z": 3.69,
+            "radius": 0.248
+          },
+          {
+            "name": "plant_009",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -8.755,
+            "y": -34.954,
+            "z": 3.302,
+            "radius": 0.25
+          },
+          {
+            "name": "plant_010",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -5.402,
+            "y": -37.771,
+            "z": 3.639,
+            "radius": 0.239
+          },
+          {
+            "name": "plant_011",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -8.969,
+            "y": 10.811,
+            "z": 5.391,
+            "radius": 0.265
+          },
+          {
+            "name": "plant_012",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -35.259,
+            "y": 11.785,
+            "z": 3.372,
+            "radius": 0.281
+          },
+          {
+            "name": "plant_013",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 44.451,
+            "y": 21.253,
+            "z": 4.284,
+            "radius": 0.207
+          },
+          {
+            "name": "plant_014",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -31.454,
+            "y": -38.661,
+            "z": 4.714,
+            "radius": 0.28
+          },
+          {
+            "name": "plant_015",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -46.09,
+            "y": -31.593,
+            "z": 4.419,
+            "radius": 0.255
+          },
+          {
+            "name": "plant_016",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -42.912,
+            "y": 44.562,
+            "z": 1.628,
+            "radius": 0.265
+          },
+          {
+            "name": "plant_017",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 22.782,
+            "y": 12.527,
+            "z": 6.018,
+            "radius": 0.314
+          },
+          {
+            "name": "plant_000.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -39.741,
+            "y": -26.227,
+            "z": 4.802,
+            "radius": 0.262
+          },
+          {
+            "name": "plant_001.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 46.993,
+            "y": -11.447,
+            "z": 4.619,
+            "radius": 0.316
+          },
+          {
+            "name": "plant_002.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -17.943,
+            "y": 53.583,
+            "z": 3.058,
+            "radius": 0.229
+          },
+          {
+            "name": "plant_003.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -46.299,
+            "y": -49.97,
+            "z": 3.067,
+            "radius": 0.214
+          },
+          {
+            "name": "plant_004.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 37.287,
+            "y": -38.936,
+            "z": 3.423,
+            "radius": 0.218
+          },
+          {
+            "name": "plant_005.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 38.072,
+            "y": -51.319,
+            "z": 4.346,
+            "radius": 0.293
+          },
+          {
+            "name": "plant_006.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -34.794,
+            "y": 40.729,
+            "z": 2.011,
+            "radius": 0.307
+          },
+          {
+            "name": "plant_007.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -14.55,
+            "y": -46.233,
+            "z": 3.786,
+            "radius": 0.307
+          },
+          {
+            "name": "plant_008.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -34.705,
+            "y": -4.514,
+            "z": 4.718,
+            "radius": 0.315
+          },
+          {
+            "name": "plant_009.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -24.392,
+            "y": 27.524,
+            "z": 2.49,
+            "radius": 0.282
+          },
+          {
+            "name": "plant_010.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 8.829,
+            "y": 38.661,
+            "z": 2.965,
+            "radius": 0.242
+          },
+          {
+            "name": "plant_011.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -38.172,
+            "y": -49.318,
+            "z": 3.005,
+            "radius": 0.311
+          },
+          {
+            "name": "plant_012.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -8.704,
+            "y": 33.116,
+            "z": 2.157,
+            "radius": 0.217
+          },
+          {
+            "name": "plant_013.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -29.155,
+            "y": -19.848,
+            "z": 4.638,
+            "radius": 0.255
+          },
+          {
+            "name": "plant_014.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 13.112,
+            "y": 36.066,
+            "z": 4.028,
+            "radius": 0.283
+          },
+          {
+            "name": "plant_015.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -28.187,
+            "y": -7.201,
+            "z": 4.388,
+            "radius": 0.263
+          },
+          {
+            "name": "plant_016.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": -51.25,
+            "y": 6.931,
+            "z": 3.228,
+            "radius": 0.243
+          },
+          {
+            "name": "plant_017.001",
+            "category": "plant",
+            "role": "static_obstacle",
+            "x": 53.545,
+            "y": -20.317,
+            "z": 2.838,
+            "radius": 0.296
+          },
+          {
+            "name": "rock_000",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 12.891,
+            "y": -31.683,
+            "z": 3.455,
+            "radius": 0.436
+          },
+          {
+            "name": "rock_001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -43.916,
+            "y": 42.572,
+            "z": 1.988,
+            "radius": 0.512
+          },
+          {
+            "name": "rock_002",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -27.717,
+            "y": 46.691,
+            "z": 1.607,
+            "radius": 0.556
+          },
+          {
+            "name": "rock_003",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 1.396,
+            "y": 16.389,
+            "z": 3.456,
+            "radius": 0.415
+          },
+          {
+            "name": "rock_004",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -40.418,
+            "y": 48.176,
+            "z": 1.207,
+            "radius": 0.714
+          },
+          {
+            "name": "rock_005",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -15.805,
+            "y": -18.911,
+            "z": 4.225,
+            "radius": 0.37
+          },
+          {
+            "name": "rock_006",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 6.22,
+            "y": 34.327,
+            "z": 3.439,
+            "radius": 0.741
+          },
+          {
+            "name": "rock_007",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -9.744,
+            "y": 13.398,
+            "z": 4.192,
+            "radius": 0.434
+          },
+          {
+            "name": "rock_008",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -30.931,
+            "y": -43.589,
+            "z": 4.166,
+            "radius": 0.586
+          },
+          {
+            "name": "rock_009",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 46.078,
+            "y": 5.15,
+            "z": 4.633,
+            "radius": 0.678
+          },
+          {
+            "name": "rock_010",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -42.128,
+            "y": 38.785,
+            "z": 2.216,
+            "radius": 0.432
+          },
+          {
+            "name": "rock_011",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 7.995,
+            "y": -10.034,
+            "z": 5.007,
+            "radius": 0.68
+          },
+          {
+            "name": "rock_012",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 53.868,
+            "y": 4.342,
+            "z": 3.356,
+            "radius": 0.574
+          },
+          {
+            "name": "rock_013",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -19.328,
+            "y": -19.488,
+            "z": 4.336,
+            "radius": 0.346
+          },
+          {
+            "name": "rock_014",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -32.494,
+            "y": 42.2,
+            "z": 2.132,
+            "radius": 0.422
+          },
+          {
+            "name": "rock_015",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -45.109,
+            "y": -46.29,
+            "z": 3.431,
+            "radius": 0.533
+          },
+          {
+            "name": "rock_000.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -5.69,
+            "y": -14.318,
+            "z": 5.145,
+            "radius": 0.31
+          },
+          {
+            "name": "rock_001.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 10.002,
+            "y": -42.323,
+            "z": 3.212,
+            "radius": 0.666
+          },
+          {
+            "name": "rock_002.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 41.829,
+            "y": 24.172,
+            "z": 3.804,
+            "radius": 0.419
+          },
+          {
+            "name": "rock_003.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -16.072,
+            "y": 19.049,
+            "z": 3.141,
+            "radius": 0.651
+          },
+          {
+            "name": "rock_004.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -31.589,
+            "y": -51.303,
+            "z": 3.399,
+            "radius": 0.49
+          },
+          {
+            "name": "rock_005.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 11.722,
+            "y": 16.183,
+            "z": 4.717,
+            "radius": 0.314
+          },
+          {
+            "name": "rock_006.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -13.871,
+            "y": -22.252,
+            "z": 4.413,
+            "radius": 0.738
+          },
+          {
+            "name": "rock_007.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -41.291,
+            "y": 10.717,
+            "z": 3.511,
+            "radius": 0.506
+          },
+          {
+            "name": "rock_008.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -36.368,
+            "y": 30.601,
+            "z": 2.605,
+            "radius": 0.484
+          },
+          {
+            "name": "rock_009.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -50.912,
+            "y": -38.958,
+            "z": 3.073,
+            "radius": 0.72
+          },
+          {
+            "name": "rock_010.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 39.623,
+            "y": -21.58,
+            "z": 4.495,
+            "radius": 0.477
+          },
+          {
+            "name": "rock_011.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 53.611,
+            "y": -42.533,
+            "z": 3.412,
+            "radius": 0.614
+          },
+          {
+            "name": "rock_012.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 42.82,
+            "y": 36.507,
+            "z": 3.043,
+            "radius": 0.313
+          },
+          {
+            "name": "rock_013.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 51.14,
+            "y": -35.957,
+            "z": 2.675,
+            "radius": 0.654
+          },
+          {
+            "name": "rock_014.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": 39.346,
+            "y": -4.908,
+            "z": 4.504,
+            "radius": 0.717
+          },
+          {
+            "name": "rock_015.001",
+            "category": "rock",
+            "role": "static_obstacle",
+            "x": -53.41,
+            "y": 11.721,
+            "z": 3.29,
+            "radius": 0.42
+          },
+          {
+            "name": "large_rock_000",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": 14.923,
+            "y": -45.594,
+            "z": 3.771,
+            "radius": 1.629
+          },
+          {
+            "name": "large_rock_001",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": 43.4,
+            "y": -37.578,
+            "z": 3.157,
+            "radius": 2.05
+          },
+          {
+            "name": "large_rock_002",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": 45.061,
+            "y": -3.2,
+            "z": 4.915,
+            "radius": 1.42
+          },
+          {
+            "name": "large_rock_003",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": 10.584,
+            "y": 10.586,
+            "z": 4.533,
+            "radius": 1.918
+          },
+          {
+            "name": "large_rock_004",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": 18.064,
+            "y": 29.886,
+            "z": 4.649,
+            "radius": 1.189
+          },
+          {
+            "name": "large_rock_000.001",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": 18.149,
+            "y": -5.714,
+            "z": 4.565,
+            "radius": 1.373
+          },
+          {
+            "name": "large_rock_001.001",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": -53.377,
+            "y": -50.683,
+            "z": 3.043,
+            "radius": 2.079
+          },
+          {
+            "name": "large_rock_002.001",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": -14.686,
+            "y": -34.112,
+            "z": 4.076,
+            "radius": 1.502
+          },
+          {
+            "name": "large_rock_003.001",
+            "category": "large_rock",
+            "role": "static_obstacle",
+            "x": -45.233,
+            "y": -44.132,
+            "z": 3.57,
+            "radius": 2.056
+          },
+          {
+            "name": "fallen_log_000",
+            "category": "fallen_log",
+            "role": "static_obstacle",
+            "x": -21.462,
+            "y": 26.491,
+            "z": 3.01,
+            "radius": 1.628
+          },
+          {
+            "name": "fallen_log_001",
+            "category": "fallen_log",
+            "role": "static_obstacle",
+            "x": -23.202,
+            "y": 10.238,
+            "z": 3.498,
+            "radius": 1.282
+          },
+          {
+            "name": "fallen_log_002",
+            "category": "fallen_log",
+            "role": "static_obstacle",
+            "x": -8.209,
+            "y": -29.832,
+            "z": 3.87,
+            "radius": 1.586
+          },
+          {
+            "name": "fallen_log_000.001",
+            "category": "fallen_log",
+            "role": "static_obstacle",
+            "x": -22.378,
+            "y": -49.906,
+            "z": 3.763,
+            "radius": 1.477
+          },
+          {
+            "name": "fallen_log_001.001",
+            "category": "fallen_log",
+            "role": "static_obstacle",
+            "x": -53.088,
+            "y": 27.698,
+            "z": 4.248,
+            "radius": 1.178
+          },
+          {
+            "name": "fallen_log_002.001",
+            "category": "fallen_log",
+            "role": "static_obstacle",
+            "x": -16.757,
+            "y": -34.055,
+            "z": 4.408,
+            "radius": 1.431
+          },
+          {
+            "name": "RuinPlatform_0",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 0.0,
+            "y": 46.0,
+            "z": 1.919,
+            "radius": 2.8
+          },
+          {
+            "name": "RuinPillar_0_0",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 2.4,
+            "y": 46.0,
+            "z": 3.007,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinPillar_0_1",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 0.0,
+            "y": 48.4,
+            "z": 3.041,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinPillar_0_2",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": -2.4,
+            "y": 46.0,
+            "z": 3.026,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinPillar_0_3",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": -0.0,
+            "y": 43.6,
+            "z": 2.797,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinLintel_0",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 0.0,
+            "y": 46.0,
+            "z": 4.469,
+            "radius": 2.8
+          },
+          {
+            "name": "RuinPlatform_1",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 0.0,
+            "y": 46.0,
+            "z": 1.919,
+            "radius": 2.8
+          },
+          {
+            "name": "RuinPillar_1_0",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 2.4,
+            "y": 46.0,
+            "z": 3.007,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinPillar_1_1",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 0.0,
+            "y": 48.4,
+            "z": 3.041,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinPillar_1_2",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": -2.4,
+            "y": 46.0,
+            "z": 3.026,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinPillar_1_3",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": -0.0,
+            "y": 43.6,
+            "z": 2.797,
+            "radius": 1.2
+          },
+          {
+            "name": "RuinLintel_1",
+            "category": "ruins",
+            "role": "static_obstacle",
+            "x": 0.0,
+            "y": 46.0,
+            "z": 4.469,
+            "radius": 2.8
+          }
+        ],
+        "river_boundary": {
+          "name": "River_Water",
+          "width_m": 9.0,
+          "flow_direction": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        "navmesh": "metadata only; no runtime navigation system implemented"
+      },
+      "character": {
+        "imported": true,
+        "asset_path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+        "imported_objects": 3,
+        "meshes": 2,
+        "dimensions": [
+          1.127,
+          1.185,
+          1.6
+        ],
+        "height_m": 1.6,
+        "source_height_m": 2.7,
+        "scale_factor": 0.5926,
+        "target_height_m": 1.6,
+        "ground_contact_error_m": 0.0,
+        "min_z": 3.7485,
+        "max_z": 5.3485,
+        "spawn_z": 3.7485,
+        "intersects_terrain": false,
+        "ground_max_under_bounds": 3.8261,
+        "actions": [
+          "Idle",
+          "Jump",
+          "Run",
+          "Walk"
+        ],
+        "source_sha256": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b"
+      },
+      "glb_validation": {
+        "ok": true,
+        "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\high\\JungleLevel.glb",
+        "errors": [],
+        "warnings": [
+          "no animations in export",
+          "no skins/rig in export"
+        ],
+        "bytes": 3512564,
+        "sha256": "fa979178c6760fc7afa643f81843436e9a14581f49e75fcae3cf1470e94ae1ac",
+        "version": 2,
+        "declared_length": 3512564,
+        "meshes": 52,
+        "primitives": 64,
+        "triangles": 37002,
+        "materials": 19,
+        "textures": 6,
+        "images": 6,
+        "embedded_images": 6,
+        "external_images": [],
+        "buffers": 1,
+        "external_buffers": [],
+        "animations": 0,
+        "animation_names": [],
+        "skins": 0,
+        "joints": 0,
+        "nodes": 584,
+        "bounds_min": [
+          -60,
+          -2.572999954223633,
+          -59.99999237060547
+        ],
+        "bounds_max": [
+          59.99999237060547,
+          7.39900016784668,
+          60
+        ],
+        "generator": "Khronos glTF Blender I/O v5.2.40"
+      },
+      "gltf_validation": {
+        "ok": true,
+        "path": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\high\\JungleLevel.gltf",
+        "errors": [],
+        "warnings": [
+          "no animations in export",
+          "no skins/rig in export"
+        ],
+        "bytes": 327115,
+        "sha256": "33fed7815fe02dfbc0fe8d514efba52678168617b9f6036bda370a4a6712e85e",
+        "version": "2.0",
+        "meshes": 52,
+        "primitives": 64,
+        "triangles": 37002,
+        "materials": 19,
+        "textures": 6,
+        "images": 6,
+        "embedded_images": 0,
+        "external_images": [
+          "T_Monkey_Fur_Normal.png",
+          "T_Monkey_Fur_BaseColor.png",
+          "T_Monkey_Fur_Roughness.png",
+          "T_Env_Ground_Normal.png",
+          "T_Env_Ground_BaseColor.png",
+          "T_Env_Ground_Roughness.png"
+        ],
+        "buffers": 1,
+        "external_buffers": [
+          "JungleLevel.bin"
+        ],
+        "animations": 0,
+        "animation_names": [],
+        "skins": 0,
+        "joints": 0,
+        "nodes": 584,
+        "bounds_min": [
+          -60,
+          -2.572999954223633,
+          -59.99999237060547
+        ],
+        "bounds_max": [
+          59.99999237060547,
+          7.39900016784668,
+          60
+        ],
+        "generator": "Khronos glTF Blender I/O v5.2.40"
+      },
+      "reimport": {
+        "ok": true,
+        "glb": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\high\\JungleLevel.glb",
+        "reimport_blend": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\high\\reimport_validation.blend",
+        "blender_exit_code": 0,
+        "duration_ms": 2181,
+        "inspection": {
+          "object_count": 584,
+          "mesh_count": 546,
+          "triangle_count": 83850,
+          "light_count": 1,
+          "camera_count": 2,
+          "armature_count": 0,
+          "material_count": 19,
+          "materials": [
+            "M_Env_Bark",
+            "M_Env_Grass",
+            "M_Env_Ground",
+            "M_Env_Leaf",
+            "M_Env_Leaf_Light",
+            "M_Env_Rock",
+            "M_Env_Rock_Mossy",
+            "M_Env_Root",
+            "M_Env_Stone",
+            "M_Env_Water",
+            "M_Env_WetGround",
+            "M_Env_Wood",
+            "M_Monkey_EyeWhite",
+            "M_Monkey_Fur",
+            "M_Monkey_InnerEar",
+            "M_Monkey_Iris",
+            "M_Monkey_Nose",
+            "M_Monkey_Pupil",
+            "M_Monkey_Skin"
+          ],
+          "actions": [],
+          "spawn_marker": true,
+          "waypoint_markers": [
+            "ROUTE_WAYPOINT_00",
+            "ROUTE_WAYPOINT_01",
+            "ROUTE_WAYPOINT_02",
+            "ROUTE_WAYPOINT_03",
+            "ROUTE_WAYPOINT_04",
+            "ROUTE_WAYPOINT_05",
+            "ROUTE_WAYPOINT_06",
+            "ROUTE_WAYPOINT_07",
+            "ROUTE_WAYPOINT_08"
+          ],
+          "landmark_marker": true,
+          "river_objects": [
+            "River_Water",
+            "RiverBank_L",
+            "RiverBank_R"
+          ],
+          "missing_images": [],
+          "saved": "D:\\MCP\\MCP\\validation\\v6-environment-pipeline\\high\\reimport_validation.blend"
+        },
+        "checks": {
+          "imported_meshes": true,
+          "imported_materials": true,
+          "imported_lights": true,
+          "imported_cameras": true,
+          "spawn_marker": true,
+          "route_markers": true,
+          "landmark_marker": true,
+          "river_objects": true,
+          "no_missing_textures": true
+        }
+      },
+      "character_source": {
+        "path": "D:\\MCP\\MCP\\validation\\v6-character-pipeline\\JungleMonkey.glb",
+        "sha256_before": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
+        "sha256_after": "fc15a9847a3b5f58fced125f81c3521261d92f71278a882698cef711b03bb58b",
+        "unchanged": true
+      },
+      "export_processes": {
+        "glb": {
+          "ok": true,
+          "exit_code": 0,
+          "duration_ms": 2590,
+          "error": null
+        },
+        "gltf": {
+          "ok": true,
+          "exit_code": 0,
+          "duration_ms": 2522,
+          "error": null
+        },
+        "fbx": {
+          "ok": true,
+          "exit_code": 0,
+          "duration_ms": 2051,
+          "error": null
+        }
+      },
+      "render_process": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 8000,
+        "error": null,
+        "render_error": null
+      }
+    }
+  },
+  "acceptance_evidence": {
+    "terrain_generated": true,
+    "terrain_non_flat": true,
+    "vegetation_generated": true,
+    "props_generated": true,
+    "river_generated": true,
+    "materials_validated": true,
+    "lighting_validated": true,
+    "layout_validated": true,
+    "collision_validated": true,
+    "character_integrated": true,
+    "export_validated": true,
+    "previews_rendered": true,
+    "reimport_validated": true,
+    "character_source_unchanged": true
+  }
+}
