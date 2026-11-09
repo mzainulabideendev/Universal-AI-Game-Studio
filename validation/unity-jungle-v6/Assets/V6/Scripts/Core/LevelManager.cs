@@ -38,7 +38,18 @@ namespace V6
 
         public void Initialize()
         {
-            LayerMask mask = groundMask;            if (mask.value == 0)
+            // Never sample the player's own CharacterController: at this point
+            // the player object already exists, so a ray from high above the
+            // spawn anchor would otherwise hit its capsule and resolve the
+            // spawn to the capsule top instead of the terrain.
+            LayerMask mask = groundMask;
+            int playerLayer = LayerMask.NameToLayer("Player");
+            if (playerLayer >= 0)
+            {
+                mask &= ~(1 << playerLayer);
+            }
+
+            if (mask.value == 0)
             {
                 mask = ~(1 << 8);
             }

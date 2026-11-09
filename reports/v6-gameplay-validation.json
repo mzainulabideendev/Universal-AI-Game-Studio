@@ -1,0 +1,401 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 5 - gameplay validation",
+  "generated_at": "2026-11-09T05:07:31Z",
+  "verdict": "PASS",
+  "acceptance": {
+    "scene_generated": true,
+    "scene_has_no_missing_materials": true,
+    "scene_has_no_missing_shaders": true,
+    "scene_has_ten_collectibles": true,
+    "scene_has_checkpoints": true,
+    "scene_has_all_animator_states": true,
+    "no_concave_trigger_warning": true,
+    "editmode_tests_pass": true,
+    "playmode_tests_pass": true,
+    "spawn_grounded_test": true,
+    "movement_test": true,
+    "jump_test": true,
+    "collision_test": true,
+    "collection_test": true,
+    "pause_restart_tests": true,
+    "completion_test": true,
+    "game_over_test": true,
+    "windows_build_succeeded": true,
+    "build_has_no_errors": true,
+    "screenshots_captured": true,
+    "level_completion_screenshot": true,
+    "real_playthrough_completed": true,
+    "performance_measured": true,
+    "performance_target_60fps_class": true,
+    "python_tests_pass": true
+  },
+  "requirements": [
+    {
+      "id": "R1",
+      "requirement": "Third-person character controller with grounded movement",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R2",
+      "requirement": "Run and jump with no double jump",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R3",
+      "requirement": "Banana collection updates score, HUD and objective",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R4",
+      "requirement": "Solid collisions with environment",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R5",
+      "requirement": "Ground detection and safe spawn",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R6",
+      "requirement": "Third-person follow camera",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R7",
+      "requirement": "HUD with bananas, objective, best score, controls",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R8",
+      "requirement": "Pause and resume",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R9",
+      "requirement": "Restart resets score, bananas and position",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R10",
+      "requirement": "Objective requires 10 bananas and the ruins destination",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R11",
+      "requirement": "Level completion state and results UI",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R12",
+      "requirement": "River hazard game over and restart path",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R13",
+      "requirement": "Explicit game states and legal transitions",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R14",
+      "requirement": "Windows Standalone build from the real project",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R15",
+      "requirement": "Real playthrough reaches level completion",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R16",
+      "requirement": "Performance measured in the built player",
+      "status": "implemented",
+      "evidence_level": "automated"
+    },
+    {
+      "id": "R17",
+      "requirement": "No climbing, swinging, swimming, weapons, multiplayer or Android scope",
+      "status": "excluded",
+      "evidence_level": "n/a"
+    },
+    {
+      "id": "R18",
+      "requirement": "Human visual inspection and playtest sign-off",
+      "status": "pending_human_review",
+      "evidence_level": "pending"
+    }
+  ],
+  "test_runs": {
+    "editmode": {
+      "exists": true,
+      "result": "Passed",
+      "total": 16,
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.1167705,
+      "start_time": "2026-11-09 04:58:01Z",
+      "end_time": "2026-11-09 04:58:01Z",
+      "cases": [
+        {
+          "name": "CameraPitchClampRespectsBounds",
+          "result": "Passed",
+          "duration_seconds": 0.021579
+        },
+        {
+          "name": "CollectibleUniquenessPreventsDoubleScore",
+          "result": "Passed",
+          "duration_seconds": 0.004715
+        },
+        {
+          "name": "CollectibleValueIsConfigurable",
+          "result": "Passed",
+          "duration_seconds": 0.000504
+        },
+        {
+          "name": "CorruptSaveFileFallsBackToDefaults",
+          "result": "Passed",
+          "duration_seconds": 0.018215
+        },
+        {
+          "name": "HigherJumpHeightNeedsMoreVelocity",
+          "result": "Passed",
+          "duration_seconds": 0.003726
+        },
+        {
+          "name": "IllegalStateTransitionsAreRejected",
+          "result": "Passed",
+          "duration_seconds": 0.006885
+        },
+        {
+          "name": "JumpVelocityMatchesKinematicEquation",
+          "result": "Passed",
+          "duration_seconds": 0.001052
+        },
+        {
+          "name": "LegalStateTransitionsAreAccepted",
+          "result": "Passed",
+          "duration_seconds": 0.000658
+        },
+        {
+          "name": "ObjectiveProgressEventFiresOncePerBanana",
+          "result": "Passed",
+          "duration_seconds": 0.000953
+        },
+        {
+          "name": "ObjectiveRequiresBananasAndDestination",
+          "result": "Passed",
+          "duration_seconds": 0.000578
+        },
+        {
+          "name": "SaveDataDefaultsAreSafe",
+          "result": "Passed",
+          "duration_seconds": 0.00267
+        },
+        {
+          "name": "SaveDataRoundTripsAndValidates",
+          "result": "Passed",
+          "duration_seconds": 0.012133
+        },
+        {
+          "name": "SaveValidationRepairsOutOfRangeValues",
+          "result": "Passed",
+          "duration_seconds": 0.000556
+        },
+        {
+          "name": "ScoreAccumulatesAndBestOnlyImproves",
+          "result": "Passed",
+          "duration_seconds": 0.000855
+        },
+        {
+          "name": "ScoreSubmissionRecordsNewBest",
+          "result": "Passed",
+          "duration_seconds": 0.000694
+        },
+        {
+          "name": "TerminalStatesCannotResumePlayingDirectly",
+          "result": "Passed",
+          "duration_seconds": 0.00111
+        }
+      ],
+      "failed_cases": []
+    },
+    "playmode": {
+      "exists": true,
+      "result": "Passed",
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 19.5702587,
+      "start_time": "2026-11-09 04:58:27Z",
+      "end_time": "2026-11-09 04:58:47Z",
+      "cases": [
+        {
+          "name": "AnimatorReceivesLocomotionParameters",
+          "result": "Passed",
+          "duration_seconds": 1.532119
+        },
+        {
+          "name": "BananaCollectionIncrementsScoreAndHidesObject",
+          "result": "Passed",
+          "duration_seconds": 0.889227
+        },
+        {
+          "name": "DoubleJumpIsRejected",
+          "result": "Passed",
+          "duration_seconds": 1.195031
+        },
+        {
+          "name": "FallingOutOfBoundsReturnsToCheckpointSafely",
+          "result": "Passed",
+          "duration_seconds": 0.924384
+        },
+        {
+          "name": "LevelCompletesOnlyAfterAllBananasAndDestination",
+          "result": "Passed",
+          "duration_seconds": 1.351622
+        },
+        {
+          "name": "NoMissingScriptsMaterialsOrShaders",
+          "result": "Passed",
+          "duration_seconds": 0.505471
+        },
+        {
+          "name": "ObjectiveProgressAdvancesWithRealCollections",
+          "result": "Passed",
+          "duration_seconds": 1.044871
+        },
+        {
+          "name": "PauseStopsMovementAndResumeRestoresIt",
+          "result": "Passed",
+          "duration_seconds": 1.609694
+        },
+        {
+          "name": "PlayerCollidesWithSolidObstacle",
+          "result": "Passed",
+          "duration_seconds": 1.743466
+        },
+        {
+          "name": "PlayerJumpsRaisesAndLands",
+          "result": "Passed",
+          "duration_seconds": 2.870407
+        },
+        {
+          "name": "PlayerMovesWhenInputIsApplied",
+          "result": "Passed",
+          "duration_seconds": 1.552665
+        },
+        {
+          "name": "PlayerSpawnsOnGroundAndStaysThere",
+          "result": "Passed",
+          "duration_seconds": 1.12681
+        },
+        {
+          "name": "RestartResetsScoreBananasAndPosition",
+          "result": "Passed",
+          "duration_seconds": 1.175996
+        },
+        {
+          "name": "RiverHazardEndsRunInGameOverState",
+          "result": "Passed",
+          "duration_seconds": 1.526353
+        },
+        {
+          "name": "SceneContainsRealPlayerEnvironmentCameraAndUi",
+          "result": "Passed",
+          "duration_seconds": 0.480267
+        }
+      ],
+      "failed_cases": []
+    },
+    "python": {
+      "result": "OK",
+      "tests": 373,
+      "exit_code": 0,
+      "duration_seconds": 66.2,
+      "tail": [
+        "Ran 373 tests in 65.555s",
+        "",
+        "OK"
+      ]
+    }
+  },
+  "build": {
+    "result": "Succeeded",
+    "unity_version": "6000.6.2f1",
+    "executable_sha256": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+    "executable_bytes": 667136
+  },
+  "playthrough": {
+    "level_completed": true,
+    "checkpoints_reached": [
+      "[V6] Checkpoint 0 reached",
+      "[V6] Checkpoint 1 reached"
+    ],
+    "screenshots": {
+      "main_menu": {
+        "path": "reports/v6-captures/01-main-menu.png",
+        "sha256": "5656e06dcaa9db34c04fbd6be94f436013c765faa717080a7776ea91c44ac20c",
+        "width": 1280,
+        "height": 720
+      },
+      "playing": {
+        "path": "reports/v6-captures/02-playing.png",
+        "sha256": "a8a7111fec011905e2c163923ea4d2179f38817f3ce3f429cf24dca5de43fc44",
+        "width": 1280,
+        "height": 720
+      },
+      "paused": {
+        "path": "reports/v6-captures/03-paused.png",
+        "sha256": "7dec38dbf9d177da734291ba2e50ddba3f3ea5263745ffcb933827c24483474f",
+        "width": 1280,
+        "height": 720
+      },
+      "level_complete": {
+        "path": "reports/v6-captures/04-level-complete.png",
+        "sha256": "c26efcb09d22974ed74495cc7ad4400c73c7efdd5bb89a6afd0006a3f1e7302d",
+        "width": 1280,
+        "height": 720
+      }
+    },
+    "performance": {
+      "average_fps": 52.0181770324707,
+      "p95_frame_ms": 16.771705627441406,
+      "one_percent_low_fps": 3.95336651802063,
+      "frames": 1206,
+      "duration_seconds": 23.1842041015625,
+      "active_triangles": 37986,
+      "active_renderers": 328,
+      "draw_calls": -1,
+      "screen": "1280x720",
+      "quality_level": "Ultra"
+    }
+  },
+  "human_review": {
+    "status": "pending",
+    "note": "No requirement is marked human-verified. A person must play the build and inspect the screenshots before sign-off."
+  },
+  "limitations": [
+    "Automated tests and a scripted playthrough do not replace human playtesting or visual sign-off.",
+    "No audio assets exist, so the game is silent apart from system UI.",
+    "The performance sample includes a multi-second first-run shader compilation hitch; p95 frame time is the more useful steady-state metric.",
+    "Draw calls were not exposed by the player ProfilerRecorder (-1).",
+    "The river is contact-lethal rather than a swimming system."
+  ]
+}

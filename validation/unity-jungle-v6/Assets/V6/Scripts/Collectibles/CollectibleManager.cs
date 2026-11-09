@@ -27,12 +27,12 @@ namespace V6
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private LevelManager level;
 
-        private readonly HashSet<int> collectedIds = new HashSet<int>();
+        private readonly HashSet<Collectible> collected = new HashSet<Collectible>();
 
         public Collectible[] Collectibles => collectibles;
         public Transform Player => player;
         public int Total => collectibles != null ? collectibles.Length : 0;
-        public int CollectedCount => collectedIds.Count;
+        public int CollectedCount => collected.Count;
         public bool GameplayActive => states == null || states.IsGameplayActive;
 
         public event Action<Collectible> Collected;
@@ -80,8 +80,7 @@ namespace V6
                 return;
             }
 
-            int id = collectible.GetInstanceID();
-            if (!collectedIds.Add(id))
+            if (!collected.Add(collectible))
             {
                 return;
             }
@@ -92,7 +91,7 @@ namespace V6
 
         public void ResetAll()
         {
-            collectedIds.Clear();
+            collected.Clear();
             if (collectibles == null)
             {
                 return;

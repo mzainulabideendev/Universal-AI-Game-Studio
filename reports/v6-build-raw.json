@@ -1,0 +1,10 @@
+{
+    "result": "Succeeded",
+    "totalErrors": 0,
+    "totalWarnings": 16,
+    "outputPath": "D:\\MCP\\MCP\\validation\\builds\\v6-windows\\V6JungleMonkey.exe",
+    "totalSize": 99723790,
+    "buildTimeSeconds": 6.467576503753662,
+    "platform": "StandaloneWindows64",
+    "unityVersion": "6000.6.2f1"
+}

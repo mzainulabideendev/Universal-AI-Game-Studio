@@ -1,0 +1,523 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 5 - gameplay integration audit",
+  "generated_at": "2026-11-09T05:08:44Z",
+  "verdict": "PASS_AUTOMATED",
+  "all_criteria_passed": true,
+  "human_review_required": true,
+  "human_review_status": "pending",
+  "criteria": {
+    "1_scene_generated": true,
+    "2_scene_assets_complete": true,
+    "3_scene_content_complete": true,
+    "4_no_concave_trigger_warning": true,
+    "5_editmode_tests_pass": true,
+    "6_playmode_tests_pass": true,
+    "7_required_playmode_coverage": true,
+    "8_reported_test_cases_match": true,
+    "9_windows_build_succeeded": true,
+    "10_build_artifact_hash_verified": true,
+    "11_scene_artifact_hash_verified": true,
+    "12_real_playthrough_completed": true,
+    "13_completion_screenshot": true,
+    "14_all_screenshots_valid": true,
+    "15_screenshot_hashes_match_report": true,
+    "16_performance_measured": true,
+    "17_performance_evidence_consistent": true,
+    "18_python_tests_pass": true,
+    "19_v4_v5_preserved": true,
+    "20_mcp_parity": true,
+    "21_no_fabricated_verification": true,
+    "22_validation_verdict_pass": true
+  },
+  "deliverables": {
+    "V6-PHASE-5-GAMEPLAY-INTEGRATION.md": true,
+    "reports/v6-gameplay-integration.json": true,
+    "reports/v6-gameplay-validation.json": true,
+    "reports/v6-gameplay-performance.json": true,
+    "reports/v6-phase5-audit.json": true,
+    "scripts/v6-phase5-demo.py": true,
+    "scripts/v6-phase5-audit.py": true,
+    "validation/unity-jungle-v6/Assets/V6/Scenes/JungleMonkeyV6.unity": true,
+    "validation/unity-jungle-v6/Assets/V6/Editor/V6SceneBuilder.cs": true,
+    "validation/unity-jungle-v6/Assets/V6/Editor/V6Build.cs": true,
+    "validation/unity-jungle-v6/Assets/V6/Tests/EditMode/V6UnitTests.cs": true,
+    "validation/unity-jungle-v6/Assets/V6/Tests/PlayMode/V6PlayModeTests.cs": true
+  },
+  "repository": {
+    "head": "9056529a1145ecc11fc207ee46a04537a3f60be5",
+    "branch": "main",
+    "status_short": [
+      "M .gitignore",
+      " M validation/unity-jungle-v6/Assets/V6/Editor/V6SceneBuilder.cs",
+      " M validation/unity-jungle-v6/Assets/V6/Scripts/Collectibles/CollectibleManager.cs",
+      " M validation/unity-jungle-v6/Assets/V6/Scripts/Core/GameBootstrap.cs",
+      " M validation/unity-jungle-v6/Assets/V6/Scripts/Core/LevelManager.cs",
+      " M validation/unity-jungle-v6/Assets/V6/Scripts/Player/PlayerCollisionHandler.cs",
+      " M validation/unity-jungle-v6/ProjectSettings/EditorBuildSettings.asset",
+      " M validation/unity-jungle-v6/ProjectSettings/ProjectSettings.asset",
+      " M validation/unity-jungle-v6/ProjectSettings/QualitySettings.asset",
+      " M validation/unity-jungle-v6/ProjectSettings/TagManager.asset",
+      "?? V6-PHASE-5-GAMEPLAY-INTEGRATION.md",
+      "?? reports/v6-build-raw.json",
+      "?? reports/v6-captures/",
+      "?? reports/v6-gameplay-integration.json",
+      "?? reports/v6-gameplay-performance.json",
+      "?? reports/v6-gameplay-validation.json",
+      "?? reports/v6-phase5-audit.json",
+      "?? scripts/v6-phase5-audit.py",
+      "?? scripts/v6-phase5-demo.py",
+      "?? tools/game-studio-mcp/tests/test_v6_phase5_gameplay_reports.py",
+      "?? validation/unity-jungle-v6/Assets/V6.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Animations.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Animations/",
+      "?? validation/unity-jungle-v6/Assets/V6/Art.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/BananaMesh.asset",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/BananaMesh.asset.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/JungleLevel.fbx.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/JungleMonkey.fbx.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/T_Env_Ground_BaseColor.png.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/T_Env_Ground_Normal.png.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/T_Env_Ground_Roughness.png.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/T_Monkey_Fur_BaseColor.png.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/T_Monkey_Fur_Normal.png.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/T_Monkey_Fur_Roughness.png.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Editor.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Editor/V6.Editor.asmdef.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Editor/V6Build.cs",
+      "?? validation/unity-jungle-v6/Assets/V6/Editor/V6Build.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Editor/V6SceneBuilder.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Materials.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Materials/",
+      "?? validation/unity-jungle-v6/Assets/V6/Prefabs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Prefabs/",
+      "?? validation/unity-jungle-v6/Assets/V6/Scenes.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scenes/",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Audio.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Audio/AudioManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Camera.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Camera/CameraFollowController.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Collectibles.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Collectibles/Collectible.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Collectibles/CollectibleManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/AutoPlayDriver.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/Checkpoint.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/CheckpointManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/DestinationZone.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/GameBootstrap.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/GameManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/GameState.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/GameStateController.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/GameplayEventBus.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/LevelManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/ObjectiveManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/ScoreManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Performance.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Performance/PerformanceMonitor.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Player.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Player/GroundDetector.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Player/PlayerAnimationDriver.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Player/PlayerCollisionHandler.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Player/PlayerInputHandler.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Player/PlayerMovement.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Save.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Save/SaveDataService.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/UI.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/UI/UIManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/V6.Runtime.asmdef.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Tests.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Tests/",
+      "?? validation/unity-jungle-v6/unity-jungle-v6.slnx"
+    ],
+    "commit_made": false,
+    "push_made": false
+  },
+  "tests": {
+    "python": {
+      "result": "OK",
+      "tests": 373,
+      "exit_code": 0,
+      "duration_seconds": 67.0,
+      "tail": [
+        "Ran 373 tests in 66.229s",
+        "",
+        "OK"
+      ],
+      "output_tail": null
+    },
+    "editmode": {
+      "exists": true,
+      "path": "validation\\unity-jungle-v6\\Logs\\editmode-results.xml",
+      "result": "Passed",
+      "total": 16,
+      "passed": 16,
+      "failed": 0,
+      "cases": [
+        {
+          "name": "CameraPitchClampRespectsBounds",
+          "result": "Passed"
+        },
+        {
+          "name": "CollectibleUniquenessPreventsDoubleScore",
+          "result": "Passed"
+        },
+        {
+          "name": "CollectibleValueIsConfigurable",
+          "result": "Passed"
+        },
+        {
+          "name": "CorruptSaveFileFallsBackToDefaults",
+          "result": "Passed"
+        },
+        {
+          "name": "HigherJumpHeightNeedsMoreVelocity",
+          "result": "Passed"
+        },
+        {
+          "name": "IllegalStateTransitionsAreRejected",
+          "result": "Passed"
+        },
+        {
+          "name": "JumpVelocityMatchesKinematicEquation",
+          "result": "Passed"
+        },
+        {
+          "name": "LegalStateTransitionsAreAccepted",
+          "result": "Passed"
+        },
+        {
+          "name": "ObjectiveProgressEventFiresOncePerBanana",
+          "result": "Passed"
+        },
+        {
+          "name": "ObjectiveRequiresBananasAndDestination",
+          "result": "Passed"
+        },
+        {
+          "name": "SaveDataDefaultsAreSafe",
+          "result": "Passed"
+        },
+        {
+          "name": "SaveDataRoundTripsAndValidates",
+          "result": "Passed"
+        },
+        {
+          "name": "SaveValidationRepairsOutOfRangeValues",
+          "result": "Passed"
+        },
+        {
+          "name": "ScoreAccumulatesAndBestOnlyImproves",
+          "result": "Passed"
+        },
+        {
+          "name": "ScoreSubmissionRecordsNewBest",
+          "result": "Passed"
+        },
+        {
+          "name": "TerminalStatesCannotResumePlayingDirectly",
+          "result": "Passed"
+        }
+      ]
+    },
+    "playmode": {
+      "exists": true,
+      "path": "validation\\unity-jungle-v6\\Logs\\playmode-results.xml",
+      "result": "Passed",
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "cases": [
+        {
+          "name": "AnimatorReceivesLocomotionParameters",
+          "result": "Passed"
+        },
+        {
+          "name": "BananaCollectionIncrementsScoreAndHidesObject",
+          "result": "Passed"
+        },
+        {
+          "name": "DoubleJumpIsRejected",
+          "result": "Passed"
+        },
+        {
+          "name": "FallingOutOfBoundsReturnsToCheckpointSafely",
+          "result": "Passed"
+        },
+        {
+          "name": "LevelCompletesOnlyAfterAllBananasAndDestination",
+          "result": "Passed"
+        },
+        {
+          "name": "NoMissingScriptsMaterialsOrShaders",
+          "result": "Passed"
+        },
+        {
+          "name": "ObjectiveProgressAdvancesWithRealCollections",
+          "result": "Passed"
+        },
+        {
+          "name": "PauseStopsMovementAndResumeRestoresIt",
+          "result": "Passed"
+        },
+        {
+          "name": "PlayerCollidesWithSolidObstacle",
+          "result": "Passed"
+        },
+        {
+          "name": "PlayerJumpsRaisesAndLands",
+          "result": "Passed"
+        },
+        {
+          "name": "PlayerMovesWhenInputIsApplied",
+          "result": "Passed"
+        },
+        {
+          "name": "PlayerSpawnsOnGroundAndStaysThere",
+          "result": "Passed"
+        },
+        {
+          "name": "RestartResetsScoreBananasAndPosition",
+          "result": "Passed"
+        },
+        {
+          "name": "RiverHazardEndsRunInGameOverState",
+          "result": "Passed"
+        },
+        {
+          "name": "SceneContainsRealPlayerEnvironmentCameraAndUi",
+          "result": "Passed"
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "v4_commit": "4bf92a84c42e8516e6f54718ce675481e44f3139",
+    "v4_ok": true,
+    "v4_files": 2,
+    "v5_ok": true,
+    "v5_artifacts": 13,
+    "details": {
+      "v4": {
+        "tools/game-studio-mcp/tests/test_llm_v4.py": {
+          "expected": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+          "actual": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+          "matches": true
+        },
+        "tools/game-studio-mcp/tests/test_p0_v4.py": {
+          "expected": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+          "actual": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+          "matches": true
+        }
+      },
+      "v5": {
+        "validation/unity-jungle-v5/.game-studio/manifest.json": {
+          "exists": true,
+          "expected": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+          "actual": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/.game-studio/specification.json": {
+          "exists": true,
+          "expected": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+          "actual": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/.game-studio/execution-plan.json": {
+          "exists": true,
+          "expected": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+          "actual": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml": {
+          "exists": true,
+          "expected": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+          "actual": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json": {
+          "exists": true,
+          "expected": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+          "actual": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png": {
+          "exists": true,
+          "expected": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+          "actual": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json": {
+          "exists": true,
+          "expected": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+          "actual": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+          "matches": true
+        },
+        "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity": {
+          "exists": true,
+          "expected": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+          "actual": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+          "matches": true
+        },
+        "validation/builds/v5-windows/JungleMonkey.exe": {
+          "exists": true,
+          "expected": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+          "actual": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+          "matches": true
+        },
+        "V5-IMPLEMENTATION-REPORT.md": {
+          "exists": true,
+          "expected": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+          "actual": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+          "matches": true
+        },
+        "V5-LLM-EVALUATION.md": {
+          "exists": true,
+          "expected": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+          "actual": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+          "matches": true
+        },
+        "V5-UNITY-VERTICAL-SLICE.md": {
+          "exists": true,
+          "expected": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+          "actual": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+          "matches": true
+        },
+        "V5-VERIFICATION-MATRIX.md": {
+          "exists": true,
+          "expected": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+          "actual": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+          "matches": true
+        }
+      }
+    }
+  },
+  "mcp": {
+    "tools": 94,
+    "handlers": 94,
+    "unique": true,
+    "parity": true
+  },
+  "artifacts": {
+    "checks": {
+      "executable_exists": true,
+      "executable_hash_matches_report": true,
+      "executable_size_matches_report": true,
+      "scene_exists": true,
+      "scene_hash_matches_report": true,
+      "performance_hash_matches_report": true,
+      "build_report_succeeded": true
+    },
+    "build": {
+      "result": "Succeeded",
+      "unity_version": "6000.6.2f1",
+      "platform": "StandaloneWindows64",
+      "total_errors": 0,
+      "total_warnings": 16,
+      "executable": {
+        "path": "validation/builds/v6-windows/V6JungleMonkey.exe",
+        "exists": true,
+        "bytes": 667136,
+        "sha256": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e"
+      },
+      "directory_total_bytes": 99723790
+    },
+    "scene": {
+      "path": "validation\\unity-jungle-v6\\Assets\\V6\\Scenes\\JungleMonkeyV6.unity",
+      "sha256": "b35ab31fe5b7c8bf108220cd75023b0d2c4995c1fe60a2428ca97c8bd1cd220e",
+      "bytes": 379627
+    },
+    "performance": {
+      "path": "reports\\v6-gameplay-performance.json",
+      "sha256": "66d9f43bb901711d2ccadfcffff94db27ca94d9c14a73d56586de2266e65dfd2",
+      "frames": 1206,
+      "average_fps": 52.0181770324707,
+      "p95_frame_ms": 16.771705627441406,
+      "one_percent_low_fps": 3.95336651802063,
+      "screen": "1280x720"
+    },
+    "screenshots": {
+      "main_menu": {
+        "path": "reports\\v6-captures\\01-main-menu.png",
+        "exists": true,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "sha256": "5656e06dcaa9db34c04fbd6be94f436013c765faa717080a7776ea91c44ac20c",
+        "report_path": "reports/v6-captures/01-main-menu.png",
+        "report_sha256": "5656e06dcaa9db34c04fbd6be94f436013c765faa717080a7776ea91c44ac20c"
+      },
+      "playing": {
+        "path": "reports\\v6-captures\\02-playing.png",
+        "exists": true,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "sha256": "a8a7111fec011905e2c163923ea4d2179f38817f3ce3f429cf24dca5de43fc44",
+        "report_path": "reports/v6-captures/02-playing.png",
+        "report_sha256": "a8a7111fec011905e2c163923ea4d2179f38817f3ce3f429cf24dca5de43fc44"
+      },
+      "paused": {
+        "path": "reports\\v6-captures\\03-paused.png",
+        "exists": true,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "sha256": "7dec38dbf9d177da734291ba2e50ddba3f3ea5263745ffcb933827c24483474f",
+        "report_path": "reports/v6-captures/03-paused.png",
+        "report_sha256": "7dec38dbf9d177da734291ba2e50ddba3f3ea5263745ffcb933827c24483474f"
+      },
+      "level_complete": {
+        "path": "reports\\v6-captures\\04-level-complete.png",
+        "exists": true,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "sha256": "c26efcb09d22974ed74495cc7ad4400c73c7efdd5bb89a6afd0006a3f1e7302d",
+        "report_path": "reports/v6-captures/04-level-complete.png",
+        "report_sha256": "c26efcb09d22974ed74495cc7ad4400c73c7efdd5bb89a6afd0006a3f1e7302d"
+      }
+    }
+  },
+  "validation_acceptance": {
+    "scene_generated": true,
+    "scene_has_no_missing_materials": true,
+    "scene_has_no_missing_shaders": true,
+    "scene_has_ten_collectibles": true,
+    "scene_has_checkpoints": true,
+    "scene_has_all_animator_states": true,
+    "no_concave_trigger_warning": true,
+    "editmode_tests_pass": true,
+    "playmode_tests_pass": true,
+    "spawn_grounded_test": true,
+    "movement_test": true,
+    "jump_test": true,
+    "collision_test": true,
+    "collection_test": true,
+    "pause_restart_tests": true,
+    "completion_test": true,
+    "game_over_test": true,
+    "windows_build_succeeded": true,
+    "build_has_no_errors": true,
+    "screenshots_captured": true,
+    "level_completion_screenshot": true,
+    "real_playthrough_completed": true,
+    "performance_measured": true,
+    "performance_target_60fps_class": true,
+    "python_tests_pass": true
+  },
+  "limitations": [
+    "Automated tests and a scripted playthrough do not replace human playtesting or visual sign-off.",
+    "No audio assets exist; audio hooks are silent.",
+    "Player draw-call reporting was unavailable (-1).",
+    "The first-run performance sample includes a multi-second shader compilation hitch.",
+    "The river is contact-lethal; no swimming system is implemented.",
+    "The audit passes the automated phase only; the Phase 5 gate stays open until a human reviews the build."
+  ],
+  "duration_seconds": 67.2
+}

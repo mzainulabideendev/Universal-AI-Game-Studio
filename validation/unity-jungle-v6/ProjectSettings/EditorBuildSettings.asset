@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/V5/Scenes/JungleMonkey.unity
-    guid: b772815da57268e4ebaa5fbcf077788d
+    path: Assets/V6/Scenes/JungleMonkeyV6.unity
+    guid: 1bbfb6826c1581c4486f5e1ec3bd09ef
   m_configObjects: {}

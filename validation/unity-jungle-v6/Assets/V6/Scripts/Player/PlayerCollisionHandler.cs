@@ -21,6 +21,11 @@ namespace V6
         {
             EnvironmentCollisions++;
             LastColliderName = hit.collider != null ? hit.collider.name : string.Empty;
+            if (hit.collider != null && IsHazard(hit.collider, hit.collider.name))
+            {
+                HazardTriggers++;
+                gameManager?.OnPlayerEnteredHazard(hit.collider.name);
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -30,10 +35,7 @@ namespace V6
                 return;
             }
 
-            string name = other.name.ToLowerInvariant();
-            bool hazard = other.CompareTag("Hazard") || name.Contains("river_water") ||
-                          name == "river" || name.Contains("hazard");
-            if (!hazard)
+            if (!IsHazard(other, other.name))
             {
                 return;
             }
@@ -41,6 +43,18 @@ namespace V6
             HazardTriggers++;
             LastColliderName = other.name;
             gameManager?.OnPlayerEnteredHazard(other.name);
+        }
+
+        private static bool IsHazard(Collider collider, string rawName)
+        {
+            if (collider != null && collider.CompareTag("Hazard"))
+            {
+                return true;
+            }
+
+            string name = (rawName ?? string.Empty).ToLowerInvariant();
+            return name.Contains("river_water") || name == "river" ||
+                   name.Contains("hazard");
         }
     }
 }

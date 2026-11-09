@@ -1,0 +1,1027 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 5 - gameplay integration",
+  "generated_at": "2026-11-09T05:07:31Z",
+  "repository": {
+    "root": "D:\\MCP\\MCP",
+    "head": "9056529a1145ecc11fc207ee46a04537a3f60be5",
+    "branch": "main",
+    "status_short": [
+      "M .gitignore",
+      " M validation/unity-jungle-v6/Assets/V6/Editor/V6SceneBuilder.cs",
+      " M validation/unity-jungle-v6/Assets/V6/Scripts/Collectibles/CollectibleManager.cs",
+      " M validation/unity-jungle-v6/Assets/V6/Scripts/Core/GameBootstrap.cs",
+      " M validation/unity-jungle-v6/Assets/V6/Scripts/Core/LevelManager.cs",
+      " M validation/unity-jungle-v6/Assets/V6/Scripts/Player/PlayerCollisionHandler.cs",
+      " M validation/unity-jungle-v6/ProjectSettings/EditorBuildSettings.asset",
+      " M validation/unity-jungle-v6/ProjectSettings/ProjectSettings.asset",
+      " M validation/unity-jungle-v6/ProjectSettings/QualitySettings.asset",
+      " M validation/unity-jungle-v6/ProjectSettings/TagManager.asset",
+      "?? V6-PHASE-5-GAMEPLAY-INTEGRATION.md",
+      "?? reports/v6-build-raw.json",
+      "?? reports/v6-captures/",
+      "?? reports/v6-gameplay-integration.json",
+      "?? reports/v6-gameplay-performance.json",
+      "?? reports/v6-gameplay-validation.json",
+      "?? reports/v6-phase5-audit.json",
+      "?? scripts/v6-phase5-audit.py",
+      "?? scripts/v6-phase5-demo.py",
+      "?? tools/game-studio-mcp/tests/test_v6_phase5_gameplay_reports.py",
+      "?? validation/unity-jungle-v6/Assets/V6.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Animations.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Animations/",
+      "?? validation/unity-jungle-v6/Assets/V6/Art.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/BananaMesh.asset",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/BananaMesh.asset.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/JungleLevel.fbx.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/JungleMonkey.fbx.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/T_Env_Ground_BaseColor.png.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/T_Env_Ground_Normal.png.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/T_Env_Ground_Roughness.png.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/T_Monkey_Fur_BaseColor.png.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/T_Monkey_Fur_Normal.png.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Art/T_Monkey_Fur_Roughness.png.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Editor.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Editor/V6.Editor.asmdef.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Editor/V6Build.cs",
+      "?? validation/unity-jungle-v6/Assets/V6/Editor/V6Build.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Editor/V6SceneBuilder.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Materials.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Materials/",
+      "?? validation/unity-jungle-v6/Assets/V6/Prefabs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Prefabs/",
+      "?? validation/unity-jungle-v6/Assets/V6/Scenes.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scenes/",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Audio.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Audio/AudioManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Camera.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Camera/CameraFollowController.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Collectibles.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Collectibles/Collectible.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Collectibles/CollectibleManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/AutoPlayDriver.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/Checkpoint.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/CheckpointManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/DestinationZone.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/GameBootstrap.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/GameManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/GameState.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/GameStateController.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/GameplayEventBus.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/LevelManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/ObjectiveManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Core/ScoreManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Performance.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Performance/PerformanceMonitor.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Player.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Player/GroundDetector.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Player/PlayerAnimationDriver.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Player/PlayerCollisionHandler.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Player/PlayerInputHandler.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Player/PlayerMovement.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Save.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/Save/SaveDataService.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/UI.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/UI/UIManager.cs.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Scripts/V6.Runtime.asmdef.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Tests.meta",
+      "?? validation/unity-jungle-v6/Assets/V6/Tests/",
+      "?? validation/unity-jungle-v6/unity-jungle-v6.slnx"
+    ],
+    "commit_made": false,
+    "push_made": false
+  },
+  "engine": {
+    "name": "Unity",
+    "version": "6000.6.2f1",
+    "editor": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.6.2f1\\Editor\\Unity.exe",
+    "target": "StandaloneWindows64",
+    "project": "validation/unity-jungle-v6"
+  },
+  "scene": {
+    "log": "validation/unity-jungle-v6/Logs/scene-build3.log",
+    "exists": true,
+    "sha256": "b35ab31fe5b7c8bf108220cd75023b0d2c4995c1fe60a2428ca97c8bd1cd220e",
+    "bytes": 379627,
+    "report": {
+      "scene": "Assets/V6/Scenes/JungleMonkeyV6.unity",
+      "renderers": 338,
+      "missingMaterials": 0,
+      "missingShaders": 0,
+      "meshColliders": 40,
+      "capsuleColliders": 22,
+      "triggerColliders": 13,
+      "collectibles": 10,
+      "checkpoints": 2,
+      "animationClips": [
+        "Armature_JungleMonkey|Walk",
+        "Armature_JungleMonkey|Jump",
+        "Armature_JungleMonkey|Run",
+        "Armature_JungleMonkey|Idle"
+      ],
+      "animatorStates": [
+        "Idle",
+        "Walk",
+        "Run",
+        "Jump"
+      ],
+      "materials": [
+        "BananaYellow",
+        "M_Env_Bark",
+        "M_Env_Grass",
+        "M_Env_Ground",
+        "M_Env_Leaf",
+        "M_Env_Leaf_Light",
+        "M_Env_Rock",
+        "M_Env_Rock_Mossy",
+        "M_Env_Root",
+        "M_Env_Stone",
+        "M_Env_Water",
+        "M_Env_WetGround",
+        "M_Env_Wood",
+        "M_Monkey_EyeWhite",
+        "M_Monkey_Fur",
+        "M_Monkey_InnerEar",
+        "M_Monkey_Iris",
+        "M_Monkey_Nose",
+        "M_Monkey_Pupil",
+        "M_Monkey_Skin",
+        "No Name"
+      ],
+      "characterImported": true,
+      "environmentImported": true,
+      "succeeded": true
+    },
+    "concave_trigger_warning": false
+  },
+  "systems": [
+    {
+      "system": "Character controller",
+      "script": "Player/PlayerMovement.cs",
+      "responsibility": "CharacterController movement, run, gravity, jump, coyote time, fall recovery"
+    },
+    {
+      "system": "Input",
+      "script": "Player/PlayerInputHandler.cs",
+      "responsibility": "Legacy Input Manager bindings plus deterministic test input"
+    },
+    {
+      "system": "Ground detection",
+      "script": "Player/GroundDetector.cs",
+      "responsibility": "Sphere/ray ground probe, slope limits, ground normals"
+    },
+    {
+      "system": "Collision and hazards",
+      "script": "Player/PlayerCollisionHandler.cs",
+      "responsibility": "Solid collisions and river hazard detection"
+    },
+    {
+      "system": "Animation",
+      "script": "Player/PlayerAnimationDriver.cs",
+      "responsibility": "Idle/Walk/Run/Jump animator parameters"
+    },
+    {
+      "system": "Camera",
+      "script": "Camera/CameraFollowController.cs",
+      "responsibility": "Third-person orbit/follow camera and collision-aware placement"
+    },
+    {
+      "system": "Game flow",
+      "script": "Core/GameManager.cs",
+      "responsibility": "State transitions, restart, pause, completion, game over, save"
+    },
+    {
+      "system": "State machine",
+      "script": "Core/GameStateController.cs",
+      "responsibility": "Explicit legal game-state transitions"
+    },
+    {
+      "system": "Objectives",
+      "script": "Core/ObjectiveManager.cs",
+      "responsibility": "10-banana collection plus destination objective"
+    },
+    {
+      "system": "Collectibles",
+      "script": "Collectibles/CollectibleManager.cs",
+      "responsibility": "Banana registry, collection, reset"
+    },
+    {
+      "system": "Score",
+      "script": "Core/ScoreManager.cs",
+      "responsibility": "Score, best score, persisted best"
+    },
+    {
+      "system": "Level",
+      "script": "Core/LevelManager.cs",
+      "responsibility": "Spawn/destination anchors, ground snapping, bounds and kill plane"
+    },
+    {
+      "system": "Checkpoints",
+      "script": "Core/CheckpointManager.cs",
+      "responsibility": "Checkpoint activation and safe respawn"
+    },
+    {
+      "system": "Destination",
+      "script": "Core/DestinationZone.cs",
+      "responsibility": "Ruins destination trigger"
+    },
+    {
+      "system": "HUD",
+      "script": "UI/UIManager.cs",
+      "responsibility": "Score, objective, toast, pause, completion and game-over UI"
+    },
+    {
+      "system": "Audio",
+      "script": "Audio/AudioManager.cs",
+      "responsibility": "Audio hooks; reports missing clips honestly (no audio assets)"
+    },
+    {
+      "system": "Save",
+      "script": "Save/SaveDataService.cs",
+      "responsibility": "Best score and settings persistence"
+    },
+    {
+      "system": "Performance",
+      "script": "Performance/PerformanceMonitor.cs",
+      "responsibility": "Measured frame times, scene counts and perf JSON"
+    },
+    {
+      "system": "Automation",
+      "script": "Core/AutoPlayDriver.cs",
+      "responsibility": "Command-line playthrough, screenshots and perf capture"
+    },
+    {
+      "system": "Bootstrap",
+      "script": "Core/GameBootstrap.cs",
+      "responsibility": "Deterministic initialization and scene validation"
+    }
+  ],
+  "game_states": [
+    "Initializing",
+    "MainMenu",
+    "Playing",
+    "Paused",
+    "GameOver",
+    "LevelCompleted",
+    "Restarting"
+  ],
+  "objectives": {
+    "bananas_required": 10,
+    "destination_required": true,
+    "completion_rule": "all bananas collected AND destination entered",
+    "completion_entry_point": "GameManager.CompleteLevel()"
+  },
+  "controls": {
+    "move": "WASD / arrow keys",
+    "run": "Shift",
+    "jump": "Space",
+    "camera": "Mouse orbit",
+    "pause": "Escape",
+    "restart": "R"
+  },
+  "build": {
+    "build_report": "reports/v6-build-raw.json",
+    "result": "Succeeded",
+    "unity_version": "6000.6.2f1",
+    "platform": "StandaloneWindows64",
+    "total_errors": 0,
+    "total_warnings": 16,
+    "reported_size_bytes": 99723790,
+    "build_time_seconds": 6.467576503753662,
+    "executable": {
+      "path": "validation/builds/v6-windows/V6JungleMonkey.exe",
+      "exists": true,
+      "bytes": 667136,
+      "sha256": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e"
+    },
+    "directory_total_bytes": 99723790,
+    "file_count": 156,
+    "files": [
+      {
+        "path": "validation/builds/v6-windows/D3D12/D3D12Core.dll",
+        "bytes": 4725304
+      },
+      {
+        "path": "validation/builds/v6-windows/dstorage.dll",
+        "bytes": 206904
+      },
+      {
+        "path": "validation/builds/v6-windows/dstoragecore.dll",
+        "bytes": 1482784
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll",
+        "bytes": 7834536
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll",
+        "bytes": 611240
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser",
+        "bytes": 1605
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx",
+        "bytes": 60575
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/2.0/machine.config",
+        "bytes": 29066
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/2.0/settings.map",
+        "bytes": 2622
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/2.0/web.config",
+        "bytes": 11635
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser",
+        "bytes": 1605
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx",
+        "bytes": 60575
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/4.0/machine.config",
+        "bytes": 33598
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/4.0/settings.map",
+        "bytes": 2622
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/4.0/web.config",
+        "bytes": 18802
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser",
+        "bytes": 1605
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx",
+        "bytes": 60575
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/4.5/machine.config",
+        "bytes": 34056
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/4.5/settings.map",
+        "bytes": 2622
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/4.5/web.config",
+        "bytes": 18811
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/browscap.ini",
+        "bytes": 311984
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/config",
+        "bytes": 3815
+      },
+      {
+        "path": "validation/builds/v6-windows/MonoBleedingEdge/etc/mono/mconfig/config.xml",
+        "bytes": 25817
+      },
+      {
+        "path": "validation/builds/v6-windows/UnityCrashHandler64.exe",
+        "bytes": 1772968
+      },
+      {
+        "path": "validation/builds/v6-windows/UnityPlayer.dll",
+        "bytes": 38693808
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey.exe",
+        "bytes": 667136
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/app.info",
+        "bytes": 41
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/boot.config",
+        "bytes": 156
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/globalgamemanagers",
+        "bytes": 34644
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/globalgamemanagers.assets",
+        "bytes": 23152
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/globalgamemanagers.assets.resS",
+        "bytes": 2796240
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/level0",
+        "bytes": 206984
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/Mono.Security.dll",
+        "bytes": 241152
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/mscorlib.dll",
+        "bytes": 4632064
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/netstandard.dll",
+        "bytes": 90112
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Buffers.dll",
+        "bytes": 4608
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Collections.Immutable.dll",
+        "bytes": 252680
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.ComponentModel.Composition.dll",
+        "bytes": 257024
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Configuration.dll",
+        "bytes": 124928
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Core.dll",
+        "bytes": 1113088
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Data.DataSetExtensions.dll",
+        "bytes": 29696
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Data.dll",
+        "bytes": 2125312
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.dll",
+        "bytes": 2641920
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Drawing.dll",
+        "bytes": 489984
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.EnterpriseServices.dll",
+        "bytes": 44544
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.IO.Compression.dll",
+        "bytes": 114688
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.IO.Compression.FileSystem.dll",
+        "bytes": 18432
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Memory.dll",
+        "bytes": 4608
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Net.Http.dll",
+        "bytes": 122880
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Numerics.dll",
+        "bytes": 119296
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Reflection.Metadata.dll",
+        "bytes": 487584
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Runtime.CompilerServices.Unsafe.dll",
+        "bytes": 19256
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Runtime.Serialization.dll",
+        "bytes": 934400
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Security.dll",
+        "bytes": 320000
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.ServiceModel.Internals.dll",
+        "bytes": 215040
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Transactions.dll",
+        "bytes": 35328
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Xml.dll",
+        "bytes": 3160064
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/System.Xml.Linq.dll",
+        "bytes": 136704
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/Unity.InternalAPIEngineBridge.004.dll",
+        "bytes": 4096
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/Unity.Scripting.dll",
+        "bytes": 70576
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/Unity.TextMeshPro.dll",
+        "bytes": 438784
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.AccessibilityModule.dll",
+        "bytes": 49584
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.AdaptivePerformanceModule.dll",
+        "bytes": 122288
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.AIModule.dll",
+        "bytes": 87472
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.AMDModule.dll",
+        "bytes": 21928
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.AndroidJNIModule.dll",
+        "bytes": 121256
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.AnimationModule.dll",
+        "bytes": 218032
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.ARModule.dll",
+        "bytes": 27560
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.AssetBundleModule.dll",
+        "bytes": 42920
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.AudioModule.dll",
+        "bytes": 142248
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.BurstModule.dll",
+        "bytes": 337832
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.ClothModule.dll",
+        "bytes": 38312
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.ClusterInputModule.dll",
+        "bytes": 30120
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.ClusterRendererModule.dll",
+        "bytes": 28592
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.ContentLoadModule.dll",
+        "bytes": 56240
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.CoreModule.dll",
+        "bytes": 2028456
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.CrashReportingModule.dll",
+        "bytes": 28592
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.DirectorModule.dll",
+        "bytes": 42928
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.dll",
+        "bytes": 225704
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.DSPGraphModule.dll",
+        "bytes": 33704
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.GameCenterModule.dll",
+        "bytes": 46504
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.GIModule.dll",
+        "bytes": 26024
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.dll",
+        "bytes": 14248
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.GridModule.dll",
+        "bytes": 32680
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.HierarchyCoreModule.dll",
+        "bytes": 111528
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.HierarchyModule.dll",
+        "bytes": 114088
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.HotReloadModule.dll",
+        "bytes": 26032
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.IdentifiersModule.dll",
+        "bytes": 16808
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.ImageConversionModule.dll",
+        "bytes": 34224
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.IMGUIModule.dll",
+        "bytes": 190888
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.InputForUIModule.dll",
+        "bytes": 56752
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.InputLegacyModule.dll",
+        "bytes": 42928
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.InputModule.dll",
+        "bytes": 32680
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.InsightsModule.dll",
+        "bytes": 15792
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.JSONSerializeModule.dll",
+        "bytes": 29104
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.LocalizationModule.dll",
+        "bytes": 29096
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.ManagedKernelModule.dll",
+        "bytes": 14248
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.MarshallingModule.dll",
+        "bytes": 100784
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.MathematicsModule.dll",
+        "bytes": 740776
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.MultiplayerModule.dll",
+        "bytes": 18344
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.NVIDIAModule.dll",
+        "bytes": 41392
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.ParticleSystemModule.dll",
+        "bytes": 169384
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.PerformanceReportingModule.dll",
+        "bytes": 27048
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.Physics2DModule.dll",
+        "bytes": 222640
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.PhysicsBackendPhysXModule.dll",
+        "bytes": 14248
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.PhysicsCore2DModule.dll",
+        "bytes": 482736
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.PhysicsModule.dll",
+        "bytes": 181680
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.PropertiesModule.dll",
+        "bytes": 124840
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.RenderAs2DModule.dll",
+        "bytes": 27560
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll",
+        "bytes": 26032
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.ScreenCaptureModule.dll",
+        "bytes": 28080
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.ScriptingModule.dll",
+        "bytes": 65968
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.dll",
+        "bytes": 26024
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.SpriteMaskModule.dll",
+        "bytes": 30640
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.SpriteShapeModule.dll",
+        "bytes": 34224
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.StreamingModule.dll",
+        "bytes": 28080
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.SubstanceModule.dll",
+        "bytes": 31152
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.SubsystemsModule.dll",
+        "bytes": 42920
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.TerrainModule.dll",
+        "bytes": 132528
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.TerrainPhysicsModule.dll",
+        "bytes": 27568
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.TetgenModule.dll",
+        "bytes": 26032
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll",
+        "bytes": 86448
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll",
+        "bytes": 314280
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.TextRenderingModule.dll",
+        "bytes": 39344
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.TilemapModule.dll",
+        "bytes": 75696
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.TimelineFoundationModule.dll",
+        "bytes": 167336
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.TLSModule.dll",
+        "bytes": 34224
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.U2DRuntimeModule.dll",
+        "bytes": 73648
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UI.dll",
+        "bytes": 269312
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UIElementsModule.dll",
+        "bytes": 2535336
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UIModule.dll",
+        "bytes": 57256
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UmbraModule.dll",
+        "bytes": 26032
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll",
+        "bytes": 36784
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UnityAnalyticsModule.dll",
+        "bytes": 61864
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UnityConnectModule.dll",
+        "bytes": 29608
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UnityConsentModule.dll",
+        "bytes": 16304
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UnityCurlModule.dll",
+        "bytes": 28072
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll",
+        "bytes": 30632
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll",
+        "bytes": 30640
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UnityWebRequestModule.dll",
+        "bytes": 81320
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll",
+        "bytes": 29616
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll",
+        "bytes": 35248
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.VectorGraphicsModule.dll",
+        "bytes": 229296
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.VehiclesModule.dll",
+        "bytes": 33192
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.VFXModule.dll",
+        "bytes": 82344
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.VideoModule.dll",
+        "bytes": 48560
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.VirtualTexturingModule.dll",
+        "bytes": 43944
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.WindModule.dll",
+        "bytes": 28592
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/UnityEngine.XRModule.dll",
+        "bytes": 96168
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/V6.Runtime.dll",
+        "bytes": 64512
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Resources/unity default resources",
+        "bytes": 5919584
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Resources/unity_builtin_extra",
+        "bytes": 546532
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/RuntimeInitializeOnLoads.json",
+        "bytes": 13
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/ScriptingAssemblies.json",
+        "bytes": 3466
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/sharedassets0.assets",
+        "bytes": 1840820
+      },
+      {
+        "path": "validation/builds/v6-windows/V6JungleMonkey_Data/sharedassets0.assets.resS",
+        "bytes": 1572960
+      }
+    ]
+  },
+  "automated_playthrough": {
+    "command": "V6JungleMonkey.exe -v6autoplay -v6capture <dir> -v6seconds 60 -v6perf <file>",
+    "log": "validation/unity-jungle-v6/Logs/player-retry1.log",
+    "level_completed": true,
+    "auto_play_finished": true,
+    "checkpoints_reached": [
+      "[V6] Checkpoint 0 reached",
+      "[V6] Checkpoint 1 reached"
+    ],
+    "spawn_line": "[V6] Level spawn=(0.00, 3.80, 48.00) destination=(0.00, 2.52, -46.00)",
+    "screenshots": {
+      "main_menu": {
+        "path": "reports/v6-captures/01-main-menu.png",
+        "exists": true,
+        "bytes": 368372,
+        "sha256": "5656e06dcaa9db34c04fbd6be94f436013c765faa717080a7776ea91c44ac20c",
+        "png_signature": true,
+        "width": 1280,
+        "height": 720,
+        "modified_utc": "2026-11-09T04:57:11Z"
+      },
+      "playing": {
+        "path": "reports/v6-captures/02-playing.png",
+        "exists": true,
+        "bytes": 359591,
+        "sha256": "a8a7111fec011905e2c163923ea4d2179f38817f3ce3f429cf24dca5de43fc44",
+        "png_signature": true,
+        "width": 1280,
+        "height": 720,
+        "modified_utc": "2026-11-09T04:57:12Z"
+      },
+      "paused": {
+        "path": "reports/v6-captures/03-paused.png",
+        "exists": true,
+        "bytes": 269323,
+        "sha256": "7dec38dbf9d177da734291ba2e50ddba3f3ea5263745ffcb933827c24483474f",
+        "png_signature": true,
+        "width": 1280,
+        "height": 720,
+        "modified_utc": "2026-11-09T04:57:14Z"
+      },
+      "level_complete": {
+        "path": "reports/v6-captures/04-level-complete.png",
+        "exists": true,
+        "bytes": 141890,
+        "sha256": "c26efcb09d22974ed74495cc7ad4400c73c7efdd5bb89a6afd0006a3f1e7302d",
+        "png_signature": true,
+        "width": 1280,
+        "height": 720,
+        "modified_utc": "2026-11-09T04:57:28Z"
+      }
+    },
+    "performance": {
+      "frames": 1206,
+      "durationSeconds": 23.1842041015625,
+      "averageFps": 52.0181770324707,
+      "minimumFps": 0.3847191035747528,
+      "onePercentLowFps": 3.95336651802063,
+      "averageFrameMs": 19.22406578063965,
+      "p95FrameMs": 16.771705627441406,
+      "maxFrameMs": 2599.299072265625,
+      "managedMemoryBytes": 1449984,
+      "totalAllocatedMemoryBytes": 199196981,
+      "gcAllocatedBytes": 0,
+      "activeGameObjects": 395,
+      "activeRenderers": 328,
+      "activeTriangles": 37986,
+      "drawCalls": -1,
+      "screenWidth": 1280,
+      "screenHeight": 720,
+      "qualityLevel": "Ultra",
+      "physicsStepMs": 19.99999237060547,
+      "capturedUtc": "2026-11-09T04:57:31.6029852Z",
+      "path": "reports/v6-gameplay-performance.json",
+      "sha256": "66d9f43bb901711d2ccadfcffff94db27ca94d9c14a73d56586de2266e65dfd2",
+      "exists": true
+    }
+  },
+  "content": {
+    "character_source": "validation/v6-character-pipeline/JungleMonkey.glb imported through Phase 3 FBX",
+    "environment_source": "validation/v6-environment-pipeline/ JungleLevel.fbx (Phase 4 medium tier)",
+    "banana_asset": "deterministic procedural mesh generated by V6SceneBuilder",
+    "audio_assets": "none; AudioManager reports missing clips honestly"
+  },
+  "excluded_scope": [
+    "climbing",
+    "swinging",
+    "swimming",
+    "weapons",
+    "multiplayer",
+    "Android"
+  ],
+  "limitations": [
+    "Stylized procedural prototype content, not production art.",
+    "No audio assets are present; audio hooks are silent.",
+    "The river is a solid hazard surface that ends the run on contact; no swimming or water physics are implemented.",
+    "Human playtest and visual sign-off are still pending.",
+    "Automated capture runs a scripted route; it is evidence of a real playthrough, not a substitute for human review."
+  ]
+}

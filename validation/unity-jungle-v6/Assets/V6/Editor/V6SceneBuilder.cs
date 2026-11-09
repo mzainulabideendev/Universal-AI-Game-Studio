@@ -38,7 +38,6 @@ namespace V6.EditorTools
 
             ConfigureModel(Art + "/JungleMonkey.fbx", true);
             ConfigureModel(Art + "/JungleLevel.fbx", false);
-            ConfigureModel(Art + "/Banana.fbx", false);
             ConfigureTextures();
 
             var palette = BuildPalette();
@@ -229,30 +228,119 @@ namespace V6.EditorTools
 
         private static GameObject BuildBananaPrefab(Dictionary<string, Material> palette)
         {
-            var bananaPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(Art + "/Banana.fbx");
-            Require(bananaPrefab, "Banana.fbx");
-            var instance = (GameObject)PrefabUtility.InstantiatePrefab(bananaPrefab);
-            instance.name = "Banana";
-            var bananaMaterial = palette["banana"];
-            foreach (var renderer in instance.GetComponentsInChildren<Renderer>(true))
+            // The Phase 3/4 pipelines never produced a banana asset, so the
+            // collectible mesh is generated deterministically here instead of
+            // pretending an external model exists. It is a real curved mesh,
+            // saved as a project asset and used by every world-space banana.
+            string meshPath = Art + "/BananaMesh.asset";
+            var mesh = AssetDatabase.LoadAssetAtPath<Mesh>(meshPath);
+            if (mesh == null)
             {
-                var materials = renderer.sharedMaterials;
-                for (int i = 0; i < materials.Length; i++)
-                {
-                    materials[i] = bananaMaterial;
-                }
-
-                renderer.sharedMaterials = materials;
+                mesh = CreateBananaMesh();
+                mesh.name = "BananaMesh";
+                AssetDatabase.CreateAsset(mesh, meshPath);
             }
+
+            var instance = new GameObject("Banana");
+            var filter = instance.AddComponent<MeshFilter>();
+            filter.sharedMesh = mesh;
+            var renderer = instance.AddComponent<MeshRenderer>();
+            renderer.sharedMaterial = palette["banana"];
+            renderer.shadowCastingMode = ShadowCastingMode.On;
 
             var collider = instance.AddComponent<SphereCollider>();
             collider.isTrigger = true;
             collider.radius = 0.55f;
+            collider.center = new Vector3(0f, 0.12f, 0f);
             instance.AddComponent<Collectible>();
+
             var asset = PrefabUtility.SaveAsPrefabAsset(instance, Prefabs + "/Banana.prefab");
             UnityEngine.Object.DestroyImmediate(instance);
             Require(asset, "Banana prefab");
             return asset;
+        }
+
+        /// <summary>
+        /// Builds a crescent (banana) tube: a circular arc swept by a tapered
+        /// elliptical cross-section, with explicit end caps. The mesh is in
+        /// local metres and is roughly 0.9 m long.
+        /// </summary>
+        private static Mesh CreateBananaMesh()
+        {
+            const int segments = 16;
+            const int sides = 12;
+            const float arcRadius = 0.55f;
+            const float tubeRadius = 0.085f;
+            const float halfArc = 0.95f;
+
+            var vertices = new List<Vector3>(segments * sides + 2);
+            var uvs = new List<Vector2>(segments * sides + 2);
+            var triangles = new List<int>((segments * sides * 2 + sides * 2) * 3);
+            var ringCenters = new List<Vector3>(segments + 1);
+            var ringTangents = new List<Vector3>(segments + 1);
+
+            for (int i = 0; i <= segments; i++)
+            {
+                float u = i / (float)segments;
+                float angle = Mathf.Lerp(-halfArc, halfArc, u);
+                Vector3 center = new Vector3(
+                    arcRadius * Mathf.Sin(angle),
+                    arcRadius * (1f - Mathf.Cos(angle)),
+                    0f);
+                Vector3 tangent = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f).normalized;
+                Vector3 normal = new Vector3(-Mathf.Sin(angle), Mathf.Cos(angle), 0f).normalized;
+                Vector3 binormal = Vector3.forward;
+                ringCenters.Add(center);
+                ringTangents.Add(tangent);
+
+                float taper = Mathf.Clamp(Mathf.Pow(Mathf.Sin(Mathf.PI * u), 0.42f), 0.16f, 1f);
+                for (int s = 0; s < sides; s++)
+                {
+                    float v = s / (float)sides;
+                    float theta = v * Mathf.PI * 2f;
+                    Vector3 offset = (normal * Mathf.Cos(theta) + binormal * Mathf.Sin(theta)) *
+                                     (tubeRadius * taper);
+                    vertices.Add(center + offset);
+                    uvs.Add(new Vector2(u, v));
+                }
+            }
+
+            for (int i = 0; i < segments; i++)
+            {
+                for (int s = 0; s < sides; s++)
+                {
+                    int next = (s + 1) % sides;
+                    int a = i * sides + s;
+                    int b = i * sides + next;
+                    int c = (i + 1) * sides + s;
+                    int d = (i + 1) * sides + next;
+                    triangles.Add(a); triangles.Add(c); triangles.Add(b);
+                    triangles.Add(b); triangles.Add(c); triangles.Add(d);
+                }
+            }
+
+            int startCap = vertices.Count;
+            vertices.Add(ringCenters[0] - ringTangents[0] * 0.035f);
+            uvs.Add(new Vector2(0f, 0.5f));
+            int endCap = vertices.Count;
+            vertices.Add(ringCenters[segments] + ringTangents[segments] * 0.035f);
+            uvs.Add(new Vector2(1f, 0.5f));
+
+            for (int s = 0; s < sides; s++)
+            {
+                int next = (s + 1) % sides;
+                triangles.Add(startCap); triangles.Add(s); triangles.Add(next);
+                int offset = segments * sides;
+                triangles.Add(endCap); triangles.Add(offset + next); triangles.Add(offset + s);
+            }
+
+            var mesh = new Mesh { name = "BananaMesh" };
+            mesh.SetVertices(vertices);
+            mesh.SetUVs(0, uvs);
+            mesh.SetTriangles(triangles, 0);
+            mesh.RecalculateNormals();
+            mesh.RecalculateBounds();
+            return mesh;
         }
 
         private static List<Collectible> PlaceCollectibles(GameObject bananaPrefab, Transform environment,
@@ -861,7 +949,7 @@ namespace V6.EditorTools
         {
             int meshColliders = 0;
             int capsules = 0;
-            int triggers = 0;
+            int hazards = 0;
             foreach (var filter in environment.GetComponentsInChildren<MeshFilter>(true))
             {
                 if (filter.sharedMesh == null || filter.gameObject.GetComponent<Collider>() != null)
@@ -879,10 +967,16 @@ namespace V6.EditorTools
 
                 if (lower.Contains("river_water") || lower == "river" || lower.Contains("water"))
                 {
+                    // Concave MeshColliders cannot be triggers in Unity, so a
+                    // trigger flag here is silently rejected. Keep the water
+                    // surface as an exact solid collider and let
+                    // PlayerCollisionHandler treat controller contact with it
+                    // as a hazard instead.
                     var water = filter.gameObject.AddComponent<MeshCollider>();
                     water.sharedMesh = filter.sharedMesh;
-                    water.isTrigger = true;
-                    triggers++;
+                    water.convex = false;
+                    water.isTrigger = false;
+                    hazards++;
                     continue;
                 }
 
@@ -909,7 +1003,7 @@ namespace V6.EditorTools
                 }
             }
 
-            Debug.Log($"[V6] Environment colliders mesh={meshColliders} capsules={capsules} triggers={triggers}");
+            Debug.Log($"[V6] Environment colliders mesh={meshColliders} capsules={capsules} hazards={hazards}");
         }
 
         private static void ConfigureEnvironmentShadows(GameObject environment)

@@ -46,6 +46,9 @@ namespace V6
         {
             GameplayEventBus.Reset();
             Application.targetFrameRate = 60;
+            // Keep simulating while the window is unfocused so automated
+            // capture/perf runs are not frozen by focus changes.
+            Application.runInBackground = true;
             QualitySettings.vSyncCount = 0;
 
             if (gameManager == null)

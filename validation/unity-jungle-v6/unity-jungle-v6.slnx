@@ -1,0 +1,6 @@
+﻿<Solution>
+  <Project Path="V6.Runtime.csproj" />
+  <Project Path="V6.PlayModeTests.csproj" />
+  <Project Path="V6.EditModeTests.csproj" />
+  <Project Path="V6.Editor.csproj" />
+</Solution>

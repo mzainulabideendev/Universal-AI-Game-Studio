@@ -1,0 +1,22 @@
+{
+    "frames": 1206,
+    "durationSeconds": 23.1842041015625,
+    "averageFps": 52.0181770324707,
+    "minimumFps": 0.3847191035747528,
+    "onePercentLowFps": 3.95336651802063,
+    "averageFrameMs": 19.22406578063965,
+    "p95FrameMs": 16.771705627441406,
+    "maxFrameMs": 2599.299072265625,
+    "managedMemoryBytes": 1449984,
+    "totalAllocatedMemoryBytes": 199196981,
+    "gcAllocatedBytes": 0,
+    "activeGameObjects": 395,
+    "activeRenderers": 328,
+    "activeTriangles": 37986,
+    "drawCalls": -1,
+    "screenWidth": 1280,
+    "screenHeight": 720,
+    "qualityLevel": "Ultra",
+    "physicsStepMs": 19.99999237060547,
+    "capturedUtc": "2026-11-09T04:57:31.6029852Z"
+}

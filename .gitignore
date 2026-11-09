@@ -21,6 +21,18 @@
 /validation/unity-jungle-v5/Builds/
 /validation/unity-jungle-v5/Build/
 
+# Unity generated folders and IDE files for the V6 gameplay project.
+/validation/unity-jungle-v6/Library/
+/validation/unity-jungle-v6/Temp/
+/validation/unity-jungle-v6/Logs/
+/validation/unity-jungle-v6/Obj/
+/validation/unity-jungle-v6/UserSettings/
+/validation/unity-jungle-v6/*.csproj
+/validation/unity-jungle-v6/*.sln
+/validation/unity-jungle-v6/.vsconfig
+/validation/unity-jungle-v6/Assets/InitTestScene*.unity
+/validation/unity-jungle-v6/Assets/InitTestScene*.unity.meta
+
 # Python and editor-generated files.
 __pycache__/
 *.py[cod]
