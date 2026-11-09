@@ -1,0 +1,64 @@
+Mono path[0] = 'D:/MCP/MCP/validation/builds/v6-windows/V6JungleMonkey_Data/Managed'
+Mono config path = 'D:/MCP/MCP/validation/builds/v6-windows/MonoBleedingEdge/etc'
+CodeReloadManager initialized
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Initialize engine version: 6000.6.2f1 (770e33f6875c)
+[EntityIdStore] init: VM path (explicit commit), pageSize=4096, blockCount=1048576, entitiesPerBlock=256, slots reserved=4294967296 bytes
+[Subsystems] Discovering subsystems at path D:/MCP/MCP/validation/builds/v6-windows/V6JungleMonkey_Data/UnitySubsystems
+[D3D12 Device Filter] Vendor Name: ATI
+[D3D12 Device Filter] Device Name: AMD Radeon(TM) Graphics
+[D3D12 Device Filter] Driver Version: 31.0.21024.5005
+[D3D12 Device Filter] Feature Level: 12.1
+[D3D12 Device Filter] Graphics Memory: 7868 MB
+[D3D12 Device Filter] Processor Count: 6
+[D3D12 Device Filter] Device Type: Integrated
+[D3D12 Device Filter] D3D12 API denied by user filter: {"Vendor": "ATI", "Device Type:": Integrated}
+GfxDevice: creating device client; kGfxThreadingModeClientWorkerJobs
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: AMD Radeon(TM) Graphics (ID=0x1636)
+    Vendor:   ATI
+    VRAM:     7868 MB
+    Driver:   31.0.21024.5005
+Begin MonoManager ReloadAssembly
+- Finished resetting the current domain, in  0.013 seconds
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+D3D11 device created for Microsoft Media Foundation video decoding.
+UnloadTime: 1.202000 ms
+[V6] Level spawn=(0.00, 3.80, 48.00) destination=(0.00, 2.52, -46.00)
+[V6] GameManager initialized bananas=10 spawn=(0.00, 3.80, 48.00) save=loaded
+V6_SCENE_VALID {"passed":true,"issues":[],"collectibles":10,"playerGrounded":false,"state":"MainMenu","animatorPresent":true,"environmentPresent":true,"destinationPresent":true,"cameraPresent":true,"uiPresent":true,"spawn":"(0.00, 3.80, 48.00)","destination":"(0.00, 2.52, -46.00)"}
+[V6] AutoPlay enabled seconds=30 capture=D:\MCP\MCP\reports\v6-build-identity-captures
+[V6] Screenshot requested: D:\MCP\MCP\reports\v6-build-identity-captures\01-main-menu.png
+[V6] Audio clip missing: collect (architecture present, no asset)
+[V6] Screenshot requested: D:\MCP\MCP\reports\v6-build-identity-captures\02-playing.png
+V6_PERF {"frames":124,"durationSeconds":5.012311935424805,"averageFps":24.73908233642578,"minimumFps":0.39299821853637695,"onePercentLowFps":0.7223747372627258,"averageFrameMs":40.42185592651367,"p95FrameMs":33.48440170288086,"maxFrameMs":2544.540771484375,"managedMemoryBytes":1429504,"totalAllocatedMemoryBytes":203948341,"gcAllocatedBytes":0,"activeGameObjects":406,"activeRenderers":336,"activeTriangles":41250,"drawCalls":-1,"screenWidth":1280,"screenHeight":720,"qualityLevel":"Ultra","physicsStepMs":19.99999237060547,"capturedUtc":"2026-11-09T05:21:27.1392415Z"}
+[V6] Audio clip missing: pause (architecture present, no asset)
+[V6] Screenshot requested: D:\MCP\MCP\reports\v6-build-identity-captures\03-paused.png
+[V6] Audio clip missing: land (architecture present, no asset)
+[V6] Checkpoint 0 reached
+V6_PERF {"frames":424,"durationSeconds":10.01476764678955,"averageFps":42.33747863769531,"minimumFps":0.39299821853637695,"onePercentLowFps":1.742562174797058,"averageFrameMs":23.619728088378906,"p95FrameMs":16.899999618530273,"maxFrameMs":2544.540771484375,"managedMemoryBytes":1519616,"totalAllocatedMemoryBytes":204603701,"gcAllocatedBytes":0,"activeGameObjects":403,"activeRenderers":334,"activeTriangles":40434,"drawCalls":-1,"screenWidth":1280,"screenHeight":720,"qualityLevel":"Ultra","physicsStepMs":19.99999237060547,"capturedUtc":"2026-11-09T05:21:32.1387187Z"}
+[V6] Checkpoint 1 reached
+V6_PERF {"frames":724,"durationSeconds":15.016945838928223,"averageFps":48.21220016479492,"minimumFps":0.39299821853637695,"onePercentLowFps":2.693816900253296,"averageFrameMs":20.741613388061523,"p95FrameMs":16.79180145263672,"maxFrameMs":2544.540771484375,"managedMemoryBytes":1540096,"totalAllocatedMemoryBytes":204669237,"gcAllocatedBytes":0,"activeGameObjects":400,"activeRenderers":331,"activeTriangles":39210,"drawCalls":-1,"screenWidth":1280,"screenHeight":720,"qualityLevel":"Ultra","physicsStepMs":19.99999237060547,"capturedUtc":"2026-11-09T05:21:37.1414658Z"}
+[V6] AutoPlay detour
+V6_PERF {"frames":1024,"durationSeconds":20.018674850463867,"averageFps":51.15223693847656,"minimumFps":0.39299821853637695,"onePercentLowFps":3.583336114883423,"averageFrameMs":19.549482345581055,"p95FrameMs":16.712705612182617,"maxFrameMs":2544.540771484375,"managedMemoryBytes":1478656,"totalAllocatedMemoryBytes":204669237,"gcAllocatedBytes":0,"activeGameObjects":398,"activeRenderers":329,"activeTriangles":38394,"drawCalls":-1,"screenWidth":1280,"screenHeight":720,"qualityLevel":"Ultra","physicsStepMs":19.99999237060547,"capturedUtc":"2026-11-09T05:21:42.1427972Z"}
+[V6] Audio clip missing: complete (architecture present, no asset)
+[V6] Screenshot requested: D:\MCP\MCP\reports\v6-build-identity-captures\04-level-complete.png
+V6_PERF {"frames":1286,"durationSeconds":24.387413024902344,"averageFps":52.732120513916016,"minimumFps":0.39299821853637695,"onePercentLowFps":4.145193576812744,"averageFrameMs":18.963790893554688,"p95FrameMs":16.70940399169922,"maxFrameMs":2544.540771484375,"managedMemoryBytes":1576960,"totalAllocatedMemoryBytes":204210485,"gcAllocatedBytes":0,"activeGameObjects":395,"activeRenderers":328,"activeTriangles":37986,"drawCalls":-1,"screenWidth":1280,"screenHeight":720,"qualityLevel":"Ultra","physicsStepMs":19.99999237060547,"capturedUtc":"2026-11-09T05:21:46.5278746Z"}
+[V6] AutoPlay finished; quitting
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+CodeReloadManager destroyed
