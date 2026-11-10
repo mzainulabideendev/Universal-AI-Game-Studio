@@ -216,6 +216,24 @@ the real Blender executable found at runtime. A render-only request (no
 `save_blend`) now stages a temporary `.blend` and removes it after rendering;
 this path is covered by a unit test.
 
+### Real character and level from the asset pipelines
+
+These are the actual Phase 3/4 pipeline outputs, not mockups. The character is
+procedurally built in Blender, validated, exported and re-imported; the level is
+built around it and includes the validated character at the spawn.
+
+| JungleMonkey (`character_generate_asset`) | JungleLevel (`environment_generate_asset`) |
+| --- | --- |
+| ![JungleMonkey character preview](../../validation/v6-character-pipeline/preview.png) | ![JungleLevel overview](../../validation/v6-environment-pipeline/preview_overview.png) |
+| 15,688 triangles · 23 bones · 7 materials · Idle/Walk/Run/Jump · 3 × 512² PBR maps | 120 m × 120 m · 26,394 triangles · 19 materials · river, ruins and 9-waypoint route |
+
+![V6 built game in play](../../reports/v6-captures/02-playing.png)
+
+The gameplay frame above was captured at 1280×720 from the built Windows player
+(Unity 6000.6.2f1), not from the editor. Full measurements and validation
+evidence are in the repository root README section
+[“V6 real character, environment and built game”](../../README.md#v6-real-character-environment-and-built-game).
+
 ## Requirements
 
 | Component | Requirement |

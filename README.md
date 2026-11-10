@@ -43,6 +43,10 @@ are in [AUDIT-V3.md](AUDIT-V3.md).
 - **Blender MCP server:** a dependency-free local stdio server that launches
   Blender for real inspection, validation, import/export, rendering and Python
   operations.
+- **Real character and environment pipelines:** a 15,688-triangle rigged monkey
+  with 23 bones, four clips and 512² PBR maps, plus a 120 m procedural jungle
+  level — both built locally in Blender, validated, re-imported and shipped in a
+  real Windows build. See [the V6 section](#v6-real-character-environment-and-built-game).
 - **Game Studio MCP server:** real detection, licensed asset search, Meshy
   generation, animation inspection and Unity/Godot/Unreal staging with explicit
   confirmation, provenance and limitations. See
@@ -57,6 +61,101 @@ are in [AUDIT-V3.md](AUDIT-V3.md).
 ## Screenshots
 
 These are **real outputs** produced by the tools in this repository, not mockups.
+Every image below comes from a file that exists in this repository; the character
+and environment were generated locally in Blender by the MCP pipelines, and the
+gameplay frames were captured from the built Windows player.
+
+### Built game — V6 Jungle Monkey (Unity 6000.6.2f1)
+
+Captured at 1280×720 by the shipped player during a 30-second automated
+playthrough. The frames show the real HUD, objective text, pause menu and
+level-complete state.
+
+<table>
+  <tr>
+    <td width="50%">
+      <img src="reports/v6-captures/01-main-menu.png" alt="V6 built game at run start with 0 of 10 bananas"><br>
+      <sub>Run start — monkey spawned, HUD reads <code>BANANAS 0 / 10</code>, objective
+      “Collect 10 bananas, then reach the jungle ruins”.</sub>
+    </td>
+    <td width="50%">
+      <img src="reports/v6-captures/02-playing.png" alt="V6 built game in play with 1 of 10 bananas"><br>
+      <sub>In play — collectible counter advanced to <code>1 / 10</code>, movement,
+      follow camera and world collision active.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="reports/v6-captures/03-paused.png" alt="V6 built game pause menu"><br>
+      <sub>Pause menu — resume, restart and main-menu actions; <code>Escape</code>
+      resumes and <code>R</code> restarts.</sub>
+    </td>
+    <td width="50%">
+      <img src="reports/v6-captures/04-level-complete.png" alt="V6 built game level complete screen"><br>
+      <sub>Level complete — <code>Bananas: 10 / 10</code>, best score 10, play-again
+      and main-menu actions.</sub>
+    </td>
+  </tr>
+</table>
+
+### Blender-built character and environment
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="validation/v6-character-pipeline/preview.png" alt="JungleMonkey character rendered by Blender" width="360"><br>
+      <sub><code>character_generate_asset</code> · JungleMonkey · 15,688 triangles ·
+      23 bones · 7 materials · Idle/Walk/Run/Jump</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="validation/v6-environment-pipeline/preview_overview.png" alt="JungleLevel environment rendered by Blender" width="360"><br>
+      <sub><code>environment_generate_asset</code> · JungleLevel · 120 m × 120 m ·
+      river, ruins, 22 trees and a 9-waypoint route</sub>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <img src="validation/v6-environment-pipeline/preview_spawn.png" alt="JungleLevel spawn view with the imported monkey" width="360"><br>
+      <sub>Spawn view — the validated character is placed on the terrain and faces
+      the authored route through the jungle.</sub>
+    </td>
+  </tr>
+</table>
+
+### Procedural PBR maps (512×512, generated locally)
+
+<table>
+  <tr>
+    <td width="33%" align="center">
+      <img src="validation/v6-character-pipeline/T_Monkey_Fur_BaseColor.png" alt="Monkey fur base color texture" width="180"><br>
+      <sub>Fur base color · sRGB</sub>
+    </td>
+    <td width="33%" align="center">
+      <img src="validation/v6-character-pipeline/T_Monkey_Fur_Normal.png" alt="Monkey fur normal map" width="180"><br>
+      <sub>Fur normal · Non-Color</sub>
+    </td>
+    <td width="33%" align="center">
+      <img src="validation/v6-character-pipeline/T_Monkey_Fur_Roughness.png" alt="Monkey fur roughness map" width="180"><br>
+      <sub>Fur roughness · Non-Color</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="validation/v6-environment-pipeline/T_Env_Ground_BaseColor.png" alt="Ground base color texture" width="180"><br>
+      <sub>Ground base color · sRGB</sub>
+    </td>
+    <td align="center">
+      <img src="validation/v6-environment-pipeline/T_Env_Ground_Normal.png" alt="Ground normal map" width="180"><br>
+      <sub>Ground normal · Non-Color</sub>
+    </td>
+    <td align="center">
+      <img src="validation/v6-environment-pipeline/T_Env_Ground_Roughness.png" alt="Ground roughness map" width="180"><br>
+      <sub>Ground roughness · Non-Color</sub>
+    </td>
+  </tr>
+</table>
+
+### Earlier blockouts and validation render
 
 <table>
   <tr>
@@ -79,8 +178,10 @@ These are **real outputs** produced by the tools in this repository, not mockups
 
 The logo is an original SVG included at
 [`assets/universal-ai-game-studio-logo.svg`](assets/universal-ai-game-studio-logo.svg).
-Blockouts are seeded layout geometry for iteration; they are not production art
-or a claim of finished gameplay.
+Blockouts are seeded layout geometry for iteration. The character and level are
+stylized procedural prototypes, not hand-authored production art, and they are
+**not AI-generated** — every mesh and texture was produced locally by Blender
+scripts with no image, texture or 3D-generation provider.
 
 ## V5 Unity vertical slice — real build proof
 
@@ -116,9 +217,141 @@ description. It was produced by the repository's MCP-driven workflow:
 No climb/swim/swing or weapons were implemented or claimed; they are explicitly out of
 scope for this prototype.
 
+## V6 real character, environment and built game
+
+The V6 pipelines produce a **more detailed character** than the V5 monkey and a
+complete jungle level around it. Both are genuine local Blender builds driven by
+the Game Studio MCP, and both were validated, exported in four formats and
+re-imported to check the exports.
+
+> These are stylized procedural prototypes built from primitives with real UVs,
+> skin weights, keyframed clips and generated PBR maps. They are **not**
+> hand-sculpted production art, and they are **not AI-generated**. No image,
+> texture or 3D-generation provider was called, and no external asset was
+> downloaded.
+
+### Character — `JungleMonkey`
+
+Built by `character_generate_asset` in Blender 5.2.2 LTS (pipeline wall clock
+36.8 s) from the request: *“a stylized 3D jungle monkey character … expressive
+eyes, detailed facial features, brown fur coloration, realistic proportions …
+hands, feet, and a game-ready material setup … idle, walk, run and jump.”*
+
+<p align="center">
+  <img src="validation/v6-character-pipeline/preview.png" alt="JungleMonkey character preview rendered in Blender" width="420"><br>
+  <sub>Blender EEVEE preview of the exported JungleMonkey character.</sub>
+</p>
+
+| Property | Measured value |
+| --- | --- |
+| Character type / style | Primate · stylized-realistic · medium quality tier |
+| Geometry | **15,688 triangles**, 7,974 vertices, 8,680 polygons |
+| Mesh quality | 0 non-manifold edges · 0 loose vertices · 0 degenerate faces |
+| UVs | One `UVMap` layer, 15.04% island coverage (smart project) |
+| Materials | **7** PBR materials |
+| Rig | **23 bones**, automatic weights, 23 vertex groups, 100% weighted vertices |
+| Animations | **4** clips at 30 fps: `Idle` 60 f, `Walk` 24 f, `Run` 18 f, `Jump` 30 f |
+| Textures | **3 × 512²** locally generated maps: base color (sRGB), normal, roughness |
+| Measured bounds | 0.90 m × 0.99 m × 1.69 m |
+| Exports | `.blend` 1.0 MB · `.glb` 1.3 MB · `.gltf` + `.bin` · `.fbx` 1.5 MB |
+| Provenance | Original project asset (`project-original-1.0`), seed 20261107, no downloads |
+
+**Anatomy actually modelled.** Rounded head with brow ridge and muzzle; two
+expressive eyes with separate eye-white, iris and pupil materials; two rounded
+monkey ears with an inner-ear material; nose; subtle stylized mouth line; torso,
+two arms, two legs; two hands with three fingers and a thumb; two feet with three
+toes; and a seven-segment tail driven by three tail bones.
+
+**Material set.** `M_Monkey_Fur` (textured base color, normal and roughness),
+`M_Monkey_Skin`, `M_Monkey_EyeWhite`, `M_Monkey_Iris`, `M_Monkey_Pupil`,
+`M_Monkey_Nose` and `M_Monkey_InnerEar`. AO, emission and opacity maps are
+absent by design and are reported as absent, not silently implied.
+
+**Validation evidence.** The GLB and glTF both validate with 0 errors and 0
+warnings: 1 mesh, 7 primitives, 15,688 triangles, 7 materials, 3 embedded images,
+4 animations, 1 skin and 23 joints. Re-importing the GLB into Blender recovered
+1 mesh, 23 bones and the `Idle`, `Walk`, `Run` and `Jump` actions with **no
+missing images** (`reports/v6-character-pipeline.json`,
+`reports/v6-character-validation.json`).
+
+### Environment — `JungleLevel`
+
+Built by `environment_generate_asset` (tropical-jungle profile, medium tier) with
+the validated character placed on the route. The full Blender pipeline took
+158.3 s with **0 network calls, 0 downloads and 0 paid requests**.
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="validation/v6-environment-pipeline/preview_overview.png" alt="JungleLevel overview" width="330"><br>
+      <sub>Overview — terrain, river and vegetation.</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="validation/v6-environment-pipeline/preview_spawn.png" alt="JungleLevel spawn view with monkey" width="330"><br>
+      <sub>Spawn view — character grounded and facing the route.</sub>
+    </td>
+  </tr>
+</table>
+
+| Property | Measured / specified value |
+| --- | --- |
+| Terrain | **120 m × 120 m**, 65 segments, 6 m amplitude, 3 hills, 11 m flat spawn pad |
+| Vegetation | **22 trees**, 30 bushes, 55 ferns, 140 grass clumps, 22 plants |
+| Rocks and props | 20 rocks (6 large), 4 fallen logs, 7 roots, 1 ruin cluster, 10 debris pieces |
+| River | 112 m long, 9 m wide, 0.4–1.4 m deep, banks and bed geometry (visual only) |
+| Route | 9 waypoints, 5 m wide, 55 m playable radius, jungle-ruins landmark |
+| Level geometry | 40 meshes · **26,394 triangles** · 19 materials · 365 nodes in the GLB |
+| Textures | 3 × 512² ground maps: base color (sRGB), normal, roughness (Non-Color) |
+| Exports | `.blend` 2.1 MB · `.glb` 2.2 MB · `.gltf` + `.bin` · `.fbx` 2.3 MB |
+| Re-import checks | Meshes, materials, lights, cameras, spawn, 9 route markers, landmark and river all found; no missing textures |
+
+Quality tiers are real, reusable parameters: **low** = 33 terrain segments,
+10 trees, 256² textures; **medium** = 65 segments, 22 trees, 512²; **high** =
+97 segments, 38 trees, 1024². The `tropical_jungle` profile is fully implemented;
+five further profiles exist as parameters but are explicitly not demonstrated.
+Water is a visual surface with boundary metadata — swimming is not implemented.
+
+### V5 monkey vs V6 monkey
+
+| Detail | V5 `Monkey.fbx` | V6 `JungleMonkey` |
+| --- | --- | --- |
+| Triangles | 3,072 | **15,688** |
+| Bones | 14 | **23** |
+| Animation clips | 3 (`Idle`, `Jump`, `Walk`) | **4** (`Idle`, `Walk`, `Run`, `Jump`) |
+| Materials | Simple imported set | **7** named PBR materials |
+| Texture maps | None | **3 × 512²** base color, normal, roughness |
+| Facial / limb detail | Basic | Brow ridge, muzzle, iris/pupil, 3 fingers + thumb, 3 toes, 7-segment tail |
+| Re-import validation | Not re-derived in-session | **Passed** — mesh, rig, 4 actions, no missing images |
+
+### Built game proof — V6 Windows player
+
+The V6 build is a real, separately produced Unity standalone player, not a copy
+of the V5 build. The `V6JungleMonkey.exe` launcher is a 667,136-byte Unity stub
+that is byte-identical to V5's because both use Unity 6000.6.2f1; every content
+file differs (`level0`, `sharedassets0.assets`, `V6.Runtime.dll`, `app.info`,
+`boot.config` build GUID). The full 99,723,790-byte build was produced from
+`validation/unity-jungle-v6` with **0 errors**.
+
+| Evidence | Value |
+| --- | --- |
+| Engine / target | Unity 6000.6.2f1 · StandaloneWindows64 |
+| Build result | Succeeded · 0 errors · 16 warnings · 6.47 s |
+| Scene | `Assets/V6/Scenes/JungleMonkeyV6.unity` |
+| Runtime systems | `PlayerMovement`, `CollectibleManager`, `AutoPlayDriver`, `LevelManager`, `GameStateController`, `ObjectiveManager`, `UIManager`, `DestinationZone`, `CheckpointManager` |
+| Scene validation | 10 collectibles · animator · environment · destination · camera · UI — all present |
+| Automated playthrough | 30 s autoplay, exit code 0, checkpoints 0 and 1 reached, level completed |
+| Performance sample | 1,286 frames · 24.39 s · **52.7 average FPS** · p95 16.7 ms · 1280×720 · Ultra |
+
+The performance sample is a first-run capture and includes a multi-second shader
+compilation hitch (1% low 4.15 FPS); it is a diagnostic measurement, not a
+certified benchmark. The playthrough is automated, not a human playtest. Full
+detail: `reports/v6-phase5-build-identity-verification.json` and
+`V6-PHASE-5-BUILD-IDENTITY-VERIFICATION.md`.
+
 ## Table of contents
 
 - [Screenshots](#screenshots)
+- [V6 real character, environment and built game](#v6-real-character-environment-and-built-game)
 - [Quick start](#quick-start)
 - [Requirements](#requirements)
 - [Use with AI agents](#use-with-ai-agents)
@@ -476,6 +709,9 @@ and
 | `tools/game-studio-mcp/` | Game Studio MCP server, tests and limitations reference |
 | `validation/assets/` | Small Blender test scene and checker texture |
 | `validation/exports/` | Test FBX/GLB exports and real Blender preview render |
+| `validation/v6-character-pipeline/` | Real rigged JungleMonkey: `.blend`, `.glb`, `.gltf`/`.bin`, `.fbx`, preview and 512² PBR maps |
+| `validation/v6-environment-pipeline/` | Real JungleLevel environment in low/medium/high tiers, previews, layout JSON and textures |
+| `reports/v6-captures/`, `reports/v6-build-identity-captures/` | 1280×720 frames captured from the built V6 Windows player |
 | `LEARNING.md` | Guided learning and practical exercises |
 | `CONTRIBUTING.md` | Contribution workflow and review checklist |
 | `LICENSE` | MIT license for repository-owned content |
