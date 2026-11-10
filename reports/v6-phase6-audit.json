@@ -1,0 +1,589 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 6 - Free AI Intelligence",
+  "generated_at": "2026-11-10T03:52:27Z",
+  "verdict": "PASS",
+  "all_criteria_passed": true,
+  "human_review_required": true,
+  "human_review_status": "pending",
+  "criteria": [
+    {
+      "id": 1,
+      "description": "Phase 1 provider architecture intact",
+      "passed": true,
+      "evidence": [
+        "anthropic",
+        "gemini",
+        "groq",
+        "ollama",
+        "openai",
+        "openai_compatible",
+        "openrouter"
+      ]
+    },
+    {
+      "id": 2,
+      "description": "Free provider status is evidence-backed",
+      "passed": true,
+      "evidence": "2026-11-10"
+    },
+    {
+      "id": 3,
+      "description": "Unknown billing conditions are rejected",
+      "passed": true,
+      "evidence": [
+        "no API key configured for 'openai'; set OPENAI_API_KEY or GAME_STUDIO_LLM_API_KEY",
+        "provider status is 'unknown'; free-only mode refuses paid, trial-only, unknown or unavailable providers",
+        "provider is not in the free-provider catalog"
+      ]
+    },
+    {
+      "id": 4,
+      "description": "Paid fallback is impossible under free-only mode",
+      "passed": true,
+      "evidence": "policy flags"
+    },
+    {
+      "id": 5,
+      "description": "Provider capability declarations are accurate",
+      "passed": true,
+      "evidence": "text adapters declare image/texture/3D generation unsupported"
+    },
+    {
+      "id": 6,
+      "description": "Provider errors and quotas are handled",
+      "passed": true,
+      "evidence": {
+        "429": "http_429_rate_limited",
+        "401": "http_401_unauthorized",
+        "403": "http_403_forbidden",
+        "timeout": "timeout",
+        "network": "network_failure",
+        "invalid_model": "invalid_model",
+        "deprecated": "deprecated",
+        "malformed_output": "malformed_output"
+      }
+    },
+    {
+      "id": 7,
+      "description": "Deterministic fallback works",
+      "passed": true,
+      "evidence": "deterministic"
+    },
+    {
+      "id": 8,
+      "description": "Game design output is schema-valid",
+      "passed": true,
+      "evidence": {
+        "total": 28,
+        "user": 5,
+        "recommendations": 23
+      }
+    },
+    {
+      "id": 9,
+      "description": "Requirement decomposition works",
+      "passed": true,
+      "evidence": {
+        "requirements": 28,
+        "coverage": 15
+      }
+    },
+    {
+      "id": 10,
+      "description": "Character specification integration works",
+      "passed": true,
+      "evidence": "spec valid, no AI asset claim"
+    },
+    {
+      "id": 11,
+      "description": "Environment specification integration works",
+      "passed": true,
+      "evidence": "spec valid, no AI asset claim"
+    },
+    {
+      "id": 12,
+      "description": "Eight-agent orchestration remains functional",
+      "passed": true,
+      "evidence": "8-agent registry loaded; free-only orchestration test passed"
+    },
+    {
+      "id": 13,
+      "description": "Asset research distinguishes free from paid",
+      "passed": true,
+      "evidence": {
+        "free_hosted": [
+          "pollinations_classic"
+        ],
+        "paid": [
+          "stability_api",
+          "huggingface_inference",
+          "tripo_api",
+          "meshy_api"
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "description": "Credentials remain protected",
+      "passed": true,
+      "evidence": "no api_key value field or secret prefix in generated reports; environment-variable names are documentation, not secrets"
+    },
+    {
+      "id": 15,
+      "description": "MCP parity is preserved",
+      "passed": true,
+      "evidence": {
+        "tools": 101,
+        "unique_tools": 101,
+        "handlers": 101,
+        "unique_handlers": 101,
+        "missing_handlers": [],
+        "extra_handlers": [],
+        "all_schemas_object": true,
+        "preflight_tools": 94,
+        "added_tools": [
+          "analyze_game_request",
+          "blender_create_environment_blockout",
+          "blender_export_asset",
+          "blender_import_asset",
+          "blender_info",
+          "blender_inspect_blend",
+          "blender_render_preview",
+          "blender_run_python",
+          "blender_validate_asset",
+          "cancel_operation",
+          "character_capabilities",
+          "character_generate_asset",
+          "check_animation_compatibility",
+          "cleanup_operation",
+          "compare_project_against_requirements",
+          "configure_studio",
+          "create_animation_retarget_map",
+          "create_asset_manifest",
+          "create_game_specification",
+          "detect_game_engines",
+          "detect_system",
+          "download_polyhaven_asset",
+          "engine_build",
+          "environment_generate_asset",
+          "environment_profiles",
+          "get_execution_mode",
+          "get_operation",
+          "get_project_manifest",
+          "godot_batch_import",
+          "godot_build",
+          "init_project_manifest",
+          "inspect_animation_rig",
+          "inspect_asset_license",
+          "inspect_engine_capabilities",
+          "inspect_game_project",
+          "inspect_requirement_evidence",
+          "list_animation_sources",
+          "list_asset_providers",
+          "list_available_engines",
+          "list_operations",
+          "list_studio_projects",
+          "llm_ai_benchmark",
+          "llm_asset_generation_capabilities",
+          "llm_free_provider_catalog",
+          "llm_free_quota_status",
+          "llm_free_route",
+          "llm_game_design",
+          "llm_game_requirements",
+          "meshy_animation_library",
+          "meshy_balance",
+          "meshy_cancel_task",
+          "meshy_clear_api_key",
+          "meshy_configure_api_key",
+          "meshy_create_animation",
+          "meshy_download_output",
+          "meshy_generate_asset",
+          "meshy_rig_character",
+          "meshy_setup_guide",
+          "meshy_task_status",
+          "meshy_text_to_3d",
+          "meshy_wait_for_task",
+          "operation_status",
+          "orchestrate_game_plan",
+          "read_studio_audit",
+          "record_project_decision",
+          "recover_operations",
+          "run_requirement_verification",
+          "search_assets",
+          "select_game_engine",
+          "set_execution_mode",
+          "set_permission",
+          "stage_asset_for_engine",
+          "studio_info",
+          "track_project_progress",
+          "unity_batch_refresh",
+          "unity_build",
+          "unity_editor_status",
+          "unity_list_commands",
+          "unity_run_command",
+          "unity_run_tests",
+          "unreal_status",
+          "update_requirement_status",
+          "validate_asset_file",
+          "verify_staged_import"
+        ],
+        "exact_parity": true
+      }
+    },
+    {
+      "id": 16,
+      "description": "All existing and new tests pass",
+      "passed": true,
+      "evidence": {
+        "starting": 373,
+        "final": 409,
+        "result": "OK"
+      }
+    },
+    {
+      "id": 17,
+      "description": "V4 and V5 protected hashes remain unchanged",
+      "passed": true,
+      "evidence": {
+        "v4_ok": true,
+        "v5_ok": true
+      }
+    },
+    {
+      "id": 18,
+      "description": "Phase 5 Unity project, build and payload unchanged",
+      "passed": true,
+      "evidence": {
+        "git_clean": true,
+        "phase5_reports_present": true
+      }
+    },
+    {
+      "id": 19,
+      "description": "Reports are reproducible",
+      "passed": true,
+      "evidence": "design/benchmark rerun produced identical structure"
+    },
+    {
+      "id": 20,
+      "description": "No unauthorized paid calls or downloads occurred",
+      "passed": true,
+      "evidence": "0 network calls, 0 downloads, 0 installs"
+    }
+  ],
+  "repository": {
+    "branch": "main",
+    "starting_head": "ee6093ecb3df086c835d430e75d7c381bbe7ca03",
+    "ending_head": "ee6093ecb3df086c835d430e75d7c381bbe7ca03",
+    "head_unchanged": true,
+    "working_tree_changes": [
+      "M tools/game-studio-mcp/game_studio/agents/coordinator.py",
+      " M tools/game-studio-mcp/game_studio/llm/capabilities.py",
+      " M tools/game-studio-mcp/game_studio/llm/config.py",
+      " M tools/game-studio-mcp/game_studio/llm/providers.py",
+      " M tools/game-studio-mcp/server.py",
+      " M tools/game-studio-mcp/tests/test_v6_phase2_coordinator.py",
+      "?? V6-PHASE-5-BUILD-IDENTITY-VERIFICATION.md",
+      "?? reports/v6-ai-game-design-evaluation.json",
+      "?? reports/v6-asset-generation-research.json",
+      "?? reports/v6-free-provider-catalog.json",
+      "?? reports/v6-free-provider-evidence.json",
+      "?? reports/v6-free-routing-policy.json",
+      "?? reports/v6-phase5-build-identity-verification.json",
+      "?? reports/v6-phase6-audit.json",
+      "?? scripts/v6-phase6-audit.py",
+      "?? scripts/v6-phase6-demo.py",
+      "?? tools/game-studio-mcp/game_studio/llm/asset_research.py",
+      "?? tools/game-studio-mcp/game_studio/llm/free_policy.py",
+      "?? tools/game-studio-mcp/game_studio/llm/free_routing.py",
+      "?? tools/game-studio-mcp/game_studio/llm/intelligence.py",
+      "?? tools/game-studio-mcp/game_studio/llm/quota.py",
+      "?? tools/game-studio-mcp/tests/test_v6_phase6_free_ai.py"
+    ]
+  },
+  "tests": {
+    "starting_count": 373,
+    "final_count": 409,
+    "added_count": 36,
+    "result": "OK",
+    "duration_seconds": 57.361,
+    "command": "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe -m unittest discover -s tools/game-studio-mcp/tests -q",
+    "tail": [
+      "----------------------------------------------------------------------",
+      "Ran 409 tests in 56.873s",
+      "OK"
+    ]
+  },
+  "mcp": {
+    "tools": 101,
+    "unique_tools": 101,
+    "handlers": 101,
+    "unique_handlers": 101,
+    "missing_handlers": [],
+    "extra_handlers": [],
+    "all_schemas_object": true,
+    "preflight_tools": 94,
+    "added_tools": [
+      "analyze_game_request",
+      "blender_create_environment_blockout",
+      "blender_export_asset",
+      "blender_import_asset",
+      "blender_info",
+      "blender_inspect_blend",
+      "blender_render_preview",
+      "blender_run_python",
+      "blender_validate_asset",
+      "cancel_operation",
+      "character_capabilities",
+      "character_generate_asset",
+      "check_animation_compatibility",
+      "cleanup_operation",
+      "compare_project_against_requirements",
+      "configure_studio",
+      "create_animation_retarget_map",
+      "create_asset_manifest",
+      "create_game_specification",
+      "detect_game_engines",
+      "detect_system",
+      "download_polyhaven_asset",
+      "engine_build",
+      "environment_generate_asset",
+      "environment_profiles",
+      "get_execution_mode",
+      "get_operation",
+      "get_project_manifest",
+      "godot_batch_import",
+      "godot_build",
+      "init_project_manifest",
+      "inspect_animation_rig",
+      "inspect_asset_license",
+      "inspect_engine_capabilities",
+      "inspect_game_project",
+      "inspect_requirement_evidence",
+      "list_animation_sources",
+      "list_asset_providers",
+      "list_available_engines",
+      "list_operations",
+      "list_studio_projects",
+      "llm_ai_benchmark",
+      "llm_asset_generation_capabilities",
+      "llm_free_provider_catalog",
+      "llm_free_quota_status",
+      "llm_free_route",
+      "llm_game_design",
+      "llm_game_requirements",
+      "meshy_animation_library",
+      "meshy_balance",
+      "meshy_cancel_task",
+      "meshy_clear_api_key",
+      "meshy_configure_api_key",
+      "meshy_create_animation",
+      "meshy_download_output",
+      "meshy_generate_asset",
+      "meshy_rig_character",
+      "meshy_setup_guide",
+      "meshy_task_status",
+      "meshy_text_to_3d",
+      "meshy_wait_for_task",
+      "operation_status",
+      "orchestrate_game_plan",
+      "read_studio_audit",
+      "record_project_decision",
+      "recover_operations",
+      "run_requirement_verification",
+      "search_assets",
+      "select_game_engine",
+      "set_execution_mode",
+      "set_permission",
+      "stage_asset_for_engine",
+      "studio_info",
+      "track_project_progress",
+      "unity_batch_refresh",
+      "unity_build",
+      "unity_editor_status",
+      "unity_list_commands",
+      "unity_run_command",
+      "unity_run_tests",
+      "unreal_status",
+      "update_requirement_status",
+      "validate_asset_file",
+      "verify_staged_import"
+    ],
+    "exact_parity": true
+  },
+  "preservation": {
+    "v4": {
+      "tools/game-studio-mcp/tests/test_llm_v4.py": {
+        "expected": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "actual": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "matches": true
+      },
+      "tools/game-studio-mcp/tests/test_p0_v4.py": {
+        "expected": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "actual": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "matches": true
+      }
+    },
+    "v5": {
+      "validation/unity-jungle-v5/.game-studio/manifest.json": {
+        "exists": true,
+        "expected": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "actual": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/specification.json": {
+        "exists": true,
+        "expected": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "actual": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/execution-plan.json": {
+        "exists": true,
+        "expected": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "actual": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml": {
+        "exists": true,
+        "expected": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "actual": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json": {
+        "exists": true,
+        "expected": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "actual": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png": {
+        "exists": true,
+        "expected": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "actual": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json": {
+        "exists": true,
+        "expected": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "actual": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity": {
+        "exists": true,
+        "expected": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "actual": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "matches": true
+      },
+      "validation/builds/v5-windows/JungleMonkey.exe": {
+        "exists": true,
+        "expected": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "actual": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "matches": true
+      },
+      "V5-IMPLEMENTATION-REPORT.md": {
+        "exists": true,
+        "expected": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "actual": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "matches": true
+      },
+      "V5-LLM-EVALUATION.md": {
+        "exists": true,
+        "expected": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "actual": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "matches": true
+      },
+      "V5-UNITY-VERTICAL-SLICE.md": {
+        "exists": true,
+        "expected": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "actual": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "matches": true
+      },
+      "V5-VERIFICATION-MATRIX.md": {
+        "exists": true,
+        "expected": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "actual": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "matches": true
+      }
+    },
+    "v4_ok": true,
+    "v5_ok": true,
+    "v5_project_build_payload_git_clean": true,
+    "v5_project_build_payload_changes": []
+  },
+  "phase_gates": {
+    "phase4_independent_pass": true,
+    "phase5_reports_present": true,
+    "phase5_verdict": "PASS_AUTOMATED",
+    "build_identity_verdict": "PASS"
+  },
+  "provider_policy": {
+    "verification_date": "2026-11-10",
+    "statuses": {
+      "gemini": "free_limited",
+      "groq": "free_limited",
+      "openrouter": "free_limited",
+      "ollama": "local_free"
+    },
+    "free_statuses": [
+      "verified_free",
+      "free_limited",
+      "local_free"
+    ],
+    "live_tests_performed": 0,
+    "network_calls": 0
+  },
+  "routing": {
+    "default_mode": "deterministic",
+    "paid_fallback": false,
+    "trial_fallback": false,
+    "unknown_quota_is_unlimited": false,
+    "deterministic_fallback": true,
+    "failure_reasons": {
+      "429": "http_429_rate_limited",
+      "401": "http_401_unauthorized",
+      "403": "http_403_forbidden",
+      "timeout": "timeout",
+      "network": "network_failure",
+      "invalid_model": "invalid_model",
+      "deprecated": "deprecated",
+      "malformed_output": "malformed_output"
+    }
+  },
+  "security": {
+    "credentials_in_reports": false,
+    "secret_redaction_tested": true,
+    "https_enforced_by_existing_provider_validation": true,
+    "response_size_limits": "inherited from util.http_request",
+    "prompt_injection_markers": "inherited from llm.client",
+    "provider_code_execution": false
+  },
+  "integration": {
+    "character_spec_valid": true,
+    "environment_spec_valid": true,
+    "orchestrator_executable": false,
+    "ai_asset_claims": false
+  },
+  "reports": {
+    "v6-free-provider-catalog.json": "reports/v6-free-provider-catalog.json",
+    "v6-free-provider-evidence.json": "reports/v6-free-provider-evidence.json",
+    "v6-free-routing-policy.json": "reports/v6-free-routing-policy.json",
+    "v6-ai-game-design-evaluation.json": "reports/v6-ai-game-design-evaluation.json",
+    "v6-asset-generation-research.json": "reports/v6-asset-generation-research.json"
+  },
+  "limitations": [
+    "No live provider request was authorized or performed.",
+    "Mock tests do not prove live provider functionality or model quality.",
+    "Gemini free-tier limits are account/project specific and were not read from a live account.",
+    "Groq free-plan model availability and OpenRouter free-model availability can change; re-verify before use.",
+    "No image, texture, normal map, roughness map, 3D mesh or animation was generated, downloaded or installed.",
+    "Local open-source image/3D routes were not installed or benchmarked.",
+    "The benchmark measures deterministic structure and policy compliance, not live model quality."
+  ],
+  "human_verification_required": [
+    "Review provider terms and data-retention policies before any live use.",
+    "Configure credentials only through environment variables or the private secret store; never paste them into source or chat.",
+    "Run one explicitly approved, budgeted live request per provider if live verification is desired.",
+    "Inspect the generated reports and this audit before accepting Phase 6."
+  ],
+  "duration_seconds": 57.923
+}

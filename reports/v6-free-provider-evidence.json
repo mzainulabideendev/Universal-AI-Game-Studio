@@ -1,0 +1,248 @@
+{
+  "ok": true,
+  "schema_version": 1,
+  "verification_date": "2026-11-10",
+  "provider_count": 4,
+  "records": [
+    {
+      "provider": "gemini",
+      "official_name": "Google Gemini Developer API",
+      "documentation_urls": [
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/rate-limits",
+        "https://ai.google.dev/gemini-api/docs/models"
+      ],
+      "verification_date": "2026-11-10",
+      "free_tier_status": "free_limited",
+      "eligible_models": [
+        "gemini-3.8-flash",
+        "gemini-3.6-flash",
+        "gemini-3.5-flash-lite",
+        "gemini-3.1-flash-lite"
+      ],
+      "model_rule": "The pricing page marks each model's Free Tier individually. Only models explicitly marked 'Free of charge' are eligible; gemini-4-argon and Pro preview models are documented as not available on the free tier.",
+      "rate_limits": "Per-project RPM, TPM and RPD. Exact values are account and model specific and are displayed in Google AI Studio; RPD resets at midnight Pacific time.",
+      "quota_reliable_from_documentation": false,
+      "token_or_context_limits": "not exposed by the documented free-tier summary",
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "supported",
+        "json_mode": "supported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "supported",
+        "model_listing": "supported",
+        "health_check": "supported",
+        "image_generation": "unsupported",
+        "texture_generation": "unsupported",
+        "3d_mesh_generation": "unsupported"
+      },
+      "restrictions": [
+        "Free-tier content may be used to improve Google products (documented).",
+        "Rate limits are applied per project, not per API key.",
+        "Advanced models are paid only; automatic paid upgrade is forbidden."
+      ],
+      "geographic_limitations": [
+        "Availability follows Google's supported-regions list for the Gemini API; verify the account's region in AI Studio."
+      ],
+      "privacy_considerations": [
+        "Free-tier prompts/responses are documented as usable for product improvement; do not send proprietary project content without approval."
+      ],
+      "authentication": {
+        "env_var": "GEMINI_API_KEY",
+        "key_required": true
+      },
+      "requires_payment_info": false,
+      "live_test_authorized": false,
+      "live_test_performed": false,
+      "live_test_reason": "No credential was provided and no live request was approved.",
+      "verification_confidence": "high"
+    },
+    {
+      "provider": "groq",
+      "official_name": "GroqCloud",
+      "documentation_urls": [
+        "https://console.groq.com/docs/rate-limits",
+        "https://console.groq.com/docs/models",
+        "https://console.groq.com/docs/structured-outputs"
+      ],
+      "verification_date": "2026-11-10",
+      "free_tier_status": "free_limited",
+      "eligible_models": [
+        "openai/gpt-oss-120b",
+        "openai/gpt-oss-20b",
+        "qwen/qwen3.8-27b"
+      ],
+      "model_rule": "Only models listed on the Free Plan tab are eligible. Fast inference is not unlimited inference.",
+      "rate_limits": "Per-model RPM, RPD, TPM and TPD. HTTP 429 is returned when a limit is exceeded; rate-limit headers are documented.",
+      "quota_reliable_from_documentation": true,
+      "token_or_context_limits": {
+        "openai/gpt-oss-120b": {
+          "rpm": 30,
+          "rpd": 1000,
+          "tpm": 8000,
+          "tpd": 200000
+        },
+        "openai/gpt-oss-20b": {
+          "rpm": 30,
+          "rpd": 1000,
+          "tpm": 8000,
+          "tpd": 200000
+        },
+        "qwen/qwen3.8-27b": {
+          "rpm": 30,
+          "rpd": 1000,
+          "tpm": 8000,
+          "tpd": 200000
+        }
+      },
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "supported",
+        "json_mode": "supported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "unknown",
+        "model_listing": "supported",
+        "health_check": "supported",
+        "image_generation": "unsupported",
+        "texture_generation": "unsupported",
+        "3d_mesh_generation": "unsupported"
+      },
+      "restrictions": [
+        "Free-plan model catalogue and limits can change; re-verify before use.",
+        "The adapter does not send tools, images or streaming requests."
+      ],
+      "geographic_limitations": [
+        "Service availability depends on GroqCloud's supported regions and account eligibility."
+      ],
+      "privacy_considerations": [
+        "Review GroqCloud's data-retention terms before sending project content."
+      ],
+      "authentication": {
+        "env_var": "GROQ_API_KEY",
+        "key_required": true
+      },
+      "requires_payment_info": false,
+      "live_test_authorized": false,
+      "live_test_performed": false,
+      "live_test_reason": "No credential was provided and no live request was approved.",
+      "verification_confidence": "high"
+    },
+    {
+      "provider": "openrouter",
+      "official_name": "OpenRouter",
+      "documentation_urls": [
+        "https://openrouter.ai/docs/api-reference/limits",
+        "https://openrouter.ai/docs/guides/overview/models",
+        "https://openrouter.ai/docs/api/api-reference/models/list-all-models-and-their-properties"
+      ],
+      "verification_date": "2026-11-10",
+      "free_tier_status": "free_limited",
+      "eligible_models": [],
+      "model_rule": "A model is eligible only when its id ends with ':free'. Never route an OpenRouter request to a paid variant.",
+      "rate_limits": "Free-model rate limit is 20 requests/minute. Daily free requests are 50 for accounts with under 10 all-time credits and 1000 for accounts with at least 10 credits. GET /api/v1/key exposes free_model_daily_requests.",
+      "quota_reliable_from_documentation": true,
+      "token_or_context_limits": {
+        "rpm": 20,
+        "rpd_without_credit": 50,
+        "rpd_with_credits": 1000,
+        "credit_threshold": 10
+      },
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "supported",
+        "json_mode": "supported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "unknown",
+        "model_listing": "supported",
+        "health_check": "supported",
+        "image_generation": "unsupported",
+        "texture_generation": "unsupported",
+        "3d_mesh_generation": "unsupported"
+      },
+      "restrictions": [
+        "Daily free-request allowance depends on all-time credit purchases.",
+        "Model availability and deprecation change frequently; discover the model list before use.",
+        "Credit-purchase or paid-variant routing is refused under free-only mode."
+      ],
+      "geographic_limitations": [
+        "Availability depends on the upstream model provider and OpenRouter's routing rules."
+      ],
+      "privacy_considerations": [
+        "The upstream provider receives the request; review both OpenRouter and upstream data policies."
+      ],
+      "authentication": {
+        "env_var": "OPENROUTER_API_KEY",
+        "key_required": true
+      },
+      "requires_payment_info": false,
+      "live_test_authorized": false,
+      "live_test_performed": false,
+      "live_test_reason": "No credential was provided and no live request was approved.",
+      "verification_confidence": "high"
+    },
+    {
+      "provider": "ollama",
+      "official_name": "Ollama (local runtime)",
+      "documentation_urls": [
+        "https://docs.ollama.com/api/tags",
+        "https://docs.ollama.com/api/generate",
+        "https://docs.ollama.com/api/chat"
+      ],
+      "verification_date": "2026-11-10",
+      "free_tier_status": "local_free",
+      "eligible_models": [],
+      "model_rule": "Any locally installed model may be used, but capabilities stay unknown until /api/show or live discovery establishes them.",
+      "rate_limits": "Constrained by local CPU/RAM/GPU, not by a hosted quota. No quota is claimed.",
+      "quota_reliable_from_documentation": false,
+      "token_or_context_limits": "not exposed by the documented free-tier summary",
+      "capabilities": {
+        "text_generation": "supported",
+        "structured_output": "supported",
+        "json_mode": "supported",
+        "tool_calling": "unsupported",
+        "vision": "unsupported",
+        "streaming": "unsupported",
+        "embeddings": "unsupported",
+        "context_window": "unknown",
+        "model_listing": "supported",
+        "health_check": "supported",
+        "image_generation": "unsupported",
+        "texture_generation": "unsupported",
+        "3d_mesh_generation": "unsupported"
+      },
+      "restrictions": [
+        "This project never installs Ollama, starts the service or downloads a model.",
+        "A reachable loopback service must be verified before use.",
+        "Large models may not be practical on the documented 16 GB / integrated-GPU hardware; no performance claim is made without measurement."
+      ],
+      "geographic_limitations": [
+        "Runs wherever the local machine runs."
+      ],
+      "privacy_considerations": [
+        "Prompts stay on the local machine."
+      ],
+      "authentication": {
+        "env_var": null,
+        "key_required": false
+      },
+      "requires_payment_info": false,
+      "live_test_authorized": false,
+      "live_test_performed": false,
+      "live_test_reason": "No local service was verified and nothing was started.",
+      "verification_confidence": "high"
+    }
+  ],
+  "secrets_recorded": false,
+  "network_calls": 0,
+  "note": "Evidence comes from the official documentation URLs listed in each record. No API key or account identifier is stored here.",
+  "generated_at": "2026-11-10T03:52:27Z"
+}

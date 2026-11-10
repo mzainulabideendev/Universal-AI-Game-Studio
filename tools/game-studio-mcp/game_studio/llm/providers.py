@@ -507,6 +507,8 @@ _REGISTRY = {
     "openai_compatible": OpenAICompatibleProvider,
     "anthropic": AnthropicProvider,
     "gemini": GeminiProvider,
+    "groq": OpenAICompatibleProvider,
+    "openrouter": OpenAICompatibleProvider,
     "ollama": OllamaProvider,
 }
 

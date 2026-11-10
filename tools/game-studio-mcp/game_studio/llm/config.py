@@ -15,7 +15,8 @@ import urllib.parse
 from .. import config as studio_config
 from ..util import ToolError, now_iso, safe_join, write_json
 
-PROVIDERS = ("openai", "openai_compatible", "anthropic", "gemini", "ollama")
+PROVIDERS = ("openai", "openai_compatible", "anthropic", "gemini", "groq",
+             "openrouter", "ollama")
 
 DEFAULTS: dict[str, dict] = {
     "openai": {
@@ -41,8 +42,22 @@ DEFAULTS: dict[str, dict] = {
     },
     "gemini": {
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
-        "model": "gemini-1.5-flash",
+        "model": "gemini-3.8-flash",
         "key_env": "GEMINI_API_KEY",
+        "key_required": True,
+        "local": False,
+    },
+    "groq": {
+        "base_url": "https://api.groq.com/openai/v1",
+        "model": "openai/gpt-oss-120b",
+        "key_env": "GROQ_API_KEY",
+        "key_required": True,
+        "local": False,
+    },
+    "openrouter": {
+        "base_url": "https://openrouter.ai/api/v1",
+        "model": "openai/gpt-oss-20b:free",
+        "key_env": "OPENROUTER_API_KEY",
         "key_required": True,
         "local": False,
     },
@@ -374,7 +389,8 @@ def status() -> dict:
         "providers": providers,
         "missing": missing,
         "env_example": {
-            "GAME_STUDIO_LLM_PROVIDER": "ollama | openai | openai_compatible | anthropic | gemini",
+            "GAME_STUDIO_LLM_PROVIDER": ("ollama | openai | openai_compatible | "
+                                           "anthropic | gemini | groq | openrouter"),
             "GAME_STUDIO_LLM_MODEL": "provider model id",
             "GAME_STUDIO_LLM_BASE_URL": "optional custom endpoint",
             "GAME_STUDIO_LLM_API_KEY": "preferred shared key variable (never commit it)",

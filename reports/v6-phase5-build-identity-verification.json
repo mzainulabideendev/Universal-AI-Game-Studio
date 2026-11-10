@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 5 - independent build identity verification",
+  "generated_at": "2026-11-10T00:00:00Z",
+  "verdict": "PASS",
+  "question": "Does the identical SHA-256 of validation/builds/v5-windows/JungleMonkey.exe and validation/builds/v6-windows/V6JungleMonkey.exe prove that the V6 executable was copied, reused, or misreported?",
+  "answer": "No. Both launchers are byte-identical Unity player stubs for Unity 6000.6.2f1, which is expected. The V6 build is a genuine, separately produced build: its _Data payload, runtime assembly, scene content, build GUID, build log project path and live gameplay all belong to validation/unity-jungle-v6.",
+  "environment": {
+    "unity_version": "6000.6.2f1",
+    "unity_changeset": "770e33f6875c",
+    "platform": "StandaloneWindows64",
+    "repository_head": "ee6093ecb3df086c835d430e75d7c381bbe7ca03",
+    "repository_branch": "main"
+  },
+  "executables": {
+    "v5": {
+      "path": "validation/builds/v5-windows/JungleMonkey.exe",
+      "exists": true,
+      "bytes": 667136,
+      "sha256": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+      "modified_utc": "2026-11-06T04:27:09.0540002Z"
+    },
+    "v6": {
+      "path": "validation/builds/v6-windows/V6JungleMonkey.exe",
+      "exists": true,
+      "bytes": 667136,
+      "sha256": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+      "modified_utc": "2026-11-09T04:38:56.1093782Z"
+    },
+    "byte_for_byte": {
+      "tool": "cmd /c fc /b",
+      "result": "no differences encountered",
+      "identical": true
+    },
+    "same_hash_reported_correctly": true
+  },
+  "payload_comparison": {
+    "note": "All game content lives in the *_Data folder; the .exe is only the Unity player launcher stub.",
+    "files": [
+      {
+        "name": "app.info",
+        "v5": { "bytes": 41, "sha256": "551d2a47636064aa984ab5f33122acc4f39291960b84836e26661d76775d2974", "content": "Universal AI Game Studio / V5 Jungle Monkey" },
+        "v6": { "bytes": 41, "sha256": "b8379a9eae25413f97e17988fd15f19ada252cd051c60819ef95c2bab43a7791", "content": "Universal AI Game Studio / V6 Jungle Monkey" },
+        "different": true
+      },
+      {
+        "name": "boot.config",
+        "v5": { "bytes": 156, "sha256": "cae286ffcca8bb86cfd27ae9a3d880f14aadeaec2971e97ec12c102df764f9f2", "build_guid": "54f68ea4831f41308cee30dc110733d3" },
+        "v6": { "bytes": 156, "sha256": "d2e8bf67558b6a9de6e3d5a889fb41d6cf7bd2170fa7eb146a202ad26118c2ae", "build_guid": "1f24c50c14ec4af68961bafbacf9a7c2" },
+        "different": true
+      },
+      {
+        "name": "level0",
+        "v5": { "bytes": 16508, "sha256": "9c76347ede79acdfb90813939df5eac815734dfd2ce12ae8bdf742812e9a7d79" },
+        "v6": { "bytes": 206984, "sha256": "ce141a0632c77f8942b08ad9cc55b715538b676a3dcd60ff10a27e620c70b687" },
+        "different": true
+      },
+      {
+        "name": "sharedassets0.assets",
+        "v5": { "bytes": 381460, "sha256": "11cf231a1b5ca07f48afff0c106b3f59af6a58f6a06b3e1b0aa997133249d007" },
+        "v6": { "bytes": 1840820, "sha256": "08e5fd8437362952f62e8bdef8968da9931a83959d1c5ffb037adc7115c370bd" },
+        "different": true
+      },
+      {
+        "name": "Managed/V5.Runtime.dll vs Managed/V6.Runtime.dll",
+        "v5": { "bytes": 14336, "sha256": "219cf9812564cdb541ee48ba967ca84f239d722f41d97ac3325329f80d90caae" },
+        "v6": { "bytes": 64512, "sha256": "cff6c4a42b001e61d834c49b2706637c3f9e54f158fc1f5472e289a6a4f2601c" },
+        "different": true
+      }
+    ],
+    "total_build_size": {
+      "v5": 97397842,
+      "v6": 99723790
+    }
+  },
+  "build_provenance": {
+    "v6": {
+      "log": "validation/unity-jungle-v6/Logs/build-windows-final2.log",
+      "command_line": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.6.2f1\\Editor\\Unity.exe -batchmode -nographics -projectPath D:\\MCP\\MCP\\validation\\unity-jungle-v6 -executeMethod V6.EditorTools.V6Build.BuildWindows -quit -logFile D:\\MCP\\MCP\\validation\\unity-jungle-v6\\Logs\\build-windows-final2.log",
+      "project_path": "D:\\MCP\\MCP\\validation\\unity-jungle-v6",
+      "execute_method": "V6.EditorTools.V6Build.BuildWindows",
+      "result": "Succeeded",
+      "total_errors": 0,
+      "total_warnings": 16,
+      "output_path": "D:\\MCP\\MCP\\validation\\builds\\v6-windows\\V6JungleMonkey.exe",
+      "total_size": 99723790,
+      "build_time_seconds": 6.467576503753662,
+      "unity_version": "6000.6.2f1",
+      "launcher_reuse_note": "Log says 'Not rebuilding Data files -- no changes'. Unity rewrites the launcher only when it changes; it kept the byte-identical stub from the first successful build (2026-11-09T04:38:56Z) while later builds rewrote the changed data files (2026-11-09T04:50:44Z and 04:56:33Z)."
+    },
+    "v5": {
+      "evidence": "validation/builds/v5-build.json",
+      "provenance": "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json",
+      "result": "Succeeded",
+      "total_errors": 0,
+      "total_warnings": 1,
+      "output_path": "D:\\MCP\\MCP\\validation\\builds\\v5-windows\\JungleMonkey.exe",
+      "total_size": 97397842,
+      "build_time_seconds": 4.468403339385986,
+      "execute_method": "V5.EditorTools.V5Build.BuildWindows",
+      "provenance_started_utc": "2026-11-06T04:30:53.394Z",
+      "provenance_ended_utc": "2026-11-06T04:31:13.362Z",
+      "launcher_reuse_note": "The V5 launcher also predates its final payload rewrite (exe 04:27:09Z, payload boot.config 04:31:06Z), showing the same Unity behavior on an independent build."
+    },
+    "v6_scene": {
+      "path": "validation/unity-jungle-v6/Assets/V6/Scenes/JungleMonkeyV6.unity",
+      "bytes": 379627,
+      "sha256": "b35ab31fe5b7c8bf108220cd75023b0d2c4995c1fe60a2428ca97c8bd1cd220e",
+      "editor_build_settings": "ProjectSettings/EditorBuildSettings.asset lists only Assets/V6/Scenes/JungleMonkeyV6.unity"
+    }
+  },
+  "content_verification": {
+    "method": "Independent ASCII and UTF-16LE string extraction from the shipped binaries (script: C:\\Users\\zu442\\AppData\\Local\\Temp\\opencode\\v6_strings_scan.py).",
+    "v6_runtime_assembly": {
+      "path": "validation/builds/v6-windows/V6JungleMonkey_Data/Managed/V6.Runtime.dll",
+      "types_found": [
+        "PlayerMovement",
+        "CollectibleManager",
+        "AutoPlayDriver",
+        "LevelManager",
+        "GameStateController",
+        "ObjectiveManager",
+        "UIManager",
+        "DestinationZone",
+        "CheckpointManager"
+      ],
+      "embedded_pdb_path": "D:\\MCP\\MCP\\validation\\unity-jungle-v6\\Library\\Bee\\artifacts\\1900b0aP.dag\\V6.Runtime.pdb"
+    },
+    "v5_runtime_assembly": {
+      "path": "validation/builds/v5-windows/JungleMonkey_Data/Managed/V5.Runtime.dll",
+      "v6_gameplay_types_found": false,
+      "embedded_pdb_path": "D:\\MCP\\MCP\\validation\\unity-jungle-v5\\Library\\Bee\\artifacts\\1900b0aP.dag\\V5.Runtime.pdb",
+      "note": "V5 assembly contains only the V5 demo driver and none of the V6 gameplay types."
+    },
+    "v6_level0": {
+      "path": "validation/builds/v6-windows/V6JungleMonkey_Data/level0",
+      "strings_found": [
+        "JungleEnvironment",
+        "DestinationAnchor",
+        "BANANAS  0 / 10",
+        "BananaText",
+        "Banana_00",
+        "Banana_01",
+        "Checkpoint_00",
+        "Checkpoint_01",
+        "Checkpoints",
+        "SPAWN_PLAYER",
+        "Mouse: orbit camera"
+      ]
+    },
+    "v5_level0": {
+      "path": "validation/builds/v5-windows/JungleMonkey_Data/level0",
+      "v6_specific_strings_found": false,
+      "note": "Contains older V5 UI text 'Bananas: 0 / 10' and no DestinationAnchor or checkpoint markers."
+    },
+    "scene_source_inventory": [
+      "Assets/V6/Scripts/Core/GameManager.cs",
+      "Assets/V6/Scripts/Core/GameStateController.cs",
+      "Assets/V6/Scripts/Core/LevelManager.cs",
+      "Assets/V6/Scripts/Core/ObjectiveManager.cs",
+      "Assets/V6/Scripts/Core/CheckpointManager.cs",
+      "Assets/V6/Scripts/Core/DestinationZone.cs",
+      "Assets/V6/Scripts/Player/PlayerMovement.cs",
+      "Assets/V6/Scripts/Collectibles/CollectibleManager.cs",
+      "Assets/V6/Scripts/UI/UIManager.cs",
+      "Assets/V6/Scripts/Core/AutoPlayDriver.cs"
+    ]
+  },
+  "runtime_test": {
+    "executable": "validation/builds/v6-windows/V6JungleMonkey.exe",
+    "command": "V6JungleMonkey.exe -v6autoplay -v6seconds 30 -v6capture reports\\v6-build-identity-captures -v6perf reports\\v6-phase5-build-identity-perf.json -logFile reports\\v6-phase5-build-identity-player.log",
+    "exit_code": 0,
+    "started_by": "independent fresh process started for this verification",
+    "scene_validation": {
+      "passed": true,
+      "issues": [],
+      "collectibles": 10,
+      "animator_present": true,
+      "environment_present": true,
+      "destination_present": true,
+      "camera_present": true,
+      "ui_present": true,
+      "spawn": "(0.00, 3.80, 48.00)",
+      "destination": "(0.00, 2.52, -46.00)"
+    },
+    "gameplay_events": [
+      "MainMenu captured",
+      "Playing captured",
+      "Paused captured",
+      "Checkpoint 0 reached",
+      "Checkpoint 1 reached",
+      "Level complete captured",
+      "AutoPlay finished; quitting"
+    ],
+    "performance": {
+      "frames": 1286,
+      "duration_seconds": 24.387413024902344,
+      "average_fps": 52.732120513916016,
+      "p95_frame_ms": 16.70940399169922,
+      "one_percent_low_fps": 4.145193576812744,
+      "screen": "1280x720",
+      "quality_level": "Ultra",
+      "captured_utc": "2026-11-09T05:21:46.5278746Z"
+    },
+    "fresh_captures": [
+      { "path": "reports/v6-build-identity-captures/01-main-menu.png", "bytes": 368372, "sha256": "5656e06dcaa9db34c04fbd6be94f436013c765faa717080a7776ea91c44ac20c", "captured_utc": "2026-11-09T05:21:24.9306922Z" },
+      { "path": "reports/v6-build-identity-captures/02-playing.png", "bytes": 349014, "sha256": "d348643e9ebbcf725c11d4cd5d773b690cb51ad563b184cfaa82677cf9ed4440", "captured_utc": "2026-11-09T05:21:26.1789838Z" },
+      { "path": "reports/v6-build-identity-captures/03-paused.png", "bytes": 259120, "sha256": "b9f0be6a888bc8c4827092d876656aacc796264fd6f9d84d8db11045bf0201ba", "captured_utc": "2026-11-09T05:21:28.1766926Z" },
+      { "path": "reports/v6-build-identity-captures/04-level-complete.png", "bytes": 142811, "sha256": "893c0363aa197e01113c7b422dc893bfd652d4f88af95222d304cf3e81268b1e", "captured_utc": "2026-11-09T05:21:43.0668409Z" }
+    ],
+    "evidence_files": [
+      { "path": "reports/v6-phase5-build-identity-player.log", "bytes": 6243, "sha256": "1c7be519b14ba664c4feb964791582cd59398bdbe3cad21c90b292f4d212fab7" },
+      { "path": "reports/v6-phase5-build-identity-perf.json", "bytes": 686, "sha256": "838ad07d2387142632a311c314d02fbe810000cf48d73405c5a6dc0f30b63671" }
+    ]
+  },
+  "interpretation": {
+    "why_launchers_match": "A Unity Windows player .exe is a small launcher stub produced from the same Unity 6000.6.2f1 player package. Two builds of the same target with the same editor produce the same stub bytes, so an identical SHA-256 is expected and is not evidence of copying or reuse.",
+    "unity_reuse_behavior": "Unity's incremental build keeps an existing launcher when it is byte-identical and rewrites only changed data. This is visible on both V5 and V6: each launcher timestamp is older than the corresponding final _Data timestamps.",
+    "proof_v6_is_genuine": [
+      "Build log command line explicitly uses -projectPath D:\\MCP\\MCP\\validation\\unity-jungle-v6 and V6.EditorTools.V6Build.BuildWindows.",
+      "V6.Runtime.dll embeds the PDB path under validation/unity-jungle-v6 and contains V6 gameplay types absent from V5.Runtime.dll.",
+      "V6 level0 contains Phase 5 scene content: DestinationAnchor, Checkpoint_00/01, Banana_00..10 and the 'BANANAS 0 / 10' UI.",
+      "V6 app.info says 'V6 Jungle Monkey'; boot.config has a different build GUID.",
+      "A fresh 30-second autoplay run of the V6 executable completed gameplay and reached checkpoints and level completion.",
+      "V6 total build size is 99,723,790 bytes versus V5's 97,397,842 bytes."
+    ]
+  },
+  "v5_preservation": {
+    "baseline": "reports/v6-phase0-baseline.json",
+    "artifacts_checked": 15,
+    "artifacts_matching": 15,
+    "v5_artifacts": 13,
+    "v4_files": 2,
+    "all_match": true,
+    "details": [
+      { "path": "validation/unity-jungle-v5/.game-studio/manifest.json", "exists": true, "bytes": 192107, "sha256": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed", "matches": true },
+      { "path": "validation/unity-jungle-v5/.game-studio/specification.json", "exists": true, "bytes": 61730, "sha256": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663", "matches": true },
+      { "path": "validation/unity-jungle-v5/.game-studio/execution-plan.json", "exists": true, "bytes": 13112, "sha256": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408", "matches": true },
+      { "path": "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml", "exists": true, "bytes": 8252, "sha256": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb", "matches": true },
+      { "path": "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json", "exists": true, "bytes": 302, "sha256": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7", "matches": true },
+      { "path": "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png", "exists": true, "bytes": 300694, "sha256": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9", "matches": true },
+      { "path": "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json", "exists": true, "bytes": 2661, "sha256": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7", "matches": true },
+      { "path": "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity", "exists": true, "bytes": 62862, "sha256": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6", "matches": true },
+      { "path": "validation/builds/v5-windows/JungleMonkey.exe", "exists": true, "bytes": 667136, "sha256": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e", "matches": true },
+      { "path": "V5-IMPLEMENTATION-REPORT.md", "exists": true, "bytes": 11275, "sha256": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7", "matches": true },
+      { "path": "V5-LLM-EVALUATION.md", "exists": true, "bytes": 5753, "sha256": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377", "matches": true },
+      { "path": "V5-UNITY-VERTICAL-SLICE.md", "exists": true, "bytes": 8747, "sha256": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4", "matches": true },
+      { "path": "V5-VERIFICATION-MATRIX.md", "exists": true, "bytes": 9865, "sha256": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548", "matches": true },
+      { "path": "tools/game-studio-mcp/tests/test_llm_v4.py", "exists": true, "bytes": 40996, "sha256": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2", "matches": true },
+      { "path": "tools/game-studio-mcp/tests/test_p0_v4.py", "exists": true, "bytes": 30890, "sha256": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d", "matches": true }
+    ]
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "informational",
+      "summary": "The V5 and V6 .exe files are byte-identical, and the identical SHA-256 was reported correctly.",
+      "evidence": "fc /b: no differences encountered; both 667,136 bytes; both af88b840...c99e."
+    },
+    {
+      "id": "F2",
+      "severity": "informational",
+      "summary": "Identical launchers are expected Unity behavior for the same Unity version and build target.",
+      "evidence": "Unity 6000.6.2f1 produced both; only the launcher stub is identical while every game-content file differs."
+    },
+    {
+      "id": "F3",
+      "severity": "informational",
+      "summary": "Unity kept the existing launcher and rewrote only data files during subsequent builds.",
+      "evidence": "V6 exe is 04:38:56Z while V6 level0/sharedassets are 04:50:44Z and boot.config is 04:56:33Z; the final2 log states 'Not rebuilding Data files -- no changes'. V5 shows the same pattern (exe 04:27:09Z vs payload 04:31:06Z)."
+    },
+    {
+      "id": "F4",
+      "severity": "informational",
+      "summary": "The V6 build is genuine and contains the Phase 5 implementation.",
+      "evidence": "Build log project path, embedded PDB path, runtime types, level0 scene strings, build GUID, app.info, payload sizes and a fresh live playthrough."
+    }
+  ],
+  "limitations": [
+    "The launcher stub identity cannot be used to distinguish builds; verification therefore relies on the *_Data payload, build logs and runtime behavior.",
+    "The fresh playthrough is automated (-v6autoplay), not a human playtest.",
+    "Draw call reporting was unavailable (-1) in the performance snapshot.",
+    "The first-run performance sample includes a multi-second shader compilation hitch."
+  ],
+  "safety": {
+    "v5_overwritten": false,
+    "commits_made": false,
+    "pushes_made": false,
+    "tags_created": false,
+    "installs_or_downloads": false,
+    "paid_api_requests": false
+  }
+}

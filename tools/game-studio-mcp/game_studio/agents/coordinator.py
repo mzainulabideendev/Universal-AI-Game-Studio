@@ -34,7 +34,8 @@ class Orchestrator:
                  platform: str | None = None, quality_target: str = "prototype",
                  concurrency: int = DEFAULT_CONCURRENCY, max_retries: int = 1,
                  provider_executor=None, use_provider: bool = False,
-                 allow_paid: bool = False, installed_engines: list[str] | None = None,
+                 allow_paid: bool = False, free_only: bool = False,
+                 installed_engines: list[str] | None = None,
                  approved_decisions: list[dict] | None = None,
                  cancel_event: threading.Event | None = None):
         if not isinstance(request, str) or not request.strip():
@@ -54,6 +55,12 @@ class Orchestrator:
         self.provider_executor = provider_executor
         self.use_provider = bool(use_provider)
         self.allow_paid = bool(allow_paid)
+        # free_only is an additive Phase 6 policy. It never enables paid routing:
+        # when set, allow_paid is forced off and only documented free providers
+        # can be selected.
+        self.free_only = bool(free_only)
+        if self.free_only:
+            self.allow_paid = False
         self.installed_engines = [str(x).lower() for x in (installed_engines or [])]
         self.approved_decisions = approved_decisions or []
         self.cancel_event = cancel_event or threading.Event()
@@ -187,12 +194,20 @@ class Orchestrator:
                        "retryable": False},
             )
 
-        decision = routing.route(
-            spec.task_category,
-            required_capabilities=list(spec.required_capabilities),
-            context_chars=estimated_chars,
-            allow_paid=self.allow_paid,
-        )
+        if self.free_only:
+            from ..llm import free_routing
+            decision = free_routing.route(
+                spec.task_category,
+                required_capabilities=list(spec.required_capabilities),
+                context_chars=estimated_chars,
+            )
+        else:
+            decision = routing.route(
+                spec.task_category,
+                required_capabilities=list(spec.required_capabilities),
+                context_chars=estimated_chars,
+                allow_paid=self.allow_paid,
+            )
         self.routing_decisions[task["id"]] = {
             "task": task["id"],
             "mode": decision["mode"],

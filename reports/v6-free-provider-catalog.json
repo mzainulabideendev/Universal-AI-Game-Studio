@@ -1,0 +1,118 @@
+{
+  "ok": true,
+  "schema_version": 1,
+  "verification_date": "2026-11-10",
+  "statuses": {
+    "verified_free": "Documented free allowance, no payment and no expiry.",
+    "free_limited": "Documented finite free allowance, rate/token limited.",
+    "local_free": "Local software with no hosted billing.",
+    "paid": "Officially paid; refused under free-only mode.",
+    "trial_only": "One-off trial credit; not an ongoing free allowance.",
+    "unknown": "Not established; refused under free-only mode.",
+    "unavailable": "No usable API route."
+  },
+  "free_statuses": [
+    "verified_free",
+    "free_limited",
+    "local_free"
+  ],
+  "providers": [
+    {
+      "provider": "gemini",
+      "name": "Google Gemini Developer API",
+      "kind": "hosted",
+      "status": "free_limited",
+      "free": true,
+      "integrated": true,
+      "adapter": "gemini",
+      "eligible_models": [
+        "gemini-3.8-flash",
+        "gemini-3.6-flash",
+        "gemini-3.5-flash-lite",
+        "gemini-3.1-flash-lite"
+      ],
+      "model_rule": "The pricing page marks each model's Free Tier individually. Only models explicitly marked 'Free of charge' are eligible; gemini-4-argon and Pro preview models are documented as not available on the free tier.",
+      "known_daily_limit": null,
+      "requires_payment_info": false,
+      "docs": [
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/rate-limits",
+        "https://ai.google.dev/gemini-api/docs/models"
+      ],
+      "verified_on": "2026-11-10",
+      "confidence": "high"
+    },
+    {
+      "provider": "groq",
+      "name": "GroqCloud",
+      "kind": "hosted",
+      "status": "free_limited",
+      "free": true,
+      "integrated": true,
+      "adapter": "openai_compatible",
+      "eligible_models": [
+        "openai/gpt-oss-120b",
+        "openai/gpt-oss-20b",
+        "qwen/qwen3.8-27b"
+      ],
+      "model_rule": "Only models listed on the Free Plan tab are eligible. Fast inference is not unlimited inference.",
+      "known_daily_limit": 1000,
+      "requires_payment_info": false,
+      "docs": [
+        "https://console.groq.com/docs/rate-limits",
+        "https://console.groq.com/docs/models",
+        "https://console.groq.com/docs/structured-outputs"
+      ],
+      "verified_on": "2026-11-10",
+      "confidence": "high"
+    },
+    {
+      "provider": "openrouter",
+      "name": "OpenRouter",
+      "kind": "hosted",
+      "status": "free_limited",
+      "free": true,
+      "integrated": true,
+      "adapter": "openai_compatible",
+      "eligible_models": [],
+      "model_rule": "A model is eligible only when its id ends with ':free'. Never route an OpenRouter request to a paid variant.",
+      "known_daily_limit": 50,
+      "requires_payment_info": false,
+      "docs": [
+        "https://openrouter.ai/docs/api-reference/limits",
+        "https://openrouter.ai/docs/guides/overview/models",
+        "https://openrouter.ai/docs/api/api-reference/models/list-all-models-and-their-properties"
+      ],
+      "verified_on": "2026-11-10",
+      "confidence": "high"
+    },
+    {
+      "provider": "ollama",
+      "name": "Ollama (local runtime)",
+      "kind": "local",
+      "status": "local_free",
+      "free": true,
+      "integrated": true,
+      "adapter": "ollama",
+      "eligible_models": [],
+      "model_rule": "Any locally installed model may be used, but capabilities stay unknown until /api/show or live discovery establishes them.",
+      "known_daily_limit": null,
+      "requires_payment_info": false,
+      "docs": [
+        "https://docs.ollama.com/api/tags",
+        "https://docs.ollama.com/api/generate",
+        "https://docs.ollama.com/api/chat"
+      ],
+      "verified_on": "2026-11-10",
+      "confidence": "high"
+    }
+  ],
+  "live_tests": {
+    "authorized": 0,
+    "performed": 0
+  },
+  "network_calls": 0,
+  "note": "Documentation evidence only. A configured credential is still required for hosted providers, and no live provider request was made.",
+  "generated_at": "2026-11-10T03:52:27Z",
+  "source": "official documentation URLs recorded per provider"
+}

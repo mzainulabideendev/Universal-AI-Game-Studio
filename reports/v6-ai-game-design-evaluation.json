@@ -1,0 +1,226 @@
+{
+  "ok": true,
+  "schema_version": "1.0",
+  "evaluation_mode": "deterministic",
+  "live_provider_quality": false,
+  "provider_ranking": null,
+  "note": "This benchmark measures schema validity, decomposition coverage, determinism and cost-policy compliance. It does not measure or rank live model quality.",
+  "ideas": [
+    {
+      "id": "simple_2d",
+      "input": "Create a simple 2D platformer where a cat collects fish.",
+      "requirement_count": 24,
+      "user_requirement_count": 2,
+      "coverage_items": 15,
+      "coverage_present": 15,
+      "schema_valid": true,
+      "contradiction_count": 0,
+      "unsupported_count": 0,
+      "blocked_count": 0,
+      "cost_policy_mode": "deterministic",
+      "paid_fallback": false,
+      "deterministic_fallback_available": true,
+      "reproducible": true,
+      "output_sha256": "9071dc7f77a186c0f494e4eee3d69ee49aeb50633e5286cbb4b3b91030e9d1d4"
+    },
+    {
+      "id": "endless_runner_3d",
+      "input": "Create a 3D endless runner where a robot dodges obstacles.",
+      "requirement_count": 24,
+      "user_requirement_count": 2,
+      "coverage_items": 15,
+      "coverage_present": 15,
+      "schema_valid": true,
+      "contradiction_count": 0,
+      "unsupported_count": 0,
+      "blocked_count": 0,
+      "cost_policy_mode": "deterministic",
+      "paid_fallback": false,
+      "deterministic_fallback_available": true,
+      "reproducible": true,
+      "output_sha256": "43516bd1dcf3157748c0baeb99f387accbd23e200d0b60da6212df3a3fe4c0bc"
+    },
+    {
+      "id": "jungle_adventure",
+      "input": "Create a 3D jungle adventure where a monkey collects bananas.",
+      "requirement_count": 28,
+      "user_requirement_count": 5,
+      "coverage_items": 15,
+      "coverage_present": 15,
+      "schema_valid": true,
+      "contradiction_count": 0,
+      "unsupported_count": 0,
+      "blocked_count": 0,
+      "cost_policy_mode": "deterministic",
+      "paid_fallback": false,
+      "deterministic_fallback_available": true,
+      "reproducible": true,
+      "output_sha256": "cae6a5c094ba3a7f8032b1426743eca715f16a7cdd3fa6db23b35436875deb5d"
+    },
+    {
+      "id": "chess",
+      "input": "Create a chess game with an AI opponent and a move history panel.",
+      "requirement_count": 22,
+      "user_requirement_count": 1,
+      "coverage_items": 15,
+      "coverage_present": 15,
+      "schema_valid": true,
+      "contradiction_count": 0,
+      "unsupported_count": 0,
+      "blocked_count": 0,
+      "cost_policy_mode": "deterministic",
+      "paid_fallback": false,
+      "deterministic_fallback_available": true,
+      "reproducible": true,
+      "output_sha256": "c62ecaeae9117da18d7a442b2720bed2965e34f9b6639198088a086352b61aca"
+    },
+    {
+      "id": "fighting",
+      "input": "Create a 3D fighting game with two characters and a health bar.",
+      "requirement_count": 27,
+      "user_requirement_count": 3,
+      "coverage_items": 15,
+      "coverage_present": 15,
+      "schema_valid": true,
+      "contradiction_count": 0,
+      "unsupported_count": 0,
+      "blocked_count": 0,
+      "cost_policy_mode": "deterministic",
+      "paid_fallback": false,
+      "deterministic_fallback_available": true,
+      "reproducible": true,
+      "output_sha256": "0dbeec340ddc5fa70e70ca86368e4c4c838bdd3dac4d2b98aa0ab26a7dd16293"
+    },
+    {
+      "id": "open_world",
+      "input": "Create an open world exploration game with hundreds of quests.",
+      "requirement_count": 34,
+      "user_requirement_count": 3,
+      "coverage_items": 15,
+      "coverage_present": 15,
+      "schema_valid": true,
+      "contradiction_count": 0,
+      "unsupported_count": 1,
+      "blocked_count": 1,
+      "cost_policy_mode": "deterministic",
+      "paid_fallback": false,
+      "deterministic_fallback_available": true,
+      "reproducible": true,
+      "output_sha256": "393b2dd0a4440020c96e7a9bd9048a4edcf6903d0a88af588c4bade348cdd677"
+    }
+  ],
+  "summary": {
+    "ideas": 6,
+    "schema_valid": true,
+    "all_reproducible": true,
+    "cost_policy_compliant": true,
+    "live_model_quality_measured": false
+  },
+  "generated_at": "2026-11-10T03:52:27Z",
+  "example_design": {
+    "concept": "Build a 3D adventure game featuring a monkey set in a jungle environment.",
+    "validation": {
+      "valid": true,
+      "errors": []
+    },
+    "requirements_summary": {
+      "total": 28,
+      "user": 5,
+      "recommendations": 23
+    },
+    "coverage": [
+      {
+        "id": "player_character",
+        "label": "Player character",
+        "covered_by": "R-004"
+      },
+      {
+        "id": "character_rig_animations",
+        "label": "Character rig and animations",
+        "covered_by": "R-021",
+        "added_as_recommendation": true
+      },
+      {
+        "id": "jungle_terrain",
+        "label": "Terrain",
+        "covered_by": "R-002"
+      },
+      {
+        "id": "vegetation",
+        "label": "Vegetation",
+        "covered_by": "R-022",
+        "added_as_recommendation": true
+      },
+      {
+        "id": "collectibles",
+        "label": "Collectibles",
+        "covered_by": "R-005"
+      },
+      {
+        "id": "collision",
+        "label": "Collision",
+        "covered_by": "R-023",
+        "added_as_recommendation": true
+      },
+      {
+        "id": "camera",
+        "label": "Camera",
+        "covered_by": "R-012"
+      },
+      {
+        "id": "player_controls",
+        "label": "Player controls",
+        "covered_by": "R-011"
+      },
+      {
+        "id": "score_system",
+        "label": "Score system",
+        "covered_by": "R-024",
+        "added_as_recommendation": true
+      },
+      {
+        "id": "objectives",
+        "label": "Objectives",
+        "covered_by": "R-008"
+      },
+      {
+        "id": "hud",
+        "label": "HUD",
+        "covered_by": "R-013"
+      },
+      {
+        "id": "game_states",
+        "label": "Game states",
+        "covered_by": "R-025",
+        "added_as_recommendation": true
+      },
+      {
+        "id": "performance",
+        "label": "Performance target",
+        "covered_by": "R-026",
+        "added_as_recommendation": true
+      },
+      {
+        "id": "build_configuration",
+        "label": "Build configuration",
+        "covered_by": "R-027",
+        "added_as_recommendation": true
+      },
+      {
+        "id": "tests",
+        "label": "Tests",
+        "covered_by": "R-028",
+        "added_as_recommendation": true
+      }
+    ],
+    "executable": false
+  },
+  "character_integration": {
+    "valid": true,
+    "ai_generated_asset": false
+  },
+  "environment_integration": {
+    "valid": true,
+    "ai_generated_asset": false
+  }
+}

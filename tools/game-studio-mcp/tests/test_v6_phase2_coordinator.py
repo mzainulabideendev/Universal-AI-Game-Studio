@@ -543,10 +543,13 @@ class McpIntegrationTests(BaseCase):
         names = [tool["name"] for tool in server.TOOLS]
         self.assertEqual(len(names), len(set(names)))
         self.assertEqual(set(names), set(server.HANDLERS))
-        self.assertEqual(len(names), 94)
+        # V6 Phase 6 adds seven free-AI tools to the original 94-tool surface.
+        self.assertEqual(len(names), 101)
         self.assertIn("orchestrate_game_plan", names)
         self.assertIn("environment_generate_asset", names)
         self.assertIn("environment_profiles", names)
+        self.assertIn("llm_free_route", names)
+        self.assertIn("llm_game_requirements", names)
 
     def test_orchestrate_tool_schema_is_strict(self) -> None:
         tool = next(t for t in server.TOOLS if t["name"] == "orchestrate_game_plan")

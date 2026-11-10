@@ -30,6 +30,9 @@ CAPABILITY_KEYS = (
     "context_window",
     "model_listing",
     "health_check",
+    "image_generation",
+    "texture_generation",
+    "3d_mesh_generation",
 )
 
 CAPABILITY_LABELS = {
@@ -43,6 +46,9 @@ CAPABILITY_LABELS = {
     "context_window": "Context window size",
     "model_listing": "Model discovery endpoint implemented",
     "health_check": "Reachability/health check implemented",
+    "image_generation": "Text-to-image generation through this adapter",
+    "texture_generation": "Texture/material map generation through this adapter",
+    "3d_mesh_generation": "3D mesh generation through this adapter",
 }
 
 TASK_CATEGORIES = {
@@ -157,6 +163,46 @@ _PROVIDER_PROFILES: dict[str, dict] = {
             "Model context window is only known after discovery returns token limits.",
         ],
     },
+    "groq": {
+        "kind": "hosted",
+        "capabilities": {
+            "text_generation": SUPPORTED,
+            "structured_output": SUPPORTED,
+            "json_mode": SUPPORTED,
+            "tool_calling": UNSUPPORTED,
+            "vision": UNSUPPORTED,
+            "streaming": UNSUPPORTED,
+            "embeddings": UNSUPPORTED,
+            "context_window": UNKNOWN,
+            "model_listing": SUPPORTED,
+            "health_check": SUPPORTED,
+        },
+        "limitations": [
+            "Uses the OpenAI-compatible adapter; no tools, images or streaming are sent.",
+            "Free-plan model eligibility and limits are documented per model and must be "
+            "re-verified before use.",
+        ],
+    },
+    "openrouter": {
+        "kind": "hosted",
+        "capabilities": {
+            "text_generation": SUPPORTED,
+            "structured_output": SUPPORTED,
+            "json_mode": SUPPORTED,
+            "tool_calling": UNSUPPORTED,
+            "vision": UNSUPPORTED,
+            "streaming": UNSUPPORTED,
+            "embeddings": UNSUPPORTED,
+            "context_window": UNKNOWN,
+            "model_listing": SUPPORTED,
+            "health_check": SUPPORTED,
+        },
+        "limitations": [
+            "Uses the OpenAI-compatible adapter; no tools, images or streaming are sent.",
+            "Only model ids ending in ':free' are eligible; paid variants are refused.",
+            "Free-model availability and daily allowance depend on the account.",
+        ],
+    },
     "ollama": {
         "kind": "local",
         "capabilities": {
@@ -181,6 +227,13 @@ _PROVIDER_PROFILES: dict[str, dict] = {
     },
 }
 
+# These adapters are text-only by design. A text model never implies image,
+# texture or 3D generation, so the adapter-level state is explicitly unsupported.
+for _profile in _PROVIDER_PROFILES.values():
+    for _name in ("image_generation", "texture_generation", "3d_mesh_generation"):
+        _profile["capabilities"].setdefault(_name, UNSUPPORTED)
+
+
 MODEL_CAPABILITY_KEYS = (
     "text_generation",
     "structured_output",
@@ -189,6 +242,9 @@ MODEL_CAPABILITY_KEYS = (
     "vision",
     "streaming",
     "embeddings",
+    "image_generation",
+    "texture_generation",
+    "3d_mesh_generation",
 )
 
 
@@ -228,6 +284,9 @@ def model_capabilities(*, text_generation: str | None = None,
                        vision: str | None = None,
                        streaming: str | None = None,
                        embeddings: str | None = None,
+                       image_generation: str | None = None,
+                       texture_generation: str | None = None,
+                       mesh_generation: str | None = None,
                        context_window: dict | None = None) -> dict:
     """Build a model-level capability object; unspecified values are unknown."""
     explicit = {
@@ -238,6 +297,9 @@ def model_capabilities(*, text_generation: str | None = None,
         "vision": vision,
         "streaming": streaming,
         "embeddings": embeddings,
+        "image_generation": image_generation,
+        "texture_generation": texture_generation,
+        "3d_mesh_generation": mesh_generation,
     }
     capabilities = {
         name: explicit[name] if explicit[name] in STATES else UNKNOWN

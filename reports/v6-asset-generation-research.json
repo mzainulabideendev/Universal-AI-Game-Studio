@@ -1,0 +1,495 @@
+{
+  "ok": true,
+  "schema_version": 1,
+  "verification_date": "2026-11-10",
+  "categories": {
+    "free_hosted_api": "Documented free hosted API.",
+    "free_limited_hosted_service": "Free but limited/best-effort hosted service.",
+    "open_source_local": "Local open-source software; not installed here.",
+    "paid_service": "Paid service; refused under free-only mode.",
+    "research_only": "Research-only or no usable hosted route."
+  },
+  "by_category": {
+    "free_hosted_api": [
+      "pollinations_classic"
+    ],
+    "free_limited_hosted_service": [],
+    "open_source_local": [
+      "stable_diffusion_local",
+      "comfyui_local",
+      "triposr_local"
+    ],
+    "paid_service": [
+      "stability_api",
+      "huggingface_inference",
+      "tripo_api",
+      "meshy_api"
+    ],
+    "research_only": [
+      "free_hosted_3d"
+    ]
+  },
+  "candidates": [
+    {
+      "id": "pollinations_classic",
+      "name": "Pollinations (Classic image API)",
+      "category": "free_hosted_api",
+      "official_source": "https://github.com/pollinations/pollinations/blob/master/APIDOCS.md",
+      "verified_on": "2026-11-10",
+      "api_available": true,
+      "free_tier_limits": "No signup documented; approximately one image per 45 seconds; one model; best-effort with no uptime guarantee.",
+      "capabilities": {
+        "text_to_image": true,
+        "image_to_image": false,
+        "texture_generation": false,
+        "seamless_material_generation": false,
+        "normal_map_generation": false,
+        "roughness_map_generation": false,
+        "text_to_3d": false,
+        "image_to_3d": false,
+        "animation_generation": false
+      },
+      "license": "See the current Pollinations project terms; not assumed here.",
+      "commercial_use": "Unverified; review the current terms before commercial use.",
+      "attribution_required": "Unverified.",
+      "watermark": "JPEG output includes a small logo according to the API docs.",
+      "rate_limits": "About one request per 45 seconds.",
+      "hardware_requirements": "None locally (hosted).",
+      "output_formats": [
+        "JPEG"
+      ],
+      "quality_limitations": [
+        "Single model; not suitable for production texture sets.",
+        "No texture maps, normal maps, roughness maps or meshes."
+      ],
+      "data_handling": "Requests leave the machine; review the provider policy.",
+      "requires_payment_info": false,
+      "notes": [
+        "Suitable only as a labelled concept-image experiment."
+      ]
+    },
+    {
+      "id": "stability_api",
+      "name": "Stability AI API",
+      "category": "paid_service",
+      "official_source": "https://platform.stability.ai/pricing",
+      "verified_on": "2026-11-10",
+      "api_available": true,
+      "free_tier_limits": "25 trial credits (1 credit = $0.01), then paid.",
+      "capabilities": {
+        "text_to_image": true,
+        "image_to_image": true,
+        "texture_generation": true,
+        "seamless_material_generation": true,
+        "normal_map_generation": false,
+        "roughness_map_generation": false,
+        "text_to_3d": true,
+        "image_to_3d": true,
+        "animation_generation": false
+      },
+      "license": "Stability AI API terms; model licences vary.",
+      "commercial_use": "Permitted only under the paid API terms.",
+      "attribution_required": "Per the current API terms.",
+      "watermark": "Per the current API terms.",
+      "rate_limits": "Account/credit dependent.",
+      "hardware_requirements": "None locally (hosted).",
+      "output_formats": [
+        "PNG",
+        "JPEG",
+        "GLB",
+        "other per model"
+      ],
+      "quality_limitations": [
+        "Trial credit is not an ongoing free allowance."
+      ],
+      "data_handling": "Hosted request; review the data policy.",
+      "requires_payment_info": true,
+      "notes": [
+        "Classified trial_only in the provider policy; refused by free-only mode."
+      ]
+    },
+    {
+      "id": "huggingface_inference",
+      "name": "Hugging Face Inference Providers",
+      "category": "paid_service",
+      "official_source": "https://huggingface.co/docs/api-inference/pricing",
+      "verified_on": "2026-11-10",
+      "api_available": true,
+      "free_tier_limits": "Free accounts receive no monthly credits; purchase required.",
+      "capabilities": {
+        "text_to_image": true,
+        "image_to_image": true,
+        "texture_generation": "unknown",
+        "seamless_material_generation": "unknown",
+        "normal_map_generation": "unknown",
+        "roughness_map_generation": "unknown",
+        "text_to_3d": "unknown",
+        "image_to_3d": "unknown",
+        "animation_generation": "unknown"
+      },
+      "license": "Depends on the selected model.",
+      "commercial_use": "Depends on the selected model and provider.",
+      "attribution_required": "Depends on the model licence.",
+      "watermark": "Depends on the model.",
+      "rate_limits": "Provider/account dependent.",
+      "hardware_requirements": "None locally (hosted).",
+      "output_formats": [
+        "Depends on model"
+      ],
+      "quality_limitations": [
+        "Paid inference, so it does not satisfy free-only mode."
+      ],
+      "data_handling": "Hosted request; review provider policy.",
+      "requires_payment_info": true,
+      "notes": [
+        "Included to show that a familiar brand is not a free allowance."
+      ]
+    },
+    {
+      "id": "stable_diffusion_local",
+      "name": "Stable Diffusion (local, via ComfyUI or a compatible runtime)",
+      "category": "open_source_local",
+      "official_source": "https://github.com/CompVis/stable-diffusion",
+      "verified_on": "2026-11-10",
+      "api_available": false,
+      "free_tier_limits": "No hosted free API. Runs locally after the user installs a runtime and obtains model weights.",
+      "capabilities": {
+        "text_to_image": true,
+        "image_to_image": true,
+        "texture_generation": true,
+        "seamless_material_generation": true,
+        "normal_map_generation": "unknown",
+        "roughness_map_generation": "unknown",
+        "text_to_3d": false,
+        "image_to_3d": false,
+        "animation_generation": "unknown"
+      },
+      "license": "CreativeML Open RAIL-M (model); runtime licences differ.",
+      "commercial_use": "Permitted by the RAIL-M licence subject to its use restrictions; verify the exact model card.",
+      "attribution_required": "Per the model card and runtime licence.",
+      "watermark": "No mandatory watermark in the base model.",
+      "rate_limits": "None hosted; limited by local hardware.",
+      "hardware_requirements": "A dedicated GPU with sufficient VRAM is typically needed; the documented 16 GB / integrated-GPU machine may not be practical. Not measured here.",
+      "output_formats": [
+        "PNG",
+        "JPEG"
+      ],
+      "quality_limitations": [
+        "Seamless material output requires additional setup and validation; not demonstrated by this project."
+      ],
+      "data_handling": "Local; prompts and images stay on the machine.",
+      "requires_payment_info": false,
+      "notes": [
+        "Not installed. No model weights were downloaded.",
+        "Procedural Blender output must never be labelled AI-generated."
+      ]
+    },
+    {
+      "id": "comfyui_local",
+      "name": "ComfyUI",
+      "category": "open_source_local",
+      "official_source": "https://github.com/comfyanonymous/ComfyUI",
+      "verified_on": "2026-11-10",
+      "api_available": false,
+      "free_tier_limits": "Local runtime; no hosted free allowance.",
+      "capabilities": {
+        "text_to_image": true,
+        "image_to_image": true,
+        "texture_generation": true,
+        "seamless_material_generation": true,
+        "normal_map_generation": "unknown",
+        "roughness_map_generation": "unknown",
+        "text_to_3d": false,
+        "image_to_3d": false,
+        "animation_generation": "unknown"
+      },
+      "license": "GPL-3.0 (verify the repository).",
+      "commercial_use": "Follow the runtime and model licences.",
+      "attribution_required": "Per the runtime and model licences.",
+      "watermark": "None by default.",
+      "rate_limits": "Local hardware only.",
+      "hardware_requirements": "GPU/VRAM dependent; not validated on this machine.",
+      "output_formats": [
+        "PNG",
+        "JPEG",
+        "other via nodes"
+      ],
+      "quality_limitations": [
+        "Requires manual workflow authoring and validation."
+      ],
+      "data_handling": "Local.",
+      "requires_payment_info": false,
+      "notes": [
+        "Not installed. This project does not download models."
+      ]
+    },
+    {
+      "id": "triposr_local",
+      "name": "TripoSR (image-to-3D)",
+      "category": "open_source_local",
+      "official_source": "https://github.com/VAST-AI-Research/TripoSR",
+      "verified_on": "2026-11-10",
+      "api_available": false,
+      "free_tier_limits": "Local model; no hosted free API.",
+      "capabilities": {
+        "text_to_image": false,
+        "image_to_image": false,
+        "texture_generation": false,
+        "seamless_material_generation": false,
+        "normal_map_generation": false,
+        "roughness_map_generation": false,
+        "text_to_3d": false,
+        "image_to_3d": true,
+        "animation_generation": false
+      },
+      "license": "MIT (verify the repository before redistribution).",
+      "commercial_use": "Permitted by the MIT licence; model weights may carry additional terms.",
+      "attribution_required": "MIT copyright notice.",
+      "watermark": "None stated.",
+      "rate_limits": "Local hardware only.",
+      "hardware_requirements": "GPU recommended; not validated on this machine.",
+      "output_formats": [
+        "OBJ",
+        "GLB (via export)"
+      ],
+      "quality_limitations": [
+        "Single-image reconstruction quality varies; no rig or animation."
+      ],
+      "data_handling": "Local.",
+      "requires_payment_info": false,
+      "notes": [
+        "Not installed. No weights were downloaded."
+      ]
+    },
+    {
+      "id": "tripo_api",
+      "name": "Tripo API",
+      "category": "paid_service",
+      "official_source": "https://platform.tripo3d.ai/docs/pricing",
+      "verified_on": "2026-11-10",
+      "api_available": true,
+      "free_tier_limits": "Usage-based paid credits; no ongoing free API allowance.",
+      "capabilities": {
+        "text_to_image": "unknown",
+        "image_to_image": "unknown",
+        "texture_generation": "unknown",
+        "seamless_material_generation": "unknown",
+        "normal_map_generation": "unknown",
+        "roughness_map_generation": "unknown",
+        "text_to_3d": true,
+        "image_to_3d": true,
+        "animation_generation": "unknown"
+      },
+      "license": "Tripo API terms.",
+      "commercial_use": "Per paid API terms.",
+      "attribution_required": "Per paid API terms.",
+      "watermark": "Per paid API terms.",
+      "rate_limits": "Credit/account dependent.",
+      "hardware_requirements": "None locally (hosted).",
+      "output_formats": [
+        "GLB",
+        "FBX",
+        "OBJ",
+        "USDZ"
+      ],
+      "quality_limitations": [
+        "Paid."
+      ],
+      "data_handling": "Hosted request.",
+      "requires_payment_info": true,
+      "notes": [
+        "The open-source TripoSR route is separate and local."
+      ]
+    },
+    {
+      "id": "meshy_api",
+      "name": "Meshy API",
+      "category": "paid_service",
+      "official_source": "https://docs.meshy.ai/en/api/pricing",
+      "verified_on": "2026-11-10",
+      "api_available": true,
+      "free_tier_limits": "Prepaid credits; no ongoing free API allowance.",
+      "capabilities": {
+        "text_to_image": "unknown",
+        "image_to_image": "unknown",
+        "texture_generation": "unknown",
+        "seamless_material_generation": "unknown",
+        "normal_map_generation": "unknown",
+        "roughness_map_generation": "unknown",
+        "text_to_3d": true,
+        "image_to_3d": true,
+        "animation_generation": "unknown"
+      },
+      "license": "Meshy API terms.",
+      "commercial_use": "Per paid API terms.",
+      "attribution_required": "Per paid API terms.",
+      "watermark": "Per paid API terms.",
+      "rate_limits": "Credit/account dependent.",
+      "hardware_requirements": "None locally (hosted).",
+      "output_formats": [
+        "GLB",
+        "FBX",
+        "OBJ",
+        "USDZ"
+      ],
+      "quality_limitations": [
+        "Paid."
+      ],
+      "data_handling": "Hosted request.",
+      "requires_payment_info": true,
+      "notes": [
+        "Existing Phase 1-5 Meshy integration remains paid and gated."
+      ]
+    },
+    {
+      "id": "free_hosted_3d",
+      "name": "Free hosted text-to-3D API",
+      "category": "research_only",
+      "official_source": "No provider with a documented ongoing free API was verified.",
+      "verified_on": "2026-11-10",
+      "api_available": false,
+      "free_tier_limits": "Not established.",
+      "capabilities": {
+        "text_to_image": "unknown",
+        "image_to_image": "unknown",
+        "texture_generation": "unknown",
+        "seamless_material_generation": "unknown",
+        "normal_map_generation": "unknown",
+        "roughness_map_generation": "unknown",
+        "text_to_3d": "unknown",
+        "image_to_3d": "unknown",
+        "animation_generation": "unknown"
+      },
+      "license": "Not applicable.",
+      "commercial_use": "Not applicable.",
+      "attribution_required": "Not applicable.",
+      "watermark": "Not applicable.",
+      "rate_limits": "Not applicable.",
+      "hardware_requirements": "Not applicable.",
+      "output_formats": [],
+      "quality_limitations": [
+        "No verified free hosted route exists in this research."
+      ],
+      "data_handling": "Not applicable.",
+      "requires_payment_info": "unknown",
+      "notes": [
+        "Do not integrate a 3D provider until API, licensing and cost are clear."
+      ]
+    }
+  ],
+  "asset_downloads": 0,
+  "model_downloads": 0,
+  "installs": 0,
+  "network_calls": 0,
+  "note": "Research catalogue only. No image, texture or 3D asset was generated, downloaded or installed.",
+  "generated_at": "2026-11-10T03:52:27Z",
+  "capability_summary": {
+    "ok": true,
+    "schema_version": 1,
+    "verification_date": "2026-11-10",
+    "capabilities": {
+      "text_to_image": {
+        "free_hosted_api": [
+          "pollinations_classic"
+        ],
+        "open_source_local": [
+          "stable_diffusion_local",
+          "comfyui_local"
+        ],
+        "paid_service": [
+          "stability_api",
+          "huggingface_inference"
+        ],
+        "available_now": false,
+        "reason": "No provider is configured or authorized and no local model is installed; this project did not generate or download an asset."
+      },
+      "image_to_image": {
+        "free_hosted_api": [],
+        "open_source_local": [
+          "stable_diffusion_local",
+          "comfyui_local"
+        ],
+        "paid_service": [
+          "stability_api",
+          "huggingface_inference"
+        ],
+        "available_now": false,
+        "reason": "No provider is configured or authorized and no local model is installed; this project did not generate or download an asset."
+      },
+      "texture_generation": {
+        "free_hosted_api": [],
+        "open_source_local": [
+          "stable_diffusion_local",
+          "comfyui_local"
+        ],
+        "paid_service": [
+          "stability_api"
+        ],
+        "available_now": false,
+        "reason": "No provider is configured or authorized and no local model is installed; this project did not generate or download an asset."
+      },
+      "seamless_material_generation": {
+        "free_hosted_api": [],
+        "open_source_local": [
+          "stable_diffusion_local",
+          "comfyui_local"
+        ],
+        "paid_service": [
+          "stability_api"
+        ],
+        "available_now": false,
+        "reason": "No provider is configured or authorized and no local model is installed; this project did not generate or download an asset."
+      },
+      "normal_map_generation": {
+        "free_hosted_api": [],
+        "open_source_local": [],
+        "paid_service": [],
+        "available_now": false,
+        "reason": "No provider is configured or authorized and no local model is installed; this project did not generate or download an asset."
+      },
+      "roughness_map_generation": {
+        "free_hosted_api": [],
+        "open_source_local": [],
+        "paid_service": [],
+        "available_now": false,
+        "reason": "No provider is configured or authorized and no local model is installed; this project did not generate or download an asset."
+      },
+      "text_to_3d": {
+        "free_hosted_api": [],
+        "open_source_local": [],
+        "paid_service": [
+          "stability_api",
+          "tripo_api",
+          "meshy_api"
+        ],
+        "available_now": false,
+        "reason": "No provider is configured or authorized and no local model is installed; this project did not generate or download an asset."
+      },
+      "image_to_3d": {
+        "free_hosted_api": [],
+        "open_source_local": [
+          "triposr_local"
+        ],
+        "paid_service": [
+          "stability_api",
+          "tripo_api",
+          "meshy_api"
+        ],
+        "available_now": false,
+        "reason": "No provider is configured or authorized and no local model is installed; this project did not generate or download an asset."
+      },
+      "animation_generation": {
+        "free_hosted_api": [],
+        "open_source_local": [],
+        "paid_service": [],
+        "available_now": false,
+        "reason": "No provider is configured or authorized and no local model is installed; this project did not generate or download an asset."
+      }
+    },
+    "verified_free_hosted_available_now": [],
+    "installed_local_generators": [],
+    "asset_generation_performed": false,
+    "procedural_blender_is_not_ai": true,
+    "note": "Free hosted text-to-image exists only as a rate-limited concept-image route. No verified free hosted texture, normal-map, roughness-map or 3D-mesh API was established. Local open-source routes require separate installation and licensing review."
+  }
+}

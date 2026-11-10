@@ -32,6 +32,11 @@ from game_studio.llm import capabilities as llm_capabilities
 from game_studio.llm import catalog as llm_catalog
 from game_studio.llm import reasoning as llm_reasoning
 from game_studio.llm import routing as llm_routing
+from game_studio.llm import free_policy as llm_free_policy
+from game_studio.llm import free_routing as llm_free_routing
+from game_studio.llm import quota as llm_quota
+from game_studio.llm import intelligence as llm_intelligence
+from game_studio.llm import asset_research as llm_asset_research
 from game_studio.llm.client import LLMError
 from game_studio.agents import Orchestrator as AgentOrchestrator
 from game_studio.agents.helpers import QUALITY_PROFILES
@@ -724,6 +729,94 @@ def tool_orchestrate_game_plan(args: dict) -> dict:
     except ValueError as exc:
         raise ToolError(str(exc)) from exc
 
+
+# --------------------------------------------------------------------------
+# Phase 6 free AI intelligence tools
+# --------------------------------------------------------------------------
+def tool_llm_free_provider_catalog(args: dict) -> dict:
+    result = llm_free_policy.catalog()
+    if _bool(args, "include_evidence"):
+        result["evidence"] = llm_free_policy.evidence()
+    return result
+
+
+def tool_llm_free_quota_status(args: dict) -> dict:
+    return llm_quota.status()
+
+
+def tool_llm_free_route(args: dict) -> dict:
+    try:
+        return llm_free_routing.route(
+            _str(args, "task", required=True) or "",
+            required_capabilities=_list(args, "required_capabilities") or None,
+            context_chars=_int(args, "context_chars", minimum=0),
+            provider=_str(args, "provider"),
+            model=_str(args, "model"),
+            require_known=_bool(args, "require_known", default=True),
+            discovered=_obj(args, "discovered"),
+            max_tokens=_int(args, "max_tokens", minimum=1),
+            account_credits=_float(args, "account_credits", minimum=0),
+        )
+    except ToolError:
+        raise
+    except Exception as exc:
+        raise ToolError(f"free routing failed: {llm_config.redact(str(exc))}") from exc
+
+
+def tool_llm_game_requirements(args: dict) -> dict:
+    approved = _list(args, "approved_decisions") or []
+    if any(not isinstance(item, dict) for item in approved):
+        raise ToolError("approved_decisions must be an array of objects")
+    try:
+        return llm_intelligence.requirements(
+            _str(args, "request", required=True, max_length=20_000) or "",
+            engine=_str(args, "engine") or "unity",
+            approved_decisions=approved,
+        )
+    except ValueError as exc:
+        raise ToolError(str(exc)) from exc
+
+
+def tool_llm_game_design(args: dict) -> dict:
+    approved = _list(args, "approved_decisions") or []
+    if any(not isinstance(item, dict) for item in approved):
+        raise ToolError("approved_decisions must be an array of objects")
+    try:
+        result = llm_intelligence.design(
+            _str(args, "request", required=True, max_length=20_000) or "",
+            engine=_str(args, "engine") or "unity",
+            platform=_str(args, "platform"),
+            dimension=_str(args, "dimension"),
+            art_style=_str(args, "art_style"),
+            quality_target=_str(args, "quality_target") or "prototype",
+            approved_decisions=approved,
+        )
+        if _bool(args, "include_specs"):
+            quality = _str(args, "quality_tier") or "medium"
+            result["character_spec"] = llm_intelligence.character_spec_from_design(
+                result, quality_tier=quality)
+            result["environment_spec"] = llm_intelligence.environment_spec_from_design(
+                result, quality_tier=quality)
+        return result
+    except ValueError as exc:
+        raise ToolError(str(exc)) from exc
+
+
+def tool_llm_asset_generation_capabilities(args: dict) -> dict:
+    capability = _str(args, "capability")
+    if capability:
+        try:
+            return llm_asset_research.find(capability)
+        except ValueError as exc:
+            raise ToolError(str(exc)) from exc
+    result = llm_asset_research.capabilities()
+    if _bool(args, "include_catalog"):
+        result["catalog"] = llm_asset_research.catalog()
+    return result
+
+
+def tool_llm_ai_benchmark(args: dict) -> dict:
+    return llm_intelligence.benchmark()
 
 
 # --------------------------------------------------------------------------
@@ -1990,6 +2083,71 @@ TOOLS = [
                                      "description": "Approved project decisions the "
                                                     "director must not override"},
           }, ["request"]),
+    # Phase 6 free AI intelligence
+    _tool("llm_free_provider_catalog", "Report the evidence-backed free-provider catalog "
+          "(Gemini, GroqCloud, OpenRouter, Ollama) with documented status, eligible "
+          "models, quota basis, restrictions and verification dates. No network call and "
+          "no credential is read.", {
+              "include_evidence": {"type": "boolean", "default": False,
+                                   "description": "Attach the full documentation "
+                                                  "evidence records"},
+          }),
+    _tool("llm_free_quota_status", "Report the machine-local free-quota ledger: requests "
+          "today, documented daily limits where exposed, remaining allowance, estimated "
+          "cost and explicit unknown states. No credential or prompt is stored."),
+    _tool("llm_free_route", "Choose a documented free provider/model under the free-only "
+          "policy. Refuses paid, trial-only and unknown-billing providers, OpenRouter "
+          "non-':free' models, and exhausted quotas. Returns the deterministic fallback "
+          "instead of switching to a paid provider. Performs no network request.", {
+              "task": {"type": "string"},
+              "required_capabilities": {"type": "array", "items": {"type": "string"}},
+              "context_chars": {"type": "integer", "minimum": 0},
+              "provider": {"type": "string", "enum": list(llm_config.PROVIDERS)},
+              "model": {"type": "string"},
+              "require_known": {"type": "boolean", "default": True},
+              "discovered": {"type": "object"},
+              "max_tokens": {"type": "integer", "minimum": 1},
+              "account_credits": {"type": "number", "minimum": 0,
+                                  "description": "Optional all-time OpenRouter credit "
+                                                 "total used only to describe the "
+                                                 "documented daily allowance"},
+          }, ["task"]),
+    _tool("llm_game_requirements", "Decompose a game idea into typed requirements with "
+          "stable IDs, priority, dependencies, acceptance criteria, required assets, "
+          "target engine, verification method, provenance and confidence. Separates user "
+          "requirements from recommendations, assumptions, unsupported features and "
+          "blocked items. Proposal only; executable=false.", {
+              "request": {"type": "string", "minLength": 1, "maxLength": 20000},
+              "engine": {"type": "string", "default": "unity"},
+              "approved_decisions": {"type": "array", "items": {"type": "object"}},
+          }, ["request"]),
+    _tool("llm_game_design", "Produce a schema-validated game-design proposal covering "
+          "concept, loop, mechanics, characters, environment, animation, UI/UX, audio, "
+          "physics, performance, assets, constraints, tests and milestones. Optionally "
+          "bridge into Phase 3 character and Phase 4 environment specs without generating "
+          "assets. executable=false.", {
+              "request": {"type": "string", "minLength": 1, "maxLength": 20000},
+              "engine": {"type": "string", "default": "unity"},
+              "platform": {"type": "string"},
+              "dimension": {"type": "string", "enum": ["2d", "2.5d", "3d"]},
+              "art_style": {"type": "string"},
+              "quality_target": {"type": "string"},
+              "quality_tier": {"type": "string", "enum": ["low", "medium", "high"]},
+              "approved_decisions": {"type": "array", "items": {"type": "object"}},
+              "include_specs": {"type": "boolean", "default": False,
+                                "description": "Attach Phase 3/4 specs; no generation"},
+          }, ["request"]),
+    _tool("llm_asset_generation_capabilities", "Report honest research on free image, "
+          "texture, normal/roughness map, 3D and animation generation. Separates free "
+          "hosted APIs, free limited services, open-source local software, paid services "
+          "and research-only routes. No asset is generated or downloaded.", {
+              "capability": {"type": "string", "enum": list(
+                  llm_asset_research.CAPABILITIES)},
+              "include_catalog": {"type": "boolean", "default": False},
+          }),
+    _tool("llm_ai_benchmark", "Run the deterministic Phase 6 benchmark over representative "
+          "game ideas. Measures schema validity, decomposition coverage, determinism and "
+          "cost-policy compliance. Does not measure or rank live model quality."),
 ]
 
 HANDLERS = {
@@ -2087,6 +2245,13 @@ HANDLERS = {
     "llm_configure_provider": tool_llm_configure_provider,
     "llm_configure_credential": tool_llm_configure_credential,
     "orchestrate_game_plan": tool_orchestrate_game_plan,
+    "llm_free_provider_catalog": tool_llm_free_provider_catalog,
+    "llm_free_quota_status": tool_llm_free_quota_status,
+    "llm_free_route": tool_llm_free_route,
+    "llm_game_requirements": tool_llm_game_requirements,
+    "llm_game_design": tool_llm_game_design,
+    "llm_asset_generation_capabilities": tool_llm_asset_generation_capabilities,
+    "llm_ai_benchmark": tool_llm_ai_benchmark,
 }
 
 

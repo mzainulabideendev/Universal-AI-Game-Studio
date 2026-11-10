@@ -1,0 +1,308 @@
+{
+  "ok": true,
+  "schema_version": 1,
+  "policy": "free-only",
+  "route_order": [
+    "gemini",
+    "groq",
+    "openrouter",
+    "ollama"
+  ],
+  "paid_fallback": false,
+  "trial_fallback": false,
+  "unknown_billing_accepted": false,
+  "unknown_quota_is_unlimited": false,
+  "rows": [
+    {
+      "task": "game_design_reasoning",
+      "mode": "deterministic",
+      "selected": null,
+      "candidates": [
+        {
+          "provider": "gemini",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": false,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "groq",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": true,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'groq'; set GROQ_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "openrouter",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": true,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'openrouter'; set OPENROUTER_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "ollama",
+          "free_status": "local_free",
+          "model_eligible": true,
+          "quota_known": false,
+          "available": false,
+          "blockers": [
+            "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+          ]
+        }
+      ]
+    },
+    {
+      "task": "technical_architecture",
+      "mode": "deterministic",
+      "selected": null,
+      "candidates": [
+        {
+          "provider": "gemini",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": false,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "groq",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": true,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'groq'; set GROQ_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "openrouter",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": true,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'openrouter'; set OPENROUTER_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "ollama",
+          "free_status": "local_free",
+          "model_eligible": true,
+          "quota_known": false,
+          "available": false,
+          "blockers": [
+            "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+          ]
+        }
+      ]
+    },
+    {
+      "task": "code_generation",
+      "mode": "deterministic",
+      "selected": null,
+      "candidates": [
+        {
+          "provider": "gemini",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": false,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "groq",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": true,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'groq'; set GROQ_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "openrouter",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": true,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'openrouter'; set OPENROUTER_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "ollama",
+          "free_status": "local_free",
+          "model_eligible": true,
+          "quota_known": false,
+          "available": false,
+          "blockers": [
+            "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+          ]
+        }
+      ]
+    },
+    {
+      "task": "character_environment_planning",
+      "mode": "deterministic",
+      "selected": null,
+      "candidates": [
+        {
+          "provider": "gemini",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": false,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "groq",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": true,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'groq'; set GROQ_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "openrouter",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": true,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'openrouter'; set OPENROUTER_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "ollama",
+          "free_status": "local_free",
+          "model_eligible": true,
+          "quota_known": false,
+          "available": false,
+          "blockers": [
+            "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+          ]
+        }
+      ]
+    },
+    {
+      "task": "asset_analysis",
+      "mode": "deterministic",
+      "selected": null,
+      "candidates": [
+        {
+          "provider": "gemini",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": false,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "groq",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": true,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'groq'; set GROQ_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "openrouter",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": true,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'openrouter'; set OPENROUTER_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "ollama",
+          "free_status": "local_free",
+          "model_eligible": true,
+          "quota_known": false,
+          "available": false,
+          "blockers": [
+            "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+          ]
+        }
+      ]
+    },
+    {
+      "task": "qa_verification",
+      "mode": "deterministic",
+      "selected": null,
+      "candidates": [
+        {
+          "provider": "gemini",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": false,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'gemini'; set GEMINI_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "groq",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": true,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'groq'; set GROQ_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "openrouter",
+          "free_status": "free_limited",
+          "model_eligible": true,
+          "quota_known": true,
+          "available": false,
+          "blockers": [
+            "no API key configured for 'openrouter'; set OPENROUTER_API_KEY or GAME_STUDIO_LLM_API_KEY"
+          ]
+        },
+        {
+          "provider": "ollama",
+          "free_status": "local_free",
+          "model_eligible": true,
+          "quota_known": false,
+          "available": false,
+          "blockers": [
+            "Ollama runtime is not installed or not on PATH; this project will not install it. Start a reachable service or choose another provider / the deterministic fallback"
+          ]
+        }
+      ]
+    }
+  ],
+  "network_calls": 0,
+  "executable": false,
+  "generated_at": "2026-11-10T03:52:27Z",
+  "default_decision": {
+    "mode": "deterministic",
+    "selected": null,
+    "paid_fallback": false,
+    "network_calls": 0
+  }
+}
