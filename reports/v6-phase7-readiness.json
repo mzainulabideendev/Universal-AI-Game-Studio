@@ -1,0 +1,84 @@
+{
+  "ok": true,
+  "schema_version": 1,
+  "phase": "V6 Phase 7 - provider readiness",
+  "checked_at": "2026-11-10T04:29:56Z",
+  "provider": "gemini",
+  "provider_name": "Google Gemini Developer API",
+  "adapter": "GeminiProvider",
+  "adapter_registered": true,
+  "model": "gemini-3.8-flash",
+  "model_default": "gemini-3.8-flash",
+  "free_status": "free_limited",
+  "free": true,
+  "model_eligibility": {
+    "eligible": true,
+    "provider": "gemini",
+    "model": "gemini-3.8-flash",
+    "reason": "model is documented with a free tier"
+  },
+  "credential": {
+    "required": true,
+    "configured": false,
+    "source": null,
+    "env_var": "GEMINI_API_KEY",
+    "value_exposed": false
+  },
+  "quota": {
+    "provider": "gemini",
+    "model": "gemini-3.8-flash",
+    "status": "free_limited",
+    "free": true,
+    "requests_today": 0,
+    "verified_daily_limit": null,
+    "remaining_today": null,
+    "exhausted": null,
+    "quota_known": false,
+    "reason": "the provider does not expose a reliable per-key remaining quota; unknown is not treated as unlimited",
+    "evidence": "no documented per-key daily limit"
+  },
+  "capabilities": {
+    "text_generation": "supported",
+    "structured_output": "supported",
+    "json_mode": "supported",
+    "tool_calling": "unsupported",
+    "vision": "unsupported"
+  },
+  "timeouts": {
+    "request_timeout_seconds": 60,
+    "connect_timeout_seconds": 10,
+    "configured_retries": 2,
+    "phase7_live_request_retries": 0
+  },
+  "structured_output": {
+    "adapter_json_mode": true,
+    "declared": "supported",
+    "schema_validation": "local, game_studio.llm.schemas"
+  },
+  "error_handling": {
+    "adapter_error_type": "game_studio.llm.providers.ProviderError",
+    "classified_kinds": [
+      "auth",
+      "rate_limit",
+      "not_found",
+      "invalid_request",
+      "unavailable",
+      "timeout"
+    ],
+    "retries_disabled_for_phase7": true
+  },
+  "blockers": [
+    "no credential configured for the selected provider"
+  ],
+  "warnings": [
+    "Gemini free-tier content may be used to improve Google products; never send proprietary project content without separate approval.",
+    "Gemini 3.6+ ignores temperature/top_p/top_k and may return deprecation warning headers; the request remains valid.",
+    "Readiness is offline evidence only. Reachability and output quality are unknown until an approved live request runs."
+  ],
+  "ready": false,
+  "ready_for_live_request": false,
+  "live_request_authorized": false,
+  "network_calls": 0,
+  "credentials_exposed": false,
+  "generated_at": "2026-11-10T04:29:56Z"
+}

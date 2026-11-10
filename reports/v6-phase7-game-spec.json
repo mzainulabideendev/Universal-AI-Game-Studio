@@ -1,0 +1,460 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 7F - idea to specification",
+  "generated_at": "2026-11-10T04:29:56Z",
+  "request": "Create a polished third-person 3D tropical jungle adventure game for Windows and Android. The player controls a monkey, explores a jungle, collects bananas, avoids environmental hazards, and reaches a final destination. The game should support low-end hardware and use an efficient rendering approach.",
+  "source": "ai_provider",
+  "source_label_note": "Built from the offline fixture payload, not from a live provider response.",
+  "engine": "unity",
+  "target_platforms": [
+    "windows",
+    "android"
+  ],
+  "quality_tier": "medium",
+  "design": {
+    "schema_version": 1,
+    "request": "Jungle Banana Run A short third-person jungle collection level for Windows and Android. Tropical jungle biome with a defined trail Cliffs, river and foliage dressing Directional sunlight with a warm ambient fill Explore the jungle trail Collect bananas to fill the objective counter Avoid hazard volumes and respawn at the last checkpoint Reach the destination zone to complete the level",
+    "concept": "Jungle Banana Run A short third-person jungle collection level for Windows and Android. Tropical jungle biome with a defined trail Cliffs, river and foliage dressing Directional sunlight with a warm ambient fill Explore the jungle trail Collect bananas to fill the objective counter Avoid hazard volumes and respawn at the last checkpoint Reach the destination zone to complete the level",
+    "genre": [
+      "third-person action adventure",
+      "platformer"
+    ],
+    "dimension": [
+      "3d"
+    ],
+    "target_platform": [
+      "Windows",
+      "Android"
+    ],
+    "art_style": [
+      "stylized low-poly"
+    ],
+    "quality_target": "prototype",
+    "core_gameplay_loop": "Explore the jungle trail Collect bananas to fill the objective counter Avoid hazard volumes and respawn at the last checkpoint Reach the destination zone to complete the level",
+    "player_mechanics": [
+      "Run and turn",
+      "Jump and land",
+      "Collect",
+      "Interact"
+    ],
+    "environment_requirements": [
+      "Tropical jungle biome with a defined trail",
+      "Cliffs, river and foliage dressing",
+      "Directional sunlight with a warm ambient fill"
+    ],
+    "character_requirements": [
+      "Player character described by the approved specification"
+    ],
+    "animation_requirements": [
+      "idle",
+      "walk",
+      "run",
+      "jump",
+      "landing"
+    ],
+    "uiux_requirements": [
+      "HUD banana counter",
+      "Pause menu",
+      "Level complete panel"
+    ],
+    "audio_requirements": [
+      "Footstep SFX",
+      "Collect chime",
+      "Ambient jungle loop"
+    ],
+    "physics_requirements": [
+      "character collision",
+      "collectible trigger",
+      "terrain/ground contact"
+    ],
+    "performance_targets": {
+      "target_fps": 60,
+      "quality_tier": "low",
+      "hardware": "Integrated GPU, 8 GB RAM",
+      "notes": "Keep draw calls bounded and reuse materials."
+    },
+    "asset_requirements": [
+      "Monkey character mesh with a 24-bone rig and idle/walk/run/jump animations",
+      "Jungle terrain tiles, tree and bush props, river plane and rock clusters",
+      "Banana prop with a stylized material",
+      "PBR base color and roughness textures for terrain and props",
+      "Footstep and collect audio clips",
+      "HUD font, banana icon and menu panel"
+    ],
+    "technical_constraints": [
+      "Target engine: unity",
+      "Procedural Blender assets are not AI-generated assets.",
+      "No paid provider may be used under free-only policy."
+    ],
+    "testing_requirements": [
+      "Collecting a banana increments the HUD counter within 1 frame",
+      "The player reaches the destination zone and the level completes within 10 seconds of arrival",
+      "Frame rate stays at or above 60 fps for 30 seconds on the reference hardware",
+      "All 10 bananas can be collected in one run"
+    ],
+    "milestones": [],
+    "user_requirements": [],
+    "recommendations": [],
+    "assumptions": [],
+    "unsupported_features": [],
+    "blocked_requirements": [],
+    "approved_decisions": [],
+    "missing_information": [],
+    "contradictions": [],
+    "provenance": {
+      "mode": "ai_provider"
+    },
+    "executable": false,
+    "validation": {
+      "valid": true,
+      "errors": []
+    }
+  },
+  "requirements_summary": [
+    {
+      "id": "player_character",
+      "label": "Player character",
+      "covered_by": "R-003"
+    },
+    {
+      "id": "character_rig_animations",
+      "label": "Character rig and animations",
+      "covered_by": "R-025",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "jungle_terrain",
+      "label": "Terrain",
+      "covered_by": "R-005"
+    },
+    {
+      "id": "vegetation",
+      "label": "Vegetation",
+      "covered_by": "R-026",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "collectibles",
+      "label": "Collectibles",
+      "covered_by": "R-009"
+    },
+    {
+      "id": "collision",
+      "label": "Collision",
+      "covered_by": "R-027",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "camera",
+      "label": "Camera",
+      "covered_by": "R-016"
+    },
+    {
+      "id": "player_controls",
+      "label": "Player controls",
+      "covered_by": "R-015"
+    },
+    {
+      "id": "score_system",
+      "label": "Score system",
+      "covered_by": "R-028",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "objectives",
+      "label": "Objectives",
+      "covered_by": "R-012"
+    },
+    {
+      "id": "hud",
+      "label": "HUD",
+      "covered_by": "R-017"
+    },
+    {
+      "id": "game_states",
+      "label": "Game states",
+      "covered_by": "R-029",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "performance",
+      "label": "Performance target",
+      "covered_by": "R-030",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "build_configuration",
+      "label": "Build configuration",
+      "covered_by": "R-031",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "tests",
+      "label": "Tests",
+      "covered_by": "R-032",
+      "added_as_recommendation": true
+    }
+  ],
+  "approval": {
+    "required": true,
+    "status": "HUMAN_REVIEW_REQUIRED",
+    "approved": false,
+    "approved_by": null,
+    "what_must_be_approved": [
+      "Engine, dimension, art direction and scope",
+      "Requirement set and priorities",
+      "Character, environment and gameplay specifications",
+      "Any future asset generation or build run"
+    ]
+  },
+  "feasibility": {
+    "checks": [
+      {
+        "item": "engine",
+        "value": "unity",
+        "status": "supported_engineering_target",
+        "reason": "An adapter exists in this repository, but a build is not run in Phase 7."
+      },
+      {
+        "item": "platform",
+        "value": "windows",
+        "status": "demonstrated_by_existing_build",
+        "reason": "A real Unity 6000.6.2f1 Windows build exists from Phase 5; Phase 7 did not rebuild it."
+      },
+      {
+        "item": "platform",
+        "value": "android",
+        "status": "requires_unverified_setup",
+        "reason": "No build for this platform was produced or measured in Phases 1-6; module/SDK setup and a new build are required."
+      },
+      {
+        "item": "performance",
+        "value": 60,
+        "status": "target_only_not_measured",
+        "reason": "A measured FPS from a different build does not validate this target."
+      }
+    ],
+    "verified": false,
+    "measurements_performed": false,
+    "note": "Feasibility is an engineering assessment based on existing adapters and previous evidence. It is not a build result."
+  },
+  "generation_plan": {
+    "ok": true,
+    "schema_version": 1,
+    "engine": "unity",
+    "steps": [
+      {
+        "id": "G1",
+        "step": "Human approves the specification and requirement set",
+        "tool": null,
+        "requires_approval": true,
+        "executed": false
+      },
+      {
+        "id": "G2",
+        "step": "Generate the character from the Phase 3 spec",
+        "tool": "character_generate_asset",
+        "requires_approval": true,
+        "executed": false
+      },
+      {
+        "id": "G3",
+        "step": "Generate the environment from the Phase 4 spec",
+        "tool": "environment_generate_asset",
+        "requires_approval": true,
+        "executed": false
+      },
+      {
+        "id": "G4",
+        "step": "Integrate assets and gameplay in a unity project",
+        "tool": "unity_build",
+        "requires_approval": true,
+        "executed": false
+      },
+      {
+        "id": "G5",
+        "step": "Run engine tests and record evidence",
+        "tool": "unity_run_tests",
+        "requires_approval": true,
+        "executed": false
+      },
+      {
+        "id": "G6",
+        "step": "Build, launch and capture the player",
+        "tool": "unity_build",
+        "requires_approval": true,
+        "executed": false
+      }
+    ],
+    "requirements_covered": [
+      "REQ-1412DF1633",
+      "REQ-31E73B7450",
+      "REQ-5612381BCF",
+      "REQ-8883FA871E",
+      "REQ-296621DE46",
+      "REQ-4CC7C5E25A",
+      "REQ-0B9D180E74",
+      "REQ-A075D0BEE3",
+      "REQ-A7F40BC2E4",
+      "REQ-DF2869A560",
+      "REQ-DA407FDC28",
+      "REQ-6768D8665E",
+      "REQ-86BEC48E1D",
+      "REQ-233644BB67",
+      "REQ-2C12D9338C",
+      "REQ-EC84B2F5F0",
+      "REQ-501C4D0189",
+      "REQ-D777F725AB",
+      "REQ-54CFA1CDAF",
+      "REQ-FA67FDC75A",
+      "REQ-DDDE5C1C38",
+      "REQ-0B244B6D91",
+      "REQ-778C182ECC",
+      "REQ-B3B5EC7C92",
+      "REQ-0FCB682443",
+      "REQ-EC06014D4C",
+      "REQ-7377474661",
+      "REQ-C6E9F724E3",
+      "REQ-DF5BB0B330",
+      "REQ-1C4B42A903",
+      "REQ-8009060056",
+      "REQ-F7CC052993"
+    ],
+    "executable": false,
+    "executed": false,
+    "human_approved": false,
+    "asset_generation_performed": false,
+    "build_started": false,
+    "ai_generated_asset": false,
+    "design_quality_target": "prototype",
+    "note": "Preview only. Every step requires explicit human approval and a separate authorised run; this document is not an executable plan."
+  },
+  "validation": {
+    "valid": true,
+    "errors": []
+  },
+  "response_validation": {
+    "ok": true,
+    "schema_valid": true,
+    "source": "ai_provider",
+    "errors": [],
+    "warnings": [],
+    "missing_fields": [],
+    "contradictions": [],
+    "unsupported_claims": [],
+    "ambiguous_requirements": [],
+    "normalised": {
+      "game_title": "Jungle Banana Run",
+      "genre": [
+        "third-person action adventure",
+        "platformer"
+      ],
+      "target_platforms": [
+        "Windows",
+        "Android"
+      ],
+      "core_gameplay_loop": [
+        "Explore the jungle trail",
+        "Collect bananas to fill the objective counter",
+        "Avoid hazard volumes and respawn at the last checkpoint",
+        "Reach the destination zone to complete the level"
+      ],
+      "player_mechanics": [
+        "Run and turn",
+        "Jump and land",
+        "Collect",
+        "Interact"
+      ],
+      "camera_design": "Third-person follow camera with a spring arm and obstacle pull-in.",
+      "environment_requirements": [
+        "Tropical jungle biome with a defined trail",
+        "Cliffs, river and foliage dressing",
+        "Directional sunlight with a warm ambient fill"
+      ],
+      "collectibles": [
+        "Banana pickup with a trigger collider"
+      ],
+      "hazards": [
+        "Spike pit",
+        "River current volume"
+      ],
+      "progression": [
+        "Spawn area",
+        "Mid-route checkpoint",
+        "Destination zone"
+      ],
+      "ui_requirements": [
+        "HUD banana counter",
+        "Pause menu",
+        "Level complete panel"
+      ],
+      "audio_requirements": [
+        "Footstep SFX",
+        "Collect chime",
+        "Ambient jungle loop"
+      ],
+      "performance_targets": {
+        "target_fps": 60,
+        "quality_tier": "low",
+        "hardware": "Integrated GPU, 8 GB RAM",
+        "notes": "Keep draw calls bounded and reuse materials."
+      },
+      "technical_architecture": [
+        "Unity character controller with rigidbody-free movement",
+        "Trigger colliders for collectibles and hazards",
+        "Single additive scene with baked lighting"
+      ],
+      "asset_requirements": [
+        "Monkey character mesh with a 24-bone rig and idle/walk/run/jump animations",
+        "Jungle terrain tiles, tree and bush props, river plane and rock clusters",
+        "Banana prop with a stylized material",
+        "PBR base color and roughness textures for terrain and props",
+        "Footstep and collect audio clips",
+        "HUD font, banana icon and menu panel"
+      ],
+      "acceptance_criteria": [
+        "Collecting a banana increments the HUD counter within 1 frame",
+        "The player reaches the destination zone and the level completes within 10 seconds of arrival",
+        "Frame rate stays at or above 60 fps for 30 seconds on the reference hardware",
+        "All 10 bananas can be collected in one run"
+      ],
+      "risks": [
+        "Android thermal throttling",
+        "Touch input mapping is not yet specified"
+      ],
+      "unsupported_or_uncertain": [
+        "Android build pipeline has not been validated in this repository"
+      ],
+      "engine": "unity",
+      "dimension": "3d",
+      "art_style": "stylized low-poly",
+      "summary": "A short third-person jungle collection level for Windows and Android."
+    },
+    "confidence": {
+      "label": "high",
+      "required_field_coverage": 1.0,
+      "schema_errors": 0,
+      "contradictions": 0,
+      "note": "Confidence is a structural completeness signal, not a judgement that the design is good or feasible."
+    },
+    "provenance": {
+      "validator": "game_studio.llm.response_validation",
+      "schema": "GameStudioAIGameSpec",
+      "schema_version": "1.0",
+      "validated_as": "ai_provider",
+      "untrusted_input": true,
+      "actions_executed": false
+    }
+  },
+  "bridges": {
+    "character_valid": true,
+    "environment_valid": true,
+    "gameplay_generated": false
+  },
+  "executable": false,
+  "ai_generated_asset": false,
+  "generation_performed": false,
+  "phase5_project_modified": false,
+  "executed": false,
+  "note": "A valid specification is not a playable game. Nothing in this report was generated, built or approved."
+}

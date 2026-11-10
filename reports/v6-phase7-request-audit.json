@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-10T04:29:56Z",
+  "provider": "gemini",
+  "model": "gemini-3.8-flash",
+  "request_sha256": "08db560c1aff6dccc249a7185c1061d5763980ac98dbc0b253958a8309edd552",
+  "max_input_chars": 4000,
+  "actual_input_chars": 301,
+  "max_output_tokens": 2048,
+  "temperature": 0.1,
+  "timeout_seconds": 60,
+  "retries": 0,
+  "project_files_sent": false,
+  "authorization_status": "NOT_AUTHORIZED",
+  "credential_status": "BLOCKED_CREDENTIAL_NOT_CONFIGURED",
+  "quota_impact": {
+    "requests": 1,
+    "retries": 0,
+    "maximum_requests_after_approval": 1,
+    "documented_daily_limit": null,
+    "remaining_before": null,
+    "quota_known": false,
+    "estimated_cost_usd": 0.0,
+    "note": "A free-tier request. Unknown remaining quota is never treated as unlimited and no paid fallback exists."
+  },
+  "data_handling": {
+    "provider_retention": "Gemini free tier: content is used to improve Google products according to the documented free tier terms; do not send proprietary content.",
+    "sends_repository_files": false,
+    "sends_user_project_files": false,
+    "sends_credentials": false,
+    "controlled_test_idea_only": true
+  },
+  "network_calls": 0,
+  "live_request_performed": false,
+  "executable_now": false,
+  "unapproved_execution_attempt": {
+    "status": "BLOCKED_AUTHORIZATION_MISSING",
+    "network_calls": 0,
+    "live_request_performed": false
+  }
+}

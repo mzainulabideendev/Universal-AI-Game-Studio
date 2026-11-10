@@ -1,0 +1,1149 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 7H - generation pipeline bridges",
+  "generated_at": "2026-11-10T04:29:56Z",
+  "source": "ai_provider",
+  "source_label_note": "The payload is an offline fixture shaped like a provider response. It is not live model output.",
+  "character": {
+    "interface": "game_studio.character_spec.build_character_spec",
+    "requirement_ids": [
+      "REQ-5612381BCF",
+      "REQ-8883FA871E",
+      "REQ-0FCB682443"
+    ],
+    "validation_errors": [],
+    "valid": true,
+    "spec": {
+      "schema_version": 1,
+      "id": "char-playercharacter-medium",
+      "name": "PlayerCharacter",
+      "description": "Player character described by the approved specification",
+      "character_type": "creature",
+      "quality_tier": "medium",
+      "style": "stylized",
+      "proportions": {
+        "height_m": 1.8,
+        "torso_scale": [
+          0.34,
+          0.26,
+          0.46
+        ],
+        "head_radius_m": 0.22,
+        "arm_length_m": 0.7,
+        "leg_length_m": 0.85,
+        "realistic_proportions": false
+      },
+      "head": {
+        "head_shape": "rounded with brow ridge and muzzle",
+        "eyes": {
+          "count": 2,
+          "expressive": false,
+          "iris": true,
+          "pupil": true
+        },
+        "mouth": {
+          "present": true,
+          "style": "subtle stylized line"
+        },
+        "ears": {
+          "count": 2,
+          "shape": "rounded monkey ears",
+          "inner_ear_material": "M_Monkey_InnerEar"
+        },
+        "nose": {
+          "present": true,
+          "material": "M_Monkey_Nose"
+        },
+        "facial_features": [
+          "brow ridge",
+          "muzzle",
+          "eye sockets"
+        ]
+      },
+      "limbs": {
+        "arms": 2,
+        "legs": 2,
+        "hands": {
+          "count": 2,
+          "finger_count": 3,
+          "thumb": true
+        },
+        "feet": {
+          "count": 2,
+          "toe_count": 3
+        },
+        "tail": {
+          "present": false,
+          "segments": 0
+        }
+      },
+      "clothing": [],
+      "accessories": [],
+      "surface_details": [
+        "procedural fur colour variation",
+        "muzzle wrinkles",
+        "nose and inner-ear colour breaks"
+      ],
+      "geometry": {
+        "generator": "procedural-blender-primitives",
+        "sphere_segments": 24,
+        "ring_count": 12,
+        "tail_segments": 0,
+        "finger_count": 3,
+        "target_triangles": 25000,
+        "lod_levels": 3,
+        "complexity": "medium",
+        "measurable_difference": {
+          "low_to_medium": "more sphere and tail segments, more fingers",
+          "medium_to_high": "more geometry detail and 2x texture resolution"
+        }
+      },
+      "materials": [
+        {
+          "name": "M_Monkey_Fur",
+          "role": "fur",
+          "base_color": [
+            0.32,
+            0.19,
+            0.1,
+            1.0
+          ],
+          "roughness": 0.78,
+          "metallic": 0.0,
+          "textured": true,
+          "channels": {
+            "base_color": "generated",
+            "roughness": "generated",
+            "normal": "generated",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {
+            "base_color": "sRGB",
+            "roughness": "Non-Color",
+            "normal": "Non-Color"
+          }
+        },
+        {
+          "name": "M_Monkey_Skin",
+          "role": "face_hands_feet",
+          "base_color": [
+            0.55,
+            0.38,
+            0.25,
+            1.0
+          ],
+          "roughness": 0.62,
+          "metallic": 0.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Monkey_EyeWhite",
+          "role": "eyes",
+          "base_color": [
+            0.92,
+            0.89,
+            0.82,
+            1.0
+          ],
+          "roughness": 0.25,
+          "metallic": 0.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Monkey_Iris",
+          "role": "eyes",
+          "base_color": [
+            0.35,
+            0.18,
+            0.04,
+            1.0
+          ],
+          "roughness": 0.3,
+          "metallic": 0.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Monkey_Pupil",
+          "role": "eyes",
+          "base_color": [
+            0.02,
+            0.02,
+            0.02,
+            1.0
+          ],
+          "roughness": 0.2,
+          "metallic": 0.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Monkey_Nose",
+          "role": "face",
+          "base_color": [
+            0.16,
+            0.1,
+            0.08,
+            1.0
+          ],
+          "roughness": 0.45,
+          "metallic": 0.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Monkey_InnerEar",
+          "role": "ears",
+          "base_color": [
+            0.62,
+            0.35,
+            0.3,
+            1.0
+          ],
+          "roughness": 0.7,
+          "metallic": 0.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        }
+      ],
+      "textures": {
+        "resolution": 512,
+        "format": "PNG",
+        "generation_method": "procedural-local-blender",
+        "maps_generated": [
+          "base_color",
+          "roughness",
+          "normal"
+        ],
+        "maps_constant": [
+          "metallic"
+        ],
+        "maps_absent": {
+          "ao": "no physically measured ambient occlusion was computed",
+          "emission": "not required by the character description",
+          "opacity": "character is fully opaque"
+        },
+        "color_spaces": {
+          "base_color": "sRGB",
+          "roughness": "Non-Color",
+          "normal": "Non-Color"
+        }
+      },
+      "uv": {
+        "method": "smart_project",
+        "angle_limit_deg": 66,
+        "island_margin": 0.02,
+        "require_uv_layer": true,
+        "require_coverage": true
+      },
+      "rigging": {
+        "required": true,
+        "skeleton": "quadruped-adapted biped",
+        "bone_count_target": 22,
+        "skinning": "automatic weights with validated fallback",
+        "animation_fps": 30,
+        "bone_groups": [
+          "root",
+          "pelvis",
+          "spine",
+          "chest",
+          "neck",
+          "head",
+          "arm.L",
+          "arm.R",
+          "hand.L",
+          "hand.R",
+          "leg.L",
+          "leg.R",
+          "foot.L",
+          "foot.R",
+          "tail"
+        ],
+        "export_animation": true
+      },
+      "animations": [
+        {
+          "name": "idle",
+          "frames": 60,
+          "fps": 30,
+          "loop": true,
+          "generation": "procedural-keyframes"
+        },
+        {
+          "name": "walk",
+          "frames": 24,
+          "fps": 30,
+          "loop": true,
+          "generation": "procedural-keyframes"
+        },
+        {
+          "name": "run",
+          "frames": 18,
+          "fps": 30,
+          "loop": true,
+          "generation": "procedural-keyframes"
+        },
+        {
+          "name": "jump",
+          "frames": 30,
+          "fps": 30,
+          "loop": false,
+          "generation": "procedural-keyframes"
+        },
+        {
+          "name": "landing",
+          "frames": 20,
+          "fps": 30,
+          "loop": false,
+          "generation": "procedural-keyframes"
+        }
+      ],
+      "export": {
+        "target_engine": "unity",
+        "formats": [
+          "blend",
+          "glb",
+          "gltf",
+          "fbx"
+        ],
+        "units": "meters",
+        "forward_axis": "-Z",
+        "up_axis": "Y",
+        "require_reimport": true
+      },
+      "provenance": {
+        "source": "generated-locally",
+        "generation_method": "procedural-blender",
+        "creator": "Universal AI Game Studio",
+        "license": "Original project asset (no third-party content)",
+        "license_id": "project-original-1.0",
+        "attribution_required": false,
+        "external_assets": [],
+        "downloads": [],
+        "blender_executed": true,
+        "seed": 20261107
+      },
+      "capabilities": {
+        "required": [
+          "mesh_generation",
+          "texture_generation",
+          "material_generation"
+        ],
+        "provider_checks": {
+          "mesh_generation": {
+            "capability": "mesh_generation",
+            "states": {
+              "openai": "unsupported",
+              "openai_compatible": "unsupported",
+              "anthropic": "unsupported",
+              "gemini": "unsupported",
+              "groq": "unsupported",
+              "openrouter": "unsupported",
+              "ollama": "unsupported",
+              "meshy": "supported"
+            },
+            "supported_providers": [],
+            "externally_authorized": false,
+            "usable_without_approval": false,
+            "note": "A supported text capability does not imply image, texture or 3D generation support."
+          },
+          "texture_generation": {
+            "capability": "texture_generation",
+            "states": {
+              "openai": "unsupported",
+              "openai_compatible": "unsupported",
+              "anthropic": "unsupported",
+              "gemini": "unsupported",
+              "groq": "unsupported",
+              "openrouter": "unsupported",
+              "ollama": "unsupported",
+              "meshy": "unknown"
+            },
+            "supported_providers": [],
+            "externally_authorized": false,
+            "usable_without_approval": false,
+            "note": "A supported text capability does not imply image, texture or 3D generation support."
+          },
+          "material_generation": {
+            "capability": "material_generation",
+            "states": {
+              "openai": "unsupported",
+              "openai_compatible": "unsupported",
+              "anthropic": "unsupported",
+              "gemini": "unsupported",
+              "groq": "unsupported",
+              "openrouter": "unsupported",
+              "ollama": "unsupported",
+              "meshy": "unsupported"
+            },
+            "supported_providers": [],
+            "externally_authorized": false,
+            "usable_without_approval": false,
+            "note": "A supported text capability does not imply image, texture or 3D generation support."
+          },
+          "image_generation": {
+            "capability": "image_generation",
+            "states": {
+              "openai": "unsupported",
+              "openai_compatible": "unsupported",
+              "anthropic": "unsupported",
+              "gemini": "unsupported",
+              "groq": "unsupported",
+              "openrouter": "unsupported",
+              "ollama": "unsupported",
+              "meshy": "unsupported"
+            },
+            "supported_providers": [],
+            "externally_authorized": false,
+            "usable_without_approval": false,
+            "note": "A supported text capability does not imply image, texture or 3D generation support."
+          }
+        },
+        "external_generation_used": false,
+        "local_generation_used": "blender",
+        "missing_capabilities": [
+          "AI image generation provider not configured/authorized",
+          "AI 3D mesh generation provider not authorized (Meshy paid)"
+        ]
+      }
+    },
+    "ai_generated_asset": false,
+    "generation_performed": false,
+    "phase5_project_modified": false
+  },
+  "environment": {
+    "interface": "game_studio.environment_spec.build_environment_spec",
+    "requirement_ids": [
+      "REQ-296621DE46",
+      "REQ-EC06014D4C"
+    ],
+    "validation_errors": [],
+    "valid": true,
+    "spec": {
+      "schema_version": 1,
+      "id": "env-gamelevel-tropical_jungle-medium",
+      "name": "GameLevel",
+      "description": "Jungle Banana Run A short third-person jungle collection level for Windows and Android. Tropical jungle biome with a defined trail Cliffs, river and foliage dressing Directional sunlight with a warm ambient fill Explore the jungle trail Collect bananas to fill the objective counter Avoid hazard volumes and respawn at the last checkpoint Reach the destination zone to complete the level Tropical jungle biome with a defined trail Cliffs, river and foliage dressing Directional sunlight with a warm ambient fill third-person action adventure platformer",
+      "profile": "tropical_jungle",
+      "profile_name": "Tropical Jungle",
+      "implemented_level": "full",
+      "quality_tier": "medium",
+      "style": "stylized-realistic tropical adventure",
+      "terrain": {
+        "size_x_m": 120.0,
+        "size_y_m": 120.0,
+        "segments": 65,
+        "amplitude_m": 6.0,
+        "hill_count": 3,
+        "base_elevation_m": 2.2,
+        "spawn_flat_radius_m": 11.0,
+        "route_flat_radius_m": 7.0,
+        "route_width_m": 5.0,
+        "uv": "world_scaled_grid_uv",
+        "material": "M_Env_Ground",
+        "collision": "terrain_mesh_collider"
+      },
+      "vegetation": {
+        "density": 0.01868,
+        "min_spacing_m": {
+          "tree": 5.0,
+          "bush": 2.8,
+          "fern": 2.0,
+          "grass": 1.2,
+          "plant": 2.5
+        },
+        "slope_limit_deg": {
+          "tree": 28.0,
+          "bush": 32.0,
+          "fern": 30.0,
+          "grass": 34.0,
+          "plant": 30.0
+        },
+        "counts": {
+          "trees": 22,
+          "bushes": 30,
+          "ferns": 55,
+          "grass": 140,
+          "plants": 22
+        },
+        "variation": {
+          "scale": [
+            0.75,
+            1.35
+          ],
+          "rotation_deg": [
+            0.0,
+            360.0
+          ]
+        },
+        "instancing": "linked_mesh_instances",
+        "route_clearance_m": 5.0
+      },
+      "rocks": {
+        "count": 20,
+        "large_count": 6,
+        "min_spacing_m": 3.0,
+        "slope_limit_deg": 42.0,
+        "collision": "static_obstacle",
+        "variation": {
+          "scale": [
+            0.6,
+            1.8
+          ],
+          "rotation_deg": [
+            0.0,
+            360.0
+          ]
+        }
+      },
+      "props": {
+        "fallen_logs": 4,
+        "ruin_clusters": 1,
+        "debris_count": 10,
+        "roots": 7,
+        "collision": "static_obstacle"
+      },
+      "water": {
+        "present": true,
+        "type": "river",
+        "width_m": 9.0,
+        "depth_m": [
+          0.4,
+          1.4
+        ],
+        "length_m": 112.0,
+        "flow_direction": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "banks": true,
+        "water_surface": true,
+        "bed_geometry": true,
+        "collision_boundary": true,
+        "physics": "visual-only; no swimming interaction implemented",
+        "material": "M_Env_Water"
+      },
+      "materials": [
+        {
+          "name": "M_Env_Ground",
+          "role": "terrain",
+          "base_color": [
+            0.18,
+            0.24,
+            0.1
+          ],
+          "roughness": 0.86,
+          "metallic": 0.0,
+          "transmission": 0.0,
+          "alpha": 1.0,
+          "textured": true,
+          "channels": {
+            "base_color": "generated",
+            "roughness": "generated",
+            "normal": "generated",
+            "metallic": "constant",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {
+            "base_color": "sRGB",
+            "roughness": "Non-Color",
+            "normal": "Non-Color"
+          }
+        },
+        {
+          "name": "M_Env_Grass",
+          "role": "ground_cover",
+          "base_color": [
+            0.16,
+            0.31,
+            0.08
+          ],
+          "roughness": 0.82,
+          "metallic": 0.0,
+          "transmission": 0.0,
+          "alpha": 1.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Env_Leaf",
+          "role": "canopy",
+          "base_color": [
+            0.1,
+            0.28,
+            0.07
+          ],
+          "roughness": 0.72,
+          "metallic": 0.0,
+          "transmission": 0.0,
+          "alpha": 1.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Env_Leaf_Light",
+          "role": "canopy_variation",
+          "base_color": [
+            0.22,
+            0.4,
+            0.1
+          ],
+          "roughness": 0.68,
+          "metallic": 0.0,
+          "transmission": 0.0,
+          "alpha": 1.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Env_Bark",
+          "role": "tree_trunk",
+          "base_color": [
+            0.22,
+            0.14,
+            0.08
+          ],
+          "roughness": 0.9,
+          "metallic": 0.0,
+          "transmission": 0.0,
+          "alpha": 1.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Env_Rock",
+          "role": "rock",
+          "base_color": [
+            0.3,
+            0.29,
+            0.26
+          ],
+          "roughness": 0.84,
+          "metallic": 0.0,
+          "transmission": 0.0,
+          "alpha": 1.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Env_Rock_Mossy",
+          "role": "rock_variation",
+          "base_color": [
+            0.22,
+            0.27,
+            0.16
+          ],
+          "roughness": 0.88,
+          "metallic": 0.0,
+          "transmission": 0.0,
+          "alpha": 1.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Env_Wood",
+          "role": "fallen_wood",
+          "base_color": [
+            0.26,
+            0.17,
+            0.09
+          ],
+          "roughness": 0.88,
+          "metallic": 0.0,
+          "transmission": 0.0,
+          "alpha": 1.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Env_Stone",
+          "role": "ruins",
+          "base_color": [
+            0.38,
+            0.36,
+            0.31
+          ],
+          "roughness": 0.8,
+          "metallic": 0.0,
+          "transmission": 0.0,
+          "alpha": 1.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Env_WetGround",
+          "role": "river_bank",
+          "base_color": [
+            0.13,
+            0.14,
+            0.08
+          ],
+          "roughness": 0.42,
+          "metallic": 0.0,
+          "transmission": 0.0,
+          "alpha": 1.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Env_Water",
+          "role": "water",
+          "base_color": [
+            0.06,
+            0.22,
+            0.26
+          ],
+          "roughness": 0.08,
+          "metallic": 0.0,
+          "transmission": 0.55,
+          "alpha": 0.82,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        },
+        {
+          "name": "M_Env_Root",
+          "role": "roots",
+          "base_color": [
+            0.2,
+            0.13,
+            0.07
+          ],
+          "roughness": 0.92,
+          "metallic": 0.0,
+          "transmission": 0.0,
+          "alpha": 1.0,
+          "textured": false,
+          "channels": {
+            "base_color": "absent",
+            "normal": "absent",
+            "roughness": "absent",
+            "metallic": "absent",
+            "ao": "absent",
+            "emission": "absent",
+            "opacity": "absent"
+          },
+          "color_spaces": {}
+        }
+      ],
+      "textures": {
+        "resolution": 512,
+        "format": "PNG",
+        "generation_method": "procedural-local-blender",
+        "maps_generated": [
+          "base_color",
+          "roughness",
+          "normal"
+        ],
+        "maps_constant": [
+          "metallic"
+        ],
+        "maps_absent": {
+          "ao": "no physically measured ambient occlusion was computed",
+          "emission": "not required by the environment description",
+          "opacity": "opaque materials except the visual water surface"
+        },
+        "color_spaces": {
+          "base_color": "sRGB",
+          "roughness": "Non-Color",
+          "normal": "Non-Color"
+        }
+      },
+      "lighting": {
+        "preset": "daylight",
+        "sun_elevation_deg": 38,
+        "sun_azimuth_deg": 52,
+        "sun_energy": 4.0,
+        "ambient_strength": 0.55,
+        "sky_color": [
+          0.42,
+          0.62,
+          0.82
+        ],
+        "fog_color": [
+          0.55,
+          0.68,
+          0.66
+        ],
+        "fog_density": 0.018,
+        "shadows": true,
+        "exposure": 0.0,
+        "view_transform": "AgX",
+        "atmosphere": "world_haze_and_distance_fog_metadata",
+        "volumetric_fog_rendered": false
+      },
+      "layout": {
+        "spawn": {
+          "x": 0.0,
+          "y": -48.0,
+          "facing": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        "route": [
+          {
+            "x": 1.978,
+            "y": -48.0,
+            "order": 0
+          },
+          {
+            "x": 2.917,
+            "y": -37.75,
+            "order": 1
+          },
+          {
+            "x": 2.787,
+            "y": -27.5,
+            "order": 2
+          },
+          {
+            "x": 1.636,
+            "y": -17.25,
+            "order": 3
+          },
+          {
+            "x": -0.115,
+            "y": -7.0,
+            "order": 4
+          },
+          {
+            "x": -1.824,
+            "y": 3.25,
+            "order": 5
+          },
+          {
+            "x": -2.864,
+            "y": 13.5,
+            "order": 6
+          },
+          {
+            "x": -2.855,
+            "y": 23.75,
+            "order": 7
+          },
+          {
+            "x": -1.799,
+            "y": 34.0,
+            "order": 8
+          }
+        ],
+        "route_width_m": 5.0,
+        "landmark": {
+          "x": 0.0,
+          "y": 46.0,
+          "type": "jungle_ruins"
+        },
+        "playable_area": {
+          "center": [
+            0.0,
+            0.0
+          ],
+          "radius_m": 55.0
+        },
+        "unit_scale": "meters",
+        "forward_axis": "-Z",
+        "up_axis": "Y"
+      },
+      "collision": {
+        "terrain_collider": true,
+        "obstacle_colliders": true,
+        "river_boundary": true,
+        "walkable_slope_deg": 32.0,
+        "spawn_clearance_m": 3.0,
+        "route_clearance_m": 2.5,
+        "navigation": "metadata prepared; no navmesh runtime implemented"
+      },
+      "performance": {
+        "target_triangles": 120000,
+        "estimated_memory_mb": 180,
+        "memory_label": "estimated, not measured",
+        "preview_size": 640,
+        "render_samples": 16,
+        "instancing": true,
+        "max_simultaneous_blender_jobs": 1
+      },
+      "character": {
+        "place": true,
+        "asset_path": "validation/v6-character-pipeline/JungleMonkey.glb",
+        "expected_height_m": [
+          1.1,
+          2.0
+        ],
+        "face_route": true,
+        "validate_ground_contact": true,
+        "preserve_source": true
+      },
+      "export": {
+        "target_engine": "unity",
+        "formats": [
+          "blend",
+          "glb",
+          "gltf",
+          "fbx"
+        ],
+        "units": "meters",
+        "forward_axis": "-Z",
+        "up_axis": "Y",
+        "include_character": true,
+        "include_collision_metadata": true,
+        "require_reimport": true
+      },
+      "provenance": {
+        "source": "generated-locally",
+        "generation_method": "procedural-blender",
+        "creator": "Universal AI Game Studio",
+        "license": "Original project asset (no third-party content)",
+        "license_id": "project-original-1.0",
+        "attribution_required": false,
+        "external_assets": [],
+        "downloads": [],
+        "ai_generated": false,
+        "seed": 20261108
+      }
+    },
+    "ai_generated_asset": false,
+    "generation_performed": false,
+    "phase5_project_modified": false
+  },
+  "gameplay": {
+    "interface": "read-only inspection of validation/unity-jungle-v6",
+    "requirement_ids": [
+      "REQ-A7F40BC2E4",
+      "REQ-DF2869A560",
+      "REQ-DA407FDC28",
+      "REQ-6768D8665E",
+      "REQ-86BEC48E1D",
+      "REQ-233644BB67",
+      "REQ-2C12D9338C",
+      "REQ-EC84B2F5F0",
+      "REQ-501C4D0189",
+      "REQ-0FCB682443",
+      "REQ-EC06014D4C",
+      "REQ-7377474661",
+      "REQ-C6E9F724E3",
+      "REQ-DF5BB0B330",
+      "REQ-1C4B42A903",
+      "REQ-8009060056",
+      "REQ-F7CC052993"
+    ],
+    "phase5_interfaces": {
+      "root": "validation/unity-jungle-v6",
+      "read_only": true,
+      "modified": false,
+      "interfaces": {
+        "Assets/V6/Scripts/Player/PlayerMovement.cs": true,
+        "Assets/V6/Scripts/Player/PlayerInputHandler.cs": true,
+        "Assets/V6/Scripts/Player/GroundDetector.cs": true,
+        "Assets/V6/Scripts/Player/PlayerCollisionHandler.cs": true,
+        "Assets/V6/Scripts/Collectibles/Collectible.cs": true,
+        "Assets/V6/Scripts/Collectibles/CollectibleManager.cs": true,
+        "Assets/V6/Scripts/Camera/CameraFollowController.cs": true,
+        "Assets/V6/Scripts/Core/GameStateController.cs": true,
+        "Assets/V6/Scripts/Core/LevelManager.cs": true,
+        "Assets/V6/Scripts/Core/ObjectiveManager.cs": true,
+        "Assets/V6/Scripts/Core/CheckpointManager.cs": true,
+        "Assets/V6/Scripts/Core/DestinationZone.cs": true
+      },
+      "missing": []
+    },
+    "collectibles": [
+      "Banana pickup with a trigger collider"
+    ],
+    "hazards": [
+      "Spike pit",
+      "River current volume"
+    ],
+    "objectives": [
+      "Spawn area",
+      "Mid-route checkpoint",
+      "Destination zone"
+    ],
+    "checkpoints": [
+      "Spawn checkpoint",
+      "Mid-route checkpoint",
+      "Destination/level-complete checkpoint"
+    ],
+    "camera": [
+      "Third-person follow camera with a spring arm and obstacle pull-in."
+    ],
+    "ui": [
+      "HUD banana counter",
+      "Pause menu",
+      "Level complete panel"
+    ],
+    "game_states": [
+      "Boot",
+      "MainMenu",
+      "Playing",
+      "Paused",
+      "LevelComplete"
+    ],
+    "acceptance_tests": [
+      "Collecting a banana increments the HUD counter within 1 frame",
+      "The player reaches the destination zone and the level completes within 10 seconds of arrival",
+      "Frame rate stays at or above 60 fps for 30 seconds on the reference hardware",
+      "All 10 bananas can be collected in one run"
+    ],
+    "generated": false,
+    "build_started": false,
+    "phase5_project_modified": false,
+    "ai_generated_asset": false
+  },
+  "all_requirement_ids_traceable": true,
+  "assets_generated": false,
+  "phase5_project_modified": false,
+  "build_started": false
+}

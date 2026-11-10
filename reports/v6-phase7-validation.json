@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 7 - validation results",
+  "generated_at": "2026-11-10T04:29:56Z",
+  "offline_fixture": {
+    "schema_valid": true,
+    "errors": [],
+    "missing_fields": [],
+    "contradictions": [],
+    "unsupported_claims": [],
+    "ambiguous_requirements": []
+  },
+  "malformed_json": {
+    "schema_valid": false,
+    "errors": [
+      "invalid JSON: model output contains no JSON object"
+    ]
+  },
+  "contradictory_payload": {
+    "schema_valid": true,
+    "contradiction_kinds": [
+      "dimension"
+    ],
+    "unsupported_claims": [
+      "multiplayer",
+      "netcode"
+    ]
+  },
+  "specification": {
+    "valid": true,
+    "errors": []
+  },
+  "tampered_specification": {
+    "valid": false,
+    "errors": [
+      "requirements[0] cannot be verified in Phase 7",
+      "approval must not be granted by the pipeline",
+      "no generation step may be marked executed"
+    ]
+  },
+  "tamper_rejected": true,
+  "quota": {
+    "exhausted_decision": false,
+    "unknown_decision": true,
+    "unknown_is_unlimited": false
+  },
+  "network_guard": {
+    "sockets_disabled": true,
+    "operations_completed": [
+      "readiness",
+      "request_plan",
+      "game_spec_pipeline",
+      "quality_evaluation",
+      "response_validation",
+      "free_routing"
+    ]
+  },
+  "live_provider_validation": {
+    "status": "BLOCKED_CREDENTIAL_NOT_CONFIGURED",
+    "authorized": false,
+    "performed": false,
+    "network_calls": 0,
+    "reason": "No credential is configured and no live request was approved by a human. Offline evidence must not be read as live validation."
+  },
+  "protected_artifacts": {
+    "v4": {
+      "tools/game-studio-mcp/tests/test_llm_v4.py": {
+        "expected": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "actual": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "matches": true
+      },
+      "tools/game-studio-mcp/tests/test_p0_v4.py": {
+        "expected": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "actual": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "matches": true
+      }
+    },
+    "v5": {
+      "validation/unity-jungle-v5/.game-studio/manifest.json": {
+        "exists": true,
+        "expected": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "actual": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/specification.json": {
+        "exists": true,
+        "expected": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "actual": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/execution-plan.json": {
+        "exists": true,
+        "expected": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "actual": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml": {
+        "exists": true,
+        "expected": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "actual": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json": {
+        "exists": true,
+        "expected": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "actual": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png": {
+        "exists": true,
+        "expected": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "actual": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json": {
+        "exists": true,
+        "expected": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "actual": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity": {
+        "exists": true,
+        "expected": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "actual": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "matches": true
+      },
+      "validation/builds/v5-windows/JungleMonkey.exe": {
+        "exists": true,
+        "expected": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "actual": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "matches": true
+      },
+      "V5-IMPLEMENTATION-REPORT.md": {
+        "exists": true,
+        "expected": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "actual": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "matches": true
+      },
+      "V5-LLM-EVALUATION.md": {
+        "exists": true,
+        "expected": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "actual": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "matches": true
+      },
+      "V5-UNITY-VERTICAL-SLICE.md": {
+        "exists": true,
+        "expected": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "actual": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "matches": true
+      },
+      "V5-VERIFICATION-MATRIX.md": {
+        "exists": true,
+        "expected": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "actual": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "matches": true
+      }
+    },
+    "v4_ok": true,
+    "v5_ok": true,
+    "phase5_interfaces_ok": true,
+    "protected_git_status": [],
+    "protected_git_clean": true
+  }
+}

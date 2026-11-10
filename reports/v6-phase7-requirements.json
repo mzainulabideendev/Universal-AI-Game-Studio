@@ -1,0 +1,946 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 7F - structured requirements",
+  "generated_at": "2026-11-10T04:29:56Z",
+  "source": "ai_provider",
+  "counts": {
+    "total": 32,
+    "user_requirement": 9,
+    "recommendation": 23,
+    "blocked": 0,
+    "verified": 0,
+    "human_approved": 0
+  },
+  "requirements": [
+    {
+      "requirement_id": "REQ-1412DF1633",
+      "id": "R-001",
+      "description": "Dimension: third person",
+      "category": "dimension",
+      "priority": "P0",
+      "dependencies": [],
+      "acceptance_criteria": "The game renders and plays in the requested perspective.",
+      "required_assets": [
+        "implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the stated acceptance test and record evidence.",
+      "provenance": "user_requirement",
+      "confidence": 0.85,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-31E73B7450",
+      "id": "R-002",
+      "description": "Dimension: 3d",
+      "category": "dimension",
+      "priority": "P0",
+      "dependencies": [],
+      "acceptance_criteria": "The game renders and plays in the requested perspective.",
+      "required_assets": [
+        "implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the stated acceptance test and record evidence.",
+      "provenance": "user_requirement",
+      "confidence": 0.85,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-5612381BCF",
+      "id": "R-003",
+      "description": "Character: human",
+      "category": "character",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "The requested character exists and is controllable.",
+      "required_assets": [
+        "character mesh",
+        "rig",
+        "materials"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Validate the generated spec, import into the engine and play the animation.",
+      "provenance": "user_requirement",
+      "confidence": 0.85,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-8883FA871E",
+      "id": "R-004",
+      "description": "Character: monkey",
+      "category": "character",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "The requested character exists and is controllable.",
+      "required_assets": [
+        "character mesh",
+        "rig",
+        "materials"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Validate the generated spec, import into the engine and play the animation.",
+      "provenance": "user_requirement",
+      "confidence": 0.85,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-296621DE46",
+      "id": "R-005",
+      "description": "Environment: jungle",
+      "category": "environment",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "The requested environment exists and is traversable.",
+      "required_assets": [
+        "environment mesh",
+        "material",
+        "collision"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Validate terrain/vegetation counts and run a play-mode traversal test.",
+      "provenance": "user_requirement",
+      "confidence": 0.85,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-4CC7C5E25A",
+      "id": "R-006",
+      "description": "Genre: adventure",
+      "category": "genre",
+      "priority": "P0",
+      "dependencies": [],
+      "acceptance_criteria": "The core loop matches the requested genre.",
+      "required_assets": [
+        "implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the stated acceptance test and record evidence.",
+      "provenance": "user_requirement",
+      "confidence": 0.85,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-0B9D180E74",
+      "id": "R-007",
+      "description": "Platform: pc",
+      "category": "platform",
+      "priority": "P0",
+      "dependencies": [],
+      "acceptance_criteria": "The game runs on the requested target platform.",
+      "required_assets": [
+        "implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the stated acceptance test and record evidence.",
+      "provenance": "user_requirement",
+      "confidence": 0.85,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-A075D0BEE3",
+      "id": "R-008",
+      "description": "Platform: mobile",
+      "category": "platform",
+      "priority": "P0",
+      "dependencies": [],
+      "acceptance_criteria": "The game runs on the requested target platform.",
+      "required_assets": [
+        "implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the stated acceptance test and record evidence.",
+      "provenance": "user_requirement",
+      "confidence": 0.85,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-A7F40BC2E4",
+      "id": "R-009",
+      "description": "Gameplay: collectibles",
+      "category": "mechanic",
+      "priority": "P0",
+      "dependencies": [],
+      "acceptance_criteria": "The requested mechanic is implemented and playable.",
+      "required_assets": [
+        "implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the stated acceptance test and record evidence.",
+      "provenance": "user_requirement",
+      "confidence": 0.85,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-DF2869A560",
+      "id": "R-010",
+      "description": "Player traversal",
+      "category": "system",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Player traversal works in a playable build: Walk, run, jump and interact with a grounded character controller.",
+      "required_assets": [
+        "system implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Unit or play-mode test that exercises the system end to end.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.65,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-DA407FDC28",
+      "id": "R-011",
+      "description": "Interaction system",
+      "category": "system",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Interaction system works in a playable build: Context prompts and interactable objects that change gameplay state.",
+      "required_assets": [
+        "system implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Unit or play-mode test that exercises the system end to end.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.65,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-6768D8665E",
+      "id": "R-012",
+      "description": "Collectibles and objectives",
+      "category": "system",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Collectibles and objectives works in a playable build: Tracked pickups and objective state that persist.",
+      "required_assets": [
+        "system implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Unit or play-mode test that exercises the system end to end.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.65,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-86BEC48E1D",
+      "id": "R-013",
+      "description": "NPC and dialogue",
+      "category": "system",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "NPC and dialogue works in a playable build: At least one NPC with a repeatable interaction and dialogue.",
+      "required_assets": [
+        "system implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Unit or play-mode test that exercises the system end to end.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.65,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-233644BB67",
+      "id": "R-014",
+      "description": "Save and progression",
+      "category": "system",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Save and progression works in a playable build: Persist position, collectibles and objectives across sessions.",
+      "required_assets": [
+        "system implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Unit or play-mode test that exercises the system end to end.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.65,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-2C12D9338C",
+      "id": "R-015",
+      "description": "Player controller",
+      "category": "system",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Player controller works in a playable build: Engine-native character/vehicle controller with tuned movement.",
+      "required_assets": [
+        "system implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Unit or play-mode test that exercises the system end to end.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.65,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-EC84B2F5F0",
+      "id": "R-016",
+      "description": "Camera",
+      "category": "system",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Camera works in a playable build: Third-person or genre-appropriate camera with collision handling.",
+      "required_assets": [
+        "system implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Unit or play-mode test that exercises the system end to end.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.65,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-501C4D0189",
+      "id": "R-017",
+      "description": "UI/HUD",
+      "category": "system",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "UI/HUD works in a playable build: Core gameplay state visible to the player.",
+      "required_assets": [
+        "system implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Unit or play-mode test that exercises the system end to end.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.65,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-D777F725AB",
+      "id": "R-018",
+      "description": "3D asset import pipeline",
+      "category": "technical",
+      "priority": "P0",
+      "dependencies": [],
+      "acceptance_criteria": "A test model imports with correct scale, materials and colliders.",
+      "required_assets": [
+        "configuration",
+        "build settings"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Build and inspect logs/artifacts; no success is claimed from configuration.",
+      "provenance": "technical_dependency",
+      "confidence": 0.85,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-54CFA1CDAF",
+      "id": "R-019",
+      "description": "Version control and reproducible project setup",
+      "category": "technical",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "A clean clone/checkout opens and builds using documented steps.",
+      "required_assets": [
+        "configuration",
+        "build settings"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Build and inspect logs/artifacts; no success is claimed from configuration.",
+      "provenance": "technical_dependency",
+      "confidence": 0.85,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-FA67FDC75A",
+      "id": "R-020",
+      "description": "Quest log",
+      "category": "optional",
+      "priority": "P3",
+      "dependencies": [],
+      "acceptance_criteria": "If built, Quest log works without breaking the core loop.",
+      "required_assets": [
+        "implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the stated acceptance test and record evidence.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.4,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-DDDE5C1C38",
+      "id": "R-021",
+      "description": "Crafting",
+      "category": "optional",
+      "priority": "P3",
+      "dependencies": [],
+      "acceptance_criteria": "If built, Crafting works without breaking the core loop.",
+      "required_assets": [
+        "implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the stated acceptance test and record evidence.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.4,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-0B244B6D91",
+      "id": "R-022",
+      "description": "Fast travel",
+      "category": "optional",
+      "priority": "P3",
+      "dependencies": [],
+      "acceptance_criteria": "If built, Fast travel works without breaking the core loop.",
+      "required_assets": [
+        "implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the stated acceptance test and record evidence.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.4,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-778C182ECC",
+      "id": "R-023",
+      "description": "Photo mode",
+      "category": "optional",
+      "priority": "P3",
+      "dependencies": [],
+      "acceptance_criteria": "If built, Photo mode works without breaking the core loop.",
+      "required_assets": [
+        "implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the stated acceptance test and record evidence.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.4,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-B3B5EC7C92",
+      "id": "R-024",
+      "description": "Achievements",
+      "category": "optional",
+      "priority": "P3",
+      "dependencies": [],
+      "acceptance_criteria": "If built, Achievements works without breaking the core loop.",
+      "required_assets": [
+        "implementation"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the stated acceptance test and record evidence.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.4,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-0FCB682443",
+      "id": "R-025",
+      "description": "Character rig and animations is required for a complete, testable vertical slice.",
+      "category": "animation",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Character rig and animations is observable in a playable build or build artifact.",
+      "required_assets": [
+        "skeleton rig",
+        "idle/walk/run animations"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the stated acceptance test and record evidence.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.6,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-EC06014D4C",
+      "id": "R-026",
+      "description": "Vegetation is required for a complete, testable vertical slice.",
+      "category": "environment",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Vegetation is observable in a playable build or build artifact.",
+      "required_assets": [
+        "tree assets",
+        "plant assets"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Validate terrain/vegetation counts and run a play-mode traversal test.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.6,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-7377474661",
+      "id": "R-027",
+      "description": "Collision is required for a complete, testable vertical slice.",
+      "category": "physics",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Collision is observable in a playable build or build artifact.",
+      "required_assets": [
+        "collider setup"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the stated acceptance test and record evidence.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.6,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-C6E9F724E3",
+      "id": "R-028",
+      "description": "Score system is required for a complete, testable vertical slice.",
+      "category": "gameplay",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Score system is observable in a playable build or build artifact.",
+      "required_assets": [
+        "score state"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Play-mode acceptance test with observable success/failure.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.6,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-DF5BB0B330",
+      "id": "R-029",
+      "description": "Game states is required for a complete, testable vertical slice.",
+      "category": "technical",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Game states is observable in a playable build or build artifact.",
+      "required_assets": [
+        "state machine"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Build and inspect logs/artifacts; no success is claimed from configuration.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.6,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-1C4B42A903",
+      "id": "R-030",
+      "description": "Performance target is required for a complete, testable vertical slice.",
+      "category": "performance",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Performance target is observable in a playable build or build artifact.",
+      "required_assets": [
+        "profiler capture"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Measure frame time on the documented hardware; report actual values.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.6,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-8009060056",
+      "id": "R-031",
+      "description": "Build configuration is required for a complete, testable vertical slice.",
+      "category": "technical",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Build configuration is observable in a playable build or build artifact.",
+      "required_assets": [
+        "build settings"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Build and inspect logs/artifacts; no success is claimed from configuration.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.6,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    },
+    {
+      "requirement_id": "REQ-F7CC052993",
+      "id": "R-032",
+      "description": "Tests is required for a complete, testable vertical slice.",
+      "category": "qa",
+      "priority": "P1",
+      "dependencies": [],
+      "acceptance_criteria": "Tests is observable in a playable build or build artifact.",
+      "required_assets": [
+        "automated test",
+        "play-mode test"
+      ],
+      "target_engine": "unity",
+      "target_platforms": [
+        "windows",
+        "android"
+      ],
+      "verification_method": "Run the automated suite and record the command, exit code and output.",
+      "provenance": "agent_recommendation",
+      "confidence": 0.6,
+      "implementation_status": "not_implemented",
+      "human_approved": false,
+      "unsupported_assumptions": [],
+      "source": "ai_provider",
+      "status": "proposed"
+    }
+  ],
+  "unsupported_features": [],
+  "blocked_requirements": [],
+  "missing_information": [
+    {
+      "topic": "engine",
+      "material": true,
+      "reason": "The engine determines project structure, scripting, asset import and build pipeline.",
+      "recommended": "unity",
+      "default_used": null,
+      "installed_options": []
+    },
+    {
+      "topic": "art-style",
+      "material": true,
+      "reason": "Asset sources, polygon budgets and shaders depend on style.",
+      "recommended": "stylised-realistic",
+      "default_used": "stylised-realistic"
+    },
+    {
+      "topic": "character-source",
+      "material": false,
+      "reason": "Character creation method affects time, cost and licensing.",
+      "recommended": "Blender-authored or licensed base mesh; Meshy optional",
+      "default_used": "Blender/licensed"
+    },
+    {
+      "topic": "scope",
+      "material": false,
+      "reason": "Prevents promising a full content plan before the core loop works.",
+      "recommended": "one vertical slice",
+      "default_used": "one vertical slice"
+    }
+  ],
+  "coverage": [
+    {
+      "id": "player_character",
+      "label": "Player character",
+      "covered_by": "R-003"
+    },
+    {
+      "id": "character_rig_animations",
+      "label": "Character rig and animations",
+      "covered_by": "R-025",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "jungle_terrain",
+      "label": "Terrain",
+      "covered_by": "R-005"
+    },
+    {
+      "id": "vegetation",
+      "label": "Vegetation",
+      "covered_by": "R-026",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "collectibles",
+      "label": "Collectibles",
+      "covered_by": "R-009"
+    },
+    {
+      "id": "collision",
+      "label": "Collision",
+      "covered_by": "R-027",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "camera",
+      "label": "Camera",
+      "covered_by": "R-016"
+    },
+    {
+      "id": "player_controls",
+      "label": "Player controls",
+      "covered_by": "R-015"
+    },
+    {
+      "id": "score_system",
+      "label": "Score system",
+      "covered_by": "R-028",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "objectives",
+      "label": "Objectives",
+      "covered_by": "R-012"
+    },
+    {
+      "id": "hud",
+      "label": "HUD",
+      "covered_by": "R-017"
+    },
+    {
+      "id": "game_states",
+      "label": "Game states",
+      "covered_by": "R-029",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "performance",
+      "label": "Performance target",
+      "covered_by": "R-030",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "build_configuration",
+      "label": "Build configuration",
+      "covered_by": "R-031",
+      "added_as_recommendation": true
+    },
+    {
+      "id": "tests",
+      "label": "Tests",
+      "covered_by": "R-032",
+      "added_as_recommendation": true
+    }
+  ],
+  "note": "Every requirement is a proposal with stable IDs. None is implemented, verified or human-approved."
+}

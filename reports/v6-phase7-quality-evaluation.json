@@ -1,0 +1,470 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 7G - game design quality evaluation",
+  "generated_at": "2026-11-10T04:29:56Z",
+  "rubric": {
+    "categories": [
+      "completeness",
+      "internal_consistency",
+      "gameplay_clarity",
+      "technical_feasibility",
+      "engine_compatibility",
+      "performance_awareness",
+      "asset_specificity",
+      "testability",
+      "requirement_traceability",
+      "unsupported_claim_avoidance"
+    ],
+    "max_score": 100,
+    "scoring": "deterministic rules; no model judges another model"
+  },
+  "offline_fixture": {
+    "ok": true,
+    "schema_version": 1,
+    "source": "offline_fixture",
+    "scores": [
+      {
+        "name": "completeness",
+        "score": 10.0,
+        "max": 10,
+        "method": "10 x (required fields present / required fields)",
+        "evidence": {
+          "present": 18,
+          "required": 18,
+          "missing": []
+        }
+      },
+      {
+        "name": "internal_consistency",
+        "score": 10.0,
+        "max": 10,
+        "method": "10 - 2 per detected cross-field contradiction (floor 0)",
+        "evidence": []
+      },
+      {
+        "name": "gameplay_clarity",
+        "score": 10.0,
+        "max": 10,
+        "method": "3 for >=3 loop steps, 3 for >=3 mechanics, 2 for progression, 2 for a concrete collectible or hazard",
+        "evidence": {
+          "loop_steps": 4,
+          "mechanics": 4,
+          "progression": 3
+        }
+      },
+      {
+        "name": "technical_feasibility",
+        "score": 10.0,
+        "max": 10,
+        "method": "4 for >=2 architecture items, 3 for platforms, 3 for an engine",
+        "evidence": {
+          "architecture_items": 3,
+          "platforms": [
+            "Windows",
+            "Android"
+          ],
+          "engine": "unity"
+        }
+      },
+      {
+        "name": "engine_compatibility",
+        "score": 10.0,
+        "max": 10,
+        "method": "0 for an unsupported engine, 6 for a supported engine not referenced in the architecture, 10 when both agree",
+        "evidence": {
+          "engine": "unity",
+          "referenced_in_architecture": true
+        }
+      },
+      {
+        "name": "performance_awareness",
+        "score": 10.0,
+        "max": 10,
+        "method": "5 for a plausible FPS target, 3 for hardware, 2 for a quality tier",
+        "evidence": {
+          "target_fps": 60,
+          "hardware_present": true,
+          "quality_tier": "low"
+        }
+      },
+      {
+        "name": "asset_specificity",
+        "score": 10.0,
+        "max": 10,
+        "method": "10 x (asset classes named / 6)",
+        "evidence": {
+          "classes_covered": [
+            "character",
+            "environment",
+            "prop",
+            "texture",
+            "audio",
+            "ui"
+          ],
+          "classes_missing": []
+        }
+      },
+      {
+        "name": "testability",
+        "score": 7.5,
+        "max": 10,
+        "method": "10 x (measurable acceptance criteria / all criteria)",
+        "evidence": {
+          "criteria": 4,
+          "measurable": 3,
+          "ambiguous": []
+        }
+      },
+      {
+        "name": "requirement_traceability",
+        "score": 0.0,
+        "max": 10,
+        "method": "10 x (requirements with id + provenance / all requirements)",
+        "evidence": {
+          "requirements": 0
+        }
+      },
+      {
+        "name": "unsupported_claim_avoidance",
+        "score": 10.0,
+        "max": 10,
+        "method": "10 - 3 per unverified capability claim (floor 0)",
+        "evidence": []
+      }
+    ],
+    "total_score": 87.5,
+    "max_score": 100,
+    "grade": "strong",
+    "missing_requirements": [],
+    "contradictions": [],
+    "unsupported_claims": [],
+    "ambiguous_requirements": [],
+    "schema_errors": [],
+    "human_review_recommendations": [
+      "Improve requirement_traceability: 10 x (requirements with id + provenance / all requirements)."
+    ],
+    "requires_human_review": true,
+    "human_approved": false,
+    "single_response_evidence_only": true,
+    "general_intelligence_claimed": false,
+    "live_model_evaluated": false,
+    "note": "A single response cannot demonstrate general AI intelligence. This rubric measures completeness, coherence and testability only; it does not prove fun, artistic quality or production readiness."
+  },
+  "ai_payload_offline_fixture": {
+    "ok": true,
+    "schema_version": 1,
+    "source": "ai_payload_offline_fixture",
+    "scores": [
+      {
+        "name": "completeness",
+        "score": 10.0,
+        "max": 10,
+        "method": "10 x (required fields present / required fields)",
+        "evidence": {
+          "present": 18,
+          "required": 18,
+          "missing": []
+        }
+      },
+      {
+        "name": "internal_consistency",
+        "score": 8.0,
+        "max": 10,
+        "method": "10 - 2 per detected cross-field contradiction (floor 0)",
+        "evidence": [
+          {
+            "id": "C-01",
+            "kind": "dimension",
+            "statement": "The response references both 2D and 3D presentation.",
+            "requires_human_decision": true
+          }
+        ]
+      },
+      {
+        "name": "gameplay_clarity",
+        "score": 10.0,
+        "max": 10,
+        "method": "3 for >=3 loop steps, 3 for >=3 mechanics, 2 for progression, 2 for a concrete collectible or hazard",
+        "evidence": {
+          "loop_steps": 4,
+          "mechanics": 4,
+          "progression": 3
+        }
+      },
+      {
+        "name": "technical_feasibility",
+        "score": 10.0,
+        "max": 10,
+        "method": "4 for >=2 architecture items, 3 for platforms, 3 for an engine",
+        "evidence": {
+          "architecture_items": 3,
+          "platforms": [
+            "Windows",
+            "Android"
+          ],
+          "engine": "unity"
+        }
+      },
+      {
+        "name": "engine_compatibility",
+        "score": 10.0,
+        "max": 10,
+        "method": "0 for an unsupported engine, 6 for a supported engine not referenced in the architecture, 10 when both agree",
+        "evidence": {
+          "engine": "unity",
+          "referenced_in_architecture": true
+        }
+      },
+      {
+        "name": "performance_awareness",
+        "score": 10.0,
+        "max": 10,
+        "method": "5 for a plausible FPS target, 3 for hardware, 2 for a quality tier",
+        "evidence": {
+          "target_fps": 60,
+          "hardware_present": true,
+          "quality_tier": "low"
+        }
+      },
+      {
+        "name": "asset_specificity",
+        "score": 10.0,
+        "max": 10,
+        "method": "10 x (asset classes named / 6)",
+        "evidence": {
+          "classes_covered": [
+            "character",
+            "environment",
+            "prop",
+            "texture",
+            "audio",
+            "ui"
+          ],
+          "classes_missing": []
+        }
+      },
+      {
+        "name": "testability",
+        "score": 7.5,
+        "max": 10,
+        "method": "10 x (measurable acceptance criteria / all criteria)",
+        "evidence": {
+          "criteria": 4,
+          "measurable": 3,
+          "ambiguous": []
+        }
+      },
+      {
+        "name": "requirement_traceability",
+        "score": 10.0,
+        "max": 10,
+        "method": "10 x (requirements with id + provenance + acceptance / all requirements)",
+        "evidence": {
+          "requirements": 32,
+          "traced": 32
+        }
+      },
+      {
+        "name": "unsupported_claim_avoidance",
+        "score": 10.0,
+        "max": 10,
+        "method": "10 - 3 per unverified capability claim (floor 0)",
+        "evidence": []
+      }
+    ],
+    "total_score": 95.5,
+    "max_score": 100,
+    "grade": "strong",
+    "missing_requirements": [],
+    "contradictions": [],
+    "unsupported_claims": [],
+    "ambiguous_requirements": [],
+    "schema_errors": [],
+    "human_review_recommendations": [],
+    "requires_human_review": true,
+    "human_approved": false,
+    "single_response_evidence_only": true,
+    "general_intelligence_claimed": false,
+    "live_model_evaluated": false,
+    "note": "A single response cannot demonstrate general AI intelligence. This rubric measures completeness, coherence and testability only; it does not prove fun, artistic quality or production readiness."
+  },
+  "deterministic_fallback": {
+    "ok": true,
+    "schema_version": 1,
+    "source": "deterministic_fallback",
+    "scores": [
+      {
+        "name": "completeness",
+        "score": 10.0,
+        "max": 10,
+        "method": "10 x (required fields present / required fields)",
+        "evidence": {
+          "present": 18,
+          "required": 18,
+          "missing": []
+        }
+      },
+      {
+        "name": "internal_consistency",
+        "score": 4.0,
+        "max": 10,
+        "method": "10 - 2 per detected cross-field contradiction (floor 0)",
+        "evidence": [
+          {
+            "id": "C-01",
+            "kind": "dimension",
+            "statement": "The response references both 2D and 3D presentation.",
+            "requires_human_decision": true
+          },
+          {
+            "id": "C-02",
+            "kind": "platform",
+            "statement": "Unrecognised target platform(s): ['mobile']",
+            "requires_human_decision": true
+          },
+          {
+            "id": "C-03",
+            "kind": "collectibles",
+            "statement": "The loop mentions collecting but no collectible is specified.",
+            "requires_human_decision": true
+          }
+        ]
+      },
+      {
+        "name": "gameplay_clarity",
+        "score": 4.0,
+        "max": 10,
+        "method": "3 for >=3 loop steps, 3 for >=3 mechanics, 2 for progression, 2 for a concrete collectible or hazard",
+        "evidence": {
+          "loop_steps": 1,
+          "mechanics": 1,
+          "progression": 5
+        }
+      },
+      {
+        "name": "technical_feasibility",
+        "score": 10.0,
+        "max": 10,
+        "method": "4 for >=2 architecture items, 3 for platforms, 3 for an engine",
+        "evidence": {
+          "architecture_items": 3,
+          "platforms": [
+            "pc",
+            "mobile"
+          ],
+          "engine": "unity"
+        }
+      },
+      {
+        "name": "engine_compatibility",
+        "score": 10.0,
+        "max": 10,
+        "method": "0 for an unsupported engine, 6 for a supported engine not referenced in the architecture, 10 when both agree",
+        "evidence": {
+          "engine": "unity",
+          "referenced_in_architecture": true
+        }
+      },
+      {
+        "name": "performance_awareness",
+        "score": 10.0,
+        "max": 10,
+        "method": "5 for a plausible FPS target, 3 for hardware, 2 for a quality tier",
+        "evidence": {
+          "target_fps": 60,
+          "hardware_present": true,
+          "quality_tier": "prototype"
+        }
+      },
+      {
+        "name": "asset_specificity",
+        "score": 6.67,
+        "max": 10,
+        "method": "10 x (asset classes named / 6)",
+        "evidence": {
+          "classes_covered": [
+            "character",
+            "environment",
+            "texture",
+            "ui"
+          ],
+          "classes_missing": [
+            "prop",
+            "audio"
+          ]
+        }
+      },
+      {
+        "name": "testability",
+        "score": 0.0,
+        "max": 10,
+        "method": "10 x (measurable acceptance criteria / all criteria)",
+        "evidence": {
+          "criteria": 3,
+          "measurable": 0,
+          "ambiguous": []
+        }
+      },
+      {
+        "name": "requirement_traceability",
+        "score": 10.0,
+        "max": 10,
+        "method": "10 x (requirements with id + provenance + acceptance / all requirements)",
+        "evidence": {
+          "requirements": 32,
+          "traced": 32
+        }
+      },
+      {
+        "name": "unsupported_claim_avoidance",
+        "score": 10.0,
+        "max": 10,
+        "method": "10 - 3 per unverified capability claim (floor 0)",
+        "evidence": []
+      }
+    ],
+    "total_score": 74.67,
+    "max_score": 100,
+    "grade": "usable_with_review",
+    "missing_requirements": [],
+    "contradictions": [
+      {
+        "id": "C-01",
+        "kind": "dimension",
+        "statement": "The response references both 2D and 3D presentation.",
+        "requires_human_decision": true
+      },
+      {
+        "id": "C-02",
+        "kind": "platform",
+        "statement": "Unrecognised target platform(s): ['mobile']",
+        "requires_human_decision": true
+      },
+      {
+        "id": "C-03",
+        "kind": "collectibles",
+        "statement": "The loop mentions collecting but no collectible is specified.",
+        "requires_human_decision": true
+      }
+    ],
+    "unsupported_claims": [],
+    "ambiguous_requirements": [],
+    "schema_errors": [],
+    "human_review_recommendations": [
+      "Improve testability: 10 x (measurable acceptance criteria / all criteria).",
+      "Improve internal_consistency: 10 - 2 per detected cross-field contradiction (floor 0).",
+      "Improve gameplay_clarity: 3 for >=3 loop steps, 3 for >=3 mechanics, 2 for progression, 2 for a concrete collectible or hazard.",
+      "Resolve contradictions before approval."
+    ],
+    "requires_human_review": true,
+    "human_approved": false,
+    "single_response_evidence_only": true,
+    "general_intelligence_claimed": false,
+    "live_model_evaluated": false,
+    "note": "A single response cannot demonstrate general AI intelligence. This rubric measures completeness, coherence and testability only; it does not prove fun, artistic quality or production readiness."
+  },
+  "live_provider_output_evaluated": false,
+  "single_response_evidence_only": true,
+  "general_intelligence_claimed": false,
+  "note": "All three scores are offline. None is a live model result, and a single response cannot prove general AI intelligence."
+}

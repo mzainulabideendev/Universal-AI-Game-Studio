@@ -37,6 +37,10 @@ from game_studio.llm import free_routing as llm_free_routing
 from game_studio.llm import quota as llm_quota
 from game_studio.llm import intelligence as llm_intelligence
 from game_studio.llm import asset_research as llm_asset_research
+from game_studio.llm import provider_validation as llm_provider_validation
+from game_studio.llm import response_validation as llm_response_validation
+from game_studio.llm import quality_evaluation as llm_quality_evaluation
+from game_studio.llm import game_spec_pipeline as llm_game_spec_pipeline
 from game_studio.llm.client import LLMError
 from game_studio.agents import Orchestrator as AgentOrchestrator
 from game_studio.agents.helpers import QUALITY_PROFILES
@@ -817,6 +821,143 @@ def tool_llm_asset_generation_capabilities(args: dict) -> dict:
 
 def tool_llm_ai_benchmark(args: dict) -> dict:
     return llm_intelligence.benchmark()
+
+
+# --------------------------------------------------------------------------
+# Phase 7 real-AI validation tools
+# --------------------------------------------------------------------------
+def tool_llm_provider_readiness(args: dict) -> dict:
+    provider = _str(args, "provider") or llm_provider_validation.DEFAULT_PROVIDER
+    model = _str(args, "model")
+    return llm_provider_validation.readiness(provider, model)
+
+
+def tool_llm_provider_validate(args: dict) -> dict:
+    mode = (_str(args, "mode") or "plan").strip().lower()
+    idea = _str(args, "idea", max_length=llm_provider_validation.MAX_IDEA_CHARS) \
+        or llm_provider_validation.CONTROLLED_TEST_IDEA
+    provider = _str(args, "provider") or llm_provider_validation.DEFAULT_PROVIDER
+    model = _str(args, "model")
+    max_output_tokens = _int(args, "max_output_tokens", default=2048,
+                             minimum=64,
+                             maximum=llm_provider_validation.HARD_MAX_OUTPUT_TOKENS)
+    temperature = _float(args, "temperature", default=0.1, minimum=0.0,
+                         maximum=1.0)
+    timeout = _int(args, "timeout", default=60, minimum=5,
+                   maximum=llm_provider_validation.HARD_MAX_TIMEOUT_SECONDS)
+    try:
+        plan = llm_provider_validation.plan_live_validation(
+            idea, provider=provider, model=model,
+            max_output_tokens=max_output_tokens, temperature=temperature,
+            timeout=timeout)
+    except ValueError as exc:
+        raise ToolError(str(exc)) from exc
+
+    if mode == "plan":
+        plan["audit_record"] = llm_provider_validation.audit_record(plan)
+        return plan
+    if mode != "execute":
+        raise ToolError("mode must be 'plan' or 'execute'")
+
+    authorization = _obj(args, "authorization")
+    if not _bool(args, "confirm"):
+        authorization = None
+    result = llm_provider_validation.execute_live_validation(
+        idea, authorization=authorization, provider=provider, model=model,
+        max_output_tokens=max_output_tokens, temperature=temperature,
+        timeout=timeout)
+    result["audit_record"] = llm_provider_validation.audit_record(plan)
+    return result
+
+
+def _spec_arguments(args: dict) -> dict:
+    platforms = _list(args, "platforms") or []
+    if any(not isinstance(item, str) for item in platforms):
+        raise ToolError("platforms must be an array of strings")
+    return {
+        "idea": _str(args, "idea", required=True, max_length=20_000) or "",
+        "engine": _str(args, "engine") or "unity",
+        "platforms": [item.strip().lower() for item in platforms if item.strip()] or None,
+        "quality_tier": _str(args, "quality_tier") or "medium",
+        "ai_payload": _obj(args, "ai_payload"),
+    }
+
+
+def tool_llm_game_spec_generate(args: dict) -> dict:
+    values = _spec_arguments(args)
+    try:
+        spec = llm_game_spec_pipeline.build_specification(
+            values["idea"], engine=values["engine"],
+            platforms=values["platforms"], quality_tier=values["quality_tier"],
+            ai_payload=values["ai_payload"],
+            include_bridges=_bool(args, "include_bridges", default=True))
+    except ValueError as exc:
+        raise ToolError(str(exc)) from exc
+    return spec
+
+
+def tool_llm_game_spec_validate(args: dict) -> dict:
+    spec = _obj(args, "spec", required=True)
+    validation = llm_game_spec_pipeline.validate_spec(spec)
+    return {
+        "ok": validation["valid"],
+        "schema_version": 1,
+        "validation": validation,
+        "summary": llm_game_spec_pipeline.summary(spec),
+        "approval": spec.get("approval"),
+        "executable": False,
+        "human_approved": False,
+        "note": ("Structural and traceability validation only. It does not prove the "
+                 "game is playable or the design is good."),
+    }
+
+
+def tool_llm_game_quality_evaluate(args: dict) -> dict:
+    payload = _obj(args, "payload")
+    spec = _obj(args, "spec")
+    source = _str(args, "source") or "offline_fixture"
+    if payload is None and spec is not None:
+        source = spec.get("source") or source
+        payload = (spec.get("ai_payload")
+                   or llm_game_spec_pipeline.quality_payload(spec))
+    if not isinstance(payload, dict):
+        raise ToolError("payload or spec is required")
+    try:
+        validation = llm_response_validation.validate_game_spec(payload, source=source)
+        return llm_quality_evaluation.evaluate(payload, source=source,
+                                               validation=validation)
+    except ValueError as exc:
+        raise ToolError(str(exc)) from exc
+
+
+def tool_llm_generation_plan_preview(args: dict) -> dict:
+    values = _spec_arguments(args)
+    try:
+        spec = llm_game_spec_pipeline.build_specification(
+            values["idea"], engine=values["engine"],
+            platforms=values["platforms"], quality_tier=values["quality_tier"],
+            ai_payload=values["ai_payload"], include_bridges=False)
+    except ValueError as exc:
+        raise ToolError(str(exc)) from exc
+    plan = spec["generation_plan"]
+    return {
+        "ok": plan["ok"],
+        "schema_version": plan["schema_version"],
+        "engine": plan["engine"],
+        "steps": plan["steps"],
+        "requirements_covered": plan["requirements_covered"],
+        "requirement_count": len(plan["requirements_covered"]),
+        "approval": spec["approval"],
+        "source": spec["source"],
+        "executable": False,
+        "executed": False,
+        "human_approved": False,
+        "asset_generation_performed": False,
+        "build_started": False,
+        "phase5_project_modified": False,
+        "note": ("Preview only. No step ran and no asset was generated; each step "
+                 "requires separate explicit human approval."),
+    }
 
 
 # --------------------------------------------------------------------------
@@ -2148,6 +2289,76 @@ TOOLS = [
     _tool("llm_ai_benchmark", "Run the deterministic Phase 6 benchmark over representative "
           "game ideas. Measures schema validity, decomposition coverage, determinism and "
           "cost-policy compliance. Does not measure or rank live model quality."),
+    # Phase 7 real-AI provider validation
+    _tool("llm_provider_readiness", "Inspect offline readiness for one free-tier provider: "
+          "adapter, model eligibility, free-policy status, credential presence (never the "
+          "value), quota, capabilities, timeouts and structured-output/error handling. "
+          "Never performs a network request.", {
+              "provider": {"type": "string", "enum": list(llm_config.PROVIDERS),
+                           "default": "gemini"},
+              "model": {"type": "string"},
+          }),
+    _tool("llm_provider_validate", "Plan or execute exactly one real free-tier provider "
+          "request using the controlled test idea. mode='plan' (default) returns the exact "
+          "prompt, request_sha256, output-token/timeout limits, quota impact, data-handling "
+          "notes and authorization state without any network call. mode='execute' requires "
+          "confirm=true plus an authorization object naming the matching request_sha256; "
+          "there are no retries and no provider fallback.", {
+              "mode": {"type": "string", "enum": ["plan", "execute"], "default": "plan"},
+              "idea": {"type": "string", "maxLength": 4000,
+                       "description": "Defaults to the Phase 7 controlled test idea"},
+              "provider": {"type": "string", "enum": list(llm_config.PROVIDERS),
+                           "default": "gemini"},
+              "model": {"type": "string"},
+              "max_output_tokens": {"type": "integer", "minimum": 64, "maximum": 4096,
+                                    "default": 2048},
+              "temperature": {"type": "number", "minimum": 0, "maximum": 1,
+                              "default": 0.1},
+              "timeout": {"type": "integer", "minimum": 5, "maximum": 120,
+                          "default": 60},
+              "confirm": {"type": "boolean", "default": False,
+                          "description": "Explicit human approval for this exact request"},
+              "authorization": {"type": "object",
+                                "description": "approved, approved_by, provider, model, "
+                                               "request_sha256 from the approved plan"},
+          }),
+    _tool("llm_game_spec_generate", "Turn a natural-language game idea, or a schema-validated "
+          "AI payload, into stable requirements, a labelled design specification and Phase 3/"
+          "4/5 specification bridges. Generates no asset, executes no plan and does not modify "
+          "the Phase 5 project.", {
+              "idea": {"type": "string", "minLength": 1, "maxLength": 20000},
+              "engine": {"type": "string", "default": "unity"},
+              "platforms": {"type": "array", "items": {"type": "string"}},
+              "quality_tier": {"type": "string", "enum": ["low", "medium", "high"]},
+              "ai_payload": {"type": "object",
+                             "description": "Validated provider response to use instead of "
+                                            "deterministic decomposition"},
+              "include_bridges": {"type": "boolean", "default": True},
+          }, ["idea"]),
+    _tool("llm_game_spec_validate", "Validate specification structure and requirement "
+          "traceability: stable IDs, provenance, acceptance criteria, approval boundary and "
+          "non-executable generation plan. Rejects pre-approved or verified requirements.", {
+              "spec": {"type": "object"},
+          }, ["spec"]),
+    _tool("llm_game_quality_evaluate", "Score a game specification with the deterministic "
+          "10-category Phase 7 rubric (0-100) and report contradictions, unsupported claims, "
+          "ambiguous criteria, schema errors and human-review recommendations. Structural "
+          "validity and subjective quality stay separate.", {
+              "payload": {"type": "object",
+                          "description": "Game-spec JSON to evaluate directly"},
+              "spec": {"type": "object",
+                       "description": "Specification returned by llm_game_spec_generate"},
+              "source": {"type": "string", "default": "offline_fixture"},
+          }),
+    _tool("llm_generation_plan_preview", "Preview the future asset/gameplay/build plan for a "
+          "specification. Every step is unexecuted and requires separate explicit human "
+          "approval; nothing is generated or built.", {
+              "idea": {"type": "string", "minLength": 1, "maxLength": 20000},
+              "engine": {"type": "string", "default": "unity"},
+              "platforms": {"type": "array", "items": {"type": "string"}},
+              "quality_tier": {"type": "string", "enum": ["low", "medium", "high"]},
+              "ai_payload": {"type": "object"},
+          }, ["idea"]),
 ]
 
 HANDLERS = {
@@ -2252,6 +2463,12 @@ HANDLERS = {
     "llm_game_design": tool_llm_game_design,
     "llm_asset_generation_capabilities": tool_llm_asset_generation_capabilities,
     "llm_ai_benchmark": tool_llm_ai_benchmark,
+    "llm_provider_readiness": tool_llm_provider_readiness,
+    "llm_provider_validate": tool_llm_provider_validate,
+    "llm_game_spec_generate": tool_llm_game_spec_generate,
+    "llm_game_spec_validate": tool_llm_game_spec_validate,
+    "llm_game_quality_evaluate": tool_llm_game_quality_evaluate,
+    "llm_generation_plan_preview": tool_llm_generation_plan_preview,
 }
 
 
