@@ -1,0 +1,99 @@
+{
+  "plan_audit": {
+    "schema_version": 1,
+    "generated_at": "2026-11-11T06:46:35Z",
+    "provider": "gemini",
+    "model": "gemini-3.8-flash",
+    "request_sha256": "865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648",
+    "model_verification": {
+      "model_id": "gemini-3.8-flash",
+      "model_documentation": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+      "generate_content_reference": "https://ai.google.dev/api/generate-content",
+      "model_code_verified": true,
+      "stable_model_code": true,
+      "input_token_limit": 1048576,
+      "output_token_limit": 65536,
+      "verified_at": "2026-11-11T06:46:35Z"
+    },
+    "max_input_chars": 4000,
+    "actual_input_chars": 301,
+    "max_output_tokens": 2048,
+    "generation_config": {
+      "max_output_tokens": 2048,
+      "response_mime_type": "application/json"
+    },
+    "temperature": null,
+    "temperature_omitted": true,
+    "temperature_omission_reason": "The Gemini generateContent reference states that temperature (and topP/topK) is no longer supported and is silently ignored on Gemini 3.6 Flash and newer models. Phase 7 omits it from generationConfig instead of sending an ignored field.",
+    "timeout_seconds": 60,
+    "retries": 0,
+    "project_files_sent": false,
+    "authorization_status": "NOT_AUTHORIZED",
+    "credential_status": "CONFIGURED",
+    "quota_impact": {
+      "requests": 1,
+      "retries": 0,
+      "maximum_requests_after_approval": 1,
+      "documented_daily_limit": null,
+      "remaining_before": null,
+      "quota_known": false,
+      "estimated_cost_usd": 0.0,
+      "note": "A free-tier request. Unknown remaining quota is never treated as unlimited and no paid fallback exists."
+    },
+    "data_handling": {
+      "provider_retention": "Gemini free tier: content is used to improve Google products according to the documented free tier terms; do not send proprietary content.",
+      "sends_repository_files": false,
+      "sends_user_project_files": false,
+      "sends_credentials": false,
+      "controlled_test_idea_only": true
+    },
+    "network_calls": 0,
+    "live_request_performed": false,
+    "executable_now": false
+  },
+  "result": {
+    "ok": false,
+    "status": "LIVE_REQUEST_FAILED",
+    "provider": "gemini",
+    "model": "gemini-3.8-flash",
+    "error": {
+      "kind": "timeout",
+      "status": null,
+      "message": "request failed: The read operation timed out",
+      "retry_attempted": false
+    },
+    "request_sha256": "865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648",
+    "started_at": "2026-11-11T06:46:35Z",
+    "finished_at": "2026-11-11T06:47:35Z",
+    "network_calls": 1,
+    "fallback_used": true,
+    "deterministic_fallback": "game_studio.understanding",
+    "quota_before": {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "free_limited",
+      "free": true,
+      "requests_today": 1,
+      "verified_daily_limit": null,
+      "remaining_today": null,
+      "exhausted": null,
+      "quota_known": false,
+      "reason": "the provider does not expose a reliable per-key remaining quota; unknown is not treated as unlimited",
+      "evidence": "no documented per-key daily limit"
+    },
+    "quota_after": {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "free_limited",
+      "free": true,
+      "requests_today": 2,
+      "verified_daily_limit": null,
+      "remaining_today": null,
+      "exhausted": null,
+      "quota_known": false,
+      "reason": "the provider does not expose a reliable per-key remaining quota; unknown is not treated as unlimited",
+      "evidence": "no documented per-key daily limit"
+    },
+    "secrets_recorded": false
+  }
+}

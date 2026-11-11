@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 7 - timeout validation",
+  "generated_at": "2026-11-11T07:20:24Z",
+  "mode": "offline-only",
+  "command": "python -m unittest discover -s tools/game-studio-mcp/tests -q",
+  "full_suite": {
+    "tests": 463,
+    "result": "PASS",
+    "expected": 463
+  },
+  "timeout_suite": {
+    "module": "tests/test_v6_phase7_timeout.py",
+    "ran": 16,
+    "result": "PASS",
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "duration_seconds": 0.48
+  },
+  "stage_coverage": [
+    {
+      "stage": "dns_timeout",
+      "test": "test_dns_timeout_is_bounded",
+      "status": "PASS"
+    },
+    {
+      "stage": "dns_failure",
+      "test": "test_dns_failure_is_reported",
+      "status": "PASS"
+    },
+    {
+      "stage": "connection_timeout",
+      "test": "test_connection_timeout_is_reported",
+      "status": "PASS"
+    },
+    {
+      "stage": "tls_failure",
+      "test": "test_tls_failure_is_reported",
+      "status": "PASS"
+    },
+    {
+      "stage": "http_response_timeout",
+      "test": "test_slow_response_headers_timeout",
+      "status": "PASS"
+    },
+    {
+      "stage": "response_body_timeout",
+      "test": "test_slow_response_body_timeout_keeps_partial_flag",
+      "status": "PASS"
+    },
+    {
+      "stage": "deadline_exceeded",
+      "test": "test_total_deadline_expires_and_stops_blocking_read",
+      "status": "PASS"
+    },
+    {
+      "stage": "cancellation",
+      "test": "test_watchdog_closes_registered_handle",
+      "status": "PASS"
+    },
+    {
+      "stage": "valid_fixture_response",
+      "test": "test_valid_fixture_response_is_parsed_with_timing",
+      "status": "PASS"
+    },
+    {
+      "stage": "truncated_body_not_json",
+      "test": "test_truncated_body_is_not_parsed_as_json",
+      "status": "PASS"
+    },
+    {
+      "stage": "no_retries_no_fallback",
+      "test": "test_transport_error_is_not_retried_and_has_no_fallback",
+      "status": "PASS"
+    },
+    {
+      "stage": "redaction",
+      "test": "test_transport_error_never_contains_header_secret",
+      "status": "PASS"
+    },
+    {
+      "stage": "util_delegation",
+      "test": "test_deadline_delegates_to_bounded_transport",
+      "status": "PASS"
+    },
+    {
+      "stage": "legacy_path_preserved",
+      "test": "test_without_deadline_uses_legacy_urllib_path",
+      "status": "PASS"
+    },
+    {
+      "stage": "gemini_passes_deadline",
+      "test": "test_gemini_complete_passes_total_deadline",
+      "status": "PASS"
+    },
+    {
+      "stage": "structured_detail_surfaced",
+      "test": "test_structured_detail_is_surfaced_without_secret",
+      "status": "PASS"
+    }
+  ],
+  "coverage_complete": true,
+  "audit": {
+    "verdict": "PASS_AUTOMATED",
+    "criteria_passed": 21,
+    "criteria_total": 21,
+    "request_sha256": "865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648",
+    "bounded_deadline_criterion": 21
+  },
+  "network_policy": {
+    "gemini_api_called": false,
+    "http_request_sent": false,
+    "network_tests": false,
+    "credentials_read": false,
+    "quota_consumed": false,
+    "sockets_opened": false,
+    "asset_generation": false,
+    "engine_builds": false,
+    "git_writes": false
+  },
+  "preserved": {
+    "request_sha256_matches": true,
+    "max_output_tokens": 2048,
+    "retries": 0,
+    "provider_fallback": false,
+    "v4_v5_phase5_modified": false
+  },
+  "test_records": [
+    {
+      "test": "test_v6_phase7_timeout.BoundedTransportTests.test_connection_timeout_is_reported",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.BoundedTransportTests.test_dns_failure_is_reported",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.BoundedTransportTests.test_dns_timeout_is_bounded",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.BoundedTransportTests.test_slow_response_body_timeout_keeps_partial_flag",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.BoundedTransportTests.test_slow_response_headers_timeout",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.BoundedTransportTests.test_tls_failure_is_reported",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.BoundedTransportTests.test_total_deadline_expires_and_stops_blocking_read",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.BoundedTransportTests.test_truncated_body_is_not_parsed_as_json",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.BoundedTransportTests.test_valid_fixture_response_is_parsed_with_timing",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.BoundedTransportTests.test_watchdog_closes_registered_handle",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.LiveValidationDetailTests.test_structured_detail_is_surfaced_without_secret",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.ProviderIntegrationTests.test_gemini_complete_passes_total_deadline",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.ProviderIntegrationTests.test_transport_error_is_not_retried_and_has_no_fallback",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.ProviderIntegrationTests.test_transport_error_never_contains_header_secret",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.UtilDelegationTests.test_deadline_delegates_to_bounded_transport",
+      "status": "PASS"
+    },
+    {
+      "test": "test_v6_phase7_timeout.UtilDelegationTests.test_without_deadline_uses_legacy_urllib_path",
+      "status": "PASS"
+    }
+  ],
+  "limitations": [
+    "All transports in the timeout suite are mocked; no real socket was opened.",
+    "A live provider response remains unverified."
+  ]
+}

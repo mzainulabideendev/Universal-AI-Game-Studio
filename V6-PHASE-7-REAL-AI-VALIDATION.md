@@ -3,15 +3,15 @@
 **Product:** UNIVERSAL AI GAME STUDIO  
 **Tagline:** From Game Idea to Playable World  
 **Phase:** 7 of V6  
-**Status:** Offline implementation **PASS_AUTOMATED** (20/20) — live provider validation **BLOCKED_CREDENTIAL_NOT_CONFIGURED** — human review **HUMAN_REVIEW_REQUIRED**  
+**Status:** Offline implementation **PASS_AUTOMATED** (21/21) — live provider request **LIVE_REQUEST_FAILED (HTTP 503 / read timeouts)** — human review **HUMAN_REVIEW_REQUIRED**  
 **Provider evidence retrieval date:** 2026-11-10  
-**Audit evidence timestamp:** `2026-11-11T05:40:36Z` (`reports/v6-phase7-audit.json`)  
+**Audit evidence timestamp:** `2026-11-11T08:32:25Z` (`reports/v6-phase7-audit.json`)  
 **Branch:** `main`  
 **Baseline HEAD:** `51342fe17996dd62011c43dabf5f7c1936bdf0bd`  
-**Current HEAD at final audit:** `ef8f72fa9ac67c5d0e58224201c238d12c2e4ecd` — "Add Phase 7 real-AI validation tools and corresponding tests" (committed externally by the repository owner; this agent performed no Git write)  
-**Tests:** 409 → **447** (38 Phase 7 tests added, 0 failed, 0 skipped)  
+**Current HEAD at final audit:** `5f2c99094badb0ffbf5380bd39008ef39d9eb425` — "Update Phase 7 documentation and tests to reflect changes in test counts and temperature handling" (committed externally by the repository owner; this agent performed no Git write)  
+**Tests:** 409 → **463** (38 Phase 7 tests plus 16 bounded-timeout tests added, 0 failed, 0 skipped)  
 **MCP tools/handlers:** 101/101 → **107/107** (six new tools, exact parity)  
-**Audit:** 20/20 criteria PASS (automated scope); live criteria explicitly excluded and reported separately
+**Audit:** 21/21 criteria PASS (automated scope); live criteria explicitly excluded and reported separately
 
 ---
 
@@ -28,9 +28,10 @@ Game idea (natural language)
 ```
 
 Offline stages 1–5 and the pipeline bridge are implemented and tested. The **real AI**
-link in that chain is the one thing this phase has **not** exercised: no credential is
-configured and no live request has been authorized. Everything below labels that
-boundary explicitly.
+link in that chain is the one thing this phase has only partly exercised: after explicit
+approval of the request hash, three live attempts ran. One reached the provider and was
+rejected with HTTP 503 ("high demand"); the other two ended in socket read timeouts before
+a response body arrived. Everything below labels that boundary explicitly.
 
 The chain must not be read as "an AI built a game". The farthest proven outcome is:
 **a natural-language idea can be turned into stable, schema-checked, provenance-labelled,
@@ -125,10 +126,10 @@ treated as unlimited; there is no paid fallback.
 | Credential | **not configured** (value never read or exposed) |
 | Quota | 0 requests today; documented per-key daily limit unavailable; **not** treated as unlimited |
 | Structured output | declared supported; adapter JSON mode on |
-| Request timeout | 60 s (connect 10 s) |
-| Provider retries | 2 (Phase 1 default) |
+| Request timeout | 60 s total wall-clock deadline (connect 10 s, TLS 10 s, headers 30 s, body 45 s) |
+| Provider retries | 0 in the Phase 7 path; no provider fallback |
 | Phase 7 live retries | **0** |
-| Blockers | `no credential configured for the selected provider` |
+| Blockers | none (credential configured locally; value never exposed) |
 | Network calls | 0 |
 
 ---
@@ -169,7 +170,7 @@ Offline results (these are **not** live model quality):
 | Offline fixture payload | 87.5 / 100 | strong | Testability 7.5; traceability 0 (fixture has no requirement array) |
 | Fixture after pipeline attaches requirement IDs | 95.5 / 100 | strong | One consistency penalty from the deterministic design's missing collectible field |
 | Deterministic fallback design (no model) | 74.67 / 100 | usable_with_review | Weak testability and gameplay clarity; contradictions surfaced |
-| Live provider output | **not measured** | — | No live request was made |
+| Live provider output | **not measured** | — | three attempts: HTTP 503 or read timeout; no response body |
 
 The rubric is deterministic and never uses one model to judge another. A single response
 cannot demonstrate general AI intelligence; the reports say so explicitly.
@@ -229,9 +230,9 @@ Nothing was generated or built.
 | Metric | Value |
 | --- | --- |
 | Baseline tests (before Phase 7 edits) | 409 |
-| New tests | 34 |
-| Final tests | **447** |
-| Passed | 447 |
+| New tests | 54 (38 Phase 7 + 16 bounded-timeout) |
+| Final tests | **463** |
+| Passed | 463 |
 | Failed | 0 |
 | Skipped | 0 |
 | Existing tests changed | 1 registry-count assertion (documented above) |
@@ -280,14 +281,15 @@ The mocked "live" case replaces the adapter; **the suite never opens a socket**.
 | 18 | V5 protected artifacts unchanged | PASS |
 | 19 | Phase 5 project/build/payload unchanged | PASS |
 | 20 | No unauthorized Git operations | PASS |
+| 21 | Bounded total request deadline implemented | PASS |
 
 Live-provider criteria are deliberately **not** in the PASS list:
 
 | Criterion | Status | Reason |
 | --- | --- | --- |
-| Live provider reachability | BLOCKED | credential not configured; no authorization |
-| Live structured response validity | NOT_TESTED | no live request |
-| Live output quality | NOT_TESTED | no live request |
+| Live provider reachability | BLOCKED | one approved request returned HTTP 503 (`unavailable`) |
+| Live structured response validity | NOT_TESTED | no response body was produced |
+| Live output quality | NOT_TESTED | no response body was produced |
 | Human approval of specification | HUMAN_REVIEW_REQUIRED | pending |
 
 ---
@@ -309,15 +311,23 @@ No protected artifact was repaired, regenerated or replaced.
 
 ## 11. Actual Git status
 
-The repository owner committed the Phase 7 implementation and its reports as
-`ef8f72fa9ac67c5d0e58224201c238d12c2e4ecd` ("Add Phase 7 real-AI validation tools and
-corresponding tests"). That commit is linear on top of the Phase 7 baseline
-`51342fe`, touches only Phase 7 paths, and changes no protected artifact.
+The repository owner committed the Phase 7 implementation, correction and reports in
+three linear external commits on top of the Phase 7 baseline `51342fe`:
+`ef8f72f` (initial tools), `b36f066` and `5f2c990` (correction and test-count/documentation
+updates). None touches a protected artifact.
 
 At the final audit, uncommitted work exists only in:
 
-- modified: the 11 regenerated `reports/v6-phase7-*.json` files (new audit timestamps)
-- new: `V6-PHASE-7-BASELINE.md` and this file
+- modified: `scripts/v6-phase7-audit.py`, the regenerated `reports/v6-phase7-*.json`
+  files, `V6-PHASE-7-REAL-AI-VALIDATION.md`, and the Phase 7 transport surface
+  (`game_studio/llm/providers.py`, `game_studio/llm/provider_validation.py`,
+  `game_studio/util.py`)
+- new: `game_studio/llm/bounded_http.py`, `tests/test_v6_phase7_timeout.py`,
+  `reports/v6-phase7-timeout-fix.json`, `reports/v6-phase7-timeout-validation.json`,
+  the Phase 7 live-validation reports, and the connectivity diagnostics script,
+  report and document
+
+No V4, V5 or Phase 5 artifact is among the changes.
 
 This agent performed **no** commit, push, tag, merge, rebase, reset, clean, stash or
 branch change. Audit criterion 20 verifies that `51342fe` is an ancestor of the current
@@ -341,11 +351,11 @@ request, before any authorization was requested.
 | Documented limits | 1,048,576 input tokens / 65,536 output tokens |
 | Official statement | `temperature` (and `topP`/`topK`) is "no longer supported and is silently ignored on Gemini 3.6 Flash and newer models" |
 | Change | `temperature` is **omitted** from `generationConfig`; no ignored field is sent |
-| Preserved | JSON-only contract, `response_mime_type: application/json`, 2,048 max output tokens, one request, zero retries, no fallback, 60 s timeout |
+| Preserved | JSON-only contract, `response_mime_type: application/json`, 2,048 max output tokens, one request, zero retries, no fallback, 60 s total deadline |
 | Request hash | recalculated from the corrected request: `865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648` |
 | Superseded hash | the earlier `08db560c…dd552` request must not be approved |
-| Tests | 4 new tests assert the corrected config, hash stability and body shape; full suite now 447 |
-| Network calls | **0** — no credential configured, no request executed |
+| Tests | 4 correction tests plus 16 bounded-timeout tests; full suite now 463 |
+| Network calls | **0** at correction time; the approved attempts are recorded in §12 |
 
 The Gemini adapter now accepts `temperature: float | None` and only serialises the field
 when a value is supplied. Phase 7 always passes `None`, so the live request can never
@@ -355,7 +365,7 @@ carry an unsupported sampling field.
 
 ## 12. Mandatory live-request approval gate
 
-**No live request has been made. No credential is configured. This is the stop point.**
+**The exact request was approved and executed once. It failed with HTTP 503 before a response was produced.**
 
 ### Exact proposed request
 
@@ -425,28 +435,31 @@ deterministic rubric. HTTP success alone will not be treated as design quality.
   ledger with `status: error:<kind>`.
 - The request writes no files, modifies no project and starts no build.
 
-### How a human approves this exact request
+### Approval and single execution record
 
-1. Decide **approve** or **reject** for hash
-   `865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648`.
-2. If approved, configure the credential locally, never in chat — for example with the
-   existing tool:
+The repository owner approved exactly hash
+`865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648` and configured the
+credential in the studio's private machine-local secrets store (outside the repository;
+the value was never printed, returned or written to any report).
 
-   ```text
-   llm_configure_credential {"provider":"gemini","action":"set","confirm":true,"api_key":"<set locally>"}
-   ```
+One request was then executed. Measured facts:
 
-   or set `GEMINI_API_KEY` in the local environment.
-3. Re-run readiness (`llm_provider_readiness`) to confirm the credential is detected
-   without exposing it.
-4. Only then call:
+| Field | Result |
+| --- | --- |
+| Authorization | approved for the exact hash |
+| Requests made | **1** |
+| Retries | **0** |
+| Provider fallback | **none** (deterministic fallback remains available) |
+| HTTP status | **503** |
+| Error class | `unavailable` |
+| Provider message (redacted) | "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later." |
+| JSON extracted | no |
+| Schema validated | not reached |
+| Usage tokens | unavailable (no successful response) |
+| Secrets recorded | no |
+| Files/projects modified by the request | none; no project, asset or build change |
 
-   ```text
-   llm_provider_validate {"mode":"execute","confirm":true,
-     "authorization":{"approved":true,"approved_by":"<your name>",
-       "provider":"gemini","model":"gemini-3.8-flash",
-       "request_sha256":"865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648"}}
-   ```
+Evidence: `reports/v6-phase7-live-validation.json`.
 
 The request hash binds approval to this exact prompt, model, output cap, JSON mode and
 zero-retry/zero-fallback configuration. It deliberately does **not** include a temperature:
@@ -455,14 +468,55 @@ the Gemini `generateContent` reference states that `temperature` (and `topP`/`to
 Phase 7 omits the field from `generationConfig` entirely. Any change produces a different
 hash and is refused.
 
-**Current status:** `BLOCKED_CREDENTIAL_NOT_CONFIGURED` / `NOT_AUTHORIZED`.
+**Current status:** `LIVE_REQUEST_FAILED`. Three separate approved attempts made exactly one
+request each with zero retries: attempt 1 returned HTTP 503 `unavailable`; attempts 2 and 3
+ended in a socket read timeout before any response was received. No retry and no provider
+fallback was attempted. Any further live attempt needs a new explicit human approval.
+
+Connectivity diagnostics (`V6-PHASE-7-CONNECTIVITY-DIAGNOSTICS.md`) ruled out DNS, TCP, TLS,
+proxy and firewall faults. They confirmed that the existing `urllib` timeout was per socket
+operation, not a total deadline, and that the advertised 10 s connect timeout and the DNS
+lookup were not bounded.
+
+### 12.1 Bounded request deadline (offline fix)
+
+A dedicated bounded transport now executes the Gemini request:
+
+`GeminiProvider.complete` → `providers._request` → `util.http_request` →
+`game_studio.llm.bounded_http.request`.
+
+| Property | Implementation |
+| --- | --- |
+| Total deadline | caller `timeout` (60 s for Phase 7) enforced by a watchdog |
+| DNS | daemon worker; the caller stops waiting at the deadline |
+| TCP connect | bounded per-address attempts, 10 s stage budget |
+| TLS | `CERT_REQUIRED` + hostname check, 10 s stage budget |
+| Response headers | 30 s stage budget, capped by remaining deadline |
+| Response body | 45 s stage budget, capped by remaining deadline |
+| Cancellation | watchdog shuts down and closes the registered socket |
+| Retries | 0 |
+| Provider fallback | none |
+| Dependencies | standard library only |
+
+Distinct structured errors are returned for `dns_timeout`, `dns_failure`, `connection_timeout`,
+`connection_failure`, `tls_failure`, `http_response_timeout`, `response_body_timeout`,
+`response_body_incomplete`, `deadline_exceeded` and provider HTTP status classes. A partial or
+truncated body is never parsed as JSON; it is reported with `partial_response: true` and
+`partial_bytes`. Timing fields cover DNS, connect, TLS, send, headers, body and total, and
+never include header or credential values.
+
+Evidence: `reports/v6-phase7-timeout-fix.json` and
+`reports/v6-phase7-timeout-validation.json`. The offline suite has 463 tests (16 new),
+the MCP parity check is 107/107, and the audit passes 21/21 criteria. No live request was
+made while implementing or testing this fix.
 
 ---
 
 ## 13. What remains unverified
 
-- Whether the provider is reachable from this machine with a real credential.
-- Whether a live model actually returns the required JSON contract.
+- The provider was reachable; the three approved requests failed with HTTP 503 or a read
+  timeout before any response body arrived.
+- Whether a live model will return the required JSON contract remains unobserved.
 - Live output quality on the rubric (no live score exists).
 - Actual quota remaining and the account's exact free-tier limits.
 - Android build viability, low-end performance targets, and any runtime measurement.
@@ -476,9 +530,11 @@ specification is not a playable game.
 
 ## 14. Exact human decisions required next
 
-1. **Approve or reject** the single live request identified by
-   `865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648`.
-2. If approved, **configure `GEMINI_API_KEY` locally**; do not paste it into chat.
+1. **Decide whether to authorize one new attempt** for the same request hash
+   `865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648`; the previous
+   attempts failed with HTTP 503 and read timeouts and made no retry. The bounded
+   deadline fix is implemented and tested offline but has not been exercised live.
+2. **Rotate the API key** that was pasted into chat, then store the replacement locally.
 3. **Review the specification**: 32 proposed requirements, their priorities, the
    deterministic design's flagged contradictions, and any ambiguous acceptance criteria.
 4. **Decide whether Phase 8 may begin** (asset generation / integration / build). Phase 7
@@ -491,11 +547,11 @@ specification is not a playable game.
 | Statement | Truth |
 | --- | --- |
 | Offline Phase 7 implementation complete | **yes** |
-| Automated audit 20/20 | **yes** |
-| Tests 447/447 with parity 107/107 | **yes** |
-| Live request authorized | **no** |
-| Live provider request succeeded | **no** — not attempted |
-| Real AI output validated | **no** |
+| Automated audit 21/21 | **yes** |
+| Tests 463/463 with parity 107/107 | **yes** |
+| Live request authorized | **yes** — exact hash approved |
+| Live provider request succeeded | **no** — HTTP 503 and read timeouts |
+| Real AI output validated | **no** — no response body |
 | Real AI output judged useful | **no** — unmeasured |
 | Specifications bridged to Phase 3/4/5 | **yes, specification-only** |
 | Assets generated | **no** |
@@ -503,6 +559,6 @@ specification is not a playable game.
 | Build started | **no** |
 | Human-approved specification | **no** — pending |
 
-Verdict: **PASS_AUTOMATED** for the implemented and tested offline scope;
-**BLOCKED_CREDENTIAL_NOT_CONFIGURED** for live provider validation;
+Verdict: **PASS_AUTOMATED** for the implemented and tested offline scope, including the
+bounded total-deadline fix; **LIVE_REQUEST_FAILED** for all three authorized live attempts;
 **HUMAN_REVIEW_REQUIRED** for the specification and the next phase.

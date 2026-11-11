@@ -1,26 +1,48 @@
 {
   "schema_version": 1,
   "phase": "V6 Phase 7A - repository and baseline audit",
-  "generated_at": "2026-11-11T05:40:36Z",
+  "generated_at": "2026-11-11T08:32:25Z",
   "repository": {
     "root": "D:\\MCP\\MCP",
     "branch": "main",
-    "head": "b36f066b965302bf6923420a387f0102e98083ff",
-    "head_short": "b36f066",
+    "head": "5f2c99094badb0ffbf5380bd39008ef39d9eb425",
+    "head_short": "5f2c990",
     "baseline_head": "51342fe17996dd62011c43dabf5f7c1936bdf0bd",
     "expected_head": "51342fe17996dd62011c43dabf5f7c1936bdf0bd",
     "head_unchanged": false,
     "head_advanced_by_external_commit": true,
     "commits_since_baseline": [
+      "5f2c990 Update Phase 7 documentation and tests to reflect changes in test counts and temperature handling",
       "b36f066 Add Phase 7 real-AI validation tools and corresponding tests",
       "ef8f72f Add Phase 7 real-AI validation tools and corresponding tests"
     ],
     "working_tree_changes": [
-      "M scripts/v6-phase7-audit.py",
+      "M V6-PHASE-7-REAL-AI-VALIDATION.md",
+      " M reports/v6-phase7-audit.json",
+      " M reports/v6-phase7-baseline.json",
+      " M reports/v6-phase7-game-spec.json",
+      " M reports/v6-phase7-generation-bridge.json",
+      " M reports/v6-phase7-provider-evidence.json",
+      " M reports/v6-phase7-provider-policy.json",
+      " M reports/v6-phase7-quality-evaluation.json",
+      " M reports/v6-phase7-readiness.json",
+      " M reports/v6-phase7-request-audit.json",
+      " M reports/v6-phase7-requirements.json",
+      " M reports/v6-phase7-validation.json",
+      " M scripts/v6-phase7-audit.py",
       " M tools/game-studio-mcp/game_studio/llm/provider_validation.py",
       " M tools/game-studio-mcp/game_studio/llm/providers.py",
-      " M tools/game-studio-mcp/server.py",
-      " M tools/game-studio-mcp/tests/test_v6_phase7_real_ai.py"
+      " M tools/game-studio-mcp/game_studio/util.py",
+      "?? V6-PHASE-7-CONNECTIVITY-DIAGNOSTICS.md",
+      "?? reports/v6-phase7-connectivity-diagnostics.json",
+      "?? reports/v6-phase7-live-validation-attempt2.json",
+      "?? reports/v6-phase7-live-validation-attempt3.json",
+      "?? reports/v6-phase7-live-validation.json",
+      "?? reports/v6-phase7-timeout-fix.json",
+      "?? reports/v6-phase7-timeout-validation.json",
+      "?? scripts/v6-phase7-connectivity-diagnostics.py",
+      "?? tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+      "?? tools/game-studio-mcp/tests/test_v6_phase7_timeout.py"
     ],
     "working_tree_dirty": true
   },
@@ -52,10 +74,10 @@
   },
   "tests": {
     "starting_count": 409,
-    "final_count": 447,
-    "expected_final_count": 447,
+    "final_count": 463,
+    "expected_final_count": 463,
     "result": "OK",
-    "duration_seconds": 64.82,
+    "duration_seconds": 57.22,
     "command": [
       "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
       "-m",
@@ -167,8 +189,8 @@
   },
   "credentials": {
     "gemini": {
-      "configured": false,
-      "source": null,
+      "configured": true,
+      "source": "local-file",
       "value_exposed": false
     },
     "groq": {

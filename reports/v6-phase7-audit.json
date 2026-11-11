@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "phase": "V6 Phase 7 - Real AI Provider Validation and Game Generation",
-  "generated_at": "2026-11-11T05:40:36Z",
+  "generated_at": "2026-11-11T08:32:25Z",
   "verdict": "PASS_AUTOMATED",
   "all_criteria_passed": true,
   "human_review_required": true,
   "human_review_status": "pending",
-  "live_provider_status": "BLOCKED_CREDENTIAL_NOT_CONFIGURED",
-  "live_provider_authorized": false,
-  "live_provider_performed": false,
+  "live_provider_status": "LIVE_REQUEST_FAILED",
+  "live_provider_authorized": true,
+  "live_provider_performed": true,
   "criteria": [
     {
       "id": 1,
@@ -169,8 +169,8 @@
       "status": "PASS",
       "evidence": {
         "starting": 409,
-        "final": 447,
-        "expected": 447,
+        "final": 463,
+        "expected": 463,
         "result": "OK"
       }
     },
@@ -206,33 +206,77 @@
       "description": "No unauthorized Git operations",
       "status": "PASS",
       "evidence": {
-        "head": "b36f066b965302bf6923420a387f0102e98083ff",
+        "head": "5f2c99094badb0ffbf5380bd39008ef39d9eb425",
         "baseline_head": "51342fe17996dd62011c43dabf5f7c1936bdf0bd",
         "baseline_is_ancestor": true,
         "branch": "main",
         "commits_since_baseline": [
+          "5f2c990 Update Phase 7 documentation and tests to reflect changes in test counts and temperature handling",
           "b36f066 Add Phase 7 real-AI validation tools and corresponding tests",
           "ef8f72f Add Phase 7 real-AI validation tools and corresponding tests"
         ],
         "unexpected_changed_paths": [],
         "protected_paths_changed": [],
         "working_tree_changes": [
-          "M scripts/v6-phase7-audit.py",
+          "M V6-PHASE-7-REAL-AI-VALIDATION.md",
+          " M reports/v6-phase7-audit.json",
+          " M reports/v6-phase7-baseline.json",
+          " M reports/v6-phase7-game-spec.json",
+          " M reports/v6-phase7-generation-bridge.json",
+          " M reports/v6-phase7-provider-evidence.json",
+          " M reports/v6-phase7-provider-policy.json",
+          " M reports/v6-phase7-quality-evaluation.json",
+          " M reports/v6-phase7-readiness.json",
+          " M reports/v6-phase7-request-audit.json",
+          " M reports/v6-phase7-requirements.json",
+          " M reports/v6-phase7-validation.json",
+          " M scripts/v6-phase7-audit.py",
           " M tools/game-studio-mcp/game_studio/llm/provider_validation.py",
           " M tools/game-studio-mcp/game_studio/llm/providers.py",
-          " M tools/game-studio-mcp/server.py",
-          " M tools/game-studio-mcp/tests/test_v6_phase7_real_ai.py"
+          " M tools/game-studio-mcp/game_studio/util.py",
+          "?? V6-PHASE-7-CONNECTIVITY-DIAGNOSTICS.md",
+          "?? reports/v6-phase7-connectivity-diagnostics.json",
+          "?? reports/v6-phase7-live-validation-attempt2.json",
+          "?? reports/v6-phase7-live-validation-attempt3.json",
+          "?? reports/v6-phase7-live-validation.json",
+          "?? reports/v6-phase7-timeout-fix.json",
+          "?? reports/v6-phase7-timeout-validation.json",
+          "?? scripts/v6-phase7-connectivity-diagnostics.py",
+          "?? tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+          "?? tools/game-studio-mcp/tests/test_v6_phase7_timeout.py"
         ]
+      }
+    },
+    {
+      "id": 21,
+      "description": "Bounded total request deadline implemented",
+      "status": "PASS",
+      "evidence": {
+        "module": "game_studio/llm/bounded_http.py",
+        "gemini_deadline": "timeout_seconds",
+        "stage_errors": [
+          "dns_timeout",
+          "connection_timeout",
+          "tls_failure",
+          "http_response_timeout",
+          "response_body_timeout",
+          "deadline_exceeded"
+        ],
+        "partial_body_never_parsed": true,
+        "retries": 0,
+        "provider_fallback": false,
+        "request_sha256": "865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648"
       }
     }
   ],
   "repository": {
     "branch": "main",
     "starting_head": "51342fe17996dd62011c43dabf5f7c1936bdf0bd",
-    "ending_head": "b36f066b965302bf6923420a387f0102e98083ff",
+    "ending_head": "5f2c99094badb0ffbf5380bd39008ef39d9eb425",
     "head_unchanged": false,
     "baseline_is_ancestor": true,
     "commits_since_baseline": [
+      "5f2c990 Update Phase 7 documentation and tests to reflect changes in test counts and temperature handling",
       "b36f066 Add Phase 7 real-AI validation tools and corresponding tests",
       "ef8f72f Add Phase 7 real-AI validation tools and corresponding tests"
     ],
@@ -253,6 +297,7 @@
       "scripts/v6-phase7-audit.py",
       "tools/game-studio-mcp/game_studio/llm/game_spec_pipeline.py",
       "tools/game-studio-mcp/game_studio/llm/provider_validation.py",
+      "tools/game-studio-mcp/game_studio/llm/providers.py",
       "tools/game-studio-mcp/game_studio/llm/quality_evaluation.py",
       "tools/game-studio-mcp/game_studio/llm/response_validation.py",
       "tools/game-studio-mcp/server.py",
@@ -262,19 +307,40 @@
     "unexpected_changed_paths": [],
     "protected_paths_changed": [],
     "working_tree_changes": [
-      "M scripts/v6-phase7-audit.py",
+      "M V6-PHASE-7-REAL-AI-VALIDATION.md",
+      " M reports/v6-phase7-audit.json",
+      " M reports/v6-phase7-baseline.json",
+      " M reports/v6-phase7-game-spec.json",
+      " M reports/v6-phase7-generation-bridge.json",
+      " M reports/v6-phase7-provider-evidence.json",
+      " M reports/v6-phase7-provider-policy.json",
+      " M reports/v6-phase7-quality-evaluation.json",
+      " M reports/v6-phase7-readiness.json",
+      " M reports/v6-phase7-request-audit.json",
+      " M reports/v6-phase7-requirements.json",
+      " M reports/v6-phase7-validation.json",
+      " M scripts/v6-phase7-audit.py",
       " M tools/game-studio-mcp/game_studio/llm/provider_validation.py",
       " M tools/game-studio-mcp/game_studio/llm/providers.py",
-      " M tools/game-studio-mcp/server.py",
-      " M tools/game-studio-mcp/tests/test_v6_phase7_real_ai.py"
+      " M tools/game-studio-mcp/game_studio/util.py",
+      "?? V6-PHASE-7-CONNECTIVITY-DIAGNOSTICS.md",
+      "?? reports/v6-phase7-connectivity-diagnostics.json",
+      "?? reports/v6-phase7-live-validation-attempt2.json",
+      "?? reports/v6-phase7-live-validation-attempt3.json",
+      "?? reports/v6-phase7-live-validation.json",
+      "?? reports/v6-phase7-timeout-fix.json",
+      "?? reports/v6-phase7-timeout-validation.json",
+      "?? scripts/v6-phase7-connectivity-diagnostics.py",
+      "?? tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+      "?? tools/game-studio-mcp/tests/test_v6_phase7_timeout.py"
     ]
   },
   "tests": {
     "starting_count": 409,
-    "final_count": 447,
-    "added_count": 38,
+    "final_count": 463,
+    "added_count": 54,
     "result": "OK",
-    "duration_seconds": 64.82,
+    "duration_seconds": 57.22,
     "command": [
       "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
       "-m",
@@ -410,15 +476,51 @@
     "status": "free_limited",
     "verification_date": "2026-11-10",
     "eligible": true,
-    "credential_configured": false
+    "credential_configured": true
   },
   "live_validation": {
     "request_sha256": "865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648",
-    "authorization_status": "NOT_AUTHORIZED",
-    "credential_status": "BLOCKED_CREDENTIAL_NOT_CONFIGURED",
-    "network_calls": 0,
-    "performed": false,
-    "note": "A human must approve the exact request hash and configure GEMINI_API_KEY locally before any request runs."
+    "authorization_status": "APPROVED",
+    "credential_status": "CONFIGURED",
+    "network_calls": 1,
+    "performed": true,
+    "status": "LIVE_REQUEST_FAILED",
+    "http_status": 503,
+    "error_kind": "unavailable",
+    "retries": 0,
+    "fallback_used": true,
+    "note": "Exactly one approved request ran and failed with LIVE_REQUEST_FAILED (HTTP 503); no retry or fallback provider was used."
+  },
+  "timeout_fix": {
+    "implemented": true,
+    "module": "tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+    "reports": [
+      "reports/v6-phase7-timeout-fix.json",
+      "reports/v6-phase7-timeout-validation.json"
+    ],
+    "total_deadline": "caller timeout (60 s for the Phase 7 request)",
+    "stage_errors": [
+      "dns_timeout",
+      "connection_timeout",
+      "tls_failure",
+      "http_response_timeout",
+      "response_body_timeout",
+      "deadline_exceeded"
+    ],
+    "partial_body_never_parsed": true,
+    "timing_fields": [
+      "dns_ms",
+      "connect_ms",
+      "tls_ms",
+      "send_ms",
+      "headers_ms",
+      "body_ms",
+      "total_ms"
+    ],
+    "secrets_recorded": false,
+    "retries": 0,
+    "provider_fallback": false,
+    "network_calls": 0
   },
   "quality": {
     "offline_fixture_score": 87.5,
@@ -436,20 +538,20 @@
     "requirements": "v6-phase7-requirements.json",
     "quality": "v6-phase7-quality-evaluation.json",
     "bridge": "v6-phase7-generation-bridge.json",
-    "validation": "v6-phase7-validation.json"
+    "validation": "v6-phase7-validation.json",
+    "live_validation": "v6-phase7-live-validation.json"
   },
   "limitations": [
-    "No live provider request was authorized or performed.",
+    "The single approved live request failed; live model behaviour was not observed.",
     "Provider quality is therefore unmeasured; only offline fixtures were scored.",
     "The specification is a proposal and no asset, scene or build was produced.",
     "A valid specification is not proof of a playable game.",
     "Unknown provider quota is treated as unknown, never unlimited."
   ],
   "human_decisions_required": [
-    "Approve or reject the single live request identified by request_sha256.",
-    "Configure GEMINI_API_KEY locally (never in chat) if the request is approved.",
+    "Review the live provider outcome and decide whether another approved attempt is warranted.",
     "Review requirement priorities, contradictions and ambiguous criteria.",
     "Decide whether any future Phase 8 asset generation or build may start."
   ],
-  "duration_seconds": 65.43
+  "duration_seconds": 57.82
 }

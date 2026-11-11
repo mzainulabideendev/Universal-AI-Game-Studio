@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import ipaddress
 import json
 import os
 import re
@@ -285,9 +286,24 @@ LOOPBACK_HOSTS = ("localhost", "127.0.0.1", "::1")
 
 
 def _is_private_ip(ip: str) -> bool:
-    return (ip.startswith(("10.", "127.", "169.254.", "192.168.", "0."))
-            or ip.startswith("172.") and 16 <= int(ip.split(".")[1]) <= 31
-            or ip in ("::1",))
+    """Return True for addresses that must not be reached without allow_local.
+
+    Uses the full address classification instead of string prefixes so that
+    carrier-grade NAT (100.64.0.0/10), IPv6 unique-local (fc00::/7), IPv6
+    link-local (fe80::/10) and other non-public ranges are also refused.
+    """
+    try:
+        parsed = ipaddress.ip_address(str(ip).split("%", 1)[0])
+    except ValueError:
+        return True
+    if isinstance(parsed, ipaddress.IPv6Address) and parsed.ipv4_mapped:
+        parsed = parsed.ipv4_mapped
+    if isinstance(parsed, ipaddress.IPv4Address) and parsed in ipaddress.ip_network(
+            "100.64.0.0/10"):
+        return True
+    return bool(parsed.is_private or parsed.is_loopback or parsed.is_link_local
+                or parsed.is_reserved or parsed.is_multicast
+                or parsed.is_unspecified)
 
 
 def _validate_url(url: str, allowed_hosts: list[str] | None = None,
@@ -324,8 +340,28 @@ def http_request(url: str, *, method: str = "GET", headers: dict | None = None,
                  body: dict | list | str | None = None, timeout: int = DEFAULT_HTTP_TIMEOUT,
                  max_bytes: int = DEFAULT_MAX_BYTES,
                  allowed_hosts: list[str] | None = None,
-                 allow_local: bool = False) -> dict:
-    """Perform one HTTPS request. Non-2xx responses are returned, not raised."""
+                 allow_local: bool = False,
+                 deadline_seconds: float | None = None,
+                 connect_timeout: float = 10.0,
+                 tls_timeout: float = 10.0,
+                 header_timeout: float = 30.0,
+                 body_timeout: float = 45.0) -> dict:
+    """Perform one HTTPS request. Non-2xx responses are returned, not raised.
+
+    When ``deadline_seconds`` is supplied the request is executed by the bounded
+    transport, which enforces a genuine total wall-clock deadline covering DNS,
+    TCP connect, TLS, response headers and the response body. Without it the
+    historical urllib path is preserved unchanged for other callers.
+    """
+    if deadline_seconds is not None:
+        from .llm.bounded_http import request as bounded_request
+        return bounded_request(
+            url, method=method, headers=headers, body=body,
+            deadline_seconds=deadline_seconds,
+            connect_timeout=connect_timeout, tls_timeout=tls_timeout,
+            header_timeout=header_timeout, body_timeout=body_timeout,
+            max_bytes=max_bytes, allowed_hosts=allowed_hosts,
+            allow_local=allow_local)
     _validate_url(url, allowed_hosts, allow_local=allow_local)
     data = None
     request_headers = {"User-Agent": USER_AGENT, "Accept": "application/json"}

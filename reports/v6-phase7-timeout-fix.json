@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 7 - Gemini HTTP timeout reliability fix",
+  "generated_at": "2026-11-11T07:20:24Z",
+  "mode": "offline-only",
+  "network_calls": 0,
+  "objective": "Enforce a genuine total wall-clock deadline over DNS, TCP connect, TLS, response headers and response body without changing the provider architecture or request contract.",
+  "confirmed_defects": [
+    {
+      "id": "dns_unbounded",
+      "detail": "socket.getaddrinfo had no timeout in URL validation."
+    },
+    {
+      "id": "connect_timeout_not_enforced",
+      "detail": "connect_timeout_seconds was advertised in readiness but never passed to the transport."
+    },
+    {
+      "id": "urllib_timeout_is_per_operation",
+      "detail": "The 60 s value bounded individual socket operations, not total request time."
+    },
+    {
+      "id": "body_read_unbounded",
+      "detail": "response.read() could exceed the intended overall deadline while a server trickled data."
+    }
+  ],
+  "implementation": {
+    "module": "tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+    "delegated_from": "game_studio.util.http_request",
+    "delegation_condition": "deadline_seconds is not None",
+    "gemini_adapter": "GeminiProvider.complete and GeminiProvider.list_models",
+    "mechanism": [
+      "DNS resolution runs in a daemon worker and the caller stops waiting at the deadline.",
+      "TCP connect uses a bounded socket timeout and tries resolved addresses in order.",
+      "TLS uses CERT_REQUIRED and check_hostname with a bounded timeout.",
+      "A daemon watchdog closes the registered socket when the total deadline expires.",
+      "Header and body reads use min(remaining deadline, stage budget).",
+      "A truncated body is returned as text with json_parse_skipped=true."
+    ],
+    "stage_budgets": {
+      "connect_seconds": 10.0,
+      "tls_seconds": 10.0,
+      "headers_seconds": 30.0,
+      "body_seconds": 45.0,
+      "total_seconds": "caller timeout (60 for the Phase 7 request)"
+    },
+    "new_dependencies": [],
+    "execution_can_be_stopped": true
+  },
+  "preserved_contract": {
+    "request_sha256": "865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648",
+    "max_output_tokens": 2048,
+    "json_mode": true,
+    "temperature_omitted": true,
+    "retries": 0,
+    "provider_fallback": false,
+    "credential_redaction": true,
+    "credential_value_exposed": false,
+    "v4_v5_phase5_modified": false
+  },
+  "structured_error_kinds": [
+    "dns_timeout",
+    "dns_failure",
+    "connection_timeout",
+    "connection_failure",
+    "tls_failure",
+    "http_response_timeout",
+    "response_body_timeout",
+    "response_body_incomplete",
+    "deadline_exceeded",
+    "blocked_private_address",
+    "blocked_host",
+    "invalid_url",
+    "internal_error"
+  ],
+  "provider_http_errors": {
+    "handling": "unchanged _classify_status mapping",
+    "kinds": [
+      "auth",
+      "rate_limit",
+      "not_found",
+      "invalid_request",
+      "unavailable",
+      "provider-error"
+    ]
+  },
+  "partial_response_policy": {
+    "incomplete_body_raises": true,
+    "partial_response_flag": true,
+    "partial_bytes_recorded": true,
+    "json_parse_skipped_when_truncated": true,
+    "json_parse_skipped_when_not_json": true
+  },
+  "timing_evidence": {
+    "fields": [
+      "dns_ms",
+      "connect_ms",
+      "tls_ms",
+      "send_ms",
+      "headers_ms",
+      "body_ms",
+      "total_ms"
+    ],
+    "secrets_recorded": false,
+    "header_values_recorded": false
+  },
+  "files_changed": [
+    "tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+    "tools/game-studio-mcp/game_studio/util.py",
+    "tools/game-studio-mcp/game_studio/llm/providers.py",
+    "tools/game-studio-mcp/game_studio/llm/provider_validation.py",
+    "tools/game-studio-mcp/tests/test_v6_phase7_timeout.py",
+    "scripts/v6-phase7-audit.py"
+  ],
+  "limitations": [
+    "The bounded transport was not exercised against a live provider in this phase.",
+    "The watchdog closes the socket; a third-party resolver thread may remain until it returns.",
+    "Stage budgets are defaults and can be lowered by the caller."
+  ]
+}

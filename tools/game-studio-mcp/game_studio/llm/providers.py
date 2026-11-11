@@ -25,14 +25,24 @@ from .capabilities import model_capabilities, unknown_model_capabilities
 
 ANTHROPIC_VERSION = "2023-06-01"
 
+# Gemini uses the bounded transport. The total deadline is the caller's
+# ``timeout``; these per-stage budgets only cap individual phases and can never
+# extend the overall deadline.
+GEMINI_CONNECT_TIMEOUT = 10.0
+GEMINI_TLS_TIMEOUT = 10.0
+GEMINI_HEADER_TIMEOUT = 30.0
+GEMINI_BODY_TIMEOUT = 45.0
+
 
 class ProviderError(Exception):
     def __init__(self, message: str, *, kind: str = "provider-error",
-                 retryable: bool = False, status: int | None = None):
+                 retryable: bool = False, status: int | None = None,
+                 detail: dict | None = None):
         super().__init__(message)
         self.kind = kind
         self.retryable = retryable
         self.status = status
+        self.detail = detail or {}
 
 
 def _classify_status(status: int | None, body: object) -> ProviderError:
@@ -69,29 +79,68 @@ def _classify_status(status: int | None, body: object) -> ProviderError:
 
 
 def _request(url: str, *, headers: dict, body: dict, timeout: int,
-             allow_local: bool = False) -> dict:
+             allow_local: bool = False,
+             deadline_seconds: float | None = None,
+             connect_timeout: float | None = None,
+             tls_timeout: float | None = None,
+             header_timeout: float | None = None,
+             body_timeout: float | None = None) -> dict:
+    transport: dict = {}
+    if deadline_seconds is not None:
+        transport.update({
+            "deadline_seconds": deadline_seconds,
+            "connect_timeout": connect_timeout,
+            "tls_timeout": tls_timeout,
+            "header_timeout": header_timeout,
+            "body_timeout": body_timeout,
+        })
+        transport = {key: value for key, value in transport.items()
+                     if value is not None}
     result = http_request(url, method="POST", headers=headers, body=body,
-                          timeout=timeout, allow_local=allow_local)
+                          timeout=timeout, allow_local=allow_local, **transport)
     if result.get("ok"):
         return result
     if result.get("status") is None:
-        message = str(result.get("error") or "network request failed")
-        kind = "timeout" if "timed out" in message.lower() else "unavailable"
-        raise ProviderError(message, kind=kind, retryable=True)
+        raise _transport_error(result)
     raise _classify_status(result.get("status"), result.get("payload"))
 
 
 def _request_get(url: str, *, headers: dict, timeout: int,
-                 allow_local: bool = False) -> dict:
+                 allow_local: bool = False,
+                 deadline_seconds: float | None = None,
+                 connect_timeout: float | None = None,
+                 tls_timeout: float | None = None,
+                 header_timeout: float | None = None,
+                 body_timeout: float | None = None) -> dict:
+    transport: dict = {}
+    if deadline_seconds is not None:
+        transport.update({
+            "deadline_seconds": deadline_seconds,
+            "connect_timeout": connect_timeout,
+            "tls_timeout": tls_timeout,
+            "header_timeout": header_timeout,
+            "body_timeout": body_timeout,
+        })
+        transport = {key: value for key, value in transport.items()
+                     if value is not None}
     result = http_request(url, method="GET", headers=headers, timeout=timeout,
-                          allow_local=allow_local)
+                          allow_local=allow_local, **transport)
     if result.get("ok"):
         return result
     if result.get("status") is None:
-        message = str(result.get("error") or "network request failed")
-        kind = "timeout" if "timed out" in message.lower() else "unavailable"
-        raise ProviderError(message, kind=kind, retryable=True)
+        raise _transport_error(result)
     raise _classify_status(result.get("status"), result.get("payload"))
+
+
+def _transport_error(result: dict) -> ProviderError:
+    """Map a bounded-transport failure to a structured ProviderError."""
+    detail = result.get("error_detail")
+    detail = dict(detail) if isinstance(detail, dict) else {}
+    message = str(result.get("error") or "network request failed")
+    kind = detail.get("kind")
+    if not kind:
+        kind = "timeout" if "timed out" in message.lower() else "unavailable"
+    return ProviderError(message, kind=str(kind), retryable=True, detail=detail)
 
 
 def _model_entry(model_id: str, *, provider: str, name: str | None = None,
@@ -344,7 +393,13 @@ class GeminiProvider(Provider):
         return self.cfg["base_url"].rstrip("/") + "/models?pageSize=200"
 
     def list_models(self, *, timeout: int = 15) -> dict:
-        result = _request_get(self._models_url(), headers=self._headers(), timeout=timeout)
+        result = _request_get(
+            self._models_url(), headers=self._headers(), timeout=timeout,
+            deadline_seconds=timeout,
+            connect_timeout=GEMINI_CONNECT_TIMEOUT,
+            tls_timeout=GEMINI_TLS_TIMEOUT,
+            header_timeout=GEMINI_HEADER_TIMEOUT,
+            body_timeout=GEMINI_BODY_TIMEOUT)
         payload = result.get("payload")
         if not isinstance(payload, dict):
             raise ProviderError("provider returned non-JSON model list",
@@ -401,7 +456,12 @@ class GeminiProvider(Provider):
             body["generationConfig"]["responseMimeType"] = "application/json"
         if system:
             body["systemInstruction"] = {"parts": [{"text": system}]}
-        result = _request(self._url(), headers=self._headers(), body=body, timeout=timeout)
+        result = _request(self._url(), headers=self._headers(), body=body,
+                          timeout=timeout, deadline_seconds=timeout,
+                          connect_timeout=GEMINI_CONNECT_TIMEOUT,
+                          tls_timeout=GEMINI_TLS_TIMEOUT,
+                          header_timeout=GEMINI_HEADER_TIMEOUT,
+                          body_timeout=GEMINI_BODY_TIMEOUT)
         payload = result.get("payload")
         if not isinstance(payload, dict):
             raise ProviderError("provider returned non-JSON content", kind="invalid_response")

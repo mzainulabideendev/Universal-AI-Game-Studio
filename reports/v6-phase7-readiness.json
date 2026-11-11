@@ -2,7 +2,7 @@
   "ok": true,
   "schema_version": 1,
   "phase": "V6 Phase 7 - provider readiness",
-  "checked_at": "2026-11-11T05:40:36Z",
+  "checked_at": "2026-11-11T08:32:25Z",
   "provider": "gemini",
   "provider_name": "Google Gemini Developer API",
   "adapter": "GeminiProvider",
@@ -19,8 +19,8 @@
   },
   "credential": {
     "required": true,
-    "configured": false,
-    "source": null,
+    "configured": true,
+    "source": "local-file",
     "env_var": "GEMINI_API_KEY",
     "value_exposed": false
   },
@@ -29,7 +29,7 @@
     "model": "gemini-3.8-flash",
     "status": "free_limited",
     "free": true,
-    "requests_today": 0,
+    "requests_today": 3,
     "verified_daily_limit": null,
     "remaining_today": null,
     "exhausted": null,
@@ -67,18 +67,16 @@
     ],
     "retries_disabled_for_phase7": true
   },
-  "blockers": [
-    "no credential configured for the selected provider"
-  ],
+  "blockers": [],
   "warnings": [
     "Gemini free-tier content may be used to improve Google products; never send proprietary project content without separate approval.",
     "Gemini 3.6+ no longer supports temperature/top_p/top_k; Phase 7 omits them from generationConfig rather than sending ignored fields.",
     "Readiness is offline evidence only. Reachability and output quality are unknown until an approved live request runs."
   ],
-  "ready": false,
-  "ready_for_live_request": false,
+  "ready": true,
+  "ready_for_live_request": true,
   "live_request_authorized": false,
   "network_calls": 0,
   "credentials_exposed": false,
-  "generated_at": "2026-11-11T05:40:36Z"
+  "generated_at": "2026-11-11T08:32:25Z"
 }

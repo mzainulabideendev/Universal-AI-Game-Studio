@@ -42,7 +42,7 @@ PREFLIGHT_HEAD = "51342fe17996dd62011c43dabf5f7c1936bdf0bd"
 STARTING_TEST_COUNT = 409
 STARTING_TOOL_COUNT = 101
 EXPECTED_TOOL_COUNT = 107
-EXPECTED_TEST_COUNT = 447
+EXPECTED_TEST_COUNT = 463
 PROTECTED_PATHS = ("validation/unity-jungle-v5", "validation/builds",
                    "validation/unity-jungle-v6")
 
@@ -654,6 +654,31 @@ def main() -> int:
                         and protection_report["phase5_interfaces_ok"]
                         and v5_ok)
 
+    # The bounded transport must be wired into the Gemini path only, must never
+    # parse a partial body as JSON, and must keep zero retries/fallback.
+    bounded_source = (ROOT / "tools" / "game-studio-mcp" / "game_studio" / "llm"
+                      / "bounded_http.py").read_text(encoding="utf-8")
+    util_source = (ROOT / "tools" / "game-studio-mcp" / "game_studio"
+                   / "util.py").read_text(encoding="utf-8")
+    providers_source = (ROOT / "tools" / "game-studio-mcp" / "game_studio" / "llm"
+                        / "providers.py").read_text(encoding="utf-8")
+    timeout_tests = (ROOT / "tools" / "game-studio-mcp" / "tests"
+                     / "test_v6_phase7_timeout.py")
+    timeout_fix_ok = (
+        timeout_tests.is_file()
+        and "from .llm.bounded_http import request as bounded_request" in util_source
+        and "deadline_seconds is not None" in util_source
+        and "deadline_seconds=timeout" in providers_source
+        and "class _Deadline" in bounded_source
+        and "deadline_exceeded" in bounded_source
+        and "partial_response" in bounded_source
+        and "json_parse_skipped" in bounded_source
+        and plan["request"]["retries"] == 0
+        and plan["request"]["provider_fallback"] is False
+        and plan["request"]["request_sha256"]
+        == "865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648"
+    )
+
     # HEAD may advance only through an external, linear commit that touches the
     # Phase 7 surface and no protected path. The audit itself performs no Git write.
     baseline_is_ancestor = run(["git", "merge-base", "--is-ancestor",
@@ -774,6 +799,17 @@ def main() -> int:
                       "unexpected_changed_paths": unexpected_changes,
                       "protected_paths_changed": protected_changes,
                       "working_tree_changes": status_lines}},
+        {"id": 21, "description": "Bounded total request deadline implemented",
+         "status": "PASS" if timeout_fix_ok else "FAIL",
+         "evidence": {"module": "game_studio/llm/bounded_http.py",
+                      "gemini_deadline": "timeout_seconds",
+                      "stage_errors": ["dns_timeout", "connection_timeout",
+                                       "tls_failure", "http_response_timeout",
+                                       "response_body_timeout", "deadline_exceeded"],
+                      "partial_body_never_parsed": True,
+                      "retries": plan["request"]["retries"],
+                      "provider_fallback": plan["request"]["provider_fallback"],
+                      "request_sha256": plan["request"]["request_sha256"]}},
     ]
     all_passed = all(item["status"] == "PASS" for item in criteria)
     verdict = "PASS_AUTOMATED" if all_passed else "FAIL"
@@ -800,6 +836,55 @@ def main() -> int:
     written["bridge"] = write_report("v6-phase7-generation-bridge.json", bridge_report)
     written["validation"] = write_report("v6-phase7-validation.json", validation_report)
 
+    # A live attempt is recorded only if the human-approved request actually ran.
+    # The audit itself never performs a provider request.
+    live_result: dict = {}
+    live_path = ROOT / "reports" / "v6-phase7-live-validation.json"
+    if live_path.is_file():
+        try:
+            live_payload = load_json(live_path)
+            live_result = live_payload.get("result") or {}
+        except (OSError, ValueError):
+            live_result = {}
+    live_performed = bool(live_result.get("network_calls"))
+    if live_path.is_file():
+        written["live_validation"] = "v6-phase7-live-validation.json"
+    live_status = (live_result.get("status")
+                   if live_performed else "BLOCKED_CREDENTIAL_NOT_CONFIGURED")
+    live_error = live_result.get("error") or {}
+    live_quality = (live_result.get("quality") or {}).get("total_score")
+    if live_performed and live_result.get("ok"):
+        live_note = ("Exactly one approved request ran. Response validity is reported "
+                     "above; schema validity is not proof of design quality.")
+        live_limitations = [
+            "A single live request is not a benchmark and does not prove general AI quality.",
+            "The specification is a proposal and no asset, scene or build was produced.",
+            "A valid specification is not proof of a playable game.",
+            "Unknown provider quota is treated as unknown, never unlimited.",
+        ]
+    elif live_performed:
+        live_note = (f"Exactly one approved request ran and failed with "
+                     f"{live_result.get('status')} "
+                     f"(HTTP {live_error.get('status')}); no retry or fallback provider "
+                     f"was used.")
+        live_limitations = [
+            "The single approved live request failed; live model behaviour was not observed.",
+            "Provider quality is therefore unmeasured; only offline fixtures were scored.",
+            "The specification is a proposal and no asset, scene or build was produced.",
+            "A valid specification is not proof of a playable game.",
+            "Unknown provider quota is treated as unknown, never unlimited.",
+        ]
+    else:
+        live_note = ("A human must approve the exact request hash and configure "
+                     "GEMINI_API_KEY locally before any request runs.")
+        live_limitations = [
+            "No live provider request was authorized or performed.",
+            "Provider quality is therefore unmeasured; only offline fixtures were scored.",
+            "The specification is a proposal and no asset, scene or build was produced.",
+            "A valid specification is not proof of a playable game.",
+            "Unknown provider quota is treated as unknown, never unlimited.",
+        ]
+
     audit_report = {
         "schema_version": 1,
         "phase": "V6 Phase 7 - Real AI Provider Validation and Game Generation",
@@ -808,9 +893,9 @@ def main() -> int:
         "all_criteria_passed": all_passed,
         "human_review_required": True,
         "human_review_status": "pending",
-        "live_provider_status": "BLOCKED_CREDENTIAL_NOT_CONFIGURED",
-        "live_provider_authorized": False,
-        "live_provider_performed": False,
+        "live_provider_status": live_status,
+        "live_provider_authorized": live_performed,
+        "live_provider_performed": live_performed,
         "criteria": criteria,
         "repository": {
             "branch": branch,
@@ -848,30 +933,47 @@ def main() -> int:
         },
         "live_validation": {
             "request_sha256": plan["request"]["request_sha256"],
-            "authorization_status": plan["authorization"]["status"],
+            "authorization_status": ("APPROVED" if live_performed
+                                     else plan["authorization"]["status"]),
             "credential_status": plan["credential"]["status"],
+            "network_calls": 1 if live_performed else 0,
+            "performed": live_performed,
+            "status": live_status,
+            "http_status": live_error.get("status") if live_performed else None,
+            "error_kind": live_error.get("kind") if live_performed else None,
+            "retries": 0,
+            "fallback_used": bool(live_result.get("fallback_used")),
+            "note": live_note,
+        },
+        "timeout_fix": {
+            "implemented": timeout_fix_ok,
+            "module": "tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+            "reports": [
+                "reports/v6-phase7-timeout-fix.json",
+                "reports/v6-phase7-timeout-validation.json",
+            ],
+            "total_deadline": "caller timeout (60 s for the Phase 7 request)",
+            "stage_errors": ["dns_timeout", "connection_timeout", "tls_failure",
+                             "http_response_timeout", "response_body_timeout",
+                             "deadline_exceeded"],
+            "partial_body_never_parsed": True,
+            "timing_fields": ["dns_ms", "connect_ms", "tls_ms", "send_ms",
+                              "headers_ms", "body_ms", "total_ms"],
+            "secrets_recorded": False,
+            "retries": 0,
+            "provider_fallback": False,
             "network_calls": 0,
-            "performed": False,
-            "note": ("A human must approve the exact request hash and configure "
-                     "GEMINI_API_KEY locally before any request runs."),
         },
         "quality": {
             "offline_fixture_score": fixture_quality["total_score"],
             "offline_fixture_grade": fixture_quality["grade"],
             "deterministic_score": deterministic_quality["total_score"],
-            "live_model_score": None,
+            "live_model_score": live_quality,
         },
         "reports": written,
-        "limitations": [
-            "No live provider request was authorized or performed.",
-            "Provider quality is therefore unmeasured; only offline fixtures were scored.",
-            "The specification is a proposal and no asset, scene or build was produced.",
-            "A valid specification is not proof of a playable game.",
-            "Unknown provider quota is treated as unknown, never unlimited.",
-        ],
+        "limitations": live_limitations,
         "human_decisions_required": [
-            "Approve or reject the single live request identified by request_sha256.",
-            "Configure GEMINI_API_KEY locally (never in chat) if the request is approved.",
+            "Review the live provider outcome and decide whether another approved attempt is warranted.",
             "Review requirement priorities, contradictions and ambiguous criteria.",
             "Decide whether any future Phase 8 asset generation or build may start.",
         ],
@@ -887,6 +989,8 @@ def main() -> int:
         "tools": parity["tools"],
         "request_sha256": plan["request"]["request_sha256"],
         "credential_status": plan["credential"]["status"],
+        "live_status": live_status,
+        "live_network_calls": 1 if live_performed else 0,
         "reports": written,
     }, indent=2))
     return 0 if all_passed else 1

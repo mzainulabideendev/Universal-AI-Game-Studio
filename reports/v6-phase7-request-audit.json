@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-11T05:40:36Z",
+  "generated_at": "2026-11-11T08:32:25Z",
   "provider": "gemini",
   "model": "gemini-3.8-flash",
   "request_sha256": "865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648",
@@ -12,7 +12,7 @@
     "stable_model_code": true,
     "input_token_limit": 1048576,
     "output_token_limit": 65536,
-    "verified_at": "2026-11-11T05:40:36Z"
+    "verified_at": "2026-11-11T08:32:25Z"
   },
   "max_input_chars": 4000,
   "actual_input_chars": 301,
@@ -28,7 +28,7 @@
   "retries": 0,
   "project_files_sent": false,
   "authorization_status": "NOT_AUTHORIZED",
-  "credential_status": "BLOCKED_CREDENTIAL_NOT_CONFIGURED",
+  "credential_status": "CONFIGURED",
   "quota_impact": {
     "requests": 1,
     "retries": 0,
