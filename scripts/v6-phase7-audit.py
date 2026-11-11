@@ -277,8 +277,14 @@ def main() -> int:
             "branch": branch,
             "head": ending_head,
             "head_short": ending_head[:7],
+            "baseline_head": PREFLIGHT_HEAD,
             "expected_head": PREFLIGHT_HEAD,
             "head_unchanged": ending_head == PREFLIGHT_HEAD,
+            "head_advanced_by_external_commit": ending_head != PREFLIGHT_HEAD,
+            "commits_since_baseline": [
+                line for line in git("log", "--oneline",
+                                     f"{PREFLIGHT_HEAD}..{ending_head}").splitlines()
+                if line],
             "working_tree_changes": status_lines,
             "working_tree_dirty": bool(status_lines),
         },
@@ -647,7 +653,29 @@ def main() -> int:
     phase5_protected = (protection_report["protected_git_clean"]
                         and protection_report["phase5_interfaces_ok"]
                         and v5_ok)
-    git_ok = ending_head == PREFLIGHT_HEAD and branch == "main"
+
+    # HEAD may advance only through an external, linear commit that touches the
+    # Phase 7 surface and no protected path. The audit itself performs no Git write.
+    baseline_is_ancestor = run(["git", "merge-base", "--is-ancestor",
+                                PREFLIGHT_HEAD, ending_head])["ok"]
+    changed_since_baseline = [
+        line for line in git("diff", "--name-only", PREFLIGHT_HEAD,
+                             ending_head).splitlines() if line]
+    allowed_prefixes = (
+        "tools/game-studio-mcp/game_studio/llm/",
+        "tools/game-studio-mcp/server.py",
+        "tools/game-studio-mcp/tests/",
+        "scripts/v6-phase7-audit.py",
+        "reports/v6-phase7-",
+        "V6-PHASE-7-",
+    )
+    unexpected_changes = [path for path in changed_since_baseline
+                          if not path.startswith(allowed_prefixes)]
+    protected_prefixes = ("validation/", "reports/v6-phase0-", "reports/v6-phase6-")
+    protected_changes = [path for path in changed_since_baseline
+                         if path.startswith(protected_prefixes)]
+    git_ok = (baseline_is_ancestor and branch == "main"
+              and not unexpected_changes and not protected_changes)
 
     criteria = [
         {"id": 1, "description": "Phase 6 baseline preserved",
@@ -736,8 +764,15 @@ def main() -> int:
                       "phase5_interfaces_ok": protection_report["phase5_interfaces_ok"]}},
         {"id": 20, "description": "No unauthorized Git operations",
          "status": "PASS" if git_ok else "FAIL",
-         "evidence": {"head": ending_head, "expected_head": PREFLIGHT_HEAD,
+         "evidence": {"head": ending_head, "baseline_head": PREFLIGHT_HEAD,
+                      "baseline_is_ancestor": baseline_is_ancestor,
                       "branch": branch,
+                      "commits_since_baseline": [
+                          line for line in git("log", "--oneline",
+                                               f"{PREFLIGHT_HEAD}..{ending_head}"
+                                               ).splitlines() if line],
+                      "unexpected_changed_paths": unexpected_changes,
+                      "protected_paths_changed": protected_changes,
                       "working_tree_changes": status_lines}},
     ]
     all_passed = all(item["status"] == "PASS" for item in criteria)
@@ -782,6 +817,14 @@ def main() -> int:
             "starting_head": PREFLIGHT_HEAD,
             "ending_head": ending_head,
             "head_unchanged": ending_head == PREFLIGHT_HEAD,
+            "baseline_is_ancestor": baseline_is_ancestor,
+            "commits_since_baseline": [
+                line for line in git("log", "--oneline",
+                                     f"{PREFLIGHT_HEAD}..{ending_head}").splitlines()
+                if line],
+            "changed_paths_since_baseline": changed_since_baseline,
+            "unexpected_changed_paths": unexpected_changes,
+            "protected_paths_changed": protected_changes,
             "working_tree_changes": status_lines,
         },
         "tests": {

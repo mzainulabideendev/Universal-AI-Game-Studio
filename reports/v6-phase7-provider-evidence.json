@@ -244,6 +244,6 @@
   "secrets_recorded": false,
   "network_calls": 0,
   "note": "Evidence comes from the official documentation URLs listed in each record. No API key or account identifier is stored here.",
-  "generated_at": "2026-11-10T04:29:56Z",
+  "generated_at": "2026-11-11T05:27:57Z",
   "source": "official provider documentation recorded per provider"
 }

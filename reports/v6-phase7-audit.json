@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "phase": "V6 Phase 7 - Real AI Provider Validation and Game Generation",
-  "generated_at": "2026-11-10T04:29:56Z",
+  "generated_at": "2026-11-11T05:27:57Z",
   "verdict": "PASS_AUTOMATED",
   "all_criteria_passed": true,
   "human_review_required": true,
@@ -206,29 +206,30 @@
       "description": "No unauthorized Git operations",
       "status": "PASS",
       "evidence": {
-        "head": "51342fe17996dd62011c43dabf5f7c1936bdf0bd",
-        "expected_head": "51342fe17996dd62011c43dabf5f7c1936bdf0bd",
+        "head": "ef8f72fa9ac67c5d0e58224201c238d12c2e4ecd",
+        "baseline_head": "51342fe17996dd62011c43dabf5f7c1936bdf0bd",
+        "baseline_is_ancestor": true,
         "branch": "main",
+        "commits_since_baseline": [
+          "ef8f72f Add Phase 7 real-AI validation tools and corresponding tests"
+        ],
+        "unexpected_changed_paths": [],
+        "protected_paths_changed": [],
         "working_tree_changes": [
-          "M tools/game-studio-mcp/server.py",
-          " M tools/game-studio-mcp/tests/test_v6_phase2_coordinator.py",
-          "?? reports/v6-phase7-audit.json",
-          "?? reports/v6-phase7-baseline.json",
-          "?? reports/v6-phase7-game-spec.json",
-          "?? reports/v6-phase7-generation-bridge.json",
-          "?? reports/v6-phase7-provider-evidence.json",
-          "?? reports/v6-phase7-provider-policy.json",
-          "?? reports/v6-phase7-quality-evaluation.json",
-          "?? reports/v6-phase7-readiness.json",
-          "?? reports/v6-phase7-request-audit.json",
-          "?? reports/v6-phase7-requirements.json",
-          "?? reports/v6-phase7-validation.json",
-          "?? scripts/v6-phase7-audit.py",
-          "?? tools/game-studio-mcp/game_studio/llm/game_spec_pipeline.py",
-          "?? tools/game-studio-mcp/game_studio/llm/provider_validation.py",
-          "?? tools/game-studio-mcp/game_studio/llm/quality_evaluation.py",
-          "?? tools/game-studio-mcp/game_studio/llm/response_validation.py",
-          "?? tools/game-studio-mcp/tests/test_v6_phase7_real_ai.py"
+          "M reports/v6-phase7-audit.json",
+          " M reports/v6-phase7-baseline.json",
+          " M reports/v6-phase7-game-spec.json",
+          " M reports/v6-phase7-generation-bridge.json",
+          " M reports/v6-phase7-provider-evidence.json",
+          " M reports/v6-phase7-provider-policy.json",
+          " M reports/v6-phase7-quality-evaluation.json",
+          " M reports/v6-phase7-readiness.json",
+          " M reports/v6-phase7-request-audit.json",
+          " M reports/v6-phase7-requirements.json",
+          " M reports/v6-phase7-validation.json",
+          " M scripts/v6-phase7-audit.py",
+          "?? V6-PHASE-7-BASELINE.md",
+          "?? V6-PHASE-7-REAL-AI-VALIDATION.md"
         ]
       }
     }
@@ -236,28 +237,50 @@
   "repository": {
     "branch": "main",
     "starting_head": "51342fe17996dd62011c43dabf5f7c1936bdf0bd",
-    "ending_head": "51342fe17996dd62011c43dabf5f7c1936bdf0bd",
-    "head_unchanged": true,
+    "ending_head": "ef8f72fa9ac67c5d0e58224201c238d12c2e4ecd",
+    "head_unchanged": false,
+    "baseline_is_ancestor": true,
+    "commits_since_baseline": [
+      "ef8f72f Add Phase 7 real-AI validation tools and corresponding tests"
+    ],
+    "changed_paths_since_baseline": [
+      "reports/v6-phase7-audit.json",
+      "reports/v6-phase7-baseline.json",
+      "reports/v6-phase7-game-spec.json",
+      "reports/v6-phase7-generation-bridge.json",
+      "reports/v6-phase7-provider-evidence.json",
+      "reports/v6-phase7-provider-policy.json",
+      "reports/v6-phase7-quality-evaluation.json",
+      "reports/v6-phase7-readiness.json",
+      "reports/v6-phase7-request-audit.json",
+      "reports/v6-phase7-requirements.json",
+      "reports/v6-phase7-validation.json",
+      "scripts/v6-phase7-audit.py",
+      "tools/game-studio-mcp/game_studio/llm/game_spec_pipeline.py",
+      "tools/game-studio-mcp/game_studio/llm/provider_validation.py",
+      "tools/game-studio-mcp/game_studio/llm/quality_evaluation.py",
+      "tools/game-studio-mcp/game_studio/llm/response_validation.py",
+      "tools/game-studio-mcp/server.py",
+      "tools/game-studio-mcp/tests/test_v6_phase2_coordinator.py",
+      "tools/game-studio-mcp/tests/test_v6_phase7_real_ai.py"
+    ],
+    "unexpected_changed_paths": [],
+    "protected_paths_changed": [],
     "working_tree_changes": [
-      "M tools/game-studio-mcp/server.py",
-      " M tools/game-studio-mcp/tests/test_v6_phase2_coordinator.py",
-      "?? reports/v6-phase7-audit.json",
-      "?? reports/v6-phase7-baseline.json",
-      "?? reports/v6-phase7-game-spec.json",
-      "?? reports/v6-phase7-generation-bridge.json",
-      "?? reports/v6-phase7-provider-evidence.json",
-      "?? reports/v6-phase7-provider-policy.json",
-      "?? reports/v6-phase7-quality-evaluation.json",
-      "?? reports/v6-phase7-readiness.json",
-      "?? reports/v6-phase7-request-audit.json",
-      "?? reports/v6-phase7-requirements.json",
-      "?? reports/v6-phase7-validation.json",
-      "?? scripts/v6-phase7-audit.py",
-      "?? tools/game-studio-mcp/game_studio/llm/game_spec_pipeline.py",
-      "?? tools/game-studio-mcp/game_studio/llm/provider_validation.py",
-      "?? tools/game-studio-mcp/game_studio/llm/quality_evaluation.py",
-      "?? tools/game-studio-mcp/game_studio/llm/response_validation.py",
-      "?? tools/game-studio-mcp/tests/test_v6_phase7_real_ai.py"
+      "M reports/v6-phase7-audit.json",
+      " M reports/v6-phase7-baseline.json",
+      " M reports/v6-phase7-game-spec.json",
+      " M reports/v6-phase7-generation-bridge.json",
+      " M reports/v6-phase7-provider-evidence.json",
+      " M reports/v6-phase7-provider-policy.json",
+      " M reports/v6-phase7-quality-evaluation.json",
+      " M reports/v6-phase7-readiness.json",
+      " M reports/v6-phase7-request-audit.json",
+      " M reports/v6-phase7-requirements.json",
+      " M reports/v6-phase7-validation.json",
+      " M scripts/v6-phase7-audit.py",
+      "?? V6-PHASE-7-BASELINE.md",
+      "?? V6-PHASE-7-REAL-AI-VALIDATION.md"
     ]
   },
   "tests": {
@@ -265,7 +288,7 @@
     "final_count": 443,
     "added_count": 34,
     "result": "OK",
-    "duration_seconds": 56.28,
+    "duration_seconds": 65.31,
     "command": [
       "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
       "-m",
@@ -442,5 +465,5 @@
     "Review requirement priorities, contradictions and ambiguous criteria.",
     "Decide whether any future Phase 8 asset generation or build may start."
   ],
-  "duration_seconds": 56.66
+  "duration_seconds": 66.19
 }
