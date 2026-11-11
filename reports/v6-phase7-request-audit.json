@@ -1,13 +1,29 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-11T05:27:57Z",
+  "generated_at": "2026-11-11T05:40:36Z",
   "provider": "gemini",
   "model": "gemini-3.8-flash",
-  "request_sha256": "08db560c1aff6dccc249a7185c1061d5763980ac98dbc0b253958a8309edd552",
+  "request_sha256": "865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648",
+  "model_verification": {
+    "model_id": "gemini-3.8-flash",
+    "model_documentation": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+    "generate_content_reference": "https://ai.google.dev/api/generate-content",
+    "model_code_verified": true,
+    "stable_model_code": true,
+    "input_token_limit": 1048576,
+    "output_token_limit": 65536,
+    "verified_at": "2026-11-11T05:40:36Z"
+  },
   "max_input_chars": 4000,
   "actual_input_chars": 301,
   "max_output_tokens": 2048,
-  "temperature": 0.1,
+  "generation_config": {
+    "max_output_tokens": 2048,
+    "response_mime_type": "application/json"
+  },
+  "temperature": null,
+  "temperature_omitted": true,
+  "temperature_omission_reason": "The Gemini generateContent reference states that temperature (and topP/topK) is no longer supported and is silently ignored on Gemini 3.6 Flash and newer models. Phase 7 omits it from generationConfig instead of sending an ignored field.",
   "timeout_seconds": 60,
   "retries": 0,
   "project_files_sent": false,

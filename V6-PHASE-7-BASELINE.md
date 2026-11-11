@@ -78,11 +78,11 @@ OK
 The same suite was re-run during the Phase 7 audit after implementation:
 
 ```text
-Ran 443 tests
+Ran 447 tests
 OK
 ```
 
-Phase 7 adds 34 tests and changes one existing registry-count assertion in
+Phase 7 adds 38 tests and changes one existing registry-count assertion in
 `test_v6_phase2_coordinator.py` from `101` to `107` (the parity and uniqueness checks in
 that test are unchanged). See the final report for the full disclosure.
 

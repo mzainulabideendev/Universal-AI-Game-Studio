@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "phase": "V6 Phase 7F - idea to specification",
-  "generated_at": "2026-11-11T05:27:56Z",
+  "generated_at": "2026-11-11T05:40:36Z",
   "request": "Create a polished third-person 3D tropical jungle adventure game for Windows and Android. The player controls a monkey, explores a jungle, collects bananas, avoids environmental hazards, and reaches a final destination. The game should support low-end hardware and use an efficient rendering approach.",
   "source": "ai_provider",
   "source_label_note": "Built from the offline fixture payload, not from a live provider response.",

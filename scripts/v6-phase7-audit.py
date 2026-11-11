@@ -42,7 +42,7 @@ PREFLIGHT_HEAD = "51342fe17996dd62011c43dabf5f7c1936bdf0bd"
 STARTING_TEST_COUNT = 409
 STARTING_TOOL_COUNT = 101
 EXPECTED_TOOL_COUNT = 107
-EXPECTED_TEST_COUNT = 443
+EXPECTED_TEST_COUNT = 447
 PROTECTED_PATHS = ("validation/unity-jungle-v5", "validation/builds",
                    "validation/unity-jungle-v6")
 

@@ -202,6 +202,44 @@ class PlanTests(BaseCase):
         self.assertNotEqual(first["request"]["request_sha256"],
                             changed["request"]["request_sha256"])
 
+    def test_plan_uses_corrected_gemini_generation_config(self) -> None:
+        plan = provider_validation.plan_live_validation()
+        request = plan["request"]
+        # Gemini 3.6+ silently ignores temperature; Phase 7 must omit it.
+        self.assertNotIn("temperature", request["generation_config"])
+        self.assertIsNone(request["temperature"])
+        self.assertTrue(request["temperature_omitted"])
+        self.assertTrue(request["temperature_omission_reason"])
+        self.assertEqual(request["generation_config"],
+                         {"max_output_tokens": 2048,
+                          "response_mime_type": "application/json"})
+        self.assertTrue(request["json_mode"])
+        self.assertEqual(request["max_output_tokens"], 2048)
+        self.assertEqual(request["retries"], 0)
+        self.assertFalse(request["provider_fallback"])
+        self.assertEqual(plan["model"], "gemini-3.8-flash")
+        self.assertEqual(plan["model_verification"]["model_id"],
+                         "gemini-3.8-flash")
+        self.assertTrue(plan["model_verification"]["model_code_verified"])
+        self.assertIn("ai.google.dev", plan["model_verification"]
+                      ["generate_content_reference"])
+
+    def test_plan_hash_reflects_temperature_removal(self) -> None:
+        plan = provider_validation.plan_live_validation()
+        request = plan["request"]
+        canonical = json.dumps({
+            "provider": plan["provider"],
+            "model": plan["model"],
+            "system": request["system_prompt"],
+            "user": request["user_prompt"],
+            "max_output_tokens": request["max_output_tokens"],
+            "response_mime_type": "application/json",
+            "retries": 0,
+            "fallback": False,
+        }, sort_keys=True, ensure_ascii=False)
+        expected = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+        self.assertEqual(request["request_sha256"], expected)
+
     def test_plan_enforces_input_and_output_bounds(self) -> None:
         with self.assertRaises(ValueError):
             provider_validation.plan_live_validation("x" * 4001)
@@ -218,6 +256,49 @@ class PlanTests(BaseCase):
         self.assertNotIn("Authorization", text)
         self.assertEqual(record["network_calls"], 0)
         self.assertFalse(record["live_request_performed"])
+
+
+class GeminiBodyTests(BaseCase):
+    def _adapter(self, *, model: str = "gemini-3.8-flash"):
+        return providers.GeminiProvider({
+            "provider": "gemini",
+            "model": model,
+            "base_url": "https://generativelanguage.googleapis.com/v1beta",
+            "api_key": "test-key-not-real",
+            "local_provider": False,
+            "key_required": True,
+        })
+
+    def _run(self, adapter, **kwargs):
+        captured = {}
+
+        def fake_request(url, *, headers, body, timeout, **extra):
+            captured["url"] = url
+            captured["body"] = body
+            return {"payload": {
+                "candidates": [{"content": {"parts": [{"text": "{}"}]},
+                                "finishReason": "STOP"}],
+                "usageMetadata": {"totalTokenCount": 1},
+            }}
+
+        with mock.patch.object(providers, "_request", fake_request):
+            adapter.complete([{"role": "user", "content": "hi"}], **kwargs)
+        return captured
+
+    def test_none_temperature_is_omitted_from_body(self) -> None:
+        captured = self._run(self._adapter(), temperature=None,
+                             max_tokens=2048, json_mode=True,
+                             system="system instructions")
+        generation = captured["body"]["generationConfig"]
+        self.assertNotIn("temperature", generation)
+        self.assertEqual(generation,
+                         {"maxOutputTokens": 2048,
+                          "responseMimeType": "application/json"})
+        self.assertIn("systemInstruction", captured["body"])
+
+    def test_explicit_temperature_is_still_forwarded_when_requested(self) -> None:
+        captured = self._run(self._adapter(), temperature=0.2, max_tokens=64)
+        self.assertEqual(captured["body"]["generationConfig"]["temperature"], 0.2)
 
 
 class GatedExecutionTests(BaseCase):
@@ -281,6 +362,7 @@ class GatedExecutionTests(BaseCase):
         self.assertEqual(result["usage"]["source"], "provider")
         self.assertEqual(adapter.kwargs["max_tokens"], 2048)
         self.assertTrue(adapter.kwargs["json_mode"])
+        self.assertIsNone(adapter.kwargs["temperature"])
         self.assertFalse(result["secrets_recorded"])
         self.assertEqual(result["quota_after"]["requests_today"], 1)
 

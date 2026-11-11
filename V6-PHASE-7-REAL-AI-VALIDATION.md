@@ -5,11 +5,11 @@
 **Phase:** 7 of V6  
 **Status:** Offline implementation **PASS_AUTOMATED** (20/20) — live provider validation **BLOCKED_CREDENTIAL_NOT_CONFIGURED** — human review **HUMAN_REVIEW_REQUIRED**  
 **Provider evidence retrieval date:** 2026-11-10  
-**Audit evidence timestamp:** `2026-11-10T04:29:56Z` (`reports/v6-phase7-audit.json`)  
+**Audit evidence timestamp:** `2026-11-11T05:40:36Z` (`reports/v6-phase7-audit.json`)  
 **Branch:** `main`  
 **Baseline HEAD:** `51342fe17996dd62011c43dabf5f7c1936bdf0bd`  
 **Current HEAD at final audit:** `ef8f72fa9ac67c5d0e58224201c238d12c2e4ecd` — "Add Phase 7 real-AI validation tools and corresponding tests" (committed externally by the repository owner; this agent performed no Git write)  
-**Tests:** 409 → **443** (34 Phase 7 tests added, 0 failed, 0 skipped)  
+**Tests:** 409 → **447** (38 Phase 7 tests added, 0 failed, 0 skipped)  
 **MCP tools/handlers:** 101/101 → **107/107** (six new tools, exact parity)  
 **Audit:** 20/20 criteria PASS (automated scope); live criteria explicitly excluded and reported separately
 
@@ -61,7 +61,7 @@ New MCP tools (registered with exact input schemas and handlers):
 
 New evidence/report script: `scripts/v6-phase7-audit.py`.
 
-New tests: `tools/game-studio-mcp/tests/test_v6_phase7_real_ai.py` (34 tests).
+New tests: `tools/game-studio-mcp/tests/test_v6_phase7_real_ai.py` (38 tests).
 
 ### Reuse, not duplication
 
@@ -230,8 +230,8 @@ Nothing was generated or built.
 | --- | --- |
 | Baseline tests (before Phase 7 edits) | 409 |
 | New tests | 34 |
-| Final tests | **443** |
-| Passed | 443 |
+| Final tests | **447** |
+| Passed | 447 |
 | Failed | 0 |
 | Skipped | 0 |
 | Existing tests changed | 1 registry-count assertion (documented above) |
@@ -328,6 +328,31 @@ Pre-existing user changes were preserved (the tree was clean at baseline).
 
 ---
 
+## 11b. Request correction: temperature removed
+
+The accepted offline scope was followed by a controlled correction of the pending live
+request, before any authorization was requested.
+
+| Item | Value |
+| --- | --- |
+| Model ID re-verified | `gemini-3.8-flash` — stable model code on the official model page |
+| Model documentation | `https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash` |
+| GenerateContent reference | `https://ai.google.dev/api/generate-content` |
+| Documented limits | 1,048,576 input tokens / 65,536 output tokens |
+| Official statement | `temperature` (and `topP`/`topK`) is "no longer supported and is silently ignored on Gemini 3.6 Flash and newer models" |
+| Change | `temperature` is **omitted** from `generationConfig`; no ignored field is sent |
+| Preserved | JSON-only contract, `response_mime_type: application/json`, 2,048 max output tokens, one request, zero retries, no fallback, 60 s timeout |
+| Request hash | recalculated from the corrected request: `865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648` |
+| Superseded hash | the earlier `08db560c…dd552` request must not be approved |
+| Tests | 4 new tests assert the corrected config, hash stability and body shape; full suite now 447 |
+| Network calls | **0** — no credential configured, no request executed |
+
+The Gemini adapter now accepts `temperature: float | None` and only serialises the field
+when a value is supplied. Phase 7 always passes `None`, so the live request can never
+carry an unsupported sampling field.
+
+---
+
 ## 12. Mandatory live-request approval gate
 
 **No live request has been made. No credential is configured. This is the stop point.**
@@ -340,11 +365,12 @@ Pre-existing user changes were preserved (the tree was clean at baseline).
 | Model | `gemini-3.8-flash` |
 | Endpoint | `POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent` |
 | Auth | local `GEMINI_API_KEY` (or the studio's private credential store) — never sent to chat |
-| Request hash | `08db560c1aff6dccc249a7185c1061d5763980ac98dbc0b253958a8309edd552` |
+| Request hash | `865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648` |
 | Input | controlled test idea + system prompt; **1,362 characters total** (idea 301) |
 | Max input policy | 4,000 characters |
 | Max output tokens | 2,048 |
-| Temperature | 0.1 (accepted but ignored by Gemini 3.6+ per docs) |
+| Temperature | **omitted** — `generationConfig` contains no `temperature` field |
+| Model ID verification | `gemini-3.8-flash` confirmed as the stable model code on the official model page (2026-11-11) |
 | Timeout | 60 seconds |
 | Retries | **0** |
 | Provider fallback | **none** |
@@ -402,7 +428,7 @@ deterministic rubric. HTTP success alone will not be treated as design quality.
 ### How a human approves this exact request
 
 1. Decide **approve** or **reject** for hash
-   `08db560c1aff6dccc249a7185c1061d5763980ac98dbc0b253958a8309edd552`.
+   `865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648`.
 2. If approved, configure the credential locally, never in chat — for example with the
    existing tool:
 
@@ -419,12 +445,15 @@ deterministic rubric. HTTP success alone will not be treated as design quality.
    llm_provider_validate {"mode":"execute","confirm":true,
      "authorization":{"approved":true,"approved_by":"<your name>",
        "provider":"gemini","model":"gemini-3.8-flash",
-       "request_sha256":"08db560c1aff6dccc249a7185c1061d5763980ac98dbc0b253958a8309edd552"}}
+       "request_sha256":"865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648"}}
    ```
 
-The request hash binds approval to this exact prompt, model, output cap, temperature and
-zero-retry/zero-fallback configuration. Any change produces a different hash and is
-refused.
+The request hash binds approval to this exact prompt, model, output cap, JSON mode and
+zero-retry/zero-fallback configuration. It deliberately does **not** include a temperature:
+the Gemini `generateContent` reference states that `temperature` (and `topP`/`topK`) is
+"no longer supported and is silently ignored on Gemini 3.6 Flash and newer models", so
+Phase 7 omits the field from `generationConfig` entirely. Any change produces a different
+hash and is refused.
 
 **Current status:** `BLOCKED_CREDENTIAL_NOT_CONFIGURED` / `NOT_AUTHORIZED`.
 
@@ -448,7 +477,7 @@ specification is not a playable game.
 ## 14. Exact human decisions required next
 
 1. **Approve or reject** the single live request identified by
-   `08db560c1aff6dccc249a7185c1061d5763980ac98dbc0b253958a8309edd552`.
+   `865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648`.
 2. If approved, **configure `GEMINI_API_KEY` locally**; do not paste it into chat.
 3. **Review the specification**: 32 proposed requirements, their priorities, the
    deterministic design's flagged contradictions, and any ambiguous acceptance criteria.
@@ -463,7 +492,7 @@ specification is not a playable game.
 | --- | --- |
 | Offline Phase 7 implementation complete | **yes** |
 | Automated audit 20/20 | **yes** |
-| Tests 443/443 with parity 107/107 | **yes** |
+| Tests 447/447 with parity 107/107 | **yes** |
 | Live request authorized | **no** |
 | Live provider request succeeded | **no** — not attempted |
 | Real AI output validated | **no** |

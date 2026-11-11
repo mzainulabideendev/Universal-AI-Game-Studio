@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "phase": "V6 Phase 7 - Real AI Provider Validation and Game Generation",
-  "generated_at": "2026-11-11T05:27:57Z",
+  "generated_at": "2026-11-11T05:40:36Z",
   "verdict": "PASS_AUTOMATED",
   "all_criteria_passed": true,
   "human_review_required": true,
@@ -169,8 +169,8 @@
       "status": "PASS",
       "evidence": {
         "starting": 409,
-        "final": 443,
-        "expected": 443,
+        "final": 447,
+        "expected": 447,
         "result": "OK"
       }
     },
@@ -206,30 +206,22 @@
       "description": "No unauthorized Git operations",
       "status": "PASS",
       "evidence": {
-        "head": "ef8f72fa9ac67c5d0e58224201c238d12c2e4ecd",
+        "head": "b36f066b965302bf6923420a387f0102e98083ff",
         "baseline_head": "51342fe17996dd62011c43dabf5f7c1936bdf0bd",
         "baseline_is_ancestor": true,
         "branch": "main",
         "commits_since_baseline": [
+          "b36f066 Add Phase 7 real-AI validation tools and corresponding tests",
           "ef8f72f Add Phase 7 real-AI validation tools and corresponding tests"
         ],
         "unexpected_changed_paths": [],
         "protected_paths_changed": [],
         "working_tree_changes": [
-          "M reports/v6-phase7-audit.json",
-          " M reports/v6-phase7-baseline.json",
-          " M reports/v6-phase7-game-spec.json",
-          " M reports/v6-phase7-generation-bridge.json",
-          " M reports/v6-phase7-provider-evidence.json",
-          " M reports/v6-phase7-provider-policy.json",
-          " M reports/v6-phase7-quality-evaluation.json",
-          " M reports/v6-phase7-readiness.json",
-          " M reports/v6-phase7-request-audit.json",
-          " M reports/v6-phase7-requirements.json",
-          " M reports/v6-phase7-validation.json",
-          " M scripts/v6-phase7-audit.py",
-          "?? V6-PHASE-7-BASELINE.md",
-          "?? V6-PHASE-7-REAL-AI-VALIDATION.md"
+          "M scripts/v6-phase7-audit.py",
+          " M tools/game-studio-mcp/game_studio/llm/provider_validation.py",
+          " M tools/game-studio-mcp/game_studio/llm/providers.py",
+          " M tools/game-studio-mcp/server.py",
+          " M tools/game-studio-mcp/tests/test_v6_phase7_real_ai.py"
         ]
       }
     }
@@ -237,13 +229,16 @@
   "repository": {
     "branch": "main",
     "starting_head": "51342fe17996dd62011c43dabf5f7c1936bdf0bd",
-    "ending_head": "ef8f72fa9ac67c5d0e58224201c238d12c2e4ecd",
+    "ending_head": "b36f066b965302bf6923420a387f0102e98083ff",
     "head_unchanged": false,
     "baseline_is_ancestor": true,
     "commits_since_baseline": [
+      "b36f066 Add Phase 7 real-AI validation tools and corresponding tests",
       "ef8f72f Add Phase 7 real-AI validation tools and corresponding tests"
     ],
     "changed_paths_since_baseline": [
+      "V6-PHASE-7-BASELINE.md",
+      "V6-PHASE-7-REAL-AI-VALIDATION.md",
       "reports/v6-phase7-audit.json",
       "reports/v6-phase7-baseline.json",
       "reports/v6-phase7-game-spec.json",
@@ -267,28 +262,19 @@
     "unexpected_changed_paths": [],
     "protected_paths_changed": [],
     "working_tree_changes": [
-      "M reports/v6-phase7-audit.json",
-      " M reports/v6-phase7-baseline.json",
-      " M reports/v6-phase7-game-spec.json",
-      " M reports/v6-phase7-generation-bridge.json",
-      " M reports/v6-phase7-provider-evidence.json",
-      " M reports/v6-phase7-provider-policy.json",
-      " M reports/v6-phase7-quality-evaluation.json",
-      " M reports/v6-phase7-readiness.json",
-      " M reports/v6-phase7-request-audit.json",
-      " M reports/v6-phase7-requirements.json",
-      " M reports/v6-phase7-validation.json",
-      " M scripts/v6-phase7-audit.py",
-      "?? V6-PHASE-7-BASELINE.md",
-      "?? V6-PHASE-7-REAL-AI-VALIDATION.md"
+      "M scripts/v6-phase7-audit.py",
+      " M tools/game-studio-mcp/game_studio/llm/provider_validation.py",
+      " M tools/game-studio-mcp/game_studio/llm/providers.py",
+      " M tools/game-studio-mcp/server.py",
+      " M tools/game-studio-mcp/tests/test_v6_phase7_real_ai.py"
     ]
   },
   "tests": {
     "starting_count": 409,
-    "final_count": 443,
-    "added_count": 34,
+    "final_count": 447,
+    "added_count": 38,
     "result": "OK",
-    "duration_seconds": 65.31,
+    "duration_seconds": 64.82,
     "command": [
       "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
       "-m",
@@ -427,7 +413,7 @@
     "credential_configured": false
   },
   "live_validation": {
-    "request_sha256": "08db560c1aff6dccc249a7185c1061d5763980ac98dbc0b253958a8309edd552",
+    "request_sha256": "865fe5ba547ce13cdad50ccd706ef28aca26e213549532b52b9fb501b549c648",
     "authorization_status": "NOT_AUTHORIZED",
     "credential_status": "BLOCKED_CREDENTIAL_NOT_CONFIGURED",
     "network_calls": 0,
@@ -465,5 +451,5 @@
     "Review requirement priorities, contradictions and ambiguous criteria.",
     "Decide whether any future Phase 8 asset generation or build may start."
   ],
-  "duration_seconds": 66.19
+  "duration_seconds": 65.43
 }

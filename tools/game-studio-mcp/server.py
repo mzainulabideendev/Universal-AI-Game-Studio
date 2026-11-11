@@ -841,15 +841,12 @@ def tool_llm_provider_validate(args: dict) -> dict:
     max_output_tokens = _int(args, "max_output_tokens", default=2048,
                              minimum=64,
                              maximum=llm_provider_validation.HARD_MAX_OUTPUT_TOKENS)
-    temperature = _float(args, "temperature", default=0.1, minimum=0.0,
-                         maximum=1.0)
     timeout = _int(args, "timeout", default=60, minimum=5,
                    maximum=llm_provider_validation.HARD_MAX_TIMEOUT_SECONDS)
     try:
         plan = llm_provider_validation.plan_live_validation(
             idea, provider=provider, model=model,
-            max_output_tokens=max_output_tokens, temperature=temperature,
-            timeout=timeout)
+            max_output_tokens=max_output_tokens, timeout=timeout)
     except ValueError as exc:
         raise ToolError(str(exc)) from exc
 
@@ -864,8 +861,7 @@ def tool_llm_provider_validate(args: dict) -> dict:
         authorization = None
     result = llm_provider_validation.execute_live_validation(
         idea, authorization=authorization, provider=provider, model=model,
-        max_output_tokens=max_output_tokens, temperature=temperature,
-        timeout=timeout)
+        max_output_tokens=max_output_tokens, timeout=timeout)
     result["audit_record"] = llm_provider_validation.audit_record(plan)
     return result
 
@@ -2312,8 +2308,6 @@ TOOLS = [
               "model": {"type": "string"},
               "max_output_tokens": {"type": "integer", "minimum": 64, "maximum": 4096,
                                     "default": 2048},
-              "temperature": {"type": "number", "minimum": 0, "maximum": 1,
-                              "default": 0.1},
               "timeout": {"type": "integer", "minimum": 5, "maximum": 120,
                           "default": 60},
               "confirm": {"type": "boolean", "default": False,

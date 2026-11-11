@@ -128,7 +128,7 @@ class Provider:
         self.cfg = cfg
 
     def complete(self, messages: list[dict], *, system: str | None = None,
-                 max_tokens: int = 2048, temperature: float = 0.2,
+                 max_tokens: int = 2048, temperature: float | None = 0.2,
                  json_mode: bool = False, timeout: int = 60) -> dict:
         raise NotImplementedError
 
@@ -383,20 +383,20 @@ class GeminiProvider(Provider):
                 "capability_metadata_exposed": True,
                 "capability_source": "supportedGenerationMethods and inputTokenLimit"}
 
-    def complete(self, messages, *, system=None, max_tokens=2048, temperature=0.2,
-                 json_mode=False, timeout=60) -> dict:
+    def complete(self, messages, *, system=None, max_tokens=2048,
+                 temperature: float | None = 0.2, json_mode=False,
+                 timeout=60) -> dict:
         contents = []
         for message in messages:
             role = "model" if message.get("role") == "assistant" else "user"
             contents.append({"role": role,
                              "parts": [{"text": str(message.get("content") or "")}]})
-        body: dict = {
-            "contents": contents,
-            "generationConfig": {
-                "maxOutputTokens": max_tokens,
-                "temperature": temperature,
-            },
-        }
+        generation: dict = {"maxOutputTokens": max_tokens}
+        # Gemini 3.6+ no longer supports temperature/top_p/top_k; omit the field
+        # entirely instead of sending a value that the API silently ignores.
+        if temperature is not None:
+            generation["temperature"] = temperature
+        body: dict = {"contents": contents, "generationConfig": generation}
         if json_mode:
             body["generationConfig"]["responseMimeType"] = "application/json"
         if system:

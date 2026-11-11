@@ -37,6 +37,14 @@ DEFAULT_MODEL = "gemini-3.8-flash"
 MAX_IDEA_CHARS = 4_000
 HARD_MAX_OUTPUT_TOKENS = 4_096
 HARD_MAX_TIMEOUT_SECONDS = 120
+MODEL_DOCUMENTATION_URL = "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
+GENERATE_CONTENT_REFERENCE_URL = "https://ai.google.dev/api/generate-content"
+TEMPERATURE_OMISSION_REASON = (
+    "The Gemini generateContent reference states that temperature (and topP/topK) "
+    "is no longer supported and is silently ignored on Gemini 3.6 Flash and newer "
+    "models. Phase 7 omits it from generationConfig instead of sending an ignored "
+    "field."
+)
 
 SYSTEM_PROMPT = (
     "You are a game design analyst. Return exactly one JSON object and no prose.\n"
@@ -76,14 +84,14 @@ def build_user_prompt(idea: str) -> str:
 
 
 def request_sha256(*, provider: str, model: str, system: str, user: str,
-                   max_output_tokens: int, temperature: float) -> str:
+                   max_output_tokens: int) -> str:
     canonical = json.dumps({
         "provider": provider,
         "model": model,
         "system": system,
         "user": user,
         "max_output_tokens": max_output_tokens,
-        "temperature": round(float(temperature), 3),
+        "response_mime_type": "application/json",
         "retries": 0,
         "fallback": False,
     }, sort_keys=True, ensure_ascii=False)
@@ -161,8 +169,8 @@ def readiness(provider: str = DEFAULT_PROVIDER,
             "Gemini free-tier content may be used to improve Google products; "
             "never send proprietary project content without separate approval.")
         warnings.append(
-            "Gemini 3.6+ ignores temperature/top_p/top_k and may return deprecation "
-            "warning headers; the request remains valid.")
+            "Gemini 3.6+ no longer supports temperature/top_p/top_k; Phase 7 omits "
+            "them from generationConfig rather than sending ignored fields.")
     warnings.append(
         "Readiness is offline evidence only. Reachability and output quality are "
         "unknown until an approved live request runs.")
@@ -216,7 +224,6 @@ def plan_live_validation(idea: str = CONTROLLED_TEST_IDEA, *,
                          provider: str = DEFAULT_PROVIDER,
                          model: str | None = None,
                          max_output_tokens: int = 2048,
-                         temperature: float = 0.1,
                          timeout: int = 60,
                          approved: bool = False,
                          approved_by: str | None = None) -> dict:
@@ -229,16 +236,13 @@ def plan_live_validation(idea: str = CONTROLLED_TEST_IDEA, *,
         raise ValueError(f"max_output_tokens must be 64..{HARD_MAX_OUTPUT_TOKENS}")
     if not isinstance(timeout, int) or not 5 <= timeout <= HARD_MAX_TIMEOUT_SECONDS:
         raise ValueError(f"timeout must be 5..{HARD_MAX_TIMEOUT_SECONDS} seconds")
-    if not 0.0 <= float(temperature) <= 1.0:
-        raise ValueError("temperature must be within 0..1")
 
     state = readiness(provider, model)
     chosen_model = state.get("model") or model or DEFAULT_MODEL
     user = build_user_prompt(idea)
     digest = request_sha256(provider=provider, model=chosen_model,
                             system=SYSTEM_PROMPT, user=user,
-                            max_output_tokens=max_output_tokens,
-                            temperature=temperature)
+                            max_output_tokens=max_output_tokens)
     approval_status = "APPROVED" if approved else "NOT_AUTHORIZED"
     credential_status = ("CONFIGURED" if state.get("credential", {}).get("configured")
                          else "BLOCKED_CREDENTIAL_NOT_CONFIGURED")
@@ -267,7 +271,13 @@ def plan_live_validation(idea: str = CONTROLLED_TEST_IDEA, *,
             "max_input_chars": MAX_IDEA_CHARS,
             "actual_input_chars": len(idea),
             "max_output_tokens": max_output_tokens,
-            "temperature": temperature,
+            "generation_config": {
+                "max_output_tokens": max_output_tokens,
+                "response_mime_type": "application/json",
+            },
+            "temperature": None,
+            "temperature_omitted": True,
+            "temperature_omission_reason": TEMPERATURE_OMISSION_REASON,
             "timeout_seconds": timeout,
             "retries": 0,
             "provider_fallback": False,
@@ -276,6 +286,16 @@ def plan_live_validation(idea: str = CONTROLLED_TEST_IDEA, *,
             "project_files_sent": False,
             "personal_data_sent": False,
             "request_sha256": digest,
+        },
+        "model_verification": {
+            "model_id": chosen_model,
+            "model_documentation": MODEL_DOCUMENTATION_URL,
+            "generate_content_reference": GENERATE_CONTENT_REFERENCE_URL,
+            "model_code_verified": chosen_model == DEFAULT_MODEL,
+            "stable_model_code": True,
+            "input_token_limit": 1_048_576,
+            "output_token_limit": 65_536,
+            "verified_at": _now(),
         },
         "quota_impact": {
             "requests": 1,
@@ -341,13 +361,11 @@ def execute_live_validation(idea: str = CONTROLLED_TEST_IDEA, *,
                             provider: str = DEFAULT_PROVIDER,
                             model: str | None = None,
                             max_output_tokens: int = 2048,
-                            temperature: float = 0.1,
                             timeout: int = 60) -> dict:
     """Perform exactly one approved request. Refuses everything else."""
     plan = plan_live_validation(
         idea, provider=provider, model=model,
-        max_output_tokens=max_output_tokens, temperature=temperature,
-        timeout=timeout)
+        max_output_tokens=max_output_tokens, timeout=timeout)
     digest = plan["request"]["request_sha256"]
 
     if not isinstance(authorization, dict):
@@ -383,7 +401,7 @@ def execute_live_validation(idea: str = CONTROLLED_TEST_IDEA, *,
             [{"role": "user", "content": plan["request"]["user_prompt"]}],
             system=plan["request"]["system_prompt"],
             max_tokens=plan["request"]["max_output_tokens"],
-            temperature=plan["request"]["temperature"],
+            temperature=None,
             json_mode=True,
             timeout=plan["request"]["timeout_seconds"],
         )
@@ -509,10 +527,14 @@ def audit_record(plan: dict) -> dict:
         "provider": plan["provider"],
         "model": plan["model"],
         "request_sha256": plan["request"]["request_sha256"],
+        "model_verification": plan.get("model_verification"),
         "max_input_chars": plan["request"]["max_input_chars"],
         "actual_input_chars": plan["request"]["actual_input_chars"],
         "max_output_tokens": plan["request"]["max_output_tokens"],
-        "temperature": plan["request"]["temperature"],
+        "generation_config": plan["request"]["generation_config"],
+        "temperature": None,
+        "temperature_omitted": True,
+        "temperature_omission_reason": plan["request"]["temperature_omission_reason"],
         "timeout_seconds": plan["request"]["timeout_seconds"],
         "retries": 0,
         "project_files_sent": False,

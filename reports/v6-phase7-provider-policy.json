@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "phase": "V6 Phase 7B - provider selection and free-tier policy",
-  "generated_at": "2026-11-11T05:27:56Z",
+  "generated_at": "2026-11-11T05:40:36Z",
   "selected_provider": "gemini",
   "selected_model": "gemini-3.8-flash",
   "verification_date": "2026-11-10",
