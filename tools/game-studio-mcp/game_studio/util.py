@@ -28,6 +28,10 @@ class RedactedHeaders(dict):
     """Expose redacted values to callers while preserving actual values for HTTP requests."""
 
     REDACTED = "******"
+    SECRET_KEYS = frozenset({
+        "authorization", "proxy-authorization", "x-api-key", "x-goog-api-key",
+        "api-key", "x-auth-token", "token", "secret", "cookie", "set-cookie",
+    })
 
     def __init__(self, payload: dict | None = None, **kwargs):
         super().__init__()
@@ -38,9 +42,7 @@ class RedactedHeaders(dict):
                 super().__setitem__(str(key), self._redacted_value(key, value))
 
     def _redacted_value(self, key: str, value: object) -> str:
-        if key.lower() == "authorization":
-            return self.REDACTED
-        if key.lower() in {"x-api-key", "x-goog-api-key", "api-key", "token", "secret"}:
+        if key.lower() in self.SECRET_KEYS:
             return self.REDACTED
         return str(value) if value is not None else value
 
@@ -313,9 +315,11 @@ def _validate_url(url: str, allowed_hosts: list[str] | None = None,
         allow_local and parsed.scheme == "http" and
         (parsed.hostname or "").lower() in LOOPBACK_HOSTS)
     if not scheme_allowed:
-        raise ToolError(f"only https URLs are allowed: {url}")
+        raise ToolError("only https URLs are allowed")
     if not parsed.hostname:
-        raise ToolError(f"URL has no host: {url}")
+        raise ToolError("URL has no host")
+    if parsed.username or parsed.password:
+        raise ToolError("URL must not contain embedded credentials")
     host = parsed.hostname.lower()
     if allowed_hosts and not any(host == allowed or host.endswith("." + allowed)
                                  for allowed in allowed_hosts):
@@ -423,9 +427,18 @@ def http_download(url: str, destination: str, *, headers: dict | None = None,
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             declared = response.headers.get("Content-Length")
-            if declared and int(declared) > max_bytes:
-                return {"ok": False, "url": url,
-                        "error": f"declared size {declared} exceeds limit {max_bytes}"}
+            if declared is not None:
+                try:
+                    declared_size = int(str(declared).strip())
+                except (TypeError, ValueError):
+                    return {"ok": False, "url": url,
+                            "error": "server returned an invalid Content-Length"}
+                if declared_size < 0:
+                    return {"ok": False, "url": url,
+                            "error": "server returned a negative Content-Length"}
+                if declared_size > max_bytes:
+                    return {"ok": False, "url": url,
+                            "error": f"declared size {declared_size} exceeds limit {max_bytes}"}
             fd, tmp_path = tempfile.mkstemp(prefix="gs-download-", dir=os.path.dirname(os.path.abspath(destination)))
             written = 0
             digest = hashlib.sha256()

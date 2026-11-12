@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 9 - baseline and environment",
+  "generated_at": "2026-11-12T05:33:39Z",
+  "repository": {
+    "head": "e3cc32960e2eff0c04212928eac31004cef8165b",
+    "branch": "main",
+    "baseline_head_declared_in_task": "dec25407bf85942c6ce70630e06b8515c3c75cf9",
+    "head_differs_from_declared_baseline": true,
+    "head_explanation": "Phase 8 work was committed as e3cc329 after the Phase 8 audit; the declared dec2540 baseline is an ancestor. Phase 9 did not commit.",
+    "last_commit": "e3cc32960e2eff0c04212928eac31004cef8165b Add V6 Phase 8 regression tests for integration and safety fixes",
+    "commits_since_declared_baseline": [
+      "e3cc329 Add V6 Phase 8 regression tests for integration and safety fixes"
+    ],
+    "working_tree_status": [
+      "M tools/game-studio-mcp/game_studio/assets.py",
+      " M tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+      " M tools/game-studio-mcp/game_studio/llm/providers.py",
+      " M tools/game-studio-mcp/game_studio/util.py",
+      "?? V6-PHASE-9-RELEASE-CANDIDATE.md",
+      "?? reports/v6-phase9-audit.json",
+      "?? reports/v6-phase9-baseline.json",
+      "?? reports/v6-phase9-dns-reliability.json",
+      "?? reports/v6-phase9-human-review.json",
+      "?? reports/v6-phase9-regression-validation.json",
+      "?? reports/v6-phase9-release-candidate.json",
+      "?? reports/v6-phase9-security-audit.json",
+      "?? scripts/v6-phase9-audit.py",
+      "?? tools/game-studio-mcp/tests/test_v6_phase9_release_candidate.py"
+    ],
+    "working_tree_dirty": true,
+    "git_writes_by_phase9": 0,
+    "commits_by_phase9": 0,
+    "pushes_by_phase9": 0,
+    "tags_by_phase9": 0,
+    "resets_by_phase9": 0,
+    "phase8_test_file_modified": false,
+    "preexisting_tests_modified": [],
+    "expected_phase8_results": {
+      "head": "dec25407bf85942c6ce70630e06b8515c3c75cf9",
+      "tests": 491,
+      "integration": "21/21",
+      "security": "12/14",
+      "reliability": "12/14",
+      "protected_hashes": "38/38",
+      "verdict": "PASS_AUTOMATED_PENDING_HUMAN_REVIEW"
+    },
+    "discrepancy": {
+      "detected": true,
+      "explanation": "Phase 8 work was committed as e3cc329 after the Phase 8 audit; the declared dec2540 baseline is an ancestor. Phase 9 did not commit.",
+      "phase8_changes_preserved": true
+    }
+  },
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "system": "Windows",
+    "release": "11",
+    "python": "3.12.10",
+    "implementation": "CPython",
+    "machine": "AMD64",
+    "cwd": "D:\\MCP\\MCP",
+    "offline": true,
+    "package_installs": 0,
+    "downloads": 0,
+    "engine_builds": 0
+  },
+  "tests": {
+    "ran": 515,
+    "passed": true,
+    "expected": 515,
+    "exact": true,
+    "duration_seconds": 55.222,
+    "command": "python -m unittest discover -s tools/game-studio-mcp/tests -q",
+    "tail": "----------------------------------------------------------------------\nRan 515 tests in 55.222s\n\nOK",
+    "exit_code": 0
+  },
+  "mcp": {
+    "tools": 107,
+    "unique_tools": 107,
+    "handlers": 107,
+    "unique_handlers": 107,
+    "missing_handlers": [],
+    "extra_handlers": [],
+    "all_schemas_object": true,
+    "expected_tools": 107,
+    "exact_parity": true
+  },
+  "protection": {
+    "v4": {
+      "tools/game-studio-mcp/tests/test_llm_v4.py": {
+        "expected": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "actual": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "matches": true
+      },
+      "tools/game-studio-mcp/tests/test_p0_v4.py": {
+        "expected": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "actual": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "matches": true
+      }
+    },
+    "v5": {
+      "validation/unity-jungle-v5/.game-studio/manifest.json": {
+        "expected": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "actual": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/specification.json": {
+        "expected": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "actual": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/execution-plan.json": {
+        "expected": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "actual": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml": {
+        "expected": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "actual": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json": {
+        "expected": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "actual": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png": {
+        "expected": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "actual": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json": {
+        "expected": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "actual": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "matches": true
+      },
+      "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity": {
+        "expected": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "actual": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "matches": true
+      },
+      "validation/builds/v5-windows/JungleMonkey.exe": {
+        "expected": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "actual": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "matches": true
+      },
+      "V5-IMPLEMENTATION-REPORT.md": {
+        "expected": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "actual": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "matches": true
+      },
+      "V5-LLM-EVALUATION.md": {
+        "expected": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "actual": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "matches": true
+      },
+      "V5-UNITY-VERTICAL-SLICE.md": {
+        "expected": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "actual": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "matches": true
+      },
+      "V5-VERIFICATION-MATRIX.md": {
+        "expected": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "actual": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "matches": true
+      }
+    },
+    "v4_ok": true,
+    "v5_ok": true,
+    "phase5_hashes": {
+      "validation/builds/v5-windows/JungleMonkey.exe": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+      "validation/builds/v6-windows/V6JungleMonkey.exe": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+      "validation/unity-jungle-v6/Assets/V6/Scenes/JungleMonkeyV6.unity": "b35ab31fe5b7c8bf108220cd75023b0d2c4995c1fe60a2428ca97c8bd1cd220e",
+      "reports/v6-build-identity-captures/01-main-menu.png": "5656e06dcaa9db34c04fbd6be94f436013c765faa717080a7776ea91c44ac20c",
+      "reports/v6-build-identity-captures/02-playing.png": "d348643e9ebbcf725c11d4cd5d773b690cb51ad563b184cfaa82677cf9ed4440",
+      "reports/v6-build-identity-captures/03-paused.png": "b9f0be6a888bc8c4827092d876656aacc796264fd6f9d84d8db11045bf0201ba",
+      "reports/v6-build-identity-captures/04-level-complete.png": "893c0363aa197e01113c7b422dc893bfd652d4f88af95222d304cf3e81268b1e",
+      "reports/v6-phase5-build-identity-player.log": "1c7be519b14ba664c4feb964791582cd59398bdbe3cad21c90b292f4d212fab7",
+      "reports/v6-phase5-build-identity-perf.json": "838ad07d2387142632a311c314d02fbe810000cf48d73405c5a6dc0f30b63671",
+      "validation/unity-jungle-v5/.game-studio/manifest.json": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+      "validation/unity-jungle-v5/.game-studio/specification.json": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+      "validation/unity-jungle-v5/.game-studio/execution-plan.json": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+      "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+      "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+      "V5-IMPLEMENTATION-REPORT.md": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+      "V5-LLM-EVALUATION.md": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+      "V5-UNITY-VERTICAL-SLICE.md": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+      "V5-VERIFICATION-MATRIX.md": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+      "tools/game-studio-mcp/tests/test_llm_v4.py": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+      "tools/game-studio-mcp/tests/test_p0_v4.py": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d"
+    },
+    "phase5_hashes_ok": true,
+    "missing_phase5_records": [],
+    "phase5_interfaces_ok": true,
+    "protected_git_status": [],
+    "protected_git_clean": true,
+    "hash_count": 38,
+    "all_hashes_ok": true
+  },
+  "phase8_reports": {
+    "v6-phase8-baseline.json": {
+      "present": true,
+      "sha256": "3d7f41d506d4672a4a3d2c76b81c4a5371ba04d610b5987482ff680adec3e24e"
+    },
+    "v6-phase8-integration-audit.json": {
+      "present": true,
+      "sha256": "f8a91bb8e1a9c405e9e7e557c92e659cf818ab759b810f30de1491bd6fa75ac5"
+    },
+    "v6-phase8-security-audit.json": {
+      "present": true,
+      "sha256": "5dd03213b7bdb537afcfd279583e86198ec61e759a492a02af9b24dc89d990b9"
+    },
+    "v6-phase8-reliability-audit.json": {
+      "present": true,
+      "sha256": "f945b20eb60e2fb26e9ce067175d922977ac0fe53d76667624059c8d03954048"
+    },
+    "v6-phase8-validation.json": {
+      "present": true,
+      "sha256": "0a1157d1fcd563d548deb3ce895583950a003f68b3bea9822bb3b7600eb3dfcf"
+    },
+    "v6-phase8-release-readiness.json": {
+      "present": true,
+      "sha256": "cafb0d770dcacac46c6d06bd49fc9179a9354a2db7e4e129cb194cd13fa41327"
+    },
+    "v6-phase8-audit.json": {
+      "present": true,
+      "sha256": "f2310e7f26ea9a5318d3e5644a128ba08972e887cbf475b30be9c14ad5cb69d8"
+    }
+  },
+  "credential_access": {
+    "values_read": false,
+    "values_printed": false
+  },
+  "network_calls": 0,
+  "verdict": "PASS"
+}

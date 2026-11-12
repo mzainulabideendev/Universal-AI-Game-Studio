@@ -6,7 +6,12 @@ providers. No dependencies beyond the Python standard library are used.
 
 Design
 ------
-* DNS resolution runs in a daemon worker so the caller can stop waiting.
+* DNS resolution runs in a fixed-size pool of daemon workers so the caller can
+  stop waiting. The pool size is a hard cap: a resolver that never returns can
+  consume a worker, but it cannot cause unbounded thread growth. Once every
+  worker is occupied, new lookups fail fast with ``dns_capacity_exhausted``.
+  An in-flight ``getaddrinfo`` call is still not cancellable; a timed-out caller
+  only stops waiting and the worker is reclaimed if the OS call ever returns.
 * TCP connect, TLS handshake, response headers and response body each have a
   bounded budget, and a watchdog closes the socket when the total deadline
   expires.
@@ -21,6 +26,7 @@ from __future__ import annotations
 import http.client
 import ipaddress
 import json
+import queue
 import socket
 import ssl
 import threading
@@ -39,6 +45,39 @@ def _now_iso() -> str:
 
 def _ms(started: float) -> float:
     return round((time.perf_counter() - started) * 1000, 1)
+
+
+_SENSITIVE_QUERY_PARAMS = frozenset({
+    "key", "api_key", "apikey", "token", "access_token", "auth", "secret",
+    "password", "signature", "sig",
+})
+
+
+def _redact_url(url: object) -> str:
+    """Return a report-safe URL: mask userinfo and credential-like query values."""
+    text = str(url)
+    try:
+        parsed = urllib.parse.urlsplit(text)
+    except ValueError:
+        return "[redacted-url]"
+    changed = False
+    netloc = parsed.netloc
+    if "@" in netloc:
+        netloc = "***@" + netloc.rsplit("@", 1)[1]
+        changed = True
+    query = parsed.query
+    if query:
+        pairs = urllib.parse.parse_qsl(query, keep_blank_values=True)
+        if any(key.lower() in _SENSITIVE_QUERY_PARAMS for key, _ in pairs):
+            query = urllib.parse.urlencode([
+                (key, "***" if key.lower() in _SENSITIVE_QUERY_PARAMS else value)
+                for key, value in pairs
+            ])
+            changed = True
+    if not changed:
+        return text
+    return urllib.parse.urlunsplit(
+        (parsed.scheme, netloc, parsed.path, query, parsed.fragment))
 
 
 class _BoundedError(Exception):
@@ -114,27 +153,143 @@ class _Deadline:
             self._thread.join(timeout=0.2)
 
 
+class _ResolverJob:
+    __slots__ = ("host", "port", "done", "infos", "error", "abandoned")
+
+    def __init__(self, host: str, port: int):
+        self.host = host
+        self.port = port
+        self.done = threading.Event()
+        self.infos: list | None = None
+        self.error: BaseException | None = None
+        self.abandoned = False
+
+
+class _ResolverPool:
+    """Fixed-size daemon worker pool for blocking ``getaddrinfo`` calls.
+
+    The number of OS threads is capped by ``max_workers`` for the lifetime of
+    the pool. A caller that reaches its deadline stops waiting and marks the
+    job abandoned; the worker is only returned to the pool when the resolver
+    actually returns. This class does not claim to cancel ``getaddrinfo``.
+    """
+
+    def __init__(self, max_workers: int = 4, *, name: str = "llm-dns",
+                 resolver=None):
+        self.max_workers = max(1, int(max_workers))
+        self._name = name
+        self._resolver = resolver
+        self._jobs: queue.Queue = queue.Queue()
+        self._lock = threading.Lock()
+        self._threads: list[threading.Thread] = []
+        self._in_flight = 0
+        self._abandoned = 0
+        self._started = False
+        self._closed = False
+
+    def _lookup(self, host: str, port: int):
+        if self._resolver is not None:
+            return self._resolver(host, port, type=socket.SOCK_STREAM)
+        return socket.getaddrinfo(host, port, type=socket.SOCK_STREAM)
+
+    def _ensure_started(self) -> None:
+        with self._lock:
+            if self._closed:
+                raise _BoundedError("dns_failure", stage="dns",
+                                    message="DNS resolver pool is closed")
+            if self._started:
+                return
+            for index in range(self.max_workers):
+                thread = threading.Thread(
+                    target=self._work, name=f"{self._name}-{index}", daemon=True)
+                thread.start()
+                self._threads.append(thread)
+            self._started = True
+
+    def _work(self) -> None:
+        while True:
+            job = self._jobs.get()
+            if job is None:
+                return
+            try:
+                job.infos = self._lookup(job.host, job.port)
+            except BaseException as exc:  # noqa: BLE001 - returned to the caller
+                job.error = exc
+            finally:
+                with self._lock:
+                    self._in_flight -= 1
+                    if job.abandoned:
+                        self._abandoned -= 1
+                    job.done.set()
+
+    def resolve(self, host: str, port: int, deadline: "_Deadline") -> list:
+        self._ensure_started()
+        with self._lock:
+            if self._in_flight >= self.max_workers:
+                raise _BoundedError(
+                    "dns_capacity_exhausted", stage="dns",
+                    message=("DNS resolver capacity is exhausted by earlier "
+                             "lookups; refusing to start another blocking call"),
+                    timed_out=False)
+            self._in_flight += 1
+        job = _ResolverJob(host, port)
+        self._jobs.put(job)
+        completed = job.done.wait(max(0.0, deadline.remaining()))
+        if not completed:
+            with self._lock:
+                if job.done.is_set():
+                    completed = True
+                else:
+                    job.abandoned = True
+                    self._abandoned += 1
+        if not completed:
+            raise _BoundedError(
+                "dns_timeout", stage="dns",
+                message=("DNS resolution did not finish within the deadline; "
+                         "the lookup was abandoned, not cancelled"),
+                timed_out=True)
+        if job.error is not None:
+            raise _BoundedError("dns_failure", stage="dns",
+                                message=f"DNS resolution failed: {job.error}")
+        return job.infos or []
+
+    def stats(self) -> dict:
+        with self._lock:
+            return {
+                "max_workers": self.max_workers,
+                "started": self._started,
+                "closed": self._closed,
+                "threads": len(self._threads),
+                "alive_threads": sum(1 for t in self._threads if t.is_alive()),
+                "in_flight": self._in_flight,
+                "abandoned": self._abandoned,
+            }
+
+    def shutdown(self, *, join_timeout: float = 1.0) -> dict:
+        """Stop idle workers. A hung resolver worker is reported, not killed."""
+        with self._lock:
+            self._closed = True
+            threads = list(self._threads)
+        for _ in threads:
+            self._jobs.put(None)
+        deadline = time.monotonic() + max(0.0, join_timeout)
+        for thread in threads:
+            thread.join(timeout=max(0.0, deadline - time.monotonic()))
+        alive = [thread for thread in threads if thread.is_alive()]
+        return {
+            "threads": len(threads),
+            "stopped": len(threads) - len(alive),
+            "hung_workers_remaining": len(alive),
+            "terminated": not alive,
+        }
+
+
+_DEFAULT_RESOLVER = _ResolverPool()
+
+
 def _resolve(host: str, port: int, deadline: _Deadline) -> list[tuple[int, str]]:
-    """Resolve host in a daemon worker so a hung resolver cannot block forever."""
-    result: dict = {}
-
-    def work() -> None:
-        try:
-            result["infos"] = socket.getaddrinfo(host, port, type=socket.SOCK_STREAM)
-        except Exception as exc:  # noqa: BLE001 - reported below
-            result["error"] = exc
-
-    worker = threading.Thread(target=work, name="llm-dns", daemon=True)
-    worker.start()
-    worker.join(deadline.remaining())
-    if worker.is_alive():
-        raise _BoundedError("dns_timeout", stage="dns",
-                            message=f"DNS resolution did not finish within the deadline",
-                            timed_out=True)
-    if "error" in result:
-        raise _BoundedError("dns_failure", stage="dns",
-                            message=f"DNS resolution failed: {result['error']}")
-    infos = result.get("infos") or []
+    """Resolve host through the bounded resolver pool."""
+    infos = _DEFAULT_RESOLVER.resolve(host, port, deadline)
     addresses: list[tuple[int, str]] = []
     seen: set[str] = set()
     for family, _socktype, _proto, _canon, sockaddr in infos:
@@ -155,8 +310,14 @@ def _reject_private(addresses: list[tuple[int, str]]) -> None:
             parsed = ipaddress.ip_address(ip)
         except ValueError:
             continue
+        if isinstance(parsed, ipaddress.IPv6Address) and parsed.ipv4_mapped:
+            parsed = parsed.ipv4_mapped
+        if isinstance(parsed, ipaddress.IPv4Address) and parsed in ipaddress.ip_network(
+                "100.64.0.0/10"):
+            raise _BoundedError("blocked_private_address", stage="dns",
+                                message=f"refusing to contact private address {ip}")
         if (parsed.is_private or parsed.is_loopback or parsed.is_link_local
-                or parsed.is_reserved or parsed.is_multicast):
+                or parsed.is_reserved or parsed.is_multicast or parsed.is_unspecified):
             raise _BoundedError("blocked_private_address", stage="dns",
                                 message=f"refusing to contact private address {ip}")
 
@@ -374,6 +535,7 @@ def request(url: str, *, method: str = "GET", headers: dict | None = None,
     """Perform one bounded HTTPS request. Returns a structured result."""
     started = time.perf_counter()
     timing: dict = {}
+    reported_url = _redact_url(url)
     deadline = _Deadline(deadline_seconds)
     deadline.start()
     tls_sock = None
@@ -461,7 +623,7 @@ def request(url: str, *, method: str = "GET", headers: dict | None = None,
         return {
             "ok": 200 <= exchange["status"] < 300,
             "status": exchange["status"],
-            "url": url,
+            "url": reported_url,
             "headers": exchange["headers"],
             "payload": payload,
             "truncated": exchange["truncated"],
@@ -473,7 +635,7 @@ def request(url: str, *, method: str = "GET", headers: dict | None = None,
         return {
             "ok": False,
             "status": None,
-            "url": url,
+            "url": reported_url,
             "error": str(exc),
             "error_detail": {
                 "kind": exc.kind,
@@ -491,7 +653,7 @@ def request(url: str, *, method: str = "GET", headers: dict | None = None,
         return {
             "ok": False,
             "status": None,
-            "url": url,
+            "url": reported_url,
             "error": f"bounded request failed: {type(exc).__name__}",
             "error_detail": {
                 "kind": "internal_error",

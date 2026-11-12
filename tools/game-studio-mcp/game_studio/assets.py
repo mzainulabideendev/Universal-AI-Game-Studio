@@ -317,6 +317,9 @@ def search_assets(query: str, *, kind: str = "model", provider: str = "auto",
 # downloads
 # --------------------------------------------------------------------------
 _ASSET_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
+_WINDOWS_RESERVED = re.compile(
+    r"^(con|prn|aux|nul|com[1-9]|lpt[1-9])(\..*)?$", re.IGNORECASE)
+_CONTROL_CHARS = re.compile(r"[\x00-\x1f]")
 
 
 def _safe_asset_id(asset_id: str) -> str:
@@ -327,11 +330,31 @@ def _safe_asset_id(asset_id: str) -> str:
     return value
 
 
+def _safe_relative_asset_path(relative: str, *, label: str = "provider path") -> str:
+    """Reject provider paths that are unsafe on Windows or the host filesystem."""
+    text = str(relative or "").replace("\\", "/").lstrip("/")
+    if os.path.isabs(text) or re.match(r"^[A-Za-z]:", text):
+        raise ToolError(f"absolute paths are not allowed: {relative!r}")
+    components = text.split("/")
+    if not text or any(not part for part in components):
+        raise ToolError(f"{label} is empty or has an empty segment: {relative!r}")
+    for part in components:
+        if part in (".", ".."):
+            raise ToolError(f"{label} contains a traversal segment: {relative!r}")
+        if ":" in part:
+            raise ToolError(f"{label} contains a Windows stream separator: {relative!r}")
+        if _CONTROL_CHARS.search(part):
+            raise ToolError(f"{label} contains control characters: {relative!r}")
+        if part.endswith(".") or part.endswith(" "):
+            raise ToolError(f"{label} has a trailing dot or space: {relative!r}")
+        if _WINDOWS_RESERVED.fullmatch(part):
+            raise ToolError(f"{label} uses a reserved device name: {relative!r}")
+    return text
+
+
 def _safe_include_target(target_dir: str, relative: str) -> str:
     """Resolve a provider-supplied include path under the asset directory."""
-    rel_clean = str(relative or "").replace("\\", "/").lstrip("/")
-    if not rel_clean or ".." in rel_clean.split("/"):
-        raise ToolError(f"provider included an unsafe relative path: {relative}")
+    rel_clean = _safe_relative_asset_path(relative, label="provider include path")
     return safe_join(target_dir, rel_clean)
 
 
@@ -382,6 +405,10 @@ def download_polyhaven(asset_id: str, *, fmt: str = "glb", resolution: str = "2k
     root = os.path.abspath(expand(destination_dir or os.path.join(load_config()["download_root"], "polyhaven")))
     target_dir = safe_join(root, asset_id)
     relative = os.path.basename(urllib.parse.urlparse(selected["url"]).path)
+    try:
+        relative = _safe_relative_asset_path(relative, label="download filename")
+    except ToolError as exc:
+        return {"ok": False, "error": str(exc)}
     target = safe_join(target_dir, relative)
     if os.path.exists(target):
         return {"ok": False, "error": f"file already exists: {target}",

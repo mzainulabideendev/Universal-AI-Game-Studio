@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 9 - DNS resolver reliability",
+  "generated_at": "2026-11-12T05:34:36Z",
+  "verdict": "PASS_WITH_DOCUMENTED_LIMITATION",
+  "design": {
+    "mechanism": "fixed-size daemon resolver pool (max 4 workers)",
+    "bounded": true,
+    "terminable_os_call": false,
+    "capacity_error": "dns_capacity_exhausted",
+    "timeout_error": "dns_timeout",
+    "failure_error": "dns_failure",
+    "network_used_by_audit": false,
+    "third_party_dependencies": 0
+  },
+  "checks": [
+    {
+      "id": "D1",
+      "area": "dns",
+      "description": "DNS success returns validated addresses",
+      "status": "PASS",
+      "evidence": {
+        "addresses": [
+          "93.184.216.34"
+        ],
+        "max_workers": 2
+      },
+      "notes": []
+    },
+    {
+      "id": "D2",
+      "area": "dns",
+      "description": "DNS failure is a structured error",
+      "status": "PASS",
+      "evidence": {
+        "kind": "dns_failure",
+        "stage": "dns",
+        "timed_out": false
+      },
+      "notes": []
+    },
+    {
+      "id": "D3",
+      "area": "dns",
+      "description": "DNS timeout stops waiting and never claims cancellation",
+      "status": "PASS",
+      "evidence": {
+        "error": {
+          "kind": "dns_timeout",
+          "timed_out": true,
+          "message": "DNS resolution did not finish within the deadline; the lookup was abandoned, not cancelled",
+          "elapsed_ms": 155
+        },
+        "stats": {
+          "max_workers": 2,
+          "started": true,
+          "closed": false,
+          "threads": 2,
+          "alive_threads": 2,
+          "in_flight": 1,
+          "abandoned": 1
+        }
+      },
+      "notes": []
+    },
+    {
+      "id": "D4",
+      "area": "dns",
+      "description": "Repeated timeouts cannot accumulate workers",
+      "status": "PASS",
+      "evidence": {
+        "capacity_kinds": [
+          "dns_capacity_exhausted",
+          "dns_capacity_exhausted",
+          "dns_capacity_exhausted",
+          "dns_capacity_exhausted",
+          "dns_capacity_exhausted"
+        ],
+        "stats": {
+          "max_workers": 2,
+          "started": true,
+          "closed": false,
+          "threads": 2,
+          "alive_threads": 2,
+          "in_flight": 2,
+          "abandoned": 2
+        },
+        "capacity_elapsed_ms": 0
+      },
+      "notes": []
+    },
+    {
+      "id": "D5",
+      "area": "dns",
+      "description": "Abandoned workers are reclaimed when the OS call returns",
+      "status": "PASS",
+      "evidence": {
+        "stats": {
+          "max_workers": 2,
+          "started": true,
+          "closed": false,
+          "threads": 2,
+          "alive_threads": 2,
+          "in_flight": 0,
+          "abandoned": 0
+        },
+        "reclaimed": true
+      },
+      "notes": []
+    },
+    {
+      "id": "D6",
+      "area": "dns",
+      "description": "Hung-worker termination is reported, not claimed",
+      "status": "PASS",
+      "evidence": {
+        "threads": 1,
+        "stopped": 0,
+        "hung_workers_remaining": 1,
+        "terminated": false
+      },
+      "notes": []
+    },
+    {
+      "id": "D7",
+      "area": "dns",
+      "description": "Idle resolver workers terminate on shutdown",
+      "status": "PASS",
+      "evidence": {
+        "threads": 2,
+        "stopped": 2,
+        "hung_workers_remaining": 0,
+        "terminated": true
+      },
+      "notes": []
+    },
+    {
+      "id": "D8",
+      "area": "dns",
+      "description": "A successful lookup follows a previous timeout",
+      "status": "PASS",
+      "evidence": {
+        "recovered": true,
+        "addresses": [
+          "93.184.216.34"
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "D9",
+      "area": "redaction",
+      "description": "DNS and transport reporting never echoes secrets",
+      "status": "PASS",
+      "evidence": {
+        "redacted_url": "https://***@example.invalid/x?key=%2A%2A%2A&q=1"
+      },
+      "notes": []
+    },
+    {
+      "id": "D10",
+      "area": "dns",
+      "description": "The overall deadline propagates into resolution",
+      "status": "PASS",
+      "evidence": {
+        "elapsed_ms": 218,
+        "kind": "dns_timeout"
+      },
+      "notes": []
+    }
+  ],
+  "counts": {
+    "PASS": 10,
+    "FAIL": 0,
+    "BLOCKED": 0,
+    "NOT_TESTED": 0,
+    "REQUIRES_HUMAN_REVIEW": 0
+  },
+  "limitations": [
+    "Python cannot cancel an in-flight getaddrinfo call. A timed-out caller stops waiting; the worker remains occupied until the OS resolver returns.",
+    "If every pool worker is occupied by a hung lookup, subsequent lookups fail fast with dns_capacity_exhausted instead of growing threads.",
+    "This is a bounded degradation, not demonstrated OS-level termination.",
+    "TLS hostname and certificate verification are unchanged."
+  ],
+  "no_network": true
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 9 - regression validation",
+  "generated_at": "2026-11-12T05:33:39Z",
+  "baseline_tests": 491,
+  "current_tests": 515,
+  "expected_current_tests": 515,
+  "added_tests": 24,
+  "suite": {
+    "ran": 515,
+    "passed": true,
+    "expected": 515,
+    "exact": true,
+    "duration_seconds": 55.222,
+    "command": "python -m unittest discover -s tools/game-studio-mcp/tests -q",
+    "tail": "----------------------------------------------------------------------\nRan 515 tests in 55.222s\n\nOK",
+    "exit_code": 0
+  },
+  "new_test_file": "tools/game-studio-mcp/tests/test_v6_phase9_release_candidate.py",
+  "new_test_file_present": true,
+  "preexisting_tests_modified": false,
+  "modified_test_files": [],
+  "phase8_preservation": {
+    "source_markers": {
+      "preapproval_rejection": true,
+      "deadline_eof_guard": true,
+      "asset_path_helpers": true
+    },
+    "all_source_markers_present": true,
+    "phase8_reports_present": {
+      "v6-phase8-baseline.json": true,
+      "v6-phase8-integration-audit.json": true,
+      "v6-phase8-security-audit.json": true,
+      "v6-phase8-reliability-audit.json": true,
+      "v6-phase8-validation.json": true,
+      "v6-phase8-release-readiness.json": true,
+      "v6-phase8-audit.json": true
+    },
+    "all_phase8_reports_present": true,
+    "phase8_test_file_unmodified": true,
+    "phase8_regression_tests_in_new_suite": true
+  },
+  "tests_weakened_or_deleted": false,
+  "network_calls": 0,
+  "verdict": "PASS"
+}

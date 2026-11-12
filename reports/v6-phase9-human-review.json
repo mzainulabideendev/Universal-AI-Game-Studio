@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 9 - human review decisions",
+  "generated_at": "2026-11-12T05:34:36Z",
+  "policy": "This audit never fabricates approval. Every item below remains PENDING_USER_DECISION until the user explicitly approves it.",
+  "gate": "STOPPED_AT_HUMAN_DECISION_BOUNDARY",
+  "no_live_provider_rule_in_force": true,
+  "head_at_review": "e3cc32960e2eff0c04212928eac31004cef8165b",
+  "items": [
+    {
+      "id": "S12",
+      "title": "Untrusted engine asset import scope",
+      "meaning": "Whether the release candidate may claim that imported third-party engine assets were validated at import time.",
+      "existing_evidence": [
+        "Phase 8 recorded performed=false for engine asset import.",
+        "Phase 9 re-verified performed=false; no Unity/Blender import ran.",
+        "Asset download paths now reject traversal, stream and device names.",
+        "License records and provenance are captured, but import-time content validation (scripts, shaders, prefabs) is not implemented."
+      ],
+      "remaining_risk": "An asset that passes path validation may still contain malicious or incompatible engine content. Enabling automated import without a separate review would widen the trust boundary.",
+      "recommended_decision": "ACCEPT_SCOPE_WITH_CONDITION",
+      "conditions": [
+        "Keep automated import disabled for this release candidate.",
+        "Require a separate human-approved import test before enabling it.",
+        "Do not describe downloaded assets as engine-verified."
+      ],
+      "consequences_if_accepted": [
+        "Release candidate remains honest about unverified import.",
+        "Asset pipeline stays specification/download-only."
+      ],
+      "consequences_if_rejected": [
+        "The release candidate must block all asset download features, not only import, or add import-time validation before release."
+      ],
+      "decision": "PENDING_USER_DECISION"
+    },
+    {
+      "id": "S14",
+      "title": "No-live-provider decision",
+      "meaning": "Whether the release candidate is acceptable without any successful live AI provider request, and whether live content handling is trusted as data-only.",
+      "existing_evidence": [
+        "Phase 7 recorded one approved live attempt that failed; live model quality is unmeasured.",
+        "Phase 9 made zero provider requests and read no credentials.",
+        "Provider routing, quota and paid-fallback policies pass offline tests.",
+        "Response validation marks untrusted input and the reasoning prompt treats target content as data."
+      ],
+      "remaining_risk": "Live connectivity, provider terms, model quality, latency and prompt-injection behaviour are unverified. Offline fixtures cannot prove live behaviour.",
+      "recommended_decision": "ACCEPT_OFFLINE_ONLY_WITH_DISCLOSURE",
+      "conditions": [
+        "Keep the no-live-provider rule in force for this release candidate.",
+        "Do not claim live AI works or that model output was verified.",
+        "Authorize any future live request separately, per request."
+      ],
+      "consequences_if_accepted": [
+        "Release candidate is an offline-verified build with AI unavailable unless a later human-approved live test succeeds."
+      ],
+      "consequences_if_rejected": [
+        "A separately approved live validation must be completed before the release candidate can advance."
+      ],
+      "decision": "PENDING_USER_DECISION"
+    },
+    {
+      "id": "R3",
+      "title": "DNS resolver resource accumulation",
+      "meaning": "Whether a fixed-size resolver pool with fast capacity failure is acceptable given that getaddrinfo itself cannot be cancelled.",
+      "existing_evidence": [
+        "Phase 8 used one daemon thread per lookup; repeated hung lookups could accumulate threads.",
+        "Phase 9 replaced this with a fixed pool of at most 4 daemon workers.",
+        "New offline tests prove success, failure, timeout, capacity exhaustion, worker reclamation, idle shutdown and honest reporting of hung workers.",
+        "The audit does not claim OS-level termination of a hung getaddrinfo."
+      ],
+      "remaining_risk": "Four permanently hung OS resolver calls would occupy the whole pool, after which new DNS requests fail fast. This is bounded but still a denial-of-DNS condition until the OS resolver returns or the process restarts.",
+      "recommended_decision": "ACCEPT_BOUNDED_MITIGATION",
+      "conditions": [
+        "Document the residual denial-of-DNS condition in release notes.",
+        "Monitor dns_capacity_exhausted and dns_timeout outcomes.",
+        "Revisit process-isolated resolution only if observation shows repeated capacity exhaustion."
+      ],
+      "consequences_if_accepted": [
+        "No unbounded thread growth; degradation is explicit and testable."
+      ],
+      "consequences_if_rejected": [
+        "A separately terminable resolver process must be built and proven before release, which adds subprocess lifecycle risk."
+      ],
+      "decision": "PENDING_USER_DECISION"
+    }
+  ],
+  "pending_decisions": [
+    "S12",
+    "S14",
+    "R3"
+  ],
+  "approved_decisions": [],
+  "human_approval_granted": false,
+  "recommended_combined_outcome": "Accept S12 with import disabled, accept S14 as offline-only, and accept R3 as bounded mitigation with monitoring."
+}

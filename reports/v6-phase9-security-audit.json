@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 9 - production security hardening",
+  "generated_at": "2026-11-12T05:34:36Z",
+  "verdict": "PASS_WITH_HUMAN_REVIEW",
+  "checks": [
+    {
+      "id": "SEC1",
+      "area": "path-traversal",
+      "description": "Provider include paths reject traversal, absolute, stream and device names",
+      "status": "PASS",
+      "evidence": {
+        "cases": {
+          "../escape.bin": "REJECTED",
+          "C:/Windows/evil.bin": "REJECTED",
+          "foo:stream": "REJECTED",
+          "CON": "REJECTED",
+          "nul.txt": "REJECTED",
+          "a//b": "REJECTED",
+          "bad\u0000name": "REJECTED"
+        },
+        "accepted": "ok.png",
+        "source": "tools/game-studio-mcp/game_studio/assets.py"
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC2",
+      "area": "credentials",
+      "description": "URLs with embedded credentials are rejected before DNS",
+      "status": "PASS",
+      "evidence": {
+        "rejected": true,
+        "dns_lookup_called": false
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC3",
+      "area": "transport",
+      "description": "Only HTTPS is accepted by the general transport",
+      "status": "PASS",
+      "evidence": {
+        "rejected": true
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC4",
+      "area": "secrets",
+      "description": "Credential-bearing headers are redacted for display",
+      "status": "PASS",
+      "evidence": {
+        "redacted_keys": [
+          "api-key",
+          "authorization",
+          "cookie",
+          "proxy-authorization",
+          "secret",
+          "set-cookie",
+          "token",
+          "x-api-key",
+          "x-auth-token",
+          "x-goog-api-key"
+        ],
+        "real_values_preserved": true
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC5",
+      "area": "secrets",
+      "description": "Secrets are redacted and rejected from manifests",
+      "status": "PASS",
+      "evidence": {
+        "redaction": true,
+        "manifest_key_rejected": true,
+        "manifest_value_rejected": true
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC6",
+      "area": "secrets",
+      "description": "Provider-controlled error text is redacted",
+      "status": "PASS",
+      "evidence": {
+        "provider_error_redacted": true
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC7",
+      "area": "billing",
+      "description": "Paid variants are refused and free routing is explicit",
+      "status": "PASS",
+      "evidence": {
+        "paid_eligible": false,
+        "free_eligible": true,
+        "route_mode": "deterministic"
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC8",
+      "area": "quota",
+      "description": "Exhausted and unknown quota never become unlimited or paid",
+      "status": "PASS",
+      "evidence": {
+        "exhausted_allowed": false,
+        "unknown_kind": "quota_unknown_not_unlimited",
+        "unknown_quota_known": false
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC9",
+      "area": "approval",
+      "description": "Pre-approved plans and false claims remain rejected",
+      "status": "PASS",
+      "evidence": {
+        "errors": [
+          "requirements[0] cannot be implemented or verified without recorded evidence and human approval",
+          "generation_plan cannot be pre-approved",
+          "provenance.human_approved must remain false before approval",
+          "generation_performed must be false for a specification"
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC10",
+      "area": "tls",
+      "description": "TLS verification and hostname checking are mandatory",
+      "status": "PASS",
+      "evidence": {
+        "check_hostname": true,
+        "verify_mode": true
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC11",
+      "area": "ssrf",
+      "description": "Private, loopback, link-local and mapped addresses are refused",
+      "status": "PASS",
+      "evidence": {
+        "blocked": 4,
+        "total": 4
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC12",
+      "area": "subprocess",
+      "description": "Commands run without a shell and with a timeout",
+      "status": "PASS",
+      "evidence": {
+        "shell_true": false,
+        "timeout_present": true,
+        "limitation": "Timed-out grandchildren are not force-killed on Windows."
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC13",
+      "area": "download",
+      "description": "Malformed Content-Length is rejected, not raised",
+      "status": "PASS",
+      "evidence": {
+        "result": "server returned an invalid Content-Length"
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC14",
+      "area": "asset-import",
+      "description": "Untrusted engine asset import remains out of scope and unperformed",
+      "status": "REQUIRES_HUMAN_REVIEW",
+      "evidence": {
+        "performed": false,
+        "note": "No asset is imported into Unity or Blender in Phase 9. Import-time validation and licensing acceptance need a human decision before any import is enabled."
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC15",
+      "area": "untrusted-content",
+      "description": "Untrusted target content is treated as data, not instructions",
+      "status": "REQUIRES_HUMAN_REVIEW",
+      "evidence": {
+        "code_guard": "response_validation marks untrusted_input and the reasoning system prompt forbids following target instructions",
+        "live_content_processed": false,
+        "note": "No model or web content was processed in Phase 9; policy acceptance remains a human decision."
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC17",
+      "area": "manifest",
+      "description": "Manifest status guards and provenance tamper detection work",
+      "status": "PASS",
+      "evidence": {
+        "verified_without_evidence_rejected": true,
+        "tampered_verified_claim_detected": true
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC18",
+      "area": "credentials",
+      "description": "Provider credentials resolve from the environment or private config only",
+      "status": "PASS",
+      "evidence": {
+        "secret_dir_outside_repository": true,
+        "secret_files_in_repository": [],
+        "values_printed": false
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC19",
+      "area": "audit",
+      "description": "No credential value is read or printed by the audit",
+      "status": "PASS",
+      "evidence": {
+        "credential_values_read": false,
+        "values_printed": false,
+        "credential_env_read": false
+      },
+      "notes": []
+    },
+    {
+      "id": "SEC20",
+      "area": "cancellation",
+      "description": "Real OS socket cancellation remains unproven",
+      "status": "NOT_TESTED",
+      "evidence": {
+        "reason": "Offline mocked transports cannot prove that a real blocking socket read is cancelled by the deadline watchdog.",
+        "phase8_id": "R13",
+        "structured_errors_verified": true,
+        "socket_close_on_all_paths_verified": true
+      },
+      "notes": []
+    }
+  ],
+  "counts": {
+    "PASS": 16,
+    "FAIL": 0,
+    "BLOCKED": 0,
+    "NOT_TESTED": 1,
+    "REQUIRES_HUMAN_REVIEW": 2
+  },
+  "hardening_changes": [
+    "assets.py: provider paths reject Windows stream separators, reserved device names, control characters and trailing dots/spaces.",
+    "util.py: URLs with embedded credentials are rejected; malformed or negative Content-Length is refused; more credential headers redacted.",
+    "bounded_http.py: report-safe URLs mask userinfo and sensitive query values.",
+    "providers.py: provider-controlled error text is redacted before it can reach a caller."
+  ],
+  "phase8_fixes_preserved": true,
+  "limitations": [
+    "The general urllib transport validates DNS before opening the connection; DNS rebinding between validation and connection is not prevented on that path. The bounded Gemini transport pins the resolved address instead.",
+    "Windows subprocess timeouts kill the direct child only; grandchildren may outlive the timeout and are not force-killed.",
+    "Archive extraction is not implemented, so archive traversal is not exercised."
+  ],
+  "no_network": true
+}

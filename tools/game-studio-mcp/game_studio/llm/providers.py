@@ -21,6 +21,7 @@ import urllib.parse
 import urllib.request
 
 from ..util import RedactedHeaders, http_request
+from . import config as llm_config
 from .capabilities import model_capabilities, unknown_model_capabilities
 
 ANTHROPIC_VERSION = "2023-06-01"
@@ -58,6 +59,7 @@ def _classify_status(status: int | None, body: object) -> ProviderError:
     elif isinstance(body, str):
         detail = body[:400]
     detail = detail.strip() or "provider returned an error"
+    detail = llm_config.redact(detail)
     if status == 401 or status == 403:
         return ProviderError(f"authentication failed: {detail}", kind="auth", status=status)
     if status == 429:
@@ -140,7 +142,8 @@ def _transport_error(result: dict) -> ProviderError:
     kind = detail.get("kind")
     if not kind:
         kind = "timeout" if "timed out" in message.lower() else "unavailable"
-    return ProviderError(message, kind=str(kind), retryable=True, detail=detail)
+    return ProviderError(llm_config.redact(message), kind=str(kind), retryable=True,
+                         detail=detail)
 
 
 def _model_entry(model_id: str, *, provider: str, name: str | None = None,
