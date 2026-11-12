@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 8 - offline acceptance validation",
+  "generated_at": "2026-11-12T04:38:27Z",
+  "verdict": "PASS_AUTOMATED",
+  "criteria": [
+    {
+      "id": "V1",
+      "description": "Baseline and protected-artifact checks pass",
+      "status": "PASS",
+      "evidence": {
+        "report": "reports/v6-phase8-baseline.json"
+      }
+    },
+    {
+      "id": "V2",
+      "description": "End-to-end integration findings are documented",
+      "status": "PASS",
+      "evidence": {
+        "report": "reports/v6-phase8-integration-audit.json",
+        "checks": 21
+      }
+    },
+    {
+      "id": "V3",
+      "description": "Security findings are documented",
+      "status": "PASS",
+      "evidence": {
+        "report": "reports/v6-phase8-security-audit.json",
+        "checks": 14
+      }
+    },
+    {
+      "id": "V4",
+      "description": "Reliability findings are documented",
+      "status": "PASS",
+      "evidence": {
+        "report": "reports/v6-phase8-reliability-audit.json",
+        "checks": 14
+      }
+    },
+    {
+      "id": "V5",
+      "description": "All implemented fixes have regression tests",
+      "status": "PASS",
+      "evidence": {
+        "tests_added": 10,
+        "path": "tools/game-studio-mcp/tests/test_v6_phase8_regressions.py"
+      }
+    },
+    {
+      "id": "V6",
+      "description": "The complete offline suite passes",
+      "status": "PASS",
+      "evidence": {
+        "count": 491,
+        "expected": 491,
+        "result": "OK"
+      }
+    },
+    {
+      "id": "V7",
+      "description": "MCP tool/handler parity is verified",
+      "status": "PASS",
+      "evidence": {
+        "tools": 107,
+        "handlers": 107
+      }
+    },
+    {
+      "id": "V8",
+      "description": "Reports agree with the actual implementation",
+      "status": "PASS",
+      "evidence": {
+        "generated_from": "live module execution in this audit",
+        "reports": [
+          "v6-phase8-baseline.json",
+          "v6-phase8-integration-audit.json",
+          "v6-phase8-security-audit.json",
+          "v6-phase8-reliability-audit.json",
+          "v6-phase8-validation.json",
+          "v6-phase8-release-readiness.json",
+          "v6-phase8-audit.json"
+        ]
+      }
+    },
+    {
+      "id": "V9",
+      "description": "Remaining limitations are explicitly documented",
+      "status": "PASS",
+      "evidence": {
+        "not_tested": [
+          "R13"
+        ],
+        "human_review": [
+          "S12",
+          "S14",
+          "R3"
+        ]
+      }
+    },
+    {
+      "id": "V10",
+      "description": "No protected artifacts or unauthorized resources changed",
+      "status": "PASS",
+      "evidence": {
+        "v4_ok": true,
+        "v5_ok": true,
+        "phase5_hashes_ok": true,
+        "protected_git_clean": true
+      }
+    },
+    {
+      "id": "V11",
+      "description": "Human production approval remains separate",
+      "status": "REQUIRES_HUMAN_REVIEW",
+      "evidence": {
+        "human_review_required": true,
+        "human_review_status": "pending"
+      }
+    }
+  ],
+  "status_counts": {
+    "PASS": 10,
+    "FAIL": 0,
+    "BLOCKED": 0,
+    "NOT_TESTED": 0,
+    "REQUIRES_HUMAN_REVIEW": 1
+  },
+  "tests": {
+    "baseline": 481,
+    "final": 491,
+    "expected": 491,
+    "added": 10,
+    "result": "OK",
+    "command": [
+      "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/game-studio-mcp/tests",
+      "-q"
+    ]
+  },
+  "offline_guarantees": {
+    "internet_access": false,
+    "live_provider_requests": 0,
+    "credentials_read": false,
+    "paid_services": 0,
+    "downloads": 0,
+    "installations": 0,
+    "engine_builds": 0,
+    "network_calls": 0
+  },
+  "mcp": {
+    "tools": 107,
+    "unique_tools": 107,
+    "handlers": 107,
+    "unique_handlers": 107,
+    "missing_handlers": [],
+    "extra_handlers": [],
+    "all_schemas_object": true,
+    "expected_tools": 107,
+    "exact_parity": true
+  },
+  "limitations": [
+    "The full suite is offline; live provider behaviour is not validated in Phase 8.",
+    "Mocked socket tests do not prove real operating-system socket cancellation.",
+    "A hung DNS resolver can leave a daemon worker alive because getaddrinfo is not cancellable.",
+    "Unity and Blender were not built or run; Phase 5 artifacts were hash-checked only.",
+    "Human review of scope, evidence and release readiness is still required."
+  ]
+}

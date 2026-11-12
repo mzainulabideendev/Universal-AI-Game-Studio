@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 8B - end-to-end integration audit",
+  "generated_at": "2026-11-12T04:38:27Z",
+  "checks": [
+    {
+      "id": "I1",
+      "area": "pipeline",
+      "description": "Natural-language idea produces a consistent specification",
+      "status": "PASS",
+      "evidence": {
+        "source": "deterministic",
+        "requirements": 29,
+        "validation_errors": []
+      },
+      "notes": []
+    },
+    {
+      "id": "I2",
+      "area": "pipeline",
+      "description": "Requirement IDs are stable and unique across runs",
+      "status": "PASS",
+      "evidence": {
+        "run_a": 29,
+        "run_b": 29,
+        "unique": 29,
+        "multi_feature": 42
+      },
+      "notes": []
+    },
+    {
+      "id": "I3",
+      "area": "pipeline",
+      "description": "Requirement dependencies resolve; unknown ids are rejected",
+      "status": "PASS",
+      "evidence": {
+        "resolve": true,
+        "unknown_rejected": true,
+        "errors": [
+          "requirements[0] depends on unknown id 'REQ-DOES-NOT-EXIST'"
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "I4",
+      "area": "agents",
+      "description": "Agent orchestration respects dependency order",
+      "status": "PASS",
+      "evidence": {
+        "status": "completed",
+        "tasks": 8,
+        "graph_errors": []
+      },
+      "notes": []
+    },
+    {
+      "id": "I5",
+      "area": "agents",
+      "description": "A failed dependency blocks its dependents and never reports success",
+      "status": "PASS",
+      "evidence": {
+        "status": "failed",
+        "failed": [
+          "design"
+        ],
+        "blocked": [
+          "architecture",
+          "character",
+          "environment",
+          "gameplay",
+          "uiux",
+          "qa",
+          "consolidation"
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "I6",
+      "area": "agents",
+      "description": "Cancellation produces explicit cancelled results",
+      "status": "PASS",
+      "evidence": {
+        "status": "cancelled",
+        "cancelled_tasks": 8
+      },
+      "notes": []
+    },
+    {
+      "id": "I7",
+      "area": "bridges",
+      "description": "Character specification reaches the Phase 3 interface",
+      "status": "PASS",
+      "evidence": {
+        "interface": "game_studio.character_spec.build_character_spec",
+        "errors": [],
+        "generation_performed": false
+      },
+      "notes": []
+    },
+    {
+      "id": "I8",
+      "area": "bridges",
+      "description": "Environment specification reaches the Phase 4 interface",
+      "status": "PASS",
+      "evidence": {
+        "interface": "game_studio.environment_spec.build_environment_spec",
+        "errors": [],
+        "generation_performed": false
+      },
+      "notes": []
+    },
+    {
+      "id": "I9",
+      "area": "bridges",
+      "description": "Gameplay requirements map to real Phase 5 interfaces",
+      "status": "PASS",
+      "evidence": {
+        "interfaces": 12,
+        "missing": [],
+        "modified": false
+      },
+      "notes": []
+    },
+    {
+      "id": "I10",
+      "area": "capability",
+      "description": "Unsupported features remain explicitly unsupported",
+      "status": "PASS",
+      "evidence": {
+        "unsupported": [
+          "multiplayer",
+          "open_world"
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "I11",
+      "area": "provenance",
+      "description": "Provider content and deterministic fallback stay distinguishable",
+      "status": "PASS",
+      "evidence": {
+        "ai_source": "ai_provider",
+        "deterministic_source": "deterministic",
+        "requirements_extraction": "deterministic"
+      },
+      "notes": []
+    },
+    {
+      "id": "I12",
+      "area": "approval",
+      "description": "Human approval cannot be pre-granted or bypassed",
+      "status": "PASS",
+      "evidence": {
+        "tamper_rejected": true,
+        "errors": [
+          "requirements[0] cannot be implemented or verified without recorded evidence and human approval",
+          "approval must not be granted by the pipeline",
+          "generation_plan cannot be pre-approved",
+          "generation_plan.build_started must be false",
+          "generation_plan.asset_generation_performed must be false",
+          "no generation step may be marked executed",
+          "provenance.human_approved must remain false before approval",
+          "generation_performed must be false for a specification",
+          "phase5_project_modified must be false for a specification"
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "I13",
+      "area": "failure",
+      "description": "Invalid provider output is refused, not converted to a specification",
+      "status": "PASS",
+      "evidence": {
+        "invalid_payload_refused": true
+      },
+      "notes": []
+    },
+    {
+      "id": "I14",
+      "area": "providers",
+      "description": "Free-only routing refuses paid OpenRouter variants",
+      "status": "PASS",
+      "evidence": {
+        "paid_eligible": false,
+        "free_eligible": true,
+        "route_mode": "deterministic",
+        "fallback_reasons": [
+          "invalid_model"
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "I15",
+      "area": "providers",
+      "description": "Unknown quota is not treated as unlimited; no paid fallback",
+      "status": "PASS",
+      "evidence": {
+        "exhausted_allowed": false,
+        "unknown_kind": "quota_unknown_not_unlimited",
+        "paid_route_fallback": false
+      },
+      "notes": []
+    },
+    {
+      "id": "I16",
+      "area": "secrets",
+      "description": "Secrets are redacted and rejected from manifests",
+      "status": "PASS",
+      "evidence": {
+        "redaction_verified": true,
+        "manifest_key_rejected": true,
+        "manifest_value_rejected": true
+      },
+      "notes": []
+    },
+    {
+      "id": "I17",
+      "area": "evidence",
+      "description": "Every requirement carries stable provenance and no false status",
+      "status": "PASS",
+      "evidence": {
+        "requirements": 29,
+        "verified": 0,
+        "human_approved": 0
+      },
+      "notes": []
+    },
+    {
+      "id": "I18",
+      "area": "offline",
+      "description": "The whole offline workflow makes zero network calls",
+      "status": "PASS",
+      "evidence": {
+        "operations": [
+          "game_spec_pipeline",
+          "free_routing",
+          "quota",
+          "response_validation",
+          "bounded_http_decode"
+        ],
+        "network_calls": 0
+      },
+      "notes": []
+    },
+    {
+      "id": "I19",
+      "area": "platform",
+      "description": "MCP tool and handler parity is exact",
+      "status": "PASS",
+      "evidence": {
+        "tools": 107,
+        "handlers": 107,
+        "missing": [],
+        "extra": []
+      },
+      "notes": []
+    },
+    {
+      "id": "I20",
+      "area": "regression",
+      "description": "Phase 3-7 audits remain parseable and passing",
+      "status": "PASS",
+      "evidence": {
+        "reports/v6-phase3-audit.json": "PASS",
+        "reports/v6-phase4-audit.json": "PASS",
+        "reports/v6-phase5-audit.json": "PASS_AUTOMATED",
+        "reports/v6-phase6-audit.json": "PASS",
+        "reports/v6-phase7-audit.json": "PASS_AUTOMATED"
+      },
+      "notes": []
+    },
+    {
+      "id": "I21",
+      "area": "protection",
+      "description": "V4, V5 and Phase 5 protected artifacts still match hashes",
+      "status": "PASS",
+      "evidence": {
+        "v4_files": 2,
+        "v5_artifacts": 13,
+        "phase5_recorded": 23,
+        "phase5_missing": [],
+        "protected_git_clean": true
+      },
+      "notes": []
+    }
+  ],
+  "status_counts": {
+    "PASS": 21,
+    "FAIL": 0,
+    "BLOCKED": 0,
+    "NOT_TESTED": 0,
+    "REQUIRES_HUMAN_REVIEW": 0
+  }
+}

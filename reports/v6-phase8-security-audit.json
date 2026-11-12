@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 8C - security audit",
+  "generated_at": "2026-11-12T04:38:27Z",
+  "checks": [
+    {
+      "id": "S1",
+      "area": "path-traversal",
+      "description": "Local path joins reject traversal and absolute paths",
+      "status": "PASS",
+      "evidence": {
+        "util_safe_join": true,
+        "asset_ids": {
+          "..": "REJECTED",
+          "C:evil": "REJECTED",
+          "nested/evil": "REJECTED"
+        },
+        "include_paths": {
+          "../escape.bin": "REJECTED",
+          "C:/Windows/evil.bin": "REJECTED",
+          "textures/ok.png": "ACCEPTED"
+        },
+        "evidence": [
+          "tools/game-studio-mcp/game_studio/util.py:116",
+          "tools/game-studio-mcp/game_studio/assets.py"
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "S2",
+      "area": "path-traversal",
+      "description": "Provider include paths cannot escape the asset directory",
+      "status": "PASS",
+      "evidence": {
+        "cases": {
+          "../escape.bin": "REJECTED",
+          "C:/Windows/evil.bin": "REJECTED",
+          "textures/ok.png": "ACCEPTED"
+        },
+        "download_uses_helper": true
+      },
+      "notes": []
+    },
+    {
+      "id": "S3",
+      "area": "command",
+      "description": "Commands run without a shell and with a timeout",
+      "status": "PASS",
+      "evidence": {
+        "shell_kwarg": false,
+        "shell_true_in_source": false,
+        "source": "tools/game-studio-mcp/game_studio/util.py:172"
+      },
+      "notes": []
+    },
+    {
+      "id": "S4",
+      "area": "ssrf",
+      "description": "Private, loopback, link-local and mapped addresses are refused",
+      "status": "PASS",
+      "evidence": {
+        "cases": [
+          "100.64.0.1",
+          "fc00::1",
+          "fe80::1",
+          "::ffff:127.0.0.1"
+        ],
+        "source": "tools/game-studio-mcp/game_studio/util.py:288"
+      },
+      "notes": []
+    },
+    {
+      "id": "S5",
+      "area": "archive",
+      "description": "No unsafe archive extraction path exists",
+      "status": "PASS",
+      "evidence": {
+        "unsafe_archive_terms": []
+      },
+      "notes": []
+    },
+    {
+      "id": "S6",
+      "area": "secrets",
+      "description": "Secret values are redacted and project manifests reject credentials",
+      "status": "PASS",
+      "evidence": {
+        "redaction": true,
+        "manifest_rejection": true,
+        "source": "tools/game-studio-mcp/game_studio/manifest.py:55"
+      },
+      "notes": []
+    },
+    {
+      "id": "S7",
+      "area": "overwrite",
+      "description": "File writes are atomic and existing downloads are not overwritten",
+      "status": "PASS",
+      "evidence": {
+        "atomic_write": true,
+        "download_requires_confirm": true,
+        "no_overwrite": true
+      },
+      "notes": []
+    },
+    {
+      "id": "S8",
+      "area": "validation",
+      "description": "Input validation bounds requests, ideas, concurrency and paths",
+      "status": "PASS",
+      "evidence": {
+        "idea_limit": "20000 chars",
+        "concurrency_limit": "1..4",
+        "asset_id_validation": "_safe_asset_id"
+      },
+      "notes": []
+    },
+    {
+      "id": "S9",
+      "area": "cleanup",
+      "description": "Failed downloads and transports clean up temporary resources",
+      "status": "PASS",
+      "evidence": {
+        "download_temp_cleanup": true,
+        "transport_finally_close": true
+      },
+      "notes": []
+    },
+    {
+      "id": "S10",
+      "area": "resource",
+      "description": "Execution and response sizes are bounded",
+      "status": "PASS",
+      "evidence": {
+        "http_max_bytes": 33554432,
+        "download_max_bytes": true,
+        "quota_entry_cap": true
+      },
+      "notes": []
+    },
+    {
+      "id": "S11",
+      "area": "audit",
+      "description": "Claims require provenance and evidence records",
+      "status": "PASS",
+      "evidence": {
+        "manifest_history": true,
+        "manifest_evidence": true,
+        "audit_events": true,
+        "reports": [
+          "v6-phase8-baseline.json",
+          "v6-phase8-integration-audit.json",
+          "v6-phase8-security-audit.json",
+          "v6-phase8-reliability-audit.json",
+          "v6-phase8-validation.json",
+          "v6-phase8-release-readiness.json",
+          "v6-phase8-audit.json"
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "S12",
+      "area": "asset-import",
+      "description": "Untrusted engine asset import is not performed by Phase 8",
+      "status": "REQUIRES_HUMAN_REVIEW",
+      "evidence": {
+        "performed": false,
+        "note": "Specifications are bridged but no asset is imported into Unity or Blender in this phase; import-time validation is outside the offline audit scope."
+      },
+      "notes": []
+    },
+    {
+      "id": "S13",
+      "area": "secrets",
+      "description": "Credential values are never read or printed by the audit",
+      "status": "PASS",
+      "evidence": {
+        "values_read": false,
+        "values_printed": false,
+        "scan_of_generated_reports": "performed below"
+      },
+      "notes": []
+    },
+    {
+      "id": "S14",
+      "area": "social",
+      "description": "Untrusted target content is treated as data, not instructions",
+      "status": "REQUIRES_HUMAN_REVIEW",
+      "evidence": {
+        "note": "Offline audit did not process model or web content."
+      },
+      "notes": []
+    }
+  ],
+  "status_counts": {
+    "PASS": 12,
+    "FAIL": 0,
+    "BLOCKED": 0,
+    "NOT_TESTED": 0,
+    "REQUIRES_HUMAN_REVIEW": 2
+  },
+  "fixes": [
+    {
+      "path": "tools/game-studio-mcp/game_studio/assets.py",
+      "change": "validate provider asset ids and resolve include paths with safe_join"
+    },
+    {
+      "path": "tools/game-studio-mcp/game_studio/llm/game_spec_pipeline.py",
+      "change": "reject pre-approved generation plans, provenance approval, build/generation claims and implemented requirement states"
+    }
+  ]
+}

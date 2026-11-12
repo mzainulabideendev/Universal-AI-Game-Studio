@@ -328,6 +328,14 @@ def _exchange(tls: ssl.SSLSocket, *, method: str, deadline: _Deadline,
                 break
             chunks.append(chunk)
             total += len(chunk)
+        # A watchdog-triggered socket shutdown can surface as a clean EOF instead
+        # of socket.timeout/OSError on some platforms. Never report that partial
+        # body as a successful response.
+        if deadline.expired:
+            raise _BoundedError("deadline_exceeded", stage="body",
+                                message="overall deadline expired before the body completed",
+                                timed_out=True, partial_response=bool(chunks),
+                                partial_bytes=total)
         timing["body_ms"] = _ms(body_started)
         return {
             "status": status,

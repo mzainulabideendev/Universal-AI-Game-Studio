@@ -507,8 +507,10 @@ def validate_spec(spec: object) -> dict:
             identifiers.add(str(identifier))
             if item.get("id"):
                 identifiers.add(str(item["id"]))
-            if item.get("implementation_status") == "verified":
-                errors.append(f"requirements[{index}] cannot be verified in Phase 7")
+            if item.get("implementation_status") in (
+                    "verified", "implemented", "completed", "approved"):
+                errors.append(f"requirements[{index}] cannot be implemented or "
+                              "verified without recorded evidence and human approval")
             if item.get("human_approved") is True:
                 errors.append(f"requirements[{index}] cannot be pre-approved")
         for index, item in enumerate(requirements):
@@ -528,8 +530,20 @@ def validate_spec(spec: object) -> dict:
     if isinstance(plan, dict):
         if plan.get("executable") is not False:
             errors.append("generation_plan.executable must be false")
+        if plan.get("human_approved") is True:
+            errors.append("generation_plan cannot be pre-approved")
+        if plan.get("build_started") is True:
+            errors.append("generation_plan.build_started must be false")
+        if plan.get("asset_generation_performed") is True:
+            errors.append("generation_plan.asset_generation_performed must be false")
         if any(step.get("executed") for step in plan.get("steps") or []):
             errors.append("no generation step may be marked executed")
+    provenance = spec.get("provenance")
+    if isinstance(provenance, dict) and provenance.get("human_approved") is True:
+        errors.append("provenance.human_approved must remain false before approval")
+    for key in ("generation_performed", "phase5_project_modified"):
+        if spec.get(key) is True:
+            errors.append(f"{key} must be false for a specification")
     if spec.get("ai_generated_asset") is not False:
         errors.append("ai_generated_asset must be false")
     if spec.get("executable") is not False:

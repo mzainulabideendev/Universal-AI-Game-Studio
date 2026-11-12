@@ -1,0 +1,1455 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 8 - Production Readiness and End-to-End Integration Audit",
+  "tagline": "From Game Idea to Playable World.",
+  "generated_at": "2026-11-12T04:38:27Z",
+  "verdict": "PASS_AUTOMATED",
+  "all_automated_criteria_passed": true,
+  "human_review_required": true,
+  "human_review_status": "pending",
+  "automated_failures": [],
+  "not_tested": [
+    "R13"
+  ],
+  "requires_human_review": [
+    "S12",
+    "S14",
+    "R3"
+  ],
+  "repository": {
+    "root": "D:\\MCP\\MCP",
+    "branch": "main",
+    "head": "dec25407bf85942c6ce70630e06b8515c3c75cf9",
+    "head_short": "dec2540",
+    "baseline_head": "dec25407bf85942c6ce70630e06b8515c3c75cf9",
+    "head_unchanged_since_previous_commit": true,
+    "commits_since_baseline": [],
+    "working_tree_changes_at_audit_start": [
+      "M tools/game-studio-mcp/game_studio/assets.py",
+      " M tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+      " M tools/game-studio-mcp/game_studio/llm/game_spec_pipeline.py",
+      "?? V6-PHASE-8-PRODUCTION-READINESS.md",
+      "?? reports/v6-phase8-audit.json",
+      "?? reports/v6-phase8-baseline.json",
+      "?? reports/v6-phase8-integration-audit.json",
+      "?? reports/v6-phase8-release-readiness.json",
+      "?? reports/v6-phase8-reliability-audit.json",
+      "?? reports/v6-phase8-security-audit.json",
+      "?? reports/v6-phase8-validation.json",
+      "?? scripts/v6-phase8-audit.py",
+      "?? tools/game-studio-mcp/tests/test_v6_phase8_regressions.py"
+    ],
+    "working_tree_dirty_at_audit_start": true,
+    "preflight_working_tree_clean": true,
+    "preflight_evidence": "git status --porcelain returned empty before any Phase 8 edit; the recorded changes are the Phase 8 implementation and generated reports.",
+    "phase8_changes": [
+      "M tools/game-studio-mcp/game_studio/assets.py",
+      " M tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+      " M tools/game-studio-mcp/game_studio/llm/game_spec_pipeline.py",
+      "?? reports/v6-phase8-audit.json",
+      "?? reports/v6-phase8-baseline.json",
+      "?? reports/v6-phase8-integration-audit.json",
+      "?? reports/v6-phase8-release-readiness.json",
+      "?? reports/v6-phase8-reliability-audit.json",
+      "?? reports/v6-phase8-security-audit.json",
+      "?? reports/v6-phase8-validation.json",
+      "?? scripts/v6-phase8-audit.py",
+      "?? tools/game-studio-mcp/tests/test_v6_phase8_regressions.py"
+    ]
+  },
+  "tests": {
+    "baseline_count": 481,
+    "final_count": 491,
+    "expected_final_count": 491,
+    "added_by_phase8": 10,
+    "result": "OK",
+    "duration_seconds": 57.05,
+    "command": [
+      "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/game-studio-mcp/tests",
+      "-q"
+    ]
+  },
+  "mcp": {
+    "tools": 107,
+    "unique_tools": 107,
+    "handlers": 107,
+    "unique_handlers": 107,
+    "missing_handlers": [],
+    "extra_handlers": [],
+    "all_schemas_object": true,
+    "expected_tools": 107,
+    "exact_parity": true
+  },
+  "protection": {
+    "v4": {
+      "tools/game-studio-mcp/tests/test_llm_v4.py": {
+        "expected": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "actual": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "matches": true
+      },
+      "tools/game-studio-mcp/tests/test_p0_v4.py": {
+        "expected": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "actual": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "matches": true
+      }
+    },
+    "v5": {
+      "validation/unity-jungle-v5/.game-studio/manifest.json": {
+        "expected": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "actual": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "exists": true,
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/specification.json": {
+        "expected": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "actual": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "exists": true,
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/execution-plan.json": {
+        "expected": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "actual": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "exists": true,
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml": {
+        "expected": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "actual": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "exists": true,
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json": {
+        "expected": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "actual": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "exists": true,
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png": {
+        "expected": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "actual": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "exists": true,
+        "matches": true
+      },
+      "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json": {
+        "expected": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "actual": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "exists": true,
+        "matches": true
+      },
+      "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity": {
+        "expected": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "actual": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "exists": true,
+        "matches": true
+      },
+      "validation/builds/v5-windows/JungleMonkey.exe": {
+        "expected": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "actual": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "exists": true,
+        "matches": true
+      },
+      "V5-IMPLEMENTATION-REPORT.md": {
+        "expected": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "actual": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "exists": true,
+        "matches": true
+      },
+      "V5-LLM-EVALUATION.md": {
+        "expected": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "actual": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "exists": true,
+        "matches": true
+      },
+      "V5-UNITY-VERTICAL-SLICE.md": {
+        "expected": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "actual": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "exists": true,
+        "matches": true
+      },
+      "V5-VERIFICATION-MATRIX.md": {
+        "expected": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "actual": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "exists": true,
+        "matches": true
+      }
+    },
+    "v4_ok": true,
+    "v5_ok": true,
+    "phase5_hashes": {
+      "validation/builds/v5-windows/JungleMonkey.exe": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+      "validation/builds/v6-windows/V6JungleMonkey.exe": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+      "validation/unity-jungle-v6/Assets/V6/Scenes/JungleMonkeyV6.unity": "b35ab31fe5b7c8bf108220cd75023b0d2c4995c1fe60a2428ca97c8bd1cd220e",
+      "reports/v6-build-identity-captures/01-main-menu.png": "5656e06dcaa9db34c04fbd6be94f436013c765faa717080a7776ea91c44ac20c",
+      "reports/v6-build-identity-captures/02-playing.png": "d348643e9ebbcf725c11d4cd5d773b690cb51ad563b184cfaa82677cf9ed4440",
+      "reports/v6-build-identity-captures/03-paused.png": "b9f0be6a888bc8c4827092d876656aacc796264fd6f9d84d8db11045bf0201ba",
+      "reports/v6-build-identity-captures/04-level-complete.png": "893c0363aa197e01113c7b422dc893bfd652d4f88af95222d304cf3e81268b1e",
+      "reports/v6-phase5-build-identity-player.log": "1c7be519b14ba664c4feb964791582cd59398bdbe3cad21c90b292f4d212fab7",
+      "reports/v6-phase5-build-identity-perf.json": "838ad07d2387142632a311c314d02fbe810000cf48d73405c5a6dc0f30b63671",
+      "validation/unity-jungle-v5/.game-studio/manifest.json": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+      "validation/unity-jungle-v5/.game-studio/specification.json": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+      "validation/unity-jungle-v5/.game-studio/execution-plan.json": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+      "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+      "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+      "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+      "V5-IMPLEMENTATION-REPORT.md": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+      "V5-LLM-EVALUATION.md": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+      "V5-UNITY-VERTICAL-SLICE.md": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+      "V5-VERIFICATION-MATRIX.md": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+      "tools/game-studio-mcp/tests/test_llm_v4.py": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+      "tools/game-studio-mcp/tests/test_p0_v4.py": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d"
+    },
+    "phase5_hashes_ok": true,
+    "missing_phase5_records": [],
+    "phase5_interfaces_ok": true,
+    "protected_git_status": [],
+    "protected_git_clean": true
+  },
+  "baseline": {
+    "schema_version": 1,
+    "phase": "V6 Phase 8A - repository and baseline audit",
+    "generated_at": "2026-11-12T04:38:27Z",
+    "repository": {
+      "root": "D:\\MCP\\MCP",
+      "branch": "main",
+      "head": "dec25407bf85942c6ce70630e06b8515c3c75cf9",
+      "head_short": "dec2540",
+      "baseline_head": "dec25407bf85942c6ce70630e06b8515c3c75cf9",
+      "head_unchanged_since_previous_commit": true,
+      "commits_since_baseline": [],
+      "working_tree_changes_at_audit_start": [
+        "M tools/game-studio-mcp/game_studio/assets.py",
+        " M tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+        " M tools/game-studio-mcp/game_studio/llm/game_spec_pipeline.py",
+        "?? V6-PHASE-8-PRODUCTION-READINESS.md",
+        "?? reports/v6-phase8-audit.json",
+        "?? reports/v6-phase8-baseline.json",
+        "?? reports/v6-phase8-integration-audit.json",
+        "?? reports/v6-phase8-release-readiness.json",
+        "?? reports/v6-phase8-reliability-audit.json",
+        "?? reports/v6-phase8-security-audit.json",
+        "?? reports/v6-phase8-validation.json",
+        "?? scripts/v6-phase8-audit.py",
+        "?? tools/game-studio-mcp/tests/test_v6_phase8_regressions.py"
+      ],
+      "working_tree_dirty_at_audit_start": true,
+      "preflight_working_tree_clean": true,
+      "preflight_evidence": "git status --porcelain returned empty before any Phase 8 edit; the recorded changes are the Phase 8 implementation and generated reports.",
+      "phase8_changes": [
+        "M tools/game-studio-mcp/game_studio/assets.py",
+        " M tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+        " M tools/game-studio-mcp/game_studio/llm/game_spec_pipeline.py",
+        "?? reports/v6-phase8-audit.json",
+        "?? reports/v6-phase8-baseline.json",
+        "?? reports/v6-phase8-integration-audit.json",
+        "?? reports/v6-phase8-release-readiness.json",
+        "?? reports/v6-phase8-reliability-audit.json",
+        "?? reports/v6-phase8-security-audit.json",
+        "?? reports/v6-phase8-validation.json",
+        "?? scripts/v6-phase8-audit.py",
+        "?? tools/game-studio-mcp/tests/test_v6_phase8_regressions.py"
+      ]
+    },
+    "git_operations_by_audit": {
+      "commits": 0,
+      "pushes": 0,
+      "tags": 0,
+      "resets": 0,
+      "merges": 0,
+      "discards": 0,
+      "writes": 0
+    },
+    "tools_and_handlers": {
+      "tools": 107,
+      "unique_tools": 107,
+      "handlers": 107,
+      "unique_handlers": 107,
+      "missing_handlers": [],
+      "extra_handlers": [],
+      "all_schemas_object": true,
+      "expected_tools": 107,
+      "exact_parity": true
+    },
+    "tests": {
+      "baseline_count": 481,
+      "final_count": 491,
+      "expected_final_count": 491,
+      "added_by_phase8": 10,
+      "result": "OK",
+      "duration_seconds": 57.05,
+      "command": [
+        "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/game-studio-mcp/tests",
+        "-q"
+      ]
+    },
+    "earlier_phase_reports": {
+      "reports/v6-phase3-audit.json": {
+        "exists": true,
+        "expected_verdict": "PASS",
+        "verdict": "PASS",
+        "all_criteria_passed": null,
+        "matches": true
+      },
+      "reports/v6-phase4-audit.json": {
+        "exists": true,
+        "expected_verdict": "PASS",
+        "verdict": "PASS",
+        "all_criteria_passed": true,
+        "matches": true
+      },
+      "reports/v6-phase5-audit.json": {
+        "exists": true,
+        "expected_verdict": "PASS_AUTOMATED",
+        "verdict": "PASS_AUTOMATED",
+        "all_criteria_passed": true,
+        "matches": true
+      },
+      "reports/v6-phase6-audit.json": {
+        "exists": true,
+        "expected_verdict": "PASS",
+        "verdict": "PASS",
+        "all_criteria_passed": true,
+        "matches": true
+      },
+      "reports/v6-phase7-audit.json": {
+        "exists": true,
+        "expected_verdict": "PASS_AUTOMATED",
+        "verdict": "PASS_AUTOMATED",
+        "all_criteria_passed": true,
+        "matches": true
+      }
+    },
+    "phase_report_inventory": {
+      "reports/v6-phase0-baseline.json": {
+        "parsed": true,
+        "phase": "V6 Phase 0 - baseline and preservation",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 14
+      },
+      "reports/v6-phase1-audit.json": {
+        "parsed": true,
+        "phase": "V6 Phase 0 - baseline and preservation",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 14
+      },
+      "reports/v6-phase2-demo.json": {
+        "parsed": true,
+        "phase": "V6 Phase 2 - multi-agent orchestration demonstration",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 25
+      },
+      "reports/v6-phase3-audit.json": {
+        "parsed": true,
+        "phase": "V6 Phase 3 - character asset pipeline audit",
+        "verdict": "PASS",
+        "all_criteria_passed": null,
+        "top_level_fields": 20
+      },
+      "reports/v6-phase4-audit.json": {
+        "parsed": true,
+        "phase": "V6 Phase 4 - environment generation audit",
+        "verdict": "PASS",
+        "all_criteria_passed": true,
+        "top_level_fields": 18
+      },
+      "reports/v6-phase5-audit.json": {
+        "parsed": true,
+        "phase": "V6 Phase 5 - gameplay integration audit",
+        "verdict": "PASS_AUTOMATED",
+        "all_criteria_passed": true,
+        "top_level_fields": 17
+      },
+      "reports/v6-phase5-build-identity-perf.json": {
+        "parsed": true,
+        "phase": null,
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 20
+      },
+      "reports/v6-phase5-build-identity-verification.json": {
+        "parsed": true,
+        "phase": "V6 Phase 5 - independent build identity verification",
+        "verdict": "PASS",
+        "all_criteria_passed": null,
+        "top_level_fields": 17
+      },
+      "reports/v6-phase6-audit.json": {
+        "parsed": true,
+        "phase": "V6 Phase 6 - Free AI Intelligence",
+        "verdict": "PASS",
+        "all_criteria_passed": true,
+        "top_level_fields": 21
+      },
+      "reports/v6-phase7-audit.json": {
+        "parsed": true,
+        "phase": "V6 Phase 7 - Real AI Provider Validation and Game Generation",
+        "verdict": "PASS_AUTOMATED",
+        "all_criteria_passed": true,
+        "top_level_fields": 23
+      },
+      "reports/v6-phase7-baseline.json": {
+        "parsed": true,
+        "phase": "V6 Phase 7A - repository and baseline audit",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 11
+      },
+      "reports/v6-phase7-connectivity-diagnostics.json": {
+        "parsed": true,
+        "phase": "V6 Phase 7 - Gemini connectivity diagnostics",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 16
+      },
+      "reports/v6-phase7-game-spec.json": {
+        "parsed": true,
+        "phase": "V6 Phase 7F - idea to specification",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 23
+      },
+      "reports/v6-phase7-generation-bridge.json": {
+        "parsed": true,
+        "phase": "V6 Phase 7H - generation pipeline bridges",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 12
+      },
+      "reports/v6-phase7-live-validation-attempt2.json": {
+        "parsed": true,
+        "phase": null,
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 2
+      },
+      "reports/v6-phase7-live-validation-attempt3.json": {
+        "parsed": true,
+        "phase": null,
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 2
+      },
+      "reports/v6-phase7-live-validation.json": {
+        "parsed": true,
+        "phase": null,
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 2
+      },
+      "reports/v6-phase7-provider-evidence.json": {
+        "parsed": true,
+        "phase": null,
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 10
+      },
+      "reports/v6-phase7-provider-policy.json": {
+        "parsed": true,
+        "phase": "V6 Phase 7B - provider selection and free-tier policy",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 15
+      },
+      "reports/v6-phase7-quality-evaluation.json": {
+        "parsed": true,
+        "phase": "V6 Phase 7G - game design quality evaluation",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 11
+      },
+      "reports/v6-phase7-readiness.json": {
+        "parsed": true,
+        "phase": "V6 Phase 7 - provider readiness",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 27
+      },
+      "reports/v6-phase7-request-audit.json": {
+        "parsed": true,
+        "phase": null,
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 24
+      },
+      "reports/v6-phase7-requirements.json": {
+        "parsed": true,
+        "phase": "V6 Phase 7F - structured requirements",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 11
+      },
+      "reports/v6-phase7-timeout-fix.json": {
+        "parsed": true,
+        "phase": "V6 Phase 7 - Gemini HTTP timeout reliability fix",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 15
+      },
+      "reports/v6-phase7-timeout-validation.json": {
+        "parsed": true,
+        "phase": "V6 Phase 7 - timeout validation",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 14
+      },
+      "reports/v6-phase7-validation.json": {
+        "parsed": true,
+        "phase": "V6 Phase 7 - validation results",
+        "verdict": null,
+        "all_criteria_passed": null,
+        "top_level_fields": 13
+      }
+    },
+    "phase0_v4_v5_baseline": {
+      "path": "reports/v6-phase0-baseline.json",
+      "v4_files": 2,
+      "v5_artifacts": 13,
+      "v4_ok": true,
+      "v5_ok": true
+    },
+    "phase5_protection": {
+      "recorded_artifacts": 23,
+      "hashes_ok": true,
+      "missing_records": [],
+      "interfaces_ok": true,
+      "protected_git_clean": true,
+      "protected_git_status": []
+    },
+    "credential_access": {
+      "values_read": false,
+      "values_printed": false,
+      "reason": "Phase 8 never reads or prints stored credential values."
+    },
+    "network_calls": 0,
+    "verdict": "PASS"
+  },
+  "integration": {
+    "checks": [
+      {
+        "id": "I1",
+        "area": "pipeline",
+        "description": "Natural-language idea produces a consistent specification",
+        "status": "PASS",
+        "evidence": {
+          "source": "deterministic",
+          "requirements": 29,
+          "validation_errors": []
+        },
+        "notes": []
+      },
+      {
+        "id": "I2",
+        "area": "pipeline",
+        "description": "Requirement IDs are stable and unique across runs",
+        "status": "PASS",
+        "evidence": {
+          "run_a": 29,
+          "run_b": 29,
+          "unique": 29,
+          "multi_feature": 42
+        },
+        "notes": []
+      },
+      {
+        "id": "I3",
+        "area": "pipeline",
+        "description": "Requirement dependencies resolve; unknown ids are rejected",
+        "status": "PASS",
+        "evidence": {
+          "resolve": true,
+          "unknown_rejected": true,
+          "errors": [
+            "requirements[0] depends on unknown id 'REQ-DOES-NOT-EXIST'"
+          ]
+        },
+        "notes": []
+      },
+      {
+        "id": "I4",
+        "area": "agents",
+        "description": "Agent orchestration respects dependency order",
+        "status": "PASS",
+        "evidence": {
+          "status": "completed",
+          "tasks": 8,
+          "graph_errors": []
+        },
+        "notes": []
+      },
+      {
+        "id": "I5",
+        "area": "agents",
+        "description": "A failed dependency blocks its dependents and never reports success",
+        "status": "PASS",
+        "evidence": {
+          "status": "failed",
+          "failed": [
+            "design"
+          ],
+          "blocked": [
+            "architecture",
+            "character",
+            "environment",
+            "gameplay",
+            "uiux",
+            "qa",
+            "consolidation"
+          ]
+        },
+        "notes": []
+      },
+      {
+        "id": "I6",
+        "area": "agents",
+        "description": "Cancellation produces explicit cancelled results",
+        "status": "PASS",
+        "evidence": {
+          "status": "cancelled",
+          "cancelled_tasks": 8
+        },
+        "notes": []
+      },
+      {
+        "id": "I7",
+        "area": "bridges",
+        "description": "Character specification reaches the Phase 3 interface",
+        "status": "PASS",
+        "evidence": {
+          "interface": "game_studio.character_spec.build_character_spec",
+          "errors": [],
+          "generation_performed": false
+        },
+        "notes": []
+      },
+      {
+        "id": "I8",
+        "area": "bridges",
+        "description": "Environment specification reaches the Phase 4 interface",
+        "status": "PASS",
+        "evidence": {
+          "interface": "game_studio.environment_spec.build_environment_spec",
+          "errors": [],
+          "generation_performed": false
+        },
+        "notes": []
+      },
+      {
+        "id": "I9",
+        "area": "bridges",
+        "description": "Gameplay requirements map to real Phase 5 interfaces",
+        "status": "PASS",
+        "evidence": {
+          "interfaces": 12,
+          "missing": [],
+          "modified": false
+        },
+        "notes": []
+      },
+      {
+        "id": "I10",
+        "area": "capability",
+        "description": "Unsupported features remain explicitly unsupported",
+        "status": "PASS",
+        "evidence": {
+          "unsupported": [
+            "multiplayer",
+            "open_world"
+          ]
+        },
+        "notes": []
+      },
+      {
+        "id": "I11",
+        "area": "provenance",
+        "description": "Provider content and deterministic fallback stay distinguishable",
+        "status": "PASS",
+        "evidence": {
+          "ai_source": "ai_provider",
+          "deterministic_source": "deterministic",
+          "requirements_extraction": "deterministic"
+        },
+        "notes": []
+      },
+      {
+        "id": "I12",
+        "area": "approval",
+        "description": "Human approval cannot be pre-granted or bypassed",
+        "status": "PASS",
+        "evidence": {
+          "tamper_rejected": true,
+          "errors": [
+            "requirements[0] cannot be implemented or verified without recorded evidence and human approval",
+            "approval must not be granted by the pipeline",
+            "generation_plan cannot be pre-approved",
+            "generation_plan.build_started must be false",
+            "generation_plan.asset_generation_performed must be false",
+            "no generation step may be marked executed",
+            "provenance.human_approved must remain false before approval",
+            "generation_performed must be false for a specification",
+            "phase5_project_modified must be false for a specification"
+          ]
+        },
+        "notes": []
+      },
+      {
+        "id": "I13",
+        "area": "failure",
+        "description": "Invalid provider output is refused, not converted to a specification",
+        "status": "PASS",
+        "evidence": {
+          "invalid_payload_refused": true
+        },
+        "notes": []
+      },
+      {
+        "id": "I14",
+        "area": "providers",
+        "description": "Free-only routing refuses paid OpenRouter variants",
+        "status": "PASS",
+        "evidence": {
+          "paid_eligible": false,
+          "free_eligible": true,
+          "route_mode": "deterministic",
+          "fallback_reasons": [
+            "invalid_model"
+          ]
+        },
+        "notes": []
+      },
+      {
+        "id": "I15",
+        "area": "providers",
+        "description": "Unknown quota is not treated as unlimited; no paid fallback",
+        "status": "PASS",
+        "evidence": {
+          "exhausted_allowed": false,
+          "unknown_kind": "quota_unknown_not_unlimited",
+          "paid_route_fallback": false
+        },
+        "notes": []
+      },
+      {
+        "id": "I16",
+        "area": "secrets",
+        "description": "Secrets are redacted and rejected from manifests",
+        "status": "PASS",
+        "evidence": {
+          "redaction_verified": true,
+          "manifest_key_rejected": true,
+          "manifest_value_rejected": true
+        },
+        "notes": []
+      },
+      {
+        "id": "I17",
+        "area": "evidence",
+        "description": "Every requirement carries stable provenance and no false status",
+        "status": "PASS",
+        "evidence": {
+          "requirements": 29,
+          "verified": 0,
+          "human_approved": 0
+        },
+        "notes": []
+      },
+      {
+        "id": "I18",
+        "area": "offline",
+        "description": "The whole offline workflow makes zero network calls",
+        "status": "PASS",
+        "evidence": {
+          "operations": [
+            "game_spec_pipeline",
+            "free_routing",
+            "quota",
+            "response_validation",
+            "bounded_http_decode"
+          ],
+          "network_calls": 0
+        },
+        "notes": []
+      },
+      {
+        "id": "I19",
+        "area": "platform",
+        "description": "MCP tool and handler parity is exact",
+        "status": "PASS",
+        "evidence": {
+          "tools": 107,
+          "handlers": 107,
+          "missing": [],
+          "extra": []
+        },
+        "notes": []
+      },
+      {
+        "id": "I20",
+        "area": "regression",
+        "description": "Phase 3-7 audits remain parseable and passing",
+        "status": "PASS",
+        "evidence": {
+          "reports/v6-phase3-audit.json": "PASS",
+          "reports/v6-phase4-audit.json": "PASS",
+          "reports/v6-phase5-audit.json": "PASS_AUTOMATED",
+          "reports/v6-phase6-audit.json": "PASS",
+          "reports/v6-phase7-audit.json": "PASS_AUTOMATED"
+        },
+        "notes": []
+      },
+      {
+        "id": "I21",
+        "area": "protection",
+        "description": "V4, V5 and Phase 5 protected artifacts still match hashes",
+        "status": "PASS",
+        "evidence": {
+          "v4_files": 2,
+          "v5_artifacts": 13,
+          "phase5_recorded": 23,
+          "phase5_missing": [],
+          "protected_git_clean": true
+        },
+        "notes": []
+      }
+    ],
+    "status_counts": {
+      "PASS": 21,
+      "FAIL": 0,
+      "BLOCKED": 0,
+      "NOT_TESTED": 0,
+      "REQUIRES_HUMAN_REVIEW": 0
+    }
+  },
+  "security": {
+    "checks": [
+      {
+        "id": "S1",
+        "area": "path-traversal",
+        "description": "Local path joins reject traversal and absolute paths",
+        "status": "PASS",
+        "evidence": {
+          "util_safe_join": true,
+          "asset_ids": {
+            "..": "REJECTED",
+            "C:evil": "REJECTED",
+            "nested/evil": "REJECTED"
+          },
+          "include_paths": {
+            "../escape.bin": "REJECTED",
+            "C:/Windows/evil.bin": "REJECTED",
+            "textures/ok.png": "ACCEPTED"
+          },
+          "evidence": [
+            "tools/game-studio-mcp/game_studio/util.py:116",
+            "tools/game-studio-mcp/game_studio/assets.py"
+          ]
+        },
+        "notes": []
+      },
+      {
+        "id": "S2",
+        "area": "path-traversal",
+        "description": "Provider include paths cannot escape the asset directory",
+        "status": "PASS",
+        "evidence": {
+          "cases": {
+            "../escape.bin": "REJECTED",
+            "C:/Windows/evil.bin": "REJECTED",
+            "textures/ok.png": "ACCEPTED"
+          },
+          "download_uses_helper": true
+        },
+        "notes": []
+      },
+      {
+        "id": "S3",
+        "area": "command",
+        "description": "Commands run without a shell and with a timeout",
+        "status": "PASS",
+        "evidence": {
+          "shell_kwarg": false,
+          "shell_true_in_source": false,
+          "source": "tools/game-studio-mcp/game_studio/util.py:172"
+        },
+        "notes": []
+      },
+      {
+        "id": "S4",
+        "area": "ssrf",
+        "description": "Private, loopback, link-local and mapped addresses are refused",
+        "status": "PASS",
+        "evidence": {
+          "cases": [
+            "100.64.0.1",
+            "fc00::1",
+            "fe80::1",
+            "::ffff:127.0.0.1"
+          ],
+          "source": "tools/game-studio-mcp/game_studio/util.py:288"
+        },
+        "notes": []
+      },
+      {
+        "id": "S5",
+        "area": "archive",
+        "description": "No unsafe archive extraction path exists",
+        "status": "PASS",
+        "evidence": {
+          "unsafe_archive_terms": []
+        },
+        "notes": []
+      },
+      {
+        "id": "S6",
+        "area": "secrets",
+        "description": "Secret values are redacted and project manifests reject credentials",
+        "status": "PASS",
+        "evidence": {
+          "redaction": true,
+          "manifest_rejection": true,
+          "source": "tools/game-studio-mcp/game_studio/manifest.py:55"
+        },
+        "notes": []
+      },
+      {
+        "id": "S7",
+        "area": "overwrite",
+        "description": "File writes are atomic and existing downloads are not overwritten",
+        "status": "PASS",
+        "evidence": {
+          "atomic_write": true,
+          "download_requires_confirm": true,
+          "no_overwrite": true
+        },
+        "notes": []
+      },
+      {
+        "id": "S8",
+        "area": "validation",
+        "description": "Input validation bounds requests, ideas, concurrency and paths",
+        "status": "PASS",
+        "evidence": {
+          "idea_limit": "20000 chars",
+          "concurrency_limit": "1..4",
+          "asset_id_validation": "_safe_asset_id"
+        },
+        "notes": []
+      },
+      {
+        "id": "S9",
+        "area": "cleanup",
+        "description": "Failed downloads and transports clean up temporary resources",
+        "status": "PASS",
+        "evidence": {
+          "download_temp_cleanup": true,
+          "transport_finally_close": true
+        },
+        "notes": []
+      },
+      {
+        "id": "S10",
+        "area": "resource",
+        "description": "Execution and response sizes are bounded",
+        "status": "PASS",
+        "evidence": {
+          "http_max_bytes": 33554432,
+          "download_max_bytes": true,
+          "quota_entry_cap": true
+        },
+        "notes": []
+      },
+      {
+        "id": "S11",
+        "area": "audit",
+        "description": "Claims require provenance and evidence records",
+        "status": "PASS",
+        "evidence": {
+          "manifest_history": true,
+          "manifest_evidence": true,
+          "audit_events": true,
+          "reports": [
+            "v6-phase8-baseline.json",
+            "v6-phase8-integration-audit.json",
+            "v6-phase8-security-audit.json",
+            "v6-phase8-reliability-audit.json",
+            "v6-phase8-validation.json",
+            "v6-phase8-release-readiness.json",
+            "v6-phase8-audit.json"
+          ]
+        },
+        "notes": []
+      },
+      {
+        "id": "S12",
+        "area": "asset-import",
+        "description": "Untrusted engine asset import is not performed by Phase 8",
+        "status": "REQUIRES_HUMAN_REVIEW",
+        "evidence": {
+          "performed": false,
+          "note": "Specifications are bridged but no asset is imported into Unity or Blender in this phase; import-time validation is outside the offline audit scope."
+        },
+        "notes": []
+      },
+      {
+        "id": "S13",
+        "area": "secrets",
+        "description": "Credential values are never read or printed by the audit",
+        "status": "PASS",
+        "evidence": {
+          "values_read": false,
+          "values_printed": false,
+          "scan_of_generated_reports": "performed below"
+        },
+        "notes": []
+      },
+      {
+        "id": "S14",
+        "area": "social",
+        "description": "Untrusted target content is treated as data, not instructions",
+        "status": "REQUIRES_HUMAN_REVIEW",
+        "evidence": {
+          "note": "Offline audit did not process model or web content."
+        },
+        "notes": []
+      }
+    ],
+    "status_counts": {
+      "PASS": 12,
+      "FAIL": 0,
+      "BLOCKED": 0,
+      "NOT_TESTED": 0,
+      "REQUIRES_HUMAN_REVIEW": 2
+    }
+  },
+  "reliability": {
+    "checks": [
+      {
+        "id": "R1",
+        "area": "deadline",
+        "description": "A total wall-clock deadline is enforced",
+        "status": "PASS",
+        "evidence": {
+          "class": "_Deadline",
+          "watchdog": "expire_now",
+          "network_calls": 0
+        },
+        "notes": []
+      },
+      {
+        "id": "R2",
+        "area": "dns",
+        "description": "DNS resolution is bounded by the deadline",
+        "status": "PASS",
+        "evidence": {
+          "worker": "daemon llm-dns",
+          "bounded_join": true
+        },
+        "notes": []
+      },
+      {
+        "id": "R3",
+        "area": "dns",
+        "description": "DNS worker lifecycle cannot leak a permanently blocked call",
+        "status": "REQUIRES_HUMAN_REVIEW",
+        "evidence": {
+          "daemon": true,
+          "limitation": "getaddrinfo cannot be cancelled; a hung resolver leaves one daemon worker until the OS resolver returns. Repeated hung resolutions could accumulate workers. Not reproduced offline."
+        },
+        "notes": []
+      },
+      {
+        "id": "R4",
+        "area": "connect",
+        "description": "TCP connect has a bounded per-address budget",
+        "status": "PASS",
+        "evidence": {
+          "watchdog_registered_during_connect": false,
+          "limitation": "The watchdog closes the socket after TLS registration; the connect budget itself is enforced by the socket timeout."
+        },
+        "notes": []
+      },
+      {
+        "id": "R5",
+        "area": "tls",
+        "description": "TLS verifies certificates and hostnames with a bounded timeout",
+        "status": "PASS",
+        "evidence": {
+          "verify_mode": "CERT_REQUIRED",
+          "check_hostname": true
+        },
+        "notes": []
+      },
+      {
+        "id": "R6",
+        "area": "headers",
+        "description": "Response headers have a bounded deadline",
+        "status": "PASS",
+        "evidence": {
+          "timeout_kind": "http_response_timeout"
+        },
+        "notes": []
+      },
+      {
+        "id": "R7",
+        "area": "body",
+        "description": "The response body has a bounded deadline and truncation cap",
+        "status": "PASS",
+        "evidence": {
+          "max_bytes": 33554432
+        },
+        "notes": []
+      },
+      {
+        "id": "R8",
+        "area": "body",
+        "description": "A clean EOF at deadline expiry is reported as a timeout",
+        "status": "PASS",
+        "evidence": {
+          "new_guard": "post-body deadline check",
+          "test": "test_clean_eof_after_deadline_is_a_timeout_not_success"
+        },
+        "notes": []
+      },
+      {
+        "id": "R9",
+        "area": "incomplete",
+        "description": "Truncated, invalid and incomplete bodies are never parsed as JSON",
+        "status": "PASS",
+        "evidence": {
+          "truncated_parsed": false,
+          "invalid_parsed": false,
+          "valid_parsed": true
+        },
+        "notes": []
+      },
+      {
+        "id": "R10",
+        "area": "errors",
+        "description": "Transport failures return structured stage-aware errors",
+        "status": "PASS",
+        "evidence": {
+          "kinds": [
+            "dns_timeout",
+            "connection_timeout",
+            "tls_failure",
+            "http_response_timeout",
+            "response_body_timeout",
+            "response_body_incomplete",
+            "deadline_exceeded",
+            "partial_response"
+          ]
+        },
+        "notes": []
+      },
+      {
+        "id": "R11",
+        "area": "cleanup",
+        "description": "Sockets and responses are closed after success, failure and cancellation",
+        "status": "PASS",
+        "evidence": {
+          "finally_blocks": 2,
+          "watchdog_stopped": true,
+          "response_closed": true
+        },
+        "notes": []
+      },
+      {
+        "id": "R12",
+        "area": "ssrf",
+        "description": "The bounded transport refuses private addresses",
+        "status": "PASS",
+        "evidence": {
+          "blocked_kind": "blocked_private_address"
+        },
+        "notes": []
+      },
+      {
+        "id": "R13",
+        "area": "deadline",
+        "description": "Deadline cancellation is verified against a real OS socket",
+        "status": "NOT_TESTED",
+        "evidence": {
+          "reason": "All transport tests mock DNS, sockets and TLS. Mocked tests do not prove operating-system socket cancellation, and Phase 8 is forbidden from making a live network request."
+        },
+        "notes": []
+      },
+      {
+        "id": "R14",
+        "area": "retry",
+        "description": "Transport failure is not retried and never falls back to a paid provider",
+        "status": "PASS",
+        "evidence": {
+          "phase7_retries": 0,
+          "paid_fallback": false,
+          "note": "The recorded Phase 7 fallback is a deterministic plan, not a paid provider."
+        },
+        "notes": []
+      }
+    ],
+    "status_counts": {
+      "PASS": 12,
+      "FAIL": 0,
+      "BLOCKED": 0,
+      "NOT_TESTED": 1,
+      "REQUIRES_HUMAN_REVIEW": 1
+    }
+  },
+  "validation": {
+    "schema_version": 1,
+    "phase": "V6 Phase 8 - offline acceptance validation",
+    "generated_at": "2026-11-12T04:38:27Z",
+    "verdict": "PASS_AUTOMATED",
+    "criteria": [
+      {
+        "id": "V1",
+        "description": "Baseline and protected-artifact checks pass",
+        "status": "PASS",
+        "evidence": {
+          "report": "reports/v6-phase8-baseline.json"
+        }
+      },
+      {
+        "id": "V2",
+        "description": "End-to-end integration findings are documented",
+        "status": "PASS",
+        "evidence": {
+          "report": "reports/v6-phase8-integration-audit.json",
+          "checks": 21
+        }
+      },
+      {
+        "id": "V3",
+        "description": "Security findings are documented",
+        "status": "PASS",
+        "evidence": {
+          "report": "reports/v6-phase8-security-audit.json",
+          "checks": 14
+        }
+      },
+      {
+        "id": "V4",
+        "description": "Reliability findings are documented",
+        "status": "PASS",
+        "evidence": {
+          "report": "reports/v6-phase8-reliability-audit.json",
+          "checks": 14
+        }
+      },
+      {
+        "id": "V5",
+        "description": "All implemented fixes have regression tests",
+        "status": "PASS",
+        "evidence": {
+          "tests_added": 10,
+          "path": "tools/game-studio-mcp/tests/test_v6_phase8_regressions.py"
+        }
+      },
+      {
+        "id": "V6",
+        "description": "The complete offline suite passes",
+        "status": "PASS",
+        "evidence": {
+          "count": 491,
+          "expected": 491,
+          "result": "OK"
+        }
+      },
+      {
+        "id": "V7",
+        "description": "MCP tool/handler parity is verified",
+        "status": "PASS",
+        "evidence": {
+          "tools": 107,
+          "handlers": 107
+        }
+      },
+      {
+        "id": "V8",
+        "description": "Reports agree with the actual implementation",
+        "status": "PASS",
+        "evidence": {
+          "generated_from": "live module execution in this audit",
+          "reports": [
+            "v6-phase8-baseline.json",
+            "v6-phase8-integration-audit.json",
+            "v6-phase8-security-audit.json",
+            "v6-phase8-reliability-audit.json",
+            "v6-phase8-validation.json",
+            "v6-phase8-release-readiness.json",
+            "v6-phase8-audit.json"
+          ]
+        }
+      },
+      {
+        "id": "V9",
+        "description": "Remaining limitations are explicitly documented",
+        "status": "PASS",
+        "evidence": {
+          "not_tested": [
+            "R13"
+          ],
+          "human_review": [
+            "S12",
+            "S14",
+            "R3"
+          ]
+        }
+      },
+      {
+        "id": "V10",
+        "description": "No protected artifacts or unauthorized resources changed",
+        "status": "PASS",
+        "evidence": {
+          "v4_ok": true,
+          "v5_ok": true,
+          "phase5_hashes_ok": true,
+          "protected_git_clean": true
+        }
+      },
+      {
+        "id": "V11",
+        "description": "Human production approval remains separate",
+        "status": "REQUIRES_HUMAN_REVIEW",
+        "evidence": {
+          "human_review_required": true,
+          "human_review_status": "pending"
+        }
+      }
+    ],
+    "status_counts": {
+      "PASS": 10,
+      "FAIL": 0,
+      "BLOCKED": 0,
+      "NOT_TESTED": 0,
+      "REQUIRES_HUMAN_REVIEW": 1
+    },
+    "tests": {
+      "baseline": 481,
+      "final": 491,
+      "expected": 491,
+      "added": 10,
+      "result": "OK",
+      "command": [
+        "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/game-studio-mcp/tests",
+        "-q"
+      ]
+    },
+    "offline_guarantees": {
+      "internet_access": false,
+      "live_provider_requests": 0,
+      "credentials_read": false,
+      "paid_services": 0,
+      "downloads": 0,
+      "installations": 0,
+      "engine_builds": 0,
+      "network_calls": 0
+    },
+    "mcp": {
+      "tools": 107,
+      "unique_tools": 107,
+      "handlers": 107,
+      "unique_handlers": 107,
+      "missing_handlers": [],
+      "extra_handlers": [],
+      "all_schemas_object": true,
+      "expected_tools": 107,
+      "exact_parity": true
+    },
+    "limitations": [
+      "The full suite is offline; live provider behaviour is not validated in Phase 8.",
+      "Mocked socket tests do not prove real operating-system socket cancellation.",
+      "A hung DNS resolver can leave a daemon worker alive because getaddrinfo is not cancellable.",
+      "Unity and Blender were not built or run; Phase 5 artifacts were hash-checked only.",
+      "Human review of scope, evidence and release readiness is still required."
+    ]
+  },
+  "release": {
+    "schema_version": 1,
+    "phase": "V6 Phase 8 - production readiness",
+    "generated_at": "2026-11-12T04:38:27Z",
+    "verdict": "PASS_AUTOMATED_PENDING_HUMAN_REVIEW",
+    "automated_verdict": "PASS_AUTOMATED",
+    "all_automated_criteria_passed": true,
+    "human_review_required": true,
+    "human_review_status": "pending",
+    "criteria_passed": 45,
+    "criteria_total": 49,
+    "automated_failures": [],
+    "not_tested": [
+      "R13"
+    ],
+    "requires_human_review": [
+      "S12",
+      "S14",
+      "R3"
+    ],
+    "release_blockers": [],
+    "manual_review_items": [
+      "Confirm that the production scope and remaining limitations are acceptable.",
+      "Confirm that no live provider request is required for this release.",
+      "Confirm that Phase 9 is explicitly out of scope.",
+      "Confirm that generated game plans are still not authorized to execute."
+    ],
+    "no_network": true,
+    "no_credentials_read": true,
+    "no_protected_changes": true
+  },
+  "reports": {
+    "v6-phase8-baseline.json": "reports/v6-phase8-baseline.json",
+    "v6-phase8-integration-audit.json": "reports/v6-phase8-integration-audit.json",
+    "v6-phase8-security-audit.json": "reports/v6-phase8-security-audit.json",
+    "v6-phase8-reliability-audit.json": "reports/v6-phase8-reliability-audit.json",
+    "v6-phase8-validation.json": "reports/v6-phase8-validation.json",
+    "v6-phase8-release-readiness.json": "reports/v6-phase8-release-readiness.json",
+    "v6-phase8-audit.json": "reports/v6-phase8-audit.json"
+  },
+  "limitations": [
+    "The full suite is offline; live provider behaviour is not validated in Phase 8.",
+    "Mocked socket tests do not prove real operating-system socket cancellation.",
+    "A hung DNS resolver can leave a daemon worker alive because getaddrinfo is not cancellable.",
+    "Unity and Blender were not built or run; Phase 5 artifacts were hash-checked only.",
+    "Human review of scope, evidence and release readiness is still required."
+  ],
+  "human_decisions_required": [
+    "Confirm that the production scope and remaining limitations are acceptable.",
+    "Confirm that no live provider request is required for this release.",
+    "Confirm that Phase 9 is explicitly out of scope.",
+    "Confirm that generated game plans are still not authorized to execute."
+  ],
+  "safety": {
+    "live_provider_requests": 0,
+    "network_calls": 0,
+    "credentials_read": false,
+    "paid_api_usage": 0,
+    "downloads": 0,
+    "installations": 0,
+    "engine_builds": 0,
+    "git_writes": 0,
+    "protected_artifacts_modified": false,
+    "phase9_started": false,
+    "generated_plans_authorized": false
+  },
+  "duration_seconds": 58.02,
+  "secret_scan": {
+    "patterns_matched": [],
+    "clean": true
+  }
+}

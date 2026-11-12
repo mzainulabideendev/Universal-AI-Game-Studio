@@ -14,6 +14,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import struct
 import urllib.parse
 
@@ -25,6 +26,7 @@ from .util import (
     http_request,
     now_iso,
     read_json,
+    safe_join,
     sha256_file,
     write_json,
 )
@@ -314,6 +316,25 @@ def search_assets(query: str, *, kind: str = "model", provider: str = "auto",
 # --------------------------------------------------------------------------
 # downloads
 # --------------------------------------------------------------------------
+_ASSET_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
+
+
+def _safe_asset_id(asset_id: str) -> str:
+    """Validate a provider asset id before it becomes a local directory name."""
+    value = str(asset_id or "")
+    if not _ASSET_ID.fullmatch(value) or value in (".", ".."):
+        raise ToolError(f"invalid asset_id: {asset_id!r}")
+    return value
+
+
+def _safe_include_target(target_dir: str, relative: str) -> str:
+    """Resolve a provider-supplied include path under the asset directory."""
+    rel_clean = str(relative or "").replace("\\", "/").lstrip("/")
+    if not rel_clean or ".." in rel_clean.split("/"):
+        raise ToolError(f"provider included an unsafe relative path: {relative}")
+    return safe_join(target_dir, rel_clean)
+
+
 def _pick_polyhaven_file(files: dict, fmt: str, resolution: str) -> dict | None:
     fmt = fmt.lower()
     if fmt == "glb":
@@ -348,8 +369,7 @@ def download_polyhaven(asset_id: str, *, fmt: str = "glb", resolution: str = "2k
                        confirm: bool = False, max_bytes: int = 512 * 1024 * 1024) -> dict:
     if not confirm:
         raise ToolError("Downloading assets writes files; pass confirm=true after approval")
-    if not asset_id or "/" in asset_id or "\\" in asset_id:
-        raise ToolError("invalid asset_id")
+    asset_id = _safe_asset_id(asset_id)
     response = http_request(f"{POLYHAVEN_API}/files/{urllib.parse.quote(asset_id)}",
                             timeout=45, allowed_hosts=POLYHAVEN_HOSTS)
     if not response.get("ok") or not isinstance(response.get("payload"), dict):
@@ -360,22 +380,22 @@ def download_polyhaven(asset_id: str, *, fmt: str = "glb", resolution: str = "2k
                 "available_formats": sorted(response["payload"].keys())}
     from .config import load_config
     root = os.path.abspath(expand(destination_dir or os.path.join(load_config()["download_root"], "polyhaven")))
-    target_dir = os.path.join(root, asset_id)
+    target_dir = safe_join(root, asset_id)
     relative = os.path.basename(urllib.parse.urlparse(selected["url"]).path)
-    target = os.path.join(target_dir, relative)
+    target = safe_join(target_dir, relative)
     if os.path.exists(target):
         return {"ok": False, "error": f"file already exists: {target}",
                 "remediation": "Choose another destination or remove the file after review."}
     include_targets = []
     for rel in selected["include"]:
-        rel_clean = rel.replace("\\", "/").lstrip("/")
-        if ".." in rel_clean.split("/"):
-            return {"ok": False, "error": f"provider included an unsafe relative path: {rel}"}
-        include_target = os.path.join(target_dir, rel_clean)
+        try:
+            include_target = _safe_include_target(target_dir, rel)
+        except ToolError as exc:
+            return {"ok": False, "error": str(exc)}
         if os.path.exists(include_target):
             return {"ok": False, "error": f"dependency already exists: {include_target}",
                     "remediation": "Remove the partial download or choose another destination."}
-        include_targets.append((rel_clean, include_target))
+        include_targets.append((rel, include_target))
     total = (selected.get("size") or 0) + sum(
         (meta.get("size") or 0) for meta in selected["include"].values())
     if total > max_bytes:
@@ -393,12 +413,10 @@ def download_polyhaven(asset_id: str, *, fmt: str = "glb", resolution: str = "2k
         return {"ok": False, "error": "downloaded file failed the provider MD5 check"}
     downloaded = [{"path": target, "bytes": main["bytes"], "sha256": main["sha256"],
                    "md5_verified": bool(selected.get("md5"))}]
+    include_by_rel = {rel: target for rel, target in include_targets}
     for rel, meta in selected["include"].items():
-        # Provider include paths are relative; normalise and reject traversal.
-        rel_clean = rel.replace("\\", "/").lstrip("/")
-        if ".." in rel_clean.split("/"):
-            return {"ok": False, "error": f"provider included an unsafe relative path: {rel}"}
-        include_target = os.path.join(target_dir, rel_clean)
+        # Provider include paths were already validated under target_dir above.
+        include_target = include_by_rel[rel]
         include_result = http_download(meta["url"], include_target,
                                        allowed_hosts=POLYHAVEN_HOSTS, max_bytes=max_bytes,
                                        timeout=300)

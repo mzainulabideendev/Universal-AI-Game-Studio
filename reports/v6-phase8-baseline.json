@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 8A - repository and baseline audit",
+  "generated_at": "2026-11-12T04:38:27Z",
+  "repository": {
+    "root": "D:\\MCP\\MCP",
+    "branch": "main",
+    "head": "dec25407bf85942c6ce70630e06b8515c3c75cf9",
+    "head_short": "dec2540",
+    "baseline_head": "dec25407bf85942c6ce70630e06b8515c3c75cf9",
+    "head_unchanged_since_previous_commit": true,
+    "commits_since_baseline": [],
+    "working_tree_changes_at_audit_start": [
+      "M tools/game-studio-mcp/game_studio/assets.py",
+      " M tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+      " M tools/game-studio-mcp/game_studio/llm/game_spec_pipeline.py",
+      "?? V6-PHASE-8-PRODUCTION-READINESS.md",
+      "?? reports/v6-phase8-audit.json",
+      "?? reports/v6-phase8-baseline.json",
+      "?? reports/v6-phase8-integration-audit.json",
+      "?? reports/v6-phase8-release-readiness.json",
+      "?? reports/v6-phase8-reliability-audit.json",
+      "?? reports/v6-phase8-security-audit.json",
+      "?? reports/v6-phase8-validation.json",
+      "?? scripts/v6-phase8-audit.py",
+      "?? tools/game-studio-mcp/tests/test_v6_phase8_regressions.py"
+    ],
+    "working_tree_dirty_at_audit_start": true,
+    "preflight_working_tree_clean": true,
+    "preflight_evidence": "git status --porcelain returned empty before any Phase 8 edit; the recorded changes are the Phase 8 implementation and generated reports.",
+    "phase8_changes": [
+      "M tools/game-studio-mcp/game_studio/assets.py",
+      " M tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+      " M tools/game-studio-mcp/game_studio/llm/game_spec_pipeline.py",
+      "?? reports/v6-phase8-audit.json",
+      "?? reports/v6-phase8-baseline.json",
+      "?? reports/v6-phase8-integration-audit.json",
+      "?? reports/v6-phase8-release-readiness.json",
+      "?? reports/v6-phase8-reliability-audit.json",
+      "?? reports/v6-phase8-security-audit.json",
+      "?? reports/v6-phase8-validation.json",
+      "?? scripts/v6-phase8-audit.py",
+      "?? tools/game-studio-mcp/tests/test_v6_phase8_regressions.py"
+    ]
+  },
+  "git_operations_by_audit": {
+    "commits": 0,
+    "pushes": 0,
+    "tags": 0,
+    "resets": 0,
+    "merges": 0,
+    "discards": 0,
+    "writes": 0
+  },
+  "tools_and_handlers": {
+    "tools": 107,
+    "unique_tools": 107,
+    "handlers": 107,
+    "unique_handlers": 107,
+    "missing_handlers": [],
+    "extra_handlers": [],
+    "all_schemas_object": true,
+    "expected_tools": 107,
+    "exact_parity": true
+  },
+  "tests": {
+    "baseline_count": 481,
+    "final_count": 491,
+    "expected_final_count": 491,
+    "added_by_phase8": 10,
+    "result": "OK",
+    "duration_seconds": 57.05,
+    "command": [
+      "C:\\Users\\zu442\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/game-studio-mcp/tests",
+      "-q"
+    ]
+  },
+  "earlier_phase_reports": {
+    "reports/v6-phase3-audit.json": {
+      "exists": true,
+      "expected_verdict": "PASS",
+      "verdict": "PASS",
+      "all_criteria_passed": null,
+      "matches": true
+    },
+    "reports/v6-phase4-audit.json": {
+      "exists": true,
+      "expected_verdict": "PASS",
+      "verdict": "PASS",
+      "all_criteria_passed": true,
+      "matches": true
+    },
+    "reports/v6-phase5-audit.json": {
+      "exists": true,
+      "expected_verdict": "PASS_AUTOMATED",
+      "verdict": "PASS_AUTOMATED",
+      "all_criteria_passed": true,
+      "matches": true
+    },
+    "reports/v6-phase6-audit.json": {
+      "exists": true,
+      "expected_verdict": "PASS",
+      "verdict": "PASS",
+      "all_criteria_passed": true,
+      "matches": true
+    },
+    "reports/v6-phase7-audit.json": {
+      "exists": true,
+      "expected_verdict": "PASS_AUTOMATED",
+      "verdict": "PASS_AUTOMATED",
+      "all_criteria_passed": true,
+      "matches": true
+    }
+  },
+  "phase_report_inventory": {
+    "reports/v6-phase0-baseline.json": {
+      "parsed": true,
+      "phase": "V6 Phase 0 - baseline and preservation",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 14
+    },
+    "reports/v6-phase1-audit.json": {
+      "parsed": true,
+      "phase": "V6 Phase 0 - baseline and preservation",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 14
+    },
+    "reports/v6-phase2-demo.json": {
+      "parsed": true,
+      "phase": "V6 Phase 2 - multi-agent orchestration demonstration",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 25
+    },
+    "reports/v6-phase3-audit.json": {
+      "parsed": true,
+      "phase": "V6 Phase 3 - character asset pipeline audit",
+      "verdict": "PASS",
+      "all_criteria_passed": null,
+      "top_level_fields": 20
+    },
+    "reports/v6-phase4-audit.json": {
+      "parsed": true,
+      "phase": "V6 Phase 4 - environment generation audit",
+      "verdict": "PASS",
+      "all_criteria_passed": true,
+      "top_level_fields": 18
+    },
+    "reports/v6-phase5-audit.json": {
+      "parsed": true,
+      "phase": "V6 Phase 5 - gameplay integration audit",
+      "verdict": "PASS_AUTOMATED",
+      "all_criteria_passed": true,
+      "top_level_fields": 17
+    },
+    "reports/v6-phase5-build-identity-perf.json": {
+      "parsed": true,
+      "phase": null,
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 20
+    },
+    "reports/v6-phase5-build-identity-verification.json": {
+      "parsed": true,
+      "phase": "V6 Phase 5 - independent build identity verification",
+      "verdict": "PASS",
+      "all_criteria_passed": null,
+      "top_level_fields": 17
+    },
+    "reports/v6-phase6-audit.json": {
+      "parsed": true,
+      "phase": "V6 Phase 6 - Free AI Intelligence",
+      "verdict": "PASS",
+      "all_criteria_passed": true,
+      "top_level_fields": 21
+    },
+    "reports/v6-phase7-audit.json": {
+      "parsed": true,
+      "phase": "V6 Phase 7 - Real AI Provider Validation and Game Generation",
+      "verdict": "PASS_AUTOMATED",
+      "all_criteria_passed": true,
+      "top_level_fields": 23
+    },
+    "reports/v6-phase7-baseline.json": {
+      "parsed": true,
+      "phase": "V6 Phase 7A - repository and baseline audit",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 11
+    },
+    "reports/v6-phase7-connectivity-diagnostics.json": {
+      "parsed": true,
+      "phase": "V6 Phase 7 - Gemini connectivity diagnostics",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 16
+    },
+    "reports/v6-phase7-game-spec.json": {
+      "parsed": true,
+      "phase": "V6 Phase 7F - idea to specification",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 23
+    },
+    "reports/v6-phase7-generation-bridge.json": {
+      "parsed": true,
+      "phase": "V6 Phase 7H - generation pipeline bridges",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 12
+    },
+    "reports/v6-phase7-live-validation-attempt2.json": {
+      "parsed": true,
+      "phase": null,
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 2
+    },
+    "reports/v6-phase7-live-validation-attempt3.json": {
+      "parsed": true,
+      "phase": null,
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 2
+    },
+    "reports/v6-phase7-live-validation.json": {
+      "parsed": true,
+      "phase": null,
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 2
+    },
+    "reports/v6-phase7-provider-evidence.json": {
+      "parsed": true,
+      "phase": null,
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 10
+    },
+    "reports/v6-phase7-provider-policy.json": {
+      "parsed": true,
+      "phase": "V6 Phase 7B - provider selection and free-tier policy",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 15
+    },
+    "reports/v6-phase7-quality-evaluation.json": {
+      "parsed": true,
+      "phase": "V6 Phase 7G - game design quality evaluation",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 11
+    },
+    "reports/v6-phase7-readiness.json": {
+      "parsed": true,
+      "phase": "V6 Phase 7 - provider readiness",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 27
+    },
+    "reports/v6-phase7-request-audit.json": {
+      "parsed": true,
+      "phase": null,
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 24
+    },
+    "reports/v6-phase7-requirements.json": {
+      "parsed": true,
+      "phase": "V6 Phase 7F - structured requirements",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 11
+    },
+    "reports/v6-phase7-timeout-fix.json": {
+      "parsed": true,
+      "phase": "V6 Phase 7 - Gemini HTTP timeout reliability fix",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 15
+    },
+    "reports/v6-phase7-timeout-validation.json": {
+      "parsed": true,
+      "phase": "V6 Phase 7 - timeout validation",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 14
+    },
+    "reports/v6-phase7-validation.json": {
+      "parsed": true,
+      "phase": "V6 Phase 7 - validation results",
+      "verdict": null,
+      "all_criteria_passed": null,
+      "top_level_fields": 13
+    }
+  },
+  "phase0_v4_v5_baseline": {
+    "path": "reports/v6-phase0-baseline.json",
+    "v4_files": 2,
+    "v5_artifacts": 13,
+    "v4_ok": true,
+    "v5_ok": true
+  },
+  "phase5_protection": {
+    "recorded_artifacts": 23,
+    "hashes_ok": true,
+    "missing_records": [],
+    "interfaces_ok": true,
+    "protected_git_clean": true,
+    "protected_git_status": []
+  },
+  "credential_access": {
+    "values_read": false,
+    "values_printed": false,
+    "reason": "Phase 8 never reads or prints stored credential values."
+  },
+  "network_calls": 0,
+  "verdict": "PASS"
+}

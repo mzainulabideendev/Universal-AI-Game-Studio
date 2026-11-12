@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 8 - production readiness",
+  "generated_at": "2026-11-12T04:38:27Z",
+  "verdict": "PASS_AUTOMATED_PENDING_HUMAN_REVIEW",
+  "automated_verdict": "PASS_AUTOMATED",
+  "all_automated_criteria_passed": true,
+  "human_review_required": true,
+  "human_review_status": "pending",
+  "criteria_passed": 45,
+  "criteria_total": 49,
+  "automated_failures": [],
+  "not_tested": [
+    "R13"
+  ],
+  "requires_human_review": [
+    "S12",
+    "S14",
+    "R3"
+  ],
+  "release_blockers": [],
+  "manual_review_items": [
+    "Confirm that the production scope and remaining limitations are acceptable.",
+    "Confirm that no live provider request is required for this release.",
+    "Confirm that Phase 9 is explicitly out of scope.",
+    "Confirm that generated game plans are still not authorized to execute."
+  ],
+  "no_network": true,
+  "no_credentials_read": true,
+  "no_protected_changes": true
+}

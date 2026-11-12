@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 8D - reliability audit",
+  "generated_at": "2026-11-12T04:38:27Z",
+  "checks": [
+    {
+      "id": "R1",
+      "area": "deadline",
+      "description": "A total wall-clock deadline is enforced",
+      "status": "PASS",
+      "evidence": {
+        "class": "_Deadline",
+        "watchdog": "expire_now",
+        "network_calls": 0
+      },
+      "notes": []
+    },
+    {
+      "id": "R2",
+      "area": "dns",
+      "description": "DNS resolution is bounded by the deadline",
+      "status": "PASS",
+      "evidence": {
+        "worker": "daemon llm-dns",
+        "bounded_join": true
+      },
+      "notes": []
+    },
+    {
+      "id": "R3",
+      "area": "dns",
+      "description": "DNS worker lifecycle cannot leak a permanently blocked call",
+      "status": "REQUIRES_HUMAN_REVIEW",
+      "evidence": {
+        "daemon": true,
+        "limitation": "getaddrinfo cannot be cancelled; a hung resolver leaves one daemon worker until the OS resolver returns. Repeated hung resolutions could accumulate workers. Not reproduced offline."
+      },
+      "notes": []
+    },
+    {
+      "id": "R4",
+      "area": "connect",
+      "description": "TCP connect has a bounded per-address budget",
+      "status": "PASS",
+      "evidence": {
+        "watchdog_registered_during_connect": false,
+        "limitation": "The watchdog closes the socket after TLS registration; the connect budget itself is enforced by the socket timeout."
+      },
+      "notes": []
+    },
+    {
+      "id": "R5",
+      "area": "tls",
+      "description": "TLS verifies certificates and hostnames with a bounded timeout",
+      "status": "PASS",
+      "evidence": {
+        "verify_mode": "CERT_REQUIRED",
+        "check_hostname": true
+      },
+      "notes": []
+    },
+    {
+      "id": "R6",
+      "area": "headers",
+      "description": "Response headers have a bounded deadline",
+      "status": "PASS",
+      "evidence": {
+        "timeout_kind": "http_response_timeout"
+      },
+      "notes": []
+    },
+    {
+      "id": "R7",
+      "area": "body",
+      "description": "The response body has a bounded deadline and truncation cap",
+      "status": "PASS",
+      "evidence": {
+        "max_bytes": 33554432
+      },
+      "notes": []
+    },
+    {
+      "id": "R8",
+      "area": "body",
+      "description": "A clean EOF at deadline expiry is reported as a timeout",
+      "status": "PASS",
+      "evidence": {
+        "new_guard": "post-body deadline check",
+        "test": "test_clean_eof_after_deadline_is_a_timeout_not_success"
+      },
+      "notes": []
+    },
+    {
+      "id": "R9",
+      "area": "incomplete",
+      "description": "Truncated, invalid and incomplete bodies are never parsed as JSON",
+      "status": "PASS",
+      "evidence": {
+        "truncated_parsed": false,
+        "invalid_parsed": false,
+        "valid_parsed": true
+      },
+      "notes": []
+    },
+    {
+      "id": "R10",
+      "area": "errors",
+      "description": "Transport failures return structured stage-aware errors",
+      "status": "PASS",
+      "evidence": {
+        "kinds": [
+          "dns_timeout",
+          "connection_timeout",
+          "tls_failure",
+          "http_response_timeout",
+          "response_body_timeout",
+          "response_body_incomplete",
+          "deadline_exceeded",
+          "partial_response"
+        ]
+      },
+      "notes": []
+    },
+    {
+      "id": "R11",
+      "area": "cleanup",
+      "description": "Sockets and responses are closed after success, failure and cancellation",
+      "status": "PASS",
+      "evidence": {
+        "finally_blocks": 2,
+        "watchdog_stopped": true,
+        "response_closed": true
+      },
+      "notes": []
+    },
+    {
+      "id": "R12",
+      "area": "ssrf",
+      "description": "The bounded transport refuses private addresses",
+      "status": "PASS",
+      "evidence": {
+        "blocked_kind": "blocked_private_address"
+      },
+      "notes": []
+    },
+    {
+      "id": "R13",
+      "area": "deadline",
+      "description": "Deadline cancellation is verified against a real OS socket",
+      "status": "NOT_TESTED",
+      "evidence": {
+        "reason": "All transport tests mock DNS, sockets and TLS. Mocked tests do not prove operating-system socket cancellation, and Phase 8 is forbidden from making a live network request."
+      },
+      "notes": []
+    },
+    {
+      "id": "R14",
+      "area": "retry",
+      "description": "Transport failure is not retried and never falls back to a paid provider",
+      "status": "PASS",
+      "evidence": {
+        "phase7_retries": 0,
+        "paid_fallback": false,
+        "note": "The recorded Phase 7 fallback is a deterministic plan, not a paid provider."
+      },
+      "notes": []
+    }
+  ],
+  "status_counts": {
+    "PASS": 12,
+    "FAIL": 0,
+    "BLOCKED": 0,
+    "NOT_TESTED": 1,
+    "REQUIRES_HUMAN_REVIEW": 1
+  },
+  "fixes": [
+    {
+      "path": "tools/game-studio-mcp/game_studio/llm/bounded_http.py",
+      "change": "post-body deadline guard: a clean EOF after deadline expiry is reported as deadline_exceeded, never as success"
+    }
+  ]
+}
