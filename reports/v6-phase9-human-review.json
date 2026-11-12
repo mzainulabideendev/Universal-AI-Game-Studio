@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "phase": "V6 Phase 9 - human review decisions",
-  "generated_at": "2026-11-12T05:34:36Z",
-  "policy": "This audit never fabricates approval. Every item below remains PENDING_USER_DECISION until the user explicitly approves it.",
-  "gate": "STOPPED_AT_HUMAN_DECISION_BOUNDARY",
+  "generated_at": "2026-11-12T05:47:42Z",
+  "policy": "This audit never fabricates approval. Decisions below were supplied explicitly by the user during the Phase 9 human review and only approve the documented limitations and mitigations.",
+  "gate": "HUMAN_REVIEW_COMPLETE",
   "no_live_provider_rule_in_force": true,
-  "head_at_review": "e3cc32960e2eff0c04212928eac31004cef8165b",
+  "head_at_review": "fe28ba1d86793c4105f7497224f74e4032ae0a98",
   "items": [
     {
       "id": "S12",
@@ -19,7 +19,7 @@
       ],
       "remaining_risk": "An asset that passes path validation may still contain malicious or incompatible engine content. Enabling automated import without a separate review would widen the trust boundary.",
       "recommended_decision": "ACCEPT_SCOPE_WITH_CONDITION",
-      "conditions": [
+      "audit_recommended_conditions": [
         "Keep automated import disabled for this release candidate.",
         "Require a separate human-approved import test before enabling it.",
         "Do not describe downloaded assets as engine-verified."
@@ -31,7 +31,13 @@
       "consequences_if_rejected": [
         "The release candidate must block all asset download features, not only import, or add import-time validation before release."
       ],
-      "decision": "PENDING_USER_DECISION"
+      "decision": "ACCEPTED_WITH_CONDITIONS",
+      "conditions": [
+        "Engine asset import remains disabled and unverified.",
+        "Do not enable automatic engine imports.",
+        "Any future import validation must be a separate, explicitly authorized task with evidence from an actual engine import."
+      ],
+      "approval_source": "Explicit user instruction in the Phase 9 human-review decision record"
     },
     {
       "id": "S14",
@@ -45,7 +51,7 @@
       ],
       "remaining_risk": "Live connectivity, provider terms, model quality, latency and prompt-injection behaviour are unverified. Offline fixtures cannot prove live behaviour.",
       "recommended_decision": "ACCEPT_OFFLINE_ONLY_WITH_DISCLOSURE",
-      "conditions": [
+      "audit_recommended_conditions": [
         "Keep the no-live-provider rule in force for this release candidate.",
         "Do not claim live AI works or that model output was verified.",
         "Authorize any future live request separately, per request."
@@ -56,7 +62,13 @@
       "consequences_if_rejected": [
         "A separately approved live validation must be completed before the release candidate can advance."
       ],
-      "decision": "PENDING_USER_DECISION"
+      "decision": "ACCEPTED_WITH_CONDITIONS",
+      "conditions": [
+        "Keep the no-live-provider restriction in place.",
+        "Do not claim successful live AI provider integration.",
+        "Any future live API request requires separate explicit authorization, verified free-tier eligibility, and secure local credentials."
+      ],
+      "approval_source": "Explicit user instruction in the Phase 9 human-review decision record"
     },
     {
       "id": "R3",
@@ -70,7 +82,7 @@
       ],
       "remaining_risk": "Four permanently hung OS resolver calls would occupy the whole pool, after which new DNS requests fail fast. This is bounded but still a denial-of-DNS condition until the OS resolver returns or the process restarts.",
       "recommended_decision": "ACCEPT_BOUNDED_MITIGATION",
-      "conditions": [
+      "audit_recommended_conditions": [
         "Document the residual denial-of-DNS condition in release notes.",
         "Monitor dns_capacity_exhausted and dns_timeout outcomes.",
         "Revisit process-isolated resolution only if observation shows repeated capacity exhaustion."
@@ -81,15 +93,31 @@
       "consequences_if_rejected": [
         "A separately terminable resolver process must be built and proven before release, which adds subprocess lifecycle risk."
       ],
-      "decision": "PENDING_USER_DECISION"
+      "decision": "ACCEPTED_WITH_CONDITIONS",
+      "conditions": [
+        "Treat the fixed four-worker DNS resolver pool as a bounded mitigation, not as complete cancellation or termination.",
+        "Preserve the dns_capacity_exhausted and dns_timeout diagnostics.",
+        "Document that hung resolver operations may continue and that operating-system-level cancellation remains unproven."
+      ],
+      "approval_source": "Explicit user instruction in the Phase 9 human-review decision record"
     }
   ],
-  "pending_decisions": [
+  "pending_decisions": [],
+  "approved_decisions": [
     "S12",
     "S14",
     "R3"
   ],
-  "approved_decisions": [],
-  "human_approval_granted": false,
+  "human_approval_granted": true,
+  "approval_scope": "The recorded decisions approve the documented limitations and mitigations only. They do NOT authorize a public release, production-ready status, Phase 10, live API requests, engine builds, or automatic asset imports.",
+  "approval_scope_limits": [
+    "No public release or distribution.",
+    "No production-ready status claim.",
+    "No Phase 10 start.",
+    "No live API requests.",
+    "No engine builds.",
+    "No automatic asset imports."
+  ],
+  "decision_provenance": "Explicit user instruction in the Phase 9 human-review decision record",
   "recommended_combined_outcome": "Accept S12 with import disabled, accept S14 as offline-only, and accept R3 as bounded mitigation with monitoring."
 }

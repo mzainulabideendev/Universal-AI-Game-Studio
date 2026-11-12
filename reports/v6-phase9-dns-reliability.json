@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "phase": "V6 Phase 9 - DNS resolver reliability",
-  "generated_at": "2026-11-12T05:34:36Z",
+  "generated_at": "2026-11-12T05:47:42Z",
   "verdict": "PASS_WITH_DOCUMENTED_LIMITATION",
   "design": {
     "mechanism": "fixed-size daemon resolver pool (max 4 workers)",
@@ -49,7 +49,7 @@
           "kind": "dns_timeout",
           "timed_out": true,
           "message": "DNS resolution did not finish within the deadline; the lookup was abandoned, not cancelled",
-          "elapsed_ms": 155
+          "elapsed_ms": 139
         },
         "stats": {
           "max_workers": 2,
@@ -176,8 +176,26 @@
     "NOT_TESTED": 0,
     "REQUIRES_HUMAN_REVIEW": 0
   },
+  "human_review": {
+    "id": "R3",
+    "decision": "ACCEPTED_WITH_CONDITIONS",
+    "resolved_by": "Explicit user instruction in the Phase 9 human-review decision record",
+    "conditions": [
+      "Treat the fixed four-worker DNS resolver pool as a bounded mitigation, not as complete cancellation or termination.",
+      "Preserve the dns_capacity_exhausted and dns_timeout diagnostics.",
+      "Document that hung resolver operations may continue and that operating-system-level cancellation remains unproven."
+    ],
+    "accepted_as": "bounded mitigation, not complete cancellation or termination",
+    "diagnostics_preserved": [
+      "dns_capacity_exhausted",
+      "dns_timeout"
+    ],
+    "os_level_cancellation_proven": false,
+    "hung_operations_may_continue": true
+  },
   "limitations": [
     "Python cannot cancel an in-flight getaddrinfo call. A timed-out caller stops waiting; the worker remains occupied until the OS resolver returns.",
+    "Hung resolver operations may continue after the caller has stopped waiting; operating-system-level cancellation remains unproven.",
     "If every pool worker is occupied by a hung lookup, subsequent lookups fail fast with dns_capacity_exhausted instead of growing threads.",
     "This is a bounded degradation, not demonstrated OS-level termination.",
     "TLS hostname and certificate verification are unchanged."

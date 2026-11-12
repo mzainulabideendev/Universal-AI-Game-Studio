@@ -2,12 +2,13 @@
 
 **Product:** UNIVERSAL AI GAME STUDIO  
 **Tagline:** From Game Idea to Playable World.  
-**Generated:** 2026-11-12T05:34:36Z  
-**HEAD:** `e3cc32960e2eff0c04212928eac31004cef8165b`  
+**Generated:** 2026-11-12T05:47:42Z  
+**HEAD:** `fe28ba1d86793c4105f7497224f74e4032ae0a98`  
 **Declared Phase 8 baseline HEAD:** `dec25407bf85942c6ce70630e06b8515c3c75cf9`  
-**Final decision:** `PASS_AUTOMATED_PENDING_HUMAN_REVIEW`  
+**Final decision:** `PASS_AUTOMATED`  
 **Production ready:** `false`  
-**Released:** `false`
+**Released:** `false`  
+**Release authorized:** `false`
 
 ---
 
@@ -15,31 +16,36 @@
 
 Phase 9 completed its offline release-candidate audit with **515 tests** and result **OK**. The suite grew from 491 to 515 tests.
 
-The final decision is **PASS_AUTOMATED_PENDING_HUMAN_REVIEW**. All automated criteria passed. This is **not** a production-readiness claim, a live-provider claim, an engine-verification claim for Phase 9, or authorization to release.
+The final decision is **PASS_AUTOMATED**. All automated criteria passed, and the human-review decisions for S12, S14 and R3 were recorded as **ACCEPTED_WITH_CONDITIONS**. This is **not** a production-readiness claim, a live-provider claim, an engine-verification claim for Phase 9, or authorization to release.
 
 - MCP tools / handlers: **107 / 107** (exact: `true`)
 - Protected hashes: **38** checked, all match: `true`
 - Protected Git paths clean: `true`
 - Network calls / credentials read: **0 / false**
-- Pending human decisions: **S12, S14, R3**
+- Human-review decisions recorded: **S12, S14, R3**
+- Pending human decisions: **none**
 
 ## 2. Baseline and repository state
 
 | Item | Measured |
 | --- | --- |
 | Branch | `main` |
-| HEAD | `e3cc32960e2eff0c04212928eac31004cef8165b` |
+| HEAD | `fe28ba1d86793c4105f7497224f74e4032ae0a98` |
 | Declared baseline | `dec25407bf85942c6ce70630e06b8515c3c75cf9` |
-| Commits since declared baseline | 1 |
+| Commits since declared baseline | 2 |
 | Working tree dirty | `true` |
 | Tests | 515 / expected 515 |
 | Tools / handlers | 107 / 107 |
 
-The declared baseline `dec2540` is an ancestor of the actual HEAD `e3cc329`. The Phase 8 work was committed after its own audit; Phase 9 preserved and built on it without resetting, cleaning or rewriting it. Phase 9 performed no Git write.
+The declared baseline `dec2540` is an ancestor of the actual HEAD `fe28ba1`. The Phase 8 work was committed after its own audit; Phase 9 preserved and built on it without resetting, cleaning or rewriting it. Phase 9 performed no Git write.
 
-## 3. Human-review decisions (pending)
+## 3. Human-review decisions (recorded)
 
-Gate: `STOPPED_AT_HUMAN_DECISION_BOUNDARY`. **No item was approved by this audit.**
+Gate: `HUMAN_REVIEW_COMPLETE`. The user explicitly recorded S12, S14 and R3 as `ACCEPTED_WITH_CONDITIONS`. This audit did not invent those decisions.
+
+Provenance: Explicit user instruction in the Phase 9 human-review decision record.
+
+Scope: The recorded decisions approve the documented limitations and mitigations only. They do NOT authorize a public release, production-ready status, Phase 10, live API requests, engine builds, or automatic asset imports.
 
 These identifiers are the Phase 8 criterion IDs. Phase 9 security checks use `SEC`-prefixed IDs to avoid collision.
 
@@ -51,15 +57,23 @@ These identifiers are the Phase 8 criterion IDs. Phase 9 security checks use `SE
 
 **Remaining risk:** An asset that passes path validation may still contain malicious or incompatible engine content. Enabling automated import without a separate review would widen the trust boundary.
 
-**Recommended decision:** `ACCEPT_SCOPE_WITH_CONDITION`
+**Decision:** `ACCEPTED_WITH_CONDITIONS` (approval source: Explicit user instruction in the Phase 9 human-review decision record)
 
-**Conditions:** Keep automated import disabled for this release candidate. Require a separate human-approved import test before enabling it. Do not describe downloaded assets as engine-verified.
+**Approved conditions:**
+
+- Engine asset import remains disabled and unverified.
+- Do not enable automatic engine imports.
+- Any future import validation must be a separate, explicitly authorized task with evidence from an actual engine import.
+
+**Audit-recommended conditions:**
+
+- Keep automated import disabled for this release candidate.
+- Require a separate human-approved import test before enabling it.
+- Do not describe downloaded assets as engine-verified.
 
 **If accepted:** Release candidate remains honest about unverified import. Asset pipeline stays specification/download-only.
 
 **If rejected:** The release candidate must block all asset download features, not only import, or add import-time validation before release.
-
-**Decision:** `PENDING_USER_DECISION`
 
 ### S14 - No-live-provider decision
 
@@ -69,15 +83,23 @@ These identifiers are the Phase 8 criterion IDs. Phase 9 security checks use `SE
 
 **Remaining risk:** Live connectivity, provider terms, model quality, latency and prompt-injection behaviour are unverified. Offline fixtures cannot prove live behaviour.
 
-**Recommended decision:** `ACCEPT_OFFLINE_ONLY_WITH_DISCLOSURE`
+**Decision:** `ACCEPTED_WITH_CONDITIONS` (approval source: Explicit user instruction in the Phase 9 human-review decision record)
 
-**Conditions:** Keep the no-live-provider rule in force for this release candidate. Do not claim live AI works or that model output was verified. Authorize any future live request separately, per request.
+**Approved conditions:**
+
+- Keep the no-live-provider restriction in place.
+- Do not claim successful live AI provider integration.
+- Any future live API request requires separate explicit authorization, verified free-tier eligibility, and secure local credentials.
+
+**Audit-recommended conditions:**
+
+- Keep the no-live-provider rule in force for this release candidate.
+- Do not claim live AI works or that model output was verified.
+- Authorize any future live request separately, per request.
 
 **If accepted:** Release candidate is an offline-verified build with AI unavailable unless a later human-approved live test succeeds.
 
 **If rejected:** A separately approved live validation must be completed before the release candidate can advance.
-
-**Decision:** `PENDING_USER_DECISION`
 
 ### R3 - DNS resolver resource accumulation
 
@@ -87,15 +109,23 @@ These identifiers are the Phase 8 criterion IDs. Phase 9 security checks use `SE
 
 **Remaining risk:** Four permanently hung OS resolver calls would occupy the whole pool, after which new DNS requests fail fast. This is bounded but still a denial-of-DNS condition until the OS resolver returns or the process restarts.
 
-**Recommended decision:** `ACCEPT_BOUNDED_MITIGATION`
+**Decision:** `ACCEPTED_WITH_CONDITIONS` (approval source: Explicit user instruction in the Phase 9 human-review decision record)
 
-**Conditions:** Document the residual denial-of-DNS condition in release notes. Monitor dns_capacity_exhausted and dns_timeout outcomes. Revisit process-isolated resolution only if observation shows repeated capacity exhaustion.
+**Approved conditions:**
+
+- Treat the fixed four-worker DNS resolver pool as a bounded mitigation, not as complete cancellation or termination.
+- Preserve the dns_capacity_exhausted and dns_timeout diagnostics.
+- Document that hung resolver operations may continue and that operating-system-level cancellation remains unproven.
+
+**Audit-recommended conditions:**
+
+- Document the residual denial-of-DNS condition in release notes.
+- Monitor dns_capacity_exhausted and dns_timeout outcomes.
+- Revisit process-isolated resolution only if observation shows repeated capacity exhaustion.
 
 **If accepted:** No unbounded thread growth; degradation is explicit and testable.
 
 **If rejected:** A separately terminable resolver process must be built and proven before release, which adds subprocess lifecycle risk.
-
-**Decision:** `PENDING_USER_DECISION`
 
 ## 4. DNS resolver reliability
 
@@ -116,9 +146,17 @@ Verdict: **PASS_WITH_DOCUMENTED_LIMITATION**. Mechanism: a fixed-size daemon res
 
 The pool prevents unbounded thread accumulation. It does **not** cancel an in-flight `getaddrinfo`; a timed-out caller stops waiting and the worker is reclaimed only when the OS call returns. If all workers hang, new lookups fail fast with `dns_capacity_exhausted`.
 
+**R3 decision:** `ACCEPTED_WITH_CONDITIONS` - accepted as bounded mitigation, not complete cancellation or termination. OS-level cancellation proven: `false`. Diagnostics preserved: `dns_capacity_exhausted`, `dns_timeout`.
+
+**Approved conditions:**
+
+- Treat the fixed four-worker DNS resolver pool as a bounded mitigation, not as complete cancellation or termination.
+- Preserve the dns_capacity_exhausted and dns_timeout diagnostics.
+- Document that hung resolver operations may continue and that operating-system-level cancellation remains unproven.
+
 ## 5. Security audit
 
-Verdict: **PASS_WITH_HUMAN_REVIEW** (16 pass, 2 human review, 1 not tested, 0 fail).
+Verdict: **PASS_WITH_DOCUMENTED_LIMITATION** (18 pass, 0 human review, 1 not tested, 0 fail).
 
 | id | description | status |
 | --- | --- | --- |
@@ -135,8 +173,8 @@ Verdict: **PASS_WITH_HUMAN_REVIEW** (16 pass, 2 human review, 1 not tested, 0 fa
 | SEC11 | Private, loopback, link-local and mapped addresses are refused | PASS |
 | SEC12 | Commands run without a shell and with a timeout | PASS |
 | SEC13 | Malformed Content-Length is rejected, not raised | PASS |
-| SEC14 | Untrusted engine asset import remains out of scope and unperformed | REQUIRES_HUMAN_REVIEW |
-| SEC15 | Untrusted target content is treated as data, not instructions | REQUIRES_HUMAN_REVIEW |
+| SEC14 | Untrusted engine asset import remains out of scope and unperformed | PASS |
+| SEC15 | Untrusted target content is treated as data, not instructions | PASS |
 | SEC17 | Manifest status guards and provenance tamper detection work | PASS |
 | SEC18 | Provider credentials resolve from the environment or private config only | PASS |
 | SEC19 | No credential value is read or printed by the audit | PASS |
@@ -181,7 +219,7 @@ Phase 8 fixes preserved:
 | human_approval | True | True | True | False | False | False |
 | evidence | True | True | True | False | False | False |
 
-`engine=True` for gameplay integration refers only to recorded Phase 5 evidence. Phase 9 ran no engine. No stage is live-provider verified and no stage is human-approved.
+`engine=True` for gameplay integration refers only to recorded Phase 5 evidence. Phase 9 ran no engine. No stage is live-provider verified. The recorded human decisions accept documented limitations; they are not release approval for any stage.
 
 ## 8. Release-candidate quality
 
@@ -189,7 +227,7 @@ Phase 8 fixes preserved:
 | --- | --- | --- |
 | application_architecture | PASS | layered game_studio modules; no new runtime dependency |
 | mcp_tool_handler_consistency | PASS | 107 tools / 107 handlers, exact=True |
-| security | PASS_WITH_HUMAN_REVIEW | 16 pass, 2 human review, 1 not tested, 0 fail |
+| security | PASS_WITH_DOCUMENTED_LIMITATION | 18 pass, 0 human review, 1 not tested, 0 fail |
 | reliability | PASS_WITH_DOCUMENTED_LIMITATION | 10 DNS checks pass; termination not claimed |
 | provider_quota_policies | PASS_OFFLINE_ONLY | free-only routing, paid refusal and unknown quota handling tested |
 | error_handling | PASS | structured transport errors; malformed input refused |
@@ -198,7 +236,7 @@ Phase 8 fixes preserved:
 | windows_compatibility | PASS | suite executed on Windows 11 with Python 3.12.10 |
 | test_reproducibility | PASS | 515/515 offline tests, passed=True |
 | known_limitations | PASS | listed in every report and in the markdown |
-| outstanding_human_decisions | REQUIRES_HUMAN_REVIEW | ['S12', 'S14', 'R3'] |
+| outstanding_human_decisions | PASS | S12, S14 and R3 recorded as ACCEPTED_WITH_CONDITIONS; release approval not granted |
 
 ## 9. Known limitations
 
@@ -206,12 +244,14 @@ Phase 8 fixes preserved:
 - No Unity or Blender process ran in Phase 9; engine claims rely on recorded Phase 5 evidence only.
 - Character and environment pipelines are specification bridges; no asset was imported or rendered in Phase 9.
 - R13 (real OS socket cancellation) remains NOT_TESTED.
-- A hung getaddrinfo still cannot be cancelled; the resolver pool only bounds accumulation.
+- A hung getaddrinfo still cannot be cancelled; the resolver pool only bounds accumulation. R3 was accepted as a bounded mitigation with this limitation documented.
 - Automated tests pass does not mean the product is production-ready.
 
 ## 10. Final decision
 
-**PASS_AUTOMATED_PENDING_HUMAN_REVIEW**
+**PASS_AUTOMATED**
 
-Automated: PASS. Human review: PENDING. Release: NOT AUTHORIZED. Production readiness: NOT CLAIMED. Phase 10: NOT STARTED.
+Automated: PASS. Human-review decisions: RECORDED (S12, S14, R3 ACCEPTED_WITH_CONDITIONS). Release: NOT AUTHORIZED. Production readiness: NOT CLAIMED. Phase 10: NOT STARTED.
+
+The recorded decisions approve the documented limitations and mitigations only. They do not authorize a public release, production-ready status, Phase 10, live API requests, engine builds or automatic asset imports.
 

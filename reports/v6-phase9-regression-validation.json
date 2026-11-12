@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "phase": "V6 Phase 9 - regression validation",
-  "generated_at": "2026-11-12T05:33:39Z",
+  "generated_at": "2026-11-12T05:46:40Z",
   "baseline_tests": 491,
   "current_tests": 515,
   "expected_current_tests": 515,
@@ -11,9 +11,9 @@
     "passed": true,
     "expected": 515,
     "exact": true,
-    "duration_seconds": 55.222,
+    "duration_seconds": 60.205,
     "command": "python -m unittest discover -s tools/game-studio-mcp/tests -q",
-    "tail": "----------------------------------------------------------------------\nRan 515 tests in 55.222s\n\nOK",
+    "tail": "----------------------------------------------------------------------\nRan 515 tests in 60.205s\n\nOK",
     "exit_code": 0
   },
   "new_test_file": "tools/game-studio-mcp/tests/test_v6_phase9_release_candidate.py",

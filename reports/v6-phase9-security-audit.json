@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "phase": "V6 Phase 9 - production security hardening",
-  "generated_at": "2026-11-12T05:34:36Z",
-  "verdict": "PASS_WITH_HUMAN_REVIEW",
+  "generated_at": "2026-11-12T05:47:42Z",
+  "verdict": "PASS_WITH_DOCUMENTED_LIMITATION",
   "checks": [
     {
       "id": "SEC1",
@@ -176,10 +176,19 @@
       "id": "SEC14",
       "area": "asset-import",
       "description": "Untrusted engine asset import remains out of scope and unperformed",
-      "status": "REQUIRES_HUMAN_REVIEW",
+      "status": "PASS",
       "evidence": {
         "performed": false,
-        "note": "No asset is imported into Unity or Blender in Phase 9. Import-time validation and licensing acceptance need a human decision before any import is enabled."
+        "prior_status": "REQUIRES_HUMAN_REVIEW",
+        "human_review_id": "S12",
+        "resolution": "ACCEPTED_WITH_CONDITIONS",
+        "resolved_by": "Explicit user instruction in the Phase 9 human-review decision record",
+        "approved_conditions": [
+          "Engine asset import remains disabled and unverified.",
+          "Do not enable automatic engine imports.",
+          "Any future import validation must be a separate, explicitly authorized task with evidence from an actual engine import."
+        ],
+        "note": "The user accepted that import stays disabled and unverified. No asset is imported into Unity or Blender in Phase 9. Any future import validation requires separate explicit authorization with evidence from an actual engine import."
       },
       "notes": []
     },
@@ -187,11 +196,20 @@
       "id": "SEC15",
       "area": "untrusted-content",
       "description": "Untrusted target content is treated as data, not instructions",
-      "status": "REQUIRES_HUMAN_REVIEW",
+      "status": "PASS",
       "evidence": {
         "code_guard": "response_validation marks untrusted_input and the reasoning system prompt forbids following target instructions",
         "live_content_processed": false,
-        "note": "No model or web content was processed in Phase 9; policy acceptance remains a human decision."
+        "prior_status": "REQUIRES_HUMAN_REVIEW",
+        "human_review_id": "S14",
+        "resolution": "ACCEPTED_WITH_CONDITIONS",
+        "resolved_by": "Explicit user instruction in the Phase 9 human-review decision record",
+        "approved_conditions": [
+          "Keep the no-live-provider restriction in place.",
+          "Do not claim successful live AI provider integration.",
+          "Any future live API request requires separate explicit authorization, verified free-tier eligibility, and secure local credentials."
+        ],
+        "note": "The user accepted the offline-only release candidate and the data-not-instructions policy. No model or web content was processed in Phase 9; the no-live-provider rule stays in force."
       },
       "notes": []
     },
@@ -245,12 +263,31 @@
     }
   ],
   "counts": {
-    "PASS": 16,
+    "PASS": 18,
     "FAIL": 0,
     "BLOCKED": 0,
     "NOT_TESTED": 1,
-    "REQUIRES_HUMAN_REVIEW": 2
+    "REQUIRES_HUMAN_REVIEW": 0
   },
+  "resolved_human_reviews": {
+    "S12": {
+      "phase9_check": "SEC14",
+      "decision": "ACCEPTED_WITH_CONDITIONS"
+    },
+    "S14": {
+      "phase9_check": "SEC15",
+      "decision": "ACCEPTED_WITH_CONDITIONS"
+    }
+  },
+  "decision_provenance": "Explicit user instruction in the Phase 9 human-review decision record",
+  "approval_scope_limits": [
+    "No public release or distribution.",
+    "No production-ready status claim.",
+    "No Phase 10 start.",
+    "No live API requests.",
+    "No engine builds.",
+    "No automatic asset imports."
+  ],
   "hardening_changes": [
     "assets.py: provider paths reject Windows stream separators, reserved device names, control characters and trailing dots/spaces.",
     "util.py: URLs with embedded credentials are rejected; malformed or negative Content-Length is refused; more credential headers redacted.",

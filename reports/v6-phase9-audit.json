@@ -2,52 +2,82 @@
   "schema_version": 1,
   "phase": "V6 Phase 9 - release candidate audit",
   "tagline": "From Game Idea to Playable World.",
-  "generated_at": "2026-11-12T05:33:39Z",
-  "verdict": "PASS_AUTOMATED_PENDING_HUMAN_REVIEW",
+  "generated_at": "2026-11-12T05:46:40Z",
+  "verdict": "PASS_AUTOMATED",
   "automated_verdict": "PASS_AUTOMATED",
   "all_automated_criteria_passed": true,
   "production_ready": false,
   "released": false,
-  "human_review_required": true,
-  "human_review_status": "pending",
+  "release_authorized": false,
+  "human_review_required": false,
+  "human_review_status": "complete",
   "human_approval_granted": false,
-  "pending_human_decisions": [
-    "S12",
-    "S14",
-    "R3"
+  "human_review_decisions_recorded": true,
+  "human_review_decisions": {
+    "S12": {
+      "decision": "ACCEPTED_WITH_CONDITIONS",
+      "conditions": [
+        "Engine asset import remains disabled and unverified.",
+        "Do not enable automatic engine imports.",
+        "Any future import validation must be a separate, explicitly authorized task with evidence from an actual engine import."
+      ]
+    },
+    "S14": {
+      "decision": "ACCEPTED_WITH_CONDITIONS",
+      "conditions": [
+        "Keep the no-live-provider restriction in place.",
+        "Do not claim successful live AI provider integration.",
+        "Any future live API request requires separate explicit authorization, verified free-tier eligibility, and secure local credentials."
+      ]
+    },
+    "R3": {
+      "decision": "ACCEPTED_WITH_CONDITIONS",
+      "conditions": [
+        "Treat the fixed four-worker DNS resolver pool as a bounded mitigation, not as complete cancellation or termination.",
+        "Preserve the dns_capacity_exhausted and dns_timeout diagnostics.",
+        "Document that hung resolver operations may continue and that operating-system-level cancellation remains unproven."
+      ]
+    }
+  },
+  "decision_provenance": "Explicit user instruction in the Phase 9 human-review decision record",
+  "approval_scope": "The recorded decisions approve the documented limitations and mitigations only. They do NOT authorize a public release, production-ready status, Phase 10, live API requests, engine builds, or automatic asset imports.",
+  "approval_scope_limits": [
+    "No public release or distribution.",
+    "No production-ready status claim.",
+    "No Phase 10 start.",
+    "No live API requests.",
+    "No engine builds.",
+    "No automatic asset imports."
   ],
+  "pending_human_decisions": [],
   "final_decision_options_considered": [
     "PASS_AUTOMATED",
     "PASS_AUTOMATED_PENDING_HUMAN_REVIEW",
     "BLOCKED",
     "NOT_READY_FOR_RELEASE"
   ],
-  "final_decision_rationale": "All automated checks pass, so the result is not BLOCKED or NOT_READY. S12, S14 and R3 still require explicit user decisions, so the result cannot be PASS_AUTOMATED.",
+  "final_decision_rationale": "All automated checks pass, so the result is not BLOCKED or NOT_READY. The explicit human-review decisions for S12, S14 and R3 are recorded as ACCEPTED_WITH_CONDITIONS with no pending decisions, so the result is PASS_AUTOMATED. Those decisions approve documented limitations only and do not authorize a release, production-ready status or Phase 10.",
   "repository": {
-    "head": "e3cc32960e2eff0c04212928eac31004cef8165b",
+    "head": "fe28ba1d86793c4105f7497224f74e4032ae0a98",
     "branch": "main",
     "baseline_head_declared_in_task": "dec25407bf85942c6ce70630e06b8515c3c75cf9",
     "head_differs_from_declared_baseline": true,
-    "head_explanation": "Phase 8 work was committed as e3cc329 after the Phase 8 audit; the declared dec2540 baseline is an ancestor. Phase 9 did not commit.",
-    "last_commit": "e3cc32960e2eff0c04212928eac31004cef8165b Add V6 Phase 8 regression tests for integration and safety fixes",
+    "head_explanation": "The declared dec2540 Phase 8 baseline is an ancestor of the actual HEAD. Phase 8 work was committed as e3cc329 after the Phase 8 audit, and a later repository commit contains the Phase 9 work. This audit made no Git write: it only regenerated report files.",
+    "last_commit": "fe28ba1d86793c4105f7497224f74e4032ae0a98 Add unit tests for V6 Phase 9 release candidate features",
     "commits_since_declared_baseline": [
+      "fe28ba1 Add unit tests for V6 Phase 9 release candidate features",
       "e3cc329 Add V6 Phase 8 regression tests for integration and safety fixes"
     ],
     "working_tree_status": [
-      "M tools/game-studio-mcp/game_studio/assets.py",
-      " M tools/game-studio-mcp/game_studio/llm/bounded_http.py",
-      " M tools/game-studio-mcp/game_studio/llm/providers.py",
-      " M tools/game-studio-mcp/game_studio/util.py",
-      "?? V6-PHASE-9-RELEASE-CANDIDATE.md",
-      "?? reports/v6-phase9-audit.json",
-      "?? reports/v6-phase9-baseline.json",
-      "?? reports/v6-phase9-dns-reliability.json",
-      "?? reports/v6-phase9-human-review.json",
-      "?? reports/v6-phase9-regression-validation.json",
-      "?? reports/v6-phase9-release-candidate.json",
-      "?? reports/v6-phase9-security-audit.json",
-      "?? scripts/v6-phase9-audit.py",
-      "?? tools/game-studio-mcp/tests/test_v6_phase9_release_candidate.py"
+      "M V6-PHASE-9-RELEASE-CANDIDATE.md",
+      " M reports/v6-phase9-audit.json",
+      " M reports/v6-phase9-baseline.json",
+      " M reports/v6-phase9-dns-reliability.json",
+      " M reports/v6-phase9-human-review.json",
+      " M reports/v6-phase9-regression-validation.json",
+      " M reports/v6-phase9-release-candidate.json",
+      " M reports/v6-phase9-security-audit.json",
+      " M scripts/v6-phase9-audit.py"
     ],
     "working_tree_dirty": true,
     "git_writes_by_phase9": 0,
@@ -68,7 +98,7 @@
     },
     "discrepancy": {
       "detected": true,
-      "explanation": "Phase 8 work was committed as e3cc329 after the Phase 8 audit; the declared dec2540 baseline is an ancestor. Phase 9 did not commit.",
+      "explanation": "The declared dec2540 Phase 8 baseline is an ancestor of the actual HEAD. Phase 8 work was committed as e3cc329 after the Phase 8 audit, and a later repository commit contains the Phase 9 work. This audit made no Git write: it only regenerated report files.",
       "phase8_changes_preserved": true
     }
   },
@@ -90,9 +120,9 @@
     "passed": true,
     "expected": 515,
     "exact": true,
-    "duration_seconds": 55.222,
+    "duration_seconds": 60.205,
     "command": "python -m unittest discover -s tools/game-studio-mcp/tests -q",
-    "tail": "----------------------------------------------------------------------\nRan 515 tests in 55.222s\n\nOK",
+    "tail": "----------------------------------------------------------------------\nRan 515 tests in 60.205s\n\nOK",
     "exit_code": 0
   },
   "mcp": {
@@ -232,13 +262,13 @@
     }
   },
   "security": {
-    "verdict": "PASS_WITH_HUMAN_REVIEW",
+    "verdict": "PASS_WITH_DOCUMENTED_LIMITATION",
     "counts": {
-      "PASS": 16,
+      "PASS": 18,
       "FAIL": 0,
       "BLOCKED": 0,
       "NOT_TESTED": 1,
-      "REQUIRES_HUMAN_REVIEW": 2
+      "REQUIRES_HUMAN_REVIEW": 0
     }
   },
   "regression": {
@@ -249,13 +279,13 @@
     "phase8_preserved": true
   },
   "release_candidate": {
-    "verdict": "PASS_AUTOMATED_PENDING_HUMAN_REVIEW",
+    "verdict": "PASS_AUTOMATED",
     "quality_counts": {
-      "PASS": 11,
+      "PASS": 12,
       "FAIL": 0,
       "BLOCKED": 0,
       "NOT_TESTED": 0,
-      "REQUIRES_HUMAN_REVIEW": 1
+      "REQUIRES_HUMAN_REVIEW": 0
     },
     "release_blockers": []
   },
@@ -287,7 +317,7 @@
     "No Unity or Blender process ran in Phase 9; engine claims rely on recorded Phase 5 evidence only.",
     "Character and environment pipelines are specification bridges; no asset was imported or rendered in Phase 9.",
     "R13 (real OS socket cancellation) remains NOT_TESTED.",
-    "A hung getaddrinfo still cannot be cancelled; the resolver pool only bounds accumulation.",
+    "A hung getaddrinfo still cannot be cancelled; the resolver pool only bounds accumulation. R3 was accepted as a bounded mitigation with this limitation documented.",
     "Automated tests pass does not mean the product is production-ready."
   ],
   "reports": [

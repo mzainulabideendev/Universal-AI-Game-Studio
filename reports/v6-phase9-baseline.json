@@ -1,32 +1,28 @@
 {
   "schema_version": 1,
   "phase": "V6 Phase 9 - baseline and environment",
-  "generated_at": "2026-11-12T05:33:39Z",
+  "generated_at": "2026-11-12T05:46:40Z",
   "repository": {
-    "head": "e3cc32960e2eff0c04212928eac31004cef8165b",
+    "head": "fe28ba1d86793c4105f7497224f74e4032ae0a98",
     "branch": "main",
     "baseline_head_declared_in_task": "dec25407bf85942c6ce70630e06b8515c3c75cf9",
     "head_differs_from_declared_baseline": true,
-    "head_explanation": "Phase 8 work was committed as e3cc329 after the Phase 8 audit; the declared dec2540 baseline is an ancestor. Phase 9 did not commit.",
-    "last_commit": "e3cc32960e2eff0c04212928eac31004cef8165b Add V6 Phase 8 regression tests for integration and safety fixes",
+    "head_explanation": "The declared dec2540 Phase 8 baseline is an ancestor of the actual HEAD. Phase 8 work was committed as e3cc329 after the Phase 8 audit, and a later repository commit contains the Phase 9 work. This audit made no Git write: it only regenerated report files.",
+    "last_commit": "fe28ba1d86793c4105f7497224f74e4032ae0a98 Add unit tests for V6 Phase 9 release candidate features",
     "commits_since_declared_baseline": [
+      "fe28ba1 Add unit tests for V6 Phase 9 release candidate features",
       "e3cc329 Add V6 Phase 8 regression tests for integration and safety fixes"
     ],
     "working_tree_status": [
-      "M tools/game-studio-mcp/game_studio/assets.py",
-      " M tools/game-studio-mcp/game_studio/llm/bounded_http.py",
-      " M tools/game-studio-mcp/game_studio/llm/providers.py",
-      " M tools/game-studio-mcp/game_studio/util.py",
-      "?? V6-PHASE-9-RELEASE-CANDIDATE.md",
-      "?? reports/v6-phase9-audit.json",
-      "?? reports/v6-phase9-baseline.json",
-      "?? reports/v6-phase9-dns-reliability.json",
-      "?? reports/v6-phase9-human-review.json",
-      "?? reports/v6-phase9-regression-validation.json",
-      "?? reports/v6-phase9-release-candidate.json",
-      "?? reports/v6-phase9-security-audit.json",
-      "?? scripts/v6-phase9-audit.py",
-      "?? tools/game-studio-mcp/tests/test_v6_phase9_release_candidate.py"
+      "M V6-PHASE-9-RELEASE-CANDIDATE.md",
+      " M reports/v6-phase9-audit.json",
+      " M reports/v6-phase9-baseline.json",
+      " M reports/v6-phase9-dns-reliability.json",
+      " M reports/v6-phase9-human-review.json",
+      " M reports/v6-phase9-regression-validation.json",
+      " M reports/v6-phase9-release-candidate.json",
+      " M reports/v6-phase9-security-audit.json",
+      " M scripts/v6-phase9-audit.py"
     ],
     "working_tree_dirty": true,
     "git_writes_by_phase9": 0,
@@ -47,7 +43,7 @@
     },
     "discrepancy": {
       "detected": true,
-      "explanation": "Phase 8 work was committed as e3cc329 after the Phase 8 audit; the declared dec2540 baseline is an ancestor. Phase 9 did not commit.",
+      "explanation": "The declared dec2540 Phase 8 baseline is an ancestor of the actual HEAD. Phase 8 work was committed as e3cc329 after the Phase 8 audit, and a later repository commit contains the Phase 9 work. This audit made no Git write: it only regenerated report files.",
       "phase8_changes_preserved": true
     }
   },
@@ -69,9 +65,9 @@
     "passed": true,
     "expected": 515,
     "exact": true,
-    "duration_seconds": 55.222,
+    "duration_seconds": 60.205,
     "command": "python -m unittest discover -s tools/game-studio-mcp/tests -q",
-    "tail": "----------------------------------------------------------------------\nRan 515 tests in 55.222s\n\nOK",
+    "tail": "----------------------------------------------------------------------\nRan 515 tests in 60.205s\n\nOK",
     "exit_code": 0
   },
   "mcp": {

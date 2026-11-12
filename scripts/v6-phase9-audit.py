@@ -72,6 +72,50 @@ JUNGLE = ("Create a stylized 3D jungle adventure where a monkey collects "
           "bananas and reaches a temple.")
 PUBLIC_IP = "93.184.216.34"
 
+# Explicit Phase 9 human-review decisions. These were supplied by the user in
+# the Phase 9 review and approve the documented limitations only. Recording them
+# here keeps the audit reproducible; it does not fabricate any other approval.
+HUMAN_DECISIONS = {
+    "S12": {
+        "decision": "ACCEPTED_WITH_CONDITIONS",
+        "conditions": [
+            "Engine asset import remains disabled and unverified.",
+            "Do not enable automatic engine imports.",
+            "Any future import validation must be a separate, explicitly "
+            "authorized task with evidence from an actual engine import.",
+        ],
+    },
+    "S14": {
+        "decision": "ACCEPTED_WITH_CONDITIONS",
+        "conditions": [
+            "Keep the no-live-provider restriction in place.",
+            "Do not claim successful live AI provider integration.",
+            "Any future live API request requires separate explicit authorization, "
+            "verified free-tier eligibility, and secure local credentials.",
+        ],
+    },
+    "R3": {
+        "decision": "ACCEPTED_WITH_CONDITIONS",
+        "conditions": [
+            "Treat the fixed four-worker DNS resolver pool as a bounded mitigation, "
+            "not as complete cancellation or termination.",
+            "Preserve the dns_capacity_exhausted and dns_timeout diagnostics.",
+            "Document that hung resolver operations may continue and that "
+            "operating-system-level cancellation remains unproven.",
+        ],
+    },
+}
+DECISION_PROVENANCE = ("Explicit user instruction in the Phase 9 human-review "
+                       "decision record")
+DECISION_SCOPE_LIMITS = [
+    "No public release or distribution.",
+    "No production-ready status claim.",
+    "No Phase 10 start.",
+    "No live API requests.",
+    "No engine builds.",
+    "No automatic asset imports.",
+]
+
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -244,8 +288,10 @@ def git_state() -> dict:
         "baseline_head_declared_in_task": EXPECTED_PHASE8_HEAD,
         "head_differs_from_declared_baseline": head != EXPECTED_PHASE8_HEAD,
         "head_explanation": (
-            "Phase 8 work was committed as e3cc329 after the Phase 8 audit; the "
-            "declared dec2540 baseline is an ancestor. Phase 9 did not commit."
+            "The declared dec2540 Phase 8 baseline is an ancestor of the actual "
+            "HEAD. Phase 8 work was committed as e3cc329 after the Phase 8 audit, "
+            "and a later repository commit contains the Phase 9 work. This audit "
+            "made no Git write: it only regenerated report files."
             if head != EXPECTED_PHASE8_HEAD else "Matches the declared Phase 8 baseline."),
         "last_commit": git("log", "-1", "--format=%H %s"),
         "commits_since_declared_baseline": git(
@@ -468,9 +514,22 @@ def dns_report() -> dict:
         },
         "checks": checks,
         "counts": check_counts,
+        "human_review": {
+            "id": "R3",
+            "decision": HUMAN_DECISIONS["R3"]["decision"],
+            "resolved_by": DECISION_PROVENANCE,
+            "conditions": HUMAN_DECISIONS["R3"]["conditions"],
+            "accepted_as": "bounded mitigation, not complete cancellation or "
+                           "termination",
+            "diagnostics_preserved": ["dns_capacity_exhausted", "dns_timeout"],
+            "os_level_cancellation_proven": False,
+            "hung_operations_may_continue": True,
+        },
         "limitations": [
             "Python cannot cancel an in-flight getaddrinfo call. A timed-out caller "
             "stops waiting; the worker remains occupied until the OS resolver returns.",
+            "Hung resolver operations may continue after the caller has stopped "
+            "waiting; operating-system-level cancellation remains unproven.",
             "If every pool worker is occupied by a hung lookup, subsequent lookups "
             "fail fast with dns_capacity_exhausted instead of growing threads.",
             "This is a bounded degradation, not demonstrated OS-level termination.",
@@ -675,21 +734,33 @@ def security_report() -> dict:
         checks.append(check(
             "SEC14", "asset-import",
             "Untrusted engine asset import remains out of scope and unperformed",
-            "REQUIRES_HUMAN_REVIEW",
+            "PASS",
             {"performed": False,
-             "note": "No asset is imported into Unity or Blender in Phase 9. "
-                     "Import-time validation and licensing acceptance need a human "
-                     "decision before any import is enabled."}))
+             "prior_status": "REQUIRES_HUMAN_REVIEW",
+             "human_review_id": "S12",
+             "resolution": HUMAN_DECISIONS["S12"]["decision"],
+             "resolved_by": DECISION_PROVENANCE,
+             "approved_conditions": HUMAN_DECISIONS["S12"]["conditions"],
+             "note": "The user accepted that import stays disabled and unverified. "
+                     "No asset is imported into Unity or Blender in Phase 9. Any "
+                     "future import validation requires separate explicit "
+                     "authorization with evidence from an actual engine import."}))
 
         checks.append(check(
             "SEC15", "untrusted-content",
             "Untrusted target content is treated as data, not instructions",
-            "REQUIRES_HUMAN_REVIEW",
+            "PASS",
             {"code_guard": "response_validation marks untrusted_input and the "
                            "reasoning system prompt forbids following target instructions",
              "live_content_processed": False,
-             "note": "No model or web content was processed in Phase 9; policy "
-                     "acceptance remains a human decision."}))
+             "prior_status": "REQUIRES_HUMAN_REVIEW",
+             "human_review_id": "S14",
+             "resolution": HUMAN_DECISIONS["S14"]["decision"],
+             "resolved_by": DECISION_PROVENANCE,
+             "approved_conditions": HUMAN_DECISIONS["S14"]["conditions"],
+             "note": "The user accepted the offline-only release candidate and the "
+                     "data-not-instructions policy. No model or web content was "
+                     "processed in Phase 9; the no-live-provider rule stays in force."}))
 
         checks.append(check(
             "SEC19", "audit", "No credential value is read or printed by the audit",
@@ -759,10 +830,18 @@ def security_report() -> dict:
             "schema_version": 1,
             "phase": "V6 Phase 9 - production security hardening",
             "generated_at": now_iso(),
-            "verdict": "PASS_WITH_HUMAN_REVIEW" if check_counts["FAIL"] == 0
-                       else "FAIL",
+            "verdict": "PASS_WITH_DOCUMENTED_LIMITATION"
+                       if check_counts["FAIL"] == 0 else "FAIL",
             "checks": checks,
             "counts": check_counts,
+            "resolved_human_reviews": {
+                "S12": {"phase9_check": "SEC14",
+                        "decision": HUMAN_DECISIONS["S12"]["decision"]},
+                "S14": {"phase9_check": "SEC15",
+                        "decision": HUMAN_DECISIONS["S14"]["decision"]},
+            },
+            "decision_provenance": DECISION_PROVENANCE,
+            "approval_scope_limits": DECISION_SCOPE_LIMITS,
             "hardening_changes": [
                 "assets.py: provider paths reject Windows stream separators, reserved "
                 "device names, control characters and trailing dots/spaces.",
@@ -808,7 +887,7 @@ def human_review_report(git_info: dict) -> dict:
                                "automated import without a separate review would widen "
                                "the trust boundary."),
             "recommended_decision": "ACCEPT_SCOPE_WITH_CONDITION",
-            "conditions": [
+            "audit_recommended_conditions": [
                 "Keep automated import disabled for this release candidate.",
                 "Require a separate human-approved import test before enabling it.",
                 "Do not describe downloaded assets as engine-verified.",
@@ -821,7 +900,9 @@ def human_review_report(git_info: dict) -> dict:
                 "The release candidate must block all asset download features, not "
                 "only import, or add import-time validation before release.",
             ],
-            "decision": "PENDING_USER_DECISION",
+            "decision": HUMAN_DECISIONS["S12"]["decision"],
+            "conditions": HUMAN_DECISIONS["S12"]["conditions"],
+            "approval_source": DECISION_PROVENANCE,
         },
         {
             "id": "S14",
@@ -841,7 +922,7 @@ def human_review_report(git_info: dict) -> dict:
                                "latency and prompt-injection behaviour are unverified. "
                                "Offline fixtures cannot prove live behaviour."),
             "recommended_decision": "ACCEPT_OFFLINE_ONLY_WITH_DISCLOSURE",
-            "conditions": [
+            "audit_recommended_conditions": [
                 "Keep the no-live-provider rule in force for this release candidate.",
                 "Do not claim live AI works or that model output was verified.",
                 "Authorize any future live request separately, per request.",
@@ -854,7 +935,9 @@ def human_review_report(git_info: dict) -> dict:
                 "A separately approved live validation must be completed before the "
                 "release candidate can advance.",
             ],
-            "decision": "PENDING_USER_DECISION",
+            "decision": HUMAN_DECISIONS["S14"]["decision"],
+            "conditions": HUMAN_DECISIONS["S14"]["conditions"],
+            "approval_source": DECISION_PROVENANCE,
         },
         {
             "id": "R3",
@@ -874,7 +957,7 @@ def human_review_report(git_info: dict) -> dict:
                                "is bounded but still a denial-of-DNS condition until the "
                                "OS resolver returns or the process restarts."),
             "recommended_decision": "ACCEPT_BOUNDED_MITIGATION",
-            "conditions": [
+            "audit_recommended_conditions": [
                 "Document the residual denial-of-DNS condition in release notes.",
                 "Monitor dns_capacity_exhausted and dns_timeout outcomes.",
                 "Revisit process-isolated resolution only if observation shows repeated "
@@ -887,22 +970,32 @@ def human_review_report(git_info: dict) -> dict:
                 "A separately terminable resolver process must be built and proven "
                 "before release, which adds subprocess lifecycle risk.",
             ],
-            "decision": "PENDING_USER_DECISION",
+            "decision": HUMAN_DECISIONS["R3"]["decision"],
+            "conditions": HUMAN_DECISIONS["R3"]["conditions"],
+            "approval_source": DECISION_PROVENANCE,
         },
     ]
     return {
         "schema_version": 1,
         "phase": "V6 Phase 9 - human review decisions",
         "generated_at": now_iso(),
-        "policy": "This audit never fabricates approval. Every item below remains "
-                  "PENDING_USER_DECISION until the user explicitly approves it.",
-        "gate": "STOPPED_AT_HUMAN_DECISION_BOUNDARY",
+        "policy": "This audit never fabricates approval. Decisions below were "
+                  "supplied explicitly by the user during the Phase 9 human review "
+                  "and only approve the documented limitations and mitigations.",
+        "gate": "HUMAN_REVIEW_COMPLETE",
         "no_live_provider_rule_in_force": True,
         "head_at_review": git_info.get("head"),
         "items": items,
-        "pending_decisions": [item["id"] for item in items],
-        "approved_decisions": [],
-        "human_approval_granted": False,
+        "pending_decisions": [],
+        "approved_decisions": [item["id"] for item in items],
+        "human_approval_granted": True,
+        "approval_scope": (
+            "The recorded decisions approve the documented limitations and "
+            "mitigations only. They do NOT authorize a public release, "
+            "production-ready status, Phase 10, live API requests, engine builds, "
+            "or automatic asset imports."),
+        "approval_scope_limits": DECISION_SCOPE_LIMITS,
+        "decision_provenance": DECISION_PROVENANCE,
         "recommended_combined_outcome": (
             "Accept S12 with import disabled, accept S14 as offline-only, and accept "
             "R3 as bounded mitigation with monitoring."),
@@ -992,8 +1085,10 @@ def release_candidate_report(tests: dict, parity: dict, protection: dict,
         {"stage": "human_approval", "implemented": True, "fixture_tested": True,
          "executed_locally": True, "engine_verified": False,
          "live_provider_verified": False, "human_approved": False,
+         "human_review_decisions_recorded": True,
          "evidence": ["approval boundaries reject pre-approval",
-                      "no human approval was granted in Phase 9"]},
+                      "S12, S14 and R3 recorded as ACCEPTED_WITH_CONDITIONS",
+                      "release approval was not granted"]},
         {"stage": "evidence", "implemented": True, "fixture_tested": True,
          "executed_locally": True, "engine_verified": False,
          "live_provider_verified": False, "human_approved": False,
@@ -1031,8 +1126,9 @@ def release_candidate_report(tests: dict, parity: dict, protection: dict,
                      f'passed={tests["passed"]}'},
         {"area": "known_limitations", "status": "PASS",
          "evidence": "listed in every report and in the markdown"},
-        {"area": "outstanding_human_decisions", "status": "REQUIRES_HUMAN_REVIEW",
-         "evidence": human["pending_decisions"]},
+        {"area": "outstanding_human_decisions", "status": "PASS",
+         "evidence": "S12, S14 and R3 recorded as ACCEPTED_WITH_CONDITIONS; "
+                     "release approval not granted"},
     ]
 
     all_checks = [{"status": item["status"] if item["status"] in STATUSES else "PASS",
@@ -1061,6 +1157,20 @@ def release_candidate_report(tests: dict, parity: dict, protection: dict,
         "released": False,
         "release_authorized": False,
         "human_approval_granted": False,
+        "human_review_decisions_recorded": True,
+        "human_review_status": "complete",
+        "human_review_decisions": {
+            item_id: {"decision": decision["decision"],
+                      "conditions": decision["conditions"]}
+            for item_id, decision in HUMAN_DECISIONS.items()
+        },
+        "decision_provenance": DECISION_PROVENANCE,
+        "approval_scope": human["approval_scope"],
+        "approval_scope_limits": DECISION_SCOPE_LIMITS,
+        "human_approval_semantics": (
+            "The recorded human decisions approve documented limitations and "
+            "mitigations only. Release, production-ready status and Phase 10 "
+            "remain unauthorized."),
         "all_automated_criteria_passed": automated_ok,
         "stages": stages,
         "quality": quality,
@@ -1084,7 +1194,8 @@ def release_candidate_report(tests: dict, parity: dict, protection: dict,
             "was imported or rendered in Phase 9.",
             "R13 (real OS socket cancellation) remains NOT_TESTED.",
             "A hung getaddrinfo still cannot be cancelled; the resolver pool only bounds "
-            "accumulation.",
+            "accumulation. R3 was accepted as a bounded mitigation with this "
+            "limitation documented.",
             "Automated tests pass does not mean the product is production-ready.",
         ],
         "no_network": True,
@@ -1133,7 +1244,8 @@ def render_markdown(baseline: dict, human: dict, dns: dict, security: dict,
         f"`{baseline['repository']['baseline_head_declared_in_task']}`  ",
         f"**Final decision:** `{rc['verdict']}`  ",
         f"**Production ready:** `{str(rc['production_ready']).lower()}`  ",
-        f"**Released:** `{str(rc['released']).lower()}`",
+        f"**Released:** `{str(rc['released']).lower()}`  ",
+        f"**Release authorized:** `{str(rc['release_authorized']).lower()}`",
         "",
         "---",
         "",
@@ -1144,9 +1256,11 @@ def render_markdown(baseline: dict, human: dict, dns: dict, security: dict,
         f"**{'OK' if baseline['tests']['passed'] else 'FAILED'}**. "
         f"The suite grew from {BASELINE_TESTS} to {baseline['tests']['ran']} tests.",
         "",
-        f"The final decision is **{rc['verdict']}**. All automated criteria passed. "
-        "This is **not** a production-readiness claim, a live-provider claim, an "
-        "engine-verification claim for Phase 9, or authorization to release.",
+        f"The final decision is **{rc['verdict']}**. All automated criteria passed, "
+        "and the human-review decisions for S12, S14 and R3 were recorded as "
+        "**ACCEPTED_WITH_CONDITIONS**. This is **not** a production-readiness "
+        "claim, a live-provider claim, an engine-verification claim for Phase 9, "
+        "or authorization to release.",
         "",
         f"- MCP tools / handlers: **{baseline['mcp']['tools']} / "
         f"{baseline['mcp']['handlers']}** (exact: "
@@ -1156,7 +1270,10 @@ def render_markdown(baseline: dict, human: dict, dns: dict, security: dict,
         f"- Protected Git paths clean: "
         f"`{str(baseline['protection']['protected_git_clean']).lower()}`",
         f"- Network calls / credentials read: **0 / false**",
-        f"- Pending human decisions: **{', '.join(rc['pending_human_decisions'])}**",
+        f"- Human-review decisions recorded: "
+        f"**{', '.join(rc['human_review_decisions'])}**",
+        f"- Pending human decisions: "
+        f"**{', '.join(rc['pending_human_decisions']) or 'none'}**",
         "",
         "## 2. Baseline and repository state",
         "",
@@ -1175,9 +1292,14 @@ def render_markdown(baseline: dict, human: dict, dns: dict, security: dict,
         "committed after its own audit; Phase 9 preserved and built on it without "
         "resetting, cleaning or rewriting it. Phase 9 performed no Git write.",
         "",
-        "## 3. Human-review decisions (pending)",
+        "## 3. Human-review decisions (recorded)",
         "",
-        f"Gate: `{human['gate']}`. **No item was approved by this audit.**",
+        f"Gate: `{human['gate']}`. The user explicitly recorded S12, S14 and R3 as "
+        "`ACCEPTED_WITH_CONDITIONS`. This audit did not invent those decisions.",
+        "",
+        f"Provenance: {human['decision_provenance']}.",
+        "",
+        f"Scope: {human['approval_scope']}",
         "",
         "These identifiers are the Phase 8 criterion IDs. Phase 9 security checks "
         "use `SEC`-prefixed IDs to avoid collision.",
@@ -1193,15 +1315,20 @@ def render_markdown(baseline: dict, human: dict, dns: dict, security: dict,
             "",
             f"**Remaining risk:** {item['remaining_risk']}",
             "",
-            f"**Recommended decision:** `{item['recommended_decision']}`",
+            f"**Decision:** `{item['decision']}` "
+            f"(approval source: {item.get('approval_source', 'n/a')})",
             "",
-            "**Conditions:** " + " ".join(item["conditions"]),
+            "**Approved conditions:**",
+            "",
+            *[f"- {condition}" for condition in item["conditions"]],
+            "",
+            "**Audit-recommended conditions:**",
+            "",
+            *[f"- {condition}" for condition in item["audit_recommended_conditions"]],
             "",
             f"**If accepted:** " + " ".join(item["consequences_if_accepted"]),
             "",
             f"**If rejected:** " + " ".join(item["consequences_if_rejected"]),
-            "",
-            f"**Decision:** `{item['decision']}`",
             "",
         ]
     lines += [
@@ -1217,6 +1344,16 @@ def render_markdown(baseline: dict, human: dict, dns: dict, security: dict,
         "in-flight `getaddrinfo`; a timed-out caller stops waiting and the worker is "
         "reclaimed only when the OS call returns. If all workers hang, new lookups "
         "fail fast with `dns_capacity_exhausted`.",
+        "",
+        f"**R3 decision:** `{dns['human_review']['decision']}` - accepted as "
+        f"{dns['human_review']['accepted_as']}. OS-level cancellation proven: "
+        f"`{str(dns['human_review']['os_level_cancellation_proven']).lower()}`. "
+        f"Diagnostics preserved: "
+        f"{', '.join(f'`{name}`' for name in dns['human_review']['diagnostics_preserved'])}.",
+        "",
+        "**Approved conditions:**",
+        "",
+        *[f"- {condition}" for condition in dns["human_review"]["conditions"]],
         "",
         "## 5. Security audit",
         "",
@@ -1265,8 +1402,9 @@ def render_markdown(baseline: dict, human: dict, dns: dict, security: dict,
                            "engine", "live", "human"]),
         "",
         "`engine=True` for gameplay integration refers only to recorded Phase 5 "
-        "evidence. Phase 9 ran no engine. No stage is live-provider verified and no "
-        "stage is human-approved.",
+        "evidence. Phase 9 ran no engine. No stage is live-provider verified. The "
+        "recorded human decisions accept documented limitations; they are not "
+        "release approval for any stage.",
         "",
         "## 8. Release-candidate quality",
         "",
@@ -1280,8 +1418,13 @@ def render_markdown(baseline: dict, human: dict, dns: dict, security: dict,
         "",
         f"**{rc['verdict']}**",
         "",
-        "Automated: PASS. Human review: PENDING. Release: NOT AUTHORIZED. "
-        "Production readiness: NOT CLAIMED. Phase 10: NOT STARTED.",
+        "Automated: PASS. Human-review decisions: RECORDED (S12, S14, R3 "
+        "ACCEPTED_WITH_CONDITIONS). Release: NOT AUTHORIZED. Production readiness: "
+        "NOT CLAIMED. Phase 10: NOT STARTED.",
+        "",
+        "The recorded decisions approve the documented limitations and mitigations "
+        "only. They do not authorize a public release, production-ready status, "
+        "Phase 10, live API requests, engine builds or automatic asset imports.",
         "",
     ]
     return "\n".join(lines)
@@ -1399,17 +1542,25 @@ def main() -> int:
         "all_automated_criteria_passed": rc["all_automated_criteria_passed"],
         "production_ready": False,
         "released": False,
-        "human_review_required": bool(human["pending_decisions"]),
-        "human_review_status": "pending",
+        "release_authorized": False,
+        "human_review_required": False,
+        "human_review_status": "complete",
         "human_approval_granted": False,
+        "human_review_decisions_recorded": True,
+        "human_review_decisions": rc["human_review_decisions"],
+        "decision_provenance": DECISION_PROVENANCE,
+        "approval_scope": human["approval_scope"],
+        "approval_scope_limits": DECISION_SCOPE_LIMITS,
         "pending_human_decisions": human["pending_decisions"],
         "final_decision_options_considered": [
             "PASS_AUTOMATED", "PASS_AUTOMATED_PENDING_HUMAN_REVIEW",
             "BLOCKED", "NOT_READY_FOR_RELEASE"],
         "final_decision_rationale": (
             "All automated checks pass, so the result is not BLOCKED or NOT_READY. "
-            "S12, S14 and R3 still require explicit user decisions, so the result "
-            "cannot be PASS_AUTOMATED."),
+            "The explicit human-review decisions for S12, S14 and R3 are recorded as "
+            "ACCEPTED_WITH_CONDITIONS with no pending decisions, so the result is "
+            "PASS_AUTOMATED. Those decisions approve documented limitations only and "
+            "do not authorize a release, production-ready status or Phase 10."),
         "repository": baseline["repository"],
         "environment": baseline["environment"],
         "tests": tests,

@@ -1,13 +1,52 @@
 {
   "schema_version": 1,
   "phase": "V6 Phase 9 - release candidate assessment",
-  "generated_at": "2026-11-12T05:34:36Z",
-  "verdict": "PASS_AUTOMATED_PENDING_HUMAN_REVIEW",
+  "generated_at": "2026-11-12T05:47:42Z",
+  "verdict": "PASS_AUTOMATED",
   "automated_verdict": "PASS_AUTOMATED",
   "production_ready": false,
   "released": false,
   "release_authorized": false,
   "human_approval_granted": false,
+  "human_review_decisions_recorded": true,
+  "human_review_status": "complete",
+  "human_review_decisions": {
+    "S12": {
+      "decision": "ACCEPTED_WITH_CONDITIONS",
+      "conditions": [
+        "Engine asset import remains disabled and unverified.",
+        "Do not enable automatic engine imports.",
+        "Any future import validation must be a separate, explicitly authorized task with evidence from an actual engine import."
+      ]
+    },
+    "S14": {
+      "decision": "ACCEPTED_WITH_CONDITIONS",
+      "conditions": [
+        "Keep the no-live-provider restriction in place.",
+        "Do not claim successful live AI provider integration.",
+        "Any future live API request requires separate explicit authorization, verified free-tier eligibility, and secure local credentials."
+      ]
+    },
+    "R3": {
+      "decision": "ACCEPTED_WITH_CONDITIONS",
+      "conditions": [
+        "Treat the fixed four-worker DNS resolver pool as a bounded mitigation, not as complete cancellation or termination.",
+        "Preserve the dns_capacity_exhausted and dns_timeout diagnostics.",
+        "Document that hung resolver operations may continue and that operating-system-level cancellation remains unproven."
+      ]
+    }
+  },
+  "decision_provenance": "Explicit user instruction in the Phase 9 human-review decision record",
+  "approval_scope": "The recorded decisions approve the documented limitations and mitigations only. They do NOT authorize a public release, production-ready status, Phase 10, live API requests, engine builds, or automatic asset imports.",
+  "approval_scope_limits": [
+    "No public release or distribution.",
+    "No production-ready status claim.",
+    "No Phase 10 start.",
+    "No live API requests.",
+    "No engine builds.",
+    "No automatic asset imports."
+  ],
+  "human_approval_semantics": "The recorded human decisions approve documented limitations and mitigations only. Release, production-ready status and Phase 10 remain unauthorized.",
   "all_automated_criteria_passed": true,
   "stages": [
     {
@@ -148,9 +187,11 @@
       "engine_verified": false,
       "live_provider_verified": false,
       "human_approved": false,
+      "human_review_decisions_recorded": true,
       "evidence": [
         "approval boundaries reject pre-approval",
-        "no human approval was granted in Phase 9"
+        "S12, S14 and R3 recorded as ACCEPTED_WITH_CONDITIONS",
+        "release approval was not granted"
       ]
     },
     {
@@ -180,8 +221,8 @@
     },
     {
       "area": "security",
-      "status": "PASS_WITH_HUMAN_REVIEW",
-      "evidence": "16 pass, 2 human review, 1 not tested, 0 fail"
+      "status": "PASS_WITH_DOCUMENTED_LIMITATION",
+      "evidence": "18 pass, 0 human review, 1 not tested, 0 fail"
     },
     {
       "area": "reliability",
@@ -225,26 +266,18 @@
     },
     {
       "area": "outstanding_human_decisions",
-      "status": "REQUIRES_HUMAN_REVIEW",
-      "evidence": [
-        "S12",
-        "S14",
-        "R3"
-      ]
+      "status": "PASS",
+      "evidence": "S12, S14 and R3 recorded as ACCEPTED_WITH_CONDITIONS; release approval not granted"
     }
   ],
   "quality_counts": {
-    "PASS": 11,
+    "PASS": 12,
     "FAIL": 0,
     "BLOCKED": 0,
     "NOT_TESTED": 0,
-    "REQUIRES_HUMAN_REVIEW": 1
+    "REQUIRES_HUMAN_REVIEW": 0
   },
-  "pending_human_decisions": [
-    "S12",
-    "S14",
-    "R3"
-  ],
+  "pending_human_decisions": [],
   "release_blockers": [],
   "status_semantics": {
     "implemented": "code path exists and is reachable",
@@ -259,7 +292,7 @@
     "No Unity or Blender process ran in Phase 9; engine claims rely on recorded Phase 5 evidence only.",
     "Character and environment pipelines are specification bridges; no asset was imported or rendered in Phase 9.",
     "R13 (real OS socket cancellation) remains NOT_TESTED.",
-    "A hung getaddrinfo still cannot be cancelled; the resolver pool only bounds accumulation.",
+    "A hung getaddrinfo still cannot be cancelled; the resolver pool only bounds accumulation. R3 was accepted as a bounded mitigation with this limitation documented.",
     "Automated tests pass does not mean the product is production-ready."
   ],
   "no_network": true,
