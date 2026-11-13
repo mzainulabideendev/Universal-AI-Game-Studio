@@ -1,0 +1,608 @@
+{
+  "schema_version": 1,
+  "deliverable": "final_project_gap_analysis",
+  "stage": "A",
+  "stage_name": "Current-state audit",
+  "generated_at": "2026-11-13T10:40:00Z",
+  "read_only": true,
+  "source_changes": 0,
+  "network_calls": 0,
+  "credentials_read": false,
+  "engine_launches": 0,
+  "builds": 0,
+  "downloads": 0,
+  "installs": 0,
+  "git_writes": 0,
+  "p10_s1_started": false,
+  "repository": {
+    "root": "D:\\MCP\\MCP",
+    "branch": "main",
+    "head": "8f9a0446573777ddde80c5469556a3e6dd5ebed7",
+    "head_subject": "Add V6 Phase 10 execution baseline report JSON",
+    "audited_head": "fca61e8de640b74420fb66545065f8b979e9e5a7",
+    "head_advanced_during_audit": true,
+    "head_advance_scope": "One external commit adding only reports/v6-phase10-execution-baseline.json (the approved P10-S0 output). No source, test, protected artifact or accepted report changed.",
+    "working_tree_clean_at_audit_start": true,
+    "untracked_at_audit_start": [
+      "reports/v6-phase10-execution-baseline.json"
+    ],
+    "untracked_note": "The single untracked file at audit start was the approved P10-S0 output. It was committed externally as 8f9a044 during the audit; the working tree is clean again.",
+    "tags": [],
+    "python": "3.12.10",
+    "third_party_runtime_dependencies": [],
+    "dependency_note": "Static import analysis found no non-stdlib imports outside the server package itself. The server is pure standard-library Python.",
+    "license": "MIT"
+  },
+  "measured_facts": {
+    "tests_defined": 515,
+    "tests_passed_at_p10_s0": 515,
+    "test_files": 17,
+    "mcp_tools": 107,
+    "mcp_handlers": 107,
+    "tool_handler_parity": "exact",
+    "protected_hash_entries": 38,
+    "protected_unique_files": 23,
+    "protected_hashes_matched": 38,
+    "reports_files_present": 74,
+    "engines_detected": {
+      "unity": "verified",
+      "blender": "verified",
+      "godot": "not-found",
+      "unreal": "not-found"
+    },
+    "unity_version": "6000.6.2f1",
+    "blender_recorded_version": "5.2.2 LTS",
+    "protocol_version_declared": "2024-11-05",
+    "server_version": "1.0.0"
+  },
+  "status_vocabulary": [
+    "IMPLEMENTED",
+    "AUTOMATED_TESTED",
+    "INTEGRATION_TESTED",
+    "HUMAN_VERIFIED",
+    "BLOCKED",
+    "NOT_TESTED",
+    "NOT_SUPPORTED",
+    "UNKNOWN"
+  ],
+  "capability_matrix": [
+    {
+      "area": "MCP protocol and transport",
+      "status": "AUTOMATED_TESTED",
+      "implemented": true,
+      "verified": true,
+      "evidence": [
+        "server.py implements initialize, ping, tools/list, tools/call",
+        "tests/test_game_studio.py::test_initialize_and_ping",
+        "tests/test_p0_v4.py::test_stdio_handshake_and_threaded_tool_call"
+      ],
+      "gaps": [
+        "notifications/cancelled is not handled (0 occurrences in server.py)",
+        "resources/list and prompts/list return hard-coded empty arrays",
+        "no test covers malformed JSON, oversized frames or concurrent tool calls beyond one threaded case"
+      ]
+    },
+    {
+      "area": "Tool registry parity",
+      "status": "AUTOMATED_TESTED",
+      "implemented": true,
+      "verified": true,
+      "evidence": [
+        "107 tools / 107 handlers, 0 missing, 0 extra",
+        "tests/test_p0_v4.py::test_all_tools_have_handlers",
+        "tests/test_game_studio.py::test_tools_list_is_unique_and_has_handlers"
+      ],
+      "gaps": [
+        "parity is proven; invocation coverage for all 107 tools is not uniformly proven",
+        "no per-tool contract snapshot (input/output) test suite"
+      ]
+    },
+    {
+      "area": "Natural-language understanding",
+      "status": "AUTOMATED_TESTED",
+      "implemented": true,
+      "verified": true,
+      "evidence": [
+        "game_studio/understanding.py (49.6 KB)",
+        "Roman Urdu and mixed-language tests in test_game_studio.py",
+        "test_roman_urdu_request_is_understood_and_traceable",
+        "test_multiple_engines_and_style_conflict_are_reported"
+      ],
+      "gaps": [
+        "Urdu script (non-Roman) coverage is not demonstrated by tests",
+        "no measurable intent-classification accuracy benchmark against a labelled corpus"
+      ]
+    },
+    {
+      "area": "Specification and requirement provenance",
+      "status": "AUTOMATED_TESTED",
+      "implemented": true,
+      "verified": true,
+      "evidence": [
+        "game_studio/llm/game_spec_pipeline.py (31.4 KB)",
+        "requirement IDs, dependency graph, acceptance-test coverage tests",
+        "test_spec_separates_explicit_from_assumptions"
+      ],
+      "gaps": [
+        "human approval of a generated specification has not been exercised end to end in Phase 10"
+      ]
+    },
+    {
+      "area": "Multi-agent orchestration",
+      "status": "AUTOMATED_TESTED",
+      "implemented": true,
+      "verified": true,
+      "evidence": [
+        "9 agent modules plus coordinator (21.4 KB)",
+        "77 agent/coordinator tests across two files",
+        "dependency-order, cancellation and failure-propagation tests"
+      ],
+      "gaps": [
+        "agents produce plans and reports; they do not themselves generate game code or assets in this audit",
+        "no test drives all nine agents through one live asset-producing run"
+      ]
+    },
+    {
+      "area": "Free-provider policy and routing",
+      "status": "AUTOMATED_TESTED",
+      "implemented": true,
+      "verified": true,
+      "evidence": [
+        "game_studio/llm/free_policy.py, free_routing.py, quota.py",
+        "test_v6_phase6_free_ai.py (36 tests)",
+        "no paid fallback enforced in code and tests"
+      ],
+      "gaps": [
+        "provider catalogue availability is stale (recorded 2026-11-10)",
+        "free-tier terms must be re-verified by a human before any live request"
+      ]
+    },
+    {
+      "area": "Live AI provider integration",
+      "status": "BLOCKED",
+      "implemented": true,
+      "verified": false,
+      "evidence": [
+        "Three prior approved Gemini attempts: HTTP 503, then two read timeouts; zero response bodies",
+        "P10-S1 not authorized",
+        "Phase 9 S14 condition: do not claim successful live integration"
+      ],
+      "gaps": [
+        "no successful live response has ever been received or schema-validated",
+        "model discovery has never been run against a current free list"
+      ]
+    },
+    {
+      "area": "Offline / credential-free mode",
+      "status": "AUTOMATED_TESTED",
+      "implemented": true,
+      "verified": true,
+      "evidence": [
+        "deterministic understanding, spec, orchestration and asset validation require no key",
+        "LLM tools fall back with explicit not-configured states",
+        "suite runs fully offline (515/515)"
+      ],
+      "gaps": [
+        "offline mode is not described as a first-class user path in a dedicated installation guide"
+      ]
+    },
+    {
+      "area": "Character asset pipeline",
+      "status": "IMPLEMENTED",
+      "implemented": true,
+      "verified": true,
+      "verification_level": "produced real assets with Blender; Unity-side independent validation not performed",
+      "evidence": [
+        "JungleMonkey.fbx 15,688 tris, 23 bones, 7 materials, 4 clips",
+        "preview.png and hashes recorded",
+        "Phase 3 pipeline tests (test_v6_phase3_*.py, 53 tests)"
+      ],
+      "gaps": [
+        "independent Unity import audit (mesh/bone/clip/texture) does not exist",
+        "attack/hit/death clips not implemented (only Idle/Walk/Run/Jump)"
+      ]
+    },
+    {
+      "area": "Environment pipeline",
+      "status": "IMPLEMENTED",
+      "implemented": true,
+      "verified": true,
+      "verification_level": "produced real assets with Blender; Unity-side independent validation not performed",
+      "evidence": [
+        "JungleLevel.fbx 53,674 tris medium tier, 19 materials, 120x120 m terrain",
+        "high tier 83,930 tris generated, never imported into Unity",
+        "Phase 4 tests (test_v6_phase4_*.py, 45 tests)"
+      ],
+      "gaps": [
+        "collision and river-hazard behaviour derived from the imported mesh is unverified in Unity",
+        "high-tier Unity import and performance never measured"
+      ]
+    },
+    {
+      "area": "Gameplay generation",
+      "status": "IMPLEMENTED",
+      "implemented": true,
+      "verified": false,
+      "verification_level": "a real Unity build exists from Phase 5, but reproduction from a new approved spec is unproven",
+      "evidence": [
+        "validation/unity-jungle-v6 scene, player controller, HUD, collectibles, river hazard",
+        "V6JungleMonkey.exe completed a scripted playthrough",
+        "test_v6_phase5_gameplay_reports.py (8 tests)"
+      ],
+      "gaps": [
+        "no tool generates C# gameplay code from a live or deterministic spec into a fresh project",
+        "the Phase 5 build is historical evidence, not a Phase 10 reproduction"
+      ]
+    },
+    {
+      "area": "Unity integration",
+      "status": "IMPLEMENTED",
+      "implemented": true,
+      "verified": false,
+      "engine_detected": true,
+      "evidence": [
+        "detect_unity state=verified, 6000.6.2f1",
+        "tools: unity_editor_status, unity_run_command, unity_batch_refresh, unity_run_tests, unity_build",
+        "adapter marks batch_refresh/tests/build as implemented-unverified",
+        "historical Phase 5 build log reports Succeeded"
+      ],
+      "gaps": [
+        "unity_build and unity_run_tests have not been invoked by this server in a disposable project",
+        "asset import through Unity is unverified",
+        "engine work is BLOCKED pending P10-S8 approval"
+      ]
+    },
+    {
+      "area": "Godot integration",
+      "status": "NOT_TESTED",
+      "implemented": "partial",
+      "verified": false,
+      "engine_detected": false,
+      "evidence": [
+        "godot_batch_import and godot_build tools exist",
+        "adapter marks tests and editor commands not-implemented",
+        "detect_godot state=not-found on this machine"
+      ],
+      "gaps": [
+        "Godot is not installed, so no detection, import or export has ever run",
+        "no project/scene/script generation tools",
+        "cannot be advertised as supported"
+      ]
+    },
+    {
+      "area": "Unreal integration",
+      "status": "NOT_SUPPORTED",
+      "implemented": "staging only",
+      "verified": false,
+      "engine_detected": false,
+      "evidence": [
+        "unreal_status projects inspection only",
+        "unreal_stage_only returns state=staged-only",
+        "engine_build returns not-implemented for Unreal",
+        "adapter limitation recorded in engines.list_available_engines"
+      ],
+      "gaps": [
+        "no import verification, no batch refresh, no tests, no build automation",
+        "only detection, project inspection and file staging are honest claims"
+      ]
+    },
+    {
+      "area": "Blender integration",
+      "status": "INTEGRATION_TESTED",
+      "implemented": true,
+      "verified": true,
+      "evidence": [
+        "detect_blender state=verified",
+        "8 Blender tools including run_python, export, import, render, validate",
+        "real character and environment generations exist in validation/"
+      ],
+      "gaps": [
+        "executable metadata reports 5.2 while reports record 5.2.2 LTS",
+        "no process-cleanup soak test for repeated Blender invocations"
+      ]
+    },
+    {
+      "area": "Security",
+      "status": "AUTOMATED_TESTED",
+      "implemented": true,
+      "verified": true,
+      "evidence": [
+        "reports/v6-phase8-security-audit.json: 12 PASS, 0 FAIL, 2 REQUIRES_HUMAN_REVIEW",
+        "path traversal, SSRF, shell-free subprocess, secret redaction, atomic writes",
+        "bounded HTTP/DNS implementation exists"
+      ],
+      "gaps": [
+        "OS-level socket cancellation remains unproven",
+        "no SECURITY.md disclosure policy",
+        "symlink handling and archive extraction are untested (archive path absent by design)",
+        "Windows-specific path edge cases are tested; POSIX not"
+      ]
+    },
+    {
+      "area": "Operating-system compatibility",
+      "status": "NOT_TESTED",
+      "implemented": "unknown",
+      "verified": "Windows 11 only",
+      "evidence": [
+        "all execution evidence is Windows 11 10.0.26200",
+        "code contains win32 branches and Unix fallbacks in detect/util"
+      ],
+      "gaps": [
+        "Linux never executed",
+        "macOS never executed",
+        "must be labelled NOT_TESTED, not SUPPORTED"
+      ]
+    },
+    {
+      "area": "MCP client compatibility",
+      "status": "NOT_TESTED",
+      "implemented": "partial",
+      "verified": false,
+      "evidence": [
+        "README and tools README show one VS Code style 'servers' configuration",
+        "no Claude Desktop 'mcpServers' example",
+        "no Cursor, OpenCode or generic client configuration file"
+      ],
+      "gaps": [
+        "no real client has been connected and recorded",
+        "Claude Desktop, Cursor, VS Code, OpenCode are all unverified"
+      ]
+    },
+    {
+      "area": "Documentation",
+      "status": "IMPLEMENTED",
+      "implemented": "partial",
+      "verified": false,
+      "evidence": [
+        "README 37 KB with quick start, requirements, configuration, troubleshooting",
+        "tools/game-studio-mcp/README 28 KB with tool reference and limitations",
+        "docs/llm-*.md (8 documents)",
+        "ACCEPTANCE.md, CONTRIBUTING.md, LEARNING.md, AUDIT-V3.md, MIT LICENSE"
+      ],
+      "missing": [
+        "INSTALLATION guide",
+        "standalone QUICKSTART",
+        "MCP client configuration guide (multi-client)",
+        "Windows / Linux / macOS guides",
+        "engine setup guide",
+        "free-provider policy document",
+        "SECURITY.md and PRIVACY.md",
+        "supported-features matrix",
+        "third-party notices",
+        "testing guide (LLM-only testing doc exists)",
+        "CHANGELOG"
+      ]
+    },
+    {
+      "area": "Distribution and packaging",
+      "status": "NOT_SUPPORTED",
+      "implemented": false,
+      "verified": false,
+      "evidence": [
+        "no pyproject.toml, setup.py, setup.cfg, MANIFEST.in, Dockerfile or requirements file",
+        "no CI workflows (.github contains only copilot-instructions.md)",
+        "installation requires cloning the repository"
+      ],
+      "gaps": [
+        "no wheel or sdist",
+        "no console entry point",
+        "no clean-environment install test",
+        "no release automation"
+      ]
+    },
+    {
+      "area": "End-to-end workflow",
+      "status": "BLOCKED",
+      "implemented": true,
+      "verified": false,
+      "evidence": [
+        "Phase 5 produced one real idea-to-build slice",
+        "Phase 10 proposes a fresh end-to-end run across 16 gates"
+      ],
+      "gaps": [
+        "no single run has taken a new idea through live AI, new assets, engine import and a new build",
+        "requires P10-S3 through P10-S13 approvals"
+      ]
+    },
+    {
+      "area": "Protected artifacts",
+      "status": "HUMAN_VERIFIED",
+      "implemented": true,
+      "verified": true,
+      "evidence": [
+        "38/38 recorded hashes match at P10-S0",
+        "working tree clean apart from the approved S0 report"
+      ],
+      "gaps": []
+    },
+    {
+      "area": "Governance and approval gates",
+      "status": "IMPLEMENTED",
+      "implemented": true,
+      "verified": true,
+      "evidence": [
+        "Phase 10 status P10_S0_COMPLETE_PENDING_APPROVAL_FOR_P10_S1",
+        "16 stage gates plus release gate A16",
+        "Phase 9 release_authorized=false"
+      ],
+      "gaps": [
+        "P10-S1 and later remain unauthorized",
+        "release gate is not requested"
+      ]
+    }
+  ],
+  "status_totals": {
+    "total_areas": 23,
+    "IMPLEMENTED": 6,
+    "AUTOMATED_TESTED": 8,
+    "INTEGRATION_TESTED": 1,
+    "HUMAN_VERIFIED": 1,
+    "BLOCKED": 2,
+    "NOT_TESTED": 3,
+    "NOT_SUPPORTED": 2,
+    "UNKNOWN": 0
+  },
+  "critical_gaps": [
+    {
+      "id": "G1",
+      "title": "No installable distribution",
+      "impact": "high",
+      "detail": "The server cannot be installed with pip and has no entry point or clean-environment test. This directly contradicts the installation requirement."
+    },
+    {
+      "id": "G2",
+      "title": "No multi-client configuration evidence",
+      "impact": "high",
+      "detail": "Only one VS Code style snippet exists; no real client connection has been recorded."
+    },
+    {
+      "id": "G3",
+      "title": "Live AI still unproven",
+      "impact": "high",
+      "detail": "Zero successful live responses. Blocked by governance, not by code."
+    },
+    {
+      "id": "G4",
+      "title": "Engine import/build tool paths unverified",
+      "impact": "high",
+      "detail": "Unity batch refresh, test and build tools are marked implemented-unverified; Godot is untestable here; Unreal is staging-only."
+    },
+    {
+      "id": "G5",
+      "title": "Operating-system and client matrix absent",
+      "impact": "medium",
+      "detail": "Only Windows 11 has evidence; Linux and macOS must remain NOT_TESTED."
+    },
+    {
+      "id": "G6",
+      "title": "Documentation set incomplete",
+      "impact": "medium",
+      "detail": "Eleven required user-facing documents do not exist as standalone guides."
+    },
+    {
+      "id": "G7",
+      "title": "No CI or reproducible release automation",
+      "impact": "medium",
+      "detail": "No workflow file exists; nothing enforces the suite on change."
+    },
+    {
+      "id": "G8",
+      "title": "MCP protocol surface incomplete",
+      "impact": "medium",
+      "detail": "Cancellation notification unhandled; resources and prompts are empty placeholders; malformed-input and concurrency tests are thin."
+    }
+  ],
+  "security_and_reliability_risks": [
+    {
+      "id": "SR1",
+      "risk": "OS-level socket/DNS cancellation remains unproven; hung resolver threads may persist.",
+      "severity": "medium",
+      "status": "ACCEPTED_WITH_CONDITIONS_PHASE9"
+    },
+    {
+      "id": "SR2",
+      "risk": "Windows-centric path and executable assumptions may fail on POSIX.",
+      "severity": "medium",
+      "status": "NOT_TESTED"
+    },
+    {
+      "id": "SR3",
+      "risk": "Empty resources/prompts handlers could mislead clients into expecting capabilities.",
+      "severity": "low",
+      "status": "IMPLEMENTED_EMPTY"
+    },
+    {
+      "id": "SR4",
+      "risk": "Credential leakage through provider error strings.",
+      "severity": "high",
+      "status": "MITIGATED_REDACTION_TESTED"
+    },
+    {
+      "id": "SR5",
+      "risk": "Unverified engine tooling could be mistaken for working builds.",
+      "severity": "high",
+      "status": "MITIGATED_BY_ADAPTER_STATES"
+    },
+    {
+      "id": "SR6",
+      "risk": "Stale provider catalogue treated as current.",
+      "severity": "high",
+      "status": "MITIGATED_BY_P10_S1_GATE"
+    },
+    {
+      "id": "SR7",
+      "risk": "No CI means regressions are invisible between manual runs.",
+      "severity": "medium",
+      "status": "OPEN"
+    }
+  ],
+  "required_future_approval_gates": [
+    {"id": "P10-S1", "scope": "Human provider terms re-verification", "network": false, "blocked": true},
+    {"id": "P10-S2", "scope": "One model-discovery request", "network": true, "blocked": true},
+    {"id": "P10-S3", "scope": "One live generation request", "network": true, "blocked": true},
+    {"id": "P10-S4", "scope": "Human spec acceptance", "network": false, "blocked": true},
+    {"id": "P10-S5", "scope": "Offline orchestration dry run", "network": false, "blocked": true},
+    {"id": "P10-S6", "scope": "Blender character run", "network": false, "engine": true, "blocked": true},
+    {"id": "P10-S7", "scope": "Blender environment run", "network": false, "engine": true, "blocked": true},
+    {"id": "P10-S8", "scope": "Unity lab creation", "network": false, "engine": true, "blocked": true},
+    {"id": "P10-S9", "scope": "Character import and playback", "network": false, "engine": true, "blocked": true},
+    {"id": "P10-S10", "scope": "Environment import and integration", "network": false, "engine": true, "blocked": true},
+    {"id": "P10-S11", "scope": "Unity test suites", "network": false, "engine": true, "blocked": true},
+    {"id": "P10-S12", "scope": "Windows build", "network": false, "engine": true, "blocked": true},
+    {"id": "P10-S13", "scope": "Runtime playthrough", "network": false, "blocked": true},
+    {"id": "P10-S14", "scope": "Windows reliability matrix", "network": false, "blocked": true},
+    {"id": "P10-S15", "scope": "Release-candidate audit", "network": false, "blocked": true},
+    {"id": "A16", "scope": "Commit, push, tag, publish or release", "network": true, "blocked": true},
+    {"id": "NEW-C", "scope": "MCP reliability fixes and regression tests", "network": false, "requires_approval": true},
+    {"id": "NEW-D", "scope": "Packaging, CI and clean-install verification", "network": true, "requires_approval": true},
+    {"id": "NEW-E", "scope": "Documentation completion", "network": false, "requires_approval": true},
+    {"id": "NEW-F", "scope": "Linux and macOS test environments", "network": true, "requires_approval": true}
+  ],
+  "stage_dependencies": [
+    {"stage": "A", "depends_on": [], "status": "COMPLETE"},
+    {"stage": "B (P10)", "depends_on": ["A", "explicit P10-S1 approval"], "status": "BLOCKED"},
+    {"stage": "C (MCP reliability)", "depends_on": ["A"], "status": "READY_FOR_APPROVAL"},
+    {"stage": "D (install & compatibility)", "depends_on": ["C"], "status": "NOT_STARTED"},
+    {"stage": "E (AI & assets)", "depends_on": ["B", "D"], "status": "NOT_STARTED"},
+    {"stage": "F (engine integration)", "depends_on": ["B", "D"], "status": "NOT_STARTED"},
+    {"stage": "G (end-to-end)", "depends_on": ["E", "F"], "status": "NOT_STARTED"},
+    {"stage": "H (docs & packaging)", "depends_on": ["C", "D", "G"], "status": "NOT_STARTED"},
+    {"stage": "I (final audit)", "depends_on": ["H"], "status": "NOT_STARTED"},
+    {"stage": "J (release)", "depends_on": ["I", "explicit A16 approval"], "status": "NOT_STARTED"}
+  ],
+  "recommended_next_stage": {
+    "id": "C",
+    "name": "MCP reliability and protocol conformance",
+    "reason": "It is local, requires no credentials, no network and no engine, and it unblocks packaging and client compatibility. P10-S1 can run in parallel only if separately approved.",
+    "scope_preview": [
+      "Add malformed-input, oversized-frame, concurrency and shutdown tests",
+      "Decide whether to implement cancellation notifications or document the limitation",
+      "Decide whether resources/prompts stay empty or get real content",
+      "Add per-tool invocation smoke tests for uncovered tool categories",
+      "Fix any defect found, with regression tests"
+    ],
+    "requires_approval": true
+  },
+  "what_is_genuinely_working": [
+    "Pure-stdlib MCP server with 107 real tools and 107 handlers.",
+    "515 passing offline tests at the audited commit.",
+    "Deterministic understanding, specification, orchestration and verification.",
+    "Free-only provider policy with quota accounting and no paid fallback.",
+    "Real Blender character and environment pipelines that produced inspectable assets.",
+    "A real Unity 6000.6.2f1 Windows build that completed a scripted playthrough (historical evidence).",
+    "Security controls with 12 passing automated checks.",
+    "38/38 protected hashes intact."
+  ],
+  "what_must_not_be_claimed": [
+    "Live AI integration works.",
+    "Godot is supported.",
+    "Unreal import or build is supported.",
+    "Linux or macOS compatibility.",
+    "Claude Desktop, Cursor, VS Code or OpenCode client compatibility.",
+    "A pip-installable package exists.",
+    "Engine import was independently validated.",
+    "The product is production-ready or released."
+  ],
+  "verdict": "PARTIAL_PRODUCT_WITH_STRONG_CORE_AND_MAJOR_DISTRIBUTION_GAPS",
+  "final_status": "STAGE_A_COMPLETE_PENDING_HUMAN_REVIEW"
+}
