@@ -1,0 +1,430 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 10 - controlled real-world validation",
+  "deliverable": "execution_baseline",
+  "stage": "P10-S0",
+  "stage_name": "Baseline re-verification and freeze",
+  "approval_id": "A0",
+  "approval_received": true,
+  "approval_scope": "P10-S0 read-only baseline re-verification only",
+  "approval_scope_respected": true,
+  "generated_at": "2026-11-13T10:18:36Z",
+  "status": "P10_S0_COMPLETE_PENDING_APPROVAL_FOR_P10_S1",
+  "final_status": "P10_S0_COMPLETE_PENDING_APPROVAL_FOR_P10_S1",
+  "phase10_execution_started_beyond_s0": false,
+  "subsequent_stage_started": false,
+  "repository": {
+    "root": "D:\\MCP\\MCP",
+    "branch": "main",
+    "head": "fca61e8de640b74420fb66545065f8b979e9e5a7",
+    "head_subject": "Add V6 Phase 10 controlled real-world validation plan JSON",
+    "head_author": "Muhammad Zain Ul Abideen",
+    "head_committed_at": "2026-11-13T15:14:48+05:00",
+    "working_tree_clean": true,
+    "staged_changes": 0,
+    "unstaged_changes": 0,
+    "untracked_entries": 0,
+    "tags": [],
+    "remote": "https://github.com/mzainulabideendev/Universal-AI-Game-Studio.git",
+    "head_advanced_since_proposal": true,
+    "proposal_baseline_head": "5b263982b23334f0495413034c17eac1058e01fd",
+    "commits_since_proposal_baseline": [
+      "fca61e8 Add V6 Phase 10 controlled real-world validation plan JSON"
+    ],
+    "head_advance_explanation": "The seven Phase 10 proposal artifacts authored under the previous step were committed externally as fca61e8. That commit adds exactly 7 files and 3,424 insertions, all of them the proposal deliverables. It changes no source, test, protected artifact or accepted report. The working tree is clean at this new HEAD, so it is a valid and stable baseline for P10-S0.",
+    "head_advance_is_material_to_baseline": false,
+    "protected_paths_modified_by_advance": false,
+    "git_writes_by_p10_s0": 0,
+    "commits_by_p10_s0": 0,
+    "pushes_by_p10_s0": 0,
+    "tags_by_p10_s0": 0,
+    "resets_by_p10_s0": 0
+  },
+  "environment": {
+    "platform": "Windows 11 (NT 10.0.26200)",
+    "architecture": "64-bit AMD64",
+    "python": "3.12.10",
+    "free_disk_gb": {
+      "C": 44.6,
+      "D": 175.1
+    },
+    "unity": {
+      "expected_version": "6000.6.2f1",
+      "changeset": "770e33f6875c",
+      "path": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.6.2f1\\Editor\\Unity.exe",
+      "present": true,
+      "version_source": "File version metadata read from Unity.exe; the editor was not launched.",
+      "product_version_metadata": "6000.6.2f1_770e33f6875c",
+      "launched": false
+    },
+    "blender": {
+      "recorded_version": "5.2.2 LTS",
+      "path": "D:\\blender data\\blender.exe",
+      "present": true,
+      "version_source": "File version metadata read from blender.exe; Blender was not launched.",
+      "product_version_metadata": "5.2",
+      "metadata_matches_recorded_patch_level": false,
+      "note": "The executable metadata reports major.minor 5.2 while accepted reports record 5.2.2 LTS. The patch level could not be re-derived without launching Blender, which this approval forbids. Recorded as a metadata difference, not treated as a version change.",
+      "launched": false
+    },
+    "network_calls_by_p10_s0": 0,
+    "credentials_read_by_p10_s0": false,
+    "engine_launches_by_p10_s0": 0,
+    "engine_builds_by_p10_s0": 0,
+    "asset_imports_by_p10_s0": 0,
+    "downloads_by_p10_s0": 0,
+    "installs_by_p10_s0": 0
+  },
+  "verification_run": {
+    "command": "python -m unittest discover -s tools/game-studio-mcp/tests -q",
+    "tests_ran": 515,
+    "tests_expected": 515,
+    "exact": true,
+    "passed": true,
+    "result": "OK",
+    "duration_seconds": 58.665,
+    "exit_code": 0,
+    "executed_at": "2026-11-13T10:18:36Z",
+    "note": "PowerShell surfaced unittest stderr as a native-command warning; the captured process exit code was 0."
+  },
+  "mcp": {
+    "tools": 107,
+    "handlers": 107,
+    "unique_tools": 107,
+    "unique_handlers": 107,
+    "missing_handlers": [],
+    "extra_handlers": [],
+    "exact_parity": true,
+    "method": "Imported tools/game-studio-mcp/server.py in-process and compared TOOLS names with HANDLERS keys."
+  },
+  "protected_artifacts": {
+    "source_of_record": "reports/v6-phase9-baseline.json -> protection",
+    "recorded_hash_entries": 38,
+    "unique_artifacts": 23,
+    "matched": 38,
+    "mismatched": 0,
+    "missing": 0,
+    "all_hashes_ok": true,
+    "by_category": {
+      "v4": 2,
+      "v5": 13,
+      "phase5": 23
+    },
+    "method": "SHA-256 recomputed from each file on disk and compared with the recorded expected digest.",
+    "records": [
+      {
+        "category": "v4",
+        "path": "tools/game-studio-mcp/tests/test_llm_v4.py",
+        "expected": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "actual": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "matches": true
+      },
+      {
+        "category": "v4",
+        "path": "tools/game-studio-mcp/tests/test_p0_v4.py",
+        "expected": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "actual": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "matches": true
+      },
+      {
+        "category": "v5",
+        "path": "validation/unity-jungle-v5/.game-studio/manifest.json",
+        "expected": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "actual": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "matches": true
+      },
+      {
+        "category": "v5",
+        "path": "validation/unity-jungle-v5/.game-studio/specification.json",
+        "expected": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "actual": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "matches": true
+      },
+      {
+        "category": "v5",
+        "path": "validation/unity-jungle-v5/.game-studio/execution-plan.json",
+        "expected": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "actual": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "matches": true
+      },
+      {
+        "category": "v5",
+        "path": "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml",
+        "expected": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "actual": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "matches": true
+      },
+      {
+        "category": "v5",
+        "path": "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json",
+        "expected": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "actual": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "matches": true
+      },
+      {
+        "category": "v5",
+        "path": "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png",
+        "expected": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "actual": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "matches": true
+      },
+      {
+        "category": "v5",
+        "path": "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json",
+        "expected": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "actual": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "matches": true
+      },
+      {
+        "category": "v5",
+        "path": "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity",
+        "expected": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "actual": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "matches": true
+      },
+      {
+        "category": "v5",
+        "path": "validation/builds/v5-windows/JungleMonkey.exe",
+        "expected": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "actual": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "matches": true
+      },
+      {
+        "category": "v5",
+        "path": "V5-IMPLEMENTATION-REPORT.md",
+        "expected": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "actual": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "matches": true
+      },
+      {
+        "category": "v5",
+        "path": "V5-LLM-EVALUATION.md",
+        "expected": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "actual": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "matches": true
+      },
+      {
+        "category": "v5",
+        "path": "V5-UNITY-VERTICAL-SLICE.md",
+        "expected": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "actual": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "matches": true
+      },
+      {
+        "category": "v5",
+        "path": "V5-VERIFICATION-MATRIX.md",
+        "expected": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "actual": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "validation/builds/v5-windows/JungleMonkey.exe",
+        "expected": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "actual": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "validation/builds/v6-windows/V6JungleMonkey.exe",
+        "expected": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "actual": "af88b840e599661ac63fc10ae27ac77dd97cd46b44df8a7ce60eb0dcfacfc99e",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "validation/unity-jungle-v6/Assets/V6/Scenes/JungleMonkeyV6.unity",
+        "expected": "b35ab31fe5b7c8bf108220cd75023b0d2c4995c1fe60a2428ca97c8bd1cd220e",
+        "actual": "b35ab31fe5b7c8bf108220cd75023b0d2c4995c1fe60a2428ca97c8bd1cd220e",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "reports/v6-build-identity-captures/01-main-menu.png",
+        "expected": "5656e06dcaa9db34c04fbd6be94f436013c765faa717080a7776ea91c44ac20c",
+        "actual": "5656e06dcaa9db34c04fbd6be94f436013c765faa717080a7776ea91c44ac20c",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "reports/v6-build-identity-captures/02-playing.png",
+        "expected": "d348643e9ebbcf725c11d4cd5d773b690cb51ad563b184cfaa82677cf9ed4440",
+        "actual": "d348643e9ebbcf725c11d4cd5d773b690cb51ad563b184cfaa82677cf9ed4440",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "reports/v6-build-identity-captures/03-paused.png",
+        "expected": "b9f0be6a888bc8c4827092d876656aacc796264fd6f9d84d8db11045bf0201ba",
+        "actual": "b9f0be6a888bc8c4827092d876656aacc796264fd6f9d84d8db11045bf0201ba",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "reports/v6-build-identity-captures/04-level-complete.png",
+        "expected": "893c0363aa197e01113c7b422dc893bfd652d4f88af95222d304cf3e81268b1e",
+        "actual": "893c0363aa197e01113c7b422dc893bfd652d4f88af95222d304cf3e81268b1e",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "reports/v6-phase5-build-identity-player.log",
+        "expected": "1c7be519b14ba664c4feb964791582cd59398bdbe3cad21c90b292f4d212fab7",
+        "actual": "1c7be519b14ba664c4feb964791582cd59398bdbe3cad21c90b292f4d212fab7",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "reports/v6-phase5-build-identity-perf.json",
+        "expected": "838ad07d2387142632a311c314d02fbe810000cf48d73405c5a6dc0f30b63671",
+        "actual": "838ad07d2387142632a311c314d02fbe810000cf48d73405c5a6dc0f30b63671",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "validation/unity-jungle-v5/.game-studio/manifest.json",
+        "expected": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "actual": "6265187b9390a378609e8d465fec9573def18f8fb8146251de953fe5017e23ed",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "validation/unity-jungle-v5/.game-studio/specification.json",
+        "expected": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "actual": "888b2425dc6286923a3cfea3fc34e6be2927229674001f2876f156eb6755d663",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "validation/unity-jungle-v5/.game-studio/execution-plan.json",
+        "expected": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "actual": "61283aca9a8977b24392c4114c2480c2f774fcc165a09aae58027da8f28cd408",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "validation/unity-jungle-v5/.game-studio/evidence/source/v5-playmode-results.xml",
+        "expected": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "actual": "4cac427c6d22ff0bc852496dd0890cdb9cab6d524d9a3a3ed909a8df184d82bb",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-evidence.json",
+        "expected": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "actual": "139c7a43224a9a7e9b21afc5172391008e67ac6f5b1518a2b6e1688d34ef40a7",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "validation/unity-jungle-v5/.game-studio/evidence/source/v5-player-screenshot.png",
+        "expected": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "actual": "b045c643208bea5530aad2af2d621d41c500d1fad38a76c5de31816472c870a9",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "validation/unity-jungle-v5/.game-studio/evidence/source/unity-player-build.provenance.json",
+        "expected": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "actual": "224b5f245ca3cf2e1a8636b29a2cc02a11fd33b6b3c8aeb8d73b4fe7270259d7",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "validation/unity-jungle-v5/Assets/V5/Scenes/JungleMonkey.unity",
+        "expected": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "actual": "b799a7a53567787bb482c62da2bfbc48710612502827eba7206cc4cc940790f6",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "V5-IMPLEMENTATION-REPORT.md",
+        "expected": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "actual": "df00a831c936331f9a0fd237b02899e95601e1cd159be854cdd6b7d0c63688d7",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "V5-LLM-EVALUATION.md",
+        "expected": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "actual": "79fb1f33455d7f95c211b7abaf913d74b7e0dc15ab197ba13da6ffbcdfefb377",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "V5-UNITY-VERTICAL-SLICE.md",
+        "expected": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "actual": "5316e24f46f051ddbb1d81bf215070a09ae0ae7bbac29fc7d3ff02dd408d1da4",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "V5-VERIFICATION-MATRIX.md",
+        "expected": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "actual": "e62943913a1b749d2b4dd2a77ab41cabb8579306366ca9eb1eab983c3b387548",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "tools/game-studio-mcp/tests/test_llm_v4.py",
+        "expected": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "actual": "9b99d40232f0de88aa9a7af78f3465b0f657211e82714bd977dc0d7d5ef157f2",
+        "matches": true
+      },
+      {
+        "category": "phase5",
+        "path": "tools/game-studio-mcp/tests/test_p0_v4.py",
+        "expected": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "actual": "98a6aeea2ea903049d5dc525f342b59d026533966ecfe0b68a1bbb678ed18d3d",
+        "matches": true
+      }
+    ]
+  },
+  "preservation": {
+    "protected_paths_clean_in_git": true,
+    "protected_files_changed": [],
+    "v5_project_untouched": true,
+    "phase5_project_untouched": true,
+    "phase5_builds_untouched": true,
+    "accepted_reports_untouched": true,
+    "source_files_modified_by_p10_s0": 0,
+    "new_files_created_by_p10_s0": [
+      "reports/v6-phase10-execution-baseline.json"
+    ]
+  },
+  "acceptance": {
+    "head_and_clean_tree_recorded": "PASS",
+    "protected_hashes_38_of_38": "PASS",
+    "tests_515_of_515": "PASS",
+    "mcp_parity_107_of_107": "PASS",
+    "no_network_operation": "PASS",
+    "no_credential_access": "PASS",
+    "no_engine_launch_or_build": "PASS",
+    "no_asset_import": "PASS",
+    "no_install_or_download": "PASS",
+    "no_git_write": "PASS",
+    "no_subsequent_stage_started": "PASS"
+  },
+  "acceptance_all_passed": true,
+  "deviations_and_observations": [
+    "HEAD advanced from 5b26398 to fca61e8 because the Phase 10 proposal artifacts were committed externally between proposal and this stage.",
+    "The advance adds only the 7 proposal deliverables and leaves every protected artifact unchanged.",
+    "Blender executable metadata reports 5.2 while reports record 5.2.2 LTS; the patch level was not re-derived because launching Blender is out of scope.",
+    "C: free space decreased from 45.0 GB to 44.6 GB; D: remains 175.1 GB, well above the 20 GB stop threshold."
+  ],
+  "not_performed": [
+    "No network request or provider API call.",
+    "No credential read or presence check against a secret store.",
+    "No Unity or Blender launch, build, import or batch process.",
+    "No package install, model download or engine installation.",
+    "No source, test, protected artifact or accepted report modification.",
+    "No commit, push, tag or release.",
+    "No P10-S1 or later stage activity."
+  ],
+  "next_stage": {
+    "id": "P10-S1",
+    "name": "Provider terms and free-tier re-verification",
+    "requires_separate_explicit_approval": true,
+    "started": false
+  }
+}
