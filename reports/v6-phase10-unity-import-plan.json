@@ -1,0 +1,595 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 10 - controlled real-world validation proposal",
+  "deliverable": "unity_import_plan",
+  "generated_at": "2026-11-13T09:42:02Z",
+  "status": "PROPOSAL_ONLY_PENDING_USER_APPROVAL",
+  "execution_performed": false,
+  "engine": {
+    "name": "Unity",
+    "version": "6000.6.2f1",
+    "changeset": "770e33f6875c",
+    "path": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.6.2f1\\Editor\\Unity.exe",
+    "platform_target": "StandaloneWindows64",
+    "installed_modules": [
+      "windowsstandalonesupport",
+      "AndroidPlayer",
+      "WebGLSupport"
+    ]
+  },
+  "project_policy": {
+    "source_project": "validation/unity-jungle-v6",
+    "source_project_is_read_only_input": true,
+    "v5_project_is_read_only_input": true,
+    "protected_projects": [
+      "validation/unity-jungle-v5",
+      "validation/unity-jungle-v6",
+      "validation/builds/v5-windows",
+      "validation/builds/v6-windows"
+    ],
+    "planned_lab": "validation/v6-phase10/unity-import-lab",
+    "lab_creation": "Copy Assets, ProjectSettings and Packages only. Never copy or modify the source Library.",
+    "lab_assets_namespace": "Assets/P10",
+    "new_build_output": "validation/v6-phase10/builds/windows",
+    "why_copy_instead_of_modify": "The task requires the existing Unity 6000.6.2f1 project as the engine baseline but also forbids modifying the Phase 5 project. A disposable copy satisfies both requirements and keeps the Phase 5 evidence hash-stable.",
+    "source_integrity_check": "Before and after every lab stage, recompute the 38 protected hash entries and confirm git status is unchanged for all protected paths."
+  },
+  "existing_import_state": {
+    "summary": "Unity already imported the Phase 3 and Phase 4 FBX files during the Phase 5 scene build. That is intermediate engine evidence, but it was never independently audited for mesh counts, bone mapping, clip playback, texture colour space or material appearance.",
+    "evidence": [
+      "validation/unity-jungle-v6/Assets/V6/Art/JungleMonkey.fbx.meta exists with ModelImporter settings",
+      "validation/unity-jungle-v6/Assets/V6/Art/JungleLevel.fbx.meta exists",
+      "Assets/V6/Animations/V6Monkey.controller references clip fileIDs from GUID 82805ecb4c8a4614286bee7cd9249518",
+      "Assets/V6/Scenes/JungleMonkeyV6.unity contains prefab modifications targeting JungleMonkey.fbx GUID 82805ecb4c8a4614286bee7cd9249518",
+      "Assets/V6/Materials/M_Monkey_Fur.mat references base-color and normal texture GUIDs",
+      "Logs/build-windows-final2.log reports a succeeded build",
+      "Validation/builds/v6-windows/V6JungleMonkey.exe ran a completed playthrough"
+    ],
+    "not_yet_proven": [
+      "Imported triangle and vertex counts match the Blender source",
+      "All 23 bones import and bind to the skinned mesh",
+      "The four clips contain non-empty keyframes in Unity",
+      "A clip actually deforms the mesh during playback",
+      "Texture sRGB and Non-Color import settings are correct in Unity",
+      "Material appearance matches the intended PBR channels",
+      "The environment collision and river hazard derive from the imported mesh",
+      "High-tier environment imports cleanly",
+      "Import-time content safety for untrusted third-party assets"
+    ],
+    "phase8_phase9_statement_reconciled": "The Phase 8/9 statement 'engine asset import performed=false' describes the studio's provider/download-to-engine import path. It does not deny that the Phase 5 scene builder loaded the local Phase 3/4 FBX files inside Unity. Phase 10 must not repeat either overclaim or underclaim."
+  },
+  "asset_inventory": [
+    {
+      "id": "P10-CHAR-FBX",
+      "kind": "character_mesh_rig_animation",
+      "source": "validation/v6-character-pipeline/JungleMonkey.fbx",
+      "unity_copy": "validation/unity-jungle-v6/Assets/V6/Art/JungleMonkey.fbx",
+      "bytes": 1513628,
+      "sha256": "634e2e64276c80194881c13c25d8cb70c6083f36431b38a65126303fa60b9cf6",
+      "unity_copy_identical": true,
+      "importable_now": true,
+      "evidence": "Byte-identical in both locations; Unity .meta and scene references exist.",
+      "facts": {
+        "vertices_blender": 7974,
+        "triangles": 15688,
+        "materials": 7,
+        "bones": 23,
+        "vertex_groups": 23,
+        "weighted_ratio": 1.0,
+        "dimensions_m": [0.9, 0.9906, 1.69],
+        "uv_layers": ["UVMap"],
+        "clips": ["Idle", "Walk", "Run", "Jump"]
+      },
+      "known_work_remaining": [
+        "Independent Unity mesh and bone count validation",
+        "Clip playback sampling",
+        "Material slot and texture binding validation",
+        "Visual sign-off"
+      ]
+    },
+    {
+      "id": "P10-CHAR-TEX-BASE",
+      "kind": "character_texture_basecolor",
+      "source": "validation/v6-character-pipeline/T_Monkey_Fur_BaseColor.png",
+      "unity_copy": "validation/unity-jungle-v6/Assets/V6/Art/T_Monkey_Fur_BaseColor.png",
+      "bytes": 162812,
+      "sha256": "0442abcacbfdbdc953dfd51dfee8210feec314f04e9c04a5e361b5a1746c990c",
+      "unity_copy_identical": true,
+      "expected_import": {
+        "resolution": "512x512",
+        "sRGB": true,
+        "texture_type": "Default"
+      },
+      "importable_now": true,
+      "known_work_remaining": ["Verify Unity importer sRGB flag and actual bound texture"]
+    },
+    {
+      "id": "P10-CHAR-TEX-NORMAL",
+      "kind": "character_texture_normal",
+      "source": "validation/v6-character-pipeline/T_Monkey_Fur_Normal.png",
+      "unity_copy": "validation/unity-jungle-v6/Assets/V6/Art/T_Monkey_Fur_Normal.png",
+      "bytes": 235413,
+      "sha256": "36c73708e39577d696fab0708967d6e009c732e0efbd298ca82f116b47b6e8ce",
+      "unity_copy_identical": true,
+      "expected_import": {
+        "resolution": "512x512",
+        "sRGB": false,
+        "texture_type": "Normal map"
+      },
+      "importable_now": true,
+      "known_work_remaining": ["Verify Unity normal-map type and non-sRGB flag"]
+    },
+    {
+      "id": "P10-CHAR-TEX-ROUGH",
+      "kind": "character_texture_roughness",
+      "source": "validation/v6-character-pipeline/T_Monkey_Fur_Roughness.png",
+      "unity_copy": "validation/unity-jungle-v6/Assets/V6/Art/T_Monkey_Fur_Roughness.png",
+      "bytes": 146417,
+      "sha256": "9aa24e98945bd03fcafc6d4b1749c78b0a9afbbbf1d8c5ad596932cbaf4c2000",
+      "unity_copy_identical": true,
+      "expected_import": {
+        "resolution": "512x512",
+        "sRGB": false
+      },
+      "importable_now": true,
+      "known_work_remaining": ["The current Unity material uses a constant smoothness, not the roughness texture; decide whether to wire it or document the simplification"]
+    },
+    {
+      "id": "P10-ENV-FBX",
+      "kind": "environment_mesh_materials",
+      "source": "validation/v6-environment-pipeline/JungleLevel.fbx",
+      "unity_copy": "validation/unity-jungle-v6/Assets/V6/Art/JungleLevel.fbx",
+      "bytes": 2250540,
+      "sha256": "fc39f575da637724a609d82ea548f93b27c4876cfa1520fa0c5d3dfd8f9a81f9",
+      "unity_copy_identical": true,
+      "importable_now": true,
+      "facts": {
+        "tier": "medium",
+        "total_triangles": 53674,
+        "terrain_triangles": 8450,
+        "terrain_vertices": 4356,
+        "vegetation_instances": 287,
+        "scene_objects": 343,
+        "materials": 19,
+        "river_triangles": 192,
+        "terrain_extent_m": "120 x 120",
+        "terrain_relief_m": 7.09,
+        "spawn": "(0, -48, 3.77)",
+        "destination": "(0, 46)"
+      },
+      "known_work_remaining": [
+        "Independent Unity import validation",
+        "Material remap verification",
+        "Collision and river hazard validation from the imported mesh",
+        "Visual sign-off"
+      ]
+    },
+    {
+      "id": "P10-ENV-TEX-BASE",
+      "kind": "environment_texture_basecolor",
+      "source": "validation/v6-environment-pipeline/T_Env_Ground_BaseColor.png",
+      "unity_copy": "validation/unity-jungle-v6/Assets/V6/Art/T_Env_Ground_BaseColor.png",
+      "bytes": 177081,
+      "sha256": "841259b10b7db78e299843f9c2e4af7976b191ae2499b831b442249c7f8ee955",
+      "unity_copy_identical": true,
+      "expected_import": {"resolution": "512x512", "sRGB": true},
+      "importable_now": true
+    },
+    {
+      "id": "P10-ENV-TEX-NORMAL",
+      "kind": "environment_texture_normal",
+      "source": "validation/v6-environment-pipeline/T_Env_Ground_Normal.png",
+      "unity_copy": "validation/unity-jungle-v6/Assets/V6/Art/T_Env_Ground_Normal.png",
+      "bytes": 286025,
+      "sha256": "dc5f946318186c4991fc133204f6a5eef39d5be5c30c53c22e947d8c7778c6f0",
+      "unity_copy_identical": true,
+      "expected_import": {"resolution": "512x512", "sRGB": false, "texture_type": "Normal map"},
+      "importable_now": true
+    },
+    {
+      "id": "P10-ENV-TEX-ROUGH",
+      "kind": "environment_texture_roughness",
+      "source": "validation/v6-environment-pipeline/T_Env_Ground_Roughness.png",
+      "unity_copy": "validation/unity-jungle-v6/Assets/V6/Art/T_Env_Ground_Roughness.png",
+      "bytes": 149377,
+      "sha256": "581e90924af3b3ef1ed35dcb09cab871bf4e16aa599c74e62a0d63d00fe71e5f",
+      "unity_copy_identical": true,
+      "expected_import": {"resolution": "512x512", "sRGB": false},
+      "importable_now": true,
+      "known_work_remaining": ["The current Unity material uses a constant smoothness, not the roughness texture"]
+    },
+    {
+      "id": "P10-ENV-HIGH-FBX",
+      "kind": "environment_mesh_optional_high_tier",
+      "source": "validation/v6-environment-pipeline/high/JungleLevel.fbx",
+      "bytes": 3671740,
+      "importable_now": true,
+      "tested_in_phase4": true,
+      "tested_in_unity": false,
+      "facts": {
+        "total_triangles": 83930,
+        "scene_objects": 562,
+        "materials": 19,
+        "textures": "1024x1024"
+      },
+      "known_work_remaining": ["Optional second-tier Unity import and performance check"]
+    },
+    {
+      "id": "P10-ANIM-CLIPS",
+      "kind": "animation_clips",
+      "source": "embedded in JungleMonkey.fbx",
+      "clips": [
+        {"name": "Idle", "frame_range": [1, 60], "fps": 30, "seconds": 2.0, "fcurves": 6},
+        {"name": "Walk", "frame_range": [1, 25], "fps": 30, "seconds": 0.833, "fcurves": 9},
+        {"name": "Run", "frame_range": [1, 19], "fps": 30, "seconds": 0.633, "fcurves": 12},
+        {"name": "Jump", "frame_range": [1, 30], "fps": 30, "seconds": 1.0, "fcurves": 12}
+      ],
+      "importable_now": true,
+      "known_work_remaining": [
+        "Prove clips are non-empty after Unity import",
+        "Prove they deform the mesh",
+        "Human visual review"
+      ]
+    },
+    {
+      "id": "P10-MATERIALS-MONKEY",
+      "kind": "material_assets",
+      "source": "validation/unity-jungle-v6/Assets/V6/Materials/",
+      "files": [
+        "M_Monkey_Fur.mat",
+        "M_Monkey_Skin.mat",
+        "M_Monkey_Nose.mat",
+        "M_Monkey_EyeWhite.mat",
+        "M_Monkey_Iris.mat",
+        "M_Monkey_Pupil.mat",
+        "M_Monkey_InnerEar.mat"
+      ],
+      "importable_now": true,
+      "known_work_remaining": ["Verify all seven slots bind to the imported renderer and none are magenta"]
+    },
+    {
+      "id": "P10-MATERIALS-ENV",
+      "kind": "material_assets",
+      "source": "validation/unity-jungle-v6/Assets/V6/Materials/",
+      "files": [
+        "M_Env_Bark.mat",
+        "M_Env_Grass.mat",
+        "M_Env_Ground.mat",
+        "M_Env_Leaf.mat",
+        "M_Env_Leaf_Light.mat",
+        "M_Env_Rock.mat",
+        "M_Env_Rock_Mossy.mat",
+        "M_Env_Root.mat",
+        "M_Env_Stone.mat",
+        "M_Env_Water.mat",
+        "M_Env_WetGround.mat",
+        "M_Env_Wood.mat",
+        "BananaYellow.mat"
+      ],
+      "importable_now": true,
+      "known_work_remaining": ["Verify FBX material slot mapping and visual appearance"]
+    }
+  ],
+  "assets_that_can_be_imported_now": [
+    "P10-CHAR-FBX",
+    "P10-CHAR-TEX-BASE",
+    "P10-CHAR-TEX-NORMAL",
+    "P10-CHAR-TEX-ROUGH",
+    "P10-ENV-FBX",
+    "P10-ENV-TEX-BASE",
+    "P10-ENV-TEX-NORMAL",
+    "P10-ENV-TEX-ROUGH",
+    "P10-ANIM-CLIPS",
+    "P10-MATERIALS-MONKEY",
+    "P10-MATERIALS-ENV"
+  ],
+  "assets_that_still_require_work": [
+    {
+      "item": "Unity import audit harness",
+      "work": "Add an editor validation script and PlayMode playback test inside the lab only."
+    },
+    {
+      "item": "Material slot mapping",
+      "work": "Prove each of the 7 character and 19 environment source materials maps to a Unity material with a valid shader and textures."
+    },
+    {
+      "item": "Roughness texture wiring",
+      "work": "The Unity materials use constant smoothness. Either wire the roughness map correctly or document the simplification as a known difference."
+    },
+    {
+      "item": "Animation deformation proof",
+      "work": "Sample bone transforms and render frames; parameters alone are insufficient."
+    },
+    {
+      "item": "Environment collision and river",
+      "work": "Validate colliders generated from imported meshes and the contact-lethal river behaviour."
+    },
+    {
+      "item": "High-tier import",
+      "work": "Optional import and performance check for the 83,930-triangle high tier."
+    },
+    {
+      "item": "Import-time content safety",
+      "work": "S12 remains open. Phase 10 validates project-original assets only and does not enable untrusted third-party import."
+    },
+    {
+      "item": "Studio pipeline-to-Unity bridge",
+      "work": "Phase 10 does not implement automatic engine import. Every import is a manually approved lab operation."
+    }
+  ],
+  "lab_stages": [
+    {
+      "id": "U0",
+      "name": "Create lab",
+      "actions": [
+        "robocopy Assets, ProjectSettings and Packages from validation/unity-jungle-v6 to validation/v6-phase10/unity-import-lab",
+        "open once in batch mode with -nographics to regenerate Library",
+        "record source-tree hash before and after"
+      ],
+      "pass": [
+        "Lab opens with 0 compile errors",
+        "Source tree unchanged",
+        "No V5 path touched"
+      ]
+    },
+    {
+      "id": "U1",
+      "name": "Import character",
+      "actions": [
+        "copy the Phase 10 character FBX and textures into Assets/P10/Character",
+        "set animationType Generic, importAnimation true, import normals, no cameras or lights",
+        "set base color sRGB true; normal and roughness sRGB false",
+        "reimport and record AssetDatabase results"
+      ],
+      "pass": [
+        "0 import errors",
+        "Triangles within 2% of 15,688",
+        "23 bones and 23 vertex groups",
+        "7 material slots",
+        "4 clips present",
+        "Renderer is a SkinnedMeshRenderer"
+      ]
+    },
+    {
+      "id": "U2",
+      "name": "Validate character appearance",
+      "actions": [
+        "instantiate the imported prefab in a neutral scene",
+        "bind the 7 materials",
+        "capture front, side and three-quarter views at 1280x720",
+        "sample center pixels and assert the render is not uniform magenta"
+      ],
+      "pass": [
+        "All material slots resolve",
+        "Fur base color and normal maps non-null",
+        "No missing shader",
+        "Human visual review recorded"
+      ]
+    },
+    {
+      "id": "U3",
+      "name": "Validate animation playback",
+      "actions": [
+        "play each clip for at least 0.3 seconds of scaled time",
+        "sample hand, foot, head and tail bone world positions at t=0, t=0.25 and t=0.5 of clip length",
+        "record maximum displacement and finite checks",
+        "capture one frame per clip"
+      ],
+      "pass": [
+        "Idle displacement > 1 cm",
+        "Walk displacement > 1 cm",
+        "Run displacement > 1 cm",
+        "Jump displacement > 5 cm",
+        "No NaN or infinite transform",
+        "Clip length matches the source within 5%"
+      ]
+    },
+    {
+      "id": "U4",
+      "name": "Import environment",
+      "actions": [
+        "copy the Phase 10 environment FBX and textures into Assets/P10/Environment",
+        "import with the same model-importer discipline",
+        "record triangle count, renderer count, terrain bounds and material slots"
+      ],
+      "pass": [
+        "0 import errors",
+        "Triangles within 2% of 53,674",
+        "Terrain relief > 5 m",
+        "River object present",
+        "At least 19 material slots resolve",
+        "No missing shader"
+      ]
+    },
+    {
+      "id": "U5",
+      "name": "Integrate scene and gameplay",
+      "actions": [
+        "build the scene from imported assets using the existing builder logic",
+        "add CharacterController player, camera, HUD, collectibles, checkpoints, destination and river hazard",
+        "run the existing acceptance checks"
+      ],
+      "pass": [
+        "Player spawns grounded",
+        "Movement and jump work",
+        "10 bananas collectible",
+        "Objective and completion work",
+        "River contact produces game over",
+        "No missing script or material"
+      ]
+    },
+    {
+      "id": "U6",
+      "name": "Run Unity tests",
+      "actions": [
+        "run EditMode and PlayMode suites in batch mode",
+        "parse XML results"
+      ],
+      "pass": [
+        "0 failures",
+        "0 unhandled exceptions",
+        "Skipped count reported"
+      ]
+    },
+    {
+      "id": "U7",
+      "name": "Build and run",
+      "actions": [
+        "build StandaloneWindows64 into validation/v6-phase10/builds/windows",
+        "run the auto-play harness for at least one completion",
+        "capture four screenshots and performance"
+      ],
+      "pass": [
+        "Build Succeeded with 0 errors",
+        "Player exit code 0",
+        "LevelCompleted reached with 10/10 bananas",
+        "No unhandled exception"
+      ]
+    }
+  ],
+  "objective_acceptance_tests": [
+    {
+      "id": "UT1",
+      "area": "import",
+      "assertion": "Unity imports JungleMonkey.fbx with zero errors and the console contains no 'Failed to import' or missing-script message.",
+      "method": "Batch-mode editor log plus editor validation report.",
+      "threshold": "errors = 0"
+    },
+    {
+      "id": "UT2",
+      "area": "mesh",
+      "assertion": "Imported character triangle count matches the Blender source within tolerance.",
+      "method": "AssetDatabase Mesh.triangles.Length and vertex count.",
+      "threshold": "|Unity triangles - 15688| / 15688 <= 0.02"
+    },
+    {
+      "id": "UT3",
+      "area": "rig",
+      "assertion": "The character imports as a skinned mesh with the full skeleton.",
+      "method": "SkinnedMeshRenderer.bones and Mesh.boneWeights.",
+      "threshold": "bones = 23; every vertex has at least one non-zero weight"
+    },
+    {
+      "id": "UT4",
+      "area": "clips",
+      "assertion": "Four named clips exist with non-zero length.",
+      "method": "AssetDatabase.LoadAllAssetsAtPath(...).OfType<AnimationClip>().",
+      "threshold": "Idle, Walk, Run, Jump present; length > 0.1 s each"
+    },
+    {
+      "id": "UT5",
+      "area": "playback",
+      "assertion": "Each locomotion clip moves bones over time.",
+      "method": "Animator.Play + sample bone transforms at three normalized times.",
+      "threshold": "max displacement > 0.01 m for Idle/Walk/Run; > 0.05 m for Jump"
+    },
+    {
+      "id": "UT6",
+      "area": "textures",
+      "assertion": "Base color is sRGB and normal/roughness are linear.",
+      "method": "TextureImporter.sRGBTexture and textureType.",
+      "threshold": "base color true; normal false with textureType NormalMap; roughness false"
+    },
+    {
+      "id": "UT7",
+      "area": "materials",
+      "assertion": "Every renderer has a non-null material with a non-null shader and no error shader.",
+      "method": "Renderer.sharedMaterial and shader.name.",
+      "threshold": "0 missing materials; 0 'Hidden/InternalErrorShader'"
+    },
+    {
+      "id": "UT8",
+      "area": "appearance",
+      "assertion": "Rendered character is not the magenta error colour.",
+      "method": "Capture 1280x720 PNG and sample pixels; compare with the expected palette.",
+      "threshold": "No dominant full-frame magenta; human review accepts the capture"
+    },
+    {
+      "id": "UT9",
+      "area": "environment",
+      "assertion": "Imported terrain is non-flat and the river exists.",
+      "method": "Mesh bounds and named object search.",
+      "threshold": "terrain Y range > 5 m; River_Water present"
+    },
+    {
+      "id": "UT10",
+      "area": "environment materials",
+      "assertion": "All environment material slots resolve.",
+      "method": "Renderer count and material slots.",
+      "threshold": "0 missing; at least 19 distinct slots"
+    },
+    {
+      "id": "UT11",
+      "area": "integration",
+      "assertion": "The imported assets support the real gameplay loop.",
+      "method": "PlayMode tests for spawn, movement, jump, collection, pause, completion and river game over.",
+      "threshold": "all tests pass"
+    },
+    {
+      "id": "UT12",
+      "area": "build",
+      "assertion": "A new Windows player builds from the lab scene.",
+      "method": "Batch-mode build report.",
+      "threshold": "Succeeded; 0 errors"
+    },
+    {
+      "id": "UT13",
+      "area": "runtime",
+      "assertion": "The built player completes the level.",
+      "method": "Auto-play harness and log parsing.",
+      "threshold": "exit 0; LevelCompleted; 10/10 bananas; 4 captures"
+    },
+    {
+      "id": "UT14",
+      "area": "preservation",
+      "assertion": "The source Phase 5 and V5 projects are unchanged.",
+      "method": "38 protected hashes plus git status.",
+      "threshold": "38/38 match; 0 protected path changes"
+    }
+  ],
+  "human_visual_review": {
+    "required": true,
+    "artifacts": [
+      "Character front, side, three-quarter",
+      "Walk and run mid-stride frames",
+      "Jump apex frame",
+      "Environment spawn view",
+      "Environment overview",
+      "Gameplay frame with player and environment"
+    ],
+    "criteria": [
+      "Character silhouette and proportions are recognizable",
+      "Fur base colour and normal detail are visible",
+      "No obvious mesh explosion, inverted normals or missing faces",
+      "Animations show plausible limb motion",
+      "Environment terrain, vegetation, water and ruins are visible",
+      "No magenta or black material failure",
+      "No obvious z-fighting or floating props"
+    ],
+    "not_claimed": "Human visual acceptance is not pixel-perfect art approval and does not make the prototype production art."
+  },
+  "known_limitations_that_phase10_will_not_fix": [
+    "Character and environment are procedural prototypes, not sculpted production art.",
+    "Animations are short procedural clips, not authored performances.",
+    "AO, emission and opacity maps are absent.",
+    "Roughness maps are not wired into the current Unity materials.",
+    "Water is visual plus contact hazard; there is no swimming or buoyancy.",
+    "Navigation is metadata only; no runtime navmesh.",
+    "No audio assets exist.",
+    "No automatic provider-to-engine import path exists.",
+    "No untrusted third-party asset import is enabled."
+  ],
+  "expected_evidence_files": [
+    "reports/v6-phase10-unity-lab.json",
+    "reports/v6-phase10-unity-character-import.json",
+    "reports/v6-phase10-animation-playback.json",
+    "reports/v6-phase10-material-validation.json",
+    "reports/v6-phase10-unity-environment-import.json",
+    "reports/v6-phase10-scene-integration.json",
+    "reports/v6-phase10-unity-tests.json",
+    "reports/v6-phase10-character-captures/",
+    "reports/v6-phase10-environment-captures/",
+    "validation/v6-phase10/unity-import-lab/Logs/"
+  ],
+  "final_status": "PROPOSAL_ONLY_PENDING_USER_APPROVAL"
+}

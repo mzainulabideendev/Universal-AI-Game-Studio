@@ -1,0 +1,366 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 10 - controlled real-world validation proposal",
+  "deliverable": "baseline",
+  "generated_at": "2026-11-13T09:42:02Z",
+  "status": "PROPOSAL_ONLY_PENDING_USER_APPROVAL",
+  "execution_performed": false,
+  "repository": {
+    "root": "D:\\MCP\\MCP",
+    "branch": "main",
+    "head": "5b263982b23334f0495413034c17eac1058e01fd",
+    "head_subject": "Update Phase 9 reports and audit scripts with human review decisions and adjustments",
+    "head_author": "Muhammad Zain Ul Abideen",
+    "head_committed_at": "2026-11-12T10:50:01+05:00",
+    "working_tree_clean": true,
+    "staged_changes": 0,
+    "unstaged_changes": 0,
+    "untracked_entries": 0,
+    "tags": [],
+    "remote": "https://github.com/mzainulabideendev/Universal-AI-Game-Studio.git",
+    "phase9_report_head": "fe28ba1d86793c4105f7497224f74e4032ae0a98",
+    "commits_since_phase9_report_head": [
+      "5b26398 Update Phase 9 reports and audit scripts with human review decisions and adjustments"
+    ],
+    "git_writes_by_phase10": 0,
+    "commits_by_phase10": 0,
+    "pushes_by_phase10": 0,
+    "tags_by_phase10": 0,
+    "resets_by_phase10": 0
+  },
+  "phase9_uncommitted_changes_question": {
+    "requested_check": "Identify uncommitted Phase 9 decision-recording changes.",
+    "finding": "None remain uncommitted.",
+    "explanation": "The Phase 9 baseline recorded nine modified paths, including V6-PHASE-9-RELEASE-CANDIDATE.md, eight reports/v6-phase9-*.json files and scripts/v6-phase9-audit.py. Those exact decision-recording changes were committed externally as 5b263982. The current working tree is clean.",
+    "committed_in": "5b263982b23334f0495413034c17eac1058e01fd",
+    "committed_paths": [
+      "V6-PHASE-9-RELEASE-CANDIDATE.md",
+      "reports/v6-phase9-audit.json",
+      "reports/v6-phase9-baseline.json",
+      "reports/v6-phase9-dns-reliability.json",
+      "reports/v6-phase9-human-review.json",
+      "reports/v6-phase9-regression-validation.json",
+      "reports/v6-phase9-release-candidate.json",
+      "reports/v6-phase9-security-audit.json",
+      "scripts/v6-phase9-audit.py"
+    ],
+    "preserved": true
+  },
+  "environment": {
+    "platform": "Windows 11 Pro 10.0.26200",
+    "architecture": "64-bit",
+    "python": "3.12.10",
+    "cpu": "AMD Ryzen 5 4500U with Radeon Graphics",
+    "logical_cores": 6,
+    "ram_gb": 15.4,
+    "gpu": "AMD Radeon(TM) Graphics (integrated)",
+    "gpu_driver": "31.0.21024.5005",
+    "free_disk_gb": {
+      "C": 45.0,
+      "D": 175.1
+    },
+    "unity": {
+      "version": "6000.6.2f1",
+      "changeset": "770e33f6875c",
+      "path": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.6.2f1\\Editor\\Unity.exe",
+      "present": true,
+      "modules": [
+        "AndroidPlayer",
+        "WebGLSupport",
+        "windowsstandalonesupport"
+      ]
+    },
+    "blender": {
+      "version": "5.2.2 LTS",
+      "path": "D:\\blender data\\blender.exe",
+      "present": true
+    },
+    "visual_studio": "18.10.12217.157",
+    "dotnet_sdk": "10.0.401",
+    "network_calls_by_phase10": 0,
+    "credentials_read_by_phase10": false,
+    "engine_builds_by_phase10": 0,
+    "asset_imports_by_phase10": 0,
+    "downloads_by_phase10": 0,
+    "installs_by_phase10": 0
+  },
+  "verification_run": {
+    "command": "python -m unittest discover -s tools/game-studio-mcp/tests -q",
+    "tests_ran": 515,
+    "tests_expected": 515,
+    "exact": true,
+    "passed": true,
+    "duration_seconds": 75.327,
+    "result": "OK",
+    "exit_code": 0,
+    "executed_at": "2026-11-13T09:40:00Z"
+  },
+  "mcp": {
+    "tools": 107,
+    "handlers": 107,
+    "unique_tools": 107,
+    "unique_handlers": 107,
+    "missing_handlers": [],
+    "extra_handlers": [],
+    "exact_parity": true
+  },
+  "protected_artifacts": {
+    "recorded_hash_entries": 38,
+    "unique_artifacts": 23,
+    "matched": 38,
+    "mismatched": 0,
+    "missing": 0,
+    "all_hashes_ok": true,
+    "v4_records": 2,
+    "v5_records": 13,
+    "phase5_records": 23,
+    "duplicate_records_note": "The 23 Phase 5 records include the 13 V5 records and the 2 V4 records, so 38 recorded entries cover 23 unique files.",
+    "protected_git_paths_clean": true,
+    "verified_at": "2026-11-13T09:41:30Z",
+    "verification_method": "SHA-256 recomputed from each file on disk and compared with reports/v6-phase9-baseline.json"
+  },
+  "phase_reports_present": {
+    "V6-PHASE-0-BASELINE.md": true,
+    "V6-PHASE-1-PROVIDER-REPORT.md": true,
+    "V6-PHASE-2-AGENT-ORCHESTRATION.md": true,
+    "V6-PHASE-3-CHARACTER-ASSET-PIPELINE.md": true,
+    "V6-PHASE-4-ENVIRONMENT-GENERATION.md": true,
+    "V6-PHASE-5-GAMEPLAY-INTEGRATION.md": true,
+    "V6-PHASE-5-BUILD-IDENTITY-VERIFICATION.md": true,
+    "V6-PHASE-6-FREE-AI-INTELLIGENCE.md": true,
+    "V6-PHASE-7-REAL-AI-VALIDATION.md": true,
+    "V6-PHASE-7-CONNECTIVITY-DIAGNOSTICS.md": true,
+    "V6-PHASE-8-PRODUCTION-READINESS.md": true,
+    "V6-PHASE-9-RELEASE-CANDIDATE.md": true
+  },
+  "phase_verdicts": {
+    "phase0": "COMPLETE",
+    "phase1": "COMPLETE_OFFLINE",
+    "phase2": "PASS_PLANNING_ONLY",
+    "phase3": "PASS",
+    "phase4": "PASS",
+    "phase5": "PASS_AUTOMATED_PENDING_HUMAN_PLAYTEST",
+    "phase6": "PASS_OFFLINE_ONLY",
+    "phase7": "PASS_AUTOMATED_LIVE_REQUEST_FAILED",
+    "phase8": "PASS_AUTOMATED_PENDING_HUMAN_REVIEW",
+    "phase9": "PASS_AUTOMATED_RELEASE_NOT_AUTHORIZED"
+  },
+  "verification_vocabulary": {
+    "implemented": "Code or asset exists in the repository.",
+    "fixture_tested": "Offline tests exercise the path with fixtures or mocks.",
+    "locally_executed": "A real local process ran (Python, Blender, Unity or the Windows player).",
+    "evidence_hashed": "Artifacts produced by the local run were hashed and recorded.",
+    "independently_verified": "A separate audit or independent run observed the result, not only a self-report.",
+    "live_verified": "A real external provider or service returned a valid response for the exact approved request.",
+    "human_accepted": "A named human reviewed and accepted the evidence."
+  },
+  "integration_status_matrix": [
+    {
+      "integration": "AI provider transport",
+      "implemented": true,
+      "fixture_tested": true,
+      "locally_executed": true,
+      "independently_verified": true,
+      "live_verified": false,
+      "human_accepted": false,
+      "evidence": [
+        "game_studio/llm/providers.py",
+        "game_studio/llm/bounded_http.py",
+        "reports/v6-phase7-live-validation.json"
+      ],
+      "honest_state": "Adapters, bounded transport, routing and schema validation are offline-tested. No live request has produced a response body. Three approved Gemini attempts failed with HTTP 503 or read timeouts."
+    },
+    {
+      "integration": "AI game specification chain",
+      "implemented": true,
+      "fixture_tested": true,
+      "locally_executed": true,
+      "independently_verified": true,
+      "live_verified": false,
+      "human_accepted": false,
+      "evidence": [
+        "game_studio/llm/game_spec_pipeline.py",
+        "reports/v6-phase7-generation-bridge.json",
+        "reports/v6-phase7-quality-evaluation.json"
+      ],
+      "honest_state": "Idea to requirements to design to Phase 3/4/5 specification bridge works offline and on fixtures. Live model output has never been received or scored."
+    },
+    {
+      "integration": "Character asset pipeline",
+      "implemented": true,
+      "fixture_tested": true,
+      "locally_executed": true,
+      "independently_verified": true,
+      "live_verified": false,
+      "human_accepted": false,
+      "evidence": [
+        "validation/v6-character-pipeline/JungleMonkey.fbx",
+        "reports/v6-character-pipeline.json",
+        "reports/v6-phase3-audit.json"
+      ],
+      "honest_state": "Blender 5.2.2 generated a 15,688-triangle, 23-bone, 7-material character with Idle/Walk/Run/Jump clips and 512x512 PBR textures. Output is a procedural prototype. No independent engine import validation existed in Phase 3."
+    },
+    {
+      "integration": "Environment asset pipeline",
+      "implemented": true,
+      "fixture_tested": true,
+      "locally_executed": true,
+      "independently_verified": true,
+      "live_verified": false,
+      "human_accepted": false,
+      "evidence": [
+        "validation/v6-environment-pipeline/JungleLevel.fbx",
+        "reports/v6-environment-generation.json",
+        "reports/v6-phase4-audit.json"
+      ],
+      "honest_state": "Blender generated low/medium/high tropical-jungle tiers. Medium tier has 53,674 triangles, 287 vegetation instances and 19 materials. No engine import was executed in Phase 4."
+    },
+    {
+      "integration": "Unity consumption of generated assets",
+      "implemented": true,
+      "fixture_tested": false,
+      "locally_executed": true,
+      "independently_verified": false,
+      "live_verified": false,
+      "human_accepted": false,
+      "evidence": [
+        "validation/unity-jungle-v6/Assets/V6/Art/JungleMonkey.fbx",
+        "validation/unity-jungle-v6/Assets/V6/Art/JungleLevel.fbx",
+        "validation/unity-jungle-v6/Assets/V6/Animations/V6Monkey.controller",
+        "validation/unity-jungle-v6/Assets/V6/Scenes/JungleMonkeyV6.unity",
+        "validation/unity-jungle-v6/Logs/build-windows-final2.log"
+      ],
+      "honest_state": "Unity 6000.6.2f1 did import and consume both FBX files during the Phase 5 scene build: model importer metadata exists, the scene references the character FBX GUID, the animator controller references four FBX clips, and the Windows build succeeded. This is intermediate engine evidence, not an independently validated import audit. Phase 8/9 'engine asset import performed=false' refers to the studio's provider-to-engine import path, not to the Phase 5 hand-built Unity scene."
+    },
+    {
+      "integration": "Unity animation playback",
+      "implemented": true,
+      "fixture_tested": false,
+      "locally_executed": true,
+      "independently_verified": false,
+      "live_verified": false,
+      "human_accepted": false,
+      "evidence": [
+        "validation/unity-jungle-v6/Assets/V6/Tests/PlayMode/V6PlayModeTests.cs",
+        "validation/unity-jungle-v6/Logs/playmode-results.xml"
+      ],
+      "honest_state": "PlayMode tests assert that the Animator exists and that the Speed parameter rises while moving. No test samples bone poses, clip weights, clip duration or skinned deformation over time, and no test proves the imported clips visually animate the mesh."
+    },
+    {
+      "integration": "Unity material and texture appearance",
+      "implemented": true,
+      "fixture_tested": false,
+      "locally_executed": true,
+      "independently_verified": false,
+      "live_verified": false,
+      "human_accepted": false,
+      "evidence": [
+        "validation/unity-jungle-v6/Assets/V6/Materials/M_Monkey_Fur.mat",
+        "validation/unity-jungle-v6/Assets/V6/Materials/M_Env_Ground.mat",
+        "reports/v6-captures/02-playing.png"
+      ],
+      "honest_state": "Materials reference texture GUIDs and the playthrough screenshots show a rendered scene. There is no objective material-appearance test, no texture colour-space assertion in Unity, and no human visual sign-off."
+    },
+    {
+      "integration": "Playable Windows build",
+      "implemented": true,
+      "fixture_tested": false,
+      "locally_executed": true,
+      "independently_verified": true,
+      "live_verified": false,
+      "human_accepted": false,
+      "evidence": [
+        "validation/builds/v6-windows/V6JungleMonkey.exe",
+        "reports/v6-build-raw.json",
+        "reports/v6-phase5-build-identity-verification.json",
+        "reports/v6-gameplay-performance.json",
+        "reports/v6-captures/"
+      ],
+      "honest_state": "A real Unity Windows build ran a scripted 23-second playthrough, collected all 10 bananas and completed the level. Build identity was separately verified. There is no human playtest, no soak test, no clean-machine test, no installer and no code signing."
+    },
+    {
+      "integration": "Windows application reliability",
+      "implemented": true,
+      "fixture_tested": false,
+      "locally_executed": true,
+      "independently_verified": false,
+      "live_verified": false,
+      "human_accepted": false,
+      "evidence": [
+        "validation/unity-jungle-v6/Logs/player-run-final.log",
+        "reports/v6-phase5-build-identity-perf.json"
+      ],
+      "honest_state": "The player starts, runs and exits cleanly on the development machine. Repeated launches, long soak, focus loss, resolution changes, DPI scaling, save corruption and antivirus/SmartScreen behaviour are unmeasured."
+    },
+    {
+      "integration": "End-to-end idea to playable build",
+      "implemented": false,
+      "fixture_tested": false,
+      "locally_executed": false,
+      "independently_verified": false,
+      "live_verified": false,
+      "human_accepted": false,
+      "evidence": [
+        "reports/v6-phase9-release-candidate.json"
+      ],
+      "honest_state": "No single run has taken a new natural-language idea through live AI, new character generation, new environment generation, Unity integration and a new playable build. The Phase 5 build used pre-existing Phase 3/4 assets and offline specifications."
+    },
+    {
+      "integration": "Release-candidate verification",
+      "implemented": true,
+      "fixture_tested": true,
+      "locally_executed": true,
+      "independently_verified": true,
+      "live_verified": false,
+      "human_accepted": false,
+      "evidence": [
+        "reports/v6-phase9-audit.json",
+        "reports/v6-phase9-release-candidate.json",
+        "V6-PHASE-9-RELEASE-CANDIDATE.md"
+      ],
+      "honest_state": "Phase 9 is PASS_AUTOMATED with 515 tests and 38/38 protected entries matching. Production readiness is false, release is not authorized, S12/S14/R3 are accepted with conditions, and Phase 10 is explicitly unauthorized."
+    }
+  ],
+  "existing_engine_artifacts": {
+    "unity_project": "validation/unity-jungle-v6",
+    "unity_project_version": "6000.6.2f1",
+    "unity_project_total_bytes": 226165473,
+    "unity_project_files": 5203,
+    "unity_assets_bytes": 5620003,
+    "unity_library_bytes": 218073434,
+    "windows_build": "validation/builds/v6-windows",
+    "windows_build_bytes": 99723790,
+    "windows_build_files": 156,
+    "v5_project": "validation/unity-jungle-v5",
+    "v5_project_bytes": 204644267,
+    "v5_project_files": 5272,
+    "protected_projects": [
+      "validation/unity-jungle-v5",
+      "validation/builds/v5-windows",
+      "validation/unity-jungle-v6",
+      "validation/builds/v6-windows"
+    ]
+  },
+  "known_gaps_for_phase10": [
+    "No successful live AI provider response, no measured live output quality and no live quota observation.",
+    "No independent Unity import audit: imported mesh counts, bone mapping, clip playback and material binding are not objectively proven.",
+    "No end-to-end generation from a new idea to a new playable build.",
+    "No Windows reliability matrix, soak test, clean-machine test or human playtest.",
+    "No release-candidate sign-off combining live AI, engine import and runtime evidence.",
+    "Studio provider-to-engine import remains disabled per Phase 9 S12 conditions.",
+    "R13 real OS socket cancellation remains NOT_TESTED."
+  ],
+  "phase10_constraints_observed_now": {
+    "live_api_calls": 0,
+    "network_requests": 0,
+    "credentials_read": false,
+    "engine_builds": 0,
+    "asset_imports": 0,
+    "downloads_or_installs": 0,
+    "protected_artifact_changes": 0,
+    "commits_pushes_tags_releases": 0,
+    "phase10_implemented": false
+  },
+  "verdict": "BASELINE_VERIFIED_CLEAN_AND_PRESERVED",
+  "final_status": "PROPOSAL_ONLY_PENDING_USER_APPROVAL"
+}

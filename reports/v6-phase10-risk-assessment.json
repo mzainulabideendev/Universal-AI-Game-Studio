@@ -1,0 +1,393 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 10 - controlled real-world validation proposal",
+  "deliverable": "risk_assessment",
+  "generated_at": "2026-11-13T09:42:02Z",
+  "status": "PROPOSAL_ONLY_PENDING_USER_APPROVAL",
+  "execution_performed": false,
+  "scoring": {
+    "likelihood": ["low", "medium", "high"],
+    "impact": ["low", "medium", "high", "critical"],
+    "overall": "highest credible impact among unmitigated risks",
+    "residual": "risk remaining after the stated mitigation"
+  },
+  "overall_risk": {
+    "level": "HIGH",
+    "reason": "Phase 10 deliberately crosses three trust boundaries that Phases 0-9 avoided: a live external service, real engine asset import, and a new playable build. The work is bounded and reversible, but it can expose credentials, import incompatible content, or produce misleading evidence if a gate is skipped.",
+    "risk_acceptance": "NOT_ACCEPTED_UNTIL_USER_APPROVES_EACH_GATE",
+    "residual_after_mitigation": "MEDIUM"
+  },
+  "risks": [
+    {
+      "id": "R1",
+      "category": "provider_availability",
+      "description": "The recorded free models, quotas or free-tier status are no longer valid, or the provider changes terms before execution.",
+      "likelihood": "high",
+      "impact": "medium",
+      "mitigation": [
+        "P10-S1 requires a fresh human read of the official pages.",
+        "P10-S2 performs one model-discovery request before any generation.",
+        "No static model name is trusted by itself.",
+        "If the model is absent, stop; do not substitute silently."
+      ],
+      "detection": "Model discovery returns 404 or the model is absent from the free list.",
+      "residual": "low",
+      "stop_condition": "SC4"
+    },
+    {
+      "id": "R2",
+      "category": "provider_cost",
+      "description": "A provider requires billing, a card, a paid variant or an automatic upgrade.",
+      "likelihood": "medium",
+      "impact": "critical",
+      "mitigation": [
+        "Free-only policy is enforced before the request.",
+        "Paid fallback is hard-disabled.",
+        "No payment details are ever entered.",
+        "Any billing prompt stops the stage."
+      ],
+      "detection": "HTTP 402, pricing page requires a card, or a paid model is the only option.",
+      "residual": "low",
+      "stop_condition": "SC3"
+    },
+    {
+      "id": "R3",
+      "category": "credentials",
+      "description": "An API key is exposed in a command line, log, report, screenshot, stack trace or chat message.",
+      "likelihood": "medium",
+      "impact": "critical",
+      "mitigation": [
+        "User provisions the key outside the repository and outside chat.",
+        "Agent checks presence only and never reads the value.",
+        "Headers are redacted before logging.",
+        "Every artifact is scanned for key patterns.",
+        "A suspected exposure requires key rotation before any further request."
+      ],
+      "detection": "Secret scan of every generated file; manual review of commands.",
+      "residual": "low",
+      "stop_condition": "SC2"
+    },
+    {
+      "id": "R4",
+      "category": "privacy",
+      "description": "Free-tier data-retention terms allow the provider to store or train on the submitted content.",
+      "likelihood": "high",
+      "impact": "medium",
+      "mitigation": [
+        "Only a controlled, non-proprietary idea is sent.",
+        "No project files, repository content, personal data or assets are sent.",
+        "The current retention policy must be recorded and accepted in P10-S1.",
+        "A provider with unacceptable terms is disqualified."
+      ],
+      "detection": "Human review of the current data policy; request payload audit.",
+      "residual": "medium",
+      "stop_condition": "S1 disqualifier"
+    },
+    {
+      "id": "R5",
+      "category": "rate_limits",
+      "description": "The request hits RPM, TPM, RPD or TPD limits, or the provider returns 429.",
+      "likelihood": "medium",
+      "impact": "low",
+      "mitigation": [
+        "One discovery request and one generation request only.",
+        "Output capped at 2,048 tokens.",
+        "No retry.",
+        "Record reset information and stop."
+      ],
+      "detection": "HTTP 429 and provider rate-limit headers.",
+      "residual": "low",
+      "stop_condition": "SC5"
+    },
+    {
+      "id": "R6",
+      "category": "latency",
+      "description": "The provider is slow or hangs, as in Phase 7 where two attempts timed out and one returned 503.",
+      "likelihood": "high",
+      "impact": "medium",
+      "mitigation": [
+        "60-second total wall-clock deadline.",
+        "Bounded DNS, connect, TLS, header and body stages.",
+        "No retry and no provider switch.",
+        "Failure is recorded as evidence, not hidden."
+      ],
+      "detection": "Structured transport error and timings.",
+      "residual": "medium",
+      "stop_condition": "SC6"
+    },
+    {
+      "id": "R7",
+      "category": "model_output",
+      "description": "The live model returns malformed JSON, missing fields, contradictions, unsupported features or claims of verified functionality.",
+      "likelihood": "high",
+      "impact": "medium",
+      "mitigation": [
+        "Strict JSON contract and schema validation.",
+        "Unsupported-claim and contradiction detection.",
+        "Reject invalid output rather than repairing it by re-requesting.",
+        "Deterministic quality rubric.",
+        "No model output is executed."
+      ],
+      "detection": "Schema validation and claim scan.",
+      "residual": "medium",
+      "stop_condition": "SC14"
+    },
+    {
+      "id": "R8",
+      "category": "prompt_injection",
+      "description": "Provider output contains instruction-like text that attempts to make the agent run commands, reveal secrets or change scope.",
+      "likelihood": "medium",
+      "impact": "high",
+      "mitigation": [
+        "Treat all provider content as untrusted data.",
+        "Never execute model output.",
+        "Never follow instructions embedded in model output.",
+        "Flag and report injection attempts."
+      ],
+      "detection": "Manual review and injection-pattern scan.",
+      "residual": "low",
+      "stop_condition": "SC15"
+    },
+    {
+      "id": "R9",
+      "category": "engine_project_integrity",
+      "description": "Unity import, test or build writes into the Phase 5 project or the protected V5 project.",
+      "likelihood": "medium",
+      "impact": "critical",
+      "mitigation": [
+        "All engine work happens in validation/v6-phase10/unity-import-lab.",
+        "Source projects are read-only inputs.",
+        "Protected hashes are checked before and after every engine stage.",
+        "Never use git reset or git clean to recover."
+      ],
+      "detection": "38-hash check and git status on protected paths.",
+      "residual": "low",
+      "stop_condition": "SC1"
+    },
+    {
+      "id": "R10",
+      "category": "unity_import",
+      "description": "The FBX imports with wrong scale, missing bones, broken skin weights, missing clips or missing materials.",
+      "likelihood": "medium",
+      "impact": "high",
+      "mitigation": [
+        "Use the existing Generic importer settings.",
+        "Measure mesh, bone, clip and material facts instead of trusting the import dialog.",
+        "Fail before scene integration if any import check fails.",
+        "Keep the original source hashes for comparison."
+      ],
+      "detection": "UT1-UT5 editor validation.",
+      "residual": "medium",
+      "stop_condition": "SC8"
+    },
+    {
+      "id": "R11",
+      "category": "animation",
+      "description": "Clips exist but do not deform the mesh, play at the wrong speed, or contain NaN/constant keys.",
+      "likelihood": "medium",
+      "impact": "high",
+      "mitigation": [
+        "Sample bone transforms over time rather than checking only Animator parameters.",
+        "Check clip duration against the Blender source.",
+        "Render one frame per clip.",
+        "Require human visual review."
+      ],
+      "detection": "UT5 and captures.",
+      "residual": "medium",
+      "stop_condition": "SC8"
+    },
+    {
+      "id": "R12",
+      "category": "materials",
+      "description": "Materials appear magenta, textures use the wrong colour space, or roughness maps are silently ignored.",
+      "likelihood": "high",
+      "impact": "medium",
+      "mitigation": [
+        "Assert shader and texture bindings in the editor.",
+        "Assert sRGB and Non-Color importer flags.",
+        "Capture and review renders.",
+        "Document the constant-smoothness simplification instead of claiming PBR parity."
+      ],
+      "detection": "UT6-UT8 and human review.",
+      "residual": "medium",
+      "stop_condition": "SC8"
+    },
+    {
+      "id": "R13",
+      "category": "environment_collision",
+      "description": "Imported terrain, obstacles or river do not produce correct colliders, allowing the player to fall through or making the hazard inert.",
+      "likelihood": "medium",
+      "impact": "high",
+      "mitigation": [
+        "Validate collider presence from the imported meshes.",
+        "Run PlayMode spawn, collision and river tests.",
+        "Do not assume convex or trigger support for concave meshes.",
+        "Preserve the known river fix from Phase 5."
+      ],
+      "detection": "UT9-UT11.",
+      "residual": "medium",
+      "stop_condition": "SC8"
+    },
+    {
+      "id": "R14",
+      "category": "build",
+      "description": "The Unity build fails, produces an empty scene or silently uses stale assets.",
+      "likelihood": "low",
+      "impact": "high",
+      "mitigation": [
+        "Fresh lab Library.",
+        "Force a scene rebuild and record the scene hash.",
+        "Assert build result Succeeded and errors = 0.",
+        "Launch the produced executable and parse its log."
+      ],
+      "detection": "Build report and player log.",
+      "residual": "low",
+      "stop_condition": "SC9"
+    },
+    {
+      "id": "R15",
+      "category": "windows_reliability",
+      "description": "The player passes one scripted run but crashes, leaks memory, loses focus, mishandles DPI or fails on a clean machine.",
+      "likelihood": "medium",
+      "impact": "high",
+      "mitigation": [
+        "20 cold starts.",
+        "60-minute soak.",
+        "Focus, resolution, DPI, save and read-only tests.",
+        "Clean-profile launch.",
+        "Document unsigned-build SmartScreen behaviour."
+      ],
+      "detection": "P10-S14 matrix.",
+      "residual": "medium",
+      "stop_condition": "SC10"
+    },
+    {
+      "id": "R16",
+      "category": "performance",
+      "description": "A new asset or scene increases frame time beyond the 60 FPS class target on the integrated GPU.",
+      "likelihood": "medium",
+      "impact": "medium",
+      "mitigation": [
+        "Measure after warmup.",
+        "Separate the first-run shader compilation hitch from steady state.",
+        "Compare against the Phase 5 baseline p95 of 16.77 ms.",
+        "Do not claim a target as measured if draw calls are unavailable."
+      ],
+      "detection": "Performance JSON.",
+      "residual": "medium",
+      "stop_condition": "Human review if p95 > 20 ms"
+    },
+    {
+      "id": "R17",
+      "category": "scope",
+      "description": "The bounded validation expands into a full game-production project or automatic pipeline.",
+      "likelihood": "high",
+      "impact": "high",
+      "mitigation": [
+        "Stage-gated execution with no automatic pipeline.",
+        "One controlled idea and one build.",
+        "No new features outside the approved spec.",
+        "Any scope change needs a new proposal."
+      ],
+      "detection": "Approval ledger comparison.",
+      "residual": "low",
+      "stop_condition": "SC17"
+    },
+    {
+      "id": "R18",
+      "category": "evidence_integrity",
+      "description": "Historical reports are mistaken for current evidence, or a generated report is treated as proof of an operation that did not run.",
+      "likelihood": "high",
+      "impact": "high",
+      "mitigation": [
+        "Re-verify baseline at P10-S0.",
+        "Require a fresh artifact per stage.",
+        "Separate implemented, fixture-tested, locally executed, independently verified and live-verified.",
+        "Never mark a criterion PASS without a linked observation."
+      ],
+      "detection": "Cross-check every claim against a timestamped artifact.",
+      "residual": "low",
+      "stop_condition": "SC18"
+    },
+    {
+      "id": "R19",
+      "category": "licensing",
+      "description": "A future asset or tool has unclear provenance or license.",
+      "likelihood": "low",
+      "impact": "high",
+      "mitigation": [
+        "Phase 10 uses project-original assets only.",
+        "No third-party downloads.",
+        "Provenance must be present before import."
+      ],
+      "detection": "Asset manifest review.",
+      "residual": "low",
+      "stop_condition": "SC16"
+    },
+    {
+      "id": "R20",
+      "category": "environment",
+      "description": "Disk, memory, time or Unity licensing prevents completion.",
+      "likelihood": "low",
+      "impact": "medium",
+      "mitigation": [
+        "Check free disk before engine stages (175 GB available).",
+        "One Blender process at a time.",
+        "Batch-mode Unity with explicit timeouts.",
+        "Stop if free disk drops below 20 GB."
+      ],
+      "detection": "Preflight resource check.",
+      "residual": "low",
+      "stop_condition": "SC7 or SC12"
+    },
+    {
+      "id": "R21",
+      "category": "human_review",
+      "description": "Automated success is mistaken for human acceptance, or a gate is approved without reading the evidence.",
+      "likelihood": "medium",
+      "impact": "high",
+      "mitigation": [
+        "Human decisions are recorded separately with name and scope.",
+        "Approval binds to exact hashes.",
+        "No release or production claim is derived from automated PASS."
+      ],
+      "detection": "Approval ledger and sign-off record.",
+      "residual": "low",
+      "stop_condition": "SC18"
+    }
+  ],
+  "risk_summary": {
+    "total_risks": 21,
+    "critical_impact": 4,
+    "high_impact": 10,
+    "medium_impact": 7,
+    "low_impact": 0,
+    "highest_risk_ids": ["R2", "R3", "R9"],
+    "most_likely_risks": ["R1", "R4", "R6", "R7", "R12", "R17", "R18"],
+    "risks_requiring_human_decision_before_execution": ["R2", "R4", "R9", "R21"],
+    "risks_that_cannot_be_fully_eliminated": [
+      "Free-tier terms can change during the work.",
+      "A provider can remain unavailable despite a correct request.",
+      "A procedural asset can import cleanly but still look poor to a human.",
+      "OS-level socket cancellation remains unproven (R13 from Phase 9)."
+    ]
+  },
+  "go_no_go": {
+    "recommendation": "CONDITIONAL_GO_ONLY_AFTER_USER_APPROVES_A0_A1",
+    "preconditions": [
+      "User accepts the stage-gated scope.",
+      "User selects a provider after current terms are recorded.",
+      "User provides credentials outside the repository.",
+      "User confirms the disposable Unity lab is acceptable instead of modifying the Phase 5 project.",
+      "User accepts that a failed live request is a valid, honest outcome."
+    ],
+    "no_go_if": [
+      "The user expects an automatic pipeline.",
+      "The user expects a production-ready game.",
+      "The user cannot provide any free-tier credential.",
+      "The user requires modifying the Phase 5 project.",
+      "The user requires a release in the same phase."
+    ]
+  },
+  "final_status": "PROPOSAL_ONLY_PENDING_USER_APPROVAL"
+}

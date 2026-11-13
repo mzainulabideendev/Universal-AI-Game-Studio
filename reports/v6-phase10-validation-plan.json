@@ -1,0 +1,919 @@
+{
+  "schema_version": 1,
+  "phase": "V6 Phase 10 - controlled real-world validation proposal",
+  "deliverable": "validation_plan",
+  "generated_at": "2026-11-13T09:42:02Z",
+  "status": "PROPOSAL_ONLY_PENDING_USER_APPROVAL",
+  "execution_performed": false,
+  "objective": "Validate, with separate human approval per operation, the integrations that remain unproven after Phases 0-9: one live free-tier AI provider request, real Unity import and playback of the generated character and environment, one staged end-to-end idea-to-build run, Windows application reliability, and release-candidate verification.",
+  "non_objectives": [
+    "Do not build a new commercial game.",
+    "Do not install packages, engines, models or runtimes.",
+    "Do not use paid services or automatically fall back to paid providers.",
+    "Do not modify protected V5 or Phase 5 projects.",
+    "Do not release, publish, commit, tag or push.",
+    "Do not claim production readiness."
+  ],
+  "execution_model": {
+    "mode": "stage_gated_manual",
+    "automatic_pipeline_execution": false,
+    "each_stage_requires_separate_approval": true,
+    "approval_binds_to": [
+      "stage id",
+      "exact command or operation",
+      "input hashes",
+      "output directory",
+      "provider or engine",
+      "maximum requests or runs",
+      "expiry"
+    ],
+    "approval_reusable": false,
+    "approval_transferable_to_other_stage": false,
+    "new_approval_required_if_any_bound_input_changes": true
+  },
+  "prerequisites": {
+    "baseline": "reports/v6-phase10-baseline.json",
+    "baseline_verdict": "BASELINE_VERIFIED_CLEAN_AND_PRESERVED",
+    "all_38_protected_hash_entries_match": true,
+    "working_tree_clean_at_proposal": true,
+    "tests_passing_at_proposal": "515/515 OK",
+    "mcp_parity_at_proposal": "107/107 exact",
+    "user_must_confirm_scope": true
+  },
+  "stages": [
+    {
+      "id": "P10-S0",
+      "name": "Baseline re-verification and freeze",
+      "kind": "read_only_local",
+      "objective": "Re-run the exact baseline checks immediately before any Phase 10 operation and freeze the starting commit, hashes and test count.",
+      "operations": [
+        "git rev-parse HEAD and git status --porcelain",
+        "recompute all 38 protected hash entries",
+        "run the 515-test offline suite",
+        "verify 107 tool / 107 handler parity",
+        "record Unity and Blender versions without building"
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": false,
+      "approval_id": "A0",
+      "outputs": [
+        "reports/v6-phase10-execution-baseline.json"
+      ],
+      "acceptance": [
+        "HEAD and clean-tree state recorded",
+        "38/38 protected entries match",
+        "515/515 tests pass",
+        "107/107 parity",
+        "no engine or network operation occurred"
+      ],
+      "estimated_minutes": 5,
+      "estimated_cost_usd": 0.0,
+      "rollback": "No write except a new report file."
+    },
+    {
+      "id": "P10-S1",
+      "name": "Provider terms and free-tier re-verification",
+      "kind": "human_review_no_network",
+      "objective": "Replace stale catalogue evidence with current, human-read provider terms before any request.",
+      "operations": [
+        "Human opens the official pricing, rate-limit, model and data-policy pages for the chosen provider.",
+        "Human records the checked date, eligible model, free allowance, billing requirement, retention terms and regional restriction.",
+        "Agent performs no fetch and reads no credential."
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": false,
+      "approval_id": "A1",
+      "outputs": [
+        "reports/v6-phase10-provider-reverification.json"
+      ],
+      "acceptance": [
+        "Free-tier eligibility confirmed on the provider's own current page",
+        "No payment method required",
+        "Data-retention policy recorded explicitly",
+        "Exact model id exists in the current free list",
+        "User signs the provider choice"
+      ],
+      "estimated_minutes": 20,
+      "estimated_cost_usd": 0.0,
+      "rollback": "No external state changed."
+    },
+    {
+      "id": "P10-S2",
+      "name": "Model discovery request",
+      "kind": "live_network_read_only",
+      "objective": "Prove the selected free model exists for this account without generating content.",
+      "operations": [
+        "Send exactly one authenticated model-list or model-metadata request to the selected provider.",
+        "Record HTTP status, response bytes, model id and timestamp.",
+        "Do not send project content, prompts or repository data."
+      ],
+      "network": true,
+      "credentials": true,
+      "credential_handling": "User provisions the credential outside the repository and outside chat. The agent checks presence only and never prints or stores the value.",
+      "engine_action": false,
+      "approval_id": "A2",
+      "outputs": [
+        "reports/v6-phase10-model-discovery.json"
+      ],
+      "acceptance": [
+        "HTTP 2xx",
+        "Exact model id present in the response",
+        "Free eligibility consistent with S1",
+        "No credential value in any artifact",
+        "Exactly one request, zero retries"
+      ],
+      "estimated_minutes": 5,
+      "estimated_cost_usd": 0.0,
+      "rollback": "No project state changed. The request is recorded in the local quota ledger."
+    },
+    {
+      "id": "P10-S3",
+      "name": "Single live generation request",
+      "kind": "live_network_generation",
+      "objective": "Obtain one real structured game-design response for a controlled, non-proprietary idea.",
+      "operations": [
+        "Generate an exact request plan and SHA-256 over provider, model, endpoint, prompt, output cap, JSON mode, timeout and zero-retry policy.",
+        "User approves that exact hash.",
+        "Send exactly one request with a 60-second total deadline.",
+        "Validate the response locally for JSON, schema, required fields, contradictions and unsupported claims.",
+        "Score the accepted response with the deterministic rubric."
+      ],
+      "network": true,
+      "credentials": true,
+      "engine_action": false,
+      "approval_id": "A3",
+      "inputs": {
+        "idea": "A controlled third-person 3D tropical-jungle monkey game for Windows with banana collection, hazards, a destination and low-end hardware targets.",
+        "project_content_sent": false,
+        "repository_content_sent": false,
+        "personal_data_sent": false,
+        "max_requests": 1,
+        "max_output_tokens": 2048,
+        "retries": 0,
+        "paid_fallback": false
+      },
+      "outputs": [
+        "reports/v6-phase10-live-request-plan.json",
+        "reports/v6-phase10-live-response.json",
+        "reports/v6-phase10-schema-validation.json",
+        "reports/v6-phase10-quality-evaluation.json",
+        "reports/v6-phase10-request-audit.json"
+      ],
+      "acceptance": [
+        "Approved hash matches the executed request byte-for-byte",
+        "Exactly one request, zero retries, zero provider fallback",
+        "HTTP 2xx with a complete response body",
+        "One JSON object matching the contract",
+        "Schema validation passes with zero errors",
+        "Unsupported claims are flagged, not accepted",
+        "Quality score recorded with the deterministic method",
+        "No credential, header or secret stored",
+        "No project file modified by the request"
+      ],
+      "failure_is_evidence": true,
+      "on_failure": [
+        "Record the redacted error class and HTTP status.",
+        "Do not retry automatically.",
+        "Do not switch provider.",
+        "Do not use paid fallback.",
+        "Continue with a labelled deterministic fallback only if the user approves the next stage."
+      ],
+      "estimated_minutes": 10,
+      "estimated_cost_usd": 0.0,
+      "quota_estimate": "At most 1 request and at most 2,048 output tokens.",
+      "rollback": "No project state changed; the ledger records success or failure."
+    },
+    {
+      "id": "P10-S4",
+      "name": "Human approval of the generated specification",
+      "kind": "human_review",
+      "objective": "Decide whether the live or deterministic specification is acceptable as the input to generation.",
+      "operations": [
+        "Review requirements, priorities, dependencies, contradictions and unsupported claims.",
+        "Record explicit approval, rejection or requested changes.",
+        "Do not mark any requirement verified."
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": false,
+      "approval_id": "A4",
+      "outputs": [
+        "reports/v6-phase10-spec-approval.json"
+      ],
+      "acceptance": [
+        "Human decision recorded with name, timestamp and scope",
+        "No requirement status is changed to verified or implemented",
+        "Approved spec hash is frozen"
+      ],
+      "estimated_minutes": 20,
+      "estimated_cost_usd": 0.0,
+      "rollback": "Specification remains a proposal."
+    },
+    {
+      "id": "P10-S5",
+      "name": "Agent orchestration dry run",
+      "kind": "local_planning",
+      "objective": "Produce an agent plan from the approved spec without executing asset or engine work.",
+      "operations": [
+        "Run the existing deterministic coordinator on the approved spec.",
+        "Validate dependency order, failure propagation and cancellation semantics.",
+        "Emit a non-executable generation plan with every step requires_approval=true."
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": false,
+      "approval_id": "A5",
+      "outputs": [
+        "reports/v6-phase10-orchestration.json",
+        "reports/v6-phase10-generation-plan.json"
+      ],
+      "acceptance": [
+        "Plan is executable=false",
+        "Every step is executed=false and requires_approval=true",
+        "No agent output is treated as generated content"
+      ],
+      "estimated_minutes": 5,
+      "estimated_cost_usd": 0.0,
+      "rollback": "Reports only."
+    },
+    {
+      "id": "P10-S6",
+      "name": "New character generation in an isolated output directory",
+      "kind": "local_blender_generation",
+      "objective": "Generate a fresh character from the approved spec, separately from all previous phase outputs.",
+      "operations": [
+        "Run one Blender 5.2.2 process with the existing character pipeline.",
+        "Write only to validation/v6-phase10/character/.",
+        "Validate geometry, UVs, materials, rig, clips and exports.",
+        "Re-import the GLB into an empty Blender scene."
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": true,
+      "engine": "Blender 5.2.2 LTS",
+      "approval_id": "A6",
+      "outputs": [
+        "validation/v6-phase10/character/",
+        "reports/v6-phase10-character.json"
+      ],
+      "acceptance": [
+        "Blender exit code 0",
+        "Mesh has UVs and no degenerate faces",
+        "At least 6 bones and 100% weighted vertices",
+        "Idle, Walk, Run and Jump actions exported",
+        "FBX, GLB, glTF and preview written and hashed",
+        "No protected path touched"
+      ],
+      "estimated_minutes": 5,
+      "estimated_cost_usd": 0.0,
+      "rollback": "Delete only validation/v6-phase10/character/ and its report."
+    },
+    {
+      "id": "P10-S7",
+      "name": "New environment generation in an isolated output directory",
+      "kind": "local_blender_generation",
+      "objective": "Generate a fresh medium-tier tropical-jungle level from the approved spec.",
+      "operations": [
+        "Run one Blender 5.2.2 process with the existing environment pipeline.",
+        "Write only to validation/v6-phase10/environment/.",
+        "Validate terrain, vegetation, props, river, materials, lighting, layout, collision metadata and exports.",
+        "Re-import the GLB into an empty Blender scene."
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": true,
+      "engine": "Blender 5.2.2 LTS",
+      "approval_id": "A7",
+      "outputs": [
+        "validation/v6-phase10/environment/",
+        "reports/v6-phase10-environment.json"
+      ],
+      "acceptance": [
+        "Blender exit code 0",
+        "Terrain non-flat and within spec bounds",
+        "River, spawn, route and destination present",
+        "All material slots resolve",
+        "FBX, GLB, glTF, previews written and hashed",
+        "No protected path touched"
+      ],
+      "estimated_minutes": 10,
+      "estimated_cost_usd": 0.0,
+      "rollback": "Delete only validation/v6-phase10/environment/ and its report."
+    },
+    {
+      "id": "P10-S8",
+      "name": "Unity import laboratory creation",
+      "kind": "local_project_copy",
+      "objective": "Create a disposable Unity 6000.6.2f1 project copy so the Phase 5 project remains untouched.",
+      "operations": [
+        "Copy Assets, ProjectSettings and Packages from validation/unity-jungle-v6 to validation/v6-phase10/unity-import-lab.",
+        "Do not copy Library or Logs.",
+        "Open the copy in Unity 6000.6.2f1 batch mode once to regenerate the Library.",
+        "Confirm the source project's Git status is unchanged."
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": true,
+      "engine": "Unity 6000.6.2f1",
+      "approval_id": "A8",
+      "outputs": [
+        "validation/v6-phase10/unity-import-lab/",
+        "reports/v6-phase10-unity-lab.json"
+      ],
+      "acceptance": [
+        "Copy opens with zero compile errors",
+        "Source validation/unity-jungle-v6 remains byte-identical for tracked files",
+        "No V5 path touched",
+        "Library regenerated only inside the lab"
+      ],
+      "estimated_minutes": 20,
+      "estimated_disk_mb": 350,
+      "estimated_cost_usd": 0.0,
+      "rollback": "Delete only validation/v6-phase10/unity-import-lab/."
+    },
+    {
+      "id": "P10-S9",
+      "name": "Character import and playback validation",
+      "kind": "local_unity_import",
+      "objective": "Objectively prove that the generated character imports, binds, animates and renders.",
+      "operations": [
+        "Copy the new character FBX and textures into the lab.",
+        "Import with Generic animation type and animation enabled.",
+        "Run an editor validation script that reports mesh, bone, clip, material and texture facts.",
+        "Run a PlayMode test that samples bone poses over time and captures screenshots."
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": true,
+      "engine": "Unity 6000.6.2f1",
+      "approval_id": "A9",
+      "outputs": [
+        "reports/v6-phase10-unity-character-import.json",
+        "reports/v6-phase10-animation-playback.json",
+        "reports/v6-phase10-character-captures/"
+      ],
+      "acceptance": [
+        "Import log has zero errors and zero missing scripts",
+        "Imported triangle count is within 2% of the Blender source",
+        "SkinnedMeshRenderer exists with at least 23 bones",
+        "Four non-empty clips named Idle, Walk, Run and Jump",
+        "Sampled bone position delta exceeds 1 cm in each locomotion clip",
+        "No NaN or infinite bone transform",
+        "Fur base-color and normal textures are bound",
+        "Rendered character is not magenta",
+        "Human reviews the captures"
+      ],
+      "estimated_minutes": 15,
+      "estimated_cost_usd": 0.0,
+      "rollback": "Delete only the lab and Phase 10 character copies."
+    },
+    {
+      "id": "P10-S10",
+      "name": "Environment import and scene integration",
+      "kind": "local_unity_import",
+      "objective": "Objectively prove that the generated environment imports and supports the gameplay scene.",
+      "operations": [
+        "Copy the new environment FBX and textures into the lab.",
+        "Import and validate mesh counts, material slots, texture bindings and hierarchy.",
+        "Build a scene from the imported assets using the existing scene builder.",
+        "Instantiate the imported character and run the existing gameplay systems."
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": true,
+      "engine": "Unity 6000.6.2f1",
+      "approval_id": "A10",
+      "outputs": [
+        "reports/v6-phase10-unity-environment-import.json",
+        "reports/v6-phase10-scene-integration.json",
+        "reports/v6-phase10-environment-captures/"
+      ],
+      "acceptance": [
+        "Import log has zero errors",
+        "Imported triangle count is within 2% of the Blender source",
+        "Terrain non-flat with a valid collider",
+        "River object present and contact-lethal",
+        "At least 19 material slots resolve",
+        "No missing shader or pink material",
+        "Player spawns grounded",
+        "Camera, HUD, 10 collectibles and destination present",
+        "Human reviews the captures"
+      ],
+      "estimated_minutes": 20,
+      "estimated_cost_usd": 0.0,
+      "rollback": "Delete only the lab scene and Phase 10 copies."
+    },
+    {
+      "id": "P10-S11",
+      "name": "Unity EditMode and PlayMode tests",
+      "kind": "local_engine_tests",
+      "objective": "Run the real Unity test suites against the Phase 10 scene.",
+      "operations": [
+        "Run EditMode tests in batch mode.",
+        "Run PlayMode tests in batch mode.",
+        "Record the XML results and console log."
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": true,
+      "engine": "Unity 6000.6.2f1",
+      "approval_id": "A11",
+      "outputs": [
+        "validation/v6-phase10/unity-import-lab/Logs/editmode-results.xml",
+        "validation/v6-phase10/unity-import-lab/Logs/playmode-results.xml",
+        "reports/v6-phase10-unity-tests.json"
+      ],
+      "acceptance": [
+        "EditMode failures = 0",
+        "PlayMode failures = 0",
+        "Skipped tests are reported, not hidden",
+        "Console has no unhandled exception"
+      ],
+      "estimated_minutes": 15,
+      "estimated_cost_usd": 0.0,
+      "rollback": "Logs and report only."
+    },
+    {
+      "id": "P10-S12",
+      "name": "Playable Windows build",
+      "kind": "local_engine_build",
+      "objective": "Build a new Windows player from the Phase 10 scene.",
+      "operations": [
+        "Run the batch-mode build entry point.",
+        "Write only to validation/v6-phase10/builds/windows/.",
+        "Record build errors, warnings, size, file count and hashes."
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": true,
+      "engine": "Unity 6000.6.2f1",
+      "approval_id": "A12",
+      "outputs": [
+        "validation/v6-phase10/builds/windows/",
+        "reports/v6-phase10-build.json"
+      ],
+      "acceptance": [
+        "Build result Succeeded",
+        "Build errors = 0",
+        "Executable and data payload exist and are hashed",
+        "Executable is not the V5 or Phase 5 artifact",
+        "No protected path touched"
+      ],
+      "estimated_minutes": 15,
+      "estimated_cost_usd": 0.0,
+      "rollback": "Delete only validation/v6-phase10/builds/."
+    },
+    {
+      "id": "P10-S13",
+      "name": "Runtime playthrough and captures",
+      "kind": "local_runtime",
+      "objective": "Run the new build and capture real gameplay evidence.",
+      "operations": [
+        "Launch the built player with the in-game auto-play harness.",
+        "Collect all bananas, reach checkpoints and complete the level.",
+        "Capture main menu, playing, pause and completion screenshots.",
+        "Record performance samples and the player log."
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": false,
+      "approval_id": "A13",
+      "outputs": [
+        "reports/v6-phase10-runtime.json",
+        "reports/v6-phase10-captures/",
+        "reports/v6-phase10-player.log"
+      ],
+      "acceptance": [
+        "Process exits with code 0",
+        "LevelCompleted reached",
+        "10/10 bananas collected",
+        "Four 1280x720 captures exist",
+        "Scene validation reports no missing object",
+        "No unhandled exception in the log",
+        "Human reviews the captures"
+      ],
+      "estimated_minutes": 10,
+      "estimated_cost_usd": 0.0,
+      "rollback": "Reports only."
+    },
+    {
+      "id": "P10-S14",
+      "name": "Windows reliability matrix",
+      "kind": "local_runtime_reliability",
+      "objective": "Measure whether the Windows application is reliable beyond one happy-path run.",
+      "operations": [
+        "Run 20 cold starts and record exit code, startup time and scene-valid line.",
+        "Run one 60-minute soak and sample managed memory and frame time.",
+        "Test focus loss, pause/resume, resolution change, DPI scaling and multi-monitor.",
+        "Test save, reload, corrupted save and read-only save directory.",
+        "Test a path containing spaces and non-ASCII characters.",
+        "Test launch on a machine or profile without Unity installed.",
+        "Record SmartScreen and antivirus behaviour for the unsigned executable."
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": false,
+      "approval_id": "A14",
+      "outputs": [
+        "reports/v6-phase10-windows-reliability.json",
+        "reports/v6-phase10-windows-logs/"
+      ],
+      "acceptance": [
+        "20/20 cold starts exit 0",
+        "No crash or unhandled exception in 60 minutes",
+        "Managed memory growth after warmup below 10%",
+        "No progress loss on focus loss or pause",
+        "Resolution and DPI changes do not break input or UI",
+        "Corrupted save is handled without crash",
+        "Read-only save directory produces a clear diagnostic",
+        "Unsigned-build warnings are documented, not hidden"
+      ],
+      "estimated_minutes": 120,
+      "estimated_cost_usd": 0.0,
+      "rollback": "Reports and logs only."
+    },
+    {
+      "id": "P10-S15",
+      "name": "Release-candidate verification",
+      "kind": "read_only_audit",
+      "objective": "Combine all evidence into one honest release-candidate assessment.",
+      "operations": [
+        "Recompute protected hashes.",
+        "Run the full offline suite.",
+        "Re-read every Phase 10 evidence file and check claims against evidence.",
+        "Mark each criterion PASS, FAIL, NOT_TESTED or HUMAN_REVIEW_REQUIRED.",
+        "Publish no release and make no commit."
+      ],
+      "network": false,
+      "credentials": false,
+      "engine_action": false,
+      "approval_id": "A15",
+      "outputs": [
+        "reports/v6-phase10-release-candidate.json",
+        "V6-PHASE-10-VALIDATION-REPORT.md"
+      ],
+      "acceptance": [
+        "Every claim links to observed evidence",
+        "Failures and untested items are explicit",
+        "No production-ready or release-authorized claim unless a human grants it separately",
+        "Final status remains pending human sign-off"
+      ],
+      "estimated_minutes": 30,
+      "estimated_cost_usd": 0.0,
+      "rollback": "Reports only."
+    }
+  ],
+  "approval_boundaries": [
+    {
+      "approval_id": "A0",
+      "covers": "Baseline re-verification and freeze",
+      "network": false,
+      "credentials": false,
+      "engine": false,
+      "writes": "One new report"
+    },
+    {
+      "approval_id": "A1",
+      "covers": "Human provider terms review",
+      "network": false,
+      "credentials": false,
+      "engine": false,
+      "writes": "One new report"
+    },
+    {
+      "approval_id": "A2",
+      "covers": "Exactly one model-discovery network request",
+      "network": true,
+      "credentials": true,
+      "engine": false,
+      "writes": "One new report and quota ledger entry"
+    },
+    {
+      "approval_id": "A3",
+      "covers": "Exactly one live generation request bound to an approved hash",
+      "network": true,
+      "credentials": true,
+      "engine": false,
+      "writes": "Response, validation and audit reports"
+    },
+    {
+      "approval_id": "A4",
+      "covers": "Human acceptance of the specification",
+      "network": false,
+      "credentials": false,
+      "engine": false,
+      "writes": "Approval record"
+    },
+    {
+      "approval_id": "A5",
+      "covers": "Offline orchestration dry run",
+      "network": false,
+      "credentials": false,
+      "engine": false,
+      "writes": "Planning reports"
+    },
+    {
+      "approval_id": "A6",
+      "covers": "One Blender character generation run",
+      "network": false,
+      "credentials": false,
+      "engine": true,
+      "writes": "validation/v6-phase10/character and one report"
+    },
+    {
+      "approval_id": "A7",
+      "covers": "One Blender environment generation run",
+      "network": false,
+      "credentials": false,
+      "engine": true,
+      "writes": "validation/v6-phase10/environment and one report"
+    },
+    {
+      "approval_id": "A8",
+      "covers": "Unity project copy and lab creation",
+      "network": false,
+      "credentials": false,
+      "engine": true,
+      "writes": "validation/v6-phase10/unity-import-lab"
+    },
+    {
+      "approval_id": "A9",
+      "covers": "Character import, playback test and captures",
+      "network": false,
+      "credentials": false,
+      "engine": true,
+      "writes": "Lab assets, tests, captures and reports"
+    },
+    {
+      "approval_id": "A10",
+      "covers": "Environment import and scene integration",
+      "network": false,
+      "credentials": false,
+      "engine": true,
+      "writes": "Lab assets, scene, captures and reports"
+    },
+    {
+      "approval_id": "A11",
+      "covers": "Unity test suites",
+      "network": false,
+      "credentials": false,
+      "engine": true,
+      "writes": "Logs and one report"
+    },
+    {
+      "approval_id": "A12",
+      "covers": "Windows player build",
+      "network": false,
+      "credentials": false,
+      "engine": true,
+      "writes": "validation/v6-phase10/builds and one report"
+    },
+    {
+      "approval_id": "A13",
+      "covers": "Runtime playthrough and captures",
+      "network": false,
+      "credentials": false,
+      "engine": false,
+      "writes": "Captures, log and one report"
+    },
+    {
+      "approval_id": "A14",
+      "covers": "Windows reliability matrix",
+      "network": false,
+      "credentials": false,
+      "engine": false,
+      "writes": "Logs and one report"
+    },
+    {
+      "approval_id": "A15",
+      "covers": "Release-candidate audit",
+      "network": false,
+      "credentials": false,
+      "engine": false,
+      "writes": "Audit reports"
+    },
+    {
+      "approval_id": "A16",
+      "covers": "Any commit, push, tag, publication or release",
+      "network": true,
+      "credentials": false,
+      "engine": false,
+      "writes": "Git or distribution state",
+      "default": "NOT_REQUESTED_AND_NOT_AUTHORIZED"
+    }
+  ],
+  "global_acceptance_criteria": [
+    {
+      "id": "AC1",
+      "criterion": "Baseline integrity",
+      "target": "38/38 protected hash entries match; 515/515 tests pass; 107/107 MCP parity",
+      "evidence": "reports/v6-phase10-execution-baseline.json"
+    },
+    {
+      "id": "AC2",
+      "criterion": "Approval integrity",
+      "target": "Every executed operation maps to an approved stage id and exact input hash",
+      "evidence": "reports/v6-phase10-approval-ledger.json"
+    },
+    {
+      "id": "AC3",
+      "criterion": "Live AI request",
+      "target": "One successful schema-valid live response, or an explicit failed result with no success claim",
+      "evidence": "reports/v6-phase10-live-validation.json"
+    },
+    {
+      "id": "AC4",
+      "criterion": "Unity import",
+      "target": "Character and environment import with zero errors and measured mesh, bone, clip and material facts",
+      "evidence": "reports/v6-phase10-unity-character-import.json, reports/v6-phase10-unity-environment-import.json"
+    },
+    {
+      "id": "AC5",
+      "criterion": "Animation playback",
+      "target": "Four clips bind and sampled bone motion exceeds 1 cm; no NaN",
+      "evidence": "reports/v6-phase10-animation-playback.json"
+    },
+    {
+      "id": "AC6",
+      "criterion": "Material appearance",
+      "target": "Texture bindings resolve; no pink material; human visual check recorded",
+      "evidence": "reports/v6-phase10-material-validation.json"
+    },
+    {
+      "id": "AC7",
+      "criterion": "End-to-end generation",
+      "target": "One new idea reaches a new build with all stages approved and evidenced",
+      "evidence": "reports/v6-phase10-end-to-end.json"
+    },
+    {
+      "id": "AC8",
+      "criterion": "Windows reliability",
+      "target": "20/20 cold starts, 60-minute soak, focus/resolution/DPI/save tests pass",
+      "evidence": "reports/v6-phase10-windows-reliability.json"
+    },
+    {
+      "id": "AC9",
+      "criterion": "Preservation",
+      "target": "No protected V4, V5, Phase 5 or accepted-report modification",
+      "evidence": "reports/v6-phase10-protection.json"
+    },
+    {
+      "id": "AC10",
+      "criterion": "No paid service",
+      "target": "Zero paid requests, zero paid fallback, zero billing changes",
+      "evidence": "reports/v6-phase10-cost-audit.json"
+    },
+    {
+      "id": "AC11",
+      "criterion": "Honest reporting",
+      "target": "Each criterion is PASS, FAIL, NOT_TESTED or HUMAN_REVIEW_REQUIRED with evidence",
+      "evidence": "reports/v6-phase10-release-candidate.json"
+    },
+    {
+      "id": "AC12",
+      "criterion": "Human sign-off",
+      "target": "A named human accepts or rejects the release candidate",
+      "evidence": "reports/v6-phase10-human-signoff.json"
+    }
+  ],
+  "expected_test_evidence": {
+    "offline_python": "515+ tests, exit 0, exact count recorded",
+    "provider": "request hash, HTTP status, redacted error, response bytes, schema result, quality score, quota ledger",
+    "character": "Blender log, FBX/GLB hashes, mesh counts, bone count, clip names, re-import result",
+    "environment": "Blender log, FBX/GLB hashes, terrain/vegetation/material counts, re-import result",
+    "unity_import": "editor log, imported mesh counts, bone count, clip list, material and texture bindings, prefab/scene GUIDs",
+    "animation": "sampled bone transforms at multiple times, clip durations, finite checks",
+    "materials": "shader name, texture GUIDs, sRGB flags, pixel sample proving non-magenta",
+    "unity_tests": "editmode-results.xml, playmode-results.xml, failure counts",
+    "build": "build report JSON, executable hash, payload hash, errors/warnings",
+    "runtime": "player log, scene-valid line, completion state, screenshots, performance JSON",
+    "reliability": "cold-start table, soak samples, focus/resolution/DPI/save results",
+    "release_candidate": "criterion table with statuses and evidence paths"
+  },
+  "resource_requirements": {
+    "human_approval_gates": 17,
+    "estimated_human_review_hours": "3-5",
+    "estimated_supervised_execution_hours": "4-6",
+    "estimated_total_elapsed": "1-2 working days",
+    "live_ai_requests": "2 maximum (1 discovery + 1 generation)",
+    "live_ai_cost_usd": 0.0,
+    "blender_runs": 2,
+    "unity_processes": "5-7 batch-mode runs",
+    "windows_player_runs": "21+ (20 cold starts + 1 soak)",
+    "estimated_disk_mb": {
+      "unity_lab_library": 250,
+      "windows_build": 100,
+      "captures_and_logs": 50,
+      "assets": 25,
+      "total": 425
+    },
+    "free_disk_available_gb": 175.1,
+    "packages_to_install": 0,
+    "models_to_download": 0
+  },
+  "stop_conditions": [
+    {
+      "id": "SC1",
+      "condition": "Any protected hash mismatch or protected path modification",
+      "action": "Stop immediately and report the exact path and hash."
+    },
+    {
+      "id": "SC2",
+      "condition": "Any credential value appears in a log, report, command line or chat",
+      "action": "Stop, do not repeat the value, require key rotation."
+    },
+    {
+      "id": "SC3",
+      "condition": "Provider requires billing, a card or a paid tier",
+      "action": "Stop; do not add payment details; do not fall back to paid."
+    },
+    {
+      "id": "SC4",
+      "condition": "Selected model is not on the current free list",
+      "action": "Stop; do not substitute silently."
+    },
+    {
+      "id": "SC5",
+      "condition": "Rate limit, quota exhaustion or HTTP 429",
+      "action": "Stop; no automatic retry; record the reset information."
+    },
+    {
+      "id": "SC6",
+      "condition": "Any unapproved network request is attempted or observed",
+      "action": "Stop and audit the transport path."
+    },
+    {
+      "id": "SC7",
+      "condition": "Unity license, activation or editor launch failure",
+      "action": "Stop; do not attempt account or license changes."
+    },
+    {
+      "id": "SC8",
+      "condition": "Unity import error, missing script, missing shader or missing material",
+      "action": "Stop before scene or build work."
+    },
+    {
+      "id": "SC9",
+      "condition": "Build errors > 0 or build result not Succeeded",
+      "action": "Stop; do not report a build."
+    },
+    {
+      "id": "SC10",
+      "condition": "Player crash, non-zero exit or unhandled exception",
+      "action": "Stop the reliability run and preserve the log."
+    },
+    {
+      "id": "SC11",
+      "condition": "Any request to modify V5 or the Phase 5 project/build",
+      "action": "Refuse and redirect to the disposable lab."
+    },
+    {
+      "id": "SC12",
+      "condition": "Free disk below 20 GB",
+      "action": "Stop before any engine operation."
+    },
+    {
+      "id": "SC13",
+      "condition": "Stage exceeds its approved time or request count",
+      "action": "Stop; a new approval is required."
+    },
+    {
+      "id": "SC14",
+      "condition": "AI output claims verified, implemented, approved or executable status",
+      "action": "Reject the output and stop the pipeline."
+    },
+    {
+      "id": "SC15",
+      "condition": "Prompt injection or instruction-like content appears in provider output",
+      "action": "Treat as data, flag it, do not act on it."
+    },
+    {
+      "id": "SC16",
+      "condition": "Asset provenance or license is missing",
+      "action": "Do not import the asset."
+    },
+    {
+      "id": "SC17",
+      "condition": "A stage is asked to run the whole pipeline automatically",
+      "action": "Refuse; Phase 10 is stage-gated by design."
+    },
+    {
+      "id": "SC18",
+      "condition": "Human approval is missing, expired or bound to a different hash",
+      "action": "Do not execute."
+    }
+  ],
+  "rollback_policy": {
+    "default": "All Phase 10 writes go to new reports or validation/v6-phase10/ paths. Deleting that directory and the Phase 10 reports restores the repository to the proposal state.",
+    "never_rollback_by": [
+      "git reset --hard",
+      "git clean",
+      "deleting protected paths",
+      "restoring protected artifacts from generated copies"
+    ],
+    "source_projects": "validation/unity-jungle-v5 and validation/unity-jungle-v6 are read-only inputs and are never rollback targets."
+  },
+  "final_status": "PROPOSAL_ONLY_PENDING_USER_APPROVAL"
+}
